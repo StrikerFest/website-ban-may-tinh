@@ -14,3 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AdminLoginController::class, "login"]);
+
+Route::get('/login', [AdminLoginController::class, "login"])->name("administrator/login");
+Route::get('/logout', [AdminLoginController::class, "logout"])->name("administrator/logout");
+
+Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
