@@ -1,4 +1,4 @@
-
+{{--
     <script type="284550efe2f34c11bdc2fce4-text/javascript" src="{{ asset('js/jquery.min.js')}}"></script>
     <script type="284550efe2f34c11bdc2fce4-text/javascript" src="{{ asset('js/jquery-ui.min.js')}}"></script>
     <script type="284550efe2f34c11bdc2fce4-text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
@@ -25,8 +25,25 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
+        
       gtag('config', 'UA-23581568-13');
     </script>
     <script src="{{ asset('js/rocket-loader.min.js')}}" data-cf-settings="284550efe2f34c11bdc2fce4-|49" defer=""></script>
+ --}}
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>

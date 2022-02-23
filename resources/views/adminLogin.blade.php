@@ -100,7 +100,7 @@
                         @csrf
                         <div class="text-center  ">
                             <h2 class="title-login bg-login bg-box-login centered">
-                                Quản lý web bán hàng 
+                                Quản lý web bán hàng
                             </h2>
                         </div>
                         <div class="auth-box card">
