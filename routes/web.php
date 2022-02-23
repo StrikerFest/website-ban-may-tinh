@@ -29,6 +29,6 @@ Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard
 Route::post('/loginProcess', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcess', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
-Route::get('/i', function () {
-    return view('Admin.Customer.customerView');
+Route::get('/test', function () {
+    return view('Customer.Customer.index');
 });
