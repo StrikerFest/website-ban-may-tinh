@@ -21,7 +21,7 @@ class AdminLoginController extends Controller
         // Nếu ko
         else {
             // Quay về login
-            return view('login');
+            return view('adminLogin');
         }
     }
 
