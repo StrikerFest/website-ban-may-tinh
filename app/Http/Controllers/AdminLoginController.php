@@ -7,24 +7,30 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class LoginController extends Controller
+// Controller quản lý login của admin
+class AdminLoginController extends Controller
 {
     // Login Admin
     public function login()
     {
+        // Nếu có admin trong session
         if (session()->has('admin')) {
+            // Quay về dashboard
             return Redirect::route('dashboard');
-        } else {
-            return view('admin_login');
+        }
+        // Nếu ko
+        else {
+            // Quay về login
+            return view('login');
         }
     }
 
     // Xử lý login Admin
     public function loginProcess(Request $request)
     {
+        // Sửa thành phần theo db mới
         $email = $request->get('email');
         $password = $request->get('password');
-
         $validated = $request->validate([
             'email' => 'required|email:rfc,dns',
             'password' => 'required',
@@ -32,17 +38,16 @@ class LoginController extends Controller
 
         // khi có session
         if (session()->has('admin')) {
-
             return Redirect::route('dashboard');
-
-            // khi ko có session
-        } else {
+        }
+        // khi ko có session
+        else {
             try {
-                // lấy dữ liệu từ db
+                // lấy dữ liệu từ db - Sửa thành phần theo db mới
                 $admin = UserModel::where('emailGV', $email)->where('matKhauGV', $password)->firstOrFail();
-                // tạo biến session
-                $request->session()->put('giaoVu', $admin->maGV);
-                $request->session()->put('tenGiaoVu', $admin->tenGV);
+                // tạo biến session - Sửa thành phần theo db mới
+                $request->session()->put('admin', $admin->maGV);
+                $request->session()->put('tenAdmin', $admin->tenGV);
                 $request->session()->put('chucVu', $admin->chucVu);
                 // chuyển sang dashBoard
                 return Redirect::route('dashBoard');
@@ -57,13 +62,12 @@ class LoginController extends Controller
     // Đăng xuất
     public function logout()
     {
-
-        if (session()->has('giaoVu')) {
-            // khi co session
-            session()->pull('giaoVu');
+        // khi co session
+        if (session()->has('admin')) {
             return Redirect::route('administrator/login');
-        } else {
-            // khi ko co session
+        }
+        // khi ko co session
+        else {
             return Redirect::route('administrator/login')->with("error", "Không được làm vậy bro");
         }
     }
