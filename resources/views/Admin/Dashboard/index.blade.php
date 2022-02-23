@@ -1,16 +1,16 @@
 <html lang="en">
 <head>
-    @include("Layout.Common.meta")
+    @include("Admin.Layout.Common.meta")
 </head>
 <body>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @include("Layout.Common.side_nav_menu")
+        @include("Admin.Layout.Common.side_nav_menu")
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-    @include("Layout.Common.header")
+        @include("Admin.Layout.Common.header")
 
             <!-- Main Content -->
             <div id="content">
@@ -347,7 +347,7 @@
                 <!-- /.container-fluid -->
 
                 <div>
-                    @include("Layout.Common.footer")
+                    @include("Admin.Layout.Common.footer")
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -358,7 +358,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
-    @include("Layout.Common.bottom_script")
+    @include("Admin.Layout.Common.bottom_script")
 
 </body>
 </html>

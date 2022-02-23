@@ -27,5 +27,5 @@ Route::post('/loginProcess', [AdminLoginController::class, "loginProcess"])->nam
 Route::post('/logoutProcess', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
 Route::get('/i', function () {
-    return view('Customer.customerView');
+    return view('Admin.Customer.customerView');
 });

@@ -13,7 +13,7 @@ class DashboardController extends Controller
         // Nếu có session của admin - Sửa khi đã có session
         if (!session()->has('admin')) {
 
-            return view("Dashboard/index", []);
+            return view("Admin.Dashboard.index", []);
         } else {
             return Redirect::route('administrator/login')->with("error", "Không được làm vậy bro");
         }
