@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, "index"]);
 
-Route::get('/login', [AdminLoginController::class, "login"])->name("administrator/login");
-Route::get('/logout', [AdminLoginController::class, "logout"])->name("administrator/logout");
+Route::get('/login/Admin', [AdminLoginController::class, "login"])->name("administrator/login");
+Route::get('/logout/Admin', [AdminLoginController::class, "logout"])->name("administrator/logout");
+
+Route::get('/login', [CustomerLoginController::class, "login"])->name("login");
+Route::get('/logout', [CustomerLoginController::class, "logout"])->name("logout");
 
 Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
 
