@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,7 @@ Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard
 
 Route::post('/loginProcess', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcess', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
+
+Route::get('/i', function () {
+    return view('Customer.customerView');
+});
