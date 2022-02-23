@@ -1,0 +1,194 @@
+table td{
+    padding: 5px;
+    font-size: 1.3vw;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+
+
+table th{
+    padding: 5px;
+    background-color: rgb(66, 168, 252);
+
+    color: aliceblue;
+    font-size: 1.5vw;
+    text-align: center;
+
+}
+
+.main-section
+{
+    height: 100%;;
+}
+
+.footer-main{
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    width: 100%;
+}
+
+.bg-blue{
+    background-color: rgb(94, 125, 163);
+    color: white;
+    min-height: 95%;
+
+    position: relative;
+    top: 0;
+}
+
+.btn-nav-custom
+{
+    background-color: blue;
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 1%;
+    color: white;
+    font-size: 1vw;
+    position: relative;
+    left: 0;
+}
+
+.btn-nav-title
+{
+    background-color: red;
+    width: 100%;
+    min-height: 40px;
+    margin-bottom: 1%;
+    color: white;
+    font-size: 1vw;
+    position: relative;
+    left: 0;
+}
+
+.fixed-nav
+{
+    background-color:rgb(94, 125, 163);
+    position: fixed;
+    width: 22%;
+    min-height: 100%;
+    margin: auto;
+    left: 1%;
+
+}
+
+.centered{
+    position: relative;
+
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.centered-v1{
+    position: relative;
+
+    margin: auto;
+    left: 70%;
+    right: auto;
+}
+
+.centered-title{
+    text-align: center;
+}
+
+.nav-bar-h
+{
+    max-height: 16% ;
+}
+
+.padding-0{
+    padding: 0;
+}
+
+.no-pointer{
+    cursor: default;
+}
+
+h1.margin-0{
+    margin: 0;
+}
+
+.title{
+    background-color: blue;
+    padding: 2%;
+    font-size: 3vw;
+}
+
+.paragraph{
+    background-color: dodgerblue;
+    padding: 2%;
+    font-size: 1vw;
+}
+
+.main-title
+{
+    background-color: red;
+    padding: 1.3%;
+    font-size: 1vw;
+    text-align: center;
+    font-weight: bold;
+}
+
+.navbar-brand-custom
+{
+    font-size: 1.4vw;
+    font-weight: bold;
+    padding-left: 0;
+    margin-left: 0;
+
+    color: aliceblue;
+}
+
+.color-alice{
+    color: aliceblue;
+}
+
+.bg-darkblue{
+    background-color: rgb(32, 0, 173);
+}
+
+.header-height{
+    height: 10%;
+}
+
+.main-container-height{
+    height: 80px;
+    max-height: 80px;
+    min-height: 80px;
+}
+
+.fixed-fullscreen-icon{
+    line-height: 4.3;
+}
+
+.wrapper-fill{
+    /* border-top: 5px solid red; */
+    top: 70px;
+}
+
+.bg-box-login{
+    width: 50%;
+    padding: 1%;
+}
+
+.bg-login{
+    border-radius: 50px;
+    height: auto;
+    background-color: rgb(46, 48, 139);
+}
+.title-login{
+    font-weight: bold;
+    color: rgb(165, 140, 255);
+    opacity: 90%;
+}
+
+.body-bg{
+    background-color: blueviolet;
+}
+
+.login-bg{
+    background: url('../jpg/maxresdefault.jpg')  no-repeat ;
+    background-size: cover;
+}

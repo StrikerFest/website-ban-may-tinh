@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,6 @@ Route::get('/login', [AdminLoginController::class, "login"])->name("administrato
 Route::get('/logout', [AdminLoginController::class, "logout"])->name("administrator/logout");
 
 Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
+
+Route::post('/loginProcess', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
+Route::post('/logoutProcess', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");

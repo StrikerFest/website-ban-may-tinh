@@ -99,11 +99,8 @@
                     <form action="{{ route('administrator/loginProcess')}}" class="md-float-material form-material"  method="post">
                         @csrf
                         <div class="text-center  ">
-                            {{-- <img src="png/logo.png" alt="logo.png"> --}}
                             <h2 class="title-login bg-login bg-box-login centered">
-
-                                Phần mềm quản lý học phí sinh viên
-
+                                Quản lý web bán hàng
                             </h2>
                         </div>
                         <div class="auth-box card">
