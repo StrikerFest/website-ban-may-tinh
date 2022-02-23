@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AdminLoginController::class, "login"]);
+Route::get('/', [DashboardController::class, "index"]);
 
 Route::get('/login', [AdminLoginController::class, "login"])->name("administrator/login");
 Route::get('/logout', [AdminLoginController::class, "logout"])->name("administrator/logout");
