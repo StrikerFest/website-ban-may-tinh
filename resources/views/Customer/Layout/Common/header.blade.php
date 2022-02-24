@@ -1,12 +1,11 @@
 <!-- Topbar -->
+{{-- Thanh navbar thứ nhất --}}
 <header class="navbar navbar-expand navbar-light bg-gradient-danger topbar mb-4 static-top shadow fixed-top " style="padding: 0" >
     <div style="display: flex;justify-content: center;align-items: center; margin: auto;">
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
-
-        {{-- Logo --}}
 
         <!-- Topbar Search -->
         <form
@@ -208,26 +207,54 @@
 
 
 </header>
-<nav class="navbar navbar-expand navbar-light bg-gradient-light topbar mb-4 static-top shadow fixed-top " style="top: 70px;z-index: 5">
-    <div >
-        <li class="nav-item ">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                dsa</a>
-        </li>
 
+{{-- Thanh navbar thứ 2 --}}
+<nav class="navbar navbar-expand navbar-light bg-gradient-light topbar mb-4 static-top shadow fixed-top second-navbar padding-0">
+    <div class="center-custom list-style-none">
+        <div class="nav-item-container-highlight">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom" href="index.html">
+                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
+                    PC Build
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom" href="index.html">
+                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
+                    Service
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom" href="index.html">
+                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
+                    Best Deal
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom" href="index.html">
+                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
+                    Lifestyle
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom" href="index.html">
+                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
+                    Community
+                </a>
+            </li>
+        </div>
     </div>
-</nav>
-<nav>
-    <div class="">
-        <li class="nav-item ">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                dsa</a>
-        </li>
 
-    </div>
 </nav>
+
 <!-- End of Topbar -->
 
 
