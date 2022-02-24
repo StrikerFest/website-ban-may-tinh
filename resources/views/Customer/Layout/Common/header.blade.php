@@ -6,7 +6,9 @@
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
-
+        <div class="" style="padding-top: 10px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:white">
+            <h1>BKCOM</h1>
+        </div>
         <!-- Topbar Search -->
         <form
             class="d-flex align-items-center justify-content-center mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
