@@ -4,37 +4,55 @@ body {
 }
 
 /* Custom css thay đổi thuộc tính chung đơn giản*/
+
+/* Cho div ra giữa */
 .center-custom {
     display: flex;
     justify-content: center;
     margin: auto;
 }
+
+/* Bỏ chấm của <li> */
 .list-style-none {
     list-style: none;
 }
 
+/* Bỏ padding */
 .padding-0 {
     padding: 0;
 }
 
+/* Padding = 10 */
 .padding-10 {
     padding: 10;
 }
+
+/* Bỏ margin */
 .margin-0 {
     margin: 0;
 }
+
+/* Tròn góc 10px */
 .border-radius-10 {
     border-radius: 10px;
 }
+
+/* Tròn góc 5px */
 .border-radius-5 {
     border-radius: 5px;
 }
+
+/* Tròn góc 15px */
 .border-radius-15 {
     border-radius: 15px;
 }
+
+/* Căn giữa theo hướng chính (Flex) */
 .justify-content-center {
     justify-content: center;
 }
+
+/* Bỏ background */
 .background-none {
     background: none;
 }
@@ -42,14 +60,18 @@ body {
 /* Kết thúc - Custom css thay đổi thuộc tính chung đơn giản*/
 
 /* Custom css thay đổi thuộc tính chung chi tiết*/
+
+/* Xuyên thấu - Màu đen */
 .black-glass {
     background-color: rgba(20, 0, 0, 0.671);
 }
 
+/* Xuyên thấu - Màu đỏ */
 .red-glass {
     background-color: rgba(228, 0, 0, 0.842);
 }
 
+/* Hiệu ứng cắt góc trên */
 .red-glass :before {
     content: "";
     position: absolute;
@@ -60,6 +82,7 @@ body {
     width: 0;
 }
 
+/* Hiệu ứng cắt góc dưới */
 .black-glass :after {
     content: "";
     position: absolute;
@@ -73,6 +96,8 @@ body {
 /* Kết thúc - Custom css thay đổi thuộc tính chung chi tiết*/
 
 /* CSS Nav bar */
+
+/* Nút đường link navbar  */
 a.nav-item-custom:link {
     color: black;
     font-weight: bold;
@@ -80,17 +105,20 @@ a.nav-item-custom:link {
     text-decoration: none;
 }
 
+/* Nút đường link navbar khi được di qua */
 a.nav-item-custom:hover {
     color: red;
     background-color: transparent;
 }
 
+/* Thanh navbar thứ 2 */
 .second-navbar {
     height: 50px;
     top: 70px;
     z-index: 5;
 }
 
+/* Container chứa nút navbar */
 .nav-item-container {
     display: flex;
 
@@ -101,6 +129,7 @@ a.nav-item-custom:hover {
     height: 50px;
 }
 
+/* Container chứa nút navbar được highlight */
 .nav-item-container-highlight {
     background-color: red;
     display: flex;
@@ -111,12 +140,15 @@ a.nav-item-custom:hover {
     width: 200px;
     height: 50px;
 }
+
+/* CSS chữ của container chứa nút navbar được highlight */
 .nav-item-container-highlight a.nav-item-custom:link {
     color: aliceblue;
     background-color: transparent;
     text-decoration: none;
 }
 
+/* CSS chữ của container chứa nút navbar được highlight khi di qua */
 .nav-item-container-highlight a.nav-item-custom:hover {
     color: whitesmoke;
     background-color: transparent;
@@ -125,15 +157,19 @@ a.nav-item-custom:hover {
 /* Kết thúc - CSS Navbar */
 
 /* CSS carousel - Slide hình ảnh - Và các class liên quan đến carousel*/
+
+/* Container chứa slide hình ảnh */
 .carousel-container-custom {
     height: 400;
 }
 
+/* Vật phẩm ảnh trong slide hình ảnh */
 .carousel-item-custom {
     height: 400;
     width: 944px;
 }
 
+/* Vật phẩm quảng cáo dưới slide hình ảnh*/
 .carousel-promo-item {
     /* background-color: red; */
     position: relative;
@@ -145,6 +181,7 @@ a.nav-item-custom:hover {
     padding-right: 1%;
 }
 
+/* Chỉnh ảnh vật phẩm quảng cáo dưới slide hình ảnh */
 .carousel-promo-item-image-size {
     height: 130px;
     width: 180px;
@@ -152,6 +189,7 @@ a.nav-item-custom:hover {
     padding-right: 5px;
 }
 
+/* Tiêu đề vật phẩm quảng cáo dưới slide hình ảnh */
 .carousel-promo-item-label {
     text-align: right;
 }
