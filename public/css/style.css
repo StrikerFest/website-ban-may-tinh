@@ -59,3 +59,15 @@ a.nav-item-custom:hover {
     color: whitesmoke;
     background-color: transparent;
 }
+.carousel-container-custom {
+    height: 450px;
+}
+
+.carousel-item-custom {
+    height: 450px;
+    width: 1000px;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
