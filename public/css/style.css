@@ -26,8 +26,21 @@ a.nav-item-custom:hover {
 .padding-0 {
     padding: 0;
 }
+
+.padding-10 {
+    padding: 10;
+}
 .margin-0 {
     margin: 0;
+}
+.border-radius-10 {
+    border-radius: 10px;
+}
+.border-radius-5 {
+    border-radius: 5px;
+}
+.border-radius-15 {
+    border-radius: 15px;
 }
 .nav-item-container {
     display: flex;
@@ -60,14 +73,63 @@ a.nav-item-custom:hover {
     background-color: transparent;
 }
 .carousel-container-custom {
-    height: 450px;
+    height: 400;
 }
 
 .carousel-item-custom {
-    height: 450px;
-    width: 1000px;
+    height: 400;
+    width: 944px;
 }
 
 .justify-content-center {
     justify-content: center;
+}
+.carousel-promo-item {
+    /* background-color: red; */
+    position: relative;
+    width: 25%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.carousel-promo-item-image-size {
+    height: 130px;
+    width: 180px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.carousel-promo-item-label {
+    text-align: right;
+}
+
+.black-glass {
+    background-color: rgba(20, 0, 0, 0.671);
+}
+
+.red-glass {
+    background-color: rgba(228, 0, 0, 0.842);
+}
+
+.red-glass :before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 70px solid white;
+    border-right: 70px solid rgba(255, 0, 0, 0);
+    width: 0;
+}
+
+.black-glass :after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-bottom: 80px solid white;
+    border-left: 80px solid rgba(255, 0, 0, 0);
+    width: 0;
 }

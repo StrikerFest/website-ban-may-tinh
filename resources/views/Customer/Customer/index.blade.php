@@ -12,17 +12,20 @@
         <div id="content-wrapper" class="d-flex flex-row">
         @include("Customer.Layout.Common.side_nav_menu")
 
-            <!-- Begin Page Content -->
+            <!-- Bắt đầu - Content của trang -->
                 <div class="container-fluid" style="position:relative;top: 70px">
 
-                    <!-- DataTales Example -->
-                    <div >
+                    {{-- Bắt đầu - Slide quảng cáo --}}
+                    <div id="carouselID">
                         <div id="carouselExampleIndicators" class="carousel slide carousel-container-custom" data-ride="carousel">
+                            {{-- Bắt đầu - Hiển thị vị trí slide --}}
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
+                            {{-- Kết thúc - Hiển thị vị trí slide --}}
+                            {{-- Bắt đầu - Vật phẩm bên trong slide --}}
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                 <img class="d-block center-custom carousel-item-custom" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17f2998a76c%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17f2998a76c%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9140625%22%20y%3D%22217.7%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="First slide">
@@ -34,6 +37,8 @@
                                 <img class="d-block center-custom carousel-item-custom" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17f2998a76e%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17f2998a76e%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22276.9921875%22%20y%3D%22217.7%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Third slide">
                                 </div>
                             </div>
+                            {{-- Kết thúc - Vật phẩm bên trong slide --}}
+                            {{-- Bắt đầu - Nút điều khiển slide --}}
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
@@ -42,9 +47,84 @@
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
+                            {{-- Kết thúc - Nút điều khiển slide --}}
                         </div>
                     </div>
-                    <div class="card shadow mb-4">
+                    {{-- Kết thúc - Slide quảng cảo --}}
+                    <br>
+                    {{-- Bắt đầu - Vật phẩm dưới slide quảng cáo --}}
+                    <div class="card shadow mb-4 bg-gradient-">
+                        <div class="card-body padding-0">
+                            <div class="table-responsive d-flex justify-content-center">
+                                {{-- Bắt đầu - Nội dung 1--}}
+                                <div class="carousel-promo-item">
+                                    <div class=" shadow mb-4 ">
+                                        {{-- Label nội dung --}}
+                                        <div class="card-header py-3 red-glass">
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                        </div>
+                                        {{-- Vật phẩm trong nội dung --}}
+                                        <div class="card-body padding-10 black-glass">
+                                            <div class="table-responsive center-custom">
+                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Kết thúc - Nội dung 1--}}
+                                {{-- Bắt đầu - Nội dung 2--}}
+                                <div class="carousel-promo-item">
+                                    <div class=" shadow mb-4 ">
+                                        {{-- Label nội dung --}}
+                                        <div class="card-header py-3 red-glass">
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                        </div>
+                                        {{-- Vật phẩm trong nội dung --}}
+                                        <div class="card-body padding-10 black-glass">
+                                            <div class="table-responsive center-custom">
+                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Kết thúc - Nội dung 2--}}
+                                {{-- Bắt đầu - Nội dung 3--}}
+                                <div class="carousel-promo-item">
+                                    <div class=" shadow mb-4 ">
+                                        {{-- Label nội dung --}}
+                                        <div class="card-header py-3 red-glass">
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                        </div>
+                                        {{-- Vật phẩm trong nội dung --}}
+                                        <div class="card-body padding-10 black-glass">
+                                            <div class="table-responsive center-custom">
+                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Kết thúc - Nội dung 3--}}
+                                {{-- Bắt đầu - Nội dung 4--}}
+                                <div class="carousel-promo-item">
+                                    <div class=" shadow mb-4 ">
+                                        {{-- Label nội dung --}}
+                                        <div class="card-header py-3 red-glass">
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                        </div>
+                                        {{-- Vật phẩm trong nội dung --}}
+                                        <div class="card-body padding-10 black-glass">
+                                            <div class="table-responsive center-custom">
+                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Kết thúc - Nội dung 4--}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Kết thúc - Vật phẩm dưới slide quảng cáo --}}
+                    <div class="card shadow mb-4" >
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                         </div>
