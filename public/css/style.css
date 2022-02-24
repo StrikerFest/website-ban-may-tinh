@@ -1,7 +1,9 @@
+/* Body */
 body {
     background-image: url("../assets/img/white-background-1.jpg");
 }
 
+/* Custom css thay đổi thuộc tính chung đơn giản*/
 .center-custom {
     display: flex;
     justify-content: center;
@@ -11,22 +13,6 @@ body {
     list-style: none;
 }
 
-a.nav-item-custom:link {
-    color: black;
-    font-weight: bold;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-a.nav-item-custom:hover {
-    color: red;
-    background-color: transparent;
-}
-.second-navbar {
-    height: 50px;
-    top: 70px;
-    z-index: 5;
-}
 .padding-0 {
     padding: 0;
 }
@@ -46,6 +32,65 @@ a.nav-item-custom:hover {
 .border-radius-15 {
     border-radius: 15px;
 }
+.justify-content-center {
+    justify-content: center;
+}
+.background-none {
+    background: none;
+}
+
+/* Kết thúc - Custom css thay đổi thuộc tính chung đơn giản*/
+
+/* Custom css thay đổi thuộc tính chung chi tiết*/
+.black-glass {
+    background-color: rgba(20, 0, 0, 0.671);
+}
+
+.red-glass {
+    background-color: rgba(228, 0, 0, 0.842);
+}
+
+.red-glass :before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 60px solid rgb(226, 226, 226);
+    border-right: 60px solid rgba(255, 0, 0, 0);
+    width: 0;
+}
+
+.black-glass :after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-bottom: 80px solid rgb(226, 226, 226);
+    border-left: 80px solid rgba(255, 0, 0, 0);
+    width: 0;
+}
+
+/* Kết thúc - Custom css thay đổi thuộc tính chung chi tiết*/
+
+/* CSS Nav bar */
+a.nav-item-custom:link {
+    color: black;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.nav-item-custom:hover {
+    color: red;
+    background-color: transparent;
+}
+
+.second-navbar {
+    height: 50px;
+    top: 70px;
+    z-index: 5;
+}
+
 .nav-item-container {
     display: flex;
 
@@ -76,6 +121,10 @@ a.nav-item-custom:hover {
     color: whitesmoke;
     background-color: transparent;
 }
+
+/* Kết thúc - CSS Navbar */
+
+/* CSS carousel - Slide hình ảnh - Và các class liên quan đến carousel*/
 .carousel-container-custom {
     height: 400;
 }
@@ -85,9 +134,6 @@ a.nav-item-custom:hover {
     width: 944px;
 }
 
-.justify-content-center {
-    justify-content: center;
-}
 .carousel-promo-item {
     /* background-color: red; */
     position: relative;
@@ -108,36 +154,4 @@ a.nav-item-custom:hover {
 
 .carousel-promo-item-label {
     text-align: right;
-}
-
-.black-glass {
-    background-color: rgba(20, 0, 0, 0.671);
-}
-
-.red-glass {
-    background-color: rgba(228, 0, 0, 0.842);
-}
-
-.red-glass :before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-top: 60px solid rgb(226, 226, 226);
-    border-right: 60px solid rgba(255, 0, 0, 0);
-    width: 0;
-}
-
-.black-glass :after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-bottom: 80px solid rgb(226, 226, 226);
-    border-left: 80px solid rgba(255, 0, 0, 0);
-    width: 0;
-}
-
-.background-none {
-    background: none;
 }
