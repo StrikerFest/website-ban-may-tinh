@@ -1,3 +1,7 @@
+body {
+    background-image: url("../assets/img/white-background-1.jpg");
+}
+
 .center-custom {
     display: flex;
     justify-content: center;
@@ -119,8 +123,8 @@ a.nav-item-custom:hover {
     position: absolute;
     top: 0;
     left: 0;
-    border-top: 70px solid white;
-    border-right: 70px solid rgba(255, 0, 0, 0);
+    border-top: 60px solid rgb(226, 226, 226);
+    border-right: 60px solid rgba(255, 0, 0, 0);
     width: 0;
 }
 
@@ -129,7 +133,11 @@ a.nav-item-custom:hover {
     position: absolute;
     bottom: 0;
     right: 0;
-    border-bottom: 80px solid white;
+    border-bottom: 80px solid rgb(226, 226, 226);
     border-left: 80px solid rgba(255, 0, 0, 0);
     width: 0;
+}
+
+.background-none {
+    background: none;
 }
