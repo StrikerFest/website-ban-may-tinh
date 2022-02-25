@@ -16,18 +16,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, "index"]);
+
+// ADMIN======================
+// ===========================
+// ===========================
 
 Route::get('/login/Admin', [AdminLoginController::class, "login"])->name("administrator/login");
 Route::get('/logout/Admin', [AdminLoginController::class, "logout"])->name("administrator/logout");
 
+Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
+
+Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
+Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
+
+Route::get('/testAdmin', function () {
+    return view('Customer.Customer.index');
+});
+
+// CUSTOMER===================
+// ===========================
+// ===========================
+
+Route::get('/', [CustomerLoginController::class, "login"]);
+
 Route::get('/login', [CustomerLoginController::class, "login"])->name("login");
 Route::get('/logout', [CustomerLoginController::class, "logout"])->name("logout");
 
-Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
-
-Route::post('/loginProcess', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
-Route::post('/logoutProcess', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
+Route::post('/loginProcess', [CustomerLoginController::class, "loginProcess"])->name("loginProcess");
+Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])->name("logoutProcess");
 
 Route::get('/test', function () {
     return view('Customer.Customer.index');
