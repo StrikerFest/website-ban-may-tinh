@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->id();
-            $table->string('uuid')->unique();
-            $table->text('connection');
-            $table->text('queue');
-            $table->longText('payload');
-            $table->longText('exception');
-            $table->timestamp('failed_at')->useCurrent();
+        Schema::create('anh_san_pham', function(Blueprint $table){
+            $table->increments('maASP');
+            $table->unsignedInteger('maSP');
+            $table->foreign('maSP')->references('maSP')->on('san_pham');
+            $table->string('anh', 300);
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('anh_san_pham');
     }
 };
