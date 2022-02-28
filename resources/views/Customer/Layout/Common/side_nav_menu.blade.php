@@ -1,12 +1,12 @@
 <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary  sidebar sidebar-dark accordion fixed-top"  id="accordionSidebar">
+    <ul class="navbar-nav bg-gray-200  sidebar sidebar-dark accordion fixed-top"  id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center sidenav-text" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laptop-code"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">BKCOM</div>
+            <div class="sidebar-brand-text mx-3" >BKCOM</div>
         </a>
 
         <!-- Divider -->
@@ -14,24 +14,24 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-home"></i>
+            <a class="nav-link sidenav-text" href="index.html">
+                <i class="fas fa-fw fa-home sidenav-header"></i>
                 <span>Homepage</span></a>
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider sidenav-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading sidenav-header">
             PC Build
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-desktop"></i>
+                <i class="fas fa-desktop sidenav-header"></i>
                 <span>Desktop PC</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -45,9 +45,9 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-gamepad"></i>
+                <i class="fas fa-gamepad sidenav-icon"></i>
                 <span>Gaming PC</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -63,18 +63,18 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider sidenav-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading sidenav-header">
             Laptop
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-laptop"></i>
+                <i class="fas fa-laptop sidenav-header"></i>
                 <span>Laptop</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -106,17 +106,17 @@
         </li> --}}
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebar-divider d-none d-md-block  sidenav-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading sidenav-header">
             Component
         </div>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-laptop"></i>
+                <i class="fas fa-laptop sidenav-header"></i>
                 <span>Hardware</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -133,9 +133,9 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-laptop"></i>
+                <i class="fas fa-laptop sidenav-header"></i>
                 <span>Peripheral</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -153,17 +153,17 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebar-divider d-none d-md-block  sidenav-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading sidenav-header">
             Stationery
         </div>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-laptop"></i>
+                <i class="fas fa-laptop sidenav-header"></i>
                 <span>Printer</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -180,9 +180,9 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-laptop"></i>
+                <i class="fas fa-laptop sidenav-header"></i>
                 <span>Lighting</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -200,8 +200,8 @@
         </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <div class="text-center d-none  d-md-inline">
+            <button class="rounded-circle bg-gradient-danger border-0" id="sidebarToggle"></button>
         </div>
 
         <!-- Sidebar Message -->

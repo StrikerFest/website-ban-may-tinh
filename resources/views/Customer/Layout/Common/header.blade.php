@@ -211,7 +211,7 @@
 </header>
 
 {{-- Thanh navbar thứ 2 --}}
-<nav class="navbar navbar-expand navbar-light bg-gradient-light topbar mb-4 static-top shadow fixed-top second-navbar padding-0">
+<nav class="navbar navbar-expand navbar-light bg-gradient- topbar mb-4 static-top shadow fixed-top second-navbar padding-0" style="background-color: rgba(255, 255, 255, 0.9)">
     <div class="center-custom list-style-none">
         <div class="nav-item-container-highlight">
             <li class="nav-item ">

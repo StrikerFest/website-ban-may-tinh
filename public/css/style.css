@@ -1,6 +1,10 @@
 /* Body */
 body {
     background-image: url("../assets/img/white-background-1.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /* Custom css thay đổi thuộc tính chung đơn giản*/
@@ -192,4 +196,34 @@ a.nav-item-custom:hover {
 /* Tiêu đề vật phẩm quảng cáo dưới slide hình ảnh */
 .carousel-promo-item-label {
     text-align: right;
+}
+
+/* Nút đường link navbar  */
+a.sidenav-text:link {
+    color: black !important;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+/* Nút đường link navbar khi được di qua */
+a.sidenav-text:hover {
+    color: red !important;
+    background-color: transparent;
+}
+
+.sidenav-text {
+    color: black !important;
+}
+
+.sidenav-header {
+    color: black !important;
+}
+
+.sidenav-icon {
+    color: black !important;
+}
+
+.sidenav-divider {
+    border-top: solid black 1px !important;
 }
