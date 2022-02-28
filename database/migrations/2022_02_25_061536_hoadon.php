@@ -22,7 +22,8 @@ return new class extends Migration
             $table->dateTime('ngayTao');
             $table->unsignedInteger('maPTTT');
             $table->foreign('maPTTT')->references('maPTTT')->on('phuong_thuc_thanh_toan');
-            $table->unsignedInteger('tinhTrang');
+            $table->unsignedInteger('maTTHD');
+            $table->foreign('maTTHD')->references('maTTHD')->on('tinh_trang_hoa_don');
         });
     }
 
