@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nha_san_xuat', function(Blueprint $table){
+        Schema::create('nha_san_xuat', function (Blueprint $table) {
             $table->increments('maNSX');
             $table->string('tenNSX', 30);
         });
