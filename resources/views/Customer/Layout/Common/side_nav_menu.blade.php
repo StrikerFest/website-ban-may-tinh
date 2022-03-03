@@ -1,12 +1,12 @@
 <!-- Sidebar -->
-    <ul class="navbar-nav bg-gray-200  sidebar sidebar-dark accordion fixed-top"  id="accordionSidebar">
+    <ul class="navbar-nav bg-primary  sidebar sidebar-dark accordion fixed-top" style="background-color: rgba(20, 20, 20, 0.95)  !important"  id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center sidenav-text" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center sidenav-text side" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15 sidenav-header">
                 <i class="fas fa-laptop-code"></i>
             </div>
-            <div class="sidebar-brand-text mx-3" >BKCOM</div>
+            <div class="sidebar-brand-text mx-3 sidenav-header" >BKCOM</div>
         </a>
 
         <!-- Divider -->
@@ -15,8 +15,11 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link sidenav-text" href="index.html">
+                <div class="sidenav-header">
                 <i class="fas fa-fw fa-home sidenav-header"></i>
-                <span>Homepage</span></a>
+                <span>Homepage</span>
+                </div>
+            </a>
         </li>
 
         <!-- Divider -->
@@ -27,7 +30,7 @@
             PC Build
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Menu Desktop PC -->
         <li class="nav-item">
             <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -43,9 +46,9 @@
             </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
+        <!-- Nav Item - GamingPC Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseGamingPC"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-gamepad sidenav-icon"></i>
                 <span>Gaming PC</span>
@@ -200,8 +203,8 @@
         </li>
 
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none  d-md-inline">
-            <button class="rounded-circle bg-gradient-danger border-0" id="sidebarToggle"></button>
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle bg-light border-0     " id="sidebarToggle"></button>
         </div>
 
         <!-- Sidebar Message -->

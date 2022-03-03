@@ -67,16 +67,26 @@ body {
 
 /* Xuyên thấu - Màu đen */
 .black-glass {
-    background-color: rgba(20, 0, 0, 0.671);
+    background-color: rgba(0, 0, 0, 0.671);
 }
 
 /* Xuyên thấu - Màu đỏ */
 .red-glass {
-    background-color: rgba(228, 0, 0, 0.842);
+    background-color: rgba(255, 0, 0, 0.842);
 }
 
 /* Hiệu ứng cắt góc trên */
 .red-glass :before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 60px solid rgb(226, 226, 226);
+    border-right: 60px solid rgba(255, 0, 0, 0);
+    width: 0;
+}
+
+.black-glass :before {
     content: "";
     position: absolute;
     top: 0;
@@ -208,22 +218,22 @@ a.sidenav-text:link {
 
 /* Nút đường link navbar khi được di qua */
 a.sidenav-text:hover {
-    color: red !important;
+    color: grey !important;
     background-color: transparent;
 }
 
 .sidenav-text {
-    color: black !important;
+    color: grey !important;
 }
 
 .sidenav-header {
-    color: black !important;
+    color: grey !important;
 }
 
 .sidenav-icon {
-    color: black !important;
+    color: grey !important;
 }
 
 .sidenav-divider {
-    border-top: solid black 1px !important;
+    border-top: solid grey 1px !important;
 }

@@ -14,8 +14,8 @@ class CustomerLoginController extends Controller
     public function login()
     {
         // Nếu có session
-        if (session()->has('sinhVien')) {
-            // return Redirect::route('sinhVien/noiQuy');
+        if (session()->has('khachHang')) {
+            return Redirect::route('test');
         }
         // Nếu không có session, quay lại đăng nhập
         else {
@@ -33,23 +33,24 @@ class CustomerLoginController extends Controller
             'password' => 'required',
         ]);
         // khi có session - Sửa khi có db
-        if (session()->has('sinhVien')) {
-            // return Redirect::route('sinhVien/noiQuy');
+        if (session()->has('khachHang')) {
+
+            return Redirect::route('test');
         }
         // khi không có session - Sửa khi có db
         else {
             try {
-                $user = UserModel::where('emailSV', $email)->where('matKhauSV', $password)->firstOrFail();
+                $user = UserModel::where('emailND', $email)->where('matKhauND', $password)->firstOrFail();
 
-                $request->session()->put('sinhVien', $user->maSV);
-                $request->session()->put('tenSinhVien', $user->tenSV);
+                $request->session()->put('khachHang', $user->maND);
+                $request->session()->put('tenKhachHang', $user->tenND);
 
-
-                // return Redirect::route('sinhVien/noiQuy');
+                return Redirect::route('test');
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
                 return Redirect::route('login')->with("error", "Email hoặc mật khẩu của bạn đã sai");
+
             }
         }
     }
@@ -58,8 +59,8 @@ class CustomerLoginController extends Controller
     public function logout()
     {
         // Nếu có session
-        if (session()->has('sinhVien')) {
-            session()->pull('sinhVien');
+        if (session()->has('khachHang')) {
+            session()->pull('khachHang');
             return Redirect::route('login');
         }
         // Nếu không có session

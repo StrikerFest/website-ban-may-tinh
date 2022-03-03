@@ -1,6 +1,6 @@
 <!-- Topbar -->
 {{-- Thanh navbar thứ nhất --}}
-<header class="navbar navbar-expand navbar-light bg-gradient-danger topbar mb-4 static-top shadow fixed-top " style="padding: 0" >
+<header class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow fixed-top " style="padding: 0; background-color: rgba(20, 20, 20, 0.97) !important" >
     <div style="display: flex;justify-content: center;align-items: center; margin: auto;">
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -128,7 +128,9 @@
                         Activity Log
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <a class="dropdown-item" href="{{route('logout')}}"
+                     {{-- data-toggle="modal" data-target="#logoutModal --}}
+                     ">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>

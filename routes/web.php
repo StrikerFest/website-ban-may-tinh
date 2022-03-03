@@ -47,4 +47,4 @@ Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])
 
 Route::get('/test', function () {
     return view('Customer.Customer.index');
-});
+})->name("test");
