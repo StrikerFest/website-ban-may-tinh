@@ -63,7 +63,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -79,7 +79,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -95,7 +95,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -111,7 +111,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -146,7 +146,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -162,7 +162,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -177,7 +177,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -192,7 +192,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOM</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">

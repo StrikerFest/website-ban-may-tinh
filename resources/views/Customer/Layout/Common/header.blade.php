@@ -2,14 +2,14 @@
 {{-- Thanh navbar thứ nhất --}}
 <header class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow fixed-top " style="padding: 0; background-color: rgba(20, 20, 20, 0.97) !important" >
     <div style="display: flex;justify-content: center;align-items: center; margin: auto;">
-        <!-- Sidebar Toggle (Topbar) -->
+        <!-- Nút đóng mở navbar -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
         <div class="" style="padding-top: 10px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:white">
             <h1>BKCOM</h1>
         </div>
-        <!-- Topbar Search -->
+        <!-- Topbar tìm kiếm -->
         <form
             class="d-flex align-items-center justify-content-center mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
@@ -101,18 +101,20 @@
                 </div>
             </li>
 
-            {{-- Divide --}}
+            {{-- Vách ngăn --}}
             <div class="topbar-divider d-none d-sm-block"></div>
 
-            <!-- Nav Item - User Information -->
+            <!-- Nav Item - Icon và thông tin người dùng -->
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{-- Tên người dùng --}}
                     <span class="mr-2 d-none d-lg-inline text-white small">Adu Darkwa</span>
+                    {{-- Ảnh người dùng --}}
                     <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg">
                 </a>
-                <!-- Dropdown - User Information -->
+                <!-- Dropdown - Thông tin người dùng -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
@@ -128,6 +130,7 @@
                         Activity Log
                     </a>
                     <div class="dropdown-divider"></div>
+                    {{-- Nút logout --}}
                     <a class="dropdown-item" href="{{route('logout')}}"
                      {{-- data-toggle="modal" data-target="#logoutModal --}}
                      ">
@@ -137,10 +140,10 @@
                 </div>
             </li>
 
-            {{-- Divide  --}}
+            {{-- Vách ngăn  --}}
             <div class="topbar-divider d-none d-sm-block"></div>
 
-            <!-- Nav Item - Messages -->
+            <!-- Nav Item - Giỏ hàng -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -226,7 +229,6 @@
         <div class="nav-item-container">
             <li class="nav-item ">
                 <a class="nav-link nav-item-custom" href="index.html">
-                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
                     Service
                 </a>
             </li>
@@ -234,7 +236,6 @@
         <div class="nav-item-container">
             <li class="nav-item ">
                 <a class="nav-link nav-item-custom" href="index.html">
-                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
                     Best Deal
                 </a>
             </li>
@@ -242,7 +243,6 @@
         <div class="nav-item-container">
             <li class="nav-item ">
                 <a class="nav-link nav-item-custom" href="index.html">
-                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
                     Lifestyle
                 </a>
             </li>
@@ -250,7 +250,6 @@
         <div class="nav-item-container">
             <li class="nav-item ">
                 <a class="nav-link nav-item-custom" href="index.html">
-                    {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
                     Community
                 </a>
             </li>
@@ -277,7 +276,7 @@
 
 
 
-<!-- Topbar Filler -->
+<!-- Topbar Filler - Không cần quan tâm đến cái này -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
