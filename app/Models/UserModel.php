@@ -10,7 +10,7 @@ class UserModel extends Model
     use HasFactory;
     protected $table = 'nguoi_dung';
 
-    // public $timestamps = false;
+    public $timestamps = false;
 
     public $primaryKey = 'maND';
 

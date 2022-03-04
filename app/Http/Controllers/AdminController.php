@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RoleModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -15,6 +17,9 @@ class AdminController extends Controller
     public function index()
     {
         //
+
+        $chucVu = DB::table('chuc_vu')->get();
+
         $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
             ->where('tenQH', 'Là Admin')
@@ -23,6 +28,7 @@ class AdminController extends Controller
 
         return view('Admin.Admin.index', [
             "admin" => $admin,
+            "chucVu" => $chucVu,
         ]);
     }
 
@@ -45,6 +51,14 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
+        $admin = new UserModel();
+        $admin->tenND = $request->get('ten');
+        $admin->emailND = $request->get('email');
+        $admin->matKhauND = $request->get('password');
+        $admin->maCV = $request->get('maCV');
+
+        $admin->save();
+        return redirect(route('admin.index'));
     }
 
     /**
