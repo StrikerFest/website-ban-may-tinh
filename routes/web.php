@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\DashboardController;
@@ -29,9 +30,11 @@ Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard
 Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
+Route::resource('customer', AdminCustomerController::class);
+
 Route::get('/testAdmin', function () {
-    return view('Customer.Customer.index');
-});
+    return view('Admin.Customer.index');
+})->name("testAdmin");
 
 // CUSTOMER===================
 // ===========================
