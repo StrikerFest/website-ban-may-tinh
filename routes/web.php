@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\AdminEmployeeController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminPermissionController;
+use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +37,8 @@ Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"
 Route::resource('customer', AdminCustomerController::class);
 Route::resource('admin', AdminController::class);
 Route::resource('employee', AdminEmployeeController::class);
+Route::resource('role', AdminRoleController::class);
+Route::resource('permission', AdminPermissionController::class);
 
 Route::get('/testAdmin', function () {
     return view('Admin.Customer.index');
