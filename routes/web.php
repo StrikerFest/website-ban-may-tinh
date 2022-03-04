@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminCustomerController;
+use App\Http\Controllers\AdminEmployeeController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\DashboardController;
@@ -31,6 +33,8 @@ Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
 Route::resource('customer', AdminCustomerController::class);
+Route::resource('admin', AdminController::class);
+Route::resource('employee', AdminEmployeeController::class);
 
 Route::get('/testAdmin', function () {
     return view('Admin.Customer.index');
