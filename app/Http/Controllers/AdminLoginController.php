@@ -44,11 +44,16 @@ class AdminLoginController extends Controller
         else {
             try {
                 // lấy dữ liệu từ db - Sửa thành phần theo db mới
-                $admin = UserModel::where('emailGV', $email)->where('matKhauGV', $password)->firstOrFail();
+                // $admin = UserModel::where('emailND', $email)->where('matKhauND', $password)->firstOrFail();
+                $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
+                    ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
+                    ->where('emailND', $email)->where('matKhauND', $password)
+                    ->where('tenQH', 'Đăng nhập Admin')
+                    ->firstOrFail();
                 // tạo biến session - Sửa thành phần theo db mới
-                $request->session()->put('admin', $admin->maGV);
-                $request->session()->put('tenAdmin', $admin->tenGV);
-                $request->session()->put('chucVu', $admin->chucVu);
+                $request->session()->put('admin', $admin->maND);
+                $request->session()->put('tenAdmin', $admin->tenND);
+                $request->session()->put('chucVu', $admin->maCV);
                 // chuyển sang dashBoard
                 return Redirect::route('dashBoard');
 
@@ -64,6 +69,8 @@ class AdminLoginController extends Controller
     {
         // khi co session
         if (session()->has('admin')) {
+            session()->pull('admin');
+
             return Redirect::route('administrator/login');
         }
         // khi ko co session
