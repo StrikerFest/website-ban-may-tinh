@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-dark  sidebar sidebar-dark accordion fixed-top" style="overflow-y: scroll;overflow-x:hidden;height: 100% !important;" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-dark  sidebar sidebar-dark accordion sticky-top" style="height: 100% !important;" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -41,10 +41,8 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.index')}}">Danh sách Admin</a>
-                    <a class="collapse-item" href="{{route('customer.index')}}">Danh sách nhân viên</a>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm Admin</a>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm nhân viên</a>
+                    <a class="collapse-item" href="{{route('admin.index')}}">Quản lý Admin</a>
+                    <a class="collapse-item" href="{{route('employee.index')}}">Quản lý nhân viên</a>
                 </div>
             </div>
         </li>
@@ -116,12 +114,12 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-comment"></i>
                 <span>Bình luận và phản hồi</span>
             </a>
-            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="{{route('customer.index')}}">Danh sách sản phẩm</a>
@@ -132,16 +130,16 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
+                aria-expanded="true" aria-controls="collapseEight">
                 <i class="fas fa-fw fa-ellipsis-h"></i>
-                <span>Khác</span>
+                <span>Phân quyền</span>
             </a>
-            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseEight" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.index')}}">Danh sách sản phẩm</a>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
+                    <a class="collapse-item" href="{{route('role.index')}}">Quản lý chức vụ</a>
+                    <a class="collapse-item" href="{{route('permission.index')}}">Quản lý quyền hạn</a>
                 </div>
             </div>
         </li>
@@ -187,12 +185,12 @@
 <!-- End of Sidebar -->
 
 <!-- Filler -->
-    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"  id="accordionSidebar">
+    {{-- <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"  id="accordionSidebar">
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link">
                 <span>Charts</span></a>
         </li>
-    </ul>
+    </ul> --}}
 <!-- End of Filler -->
