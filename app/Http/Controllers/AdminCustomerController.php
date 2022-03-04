@@ -17,7 +17,7 @@ class AdminCustomerController extends Controller
         //
         $khachHang = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
-            ->where('tenQH', 'Đăng nhập khách hàng')
+            ->where('tenQH', 'Là khách hàng')
             ->orderBy('maND', 'desc')->get();
         // ->paginate();
 
