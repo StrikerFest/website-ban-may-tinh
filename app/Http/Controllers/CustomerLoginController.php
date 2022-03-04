@@ -50,7 +50,6 @@ class CustomerLoginController extends Controller
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
                 return Redirect::route('login')->with("error", "Email hoặc mật khẩu của bạn đã sai");
-
             }
         }
     }

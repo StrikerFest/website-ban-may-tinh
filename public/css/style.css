@@ -237,3 +237,19 @@ a.sidenav-text:hover {
 .sidenav-divider {
     border-top: solid grey 1px !important;
 }
+
+/* Menu bên cạnh giấu thanh trượt - Sửa sau */
+.sidenav-menu-scroll {
+    /* overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100% !important; */
+}
+
+.sidenav-menu-scroll::-webkit-scrollbar {
+    /* display: none !important; */
+}
+
+/* .sidenav-menu {
+    /* -ms-overflow-style: none; IE and Edge */
+/* scrollbar-width: none; Firefox */
+/* }  */
