@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('maTL')->references('maTL')->on('the_loai');
             $table->unsignedInteger('maTS');
             $table->foreign('maTS')->references('maTS')->on('thong_so');
+            $table->unique(['maTL', 'maTS']);
         });
     }
 
