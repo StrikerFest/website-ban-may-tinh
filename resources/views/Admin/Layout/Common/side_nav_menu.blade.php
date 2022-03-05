@@ -59,7 +59,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{ route('customer.index') }}">Danh sách người dùng</a>
-                <a class="collapse-item" href="{{ route('customer.create') }}">Thêm người dùng</a>
             </div>
         </div>
     </li>
