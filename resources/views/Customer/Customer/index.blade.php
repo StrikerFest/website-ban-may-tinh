@@ -63,7 +63,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -79,7 +79,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -95,7 +95,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -111,7 +111,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -135,7 +135,7 @@
                     {{-- Vật phẩm danh mục 1 --}}
                     <div class="card shadow mb-4 background-none" id="carouselID" >
                         {{-- Label danh mục - Thay class bằng class khác --}}
-                        <div class="card-header py-3 red-glass">
+                        <div class="card-header py-3 black-glass">
                             <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">DataTables Example</h6>
                         </div>
                         {{-- Content danh mục - Thay class bằng class khác --}}
@@ -146,7 +146,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -162,7 +162,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -177,7 +177,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -192,7 +192,7 @@
                                     <div class=" shadow mb-4 ">
                                         {{-- Label nội dung --}}
                                         <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
+                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">Quảng cáo máy tính BKCOMe</h6>
                                         </div>
                                         {{-- Vật phẩm trong nội dung --}}
                                         <div class="card-body padding-10 black-glass">
@@ -207,230 +207,7 @@
                     </div>
                     {{-- Kết thúc - Vật phẩm danh mục 1 --}}
 
-                    {{-- Vật phẩm danh mục 2 --}}
-                    <div class="card shadow mb-4 background-none" id="carouselID" >
-                        {{-- Label danh mục - Thay class bằng class khác --}}
-                        <div class="card-header py-3 red-glass">
-                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">DataTables Example</h6>
-                        </div>
-                        {{-- Content danh mục - Thay class bằng class khác --}}
-                        <div class="card-body">
-                            <div class="table-responsive d-flex">
-                                {{-- Vật phẩm 1 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div>
-                                {{-- Vật phẩm 2 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Vật phẩm 3 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Vật phẩm 4 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Kết thúc - Vật phẩm danh mục 2 --}}
-
-                    {{-- Vật phẩm danh mục 3 --}}
-                    <div class="card shadow mb-4 background-none" id="carouselID" >
-                        {{-- Label danh mục - Thay class bằng class khác --}}
-                        <div class="card-header py-3 red-glass">
-                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">DataTables Example</h6>
-                        </div>
-                        {{-- Content danh mục - Thay class bằng class khác --}}
-                        <div class="card-body">
-                            <div class="table-responsive d-flex">
-                                {{-- Vật phẩm 1 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                {{-- Vật phẩm 2 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Vật phẩm 3 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Vật phẩm 4 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Kết thúc - Vật phẩm danh mục 3 --}}
-
-                    {{-- Vật phẩm danh mục 4 --}}
-                    <div class="card shadow mb-4 background-none" id="carouselID" >
-                        {{-- Label danh mục - Thay class bằng class khác --}}
-                        <div class="card-header py-3 red-glass">
-                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">DataTables Example</h6>
-                        </div>
-                        {{-- Content danh mục - Thay class bằng class khác --}}
-                        <div class="card-body">
-                            <div class="table-responsive d-flex">
-                                {{-- Vật phẩm 1 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                {{-- Vật phẩm 2 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Vật phẩm 3 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- Vật phẩm 4 --}}
-                                <div class="carousel-promo-item">
-                                    <div class=" shadow mb-4 ">
-                                        {{-- Label nội dung --}}
-                                        <div class="card-header py-3 red-glass">
-                                            <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">You might be interested with</h6>
-                                        </div>
-                                        {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
-                                            <div class="table-responsive center-custom">
-                                                <img class="carousel-promo-item-image-size" src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Kết thúc - Vật phẩm danh mục 4 --}}
 
                     {{-- Mẫu table --}}
                     <div class="card shadow mb-4">

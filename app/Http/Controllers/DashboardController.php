@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         // Nếu có session của admin - Sửa khi đã có session
-        if (!session()->has('admin')) {
+        if (session()->has('admin')) {
 
             return view("Admin.Dashboard.index", []);
         } else {
