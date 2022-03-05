@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoleModel extends Model
+class RolePermissionModel extends Model
 {
     use HasFactory;
-    protected $table = 'chuc_vu';
+    protected $table = 'chuc_vu_quyen_han';
 
     public $timestamps = false;
 
-    public $primaryKey = 'maCV';
+    // public $primaryKey = 'maCV';
 }
