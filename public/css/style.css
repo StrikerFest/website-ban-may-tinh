@@ -174,12 +174,12 @@ a.nav-item-custom:hover {
 
 /* Container chứa slide hình ảnh */
 .carousel-container-custom {
-    height: 400;
+    height: 600;
 }
 
 /* Vật phẩm ảnh trong slide hình ảnh */
 .carousel-item-custom {
-    height: 400;
+    height: 600;
     width: 944px;
 }
 
@@ -187,7 +187,7 @@ a.nav-item-custom:hover {
 .carousel-promo-item {
     /* background-color: red; */
     position: relative;
-    width: 25%;
+    width: 100%;
     height: auto;
     padding: 0;
     margin: 0;

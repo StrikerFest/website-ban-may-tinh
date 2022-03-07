@@ -1,0 +1,289 @@
+{{-- Vật phẩm 1 --}}
+<div class="carousel-promo-item">
+    {{-- Insert product --}}
+    <div class="col mb-5">
+        <div class="card" style="height: 500px">
+            <!-- Sale badge-->
+            <div
+                class="badge bg-gradient-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+            >
+                Sale
+            </div>
+            <!-- Product image-->
+            <img
+                class="card-img-top"
+                style="height: 60%; width: 100%; border: 1px solid lightgray"
+                src="{{ asset('assets/img/250_59273_hp_200_g4_01.jpg') }}"
+                alt="..."
+            />
+            <!-- Product details-->
+            <div class="card-body p-4 bg-dark text-light">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">
+                        Super Computer M9 Intel i9-12975 16GB 256GB SSD NVME
+                        2070ti
+                    </h5>
+
+                    <!-- Product price-->
+                    <span class="">29,000,000VND</span>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-3 border-top-0 bg-gradient-dark">
+                <div class="text-center">
+                    <a class="btn btn-outline-light mt-auto" href="#"
+                        >Thêm vào giỏ hàng</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Vật phẩm 2 --}}
+<div class="carousel-promo-item">
+    {{-- Insert product --}}
+    <div class="col mb-5">
+        <div class="card" style="height: 500px">
+            <!-- Sale badge-->
+            <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+            >
+                Sale
+            </div>
+            <!-- Product image-->
+            <img
+                class="card-img-top"
+                style="height: 60%; width: 100%; border: 1px solid lightgray"
+                src="{{ asset('assets/img/250_59273_hp_200_g4_01.jpg') }}"
+                alt="..."
+            />
+            <!-- Product details-->
+            <div class="card-body p-4 bg-dark text-light">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">
+                        Super Computer M9 Intel i9-12975 16GB 256GB SSD NVME
+                        2070ti
+                    </h5>
+
+                    <!-- Product price-->
+                    <span class="">29,000,000VND</span>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-3 border-top-0 bg-dark">
+                <div class="text-center">
+                    <a class="btn btn-outline-light mt-auto" href="#"
+                        >Add to cart</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Vật phẩm 3 --}}
+<div class="carousel-promo-item">
+    {{-- Insert product --}}
+    <div class="col mb-5">
+        <div class="card" style="height: 500px">
+            <!-- Sale badge-->
+            <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+            >
+                Sale
+            </div>
+            <!-- Product image-->
+            <img
+                class="card-img-top"
+                style="height: 60%; width: 100%; border: 1px solid lightgray"
+                src="{{ asset('assets/img/250_59273_hp_200_g4_01.jpg') }}"
+                alt="..."
+            />
+            <!-- Product details-->
+            <div class="card-body p-4 bg-dark text-light">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">
+                        Super Computer M9 Intel i9-12975 16GB 256GB SSD NVME
+                        2070ti
+                    </h5>
+
+                    <!-- Product price-->
+                    <span class="">29,000,000VND</span>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-3 border-top-0 bg-dark">
+                <div class="text-center">
+                    <a class="btn btn-outline-light mt-auto" href="#"
+                        >Add to cart</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-----------------------------
+
+<div class="carousel-item active">
+    @foreach ($computerNew as $CN) @if ($countItem1 != 4) @php $countItem1++;
+    @endphp
+    <div class="carousel-promo-item">
+        {{-- Insert product --}}
+        <div class="card" style="height: 500px">
+            <!-- Sale badge-->
+            <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+            >
+                Sale
+            </div>
+            <!-- Product image-->
+            <img
+                class="card-img-top"
+                style="height: 60%; width: 100%; border: 1px solid lightgray"
+                src="{{ asset('assets/img/250_59273_hp_200_g4_01.jpg') }}"
+                alt="..."
+            />
+            <!-- Product details-->
+            <div class="card-body p-4 bg-dark text-light">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">{{ $CN->tenSP }}</h5>
+
+                    <!-- Product price-->
+                    <span class="">{{ number_format($CN->giaSP) }} VND</span>
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-3 border-top-0 bg-dark">
+                <div class="text-center">
+                    <a class="btn btn-outline-light mt-auto" href="#"
+                        >Add to cart</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif @endforeach
+</div>
+
+-----------------------------
+
+<div
+    id="carouselExampleIndicators"
+    class="carousel slide carousel-container-custom"
+    data-ride="carousel"
+    style="width: 100%"
+>
+    {{-- Hiển thị vị trí slide --}}
+    <ol class="carousel-indicators">
+        <li
+            data-target="#multi-item-example"
+            data-slide-to="0"
+            class="active"
+        ></li>
+        <li data-target="#multi-item-example" data-slide-to="1"></li>
+        <li data-target="#multi-item-example" data-slide-to="2"></li>
+    </ol>
+    {{-- Kết thúc - Hiển thị vị trí slide --}}
+    {{-- Vật phẩm bên trong slide --}}
+    <div class="carousel-inner">
+        <!--First slide-->
+        <div class="carousel-item active">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-2">
+                        <img
+                            class="card-img-top"
+                            src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                            alt="Card image cap"
+                        />
+                        <div class="card-body">
+                            <h4 class="card-title">Card title ASS</h4>
+                            <p class="card-text">
+                                Some quick example text to build on the card
+                                title and make up the bulk of the card's
+                                content.
+                            </p>
+                            <a class="btn btn-primary">Button</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 clearfix d-none d-md-block">
+                    <div class="card mb-2">
+                        <img
+                            class="card-img-top"
+                            src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+                            alt="Card image cap"
+                        />
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">
+                                Some quick example text to build on the card
+                                title and make up the bulk of the card's
+                                content.
+                            </p>
+                            <a class="btn btn-primary">Button</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 clearfix d-none d-md-block">
+                    <div class="card mb-2">
+                        <img
+                            class="card-img-top"
+                            src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
+                            alt="Card image cap"
+                        />
+                        <div class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">
+                                Some quick example text to build on the card
+                                title and make up the bulk of the card's
+                                content.
+                            </p>
+                            <a class="btn btn-primary">Button</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.First slide-->
+    </div>
+    {{-- Kết thúc - Vật phẩm bên trong slide --}}
+    {{-- Nút điều khiển slide --}}
+    {{--
+    <a
+        class="carousel-control-prev"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="prev"
+    >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a
+        class="carousel-control-next"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="next"
+    >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span> --}}
+    </a>
+    <div class="controls-top">
+        <a class="btn-floating" href="#multi-item-example" data-slide="prev"
+            ><i class="fa fa-chevron-left"></i
+        ></a>
+        <a class="btn-floating" href="#multi-item-example" data-slide="next"
+            ><i class="fa fa-chevron-right"></i
+        ></a>
+    </div>
+    {{-- Kết thúc - Nút điều khiển slide --}}
+</div>

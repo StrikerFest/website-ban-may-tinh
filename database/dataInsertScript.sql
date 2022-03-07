@@ -55,4 +55,42 @@ INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Hoàng Văn
 INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Dương Văn E','EDV@mail.com','12345',6);
 INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Trịnh Văn F','FTV@mail.com','12345',6);
 
+-- ==========================================================================================================
+-- Bảng Nhà sản xuất
+INSERT INTO nha_san_xuat(`tenNSX`) VALUE ('Dell');
+INSERT INTO nha_san_xuat(`tenNSX`) VALUE ('Apple');
+INSERT INTO nha_san_xuat(`tenNSX`) VALUE ('HP');
+INSERT INTO nha_san_xuat(`tenNSX`) VALUE ('ASUS');
+INSERT INTO nha_san_xuat(`tenNSX`) VALUE ('Microsoft');
+
+-- =============================== ===========================================================================
+-- Bảng Thể loại
+INSERT INTO the_loai(`tenTL`) VALUE ('PC văn phòng');
+INSERT INTO the_loai(`tenTL`) VALUE ('PC gaming');
+INSERT INTO the_loai(`tenTL`) VALUE ('PC trạm');
+INSERT INTO the_loai(`tenTL`) VALUE ('Màn hình');
+INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
+
+-- ==========================================================================================================
+-- Bảng Trạng thái sản phẩm
+INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Còn hàng');
+INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Hết hàng');
+INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');
+INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Liên hệ');
+
+-- ==========================================================================================================
 -- Bảng Sản phẩm
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC HP All in One 200 Pro G4 (i5-10210U/8GB RAM/256GB SSD/DVDRW/21.5 inch FHD/ WL+BT/K+M/Win 10) (2J861PA)',16900000,'Máy tính lập trình',28,2000000,1,1,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC Dell OptiPlex All in One 7490 (i5-11500/8GB RAM/512GB SSD/GTX1650/23.8 inch FHD/WL+BT/K+M/Ubuntu)',29000000,'Máy tính chơi game',28,2000000,3,2,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC Dell OptiPlex All in One 7490 (i7-11700/8GB RAM/512GB SSD/GTX1650/23.8 inch FHD/Touch/WL+BT/K+M/Ubuntu)',35000000,'Máy tính trạm',28,2000000,1,3,4);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC HP All in One 200 Pro G4 (i3-10110U/4GB RAM/256GB SSD/DVDRW/21.5 inch FHD/ WL+BT/K+M/Win 10) (2J860PA)',13000000,'Máy tính trạm',28,12000000,1,3,4);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC Asus All in One M3400WU (R3 5300U/8GB RAM/512GB SSD/23.8 inch Full HD/Touch/WL+BT/K+M/Win 10) (M3400WUAT-BA027T)',14000000,'Máy tính trạm',28,20000000,1,3,4);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED ',77000000,'Máy tính trạm',28,20000000,1,3,4);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',24000000,'Máy tính trạm',28,20000000,1,3,4);
