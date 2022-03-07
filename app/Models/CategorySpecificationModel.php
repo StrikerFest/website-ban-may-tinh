@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RolePermissionModel extends Model
+class CategorySpecificationModel extends Model
 {
     use HasFactory;
-    protected $table = 'chuc_vu_quyen_han';
+    protected $table = 'the_loai_thong_so';
 
     public $timestamps = false;
 
-    public $primaryKey = ['maCV', 'maQH'];
+    public $primaryKey = ['maTL', 'maTS'];
 }

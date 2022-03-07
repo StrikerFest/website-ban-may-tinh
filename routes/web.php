@@ -40,6 +40,25 @@ Route::resource('admin', AdminController::class);
 Route::resource('employee', AdminEmployeeController::class);
 Route::resource('role', AdminRoleController::class);
 Route::resource('permission', AdminPermissionController::class);
+Route::resource('rolePermission', AdminRolePermissionController::class);
+Route::resource('product', AdminProductController::class);
+Route::resource('productComment', AdminProductCommentController::class);
+Route::resource('productResponse', AdminProductResponseController::class);
+Route::resource('productImage', AdminProductImageController::class);
+Route::resource('productStatus', AdminProductStatusController::class);
+Route::resource('productSpecification', AdminProductSpecificationController::class);
+Route::resource('blog', AdminBlogController::class);
+Route::resource('blogComment', AdminBlogCommentController::class);
+Route::resource('blogResponse', AdminBlogResponseController::class);
+Route::resource('blogStatus', AdminBlogStatusController::class);
+Route::resource('category', AdminCategoryController::class);
+Route::resource('categorySpecification', AdminCategorySpecificationController::class);
+Route::resource('receipt', AdminReceiptController::class);
+Route::resource('receiptStatus', AdminReceiptStatusController::class);
+Route::resource('detailReceipt', AdminDetailReceiptController::class);
+Route::resource('paymentMethod', AdminPaymentMethodController::class);
+Route::resource('manufacturer', AdminManufacturerController::class);
+Route::resource('specification', AdminSpecificationController::class);
 
 Route::get('/testAdmin', function () {
     return view('Admin.Customer.index');
