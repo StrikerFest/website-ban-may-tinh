@@ -70,6 +70,8 @@ INSERT INTO the_loai(`tenTL`) VALUE ('PC gaming');
 INSERT INTO the_loai(`tenTL`) VALUE ('PC trạm');
 INSERT INTO the_loai(`tenTL`) VALUE ('Màn hình');
 INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
+INSERT INTO the_loai(`tenTL`) VALUE ('Laptop gaming');
+INSERT INTO the_loai(`tenTL`) VALUE ('Laptop văn phòng');
 
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
@@ -81,16 +83,36 @@ INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Liên hệ');
 -- ==========================================================================================================
 -- Bảng Sản phẩm
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC HP All in One 200 Pro G4 (i5-10210U/8GB RAM/256GB SSD/DVDRW/21.5 inch FHD/ WL+BT/K+M/Win 10) (2J861PA)',16900000,'Máy tính lập trình',28,2000000,1,1,1);
+VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) (i7 11800H/64GB RAM/1TB SSD/RTX 3080 8G/16.0 inch WQXGA 165Hz 100%sRGB/Win10/Xám) (2021)',82990000,'Máy tính lập trình',28,2000000,1,6,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC Dell OptiPlex All in One 7490 (i5-11500/8GB RAM/512GB SSD/GTX1650/23.8 inch FHD/WL+BT/K+M/Ubuntu)',29000000,'Máy tính chơi game',28,2000000,3,2,1);
+VALUE('Laptop Acer Gaming Predator Helios 500 PH517-52-797L (NH.QD3SV.001) (i711800H/64GB Ram/2TB SSD/RTX3080 8G/17.3 inch FHD 360Hz/Win 10/Đen)',98000000,'Máy tính lập trình',28,2000000,1,6,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC Dell OptiPlex All in One 7490 (i7-11700/8GB RAM/512GB SSD/GTX1650/23.8 inch FHD/Touch/WL+BT/K+M/Ubuntu)',35000000,'Máy tính trạm',28,2000000,1,3,4);
+VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',42000000,'Máy tính lập trình',28,2000000,1,6,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC HP All in One 200 Pro G4 (i3-10110U/4GB RAM/256GB SSD/DVDRW/21.5 inch FHD/ WL+BT/K+M/Win 10) (2J860PA)',13000000,'Máy tính trạm',28,12000000,1,3,4);
+VALUE('Laptop Acer Gaming Aspire 7 A715-42G-R4XX (NH.QAYSV.008) (R5 5500U/8GB RAM/256GB SSD/15.6 inch FHD/GTX1650 4G/Win11/Đen) (2021)',18000000,'Máy tính lập trình',28,2000000,1,6,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC Asus All in One M3400WU (R3 5300U/8GB RAM/512GB SSD/23.8 inch Full HD/Touch/WL+BT/K+M/Win 10) (M3400WUAT-BA027T)',14000000,'Máy tính trạm',28,20000000,1,3,4);
+VALUE('Laptop Acer Gaming Nitro 5 Eagle AN515-57-54MV (NH.QENSV.003) (i5 11400H/8GB Ram/512GB SSD/RTX3050 4G/15.6 inch FHD 144Hz/Win 11 mới nhất/Đen) (2021)',23000000,'Máy tính lập trình',28,2000000,1,6,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED ',77000000,'Máy tính trạm',28,20000000,1,3,4);
+VALUE('Laptop Gigabyte Gaming AORUS 15P (XD-73S1224GH) (i7 11800H /16GB Ram/1TB SSD/RTX3070 8G/15.6 inch FHD 240Hz/Win 10/Đen/Balo Aorus) (2021)',50000000,'Máy tính lập trình',28,2000000,1,6,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
-VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',24000000,'Máy tính trạm',28,20000000,1,3,4);
+VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i5 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',23000000,'Máy tính lập trình',28,2000000,1,6,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',70000000,'Máy tính lập trình',28,2000000,1,2,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',30000000,'Máy tính lập trình',28,2000000,1,2,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('C GAMING HACOM 031 (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',13000000,'Máy tính lập trình',28,2000000,1,2,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTL`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 021 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',16900000,'Máy tính lập trình',28,2000000,1,2,1);
+
+-- Bang Anh san pham
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'60634_laptop_acer_gaming_predator_triton_500se_10.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (2,'62709_laptop_acer_gaming_predator_helios_500_12.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (3,'61228_laptop_acer_gaming_predator_helios_300_ph315_54_74ru_nhqc1sv002_den_2021_4.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (4,'61621_laptop_acer_gaming_aspire_7_a715_42g_18.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (5,'60790_laptop_acer_gaming_nitro_5_eagle_17.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (6,'59691_laptop_gigabyte_gaming_aorus_15_10.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (7,'63527_laptop_asus_gaming_tuf_fx706hcb_9.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (8,'63473_pc_gaming_lianli_o11dx_limited_2022.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (9,'63500_pc_gaming_hacom_pro_020_2022.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (10,'63502_pc_gaming_hacom_pro_021_2022.jpg');

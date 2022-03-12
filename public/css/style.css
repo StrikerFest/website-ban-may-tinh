@@ -238,18 +238,192 @@ a.sidenav-text:hover {
     border-top: solid grey 1px !important;
 }
 
-/* Menu bên cạnh giấu thanh trượt - Sửa sau */
-.sidenav-menu-scroll {
-    /* overflow-y: scroll;
-    overflow-x: hidden;
-    height: 100% !important; */
+.product-overlay {
+    display: none;
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+    width: 100%;
+    height: 80%;
+    opacity: 0;
+    animation-name: overlay-unhover;
+    animation-duration: 1s;
+}
+@keyframes overlay-unhover {
+    0% {
+        left: 100px;
+        top: 0px;
+    }
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+}
+.product-item {
+    position: relative;
+    z-index: 2;
 }
 
-.sidenav-menu-scroll::-webkit-scrollbar {
-    /* display: none !important; */
+/* Bo */
+.product-item-detail {
+    position: absolute;
+    display: none;
+    background-color: red;
+    color: transparent !important;
+    opacity: 0;
+    transition: 0.4s 4.6s;
+}
+.product-item:hover .product-overlay {
+    /* display: block; */
 }
 
-/* .sidenav-menu {
-    /* -ms-overflow-style: none; IE and Edge */
-/* scrollbar-width: none; Firefox */
-/* }  */
+.product-overlay:hover {
+    position: absolute;
+    top: 0px;
+    display: block;
+    background-color: aliceblue;
+    color: black;
+    height: 80%;
+    width: 100%;
+    border-radius: 5px;
+    z-index: 100;
+    opacity: 1;
+    transition: 0.4s;
+    animation-name: overlay-hover;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes overlay-hover {
+    0% {
+        left: 100px;
+        top: 0px;
+    }
+    1% {
+        left: 0px;
+        top: 0px;
+    }
+    100% {
+        left: 100px;
+        top: 0px;
+    }
+}
+
+.product-overlay:hover .product-overlay-product-name {
+    width: 100%;
+    height: 12%;
+    background-color: red;
+    padding: 5px 0px 0px 0px;
+
+    color: aliceblue;
+
+    border-radius: 5px 0;
+}
+
+.product-overlay:hover .product-overlay-product-warranty {
+    width: 100%;
+    height: 10%;
+    background-color: red;
+    padding: 5px 0px 0px 0px;
+
+    color: aliceblue;
+
+    border-radius: 5px 0;
+}
+.product-overlay:hover .product-overlay-product-price {
+    width: 100%;
+    height: 10%;
+    background-color: transparent;
+    padding: 5px 0px 0px 0px;
+
+    color: red;
+
+    border-radius: 5px 0;
+}
+
+.product-overlay:hover .product-overlay-product-spec {
+    width: 100%;
+    height: 70%;
+    background-color: transparent;
+    padding: 5px 5px 0px 5px;
+
+    color: red;
+
+    border-radius: 5px 0;
+}
+
+.product-overlay:hover .product-overlay-product-promotion {
+    width: 100%;
+    height: 20%;
+    background-color: yellow;
+    padding: 5px 0px 0px 0px;
+
+    color: aliceblue;
+
+    border-radius: 5px 0;
+}
+
+#product-test {
+    position: absolute;
+    /* transform: translate(-50%, -50%); */
+    background-color: aliceblue;
+    height: 350px;
+    width: 350px;
+    /* border-radius: 50%; */
+    border: 2px solid gold;
+    z-index: 10000;
+}
+
+#product-test:hover .product-test-product-name {
+    width: 100%;
+    height: 12%;
+    background-color: red;
+    padding: 5px 0px 0px 0px;
+
+    color: aliceblue;
+
+    border-radius: 5px 0;
+}
+
+#product-test:hover .product-test-product-warranty {
+    width: 100%;
+    height: 10%;
+    background-color: red;
+    padding: 5px 0px 0px 0px;
+
+    color: aliceblue;
+
+    border-radius: 5px 0;
+}
+#product-test:hover .product-test-product-price {
+    width: 100%;
+    height: 10%;
+    background-color: transparent;
+    padding: 5px 0px 0px 0px;
+
+    color: red;
+
+    border-radius: 5px 0;
+}
+
+#product-test:hover .product-test-product-spec {
+    width: 100%;
+    height: 70%;
+    background-color: transparent;
+    padding: 5px 5px 0px 5px;
+
+    color: red;
+
+    border-radius: 5px 0;
+}
+
+#product-test:hover .product-overlay-product-promotion {
+    width: 100%;
+    height: 20%;
+    background-color: yellow;
+    padding: 5px 0px 0px 0px;
+
+    color: aliceblue;
+
+    border-radius: 5px 0;
+}

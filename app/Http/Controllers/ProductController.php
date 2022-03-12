@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductImageModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -27,14 +28,27 @@ class ProductController extends Controller
         //     ->orderBy('maND', 'desc')->get();
 
         // Get all sản phẩm mới thêm vào - là máy tính
+        $productImage = ProductImageModel::get();
+        $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
         $computerNew1 = ProductModel::skip(0)->take(4)->orderBy('maSP')->get();
         $computerNew2 = ProductModel::skip(4)->take(4)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->orderBy('maSP')->get();
 
+        $laptopNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(0)->take(4)->get();
+        $laptopNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(4)->take(4)->get();
+        $laptopNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(8)->take(4)->get();
+
+
         return view('Customer.Customer.index', [
+            'productImage' => $productImage,
             'computerNew1' => $computerNew1,
             'computerNew2' => $computerNew2,
             'computerNew3' => $computerNew3,
+            'computerNew' => $computerNew,
+            'laptopNew1' => $laptopNew1,
+            'laptopNew2' => $laptopNew2,
+            'laptopNew3' => $laptopNew3,
+
         ]);
     }
 
