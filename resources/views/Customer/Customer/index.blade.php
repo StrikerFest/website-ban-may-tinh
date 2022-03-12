@@ -6,7 +6,7 @@
 
 <body>
     <!-- Wrapper - Cả trang -->
-    <div id="product-test">
+    <div id="product-test" class="text-light">
         @foreach ($computerNew as $computerNew)
             @if ($computerNew->ma)
             @endif
