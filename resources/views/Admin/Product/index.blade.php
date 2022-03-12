@@ -17,38 +17,41 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Nhân viên</h1>
-                <p class="mb-4">Trang thông tin nhân viên.</p>
+                <h1 class="h3 mb-2 text-gray-800">Sản phẩm</h1>
+                <p class="mb-4">Trang thông tin Sản phẩm.</p>
 
-                <!-- Danh sách nhân viên -->
+                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Bảng nhân viên hiện tại</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Bảng Admin hiện tại</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>Mật khẩu</th>
-                                        <th>Chức vụ</th>
+                                        <th>Tên SP</th>
+                                        <th>Giá SP</th>
+                                        <th>Mô tả</th>
+                                        <th>Số lượng</th>
+                                        <th>Giảm giá</th>
+                                        <th>Thể loại</th>
+                                        <th>Trạng thái</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
 
                                 </tfoot>
                                 <tbody>
-                                    @foreach ($employee as $E)
+                                    @foreach ($admin as $A)
                                         <tr>
-                                            <td>{{ $E->tenND }}</td>
-                                            <td>{{ $E->emailND }}</td>
-                                            <td>{{ $E->matKhauND }}</td>
+                                            <td>{{ $A->tenND }}</td>
+                                            <td>{{ $A->emailND }}</td>
+                                            <td>{{ $A->matKhauND }}</td>
                                             <td>
                                                 @foreach ($chucVu as $CV)
                                                     @php
-                                                        if ($E->maCV == $CV->maCV) {
+                                                        if ($A->maCV == $CV->maCV) {
                                                             echo $CV->tenCV;
                                                         }
                                                     @endphp
@@ -62,14 +65,13 @@
                     </div>
                 </div>
 
-                {{-- Form thêm nhân viên --}}
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Thêm Admin mới</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="user" action="{{ route('employee.store') }}" method="POST">
+                            <form class="user" action="{{ route('admin.store') }}" method="POST">
                                 @csrf
                                 {{-- Dòng 1 --}}
                                 <div class="form-group row">

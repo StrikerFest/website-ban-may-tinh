@@ -15,7 +15,7 @@ class CustomerLoginController extends Controller
     {
         // Nếu có session
         if (session()->has('khachHang')) {
-            return Redirect::route('test');
+            return Redirect::route('product.index');
         }
         // Nếu không có session, quay lại đăng nhập
         else {
@@ -35,7 +35,7 @@ class CustomerLoginController extends Controller
         // khi có session - Sửa khi có db
         if (session()->has('khachHang')) {
 
-            return Redirect::route('test');
+            return Redirect::route('product.index');
         }
         // khi không có session - Sửa khi có db
         else {
@@ -45,7 +45,7 @@ class CustomerLoginController extends Controller
                 $request->session()->put('khachHang', $user->maND);
                 $request->session()->put('tenKhachHang', $user->tenND);
 
-                return Redirect::route('test');
+                return Redirect::route('product.index');
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {

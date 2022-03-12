@@ -33,6 +33,7 @@
                                         <th>Tên</th>
                                         <th>Email</th>
                                         <th>Mật khẩu</th>
+                                        <th>Chức vụ</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -44,6 +45,15 @@
                                             <td>{{ $A->tenND }}</td>
                                             <td>{{ $A->emailND }}</td>
                                             <td>{{ $A->matKhauND }}</td>
+                                            <td>
+                                                @foreach ($chucVu as $CV)
+                                                    @php
+                                                        if ($A->maCV == $CV->maCV) {
+                                                            echo $CV->tenCV;
+                                                        }
+                                                    @endphp
+                                                @endforeach
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminEmployeeController extends Controller
 {
@@ -14,7 +15,10 @@ class AdminEmployeeController extends Controller
      */
     public function index()
     {
-        //
+        // Get all từ bảng chức vụ - Chỉ lấy những chức vụ có quyền hạn ( là Admin )
+        $chucVu = DB::table('chuc_vu')->join('chuc_vu_quyen_han', 'chuc_vu.maCV', '=', 'chuc_vu_quyen_han.maCV')
+            ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')->where('tenQH', 'Là nhân viên')->get();
+
         //
         $employee = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
@@ -24,6 +28,7 @@ class AdminEmployeeController extends Controller
 
         return view('Admin.Employee.index', [
             "employee" => $employee,
+            "chucVu" => $chucVu,
         ]);
     }
 
@@ -46,6 +51,19 @@ class AdminEmployeeController extends Controller
     public function store(Request $request)
     {
         //
+        $nhanVien = new UserModel();
+
+        // Request biến từ form
+        $nhanVien->tenND = $request->get('ten');
+        $nhanVien->emailND = $request->get('email');
+        $nhanVien->matKhauND = $request->get('password');
+        $nhanVien->maCV = $request->get('maCV');
+
+        // Lưu vào bảng
+        $nhanVien->save();
+
+        // Quay về danh sách Admin
+        return redirect(route('employee.index'));
     }
 
     /**

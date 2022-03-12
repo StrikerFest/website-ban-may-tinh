@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('san_pham', function (Blueprint $table) {
             $table->increments('maSP');
-            $table->string('tenSp', 200);
+            $table->string('tenSP', 200);
             $table->double('giaSP');
             $table->text('moTa');
-            // Test đăng ảnh
-            // $table->binary('anhSP');
             $table->unsignedInteger('soLuong');
             $table->unsignedInteger('giamGia');
             $table->unsignedInteger('maNSX');
