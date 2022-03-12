@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ReceiptStatusModel;
+
 
 class AdminReceiptStatusController extends Controller
 {
@@ -13,7 +15,11 @@ class AdminReceiptStatusController extends Controller
      */
     public function index()
     {
-        //
+        $TTHD = ReceiptStatusModel::orderBy('maTTHD', 'desc')->paginate(5);
+
+        return view('Admin.Status.Receipt.index', [
+            "TTHD" => $TTHD,
+        ]);
     }
 
     /**
@@ -34,7 +40,11 @@ class AdminReceiptStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $TTHD = new ReceiptStatusModel();
+        $TTHD->tenTTHD = $request->get('tenTTHD');
+        $TTHD->save();
+
+        return redirect(route('receiptStatus.index'));
     }
 
     /**
@@ -56,7 +66,11 @@ class AdminReceiptStatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $TTHD = ReceiptStatusModel::find($id);
+        
+        return view('Admin.Status.Receipt.edit', [
+            "TTHD" => $TTHD,
+        ]);
     }
 
     /**
@@ -68,7 +82,11 @@ class AdminReceiptStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $TTHD = ReceiptStatusModel::find($id);
+        $TTHD->tenTTHD = $request->get('tenTTHD');
+
+        $TTHD->save();
+        return redirect(route('receiptStatus.index'));
     }
 
     /**
@@ -79,6 +97,9 @@ class AdminReceiptStatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $TTHD = ReceiptStatusModel::find($id);
+        $TTHD->delete();
+
+        return redirect(route('receiptStatus.index'));
     }
 }

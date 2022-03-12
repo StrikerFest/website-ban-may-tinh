@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('san_pham_thong_so', function(Blueprint $table){
+            $table->increments('maSPTS');
             $table->unsignedInteger('maSP');
             $table->foreign('maSP')->references('maSP')->on('san_pham');
             $table->unsignedInteger('maTS');

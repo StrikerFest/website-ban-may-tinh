@@ -12,5 +12,5 @@ class DetailReceiptModel extends Model
 
     public $timestamps = false;
 
-    public $primaryKey = ['maHD', 'maSP'];
+    public $primaryKey = 'maHDCT';
 }

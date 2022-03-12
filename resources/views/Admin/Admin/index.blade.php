@@ -32,7 +32,8 @@
                                     <tr>
                                         <th>Tên</th>
                                         <th>Email</th>
-                                        <th>Mật khẩu</th>
+                                        <th>Chức vụ</th>
+                                        <th colspan="2" width="10%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -43,7 +44,25 @@
                                         <tr>
                                             <td>{{ $A->tenND }}</td>
                                             <td>{{ $A->emailND }}</td>
-                                            <td>{{ $A->matKhauND }}</td>
+                                            <td>{{ $A->tenCV }}</td>
+                                            <td>
+                                                <form action="{{route('admin.edit', $A->maND)}}" method="get">
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{route('admin.destroy', $A->maND)}}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button 
+                                                        onclick="return confirm('Xác nhận xóa admin?')"
+                                                        class="btn btn-primary btn-user btn-block"
+                                                        >
+                                                        Xóa
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -51,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-
+                {{$admin->links('')}}
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Thêm Admin mới</h6>
@@ -63,38 +82,47 @@
                                 {{-- Dòng 1 --}}
                                 <div class="form-group row">
                                     {{-- Tên --}}
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control " id="exampleFirstName"
-                                            placeholder="Nhập tên" name="ten">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="Name" name="name" required>
                                     </div>
                                     {{-- Chức vụ --}}
-                                    <div class="col-sm-6">
+                                    <input type="hidden" value="2" name="maCV">
+                                    <!-- <div class="col-sm-6">
                                         <select name="maCV" class="form-control r"><br>
                                             @foreach ($chucVu as $CV)
                                                 <option value="{{ $CV->maCV }}">{{ $CV->tenCV }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 {{-- Dòng 2 --}}
                                 <div class="form-group">
                                     {{-- Email --}}
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email">
+                                        placeholder="Email Address" name="email" required>
                                 </div>
                                 {{-- Dòng 3 --}}
                                 <div class="form-group row">
                                     {{-- Mật khẩu --}}
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" name="password">
+                                            id="exampleInputPassword" placeholder="Password" name="password" required>
                                     </div>
                                     {{-- Nhập lại mật khẩu --}}
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password" name="password2">
+                                        id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required>
                                     </div>
                                 </div>
+                                @php
+                                    $pwError = Session::get('matKhau');
+                                @endphp
+                                @isset( $pwError )
+                                    <div class="col-sm-12 mb-3 mb-sm-0 alert alert-danger">
+                                        {{ $pwError }}
+                                    </div>
+                                @endisset
                                 {{-- Nút Thêm --}}
                                 <button class="btn btn-primary btn-user btn-block">
                                     Add data

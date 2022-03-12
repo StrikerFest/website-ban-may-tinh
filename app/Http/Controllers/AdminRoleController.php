@@ -15,8 +15,7 @@ class AdminRoleController extends Controller
     public function index()
     {
         //
-        $chucVu = RoleModel::orderBy('maCV', 'desc')->get();
-        // ->paginate();
+        $chucVu = RoleModel::orderBy('maCV', 'desc')->paginate(5);
 
         return view('Admin.Role.index', [
             "chucVu" => $chucVu,
@@ -41,7 +40,11 @@ class AdminRoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $chucVu = new RoleModel();
+        $chucVu->tenCV = $request->get('tenCV');
+
+        $chucVu->save();
+        return redirect(route('role.index'));
     }
 
     /**
@@ -86,6 +89,9 @@ class AdminRoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chucVu = RoleModel::find($id);
+        $chucVu->delete();
+
+        return redirect(route('role.index'));
     }
 }

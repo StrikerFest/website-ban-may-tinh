@@ -22,9 +22,10 @@ class AdminController extends Controller
 
         $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
+            ->join('chuc_vu', 'nguoi_dung.maCV', '=', 'chuc_vu.maCV')
             ->where('tenQH', 'Là Admin')
-            ->orderBy('maND', 'desc')->get();
-        // ->paginate();
+            ->orderBy('maND', 'desc')
+            ->paginate(5);
 
         return view('Admin.Admin.index', [
             "admin" => $admin,
@@ -52,11 +53,15 @@ class AdminController extends Controller
     {
         //
         $admin = new UserModel();
-        $admin->tenND = $request->get('ten');
+        $admin->tenND = $request->get('name');
         $admin->emailND = $request->get('email');
         $admin->matKhauND = $request->get('password');
+        $matKhau2 = $request->get('password2');
         $admin->maCV = $request->get('maCV');
 
+        if($admin->matKhauND != $matKhau2){
+            return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
+        }
         $admin->save();
         return redirect(route('admin.index'));
     }
@@ -80,7 +85,11 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $admin = UserModel::find($id);
+        
+        return view('Admin.Admin.edit', [
+            "admin" => $admin,
+        ]);
     }
 
     /**
@@ -92,7 +101,18 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $admin = UserModel::find($id);
+        $admin->tenND = $request->get('name');
+        $admin->emailND = $request->get('email');
+        $admin->matKhauND = $request->get('password');
+        $matKhau2 = $request->get('password2');
+        $admin->maCV = $request->get('maCV');
+
+        if($admin->matKhauND != $matKhau2){
+            return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
+        }
+        $admin->save();
+        return redirect(route('admin.index'));
     }
 
     /**
@@ -103,6 +123,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = UserModel::find($id);
+        $admin->delete();
+
+        return redirect(route('admin.index'));
     }
 }

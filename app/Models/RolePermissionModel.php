@@ -12,5 +12,5 @@ class RolePermissionModel extends Model
 
     public $timestamps = false;
 
-    public $primaryKey = ['maCV', 'maQH'];
+    public $primaryKey = 'maCVQH';
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminEmployeeController extends Controller
 {
@@ -14,16 +15,19 @@ class AdminEmployeeController extends Controller
      */
     public function index()
     {
-        //
-        //
+        //Lấy chức vụ của nhân viên theo DB (id từ 3 - 5)
+        $chucVu = DB::table('chuc_vu')->whereBetween('maCV', [3, 5])->get();
+
         $employee = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
+            ->join('chuc_vu', 'nguoi_dung.maCV', '=', 'chuc_vu.maCV')
             ->where('tenQH', 'Là nhân viên')
-            ->orderBy('maND', 'desc')->get();
-        // ->paginate();
+            ->orderBy('maND', 'desc')
+            ->paginate(5);
 
         return view('Admin.Employee.index', [
             "employee" => $employee,
+            "chucVu" => $chucVu,
         ]);
     }
 
@@ -45,7 +49,18 @@ class AdminEmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new UserModel();
+        $employee->tenND = $request->get('name');
+        $employee->emailND = $request->get('email');
+        $employee->matKhauND = $request->get('password');
+        $matKhau2 = $request->get('password2');
+        $employee->maCV = $request->get('maCV');
+
+        if($employee->matKhauND != $matKhau2){
+            return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
+        }
+        $employee->save();
+        return redirect(route('employee.index'));
     }
 
     /**
@@ -67,7 +82,15 @@ class AdminEmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $nhanVien = UserModel::find($id);
+
+        //Lấy chức vụ của nhân viên theo DB (id từ 3 - 5)
+        $chucVu = DB::table('chuc_vu')->whereBetween('maCV', [3, 5])->get();
+        
+        return view('Admin.Employee.edit', [
+            "nhanVien" => $nhanVien,
+            "chucVu" => $chucVu,
+        ]);
     }
 
     /**
@@ -79,7 +102,18 @@ class AdminEmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $nhanVien = UserModel::find($id);
+        $nhanVien->tenND = $request->get('name');
+        $nhanVien->emailND = $request->get('email');
+        $nhanVien->matKhauND = $request->get('password');
+        $matKhau2 = $request->get('password2');
+        $nhanVien->maCV = $request->get('maCV');
+
+        if($nhanVien->matKhauND != $matKhau2){
+            return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
+        }
+        $nhanVien->save();
+        return redirect(route('employee.index'));
     }
 
     /**
@@ -90,6 +124,9 @@ class AdminEmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = UserModel::find($id);
+        $employee->delete();
+
+        return redirect(route('employee.index'));
     }
 }
