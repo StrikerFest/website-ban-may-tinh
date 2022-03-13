@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductStatusModel;
 
 class AdminProductStatusController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminProductStatusController extends Controller
      */
     public function index()
     {
-        //
+        $TTSP = ProductStatusModel::orderBy('maTTSP', 'desc')->paginate(5);
+
+        return view('Admin.Status.Product.index', [
+            "TTSP" => $TTSP,
+        ]);
     }
 
     /**
@@ -34,7 +39,11 @@ class AdminProductStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $TTSP = new ProductStatusModel();
+        $TTSP->tenTTSP = $request->get('tenTTSP');
+
+        $TTSP->save();
+        return redirect(route('productStatus.index'));
     }
 
     /**
@@ -56,7 +65,11 @@ class AdminProductStatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $TTSP = ProductStatusModel::find($id);
+        
+        return view('Admin.Status.Product.edit', [
+            "TTSP" => $TTSP,
+        ]);
     }
 
     /**
@@ -68,7 +81,11 @@ class AdminProductStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $TTSP = ProductStatusModel::find($id);
+        $TTSP->tenTTSP = $request->get('tenTTSP');
+
+        $TTSP->save();
+        return redirect(route('productStatus.index'));
     }
 
     /**
@@ -79,6 +96,9 @@ class AdminProductStatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $TTSP = ProductStatusModel::find($id);
+        $TTSP->delete();
+
+        return redirect(route('productStatus.index'));
     }
 }

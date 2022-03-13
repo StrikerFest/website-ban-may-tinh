@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BlogStatusModel;
 
 class AdminBlogStatusController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminBlogStatusController extends Controller
      */
     public function index()
     {
-        //
+        $TTBV = BlogStatusModel::orderBy('maTTBV', 'desc')->paginate(5);
+
+        return view('Admin.Status.Blog.index', [
+            "TTBV" => $TTBV,
+        ]);
     }
 
     /**
@@ -34,7 +39,11 @@ class AdminBlogStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $TTBV = new BlogStatusModel();
+        $TTBV->tenTTBV = $request->get('tenTTBV');
+
+        $TTBV->save();
+        return redirect(route('blogStatus.index'));
     }
 
     /**
@@ -56,7 +65,11 @@ class AdminBlogStatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $TTBV = BlogStatusModel::find($id);
+        
+        return view('Admin.Status.Blog.edit', [
+            "TTBV" => $TTBV,
+        ]);
     }
 
     /**
@@ -68,7 +81,11 @@ class AdminBlogStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $TTBV = BlogStatusModel::find($id);
+        $TTBV->tenTTBV = $request->get('tenTTBV');
+
+        $TTBV->save();
+        return redirect(route('blogStatus.index'));
     }
 
     /**
@@ -79,6 +96,9 @@ class AdminBlogStatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $TTBV = BlogStatusModel::find($id);
+        $TTBV->delete();
+
+        return redirect(route('blogStatus.index'));
     }
 }

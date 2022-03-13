@@ -89,6 +89,7 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
+            {{$chucVu->links('')}}
         </div>
 
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\CategoryModel;
 
 class AdminCategoryController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $theLoai = CategoryModel::orderBy('maTL', 'desc')->paginate(5);
+
+        return view('Admin.Category.index', [
+            "theLoai" => $theLoai,
+        ]);
     }
 
     /**
@@ -34,7 +39,11 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $theLoai = new CategoryModel();
+        $theLoai->tenTL = $request->get('tenTL');
+        $theLoai->save();
+
+        return redirect(route('category.index'));
     }
 
     /**
@@ -56,7 +65,11 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $TL = CategoryModel::find($id);
+        
+        return view('Admin.Category.edit', [
+            "TL" => $TL,
+        ]);
     }
 
     /**
@@ -68,7 +81,11 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $TL = CategoryModel::find($id);
+        $TL->tenTL = $request->get('tenTL');
+        
+        $TL->save();
+        return redirect(route('category.index'));
     }
 
     /**
@@ -79,6 +96,9 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $theLoai = CategoryModel::find($id);
+        $theLoai->delete();
+
+        return redirect(route('category.index'));
     }
 }

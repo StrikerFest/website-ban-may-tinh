@@ -10,7 +10,7 @@ class PermissionModel extends Model
     use HasFactory;
     protected $table = 'quyen_han';
 
-    // public $timestamps = false;
+    public $timestamps = false;
 
     public $primaryKey = 'maQH';
 }
