@@ -95,6 +95,8 @@ Route::get('/logout', [CustomerLoginController::class, "logout"])->name("logout"
 Route::post('/loginProcess', [CustomerLoginController::class, "loginProcess"])->name("loginProcess");
 Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])->name("logoutProcess");
 
+Route::resource('product', ProductController::class);
+
 Route::get('/test', function () {
     return view('Customer.Customer.index');
 })->name("test");

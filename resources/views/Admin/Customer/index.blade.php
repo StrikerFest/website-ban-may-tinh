@@ -1,22 +1,24 @@
 <html lang="en">
+
 <head>
-    @include("Admin.Layout.Common.meta")
+    @include('Admin.Layout.Common.meta')
 </head>
+
 <body>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @include("Admin.Layout.Common.side_nav_menu")
+        @include('Admin.Layout.Common.side_nav_menu')
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-            @include("Admin.Layout.Common.header")
+            @include('Admin.Layout.Common.header')
             <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Khách hàng</h1>
-                    <p class="mb-4">Trang thông tin khách hàng.</p>
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Khách hàng</h1>
+                <p class="mb-4">Trang thông tin khách hàng.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -35,10 +37,9 @@
                                     </thead>
                                     <tfoot>
 
-                                    </tfoot>
-                                    <tbody>
+                                </tfoot>
+                                <tbody>
                                     @foreach ($khachHang as $KH)
-
                                         <tr>
                                             <td>{{$KH->tenND}}</td>
                                             <td>{{$KH->emailND}}</td>
@@ -115,12 +116,15 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
+
+            </div>
+            <!-- /.container-fluid -->
         </div>
 
     </div>
     <!-- End of Page Wrapper -->
-    @include("Admin.Layout.Common.bottom_script")
+    @include('Admin.Layout.Common.bottom_script')
 
 </body>
+
 </html>

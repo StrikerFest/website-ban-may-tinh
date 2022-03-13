@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('tenSP', 200);
             $table->double('giaSP');
             $table->text('moTa');
-            // Test đăng ảnh
-            // $table->binary('anhSP');
             $table->unsignedInteger('soLuong');
             $table->unsignedInteger('giamGia');
             $table->unsignedInteger('maNSX');
