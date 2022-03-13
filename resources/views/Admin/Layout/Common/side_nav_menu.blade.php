@@ -176,7 +176,7 @@
         <div class="sidebar-heading">
             Addons
         </div>
-    </li>
+    
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -192,7 +192,7 @@
                     <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
                 </div>
             </div>
-        </div>
+        
     </li>
 
     <!-- Divider -->
