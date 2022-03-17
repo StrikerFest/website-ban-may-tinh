@@ -18,10 +18,10 @@ class AdminCategorySpecificationController extends Controller
     {
         $theLoai = CategoryModel::find($maTL);
 
-        $thongSo = SpecificationModel::get();
+        $thongSo = SpecificationModel::all();
         
-        $theLoaiThongSo = CategorySpecificationModel
-            ::join('thong_so', 'thong_so.maTS', '=', 'the_loai_thong_so.maTS')
+        $theLoaiThongSo = CategorySpecificationModel::
+            join('thong_so', 'thong_so.maTS', '=', 'the_loai_thong_so.maTS')
             ->where('the_loai_thong_so.maTL', '=', $maTL)
             ->get();
             
@@ -50,11 +50,14 @@ class AdminCategorySpecificationController extends Controller
      */
     public function store(Request $request)
     {
-        $theLoaiThongSo = new CategorySpecificationModel();
-        $theLoaiThongSo->maTL = $request->get('maTL');
-        $maTL = $theLoaiThongSo->maTL;
-        $theLoaiThongSo->maTS = $request->get('maTS');
-        $theLoaiThongSo->save();
+        $maTL = $request->get('maTL');
+        for($i = 0; $i < sizeof($request->get('maTS')); $i++){
+            $TLTS = new CategorySpecificationModel();
+            $TLTS->maTL = $request->get('maTL');
+            $TLTS->maTS = $request->get('maTS')[$i];
+            $TLTS->save();
+
+        }
 
         return redirect(route('categorySpecification.index', $maTL));
     }

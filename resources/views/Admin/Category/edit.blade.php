@@ -29,6 +29,7 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
+                                        <label class="form-inline label">Danh mục</label>
                                         <input type="text" class="form-control form-control-user" id="examplereceiptStatus"
                                             placeholder="Category" name="tenTL" value="{{$TL->tenTL}}">
                                     </div>

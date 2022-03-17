@@ -30,11 +30,13 @@
                                 <div class="form-group row">
                                     {{-- Tên --}}
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Tên</label>
                                         <input type="text" class="form-control " id="exampleFirstName"
                                             placeholder="Name" name="name" required value=" {{$nhanVien->tenND}} ">
                                     </div>
                                     {{-- Chức vụ --}}
                                     <div class="col-sm-6">
+                                        <label class="form-inline label">Chức vụ</label>
                                         <select name="maCV" class="form-control r"><br>
                                             @foreach ($chucVu as $CV)
                                                 <option value="{{ $CV->maCV }}" <?php echo($nhanVien->maCV == $CV->maCV? "selected": "") ?>>
@@ -45,15 +47,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-inline label">Email</label>
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address" name="email" required value="{{$nhanVien->emailND}}">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Mật khẩu</label>
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required value="{{$nhanVien->matKhauND}}">
                                     </div>
                                     <div class="col-sm-6">
+                                        <label class="form-inline label">Nhập lại mật khẩu</label>
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required value="{{$nhanVien->matKhauND}}">
                                     </div>

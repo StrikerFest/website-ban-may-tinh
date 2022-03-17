@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 {{-- Form thêm nhân viên --}}
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -63,16 +63,16 @@
                                 <div class="form-group row">
                                     {{-- Tên --}}
                                     <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Chức vụ</label>
                                         <input type="text" class="form-control " id="exampleFirstName"
                                             placeholder="Nhập tên" name="ten">
                                     </div>
                                 </div>
-                                {{-- Dòng 2 --}}
+                                {{-- Dòng 2 --}}<label class="form-inline label">Quyền hạn</label>
                                 <div class="form-group row">
                                     {{-- Email --}}
                                     @foreach ($quyenHan as $QH)
-                                        <div class="col-sm-3">
-
+                                        <div class="col-sm-4">
                                             <input type="checkbox" id="exampleInputEmail" name="maQH[]"
                                                 value="{{ $QH->maQH }}"> {{ $QH->tenQH }}
                                         </div>
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
-            {{$chucVu->links('')}}
+            
         </div>
 
     </div>

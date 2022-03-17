@@ -15,7 +15,7 @@ class AdminPermissionController extends Controller
     public function index()
     {
         //
-        $quyenHan = PermissionModel::orderBy('maQH', 'desc')->paginate(5);
+        $quyenHan = PermissionModel::orderBy('maQH', 'desc')->get();
 
         return view('Admin.Permission.index', [
             "quyenHan" => $quyenHan,

@@ -48,7 +48,6 @@
                             </div>
                         </div>
                     </div>
-                    {{$quyenHan->links('')}}
                 </div>
                 <!-- /.container-fluid -->
         </div>

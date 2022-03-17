@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductModel;
+use App\Models\ProductImageModel;
+use File;
 
 class AdminProductImageController extends Controller
 {
@@ -11,9 +14,16 @@ class AdminProductImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($maSP)
     {
-        //
+        $sanPham = ProductModel::find($maSP);
+
+        $anhSP = ProductImageModel::where('maSP', '=', $maSP)->get();
+
+        return view('Admin.ProductImage.index', [
+            'sanPham' => $sanPham,
+            'anhSP' => $anhSP,
+        ]);
     }
 
     /**
@@ -34,7 +44,17 @@ class AdminProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'anh' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        // ]);
+        $path = $request->file('anh')->store('img');
+        $ASP = new ProductImageModel();
+        $ASP->maSP = $request->get('maSP');
+        $maSP = $ASP->maSP;
+        $ASP->anh = explode("/", $path)[1];
+        $ASP->save();
+
+        return redirect(route('productImage.index', $maSP));
     }
 
     /**
@@ -56,7 +76,12 @@ class AdminProductImageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ASP = ProductImageModel::find($id);
+        $SP = ProductModel::find($ASP->maSP);
+        return view('Admin.ProductImage.edit',[
+            'ASP' => $ASP,
+            'SP' => $SP
+        ]);
     }
 
     /**
@@ -68,7 +93,26 @@ class AdminProductImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Xoá ảnh cũ khỏi public/assets/img
+        $ASP = ProductImageModel::find($id);
+
+        if(!is_null($request->file('anh'))){
+            $oldPath = public_path('assets/img/'.$ASP->anh);
+            if(File::exists($oldPath)){
+                File::delete($oldPath);
+            }else{
+                dd('File does not exists.');
+            }
+
+            $path = $request->file('anh')->store('img');
+            $BV->anh = explode("/", $path)[1];
+        }
+
+        $ASP->maSP = $request->get('maSP');
+        $maSP = $ASP->maSP;
+        $ASP->save();
+
+        return redirect(route('productImage.index', $maSP));
     }
 
     /**
@@ -79,6 +123,16 @@ class AdminProductImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ASP = ProductImageModel::find($id);
+        $maSP = $ASP->maSP;
+        $path = public_path('assets/img/'.$ASP->anh);
+        if(File::exists($path)){
+            File::delete($path);
+        }else{
+            dd('File does not exists.');
+        }
+        $ASP->delete();
+
+        return redirect(route('productImage.index', $maSP));
     }
 }

@@ -13,25 +13,22 @@
             @include("Admin.Layout.Common.header")
             <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Nhà sản xuất</h1>
-                    <p class="mb-4">Trang thông tin nhà sản xuất.</p>
-
+                
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Sửa thông tin nhà sản xuất</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Sửa thông số cho sản phẩm</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('manufacturer.update', $NSX->maNSX) }}" method="POST">
+                                <form class="user" action="{{ route('productSpecification.update', $SPTS->maSPTS) }}" method="POST">
                                     @method('PUT')
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <label class="form-inline label">Nhà sản xuất</label>
-                                        <input type="text" class="form-control form-control-user" id="exampleblogStatus"
-                                            placeholder="Role" name="tenNSX" value="{{$NSX->tenNSX}}">
+                                        <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">
+                                        <input type="hidden" name="maTS" value="{{ $thongSo->maTS }}">
+                                        <label class="form-inline label">Giá trị</label>
+                                        <input type="text" name="giaTri" class="form-control" placeholder="Value" value="{{$SPTS->giaTri}}">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

@@ -83,6 +83,7 @@
                                 <div class="form-group row">
                                     {{-- Tên --}}
                                     <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Tên</label>
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
                                             placeholder="Name" name="name" required>
                                     </div>
@@ -99,18 +100,23 @@
                                 {{-- Dòng 2 --}}
                                 <div class="form-group">
                                     {{-- Email --}}
+                                    <label class="form-inline label">Email</label>
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address" name="email" required>
                                 </div>
                                 {{-- Dòng 3 --}}
                                 <div class="form-group row">
                                     {{-- Mật khẩu --}}
+                                    
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Mật khẩu</label>
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required>
                                     </div>
                                     {{-- Nhập lại mật khẩu --}}
+                                    
                                     <div class="col-sm-6">
+                                        <label class="form-inline label">Nhập lại mật khẩu</label>
                                         <input type="password" class="form-control form-control-user"
                                         id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required>
                                     </div>
