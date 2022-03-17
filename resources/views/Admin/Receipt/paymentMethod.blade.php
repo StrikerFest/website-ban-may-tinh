@@ -43,13 +43,13 @@
                                             <td>{{ $PT->maPTTT }}</td>
                                             <td>{{ $PT->tenPTTT }}</td>
                                             <td>
-                                                <form action="{{route('customer.edit', $PT->maPTTT)}}" method="get">
+                                                <form action="{{route('paymentMethod.edit', $PT->maPTTT)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('customer.destroy', $PT->maPTTT)}}" method="post">
+                                                <form action="{{route('paymentMethod.destroy', $PT->maPTTT)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button 
@@ -78,6 +78,7 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Phương thức</label>
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Payment method" name="tenPTTT" required>
                                     </div>

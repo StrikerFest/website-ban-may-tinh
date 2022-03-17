@@ -27,6 +27,7 @@ use App\Http\Controllers\AdminBlogCommentController;
 use App\Http\Controllers\AdminBlogResponseController;
 use App\Http\Controllers\AdminReceiptController;
 use App\Http\Controllers\AdminDetailReceiptController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,32 +53,37 @@ Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard
 
 Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
+//Thêm tiền tố 'admin/' vào url
+Route::prefix('admin')->group(function () {
+    Route::resource('customer', AdminCustomerController::class);
+    Route::resource('admin', AdminController::class);
+    Route::resource('employee', AdminEmployeeController::class);
+    Route::resource('role', AdminRoleController::class);
+    Route::resource('permission', AdminPermissionController::class);
+    Route::resource('rolePermission', AdminRolePermissionController::class);
+    Route::resource('product', AdminProductController::class);
+    Route::resource('productComment', AdminProductCommentController::class);
+    Route::resource('productResponse', AdminProductResponseController::class);
+    Route::get('productImage/{maSP}', [AdminProductImageController::class, "index"])->name('productImage.index');
+    Route::resource('productImage', AdminProductImageController::class)->except(['index']);
+    Route::resource('productStatus', AdminProductStatusController::class);
+    Route::get('productSpecification/{maSP}', [AdminProductSpecificationController::class, "index"])->name('productSpecification.index');
+    Route::resource('productSpecification', AdminProductSpecificationController::class)->except(['index']);
+    Route::resource('blog', AdminBlogController::class);
+    Route::resource('blogComment', AdminBlogCommentController::class);
+    Route::resource('blogResponse', AdminBlogResponseController::class);
+    Route::resource('blogStatus', AdminBlogStatusController::class);
+    Route::resource('category', AdminCategoryController::class);
+    Route::get('categorySpecification/{maTL}', [AdminCategorySpecificationController::class, "index"])->name('categorySpecification.index');
+    Route::resource('categorySpecification', AdminCategorySpecificationController::class)->except(['index']);
+    Route::resource('receipt', AdminReceiptController::class);
+    Route::resource('receiptStatus', AdminReceiptStatusController::class);
+    Route::resource('detailReceipt', AdminDetailReceiptController::class);
+    Route::resource('paymentMethod', AdminPaymentMethodController::class);
+    Route::resource('manufacturer', AdminManufacturerController::class);
+    Route::resource('specification', AdminSpecificationController::class);
+});
 
-Route::resource('customer', AdminCustomerController::class);
-Route::resource('admin', AdminController::class);
-Route::resource('employee', AdminEmployeeController::class);
-Route::resource('role', AdminRoleController::class);
-Route::resource('permission', AdminPermissionController::class);
-Route::resource('rolePermission', AdminRolePermissionController::class);
-Route::resource('product', AdminProductController::class);
-Route::resource('productComment', AdminProductCommentController::class);
-Route::resource('productResponse', AdminProductResponseController::class);
-Route::resource('productImage', AdminProductImageController::class);
-Route::resource('productStatus', AdminProductStatusController::class);
-Route::resource('productSpecification', AdminProductSpecificationController::class);
-Route::resource('blog', AdminBlogController::class);
-Route::resource('blogComment', AdminBlogCommentController::class);
-Route::resource('blogResponse', AdminBlogResponseController::class);
-Route::resource('blogStatus', AdminBlogStatusController::class);
-Route::resource('category', AdminCategoryController::class);
-Route::get('categorySpecification/{maTL}', [AdminCategorySpecificationController::class, "index"])->name('categorySpecification.index');
-Route::resource('categorySpecification', AdminCategorySpecificationController::class)->except(['index']);
-Route::resource('receipt', AdminReceiptController::class);
-Route::resource('receiptStatus', AdminReceiptStatusController::class);
-Route::resource('detailReceipt', AdminDetailReceiptController::class);
-Route::resource('paymentMethod', AdminPaymentMethodController::class);
-Route::resource('manufacturer', AdminManufacturerController::class);
-Route::resource('specification', AdminSpecificationController::class);
 
 Route::get('/testAdmin', function () {
     return view('Admin.Customer.index');
@@ -95,7 +101,7 @@ Route::get('/logout', [CustomerLoginController::class, "logout"])->name("logout"
 Route::post('/loginProcess', [CustomerLoginController::class, "loginProcess"])->name("loginProcess");
 Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])->name("logoutProcess");
 
-Route::resource('product', ProductController::class);
+// Route::resource('product', ProductController::class);
 
 Route::get('/test', function () {
     return view('Customer.Customer.index');

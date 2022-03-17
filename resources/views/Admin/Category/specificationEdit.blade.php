@@ -26,6 +26,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <input type="hidden" name="maTL" value="{{ $theLoai->maTL }}">
+                                        <label class="form-inline label">Thông số</label>
                                         <select class="form-control" name="maTS">
                                             @foreach($thongSo as $TS)
                                                 <option value="{{ $TS->maTS }}" <?php echo($TLTS->maTS == $TS->maTS? "selected": "") ?>>
@@ -49,6 +50,5 @@
     </div>
     <!-- End of Page Wrapper -->
     @include("Admin.Layout.Common.bottom_script")
-
 </body>
 </html>

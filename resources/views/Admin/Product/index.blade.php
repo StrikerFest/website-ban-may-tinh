@@ -36,7 +36,7 @@
                                             <th>Nhà sản xuất</th>
                                             <th>Danh mục</th>
                                             <th>Tình trạng</th>
-                                            <th colspan="3" width="15%">Thao tác</th>
+                                            <th colspan="4" width="20%">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -77,6 +77,18 @@
                                                 ?>
                                             </td>
                                             <td>
+                                                <form action="{{route('productSpecification.index', $SP->maSP)}}" method="get">
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-user btn-block">Thông số</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{route('productImage.index', $SP->maSP)}}" method="get">
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-user btn-block">Ảnh</button>
+                                                </form>
+                                            </td>
+                                            <td>
                                                 <form action="{{route('product.edit', $SP->maSP)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
@@ -112,26 +124,31 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
+                                        <label class="form-inline label">Sản phẩm</label>
                                         <input type="text" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Product name" name="tenSP">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Giá</label>
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Price" name="giaSP">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Số lượng</label>
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Quantity" name="soLuong">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Giảm giá</label>
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Discount" name="giamGia" min="0" max="100">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Nhà sản xuất</label>
                                         <select class="form-control" name="maNSX">
                                             <option value="" disabled selected hidden>Manufacturer</option>
                                             @foreach($nhaSanXuat as $NSX)
@@ -140,6 +157,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Danh mục</label>
                                         <select class="form-control" name="maTL">
                                             <option value="" disabled selected hidden>Category</option>
                                             @foreach($theLoai as $TL)
@@ -148,6 +166,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Tình trạng</label>
                                         <select class="form-control" name="maTTSP">
                                             <option value="" disabled selected hidden>Status</option>
                                             @foreach($tinhTrangSanPham as $TTSP)
@@ -158,6 +177,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Mô tả</label>
                                         <textarea class="form-control" name="moTa" rows="5" placeholder="Description"></textarea>
                                     </div>
                                 </div>
