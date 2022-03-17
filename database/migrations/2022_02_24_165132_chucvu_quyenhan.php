@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chuc_vu_quyen_han', function(Blueprint $table){
+            $table->increments('maCVQH');
             $table->unsignedInteger('maCV');
             $table->foreign('maCV')->references('maCV')->on('chuc_vu');
             $table->unsignedInteger('maQH');

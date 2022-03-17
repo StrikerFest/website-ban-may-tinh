@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PaymentMethodModel;
 
 class AdminPaymentMethodController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminPaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        $PTTT = PaymentMethodModel::orderBy('maPTTT', 'desc')->paginate(5);
+
+        return view('Admin.Receipt.paymentMethod', [
+            'PTTT' => $PTTT
+        ]);
     }
 
     /**
@@ -34,7 +39,11 @@ class AdminPaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $PTTT = new PaymentMethodModel();
+        $PTTT->tenPTTT = $request->get('tenPTTT');
+        $PTTT->save();
+
+        return redirect(route('paymentMethod.index'));
     }
 
     /**
@@ -79,6 +88,9 @@ class AdminPaymentMethodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $PTTT = PaymentMethodModel::find($id);
+        $PTTT->delete();
+
+        return redirect(route('paymentMethod.index'));
     }
 }

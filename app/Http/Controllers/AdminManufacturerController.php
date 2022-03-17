@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ManufacturerModel;
 
 class AdminManufacturerController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminManufacturerController extends Controller
      */
     public function index()
     {
-        //
+        $nhaSanXuat = ManufacturerModel::orderBy('maNSX', 'desc')->paginate(5);
+
+        return view('Admin.Manufacturer.index', [
+            "nhaSanXuat" => $nhaSanXuat,
+        ]);
     }
 
     /**
@@ -34,7 +39,11 @@ class AdminManufacturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nhaSanXuat = new ManufacturerModel();
+        $nhaSanXuat->tenNSX = $request->get('tenNSX');
+        $nhaSanXuat->save();
+
+        return redirect(route('manufacturer.index'));
     }
 
     /**
@@ -56,7 +65,11 @@ class AdminManufacturerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $NSX = ManufacturerModel::find($id);
+        
+        return view('Admin.Manufacturer.edit', [
+            "NSX" => $NSX,
+        ]);
     }
 
     /**
@@ -68,7 +81,11 @@ class AdminManufacturerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $NSX = ManufacturerModel::find($id);
+        $NSX->tenNSX = $request->get('tenNSX');
+
+        $NSX->save();
+        return redirect(route('manufacturer.index'));
     }
 
     /**
@@ -79,6 +96,9 @@ class AdminManufacturerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nhaSanXuat = ManufacturerModel::find($id);
+        $nhaSanXuat->delete();
+
+        return redirect(route('manufacturer.index'));
     }
 }

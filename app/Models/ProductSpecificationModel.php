@@ -12,5 +12,5 @@ class ProductSpecificationModel extends Model
 
     public $timestamps = false;
 
-    public $primaryKey = ['maSP', 'maTS'];
+    public $primaryKey = 'maSPTS';
 }

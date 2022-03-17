@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('hoa_don_chi_tiet', function(Blueprint $table){
+            $table->increments('maHDCT');
             $table->unsignedInteger('maHD');
             $table->foreign('maHD')->references('maHD')->on('hoa_don');
             $table->unsignedInteger('maSP');

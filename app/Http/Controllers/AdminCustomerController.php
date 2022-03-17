@@ -18,8 +18,8 @@ class AdminCustomerController extends Controller
         $khachHang = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
             ->where('tenQH', 'Là khách hàng')
-            ->orderBy('maND', 'desc')->get();
-        // ->paginate();
+            ->orderBy('maND', 'desc')
+            ->paginate(5);
 
         return view('Admin.Customer.index', [
             "khachHang" => $khachHang,
@@ -45,7 +45,18 @@ class AdminCustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = new UserModel();
+        $customer->tenND = $request->get('name');
+        $customer->emailND = $request->get('email');
+        $customer->matKhauND = $request->get('password');
+        $matKhau2 = $request->get('password2');
+        $customer->maCV = $request->get('maCV');
+
+        if($customer->matKhauND != $matKhau2){
+            return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
+        }
+        $customer->save();
+        return redirect(route('customer.index'));
     }
 
     /**
@@ -67,7 +78,11 @@ class AdminCustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $khachHang = UserModel::find($id);
+        
+        return view('Admin.Customer.edit', [
+            "khachHang" => $khachHang,
+        ]);
     }
 
     /**
@@ -79,7 +94,18 @@ class AdminCustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $khachHang = UserModel::find($id);
+        $khachHang->tenND = $request->get('name');
+        $khachHang->emailND = $request->get('email');
+        $khachHang->matKhauND = $request->get('password');
+        $matKhau2 = $request->get('password2');
+        $khachHang->maCV = $request->get('maCV');
+
+        if($khachHang->matKhauND != $matKhau2){
+            return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
+        }
+        $khachHang->save();
+        return redirect(route('customer.index'));
     }
 
     /**
@@ -90,6 +116,9 @@ class AdminCustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = UserModel::find($id);
+        $customer->delete();
+
+        return redirect(route('customer.index'));
     }
 }

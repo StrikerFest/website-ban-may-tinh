@@ -15,8 +15,7 @@ class AdminPermissionController extends Controller
     public function index()
     {
         //
-        $quyenHan = PermissionModel::orderBy('maQH', 'desc')->get();
-        // ->paginate();
+        $quyenHan = PermissionModel::orderBy('maQH', 'desc')->paginate(5);
 
         return view('Admin.Permission.index', [
             "quyenHan" => $quyenHan,
@@ -41,7 +40,11 @@ class AdminPermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quyenHan = new PermissionModel();
+        $quyenHan->tenQH = $request->get('tenQH');
+
+        $quyenHan->save();
+        return redirect(route('permission.index'));
     }
 
     /**
@@ -86,6 +89,9 @@ class AdminPermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quyenHan = PermissionModel::find($id);
+        $quyenHan->delete();
+
+        return redirect(route('permission.index'));
     }
 }

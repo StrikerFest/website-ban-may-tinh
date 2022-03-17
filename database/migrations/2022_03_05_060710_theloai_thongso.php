@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('the_loai_thong_so', function (Blueprint $table){
+            $table->increments('maTLTS');
             $table->unsignedInteger('maTL');
             $table->foreign('maTL')->references('maTL')->on('the_loai');
             $table->unsignedInteger('maTS');

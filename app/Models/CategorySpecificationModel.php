@@ -12,5 +12,5 @@ class CategorySpecificationModel extends Model
 
     public $timestamps = false;
 
-    public $primaryKey = ['maTL', 'maTS'];
+    public $primaryKey = 'maTLTS';
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SpecificationModel;
 
 class AdminSpecificationController extends Controller
 {
@@ -13,7 +14,11 @@ class AdminSpecificationController extends Controller
      */
     public function index()
     {
-        //
+        $thongSo = SpecificationModel::orderBy('maTS', 'desc')->paginate(5);
+
+        return view('Admin.Specification.index', [
+            'thongSo' => $thongSo,
+        ]);
     }
 
     /**
@@ -34,7 +39,11 @@ class AdminSpecificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $thongSo = new SpecificationModel();
+        $thongSo->tenTS = $request->get('tenTS');
+        $thongSo->save();
+
+        return redirect(route('specification.index'));
     }
 
     /**
@@ -56,7 +65,11 @@ class AdminSpecificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $TS = SpecificationModel::find($id);
+        
+        return view('Admin.Specification.edit', [
+            "TS" => $TS,
+        ]);
     }
 
     /**
@@ -68,7 +81,11 @@ class AdminSpecificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $TS = SpecificationModel::find($id);
+        $TS->tenTS = $request->get('tenTS');
+
+        $TS->save();
+        return redirect(route('specification.index'));
     }
 
     /**
@@ -79,6 +96,9 @@ class AdminSpecificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $thongSo = SpecificationModel::find($id);
+        $thongSo->delete();
+
+        return redirect(route('specification.index'));
     }
 }

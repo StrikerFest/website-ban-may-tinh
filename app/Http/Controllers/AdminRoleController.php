@@ -125,6 +125,9 @@ class AdminRoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chucVu = RoleModel::find($id);
+        $chucVu->delete();
+
+        return redirect(route('role.index'));
     }
 }
