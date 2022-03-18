@@ -30,7 +30,8 @@
 
 
                 {{-- Slide quảng cáo --}}
-                <div>
+                {{-- Bỏ hide-from-work đi --}}
+                <div class="hide-from-work">
                     <div id="carouselExampleIndicators" class="carousel slide carousel-container-custom"
                         data-ride="carousel" data-pause="hover" data-interval="5000">
                         {{-- Hiển thị vị trí slide --}}
@@ -78,7 +79,8 @@
                 <br>
 
                 {{-- Vật phẩm dưới slide quảng cáo --}}
-                <div class="card shadow mb-4 bg-gradient-  background-none">
+                {{-- Bỏ hide-from-work đi --}}
+                <div class="card shadow mb-4 bg-gradient-  background-none hide-from-work">
                     <div class="card-body padding-0">
                         <div class="table-responsive d-flex justify-content-center">
                             {{-- Nội dung 1 --}}
@@ -158,7 +160,7 @@
                 {{-- Kết thúc - Vật phẩm dưới slide quảng cáo --}}
 
                 {{-- Banner 1 --}}
-                <div>
+                <div class="hide-from-work">
                     <img width="100%" src="{{ asset('assets/img/banner-store-2.jpg') }}" />
                 </div>
                 {{-- Kết thúc - Banner 1 --}}
@@ -201,7 +203,7 @@
                                                                     <!-- Thẻ sale trên đầu -->
                                                                     <div class="badge bg-dark text-white position-absolute"
                                                                         style="top: 0.5rem; right: 0.5rem">
-                                                                        Sale
+                                                                        Sale!
                                                                     </div>
                                                                     {{-- Overlay hiển thị chi tiết sau khi hover --}}
                                                                     <div class="product-overlay">
@@ -242,11 +244,16 @@
                                                                         </div>
                                                                     </div>
                                                                     {{-- Hết overlay chi tiết --}}
-
+                                                                    @php
+                                                                        $tempImg;
+                                                                    @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            <img class="card-img-top"
+                                                                            @php
+                                                                                $tempImg = $PI->anh;
+                                                                            @endphp
+                                                                            <img class="card-img-top hide-from-work"
                                                                                 style="height:240px ; width:260px ; border: 1px solid lightgray"
                                                                                 src="{{ asset('assets/img/' . $PI->anh) }}"
                                                                                 id="{{ $CN->maSP }}" alt="..." />
@@ -275,15 +282,33 @@
                                                                         </div>
                                                                     </div>
                                                                     <!-- Hành động của sản phẩm-->
-                                                                    <div class="card-footer border-top-0 bg-dar "
+                                                                    <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success mt-auto text-left"
-                                                                            href="#" style="background-color: gray">Còn
-                                                                            hàng</a>
-                                                                        <a class="btn btn-outline-light mt-auto bg-gradientsecondary text-right"
+                                                                        <a class="btn btn-outline-success text-left"
                                                                             href="#"
-                                                                            style="background-color: crimson"><i
-                                                                                class="fa fa-shopping-cart"></i></a>
+                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
+                                                                            hàng</a>
+
+                                                                        <form action="{{ route('cart.store') }}"
+                                                                            method="POST" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <input type="hidden"
+                                                                                value="{{ $CN->maSP }}" name="id">
+                                                                            <input type="hidden"
+                                                                                value="{{ $tenSP }}" name="name">
+                                                                            <input type="hidden"
+                                                                                value="{{ $CN->giaSP }}"
+                                                                                name="price">
+                                                                            <input type="hidden"
+                                                                                value="{{ $tempImg }}"
+                                                                                name="image">
+                                                                            <input type="hidden" value="1"
+                                                                                name="quantity">
+                                                                            <button
+                                                                                class="btn btn-outline-light  text-right"
+                                                                                style="background-color: crimson"><i
+                                                                                    class="fa fa-shopping-cart"></i></button>
+                                                                        </form>
                                                                     </div>
 
 

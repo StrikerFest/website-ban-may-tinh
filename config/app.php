@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -194,5 +195,5 @@ return [
         // ...
         'Image'     => Intervention\Image\Facades\Image::class,
     ])->toArray(),
-
+    'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
 ];
