@@ -18,7 +18,7 @@
     </div>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
 
@@ -31,6 +31,56 @@
     <div class="sidebar-heading">
         Interface
     </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-shopping-basket"></i>
+                <span>Sản phẩm</span>
+            </a>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="{{route('product.index')}}">Quản lý sản phẩm</a>
+                    <a class="collapse-item" href="{{route('category.index')}}">Quản lý danh mục SP</a>
+                    <a class="collapse-item" href="{{route('manufacturer.index')}}">Quản lý nhà sản xuất</a>
+                    <a class="collapse-item" href="{{route('specification.index')}}">Thông số sản phẩm</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-receipt"></i>
+                <span>Hóa đơn</span>
+            </a>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
+                    <a class="collapse-item" href="{{route('paymentMethod.index')}}">Phương thức thanh toán</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-edit"></i>
+                <span>Blog</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="{{route('blog.index')}}">Quản lý blog</a>
+                </div>
+            </div>
+        </li>
+    
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -62,56 +112,6 @@
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="{{route('customer.index')}}">Danh sách người dùng</a>
                     <!-- <a class="collapse-item" href="{{route('customer.create')}}">Thêm người dùng</a> -->
-                </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
-                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-shopping-basket"></i>
-                <span>Sản phẩm</span>
-            </a>
-            <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('product.index')}}">Quản lý sản phẩm</a>
-                    <a class="collapse-item" href="{{route('category.index')}}">Quản lý danh mục SP</a>
-                    <a class="collapse-item" href="{{route('manufacturer.index')}}">Quản lý nhà sản xuất</a>
-                    <a class="collapse-item" href="{{route('specification.index')}}">Thông số sản phẩm</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
-                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-edit"></i>
-                <span>Blog</span>
-            </a>
-            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.index')}}">Danh sách sản phẩm</a>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-receipt"></i>
-                <span>Hóa đơn</span>
-            </a>
-            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
-                    <a class="collapse-item" href="{{route('paymentMethod.index')}}">Phương thức thanh toán</a>
                 </div>
             </div>
         </li>

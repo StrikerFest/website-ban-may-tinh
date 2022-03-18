@@ -13,23 +13,22 @@
             @include("Admin.Layout.Common.header")
             <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Nhà sản xuất</h1>
-                    <p class="mb-4">Trang thông tin nhà sản xuất.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Ảnh sản phẩm</h1>
+                    <p class="mb-4">Trang thông tin ảnh sản phẩm.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Bảng nhà sản xuất hiện tại</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng ảnh sản phẩm</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Mã</th>
-                                            <th>Tên</th>
+                                            <th>Sản phẩm: {{ $sanPham->tenSP }}</th>
                                             <th colspan="2" width="10%">Thao tác</th>
                                         </tr>
                                     </thead>
@@ -37,22 +36,28 @@
 
                                     </tfoot>
                                     <tbody>
-                                    @foreach ($nhaSanXuat as $NSX)
+                                    @foreach ($anhSP as $ASP)
                                         <tr>
-                                            <td>{{$NSX->maNSX}}</td>
-                                            <td>{{$NSX->tenNSX}}</td>
                                             <td>
-                                                <form action="{{route('manufacturer.edit', $NSX->maNSX)}}" method="get">
+                                                <img
+                                                    class="card-img-top"
+                                                    style="height: 150px; width: 150px; border: 1px solid lightgray"
+                                                    src="{{ asset('assets/img/'.$ASP->anh) }}"
+                                                    alt="..."
+                                                />
+                                            </td>
+                                            <td>
+                                                <form action="{{route('productImage.edit', $ASP->maASP)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('manufacturer.destroy', $NSX->maNSX)}}" method="post">
+                                                <form action="{{route('productImage.destroy', $ASP->maASP)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button 
-                                                        onclick="return confirm('Xác nhận xóa nhà sản xuất?')"
+                                                        onclick="return confirm('Xác nhận xóa ảnh sản phẩm?')"
                                                         class="btn btn-primary btn-user btn-block"
                                                         >
                                                         Xóa
@@ -66,20 +71,20 @@
                             </div>
                         </div>
                     </div>
-                    {{$nhaSanXuat->links('')}}
+                    
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Thêm nhà sản xuất mới</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Thêm ảnh cho sản phẩm</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('manufacturer.store') }}" method="POST">
+                                <form class="user" action="{{ route('productImage.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <label class="form-inline label">Nhà sản xuất</label>
-                                        <input type="text" class="form-control form-control-user" id="exampleManufacturer"
-                                            placeholder="Manufacturer" name="tenNSX">
+                                        <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">
+                                        <label class="form-inline label">Ảnh</label>
+                                        <input type="file" class="form-control-file" name="anh">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

@@ -29,6 +29,7 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Tên</label>
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Name" name="name" required value="{{$khachHang->tenND}}">
                                     </div>
@@ -36,15 +37,18 @@
                                     <input type="hidden" value="{{$khachHang->maCV}}" name="maCV">
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-inline label">Email</label>
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address" name="email" required value="{{$khachHang->emailND}}">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Mật khẩu</label>
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required value="{{$khachHang->matKhauND}}">
                                     </div>
                                     <div class="col-sm-6">
+                                        <label class="form-inline label">Nhập lại mật khẩu</label>
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required value="{{$khachHang->matKhauND}}">
                                     </div>

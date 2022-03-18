@@ -15,25 +15,25 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Nhà sản xuất</h1>
-                    <p class="mb-4">Trang thông tin nhà sản xuất.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Phương thức thanh toán</h1>
+                    <p class="mb-4">Trang thông tin phương thức thanh toán.</p>
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Sửa thông tin nhà sản xuất</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Sửa phương thức thanh toán</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('manufacturer.update', $NSX->maNSX) }}" method="POST">
-                                    @method('PUT')
+                                <form class="user" action="{{ route('paymentMethod.update', $PTTT->maPTTT) }}" method="post">
                                     @csrf
                                 <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <label class="form-inline label">Nhà sản xuất</label>
-                                        <input type="text" class="form-control form-control-user" id="exampleblogStatus"
-                                            placeholder="Role" name="tenNSX" value="{{$NSX->tenNSX}}">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Phương thức</label>
+                                        <input type="text" class="form-control form-control-user" id="exampleName"
+                                            placeholder="Payment method" name="tenPTTT" required value="{{$PTTT->tenPTTT}}">
                                     </div>
                                 </div>
+                                {{-- Nút Thêm --}}
                                 <button class="btn btn-primary btn-user btn-block">
                                     Update data
                                 </button>

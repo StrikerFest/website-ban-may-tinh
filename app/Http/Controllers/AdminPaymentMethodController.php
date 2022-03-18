@@ -65,7 +65,11 @@ class AdminPaymentMethodController extends Controller
      */
     public function edit($id)
     {
-        //
+        $PTTT = PaymentMethodModel::find($id);
+
+        return view('Admin.Receipt.paymentMethodEdit', [
+            'PTTT' => $PTTT
+        ]);
     }
 
     /**
@@ -77,7 +81,11 @@ class AdminPaymentMethodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $PTTT = PaymentMethodModel::find($id);
+        $PTTT->tenPTTT = $request->Get('tenPTTT');
+        $PTTT->save();
+
+        return redirect(route('paymentMethod.index'));
     }
 
     /**

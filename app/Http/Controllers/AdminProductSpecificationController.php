@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductModel;
+use App\Models\SpecificationModel;
+use App\Models\ProductSpecificationModel;
 
 class AdminProductSpecificationController extends Controller
 {
@@ -11,9 +14,27 @@ class AdminProductSpecificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($maSP)
     {
-        //
+        $sanPham = ProductModel::find($maSP);
+
+        $maTL = $sanPham->maTL;
+
+        $thongSo = SpecificationModel::
+            join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
+            ->where('the_loai_thong_so.maTL', '=' , $maTL)
+            ->get();
+        
+        $sanPhamThongSo = ProductSpecificationModel::
+            join('thong_so', 'thong_so.maTS', '=', 'san_pham_thong_so.maTS')
+            ->where('san_pham_thong_so.maSP', '=', $maSP)
+            ->get();
+
+        return view('Admin.Product.productSpecification', [
+            'sanPham' => $sanPham,
+            'thongSo' => $thongSo,
+            'sanPhamThongSo' => $sanPhamThongSo,
+        ]);
     }
 
     /**
@@ -34,7 +55,17 @@ class AdminProductSpecificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $maSP = $request->get('maSP');
+        for($i = 0; $i < sizeof($request->get('maTS')); $i++){
+            $SPTS = new ProductSpecificationModel();
+            $SPTS->maSP = $request->get('maSP');
+            $SPTS->maTS = $request->get('maTS')[$i];
+            $SPTS->giaTri = $request->get('giaTri')[$i];
+
+            $SPTS->save();
+        };
+
+        return redirect(route('productSpecification.index', $maSP));
     }
 
     /**
@@ -56,7 +87,19 @@ class AdminProductSpecificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $SPTS = ProductSpecificationModel::find($id);
+
+        $maTS = $SPTS->maTS;
+        $thongSo = SpecificationModel::find($maTS);
+
+        $maSP = $SPTS->maSP;
+        $sanPham = ProductModel::find($maSP);
+
+        return view('Admin.Product.productSpecificationEdit', [
+            'SPTS' => $SPTS,
+            'thongSo' => $thongSo,
+            'sanPham' => $sanPham,
+        ]);
     }
 
     /**
@@ -68,7 +111,14 @@ class AdminProductSpecificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $SPTS = ProductSpecificationModel::find($id);
+        $SPTS->maSP = $request->get('maSP');
+        $SPTS->maTS = $request->get('maTS');
+        $SPTS->giaTri = $request->get('giaTri');
+        $maSP = $SPTS->maSP;
+        
+        $SPTS->save();
+        return redirect(route('productSpecification.index', $maSP));
     }
 
     /**
@@ -79,6 +129,10 @@ class AdminProductSpecificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $SPTS = ProductSpecificationModel::find($id);
+        $maSP = $SPTS->maSP;
+        $SPTS->delete();
+
+        return redirect(route('productSpecification.index', $maSP));
     }
 }
