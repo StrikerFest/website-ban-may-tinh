@@ -64,6 +64,9 @@
                                     {{-- Tên --}}
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Chức vụ</label>
+                                        @error('ten')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control " id="exampleFirstName"
                                             placeholder="Nhập tên" name="ten">
                                     </div>

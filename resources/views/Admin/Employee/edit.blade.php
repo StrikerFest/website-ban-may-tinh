@@ -31,12 +31,18 @@
                                     {{-- Tên --}}
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control " id="exampleFirstName"
                                             placeholder="Name" name="name" required value=" {{$nhanVien->tenND}} ">
                                     </div>
                                     {{-- Chức vụ --}}
                                     <div class="col-sm-6">
                                         <label class="form-inline label">Chức vụ</label>
+                                        @error('maCV')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select name="maCV" class="form-control r"><br>
                                             @foreach ($chucVu as $CV)
                                                 <option value="{{ $CV->maCV }}" <?php echo($nhanVien->maCV == $CV->maCV? "selected": "") ?>>
@@ -48,29 +54,36 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-inline label">Email</label>
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address" name="email" required value="{{$nhanVien->emailND}}">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Mật khẩu</label>
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required value="{{$nhanVien->matKhauND}}">
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-inline label">Nhập lại mật khẩu</label>
+                                        @php
+                                            $pwError = Session::get('matKhau');
+                                        @endphp
+                                        @isset( $pwError )
+                                            <div class="col-sm-12 mb-3 mb-sm-0 alert alert-danger">
+                                                {{ $pwError }}
+                                            </div>
+                                        @endisset
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required value="{{$nhanVien->matKhauND}}">
                                     </div>
                                 </div>
-                                @php
-                                    $pwError = Session::get('matKhau');
-                                @endphp
-                                @isset( $pwError )
-                                    <div class="col-sm-12 mb-3 mb-sm-0 alert alert-danger">
-                                        {{ $pwError }}
-                                    </div>
-                                @endisset
+                                
                                 {{-- Nút Thêm --}}
                                 <button class="btn btn-primary btn-user btn-block">
                                     Update data

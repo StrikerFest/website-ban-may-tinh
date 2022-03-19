@@ -48,6 +48,15 @@ class AdminBlogController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'tieuDe' => 'required|min:3',
+            'anh' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'maNV' => 'required',
+            'ngayTao' => 'required|date',
+            'noiDung' => 'required|min:5',
+            'maTTBV' => 'required',
+        ]);
+
         $path = $request->file('anh')->store('img');
         $baiViet = new BlogModel();
         $baiViet->tieuDe = $request->get('tieuDe');
@@ -56,6 +65,7 @@ class AdminBlogController extends Controller
         $baiViet->ngayTao = $request->get('ngayTao');
         $baiViet->noiDung = $request->get('noiDung');
         $baiViet->maTTBV = $request->get('maTTBV');
+        
         $baiViet->save();
 
         return redirect(route('blog.index'));
@@ -106,6 +116,15 @@ class AdminBlogController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'tieuDe' => 'required|min:3',
+            'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'maNV' => 'required',
+            'ngayTao' => 'required|date',
+            'noiDung' => 'required|min:5',
+            'maTTBV' => 'required',
+        ]);
+
         $BV = BlogModel::find($id);
         $BV->tieuDe = $request->get('tieuDe');
         $BV->maNV = $request->get('maNV');

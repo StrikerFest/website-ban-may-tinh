@@ -84,8 +84,11 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <label class="form-inline label">Danh mục</label>
+                                        @error('tenTL')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleCategory"
-                                            placeholder="Category" name="tenTL">
+                                            placeholder="Category" name="tenTL" required>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

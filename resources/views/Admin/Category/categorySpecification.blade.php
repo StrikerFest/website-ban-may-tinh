@@ -77,8 +77,14 @@
                                 <div id="dynamic-div">
                                     <div class="form-group row">
                                         <input type="hidden" name="maTL" value="{{ $theLoai->maTL }}">
+                                        @error('maTL')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="col-sm-11">
                                             <label class="form-inline label">Thông số</label>
+                                            @error('maTS')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                             <select class="form-control" name="maTS[]">
                                                 @foreach($thongSo as $TS)
                                                     <option value="{{ $TS->maTS }}">{{ $TS->tenTS }}</option>

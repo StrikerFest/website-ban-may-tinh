@@ -114,27 +114,43 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <label class="form-inline label">Tiêu đề</label>
+                                        @error('tieuDe')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Blog title" name="tieuDe">
                                     </div>
+                                    
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Ảnh</label>
+                                        @error('anh')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="file" class="form-control-file" id="exampleProduct" name="anh">
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <input type="hidden" name="maNV" value="<?php echo(session()->get('admin')) ?>">
                                         <label class="form-inline label">Người viết</label>
+                                        @error('maNV')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control" id="exampleProduct"
                                             placeholder="Creator" value="<?php echo(session()->get('tenAdmin')) ?>" readonly>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Ngày tạo</label>
-                                        <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="<?php echo date('Y-m-d'); ?>" disabled>
+                                        @error('ngayTao')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="<?php echo date('Y-m-d'); ?>" readonly>
                                     </div>
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
+                                        @error('maTTBV')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maTTBV">
                                             <option value="" disabled selected hidden>Status</option>
                                             @foreach($tinhTrangBaiViet as $TTBV)
@@ -146,6 +162,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nội dung</label>
+                                        @error('noiDung')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <textarea class="form-control" name="noiDung" rows="5" placeholder="Content"></textarea>
                                     </div>
                                 </div>

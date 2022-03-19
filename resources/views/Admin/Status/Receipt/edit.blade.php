@@ -29,6 +29,10 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
+                                        <label class="form-inline label">Tình trạng</label>
+                                        @error('tenTTHD')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="examplereceiptStatus"
                                             placeholder="Role" name="tenTTHD" value="{{$TTHD->tenTTHD}}">
                                     </div>

@@ -51,6 +51,17 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP',
+            'giaSP' => 'required|numeric|min:0',
+            'moTa' => 'required|min:3',
+            'soLuong' => 'required|numeric|min:0',
+            'giamGia' => 'required|numeric|min:0|max:100',
+            'maNSX' => 'required',
+            'maTL' => 'required',
+            'maTTSP' => 'required',
+        ]);
+
         $sanPham = new ProductModel();
         $sanPham->tenSP = $request->get('tenSP');
         $sanPham->giaSP = $request->get('giaSP');
@@ -109,6 +120,17 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP',
+            'giaSP' => 'required|numeric|min:0',
+            'moTa' => 'required|min:3',
+            'soLuong' => 'required|numeric|min:0',
+            'giamGia' => 'required|numeric|min:0|max:100',
+            'maNSX' => 'required',
+            'maTL' => 'required',
+            'maTTSP' => 'required',
+        ]);
+        
         $SP = ProductModel::find($id);
         $SP->tenSP = $request->get('tenSP');
         $SP->giaSP = $request->get('giaSP');

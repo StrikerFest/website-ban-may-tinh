@@ -31,6 +31,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <label class="form-inline label">Sản phẩm</label>
+                                        @error('tenSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Product name" name="tenSP" value="{{$SP->tenSP}}">
                                     </div>
@@ -38,11 +41,17 @@
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giá</label>
+                                        @error('giaSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Price" name="giaSP" value="{{$SP->giaSP}}">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Số lượng</label>
+                                        @error('soLuong')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Quantity" name="soLuong" value="{{$SP->soLuong}}">
                                     </div>
@@ -55,6 +64,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
+                                        @error('maNSX')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maNSX">
                                             <option value="" disabled selected hidden>Manufacturer</option>
                                             @foreach($nhaSanXuat as $NSX)
@@ -66,6 +78,9 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
+                                        @error('maTL')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maTL">
                                             <option value="" disabled selected hidden>Category</option>
                                             @foreach($theLoai as $TL)
@@ -77,6 +92,9 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
+                                        @error('maTTSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maTTSP">
                                             <option value="" disabled selected hidden>Status</option>
                                             @foreach($tinhTrangSanPham as $TTSP)
@@ -90,6 +108,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Mô tả</label>
+                                        @error('moTa')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <textarea class="form-control" name="moTa" rows="5" placeholder="Description">{{$SP->moTa}}</textarea>
                                     </div>
                                 </div>
