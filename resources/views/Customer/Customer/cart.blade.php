@@ -76,17 +76,19 @@
                                                                             value="{{ $item->id }}">
                                                                         <div
                                                                             style="display:flex; flex-direction: column; justify-content: center; align-items:center">
-                                                                            <div>
+                                                                            <div class="padding-bottom-5">
                                                                                 <button type="button"
-                                                                                    class="fa fa-arrow-left"
-                                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+                                                                                    class=" btn btn-danger"
+                                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i
+                                                                                        class="fa fa-arrow-left"></i></button>
                                                                                 <input type="number" name="quantity"
                                                                                     value="{{ $item->quantity }}"
                                                                                     class=" text-center bg-gray-300"
                                                                                     style="width:50" />
                                                                                 <button type="button"
-                                                                                    class="fa fa-arrow-right"
-                                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()"></button>
+                                                                                    class="btn btn-danger"
+                                                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i
+                                                                                        class="fa fa-arrow-right"></i></button>
                                                                             </div>
                                                                             <button type="submit"
                                                                                 class=" text-white bg-gradient-secondary border-radius-10"
@@ -107,7 +109,7 @@
                                                                 @csrf
                                                                 <input type="hidden" value="{{ $item->id }}"
                                                                     name="id">
-                                                                <button class="text-white bg-danger"
+                                                                <button class="text-white btn btn-danger"
                                                                     style="width:100%">Xóa</button>
                                                             </form>
                                                         </td>
@@ -124,7 +126,8 @@
                                     <div class="d-flex" style="justify-content: end;">
                                         <div class="d-flex-" style="width:50%;justify-content: start">
                                             <a href="{{ route('product.index') }}">
-                                                <button class="px-6 py-2 text-light bg-gradient-primary padding-10"
+                                                <button
+                                                    class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
                                                     style="border-top-right-radius: 20px;border-bottom-right-radius: 20px">Quay
                                                     lại</button>
                                             </a>
@@ -132,13 +135,15 @@
                                         <div class="d-flex bg-" style="width:50%;justify-content: end">
                                             <form action="{{ route('cart.list') }}" method="POST">
                                                 @csrf
-                                                <button class="px-6 py-2 text-light bg-gradient-primary padding-10"
+                                                <button
+                                                    class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
                                                     style="border-top-left-radius: 20px;border-bottom-left-radius: 20px">Đặt
                                                     hàng</button>
                                             </form>
                                             <form action="{{ route('cart.clear') }}" method="POST">
                                                 @csrf
-                                                <button class="px-6 py-2 text-light bg-gradient-secondary">Xóa
+                                                <button
+                                                    class="px-6 py-2 text-light bg-gradient-danger btn-secondary btn">Xóa
                                                     tất cả</button>
                                             </form>
                                         </div>
