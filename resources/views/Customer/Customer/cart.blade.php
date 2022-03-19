@@ -61,7 +61,7 @@
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <a href="#">
+                                                            <a href="{{ route('product.show', $item->id) }}">
                                                                 <p class="mb-2 md:ml-4">{{ $item->name }}</p>
                                                             </a>
                                                         </td>
