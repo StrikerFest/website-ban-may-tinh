@@ -1,0 +1,7 @@
+.img-thumbnail-small {
+    width: 100px;
+    height: 100px;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    opacity: 80%;
+}

@@ -1,0 +1,29 @@
+/* Nút đường link navbar  */
+a.sidenav-text:link {
+    color: black !important;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+/* Nút đường link navbar khi được di qua */
+a.sidenav-text:hover {
+    color: grey !important;
+    background-color: transparent;
+}
+
+.sidenav-text {
+    color: grey !important;
+}
+
+.sidenav-header {
+    color: grey !important;
+}
+
+.sidenav-icon {
+    color: grey !important;
+}
+
+.sidenav-divider {
+    border-top: solid grey 1px !important;
+}

@@ -15,7 +15,7 @@
             @include('Customer.Layout.Common.side_nav_menu')
 
             <!-- Content của trang -->
-            <div class="container-fluid" style="position:relative;top: 70px">
+            <div class="container-fluid" {{-- style="position:relative;top: 70px" --}} style="padding-top: 70px">
 
                 <main class="my-8">
                     <div class="container px-6 mx-auto">
@@ -29,7 +29,7 @@
                                     </div>
                                 @endif
                                 {{-- Title giỏ hàng --}}
-                                <h3 class="text-3xl text-bold text-light italic padding-10 black-glass">Giỏ hàng</h3>
+                                <h3 class="text-3xl text-bold text-light padding-10 black-glass">Giỏ hàng</h3>
 
                                 <div class="flex-1 bg- padding-10">
                                     @if (sizeof($cartItems) == 0)
@@ -53,7 +53,7 @@
                                                 @foreach ($cartItems as $item)
                                                     <tr>
                                                         <td class="hidden pb-4 md:table-cell" style="width: 25%">
-                                                            <a href="#">
+                                                            <a href="{{ route('product.show', $item->id) }}">
                                                                 <img {{-- src="{{ $item->image }}" --}}
                                                                     style="height: 100%;width: 100%;"
                                                                     src="{{ asset('assets/img/' . $item->attributes->image) }}"
@@ -96,7 +96,7 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td class="hidden text-right md:table-cell padding-10"
+                                                        <td class="hidden text-center md:table-cell padding-10"
                                                             style="padding-top: 0px">
                                                             <span class="">
                                                                 {{ number_format($item->price) }} VND

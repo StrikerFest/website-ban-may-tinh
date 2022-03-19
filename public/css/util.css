@@ -1,0 +1,242 @@
+/* Body */
+body {
+    background-image: url("../assets/img/white-background-1.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Custom css thay đổi thuộc tính chung đơn giản*/
+
+/* ------------------------- CENTER  -------------------------*/
+/* Cho div ra giữa */
+.center-custom {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+/* ------------------------- WIDTH  -------------------------*/
+.width-100 {
+    width: 100%;
+}
+
+.width-75 {
+    width: 75%;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.width-25 {
+    width: 25%;
+}
+
+.width-auto {
+    width: auto;
+}
+
+/* ------------------------- HEIGHT  -------------------------*/
+.height-100 {
+    height: 100%;
+}
+
+.height-75 {
+    height: 75%;
+}
+
+.height-50 {
+    height: 50%;
+}
+
+.height-25 {
+    height: 25%;
+}
+
+.height-auto {
+    height: auto;
+}
+
+/* ------------------------- LI  -------------------------*/
+/* Bỏ chấm của <li> */
+.list-style-none {
+    list-style: none;
+}
+
+/* ------------------------- PADDING  -------------------------*/
+/* Bỏ padding */
+.padding-0 {
+    padding: 0;
+}
+
+/* Padding = 10 */
+.padding-10 {
+    padding: 10;
+}
+
+/* Padding = 20 */
+.padding-20 {
+    padding: 20;
+}
+
+.padding-top-0 {
+    padding-top: 0;
+}
+.padding-top-5 {
+    padding-top: 5;
+}
+.padding-top-10 {
+    padding-top: 0;
+}
+.padding-top-20 {
+    padding-top: 20;
+}
+
+.padding-right-0 {
+    padding-right: 0;
+}
+
+.padding-right-5 {
+    padding-right: 5;
+}
+
+.padding-right-10 {
+    padding-right: 10;
+}
+
+.padding-right-20 {
+    padding-right: 20;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0;
+}
+
+.padding-bottom-5 {
+    padding-bottom: 5;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20;
+}
+
+.padding-left-0 {
+    padding-left: 0;
+}
+
+.padding-left-5 {
+    padding-left: 5;
+}
+
+.padding-left-10 {
+    padding-left: 10;
+}
+
+.padding-left-20 {
+    padding-left: 20;
+}
+
+/* ------------------------- MARGIN  -------------------------*/
+/* Bỏ margin */
+.margin-0 {
+    margin: 0;
+}
+
+/* ------------------------- BORDER-RADIUS  -------------------------*/
+/* Tròn góc 10px */
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+/* Tròn góc 5px */
+.border-radius-5 {
+    border-radius: 5px;
+}
+
+/* Tròn góc 15px */
+.border-radius-15 {
+    border-radius: 15px;
+}
+
+/* Tròn góc 25px */
+.border-radius-25 {
+    border-radius: 25px;
+}
+
+/* ------------------------- FLEX  -------------------------*/
+/* Căn giữa theo hướng chính (Flex) */
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-direction-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.flex-direction-column-reverse {
+    flex-direction: column-reverse;
+}
+
+/* ------------------------- BACKGROUND  -------------------------*/
+/* Bỏ background */
+.background-none {
+    background: none;
+}
+
+/* ------------------------- CUSTOM  -------------------------*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ------------------------- LINK  -------------------------*/
+a.link-red:link {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red:visited {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red:hover {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red:active {
+    text-decoration: none;
+    color: red;
+}
+
+/* Kết thúc - Custom css thay đổi thuộc tính chung đơn giản*/

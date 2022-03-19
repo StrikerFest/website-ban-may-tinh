@@ -1,0 +1,60 @@
+/* CSS Nav bar */
+
+/* Nút đường link navbar  */
+a.nav-item-custom:link {
+    color: black;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+/* Nút đường link navbar khi được di qua */
+a.nav-item-custom:hover {
+    color: red;
+    background-color: transparent;
+}
+
+/* Thanh navbar thứ 2 */
+.second-navbar {
+    height: 50px;
+    top: 70px;
+    z-index: 5;
+}
+
+/* Container chứa nút navbar */
+.nav-item-container {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    width: 160px;
+    height: 50px;
+}
+
+/* Container chứa nút navbar được highlight */
+.nav-item-container-highlight {
+    background-color: red;
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    width: 200px;
+    height: 50px;
+}
+
+/* CSS chữ của container chứa nút navbar được highlight */
+.nav-item-container-highlight a.nav-item-custom:link {
+    color: aliceblue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+/* CSS chữ của container chứa nút navbar được highlight khi di qua */
+.nav-item-container-highlight a.nav-item-custom:hover {
+    color: whitesmoke;
+    background-color: transparent;
+}
+
+/* Kết thúc - CSS Navbar */

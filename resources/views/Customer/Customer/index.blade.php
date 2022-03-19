@@ -166,7 +166,7 @@
                 {{-- Kết thúc - Banner 1 --}}
 
                 {{-- Vật phẩm danh mục 1 --}}
-                <div class="card shadow mb-4 background-none" id="carouselID">
+                <div class="card shadow mb-4 background-none" id="collapsePoint">
                     {{-- Label danh mục - Thay class bằng class khác --}}
                     <div class="card-header py-3 black-glass">
                         <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label">PC phiên bản mới nhất</h6>

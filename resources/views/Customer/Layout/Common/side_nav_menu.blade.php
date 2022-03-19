@@ -204,7 +204,7 @@
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle bg-light border-0     " id="sidebarToggle"></button>
+            <button class="rounded-circle bg-light border-0" id="sidebarToggle"></button>
         </div>
 
         <!-- Sidebar Message -->
