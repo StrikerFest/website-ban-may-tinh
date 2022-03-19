@@ -1,0 +1,448 @@
+/* Body */
+body {
+    background-image: url("../assets/img/white-background-1.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Custom css thay đổi thuộc tính chung đơn giản*/
+
+/* ------------------------- CENTER  -------------------------*/
+/* Cho div ra giữa */
+.center-custom {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+/* ------------------------- WIDTH  -------------------------*/
+.width-100 {
+    width: 100%;
+}
+
+.width-75 {
+    width: 75%;
+}
+f .width-50 {
+    width: 50%;
+}
+
+.width-25 {
+    width: 25%;
+}
+
+.width-10 {
+    width: 10%;
+}
+
+.width-5 {
+    width: 5%;
+}
+
+.width-auto {
+    width: auto;
+}
+
+/* ------------------------- HEIGHT  -------------------------*/
+.height-100 {
+    height: 100%;
+}
+
+.height-75 {
+    height: 75%;
+}
+
+.height-50 {
+    height: 50%;
+}
+
+.height-25 {
+    height: 25%;
+}
+
+.height-auto {
+    height: auto;
+}
+
+/* ------------------------- LI  -------------------------*/
+/* Bỏ chấm của <li> */
+.list-style-none {
+    list-style: none;
+}
+
+/* ------------------------- PADDING  -------------------------*/
+/* Bỏ padding */
+.padding-0 {
+    padding: 0;
+}
+
+/* Padding = 5 */
+.padding-5 {
+    padding: 5;
+}
+
+/* Padding = 8 */
+.padding-8 {
+    padding: 8;
+}
+
+/* Padding = 10 */
+.padding-10 {
+    padding: 10;
+}
+
+/* Padding = 15 */
+.padding-15 {
+    padding: 15;
+}
+
+/* Padding = 20 */
+.padding-20 {
+    padding: 20;
+}
+
+/* Padding = 25 */
+.padding-25 {
+    padding: 25;
+}
+
+.padding-top-0 {
+    padding-top: 0;
+}
+.padding-top-5 {
+    padding-top: 5;
+}
+.padding-top-10 {
+    padding-top: 10;
+}
+.padding-top-20 {
+    padding-top: 20;
+}
+
+.padding-right-0 {
+    padding-right: 0;
+}
+
+.padding-right-5 {
+    padding-right: 5;
+}
+
+.padding-right-10 {
+    padding-right: 10;
+}
+
+.padding-right-20 {
+    padding-right: 20;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0;
+}
+
+.padding-bottom-5 {
+    padding-bottom: 5;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20;
+}
+
+.padding-left-0 {
+    padding-left: 0;
+}
+
+.padding-left-5 {
+    padding-left: 5;
+}
+
+.padding-left-10 {
+    padding-left: 10;
+}
+
+.padding-left-20 {
+    padding-left: 20;
+}
+
+/* ------------------------- MARGIN  -------------------------*/
+/* Bỏ margin */
+.margin-0 {
+    margin: 0;
+}
+
+/* ------------------------- BORDER-RADIUS  -------------------------*/
+/* Tròn góc 10px */
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+/* Tròn góc 5px */
+.border-radius-5 {
+    border-radius: 5px;
+}
+
+/* Tròn góc 15px */
+.border-radius-15 {
+    border-radius: 15px;
+}
+
+/* Tròn góc 25px */
+.border-radius-25 {
+    border-radius: 25px;
+}
+
+.border-top-left-radius-5 {
+    border-top-left-radius: 5px;
+}
+
+.border-top-right-radius-5 {
+    border-top-right-radius: 5px;
+}
+
+.border-bottom-left-radius-5 {
+    border-bottom-left-radius: 5px;
+}
+
+.border-bottom-left-radius-5 {
+    border-bottom-left-radius: 5px;
+}
+
+.border-top-left-radius-10 {
+    border-top-left-radius: 10px;
+}
+
+.border-top-right-radius-10 {
+    border-top-right-radius: 10px;
+}
+
+.border-bottom-left-radius-10 {
+    border-bottom-left-radius: 10px;
+}
+
+.border-bottom-left-radius-10 {
+    border-bottom-left-radius: 10px;
+}
+
+.border-top-left-radius-15 {
+    border-top-left-radius: 15px;
+}
+
+.border-top-right-radius-15 {
+    border-top-right-radius: 15px;
+}
+
+.border-bottom-left-radius-15 {
+    border-bottom-left-radius: 15px;
+}
+
+.border-bottom-left-radius-15 {
+    border-bottom-left-radius: 15px;
+}
+
+.border-top-left-radius-20 {
+    border-top-left-radius: 20px;
+}
+
+.border-top-right-radius-20 {
+    border-top-right-radius: 20px;
+}
+
+.border-bottom-left-radius-20 {
+    border-bottom-left-radius: 20px;
+}
+
+.border-bottom-left-radius-20 {
+    border-bottom-left-radius: 20px;
+}
+
+.border-top-left-radius-25 {
+    border-top-left-radius: 25px;
+}
+
+.border-top-right-radius-25 {
+    border-top-right-radius: 25px;
+}
+
+.border-bottom-left-radius-25 {
+    border-bottom-left-radius: 25px;
+}
+
+.border-bottom-right-radius-25 {
+    border-bottom-right-radius: 25px;
+}
+
+/* ------------------------- FLEX  -------------------------*/
+/* Căn giữa theo hướng chính (Flex) */
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+.flex-direction-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.flex-direction-column-reverse {
+    flex-direction: column-reverse;
+}
+
+/* ------------------------- BACKGROUND  -------------------------*/
+/* Bỏ background */
+.background-none {
+    background: none;
+}
+
+.background-light-gray {
+    background-color: lightgray;
+}
+
+.background-gray {
+    background-color: gray;
+}
+
+.background-black {
+    background-color: black;
+}
+
+/* ------------------------- OPACITY  -------------------------*/
+.opacity-0 {
+    opacity: 0%;
+}
+.opacity-25 {
+    opacity: 25%;
+}
+.opacity-50 {
+    opacity: 50%;
+}
+.opacity-75 {
+    opacity: 75%;
+}
+.opacity-85 {
+    opacity: 85%;
+}
+.opacity-95 {
+    opacity: 95%;
+}
+.opacity-96 {
+    opacity: 96%;
+}
+.opacity-97 {
+    opacity: 97%;
+}
+.opacity-98 {
+    opacity: 98%;
+}
+.opacity-99 {
+    opacity: 99%;
+}
+
+/* ------------------------- CUSTOM  -------------------------*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ------------------------- LINK  -------------------------*/
+a.link-red:link {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red:visited {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red:hover {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red:active {
+    text-decoration: none;
+    color: red;
+}
+
+/* Link trắng */
+
+a.link-white:link {
+    text-decoration: none;
+    color: white;
+}
+
+a.link-white:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a.link-white:hover {
+    text-decoration: none;
+    color: white;
+}
+
+a.link-white:active {
+    text-decoration: none;
+    color: white;
+}
+
+/* ------------------------- FONT  -------------------------*/
+.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+.text-bold {
+    font-weight: 800 !important;
+}
+
+.text-italic {
+    font-style: italic;
+}
+.text-small {
+    font-size: small;
+}
+
+.text-normal {
+    font-size: medium;
+}
+
+.text-large {
+    font-size: large;
+}
+
+/* ------------------------- BORDER  -------------------------*/
+.border-gray {
+    border: 1px solid lightgray;
+}
+
+.border-black {
+    border: 1px solid black;
+}
+
+/* Kết thúc - Custom css thay đổi thuộc tính chung đơn giản*/
