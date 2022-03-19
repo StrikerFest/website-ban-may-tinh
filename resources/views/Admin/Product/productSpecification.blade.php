@@ -82,9 +82,15 @@
                                     @csrf
                                 <div id="dynamic-div">
                                     <div class="form-group row">
-                                        <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">  
+                                        <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">
+                                            @error('maSP')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         <div class="col-sm-5">
                                             <label class="form-inline label">Thông số</label>
+                                                @error('maTS')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             <select class="form-control" name="maTS[]">
                                                 @foreach($thongSo as $TS)
                                                     <option value="{{ $TS->maTS }}">{{ $TS->tenTS }}</option>
@@ -93,6 +99,9 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <label class="form-inline label">Giá trị</label>
+                                            @error('giaTri')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                             <input class="form-control" type="text" name="giaTri[]" placeholder="Value" required>
                                         </div>
                                         <div class="col-sm-2">

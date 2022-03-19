@@ -77,6 +77,10 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Thông số</label>
+                                        @error('tenTS')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Specification" name="tenTS" required>
                                     </div>

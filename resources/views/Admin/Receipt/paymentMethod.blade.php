@@ -79,6 +79,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Phương thức</label>
+                                        @error('tenPTTT')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Payment method" name="tenPTTT" required>
                                     </div>

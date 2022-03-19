@@ -84,6 +84,9 @@
                                     <div class="col-sm-12">
                                         <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">
                                         <label class="form-inline label">Ảnh</label>
+                                        @error('anh')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="file" class="form-control-file" name="anh[]" multiple>
                                     </div>
                                 </div>

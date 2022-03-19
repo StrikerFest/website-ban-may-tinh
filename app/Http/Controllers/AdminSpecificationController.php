@@ -39,6 +39,10 @@ class AdminSpecificationController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'tenTS' => 'required|min:3|unique:App\Models\SpecificationModel,tenTS'
+        ]);
+
         $thongSo = new SpecificationModel();
         $thongSo->tenTS = $request->get('tenTS');
         $thongSo->save();
@@ -81,6 +85,10 @@ class AdminSpecificationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'tenTS' => 'required|min:3|unique:App\Models\SpecificationModel,tenTS'
+        ]);
+
         $TS = SpecificationModel::find($id);
         $TS->tenTS = $request->get('tenTS');
 

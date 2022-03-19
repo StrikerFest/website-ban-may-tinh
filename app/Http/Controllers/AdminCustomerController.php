@@ -45,6 +45,13 @@ class AdminCustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'password' => 'required|min:3',
+            'maCV' => 'required'
+        ]);
+
         $customer = new UserModel();
         $customer->tenND = $request->get('name');
         $customer->emailND = $request->get('email');
@@ -94,6 +101,13 @@ class AdminCustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'password' => 'required|min:3',
+            'maCV' => 'required'
+        ]);
+        
         $khachHang = UserModel::find($id);
         $khachHang->tenND = $request->get('name');
         $khachHang->emailND = $request->get('email');

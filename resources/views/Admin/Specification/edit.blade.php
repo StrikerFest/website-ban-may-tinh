@@ -29,6 +29,10 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
+                                        <label class="form-inline label">Thông số</label>
+                                        @error('tenTS')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleblogStatus"
                                             placeholder="Role" name="tenTS" value="{{$TS->tenTS}}">
                                     </div>

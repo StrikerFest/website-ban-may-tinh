@@ -52,6 +52,12 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'password' => 'required|min:3',
+            'maCV' => 'required'
+        ]);
 
         $admin = new UserModel();
         $admin->tenND = $request->get('name');
@@ -104,6 +110,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'password' => 'required|min:3',
+            'maCV' => 'required'
+        ]);
+        
         $admin = UserModel::find($id);
         $admin->tenND = $request->get('name');
         $admin->emailND = $request->get('email');

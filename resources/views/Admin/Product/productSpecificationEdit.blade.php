@@ -26,8 +26,17 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">
+                                        @error('maSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="hidden" name="maTS" value="{{ $thongSo->maTS }}">
+                                        @error('maTS')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <label class="form-inline label">Giá trị</label>
+                                        @error('giaTri')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" name="giaTri" class="form-control" placeholder="Value" value="{{$SPTS->giaTri}}">
                                     </div>
                                 </div>

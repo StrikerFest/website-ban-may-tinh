@@ -34,16 +34,25 @@
                                     {{-- Tên --}}
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
                                             placeholder="Name" name="name" required value="{{ $admin->tenND }}">
                                     </div>
                                     {{-- Chức vụ --}}
                                     <input type="hidden" value="{{ $admin->maCV }}" name="maCV">
+                                    @error('maVC')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 {{-- Dòng 2 --}}
                                 <div class="form-group">
                                     {{-- Email --}}
                                     <label class="form-inline label">Email</label>
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address" name="email" required value="{{ $admin->emailND }}">
                                 </div>
@@ -52,24 +61,28 @@
                                     {{-- Mật khẩu --}}
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Mật khẩu</label>
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required value="{{ $admin->matKhauND }}">
                                     </div>
                                     {{-- Nhập lại mật khẩu --}}
                                     <div class="col-sm-6">
                                         <label class="form-inline label">Nhập lại mật khẩu</label>
+                                        @php
+                                            $pwError = Session::get('matKhau');
+                                        @endphp
+                                        @isset( $pwError )
+                                            <div class="alert alert-danger">
+                                                {{ $pwError }}
+                                            </div>
+                                        @endisset
                                         <input type="password" class="form-control form-control-user"
                                         id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required value="{{ $admin->matKhauND }}">
                                     </div>
                                 </div>
-                                @php
-                                    $pwError = Session::get('matKhau');
-                                @endphp
-                                @isset( $pwError )
-                                    <div class="col-sm-12 mb-3 mb-sm-0 alert alert-danger">
-                                        {{ $pwError }}
-                                    </div>
-                                @endisset
+                                
                                 {{-- Nút Thêm --}}
                                 <button class="btn btn-primary btn-user btn-block">
                                     Add data

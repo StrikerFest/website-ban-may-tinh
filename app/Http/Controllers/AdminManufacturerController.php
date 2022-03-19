@@ -39,6 +39,10 @@ class AdminManufacturerController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'tenNSX' => 'required|min:3|unique:App\Models\ManufacturerModel, tenNSX',
+        ]);
+
         $nhaSanXuat = new ManufacturerModel();
         $nhaSanXuat->tenNSX = $request->get('tenNSX');
         $nhaSanXuat->save();
@@ -65,6 +69,10 @@ class AdminManufacturerController extends Controller
      */
     public function edit($id)
     {
+        $validate = $request->validate([
+            'tenNSX' => 'required|min:3|unique:App\Models\ManufacturerModel, tenNSX',
+        ]);
+        
         $NSX = ManufacturerModel::find($id);
         
         return view('Admin.Manufacturer.edit', [

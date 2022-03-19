@@ -44,9 +44,10 @@ class AdminProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'anh' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        // ]);
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'anh' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+        ]);
         for($i = 0; $i < sizeof($request->file('anh')); $i++){
             $path = $request->file('anh')[$i]->store('img');
             $ASP = new ProductImageModel();
@@ -96,6 +97,11 @@ class AdminProductImageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+        ]);
+
         //Xoá ảnh cũ khỏi public/assets/img
         $ASP = ProductImageModel::find($id);
 

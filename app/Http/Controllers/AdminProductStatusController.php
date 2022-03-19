@@ -39,6 +39,10 @@ class AdminProductStatusController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'tenTTSP' => 'required|min:3|unique:App\Models\ProductStatusModel,tenTTSP',
+        ]);
+
         $TTSP = new ProductStatusModel();
         $TTSP->tenTTSP = $request->get('tenTTSP');
 
@@ -81,6 +85,10 @@ class AdminProductStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'tenTTSP' => 'required|min:3|unique:App\Models\ProductStatusModel,tenTTSP',
+        ]);
+        
         $TTSP = ProductStatusModel::find($id);
         $TTSP->tenTTSP = $request->get('tenTTSP');
 
