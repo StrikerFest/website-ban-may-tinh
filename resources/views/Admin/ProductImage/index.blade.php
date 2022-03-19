@@ -84,7 +84,7 @@
                                     <div class="col-sm-12">
                                         <input type="hidden" name="maSP" value="{{ $sanPham->maSP }}">
                                         <label class="form-inline label">Ảnh</label>
-                                        <input type="file" class="form-control-file" name="anh">
+                                        <input type="file" class="form-control-file" name="anh[]" multiple>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

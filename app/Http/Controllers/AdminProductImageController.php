@@ -47,13 +47,16 @@ class AdminProductImageController extends Controller
         // $request->validate([
         //     'anh' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         // ]);
-        $path = $request->file('anh')->store('img');
-        $ASP = new ProductImageModel();
-        $ASP->maSP = $request->get('maSP');
-        $maSP = $ASP->maSP;
-        $ASP->anh = explode("/", $path)[1];
-        $ASP->save();
+        for($i = 0; $i < sizeof($request->file('anh')); $i++){
+            $path = $request->file('anh')[$i]->store('img');
+            $ASP = new ProductImageModel();
+            $ASP->maSP = $request->get('maSP');
+            $ASP->anh = explode("/", $path)[1];
+            $ASP->save();
 
+        }
+        
+        $maSP = $request->Get('maSP');
         return redirect(route('productImage.index', $maSP));
     }
 
