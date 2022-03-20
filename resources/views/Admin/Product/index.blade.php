@@ -89,13 +89,13 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('product.edit', $SP->maSP)}}" method="get">
+                                                <form action="{{route('admin.product.edit', $SP->maSP)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('product.destroy', $SP->maSP)}}" method="post">
+                                                <form action="{{route('admin.product.destroy', $SP->maSP)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button 
@@ -120,7 +120,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('product.store') }}" method="POST">
+                                <form class="user" action="{{ route('admin.product.store') }}" method="POST">
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">

@@ -56,6 +56,9 @@ Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard
 Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('product', AdminProductController::class);
+});
 Route::prefix('admin')->group(function () {
     Route::resource('customer', AdminCustomerController::class);
     Route::resource('admin', AdminController::class);
@@ -63,7 +66,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('role', AdminRoleController::class);
     Route::resource('permission', AdminPermissionController::class);
     Route::resource('rolePermission', AdminRolePermissionController::class);
-    Route::resource('product', AdminProductController::class);
     Route::resource('productComment', AdminProductCommentController::class);
     Route::resource('productResponse', AdminProductResponseController::class);
     Route::get('productImage/{maSP}', [AdminProductImageController::class, "index"])->name('productImage.index');
