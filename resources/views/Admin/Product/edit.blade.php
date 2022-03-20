@@ -25,7 +25,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('product.update', $SP->maSP) }}" method="POST">
+                                <form class="user" action="{{ route('admin.product.update', $SP->maSP) }}" method="POST">
                                     @method('PUT')
                                     @csrf
                                 <div class="form-group row">

@@ -33,6 +33,7 @@
     </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
+        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2 || session()->get('chucVu') == 3 ){ ?>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -42,13 +43,14 @@
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('product.index')}}">Quản lý sản phẩm</a>
+                    <a class="collapse-item" href="{{route('admin.product.index')}}">Quản lý sản phẩm</a>
                     <a class="collapse-item" href="{{route('category.index')}}">Quản lý danh mục SP</a>
                     <a class="collapse-item" href="{{route('manufacturer.index')}}">Quản lý nhà sản xuất</a>
                     <a class="collapse-item" href="{{route('specification.index')}}">Thông số sản phẩm</a>
                 </div>
             </div>
         </li>
+        <?php } ?>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -60,12 +62,12 @@
             <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
-                    <a class="collapse-item" href="{{route('paymentMethod.index')}}">Phương thức thanh toán</a>
+                    <a class="collapse-item" href="{{route('receipt.index')}}">Xem hoá đơn</a>
                 </div>
             </div>
         </li>
 
+        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2 || session()->get('chucVu') == 5 ){ ?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
@@ -80,7 +82,9 @@
                 </div>
             </div>
         </li>
-    
+        <?php } ?>
+
+        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2){ ?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -99,7 +103,9 @@
                 </div>
             </div>
         </li>
+        <?php } ?>
 
+        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2 || session()->get('chucVu') == 4 ){ ?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
@@ -115,6 +121,7 @@
                 </div>
             </div>
         </li>
+        <?php } ?>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -188,8 +195,8 @@
             <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.index')}}">Danh sách sản phẩm</a>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
+                    <a class="collapse-item" href="#">Danh sách sản phẩm</a>
+                    <a class="collapse-item" href="#">Thêm sản phẩm</a>
                 </div>
             </div>
         

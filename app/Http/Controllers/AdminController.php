@@ -21,10 +21,16 @@ class AdminController extends Controller
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')->where('tenQH', 'Là Admin')->get();
 
         // Lấy bản ghi có chức vụ gồm quyền hạn ( Là Admin )
-        $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
-            ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
-            ->join('chuc_vu', 'nguoi_dung.maCV', '=', 'chuc_vu.maCV')
-            ->where('tenQH', 'Là Admin')
+        // $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
+        //     ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
+        //     ->join('chuc_vu', 'nguoi_dung.maCV', '=', 'chuc_vu.maCV')
+        //     ->where('tenQH', 'Là Admin')
+        //     ->orderBy('maND', 'desc')
+        //     ->paginate(5);
+
+        // Lấy bản ghi có chức vụ admin (ko bao gồm Super Admin)
+        $admin = UserModel::join('chuc_vu', 'chuc_vu.maCV', '=' ,'nguoi_dung.maCV')
+            ->where('tenCV', 'like', 'Admin')
             ->orderBy('maND', 'desc')
             ->paginate(5);
 
