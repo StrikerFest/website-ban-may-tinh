@@ -48,6 +48,7 @@ class AdminCustomerController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
         ]);
@@ -55,6 +56,7 @@ class AdminCustomerController extends Controller
         $customer = new UserModel();
         $customer->tenND = $request->get('name');
         $customer->emailND = $request->get('email');
+        $customer->diaChiND = $request->get('address');
         $customer->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
         $customer->maCV = $request->get('maCV');
@@ -103,7 +105,8 @@ class AdminCustomerController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND,'. $id,
+            'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
         ]);
@@ -111,6 +114,7 @@ class AdminCustomerController extends Controller
         $khachHang = UserModel::find($id);
         $khachHang->tenND = $request->get('name');
         $khachHang->emailND = $request->get('email');
+        $khachHang->diaChiND = $request->get('address');
         $khachHang->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
         $khachHang->maCV = $request->get('maCV');

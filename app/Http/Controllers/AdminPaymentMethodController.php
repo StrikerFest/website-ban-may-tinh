@@ -40,7 +40,7 @@ class AdminPaymentMethodController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'tenPTTT' => 'required|min:3|unique:App\Models\PaymentMethodModel,tenPTTT'
+            'tenPTTT' => 'required|min:1|unique:App\Models\PaymentMethodModel,tenPTTT'
         ]);
 
         $PTTT = new PaymentMethodModel();
@@ -86,7 +86,7 @@ class AdminPaymentMethodController extends Controller
     public function update(Request $request, $id)
     {
         $validator = $request->validate([
-            'tenPTTT' => 'required|min:3|unique:App\Models\PaymentMethodModel,tenPTTT'
+            'tenPTTT' => 'required|min:1|unique:App\Models\PaymentMethodModel,tenPTTT'
         ]);
 
         $PTTT = PaymentMethodModel::find($id);

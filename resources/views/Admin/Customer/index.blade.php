@@ -32,6 +32,7 @@
                                         <tr>
                                             <th>Tên</th>
                                             <th>Email</th>
+                                            <th>Địa chỉ</th>
                                             <th colspan="2" width="10%">Thao tác</th>
                                         </tr>
                                     </thead>
@@ -43,6 +44,7 @@
                                         <tr>
                                             <td>{{$KH->tenND}}</td>
                                             <td>{{$KH->emailND}}</td>
+                                            <td>{{$KH->diaChiND}}</td>
                                             <td>
                                                 <form action="{{route('customer.edit', $KH->maND)}}" method="get">
                                                     @csrf
@@ -78,7 +80,7 @@
                                 <form class="user" action="{{ route('customer.store') }}" method="post">
                                     @csrf
                                 <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -86,41 +88,51 @@
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Name" name="name" required>
                                     </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Email</label>
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email Address" name="email" required>
+                                    </div>
                                     {{-- Chức vụ --}}
                                     <input type="hidden" value="6" name="maCV">
                                     @error('maCV')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-inline label">Email</label>
-                                    @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email" required>
-                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Mật khẩu</label>
                                         @error('password')
-                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-inline label">Nhập lại mật khẩu</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-inline label">Nhập lại mật khẩu</label>
                                         @php
-                                            $pwError = Session::get('matKhau');
+                                        $pwError = Session::get('matKhau');
                                         @endphp
                                         @isset( $pwError )
-                                            <div class="alert alert-danger">
-                                                {{ $pwError }}
-                                            </div>
+                                        <div class="alert alert-danger">
+                                            {{ $pwError }}
+                                        </div>
                                         @endisset
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required>
+                                        id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label>Địa chỉ</label>
+                                        @error('address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" placeholder="Address"
+                                            name="address" required>
                                     </div>
                                 </div>
                                 

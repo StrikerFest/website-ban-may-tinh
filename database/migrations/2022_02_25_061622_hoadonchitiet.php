@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('maSP')->references('maSP')->on('san_pham');
             $table->unsignedInteger('soLuong');
             $table->double('giaSP');
+            $table->unsignedInteger('giamGia');
             $table->unique(['maHD', 'maSP']);
         });
     }

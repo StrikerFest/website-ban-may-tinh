@@ -32,13 +32,21 @@
                                 {{-- Dòng 1 --}}
                                 <div class="form-group row">
                                     {{-- Tên --}}
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
                                             placeholder="Name" name="name" required value="{{ $admin->tenND }}">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Email</label>
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email Address" name="email" required value="{{$admin->emailND}}">
                                     </div>
                                     {{-- Chức vụ --}}
                                     <input type="hidden" value="{{ $admin->maCV }}" name="maCV">
@@ -47,16 +55,6 @@
                                     @enderror
                                 </div>
                                 {{-- Dòng 2 --}}
-                                <div class="form-group">
-                                    {{-- Email --}}
-                                    <label class="form-inline label">Email</label>
-                                    @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email" required value="{{ $admin->emailND }}">
-                                </div>
-                                {{-- Dòng 3 --}}
                                 <div class="form-group row">
                                     {{-- Mật khẩu --}}
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -80,6 +78,17 @@
                                         @endisset
                                         <input type="password" class="form-control form-control-user"
                                         id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required value="{{ $admin->matKhauND }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Địa chỉ</label>
+                                        @error('address')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" id="exampleAddress"
+                                            placeholder="Address" name="address" required value="{{$admin->diaChiND}}">
                                     </div>
                                 </div>
                                 

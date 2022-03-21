@@ -52,6 +52,7 @@ class AdminEmployeeController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
         ]);
@@ -59,6 +60,7 @@ class AdminEmployeeController extends Controller
         $employee = new UserModel();
         $employee->tenND = $request->get('name');
         $employee->emailND = $request->get('email');
+        $employee->diaChiND = $request->Get('address');
         $employee->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
         $employee->maCV = $request->get('maCV');
@@ -111,7 +113,8 @@ class AdminEmployeeController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND,'. $id,
+            'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
         ]);
@@ -119,6 +122,7 @@ class AdminEmployeeController extends Controller
         $nhanVien = UserModel::find($id);
         $nhanVien->tenND = $request->get('name');
         $nhanVien->emailND = $request->get('email');
+        $nhanVien->diaChiND = $request->Get('address');
         $nhanVien->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
         $nhanVien->maCV = $request->get('maCV');

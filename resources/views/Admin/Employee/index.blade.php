@@ -133,6 +133,16 @@
                                             id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label>Địa chỉ</label>
+                                        @error('address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" placeholder="Address"
+                                            name="address" required>
+                                    </div>
+                                </div>
                                 
                                 {{-- Nút Thêm --}}
                                 <button class="btn btn-primary btn-user btn-block">

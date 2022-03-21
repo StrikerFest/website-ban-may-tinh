@@ -41,7 +41,7 @@ class AdminReceiptStatusController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tenTTHD' => 'required|min:3|unique:App\Models\ReceiptStatusModel,tenTTHD'
+            'tenTTHD' => 'required|min:1|unique:App\Models\ReceiptStatusModel,tenTTHD'
         ]);
 
         $TTHD = new ReceiptStatusModel();
@@ -87,7 +87,7 @@ class AdminReceiptStatusController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'tenTTHD' => 'required|min:3|unique:App\Models\ReceiptStatusModel,tenTTHD'
+            'tenTTHD' => 'required|min:1|unique:App\Models\ReceiptStatusModel,tenTTHD'
         ]);
         
         $TTHD = ReceiptStatusModel::find($id);

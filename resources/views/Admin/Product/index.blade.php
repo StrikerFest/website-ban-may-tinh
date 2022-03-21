@@ -46,9 +46,9 @@
                                     @foreach ($sanPham as $SP)
                                         <tr>
                                             <td>{{$SP->tenSP}}</td>
-                                            <td>{{$SP->giaSP}}</td>
+                                            <td>{{number_format($SP->giaSP)}} VND</td>
                                             <td>{{$SP->soLuong}}</td>
-                                            <td>{{$SP->giamGia}}%</td>
+                                            <td>{{number_format($SP->giamGia)}} VND</td>
                                             <td>
                                                 <?php
                                                     foreach($nhaSanXuat as $NSX){
@@ -139,7 +139,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Price" name="giaSP">
+                                            placeholder="Price" name="giaSP" min="0">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Số lượng</label>
@@ -155,7 +155,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Discount" name="giamGia" min="0" max="100">
+                                            placeholder="Discount" name="giamGia" min="0">
                                     </div>
                                 </div>
                                 <div class="form-group row">

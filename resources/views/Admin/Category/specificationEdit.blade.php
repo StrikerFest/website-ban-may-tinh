@@ -27,7 +27,7 @@
                                     <div class="col-sm-12">
                                         <input type="hidden" name="maTL" value="{{ $theLoai->maTL }}">
                                         <label class="form-inline label">Thông số</label>
-                                        @error('tenTS')
+                                        @error('maTS')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <select class="form-control" name="maTS">

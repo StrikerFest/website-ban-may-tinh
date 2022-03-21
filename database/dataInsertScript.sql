@@ -43,17 +43,17 @@ INSERT INTO chuc_vu_quyen_han(`maCV`,`maQH`) VALUE (6,6);
 
 -- ==========================================================================================================
 -- Bảng Người dùng
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('SuperAdmin','super@mail.com','12345',1);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Admin','admin@mail.com','12345',2);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 1','NV1@mail.com','12345',3);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 2','NV2@mail.com','12345',4);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 3','NV3@mail.com','12345',5);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Nguyễn Văn A','ANV@mail.com','12345',6);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Trần Văn B','BTV@mail.com','12345',6);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Lê Văn C','CLV@mail.com','12345',6);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Hoàng Văn D','DHV@mail.com','12345',6);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Dương Văn E','EDV@mail.com','12345',6);
-INSERT INTO nguoi_dung(`tenND`,`emailND`,`matKhauND`,`maCV`) VALUE ('Trịnh Văn F','FTV@mail.com','12345',6);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('SuperAdmin','super@mail.com', 'Địa chỉ 1','12345',1);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Admin','admin@mail.com', 'Địa chỉ 2','12345',2);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 1','NV1@mail.com', 'Địa chỉ 3','12345',3);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 2','NV2@mail.com', 'Địa chỉ 4','12345',4);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 3','NV3@mail.com', 'Địa chỉ 5','12345',5);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Nguyễn Văn A','ANV@mail.com', 'Địa chỉ 6','12345',6);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Trần Văn B','BTV@mail.com', 'Địa chỉ 7','12345',6);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Lê Văn C','CLV@mail.com', 'Địa chỉ 8','12345',6);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Hoàng Văn D','DHV@mail.com', 'Địa chỉ 9','12345',6);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Dương Văn E','EDV@mail.com', 'Địa chỉ 10','12345',6);
+INSERT INTO nguoi_dung(`tenND`,`emailND`, `diaChiND`,`matKhauND`,`maCV`) VALUE ('Trịnh Văn F','FTV@mail.com', 'Địa chỉ 11','12345',6);
 
 -- ==========================================================================================================
 -- Bảng Nhà sản xuất
@@ -116,3 +116,9 @@ INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (7,'63527_laptop_asus_gaming_tuf_fx
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (8,'63473_pc_gaming_lianli_o11dx_limited_2022.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (9,'63500_pc_gaming_hacom_pro_020_2022.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (10,'63502_pc_gaming_hacom_pro_021_2022.jpg');
+
+-- Bảng tình trạng bài viết
+INSERT INTO `tinh_trang_bai_viet` (`maTTBV`, `tenTTBV`) VALUES (NULL, 'Chưa công khai'), (NULL, 'Công khai');
+
+-- Bảng tình trạng hoá đơn
+INSERT INTO `tinh_trang_hoa_don` (`maTTHD`, `tenTTHD`) VALUES (NULL, 'Đã duyệt'), (NULL, 'Chưa duyệt'), (NULL, 'Đã huỷ');

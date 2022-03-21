@@ -57,8 +57,8 @@ class AdminProductSpecificationController extends Controller
     {
         $validated = $request->validate([
             'maSP' => 'required',
-            'maTS' => 'required',
-            'giaTri' => 'required|min:3',
+            'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
+            'giaTri' => 'required|min:1',
         ]);
         $maSP = $request->get('maSP');
         for($i = 0; $i < sizeof($request->get('maTS')); $i++){
@@ -118,8 +118,8 @@ class AdminProductSpecificationController extends Controller
     {
         $validated = $request->validate([
             'maSP' => 'required',
-            'maTS' => 'required',
-            'giaTri' => 'required|min:3',
+            'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
+            'giaTri' => 'required|min:1',
         ]);
         
         $SPTS = ProductSpecificationModel::find($id);

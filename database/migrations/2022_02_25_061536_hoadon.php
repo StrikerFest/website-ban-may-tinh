@@ -17,9 +17,10 @@ return new class extends Migration
             $table->increments('maHD');
             $table->unsignedInteger('maKH');
             $table->foreign('maKH')->references('maND')->on('nguoi_dung');
-            $table->unsignedInteger('maNV');
+            $table->unsignedInteger('maNV')->nullable();
             $table->foreign('maNV')->references('maND')->on('nguoi_dung');
             $table->dateTime('ngayTao');
+            $table->string('diaChi', 400);
             $table->unsignedInteger('maPTTT');
             $table->foreign('maPTTT')->references('maPTTT')->on('phuong_thuc_thanh_toan');
             $table->unsignedInteger('maTTHD');

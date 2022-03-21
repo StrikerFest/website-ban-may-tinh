@@ -45,7 +45,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Price" name="giaSP" value="{{$SP->giaSP}}">
+                                            placeholder="Price" name="giaSP" min="0" value="{{$SP->giaSP}}">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Số lượng</label>
@@ -58,7 +58,7 @@
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giảm giá</label>
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Discount" name="giamGia" min="0" max="100" value="{{$SP->giamGia}}">
+                                            placeholder="Discount" name="giamGia" min="0" value="{{$SP->giamGia}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
