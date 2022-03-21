@@ -39,6 +39,9 @@ class AdminBlogStatusController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'tenTTBV' => 'required|min:3|unique:App\Models\BlogStatusModel,tenTTBV'
+        ]);
         $TTBV = new BlogStatusModel();
         $TTBV->tenTTBV = $request->get('tenTTBV');
 
@@ -81,6 +84,10 @@ class AdminBlogStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'tenTTBV' => 'required|min:3|unique:App\Models\BlogStatusModel,tenTTBV'
+        ]);
+        
         $TTBV = BlogStatusModel::find($id);
         $TTBV->tenTTBV = $request->get('tenTTBV');
 

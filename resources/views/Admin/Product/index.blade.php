@@ -46,9 +46,9 @@
                                     @foreach ($sanPham as $SP)
                                         <tr>
                                             <td>{{$SP->tenSP}}</td>
-                                            <td>{{$SP->giaSP}}</td>
+                                            <td>{{number_format($SP->giaSP)}} VND</td>
                                             <td>{{$SP->soLuong}}</td>
-                                            <td>{{$SP->giamGia}}%</td>
+                                            <td>{{number_format($SP->giamGia)}} VND</td>
                                             <td>
                                                 <?php
                                                     foreach($nhaSanXuat as $NSX){
@@ -89,13 +89,13 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('product.edit', $SP->maSP)}}" method="get">
+                                                <form action="{{route('admin.product.edit', $SP->maSP)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('product.destroy', $SP->maSP)}}" method="post">
+                                                <form action="{{route('admin.product.destroy', $SP->maSP)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button 
@@ -120,11 +120,14 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('product.store') }}" method="POST">
+                                <form class="user" action="{{ route('admin.product.store') }}" method="POST">
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <label class="form-inline label">Sản phẩm</label>
+                                        @error('tenSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Product name" name="tenSP">
                                     </div>
@@ -132,23 +135,35 @@
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giá</label>
+                                        @error('giaSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Price" name="giaSP">
+                                            placeholder="Price" name="giaSP" min="0">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Số lượng</label>
+                                        @error('soLuong')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Quantity" name="soLuong">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giảm giá</label>
+                                        @error('giamGia')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Discount" name="giamGia" min="0" max="100">
+                                            placeholder="Discount" name="giamGia" min="0">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
+                                        @error('maNSX')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maNSX">
                                             <option value="" disabled selected hidden>Manufacturer</option>
                                             @foreach($nhaSanXuat as $NSX)
@@ -158,6 +173,9 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
+                                        @error('maTL')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maTL">
                                             <option value="" disabled selected hidden>Category</option>
                                             @foreach($theLoai as $TL)
@@ -167,6 +185,9 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
+                                        @error('maTTSP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maTTSP">
                                             <option value="" disabled selected hidden>Status</option>
                                             @foreach($tinhTrangSanPham as $TTSP)
@@ -178,6 +199,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Mô tả</label>
+                                        @error('moTa')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <textarea class="form-control" name="moTa" rows="5" placeholder="Description"></textarea>
                                     </div>
                                 </div>

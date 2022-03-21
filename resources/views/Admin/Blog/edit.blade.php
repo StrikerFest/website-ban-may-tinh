@@ -31,6 +31,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <label class="form-inline label">Tiêu đề</label>
+                                        @error('tieuDe')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Blog title" name="tieuDe" value="{{$BV->tieuDe}}">
                                     </div>
@@ -47,12 +50,18 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-inline label">Ảnh mới</label>
+                                        @error('anh')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="file" class="form-control-file" name="anh">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Người viết</label>
+                                        @error('maNV')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maNV">
                                             @foreach($nhanVien as $NV)
                                                 <option value="{{ $NV->maND }}" <?php if($NV->maND == $BV->maNV)echo("selected") ?>>
@@ -63,10 +72,16 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Ngày tạo</label>
+                                        @error('ngayTao')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="{{$BV->ngayTao}}">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
+                                        @error('maTTBV')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <select class="form-control" name="maTTBV">
                                             @foreach($tinhTrangBaiViet as $TTBV)
                                                 <option value="{{ $TTBV->maTTBV }}" <?php if($TTBV->maTTBV == $BV->maTTBV)echo("selected") ?>>
@@ -79,6 +94,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nội dung</label>
+                                        @error('noiDung')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <textarea class="form-control" name="noiDung" rows="5" placeholder="Content">{{$BV->noiDung}}</textarea>
                                     </div>
                                 </div>

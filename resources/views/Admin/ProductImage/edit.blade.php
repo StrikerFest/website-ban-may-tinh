@@ -46,6 +46,9 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-inline label">Ảnh mới</label>
+                                        @error('anh')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="file" class="form-control-file" name="anh">
                                     </div>
                                 </div>

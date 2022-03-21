@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('maND');
             $table->string('tenND', 50);
             $table->string('emailND', 75)->unique();
+            $table->string('diaChiND', 400);
             $table->string('matKhauND', 20);
             $table->unsignedInteger('maCV');
             $table->foreign('maCV')->references('maCV')->on('chuc_vu');

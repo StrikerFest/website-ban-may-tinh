@@ -82,13 +82,27 @@
                                 {{-- Dòng 1 --}}
                                 <div class="form-group row">
                                     {{-- Tên --}}
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Name" name="name" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Email</label>
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email Address" name="email" required>
                                     </div>
                                     {{-- Chức vụ --}}
                                     <input type="hidden" value="2" name="maCV">
+                                    @error('maCV')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <!-- <div class="col-sm-6">
                                         <select name="maCV" class="form-control r"><br>
                                             @foreach ($chucVu as $CV)
@@ -98,18 +112,14 @@
                                     </div> -->
                                 </div>
                                 {{-- Dòng 2 --}}
-                                <div class="form-group">
-                                    {{-- Email --}}
-                                    <label class="form-inline label">Email</label>
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email" required>
-                                </div>
-                                {{-- Dòng 3 --}}
                                 <div class="form-group row">
                                     {{-- Mật khẩu --}}
                                     
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Mật khẩu</label>
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password" required>
                                     </div>
@@ -117,18 +127,29 @@
                                     
                                     <div class="col-sm-6">
                                         <label class="form-inline label">Nhập lại mật khẩu</label>
+                                        @php
+                                            $pwError = Session::get('matKhau');
+                                        @endphp
+                                        @isset( $pwError )
+                                            <div class="alert alert-danger">
+                                                {{ $pwError }}
+                                            </div>
+                                        @endisset
                                         <input type="password" class="form-control form-control-user"
                                         id="exampleRepeatPassword" placeholder="Repeat Password" name="password2" required>
                                     </div>
                                 </div>
-                                @php
-                                    $pwError = Session::get('matKhau');
-                                @endphp
-                                @isset( $pwError )
-                                    <div class="col-sm-12 mb-3 mb-sm-0 alert alert-danger">
-                                        {{ $pwError }}
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label>Địa chỉ</label>
+                                        @error('address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" placeholder="Address"
+                                            name="address" required>
                                     </div>
-                                @endisset
+                                </div>
+                                
                                 {{-- Nút Thêm --}}
                                 <button class="btn btn-primary btn-user btn-block">
                                     Add data

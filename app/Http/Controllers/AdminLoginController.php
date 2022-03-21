@@ -48,7 +48,10 @@ class AdminLoginController extends Controller
                 $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
                     ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
                     ->where('emailND', $email)->where('matKhauND', $password)
-                    ->where('tenQH', 'Là Admin')
+                    // ->where(function($query){
+                    //     $query->where('quyen_han.maQH', '=', '7')->orWhere('quyen_han.maQH', '<', '6');
+                    // })
+                    ->where('quyen_han.maQH', '!=', '6')
                     ->firstOrFail();
                 // tạo biến session - Sửa thành phần theo db mới
                 $request->session()->put('admin', $admin->maND);

@@ -30,6 +30,9 @@
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <label class="form-inline label">Nhà sản xuất</label>
+                                        @error('tenNSX')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleblogStatus"
                                             placeholder="Role" name="tenNSX" value="{{$NSX->tenNSX}}">
                                     </div>

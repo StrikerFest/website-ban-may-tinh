@@ -55,6 +55,11 @@ class AdminProductSpecificationController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
+            'giaTri' => 'required|min:1',
+        ]);
         $maSP = $request->get('maSP');
         for($i = 0; $i < sizeof($request->get('maTS')); $i++){
             $SPTS = new ProductSpecificationModel();
@@ -111,6 +116,12 @@ class AdminProductSpecificationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
+            'giaTri' => 'required|min:1',
+        ]);
+        
         $SPTS = ProductSpecificationModel::find($id);
         $SPTS->maSP = $request->get('maSP');
         $SPTS->maTS = $request->get('maTS');

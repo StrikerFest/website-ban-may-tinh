@@ -86,8 +86,7 @@ class ProductController extends Controller
         $sanPham = ProductModel::findOrFail($id);
 
         return view('Customer.Product.index', [
-            'productImage' =>
-            $productImage,
+            'productImage' => $productImage,
             'sanPham' => $sanPham,
         ]);
     }

@@ -39,6 +39,10 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'tenTL' => 'required|min:3|unique:App\Models\CategoryModel,tenTL'
+        ]);
+
         $theLoai = new CategoryModel();
         $theLoai->tenTL = $request->get('tenTL');
         $theLoai->save();
@@ -81,6 +85,10 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'tenTL' => 'required|min:3|unique:App\Models\CategoryModel,tenTL'
+        ]);
+        
         $TL = CategoryModel::find($id);
         $TL->tenTL = $request->get('tenTL');
         
