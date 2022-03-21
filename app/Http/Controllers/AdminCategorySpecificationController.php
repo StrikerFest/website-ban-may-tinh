@@ -52,7 +52,7 @@ class AdminCategorySpecificationController extends Controller
     {
         $validated = $request->validate([
             'maTL' => 'required',
-            'maTS' => 'required|unique:App\Models\CategorySpecificationModel,maTS',
+            'maTS' => 'required|unique:App\Models\CategorySpecificationModel,maTS,NULL,id,maTL,'.$request->maTL,
         ]);
 
         $maTL = $request->get('maTL');
@@ -111,7 +111,7 @@ class AdminCategorySpecificationController extends Controller
     {
         $validated = $request->validate([
             'maTL' => 'required',
-            'maTS' => 'required|unique:App\Models\CategorySpecificationModel,maTS',
+            'maTS' => 'required|unique:App\Models\CategorySpecificationModel,maTS,.$id.',
         ]);
 
         $TLTS = CategorySpecificationModel::find($id);

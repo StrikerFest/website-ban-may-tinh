@@ -40,7 +40,7 @@ class AdminManufacturerController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'tenNSX' => 'required|min:3|unique:App\Models\ManufacturerModel, tenNSX',
+            'tenNSX' => 'required|min:1|unique:App\Models\ManufacturerModel, tenNSX',
         ]);
 
         $nhaSanXuat = new ManufacturerModel();
@@ -70,7 +70,7 @@ class AdminManufacturerController extends Controller
     public function edit($id)
     {
         $validate = $request->validate([
-            'tenNSX' => 'required|min:3|unique:App\Models\ManufacturerModel, tenNSX',
+            'tenNSX' => 'required|min:1|unique:App\Models\ManufacturerModel, tenNSX',
         ]);
         
         $NSX = ManufacturerModel::find($id);
