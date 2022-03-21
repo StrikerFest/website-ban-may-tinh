@@ -133,7 +133,7 @@
                                             </a>
                                         </div>
                                         <div class="d-flex bg-" style="width:50%;justify-content: end">
-                                            <form action="{{ route('cart.list') }}" method="POST">
+                                            <form action="{{ route('receiptCustomer.create') }}" method="GET">
                                                 @csrf
                                                 <button
                                                     class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
