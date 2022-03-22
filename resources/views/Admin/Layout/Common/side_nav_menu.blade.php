@@ -73,12 +73,13 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-edit"></i>
-                <span>Blog</span>
+                <span>Blog & Banner</span>
             </a>
             <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="{{route('blog.index')}}">Quản lý blog</a>
+                    <a class="collapse-item" href="{{route('bannerImage.index')}}">Ảnh banner</a>
                 </div>
             </div>
         </li>

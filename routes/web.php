@@ -27,6 +27,7 @@ use App\Http\Controllers\AdminBlogCommentController;
 use App\Http\Controllers\AdminBlogResponseController;
 use App\Http\Controllers\AdminReceiptController;
 use App\Http\Controllers\AdminDetailReceiptController;
+use App\Http\Controllers\AdminBannerImageController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
@@ -87,6 +88,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('paymentMethod', AdminPaymentMethodController::class);
     Route::resource('manufacturer', AdminManufacturerController::class);
     Route::resource('specification', AdminSpecificationController::class);
+    Route::resource('bannerImage', AdminBannerImageController::class);
 });
 
 Route::get('/testAdmin', function () {
