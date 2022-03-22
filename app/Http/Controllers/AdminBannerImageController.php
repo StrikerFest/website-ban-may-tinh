@@ -3,26 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProductModel;
-use App\Models\ProductImageModel;
+use App\Models\BannerImageModel;
 use File;
 
-class AdminProductImageController extends Controller
+class AdminBannerImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($maSP)
+    public function index()
     {
-        $sanPham = ProductModel::find($maSP);
+        $anhQuangCao = BannerImageModel::paginate(5);
 
-        $anhSP = ProductImageModel::where('maSP', '=', $maSP)->get();
-
-        return view('Admin.ProductImage.index', [
-            'sanPham' => $sanPham,
-            'anhSP' => $anhSP,
+        return view('Admin.BannerImage.index', [
+            'anhQuangCao' => $anhQuangCao,
         ]);
     }
 
@@ -45,20 +41,17 @@ class AdminProductImageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'maSP' => 'required',
             'anh' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'duongDan' => 'required',
         ]);
-        for($i = 0; $i < sizeof($request->file('anh')); $i++){
-            $path = $request->file('anh')[$i]->store('img');
-            $ASP = new ProductImageModel();
-            $ASP->maSP = $request->get('maSP');
-            $ASP->anh = explode("/", $path)[1];
-            $ASP->save();
 
-        }
-        
-        $maSP = $request->Get('maSP');
-        return redirect(route('productImage.index', $maSP));
+        $path = $request->file('anh')->store('img');
+        $anhQuangCao = new BannerImageModel();
+        $anhQuangCao->anh = explode("/", $path)[1];
+        $anhQuangCao->duongDan = $request->get('duongDan');
+        $anhQuangCao->save();
+
+        return redirect(route('bannerImage.index'));
     }
 
     /**
@@ -80,11 +73,10 @@ class AdminProductImageController extends Controller
      */
     public function edit($id)
     {
-        $ASP = ProductImageModel::find($id);
-        $SP = ProductModel::find($ASP->maSP);
-        return view('Admin.ProductImage.edit',[
-            'ASP' => $ASP,
-            'SP' => $SP
+        $anhQuangCao = BannerImageModel::find($id);
+
+        return view('Admin.BannerImage.edit', [
+            'anhQuangCao' => $anhQuangCao,
         ]);
     }
 
@@ -98,15 +90,15 @@ class AdminProductImageController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'maSP' => 'required',
             'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'duongDan' => 'required',
         ]);
 
         //Xoá ảnh cũ khỏi public/assets/img
-        $ASP = ProductImageModel::find($id);
+        $anhQuangCao = BannerImageModel::find($id);
 
         if(!is_null($request->file('anh'))){
-            $oldPath = public_path('assets/img/'.$ASP->anh);
+            $oldPath = public_path('assets/img/'.$anhQuangCao->anh);
             if(File::exists($oldPath)){
                 File::delete($oldPath);
             }else{
@@ -114,14 +106,12 @@ class AdminProductImageController extends Controller
             }
 
             $path = $request->file('anh')->store('img');
-            $ASP->anh = explode("/", $path)[1];
+            $anhQuangCao->anh = explode("/", $path)[1];
         }
+        $anhQuangCao->duongDan = $request->get('duongDan');
+        $anhQuangCao->save();
 
-        $ASP->maSP = $request->get('maSP');
-        $maSP = $ASP->maSP;
-        $ASP->save();
-
-        return redirect(route('productImage.index', $maSP));
+        return redirect(route('bannerImage.index'));
     }
 
     /**
@@ -132,16 +122,15 @@ class AdminProductImageController extends Controller
      */
     public function destroy($id)
     {
-        $ASP = ProductImageModel::find($id);
-        $maSP = $ASP->maSP;
-        $path = public_path('assets/img/'.$ASP->anh);
+        $anhQuangCao = BannerImageModel::find($id);
+        $path = public_path('assets/img/'.$anhQuangCao->anh);
         if(File::exists($path)){
             File::delete($path);
         }else{
             dd('File does not exists.');
         }
-        $ASP->delete();
+        $anhQuangCao->delete();
 
-        return redirect(route('productImage.index', $maSP));
+        return redirect(route('bannerImage.index'));
     }
 }

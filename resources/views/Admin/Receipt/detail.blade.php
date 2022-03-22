@@ -32,7 +32,7 @@
                                             <th>Số lượng</th>
                                             <th>Giá</th>
                                             <th>Giảm giá</th>
-                                            <th>Thành tiền</th>
+                                            <th colspan="2">Thành tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,7 +46,7 @@
                                             </td>
                                             <td>{{number_format($HDCT->giaSP)}} VND</td>
                                             <td>{{number_format($HDCT->giamGia)}} VND</td>
-                                            <td>
+                                            <td colspan="2">
                                                 {{number_format($HDCT->thanhTien)}} VND
                                             </td>
                                         </tr>
@@ -55,19 +55,60 @@
                                             <td colspan="4">
                                                 Tổng tiền
                                             </td>
-                                            <td>
+                                            <td colspan="2">
                                                 {{number_format($tongTien->tong)}} VND
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td>
-                                                duyethoadon-----
+                                            <td colspan="4">
+                                                <?php 
+                                                    if($hoaDon->maTTHD == 2){
+                                                        echo('Duyệt đơn');
+                                                    }else{
+                                                        echo('Tình trạng');
+                                                    }
+                                                ?>
                                             </td>
+                                            <?php if($hoaDon->maTTHD == 2){ ?>
+                                                <td>
+                                                    <form action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input type="hidden" name="maTTHD" value="1">
+                                                        <button class="btn btn-success" onclick="return confirm('Xác nhận duyệt đơn?')">
+                                                            Duyệt
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input type="hidden" name="maTTHD" value="3">
+                                                        <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                            Huỷ
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            <?php }else { ?>
+                                                <td colspan="2">
+                                                    <?php
+                                                        foreach($tinhTrangHoaDon as $TTHD){
+                                                            if(($TTHD->maTTHD)==($hoaDon->maTTHD)){
+                                                                echo $TTHD->tenTTHD;
+                                                            }
+                                                        }
+                                                    ?>
+                                                </td>
+                                            <?php } ?>
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <button class="btn btn-primary" onclick="window.location='{{ route("receipt.index") }}'">
+                                    Quay lại
+                                </button>
                             </div>
                         </div>
                     </div>
