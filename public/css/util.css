@@ -444,5 +444,7 @@ a.link-white:active {
 .border-black {
     border: 1px solid black;
 }
-
+.border-red {
+    border: 1px solid red;
+}
 /* Kết thúc - Custom css thay đổi thuộc tính chung đơn giản*/

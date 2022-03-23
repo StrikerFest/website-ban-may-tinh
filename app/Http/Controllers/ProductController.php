@@ -17,20 +17,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // Get all từ bảng chức vụ - Chỉ lấy những chức vụ có quyền hạn ( là Admin )
-        // $chucVu = DB::table('chuc_vu')->join('chuc_vu_quyen_han', 'chuc_vu.maCV', '=', 'chuc_vu_quyen_han.maCV')
-        //     ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')->where('tenQH', 'Là Admin')->get();
+        // Lấy hãng
+        $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
 
-        // // Lấy bản ghi có chức vụ gồm quyền hạn ( Là Admin )
-        // $admin = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
-        //     ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
-        //     ->where('tenQH', 'Là Admin')
-        //     ->orderBy('maND', 'desc')->get();
-
-        // Get all sản phẩm mới thêm vào - là máy tính
+        // Lấy ảnh
         $productImage = ProductImageModel::get();
+        // Get all sản phẩm mới thêm vào - là máy tính
         $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
-
         $computerNew1 = ProductModel::skip(0)->take(4)->orderBy('maSP')->get();
         $computerNew2 = ProductModel::skip(4)->take(4)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->orderBy('maSP')->get();
@@ -88,6 +81,10 @@ class ProductController extends Controller
             'hardwareNew3' => $hardwareNew3,
 
             'cartItems' =>  $cartItems,
+
+            'listNhaSanXuat' =>  $listNhaSanXuat,
+
+
         ]);
     }
 

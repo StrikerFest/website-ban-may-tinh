@@ -29,6 +29,7 @@ use App\Http\Controllers\AdminReceiptController;
 use App\Http\Controllers\AdminDetailReceiptController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use Illuminate\Support\Facades\Route;
@@ -106,7 +107,10 @@ Route::post('/loginProcess', [CustomerLoginController::class, "loginProcess"])->
 Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])->name("logoutProcess");
 
 Route::resource('product', ProductController::class);
+
 Route::resource('receiptCustomer', ReceiptController::class);
+
+Route::resource('manufacturerCustomer', ManufacturerController::class);
 
 Route::get('/test', function () {
     return view('Customer.Customer.index');

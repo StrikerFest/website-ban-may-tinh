@@ -4,7 +4,7 @@
     @include('Customer.Layout.Common.meta')
 </head>
 
-<body>
+<body class="sidebar-toggled">
     <!-- Wrapper - Cả trang -->
     {{-- <div id="product-test" class="text-light">
         @foreach ($computerNew as $computerNew)
