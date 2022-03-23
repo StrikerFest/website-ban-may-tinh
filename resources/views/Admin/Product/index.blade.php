@@ -36,7 +36,7 @@
                                             <th>Nhà sản xuất</th>
                                             <th>Danh mục</th>
                                             <th>Tình trạng</th>
-                                            <th colspan="4" width="20%">Thao tác</th>
+                                            <th width="22%">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -60,9 +60,9 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                    foreach($theLoai as $TL){
-                                                        if(($SP->maTL)==($TL->maTL)){
-                                                            echo $TL->tenTL;
+                                                    foreach($theLoaiCon as $TLC){
+                                                        if(($SP->maTLC)==($TLC->maTLC)){
+                                                            echo $TLC->tenTLC;
                                                         }
                                                     }
                                                 ?>
@@ -77,34 +77,60 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <form action="{{route('productSpecification.index', $SP->maSP)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Thông số</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('productImage.index', $SP->maSP)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Ảnh</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('admin.product.edit', $SP->maSP)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Sửa</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('admin.product.destroy', $SP->maSP)}}" method="post">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button 
-                                                        onclick="return confirm('Xác nhận xóa sản phẩm?')"
-                                                        class="btn btn-primary btn-user btn-block"
-                                                        >
-                                                        Xóa
-                                                    </button>
-                                                </form>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('admin.product.updateSpecial', $SP->maSP)}}" method="post">
+                                                            @csrf
+                                                            <?php if($SP->dacBiet == 0){ ?>
+                                                                <input type="hidden" name="dacBiet" value="1">
+                                                                <button class="btn btn-danger btn-user btn-block">Thêm vào sale</button>
+                                                            <?php }else{ ?>
+                                                                <input type="hidden" name="dacBiet" value="0">
+                                                                <button class="btn btn-success btn-user btn-block">Bỏ khỏi sale</button>
+                                                            <?php } ?>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('promotion.index', $SP->maSP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Khuyến mãi</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('productImage.index', $SP->maSP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Ảnh</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('productSpecification.index', $SP->maSP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Thông số</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('admin.product.edit', $SP->maSP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('admin.product.destroy', $SP->maSP)}}" method="post">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button 
+                                                                onclick="return confirm('Xác nhận xóa sản phẩm?')"
+                                                                class="btn btn-primary btn-user btn-block"
+                                                                >
+                                                                Xóa
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -139,7 +165,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Price" name="giaSP" min="0">
+                                            placeholder="Price" name="giaSP" min="0" value="0">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Số lượng</label>
@@ -173,13 +199,13 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
-                                        @error('maTL')
+                                        @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <select class="form-control" name="maTL">
+                                        <select class="form-control" name="maTLC">
                                             <option value="" disabled selected hidden>Category</option>
-                                            @foreach($theLoai as $TL)
-                                                <option value="{{ $TL->maTL }}">{{ $TL->tenTL }}</option>
+                                            @foreach($theLoaiCon as $TLC)
+                                                <option value="{{ $TLC->maTLC }}">{{ $TLC->tenTLC }}</option>
                                             @endforeach
                                         </select>
                                     </div>

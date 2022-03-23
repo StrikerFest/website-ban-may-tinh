@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductModel;
 use App\Models\ManufacturerModel;
-use App\Models\CategoryModel;
+use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
+use App\Models\PromotionModel;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -19,7 +20,7 @@ class AdminProductController extends Controller
     {
         $nhaSanXuat = ManufacturerModel::get();
 
-        $theLoai = CategoryModel::get();
+        $theLoaiCon = SubCategoryModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
@@ -27,7 +28,7 @@ class AdminProductController extends Controller
         
         return view('Admin.Product.index', [
             "nhaSanXuat" => $nhaSanXuat,
-            "theLoai" => $theLoai,
+            "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "sanPham" => $sanPham,
         ]);
@@ -58,7 +59,7 @@ class AdminProductController extends Controller
             'soLuong' => 'required|numeric|min:0',
             'giamGia' => 'required|numeric|min:0',
             'maNSX' => 'required',
-            'maTL' => 'required',
+            'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
 
@@ -69,11 +70,16 @@ class AdminProductController extends Controller
         $sanPham->soLuong = $request->get('soLuong');
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
-        $sanPham->maTL = $request->get('maTL');
+        $sanPham->maTLC = $request->get('maTLC');
         $sanPham->maTTSP = $request->get('maTTSP');
         $sanPham->save();
 
-        return redirect(route('product.index'));
+        $khuyenMai = new PromotionModel();
+        $khuyenMai->maSP = $sanPham->maSP;
+        $khuyenMai->khuyenMai = "Sản phẩm chưa có khuyến mãi";
+        $khuyenMai->save();
+
+        return redirect(route('admin.product.index'));
     }
 
     /**
@@ -97,7 +103,7 @@ class AdminProductController extends Controller
     {
         $nhaSanXuat = ManufacturerModel::get();
 
-        $theLoai = CategoryModel::get();
+        $theLoaiCon = SubCategoryModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
@@ -105,7 +111,7 @@ class AdminProductController extends Controller
         
         return view('Admin.Product.edit', [
             "nhaSanXuat" => $nhaSanXuat,
-            "theLoai" => $theLoai,
+            "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "SP" => $SP,
         ]);
@@ -121,13 +127,13 @@ class AdminProductController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP',
+            'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP,'. $id,
             'giaSP' => 'required|numeric|min:0',
             'moTa' => 'required|min:3',
             'soLuong' => 'required|numeric|min:0',
             'giamGia' => 'required|numeric|min:0',
             'maNSX' => 'required',
-            'maTL' => 'required',
+            'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
         
@@ -138,11 +144,11 @@ class AdminProductController extends Controller
         $SP->soLuong = $request->get('soLuong');
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
-        $SP->maTL = $request->get('maTL');
+        $SP->maTLC = $request->get('maTLC');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();
         
-        return redirect(route('product.index'));
+        return redirect(route('admin.product.index'));
     }
 
     /**
@@ -156,6 +162,15 @@ class AdminProductController extends Controller
         $sanPham = ProductModel::find($id);
         $sanPham->delete();
 
-        return redirect(route('product.index'));
+        return redirect(route('admin.product.index'));
+    }
+
+    public function updateSpecial(Request $request, $id)
+    {
+        $sanPham = ProductModel::find($id);
+        $sanPham->dacBiet = $request->get('dacBiet');
+        $sanPham->save();
+
+        return back();
     }
 }
