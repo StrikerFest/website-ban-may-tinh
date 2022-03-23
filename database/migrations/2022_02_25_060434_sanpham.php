@@ -19,13 +19,14 @@ return new class extends Migration
             $table->double('giaSP');
             $table->text('moTa');
             $table->unsignedInteger('soLuong');
-            $table->unsignedInteger('giamGia');
+            $table->unsignedInteger('giamGia')->default('0');
             $table->unsignedInteger('maNSX');
             $table->foreign('maNSX')->references('maNSX')->on('nha_san_xuat');
-            $table->unsignedInteger('maTL');
-            $table->foreign('maTL')->references('maTL')->on('the_loai');
+            $table->unsignedInteger('maTLC');
+            $table->foreign('maTLC')->references('maTLC')->on('the_loai_con');
             $table->unsignedInteger('maTTSP');
             $table->foreign('maTTSP')->references('maTTSP')->on('tinh_trang_san_pham');
+            $table->boolean('dacBiet')->default('0');
         });
     }
 
@@ -36,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('san_pham');
     }
 };

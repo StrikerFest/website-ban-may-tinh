@@ -28,6 +28,8 @@ use App\Http\Controllers\AdminBlogResponseController;
 use App\Http\Controllers\AdminReceiptController;
 use App\Http\Controllers\AdminDetailReceiptController;
 use App\Http\Controllers\AdminBannerImageController;
+use App\Http\Controllers\AdminPromotionController;
+use App\Http\Controllers\AdminSubCategoryController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
@@ -59,6 +61,7 @@ Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::post('product/updateSpecial/{id}', [AdminProductController::class, "updateSpecial"])->name('product.updateSpecial');
     Route::resource('product', AdminProductController::class);
 });
 Route::prefix('admin')->group(function () {
@@ -89,6 +92,10 @@ Route::prefix('admin')->group(function () {
     Route::resource('manufacturer', AdminManufacturerController::class);
     Route::resource('specification', AdminSpecificationController::class);
     Route::resource('bannerImage', AdminBannerImageController::class);
+    Route::get('subCategory/{maTL}', [AdminSubCategoryController::class, "index"])->name('subCategory.index');
+    Route::resource('subCategory', AdminSubCategoryController::class)->except(['index']);
+    Route::get('promotion/{maSP}', [AdminPromotionController::class, "index"])->name('promotion.index');
+    Route::resource('promotion', AdminPromotionController::class)->except(['index']);
 });
 
 Route::get('/testAdmin', function () {
