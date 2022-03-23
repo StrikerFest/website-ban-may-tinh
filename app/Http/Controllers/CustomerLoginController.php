@@ -44,7 +44,6 @@ class CustomerLoginController extends Controller
 
                 $request->session()->put('khachHang', $user->maND);
                 $request->session()->put('tenKhachHang', $user->tenND);
-
                 return Redirect::route('product.index');
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai

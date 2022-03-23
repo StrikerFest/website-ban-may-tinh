@@ -109,7 +109,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     {{-- Tên người dùng --}}
-                    <span class="mr-2 d-none d-lg-inline text-white small">Adu Darkwa</span>
+                    <span class="mr-2 d-none d-lg-inline text-white small">{{ session()->get('tenKhachHang') }}</span>
                     {{-- Ảnh người dùng --}}
                     <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                 </a>
@@ -130,7 +130,7 @@
                     <div class="dropdown-divider"></div>
                     {{-- Nút logout --}}
                     <a class="dropdown-item" href="{{ route('logout') }}" {{-- data-toggle="modal" data-target="#logoutModal --}} ">
-                        <i class="        fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <i class="      fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
                 </div>
@@ -145,34 +145,47 @@
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-shopping-cart fa-fw"></i>
                     <!-- Counter - Messages -->
-                    <span class="badge badge-danger badge-counter">7</span>
+                    <span class="badge badge-danger badge-counter">{{ sizeof($cartItems) }}</span>
                 </a>
                 <!-- Dropdown - Messages -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="messagesDropdown">
-                    <h6 class="dropdown-header">
-                        Message Center
+                    <h6 class="dropdown-header bg-danger">
+                        Giỏ hàng cá nhân
                     </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="dropdown-list-image mr-3">
-                            <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
-                            <div class="status-indicator bg-success"></div>
-                        </div>
-                        <div class="font-weight-bold">
-                            <div class="text-truncate">PC Dell</div>
-                            <div class="small text-gray-500">12,900,000 VND</div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="dropdown-list-image mr-3">
-                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                            <div class="status-indicator bg-success"></div>
-                        </div>
-                        <div>
-                            <div class="text-truncate">PC MSI</div>
-                            <div class="small text-gray-500">18,900,000 VND</div>
-                        </div>
-                    </a>
+                    @php
+                        $counterCart = 0;
+                    @endphp
+                    @foreach ($cartItems as $item)
+                        @if ($counterCart < 2)
+                            {{--  --}}
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle"
+                                        src="{{ asset('assets/img/' . $item->attributes->image) }}" alt="...">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">{{ $item->name }}</div>
+                                    <div class="small text-gray-500">{{ number_format($item->price) }} VND</div>
+                                    <div>Số lượng: {{ $item->quantity }}</div>
+                                </div>
+                            </a>
+                            @php
+                                $counterCart += 1;
+                            @endphp
+                        @else
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+
+                                <div class="font-weight-bold">
+                                    Còn {{ $counterCart - 2 }} vật phẩm nữa
+                                </div>
+                            </a>
+                        @endif
+
+                        {{--  --}}
+                    @endforeach
+
                     <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
                         hàng</a>
                 </div>
