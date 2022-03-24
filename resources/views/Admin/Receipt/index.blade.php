@@ -30,6 +30,8 @@
                                         <tr>
                                             <th>Mã</th>
                                             <th>Khách hàng</th>
+                                            <th>Tên người nhận</th>
+                                            <th>Số điện thoại</th>
                                             <th>Địa chỉ</th>
                                             <th>Người duyệt</th>
                                             <th>Ngày tạo</th>
@@ -51,7 +53,13 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>{{$HD->diaChi}}</td>
+                                            <td>{{$HD->tenNguoiNhan}}</td>
+                                            <td>{{$HD->soDienThoai}}</td>
+                                            <td>
+                                                <textarea class="form-control" cols="15" rows="5" readonly>
+                                                    {{$HD->diaChi}}
+                                                </textarea>
+                                            </td>
                                             <td>
                                                 <?php 
                                                     foreach($nguoiDung as $ND){
