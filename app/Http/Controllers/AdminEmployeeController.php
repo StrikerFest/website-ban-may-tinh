@@ -13,14 +13,19 @@ class AdminEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //Lấy chức vụ của nhân viên theo DB (id từ 3 - 5)
-        $chucVu = DB::table('chuc_vu')->whereBetween('maCV', [3, 5])->get();
+        $searchName = $request->get('searchName');
+
+        //Lấy chức vụ có quyền hạn = 7 (là nhân viên)
+        $chucVu = DB::table('chuc_vu')->join('chuc_vu_quyen_han', 'chuc_vu.maCV', '=', 'chuc_vu_quyen_han.maCV')
+            ->where('chuc_vu_quyen_han.maQH', '=', '7')
+            ->get();
 
         $employee = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
             ->join('chuc_vu', 'nguoi_dung.maCV', '=', 'chuc_vu.maCV')
+            ->where('tenND', 'like', "%$searchName%")
             ->where('tenQH', 'Là nhân viên')
             ->orderBy('maND', 'desc')
             ->paginate(5);
@@ -28,6 +33,7 @@ class AdminEmployeeController extends Controller
         return view('Admin.Employee.index', [
             "employee" => $employee,
             "chucVu" => $chucVu,
+            "searchName" => $searchName,
         ]);
     }
 

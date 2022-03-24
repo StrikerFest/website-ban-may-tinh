@@ -47,7 +47,7 @@ class AdminRoleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tenCV' => 'required|min:1|unique:App\Models\RoleModel,tenCV'
+            'ten' => 'required|unique:App\Models\RoleModel,tenCV'
         ]);
 
         // Tạo 1 Role mới từ role Model
@@ -129,6 +129,9 @@ class AdminRoleController extends Controller
      */
     public function destroy($id)
     {
+        $CVQH = RolePermissionModel::where('maCV', '=', $id);
+        $CVQH->delete();
+
         $chucVu = RoleModel::find($id);
         $chucVu->delete();
 
