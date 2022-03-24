@@ -13,58 +13,55 @@
             @include("Admin.Layout.Common.header")
             <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Danh mục sản phẩm</h1>
-                    <p class="mb-4">Trang thông tin danh mục sản phẩm.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Ảnh banner</h1>
+                    <p class="mb-4">Trang thông tin ảnh banner.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Bảng danh mục sản phẩm hiện tại</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng ảnh banner</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Mã</th>
-                                            <th>Tên</th>
-                                            <th colspan="4" width="40%">Thao tác</th>
+                                            <th>Ảnh</th>
+                                            <th>Đường dẫn</th>
+                                            <th colspan="2" width="10%">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
 
                                     </tfoot>
                                     <tbody>
-                                    @foreach ($theLoai as $TL)
+                                    @foreach ($anhQuangCao as $AQC)
                                         <tr>
-                                            <td>{{$TL->maTL}}</td>
-                                            <td>{{$TL->tenTL}}</td>
                                             <td>
-                                                <form action="{{ route('categorySpecification.index', $TL->maTL) }}" method="get">
-                                                    
-                                                    <button class="btn btn-primary btn-user btn-block">Thông số</button>
-                                                </form>
+                                                <img
+                                                    class="card-img-top"
+                                                    style="height: 150px; width: 150px; border: 1px solid lightgray"
+                                                    src="{{ asset('assets/img/'.$AQC->anh) }}"
+                                                    alt="..."
+                                                />
                                             </td>
                                             <td>
-                                                <form action="{{ route('subCategory.index', $TL->maTL) }}" method="get">
-                                                    
-                                                    <button class="btn btn-primary btn-user btn-block">Danh mục con</button>
-                                                </form>
+                                                {{$AQC->duongDan}}
                                             </td>
                                             <td>
-                                                <form action="{{route('category.edit', $TL->maTL)}}" method="get">
+                                                <form action="{{route('bannerImage.edit', $AQC->maAQC)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('category.destroy', $TL->maTL)}}" method="post">
+                                                <form action="{{route('bannerImage.destroy', $AQC->maAQC)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button 
-                                                        onclick="return confirm('Xác nhận xóa danh mục?')"
+                                                        onclick="return confirm('Xác nhận xóa ảnh banner?')"
                                                         class="btn btn-primary btn-user btn-block"
                                                         >
                                                         Xóa
@@ -78,23 +75,29 @@
                             </div>
                         </div>
                     </div>
-                    {{$theLoai->links('')}}
+                    {{$anhQuangCao->links('')}}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Thêm danh mục mới</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Thêm ảnh banner</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('category.store') }}" method="POST">
+                                <form class="user" action="{{ route('bannerImage.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                 <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <label class="form-inline label">Danh mục</label>
-                                        @error('tenTL')
+                                    <div class="col-sm-4">
+                                        <label class="form-inline label">Ảnh</label>
+                                        @error('anh')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="text" class="form-control form-control-user" id="exampleCategory"
-                                            placeholder="Category" name="tenTL" required>
+                                        <input type="file" class="form-control-file" name="anh">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <label class="form-inline label">Đường dẫn</label>
+                                        @error('duongDan')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control" name="duongDan" placeholder="URL">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

@@ -72,6 +72,10 @@ class AdminReceiptController extends Controller
     {
         $sanPham = ProductModel::all();
 
+        $hoaDon = ReceiptModel::find($id);
+        
+        $tinhTrangHoaDon = ReceiptStatusModel::all();
+
         $hoaDonChiTiet = DB::select("
             SELECT 
                 san_pham.tenSP,
@@ -94,7 +98,9 @@ class AdminReceiptController extends Controller
         ")[0];
         return view('Admin.Receipt.detail', [
             'tongTien' => $tongTien,
+            'hoaDon' => $hoaDon,
             'hoaDonChiTiet' => $hoaDonChiTiet,
+            'tinhTrangHoaDon' => $tinhTrangHoaDon,
         ]);
     }
 
@@ -118,7 +124,11 @@ class AdminReceiptController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $hoaDon = ReceiptModel::find($id);
+        $hoaDon->maTTHD = $request->get('maTTHD');
+        $hoaDon->save();
+
+        return redirect()->back();
     }
 
     /**

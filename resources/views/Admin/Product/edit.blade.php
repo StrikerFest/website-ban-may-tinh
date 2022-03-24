@@ -78,14 +78,14 @@
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
-                                        @error('maTL')
+                                        @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <select class="form-control" name="maTL">
+                                        <select class="form-control" name="maTLC">
                                             <option value="" disabled selected hidden>Category</option>
-                                            @foreach($theLoai as $TL)
-                                                <option value="{{ $TL->maTL }}" <?php echo($SP->maTL == $TL->maTL? "selected": "") ?>>
-                                                    {{ $TL->tenTL }}
+                                            @foreach($theLoaiCon as $TLC)
+                                                <option value="{{ $TLC->maTLC }}" <?php echo($SP->maTLC == $TLC->maTLC? "selected": "") ?>>
+                                                    {{ $TLC->tenTLC }}
                                                 </option>
                                             @endforeach
                                         </select>

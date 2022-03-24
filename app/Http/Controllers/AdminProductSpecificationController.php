@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use App\Models\SpecificationModel;
 use App\Models\ProductSpecificationModel;
+use App\Models\SubCategoryModel;
 
 class AdminProductSpecificationController extends Controller
 {
@@ -18,7 +19,9 @@ class AdminProductSpecificationController extends Controller
     {
         $sanPham = ProductModel::find($maSP);
 
-        $maTL = $sanPham->maTL;
+        $maTLC = $sanPham->maTLC;
+
+        $maTL = SubCategoryModel::find($maTLC)->maTL;
 
         $thongSo = SpecificationModel::
             join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
