@@ -12,17 +12,20 @@ class AdminCustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $searchName = $request->get('searchName');
+        
         $khachHang = UserModel::join('chuc_vu_quyen_han', 'nguoi_dung.maCV', '=', 'chuc_vu_quyen_han.maCV')
             ->join('quyen_han', 'chuc_vu_quyen_han.maQH', '=', 'quyen_han.maQH')
+            ->where('tenND', 'like', "%$searchName%")
             ->where('tenQH', 'Là khách hàng')
             ->orderBy('maND', 'desc')
             ->paginate(5);
 
         return view('Admin.Customer.index', [
             "khachHang" => $khachHang,
+            "searchName" => $searchName,
         ]);
     }
 

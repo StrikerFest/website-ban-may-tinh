@@ -12,12 +12,18 @@ class AdminSpecificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $thongSo = SpecificationModel::orderBy('maTS', 'desc')->paginate(5);
+        $searchName = $request->get('searchName');
+
+        $thongSo = SpecificationModel::where('tenTS', 'like', "%$searchName%")
+        ->orderBy('maTS', 'desc')
+        ->paginate(5)
+        ->appends(['searchName' => $searchName]);
 
         return view('Admin.Specification.index', [
             'thongSo' => $thongSo,
+            "searchName" => $searchName,
         ]);
     }
 

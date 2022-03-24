@@ -16,21 +16,39 @@ class AdminProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $searchName = $request->get('searchName');
+        $searchManufacturer = $request->get('searchManufacturer');
+        $searchSubCategory = $request->get('searchSubCategory');
+
         $nhaSanXuat = ManufacturerModel::get();
 
         $theLoaiCon = SubCategoryModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
-
-        $sanPham = ProductModel::orderBy('maSP', 'desc')->paginate(5);
+        // dd($searchName, $searchManufacturer, $searchSubCategory);
+        $sanPham = ProductModel::join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
+            ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+            ->where('tenSP', 'like', "%$searchName%")
+            ->where('tenNSX', 'like', "%$searchManufacturer%")
+            ->where('tenTLC', 'like', "%$searchSubCategory%")
+            ->orderBy('maSP', 'desc')
+            ->paginate(5)
+            ->appends([
+                'searchName' => $searchName,
+                'searchManufacturer' => $searchManufacturer,
+                'searchSubCategory' => $searchSubCategory,
+            ]);
         
         return view('Admin.Product.index', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "sanPham" => $sanPham,
+            "searchName" => $searchName,
+            "searchManufacturer" => $searchManufacturer,
+            "searchSubCategory" => $searchSubCategory,
         ]);
     }
 
