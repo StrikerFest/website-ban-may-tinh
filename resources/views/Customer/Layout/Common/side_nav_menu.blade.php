@@ -59,8 +59,8 @@
                         </div>
                         <div class="col-md-4">
                             <h6 class="collapse-header text-danger">PC theo giá:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
+                            <a class="collapse-item"
+                                href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">{{ $NSX->tenNSX }}</a>
                         </div>
 
                     </div>
