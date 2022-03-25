@@ -42,29 +42,59 @@
             <div class="bg-white collapse-inner rounded " style="width: 400%">
                 <div class="grid">
                     <div class="row">
-                        {{-- PC theo hãng --}}
-                        <div class="col-md-4">
-                            <h6 class="collapse-header text-danger">PC theo hãng :</h6>
-                            @foreach ($listNhaSanXuat as $NSX)
-                                {{-- Create item page for this - show in controller - Manufacture --}}
-                                <a class="collapse-item"
-                                    href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">{{ $NSX->tenNSX }}</a>
-                            @endforeach
-                            <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
-                        </div>
-                        <div class="col-md-4">
-                            <h6 class="collapse-header text-danger">PC theo nhu cầu:</h6>
-                            @foreach ($listTheLoai as $TL)
-                                {{-- Create item page for this - show in controller - Manufacture --}}
-                                <a class="collapse-item" href="#">{{ $TL->tenTLC }}</a>
-                            @endforeach
-                        </div>
-                        <div class="col-md-4">
-                            <h6 class="collapse-header text-danger">PC theo giá:</h6>
-                            {{-- <a class="collapse-item"
-                                href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">{{ $NSX->tenNSX }}</a> --}}
-                        </div>
-
+                        @foreach ($listTheLoaiCha as $TLCha)
+                            @if ($TLCha->tenTL == 'Máy tính bàn')
+                                {{-- PC theo hãng --}}
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">PC theo hãng :</h6>
+                                    @foreach ($listNhaSanXuat as $NSX)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
+                                            method="GET">
+                                            @csrf
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100"
+                                                href="">{{ $NSX->tenNSX }}</button>
+                                        </form>
+                                    @endforeach
+                                    <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">PC theo nhu cầu:</h6>
+                                    @foreach ($listTheLoai as $TL)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <a class="collapse-item"
+                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">PC theo giá:</h6>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
+                                        10
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu -
+                                        20
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu -
+                                        30
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
+                                        -
+                                        50
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
+                                        triệu</a>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
 

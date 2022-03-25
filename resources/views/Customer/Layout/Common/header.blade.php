@@ -14,13 +14,14 @@
             </div>
         </a>
         <!-- Topbar tìm kiếm -->
-        <form class="d-flex align-items-center justify-content-center mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <form class="d-flex align-items-center justify-content-center mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            action="{{ route('searchCustomer.index') }}">
             <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                    aria-label="Search" aria-describedby="basic-addon2">
+                <input type="text" class="form-control bg-light border-0 small" name="search"
+                    placeholder="Tìm kiếm vật phẩm" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
+                    <button class="btn btn-primary"">
+                        <i class="       fas fa-search fa-sm"></i>
                     </button>
                 </div>
             </div>
@@ -132,7 +133,7 @@
                     <div class="dropdown-divider"></div>
                     {{-- Nút logout --}}
                     <a class="dropdown-item" href="{{ route('logout') }}" {{-- data-toggle="modal" data-target="#logoutModal --}} ">
-                        <i class="           fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <i class="                     fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
                 </div>
@@ -205,37 +206,37 @@
     <div class="center-custom list-style-none">
         <div class="nav-item-container-highlight">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom" href="index.html">
+                <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
                     {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
-                    PC Build
+                    Trang chủ
                 </a>
             </li>
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom" href="index.html">
-                    Service
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                    Sản phẩm
                 </a>
             </li>
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom" href="index.html">
-                    Best Deal
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                    Blog công nghệ
                 </a>
             </li>
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom" href="index.html">
-                    Lifestyle
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                    Liên hệ
                 </a>
             </li>
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom" href="index.html">
-                    Community
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                    Tư vấn
                 </a>
             </li>
         </div>

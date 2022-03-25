@@ -32,9 +32,12 @@ use App\Http\Controllers\AdminPromotionController;
 use App\Http\Controllers\AdminSubCategoryController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\MoneyCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -120,6 +123,13 @@ Route::resource('product', ProductController::class);
 Route::resource('receiptCustomer', ReceiptController::class);
 
 Route::resource('manufacturerCustomer', ManufacturerController::class);
+
+Route::resource('categoryCustomer', CategoryController::class);
+
+Route::resource('moneyCategoryCustomer', MoneyCategoryController::class);
+
+Route::resource('searchCustomer', SearchController::class);
+
 
 Route::get('/test', function () {
     return view('Customer.Customer.index');

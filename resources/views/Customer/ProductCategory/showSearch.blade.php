@@ -31,40 +31,47 @@
                         {{-- Lọc sản phẩm --}}
                         <div class="col-md-2 bg-light " style="margin-top:10px">
                             <div class="col-md-12 text-center padding-top-10 text-bold text-danger">
-                                <h4>Lọc sản phẩm</h4>
+                                Filter
                             </div>
                             {{-- --------- --}}
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-black">
-                                <h5>Nhà sản xuất CH</h5>
+                                <h5 class="text-bold">Nhà sản xuất CH</h5>
                                 <hr class="border-black">
                             </div>
                             {{-- Chọn hãng --}}
                             <div class="col-md-12">
-                                <ul>
-                                    @foreach ($listNhaSanXuat as $NSX)
-                                        <a class=" text-bold " style="text-decoration: none"
-                                            href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
-                                            <div class="text-dark">
-                                                <li>{{ $NSX->tenNSX }}</li>
+                                <ul class="col-md-12" style="padding: 0; list-style: none">
+                                    <div class="row">
+                                        @foreach ($listNhaSanXuat as $NSX)
+                                            <form class="col-md-6" action="{{ route('searchCustomer.index') }}">
+                                                <input type="hidden" name="search"
+                                                    value="{{ session()->get('search') }}">
+                                                <button class=" btn btn- text-bold width-100"
+                                                    style="text-decoration: none"
+                                                    href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                                    <div class="text-dark">
+                                                        <li>{{ $NSX->tenNSX }}</li>
 
-                                            </div>
-                                        </a>
-                                    @endforeach
+                                                    </div>
+                                                </button>
+                                            </form>
+                                        @endforeach
+                                    </div>
                                 </ul>
                             </div>
 
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-black">
-                                <h5>Giá tiêu dùng</h5>
+                                <h5 class="text-bold">Giá tiêu dùng</h5>
                                 <hr class="border-black">
                             </div>
 
                             {{-- Khoảng giá --}}
 
                             <div class="col-md-12">
-                                <form
-                                    action="{{ route('manufacturerCustomer.show', session()->get('currentManufacturer')) }}">
+                                <form action="{{ route('searchCustomer.index') }}">
+                                    <input type="hidden" name="search" value="{{ session()->get('search') }}">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="text-bold text-danger">Từ</div>
@@ -140,7 +147,7 @@
                             {{-- --------- --}}
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-black">
-                                <h5>Nhu cầu sử dụng</h5>
+                                <h5 class="text-bold">Nhu cầu sử dụng</h5>
                                 <hr class="border-black">
                             </div>
 
@@ -155,10 +162,23 @@
                                             @php
                                                 $count = 1;
                                             @endphp
+                                            <form action="{{ route('searchCustomer.index') }}">
+                                                <input type="hidden" name="search"
+                                                    value="{{ session()->get('search') }}">
+                                                <button class=" btn text-left text-bold width-100"
+                                                    style="text-decoration: none;">
+                                                    <div class="text-dark">
+                                                        <li>Xem tất cả</li>
+                                                    </div>
+                                                </button>
+                                            </form>
                                             @foreach ($listTheLoai as $TL)
-                                                <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                                <form action="{{ route('searchCustomer.index', $NSX->maNSX) }}">
                                                     <input type="hidden" value="{{ $TL->maTLC }}"
                                                         name="theLoaiNhaSanXuat">
+                                                    <input type="hidden" name="search"
+                                                        value="{{ session()->get('search') }}">
+
                                                     @if (session()->get('theLoaiNhaSanXuat') == $TL->maTLC)
                                                         <button class=" btn text-left text-bold width-100"
                                                             style="text-decoration: none;">
@@ -184,7 +204,7 @@
                             {{-- --------- --}}
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-black">
-                                <h5>Thông số</h5>
+                                <h5 class="text-bold">Thông số</h5>
                                 <hr class="border-black">
                             </div>
 

@@ -20,6 +20,7 @@ class ProductController extends Controller
         // Lấy hãng
         $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
         $listTheLoai = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
+        $listTheLoaiCha = DB::table('the_loai')->get();
 
         // Lấy ảnh
         $productImage = ProductImageModel::get();
@@ -85,6 +86,7 @@ class ProductController extends Controller
 
             'listNhaSanXuat' =>  $listNhaSanXuat,
             'listTheLoai' =>  $listTheLoai,
+            'listTheLoaiCha' =>  $listTheLoaiCha,
 
 
         ]);

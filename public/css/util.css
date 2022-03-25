@@ -390,6 +390,26 @@ a.link-red:active {
     color: red;
 }
 
+a.link-red-nav:link {
+    text-decoration: none;
+    color: black;
+}
+
+a.link-red-nav:visited {
+    text-decoration: none;
+    color: black;
+}
+
+a.link-red-nav:hover {
+    text-decoration: none;
+    color: red;
+}
+
+a.link-red-nav:active {
+    text-decoration: none;
+    color: black;
+}
+
 /* Link trắng */
 
 a.link-white:link {
