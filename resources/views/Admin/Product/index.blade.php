@@ -23,6 +23,43 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Bảng sản phẩm hiện tại</h6>
+                            <!-- Filter -->
+                            <div style="margin-top: 10px">
+                                <table>
+                                    <h6>Bộ lọc</h6>
+                                    <form method="get">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tên sản phẩm">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" name="searchManufacturer">
+                                                    <option value="" selected>Nhà sản xuất</option>
+                                                    @foreach($nhaSanXuat as $NSX)
+                                                        <option value="{{$NSX->tenNSX}}" <?php if($searchManufacturer == $NSX->tenNSX)echo "selected" ?>>
+                                                            {{$NSX->tenNSX}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" name="searchSubCategory">
+                                                    <option value="" selected>Danh mục</option>
+                                                    @foreach($theLoaiCon as $TLC)
+                                                        <option value="{{$TLC->tenTLC}}" <?php if($searchSubCategory == $TLC->tenTLC)echo "selected" ?>>
+                                                            {{$TLC->tenTLC}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button class="btn btn-primary">Tìm kiếm</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </table>
+                            </div>
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

@@ -15,18 +15,43 @@ class AdminBlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $validated = $request->validate([
+            'NKT' => 'before_or_equal:' . Date('Y-m-d'),
+            'NBD' => 'before_or_equal:' . Date('Y-m-d'),
+        ]);
+
+        $searchName = $request->get('searchName');
+        //lấy ngày tạo nhỏ nhất của bảng blog
+        $start = date_format(date_create(BlogModel::get('ngayTao')->min('ngayTao')),"Y-m-d");
+        //lấy ngày hiện tại
+        $end = date('Y-m-d');
+        
+        $NBD = is_null($request->get('NBD')) ? $start : $request->get('NBD');
+        $NKT = is_null($request->get('NKT')) ? $end : $request->get('NKT');
+        
+        if($NBD > $NKT){
+            $temp = $NBD;
+            $NBD = $NKT;
+            $NKT = $temp;
+        }
+
         $nhanVien = UserModel::all();
 
         $tinhTrangBaiViet = BlogStatusModel::all();
 
-        $baiViet = BlogModel::all();
+        $baiViet = BlogModel::where('tieuDe', 'like', "%$searchName%")
+            ->whereBetween('ngayTao', [$NBD, $NKT])
+            ->get();
 
         return view('Admin.Blog.index', [
-            'nhanVien' => $nhanVien,
-            'tinhTrangBaiViet' => $tinhTrangBaiViet,
-            'baiViet' => $baiViet,
+            "nhanVien" => $nhanVien,
+            "tinhTrangBaiViet" => $tinhTrangBaiViet,
+            "baiViet" => $baiViet,
+            "searchName" => $searchName,
+            "NBD" => $NBD,
+            "NKT" => $NKT,
         ]);
     }
 

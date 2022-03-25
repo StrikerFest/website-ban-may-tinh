@@ -12,12 +12,18 @@ class AdminCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $theLoai = CategoryModel::orderBy('maTL', 'desc')->paginate(5);
+        $searchName = $request->get('searchName');
+
+        $theLoai = CategoryModel::where('tenTL', 'like', "%$searchName%")
+        ->orderBy('maTL', 'desc')
+        ->paginate(5)
+        ->appends(['searchName' => $searchName]);
 
         return view('Admin.Category.index', [
             "theLoai" => $theLoai,
+            "searchName" => $searchName,
         ]);
     }
 

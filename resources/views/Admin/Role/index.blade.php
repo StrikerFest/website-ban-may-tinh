@@ -32,6 +32,7 @@
                                     <tr>
                                         <th>Mã</th>
                                         <th>Tên</th>
+                                        <th colspan="2" width="10%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -42,6 +43,24 @@
                                         <tr>
                                             <td>{{ $CV->maCV }}</td>
                                             <td>{{ $CV->tenCV }}</td>
+                                            <!-- <td>
+                                                <form action="{{route('role.edit', $CV->maCV)}}" method="get">
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                </form>
+                                            </td> -->
+                                            <td>
+                                                <form action="{{route('role.destroy', $CV->maCV)}}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button 
+                                                        onclick="return confirm('Xác nhận xóa chức vụ?')"
+                                                        class="btn btn-primary btn-user btn-block"
+                                                        >
+                                                        Xóa
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

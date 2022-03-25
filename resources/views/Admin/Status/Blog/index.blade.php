@@ -82,7 +82,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleblogStatus"
-                                            placeholder="Role" name="tenTTBV">
+                                            placeholder="Status" name="tenTTBV">
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

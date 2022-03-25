@@ -12,12 +12,18 @@ class AdminManufacturerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $nhaSanXuat = ManufacturerModel::orderBy('maNSX', 'desc')->paginate(5);
+        $searchName = $request->get('searchName');
+
+        $nhaSanXuat = ManufacturerModel::where('tenNSX', 'like', "%$searchName%")
+        ->orderBy('maNSX', 'desc')
+        ->paginate(5)
+        ->appends(['searchName' => $searchName]);
 
         return view('Admin.Manufacturer.index', [
             "nhaSanXuat" => $nhaSanXuat,
+            "searchName" => $searchName,
         ]);
     }
 
@@ -69,10 +75,6 @@ class AdminManufacturerController extends Controller
      */
     public function edit($id)
     {
-        $validate = $request->validate([
-            'tenNSX' => 'required|min:1|unique:App\Models\ManufacturerModel, tenNSX',
-        ]);
-        
         $NSX = ManufacturerModel::find($id);
         
         return view('Admin.Manufacturer.edit', [
@@ -89,6 +91,10 @@ class AdminManufacturerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = $request->validate([
+            'tenNSX' => 'required|min:1|unique:App\Models\ManufacturerModel, tenNSX',
+        ]);
+
         $NSX = ManufacturerModel::find($id);
         $NSX->tenNSX = $request->get('tenNSX');
 

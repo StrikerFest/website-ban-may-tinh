@@ -18,8 +18,29 @@ class AdminReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $validated = $request->validate([
+            'NKT' => 'before_or_equal:' . Date('Y-m-d'),
+            'NBD' => 'before_or_equal:' . Date('Y-m-d'),
+        ]);
+
+        $searchName = $request->get('searchName');
+        $searchStatus = $request->get('searchStatus');
+        //lấy ngày tạo nhỏ nhất của bảng hoá đơn
+        $start = date_format(date_create(ReceiptModel::get('ngayTao')->min('ngayTao')),"Y-m-d");
+        //lấy ngày hiện tại
+        $end = date('Y-m-d');
+        
+        $NBD = is_null($request->get('NBD')) ? $start : $request->get('NBD');
+        $NKT = is_null($request->get('NKT')) ? $end : $request->get('NKT');
+        
+        if($NBD > $NKT){
+            $temp = $NBD;
+            $NBD = $NKT;
+            $NKT = $temp;
+        }
+
         $nguoiDung = UserModel::all();
 
         $phuongThucThanhToan = PaymentMethodModel::all();
@@ -29,6 +50,9 @@ class AdminReceiptController extends Controller
         $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')
             ->join('phuong_thuc_thanh_toan', 'phuong_thuc_thanh_toan.maPTTT', '=', 'hoa_don.maPTTT')
             ->join('tinh_trang_hoa_don', 'tinh_trang_hoa_don.maTTHD', '=', 'hoa_don.maTTHD')
+            ->where('nguoi_dung.tenND', 'like', "%$searchName%")
+            ->where('tinh_trang_hoa_don.tenTTHD', 'like', "%$searchStatus%")
+            ->whereBetween('ngayTao', [$NBD, $NKT])
             ->orderBy('hoa_don.maTTHD', 'DESC')
             ->orderBy('ngayTao', 'ASC')
             ->get();
@@ -38,6 +62,10 @@ class AdminReceiptController extends Controller
             'phuongThucThanhToan' => $phuongThucThanhToan,
             'tinhTrangHoaDon' => $tinhTrangHoaDon,
             'hoaDon' => $hoaDon,
+            'searchName' => $searchName,
+            'searchStatus' => $searchStatus,
+            "NBD" => $NBD,
+            "NKT" => $NKT,
         ]);
     }
 
