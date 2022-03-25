@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     // Cart list
     public function cartList()
     {
+        $listNhaSanXuat = DB::table(
+            'nha_san_xuat'
+        )->skip(0)->take(7)->get();
         $cartItems = \Cart::getContent();
         // dd($cartItems);
-        return view('Customer.Customer.cart', compact('cartItems'));
+        return view('Customer.Customer.cart', [
+            'cartItems' =>  $cartItems,
+            'listNhaSanXuat' =>  $listNhaSanXuat,
+        ]);
     }
 
     // store

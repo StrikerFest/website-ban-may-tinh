@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-primary  sidebar sidebar-dark accordion fixed-top"
+<ul class="navbar-nav bg-primary toggled  sidebar sidebar-dark accordion fixed-top"
     style="background-color: rgba(20, 20, 20, 0.95)  !important" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
@@ -31,7 +31,7 @@
         PC Build
     </div>
 
-    <!-- Nav Item - Menu Desktop PC -->
+    <!-- Nav Item - Máy tính bàn -->
     <li class="nav-item">
         <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -39,16 +39,71 @@
             <span>Máy tính bàn</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+            <div class="bg-white collapse-inner rounded " style="width: 400%">
+                <div class="grid">
+                    <div class="row">
+                        @foreach ($listTheLoaiCha as $TLCha)
+                            @if ($TLCha->tenTL == 'Máy tính bàn')
+                                {{-- PC theo hãng --}}
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">PC theo hãng :</h6>
+                                    @foreach ($listNhaSanXuat as $NSX)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
+                                            method="GET">
+                                            @csrf
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100"
+                                                href="">{{ $NSX->tenNSX }}</button>
+                                        </form>
+                                    @endforeach
+                                    <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">PC theo nhu cầu:</h6>
+                                    @foreach ($listTheLoai as $TL)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <a class="collapse-item"
+                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">PC theo giá:</h6>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
+                                        10
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu -
+                                        20
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu -
+                                        30
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
+                                        -
+                                        50
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
+                                        triệu</a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
         </div>
     </li>
 
     <!-- Nav Item - GamingPC Collapse Menu -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseGamingPC"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-gamepad sidenav-icon"></i>
@@ -64,7 +119,7 @@
                 <a class="collapse-item" href="utilities-other.html">Other</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider sidenav-divider">
@@ -74,7 +129,7 @@
         Laptop
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Laptop -->
     <li class="nav-item">
         <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
@@ -114,16 +169,17 @@
 
     <!-- Heading -->
     <div class="sidebar-heading sidenav-header">
-        Component
+        Linh phụ kiện
     </div>
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Linh kiện-->
     <li class="nav-item">
-        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-laptop sidenav-header"></i>
-            <span>Linh kiện phần cứng</span>
+        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseHardware"
+            aria-expanded="true" aria-controls="collapseHardware">
+            <i class="fas fa-cog sidenav-header"></i>
+            <span>Linh kiện </span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseHardware" class="collapse" aria-labelledby="headingPages"
+            data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="login.html">Login</a>
@@ -137,12 +193,13 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-laptop sidenav-header"></i>
-            <span>Thiết bị ngoại vị</span>
+        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseAccessories"
+            aria-expanded="true" aria-controls="collapseAccessories">
+            <i class="fas fa-headphones sidenav-header"></i>
+            <span>Phụ kiện</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseAccessories" class="collapse" aria-labelledby="headingPages"
+            data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="login.html">Login</a>
@@ -165,12 +222,12 @@
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-laptop sidenav-header"></i>
+        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePrinter"
+            aria-expanded="true" aria-controls="collapsePrinter">
+            <i class="fas fa-print sidenav-header"></i>
             <span>Máy in</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePrinter" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="login.html">Login</a>
@@ -184,12 +241,12 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseOther"
+            aria-expanded="true" aria-controls="collapseOther">
             <i class="fas fa-laptop sidenav-header"></i>
             <span>Khác</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseOther" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Login Screens:</h6>
                 <a class="collapse-item" href="login.html">Login</a>
@@ -205,7 +262,7 @@
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle bg-light border-0" id="sidebarToggle"></button>
+        {{-- <button class="rounded-circle bg-light border-0" id="sidebarToggle"></button> --}}
     </div>
 
     <!-- Sidebar Message -->
@@ -217,7 +274,7 @@
 <!-- End of Sidebar -->
 
 <!-- Filler -->
-<ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav toggled bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">

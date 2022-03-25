@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailReceiptModel;
+use App\Models\ReceiptModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReceiptController extends Controller
 {
@@ -26,7 +29,15 @@ class ReceiptController extends Controller
     {
         //
         $cartItems = \Cart::getContent();
-        return view('Customer.Receipt.index', compact('cartItems'));
+        $listNguoiDung =
+            DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
+        // echo $listNguoiDung;
+        // echo session()->has('khachHang');
+        // die();
+        return view('Customer.Receipt.index', [
+            'cartItems'  => $cartItems,
+            'listNguoiDung' =>  $listNguoiDung,
+        ]);
     }
 
     /**
@@ -37,8 +48,60 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return view('Customer.Receipt.success');
+        // Thêm vào hóa đơn
+
+        $id = session()->get('khachHang');
+        $hoaDon = new ReceiptModel();
+
+        $hoaDon->maKH = $id;
+        $hoaDon->ngayTao =  date("Y/m/d");
+        $hoaDon->diaChi =  $request->receiptAddress;
+        if ($request->paymentMethod == "COD") {
+            $hoaDon->maPTTT = 1;
+        } else if ($request->paymentMethod == "online") {
+            $hoaDon->maPTTT = 2;
+        }
+
+
+        $hoaDon->maTTHD = 1;
+
+        $hoaDon->save();
+
+        // Thêm vào hóa đơn chi tiết
+        $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
+
+        $cartItems = \Cart::getContent();
+        foreach ($cartItems as $cart) {
+            $hoaDonChiTiet = new DetailReceiptModel();
+
+            $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
+            $giaSP = $SP->giaSP;
+            $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
+            $hoaDonChiTiet->maSP = $cart->id;
+            $hoaDonChiTiet->soLuong = $cart->quantity;
+            $hoaDonChiTiet->giaSP = $giaSP;
+            $hoaDonChiTiet->giamGia = $SP->giamGia;
+            // echo $hoaDon;
+            // echo "<br>-------<br>";
+            // echo "<br>MA HD: ";
+            // echo $maHoaDonMoiNhat;
+            // echo "<br>MA SP: ";
+            // echo $cart->id;
+            // echo "<br>quantity: ";
+            // echo $cart->quantity;
+            // echo "<br>GIA: ";
+            // echo $SP->giaSP;
+            // echo "<br>GIAM GIA: ";
+            // echo $SP->giamGia;
+            // echo "<br>------------------<br>";
+            $hoaDonChiTiet->save();
+            \Cart::clear();
+
+        }
+        // die();
+        return view('Customer.Receipt.success', [
+            'cartItems' => $cartItems,
+        ]);
     }
 
     /**
