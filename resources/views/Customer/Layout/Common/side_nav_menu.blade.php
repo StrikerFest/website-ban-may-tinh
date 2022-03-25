@@ -54,13 +54,15 @@
                         </div>
                         <div class="col-md-4">
                             <h6 class="collapse-header text-danger">PC theo nhu cầu:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
+                            @foreach ($listTheLoai as $TL)
+                                {{-- Create item page for this - show in controller - Manufacture --}}
+                                <a class="collapse-item" href="#">{{ $TL->tenTLC }}</a>
+                            @endforeach
                         </div>
                         <div class="col-md-4">
                             <h6 class="collapse-header text-danger">PC theo giá:</h6>
-                            <a class="collapse-item"
-                                href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">{{ $NSX->tenNSX }}</a>
+                            {{-- <a class="collapse-item"
+                                href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">{{ $NSX->tenNSX }}</a> --}}
                         </div>
 
                     </div>

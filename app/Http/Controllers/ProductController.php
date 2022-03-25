@@ -19,6 +19,7 @@ class ProductController extends Controller
     {
         // Lấy hãng
         $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
+        $listTheLoai = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
 
         // Lấy ảnh
         $productImage = ProductImageModel::get();
@@ -28,25 +29,25 @@ class ProductController extends Controller
         $computerNew2 = ProductModel::skip(4)->take(4)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->orderBy('maSP')->get();
         // Laptop gaming
-        $laptopGamingNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(0)->take(4)->get();
-        $laptopGamingNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(4)->take(4)->get();
-        $laptopGamingNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(8)->take(4)->get();
+        $laptopGamingNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(0)->take(4)->get();
+        $laptopGamingNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(4)->take(4)->get();
+        $laptopGamingNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(8)->take(4)->get();
         // Laptop văn phòng
-        $laptopOfficeNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop văn phòng')->skip(0)->take(4)->get();
-        $laptopOfficeNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop văn phòng')->skip(4)->take(4)->get();
-        $laptopOfficeNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop văn phòng')->skip(8)->take(4)->get();
+        $laptopOfficeNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(0)->take(4)->get();
+        $laptopOfficeNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(4)->take(4)->get();
+        $laptopOfficeNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(8)->take(4)->get();
         // Máy tính gaming
-        $computerGamingNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'PC gaming')->skip(0)->take(4)->get();
-        $computerGamingNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'PC gaming')->skip(4)->take(4)->get();
-        $computerGamingNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'PC gaming')->skip(8)->take(4)->get();
+        $computerGamingNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(0)->take(4)->get();
+        $computerGamingNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(4)->take(4)->get();
+        $computerGamingNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(8)->take(4)->get();
         // Máy trạm
-        $computerStationNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'PC trạm')->skip(0)->take(4)->get();
-        $computerStationNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'PC trạm')->skip(4)->take(4)->get();
-        $computerStationNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'PC trạm')->skip(8)->take(4)->get();
+        $computerStationNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(0)->take(4)->get();
+        $computerStationNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(4)->take(4)->get();
+        $computerStationNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(8)->take(4)->get();
         // Linh kiện
-        $hardwareNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Card đồ họa')->skip(0)->take(4)->get();
-        $hardwareNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Card đồ họa')->skip(4)->take(4)->get();
-        $hardwareNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Card đồ họa')->skip(8)->take(4)->get();
+        $hardwareNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(0)->take(4)->get();
+        $hardwareNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(4)->take(4)->get();
+        $hardwareNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(8)->take(4)->get();
 
         $cartItems = \Cart::getContent();
 
@@ -83,6 +84,7 @@ class ProductController extends Controller
             'cartItems' =>  $cartItems,
 
             'listNhaSanXuat' =>  $listNhaSanXuat,
+            'listTheLoai' =>  $listTheLoai,
 
 
         ]);
@@ -121,11 +123,15 @@ class ProductController extends Controller
         $productImage = ProductImageModel::get();
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
+        $productPromotion = DB::table('khuyen_mai')->get();
+        $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
 
         return view('Customer.Product.index', [
             'productImage' => $productImage,
             'sanPham' => $sanPham,
             'cartItems' => $cartItems,
+            'productPromotion' => $productPromotion,
+            'productSpec' => $productSpec,
         ]);
     }
 

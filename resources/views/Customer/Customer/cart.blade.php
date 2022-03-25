@@ -36,7 +36,7 @@
                                         <h1>Giỏ hàng trống - Hãy đặt hàng để thấy sản phẩm ở đây</h1>
                                     @else
                                         <table class="w-full text-sm lg:text-base border-radius-10" cellspacing="0">
-                                            {{-- Tiêu đề bảng --}}
+                                            {{-- Header từng cột --}}
                                             <thead class="border-radius-10"
                                                 style="border: 1px solid black; border-radius: 10px">
                                                 <tr class="h-12 uppercase">
@@ -49,6 +49,7 @@
                                                     </th>
                                                 </tr>
                                             </thead>
+                                            {{-- Content của giỏ hàng --}}
                                             <tbody style="border: 1px solid lightgray">
                                                 @foreach ($cartItems as $item)
                                                     <tr>
@@ -120,11 +121,13 @@
                                         </table>
                                     @endif
 
+                                    {{-- Tính tổng tiền giỏ hàng --}}
                                     <div class="d-flex padding-10" style="justify-content: end">
                                         Tổng : {{ number_format(Cart::getTotal()) }} VND
                                     </div>
                                     <div class="d-flex" style="justify-content: end;">
                                         <div class="d-flex-" style="width:50%;justify-content: start">
+                                            {{-- Nút quay về trang chủ --}}
                                             <a href="{{ route('product.index') }}">
                                                 <button
                                                     class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
@@ -135,6 +138,7 @@
                                         <div class="d-flex bg-" style="width:50%;justify-content: end">
                                             <form action="{{ route('receiptCustomer.create') }}" method="GET">
                                                 @csrf
+                                                {{-- Nút đặt hàng --}}
                                                 <button
                                                     class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
                                                     style="border-top-left-radius: 20px;border-bottom-left-radius: 20px">Đặt
@@ -142,6 +146,7 @@
                                             </form>
                                             <form action="{{ route('cart.clear') }}" method="POST">
                                                 @csrf
+                                                {{-- Nút xóa tất cả các mặt hàng trong giỏ hàng --}}
                                                 <button
                                                     class="px-6 py-2 text-light bg-gradient-danger btn-secondary btn">Xóa
                                                     tất cả</button>
