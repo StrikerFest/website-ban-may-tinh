@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SpecificationModel;
+use Exception;
 
 class AdminSpecificationController extends Controller
 {
@@ -111,8 +112,11 @@ class AdminSpecificationController extends Controller
     public function destroy($id)
     {
         $thongSo = SpecificationModel::find($id);
-        $thongSo->delete();
-
-        return redirect(route('specification.index'));
+        try{
+            $thongSo->delete();
+            return redirect(route('specification.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

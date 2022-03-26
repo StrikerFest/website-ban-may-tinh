@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\CategoryModel;
+use Exception;
 
 class AdminCategoryController extends Controller
 {
@@ -111,8 +112,12 @@ class AdminCategoryController extends Controller
     public function destroy($id)
     {
         $theLoai = CategoryModel::find($id);
-        $theLoai->delete();
-
-        return redirect(route('category.index'));
+        try{
+            $theLoai->delete();
+            return redirect(route('category.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
+        
     }
 }

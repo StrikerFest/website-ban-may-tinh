@@ -6,6 +6,7 @@ use App\Models\RoleModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class AdminController extends Controller
 {
@@ -155,8 +156,15 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $admin = UserModel::find($id);
-        $admin->delete();
-
-        return redirect(route('admin.index'));
+        if ($admin->maCV == 1) {
+            return Redirect::route('admin.index')->with('super', "Không được phép xóa Super Admin!!");
+        } else {
+            try {
+                $admin->delete();
+                return redirect(route('admin.index'));
+            } catch (Exception $e) {
+                return back()->with("delete", "Xung đột khoá ngoại");
+            }
+        }
     }
 }

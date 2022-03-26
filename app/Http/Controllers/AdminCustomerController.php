@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Exception;
 
 class AdminCustomerController extends Controller
 {
@@ -138,8 +139,11 @@ class AdminCustomerController extends Controller
     public function destroy($id)
     {
         $customer = UserModel::find($id);
-        $customer->delete();
-
-        return redirect(route('customer.index'));
+        try{
+            $customer->delete();
+            return redirect(route('customer.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

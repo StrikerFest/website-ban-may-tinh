@@ -45,7 +45,7 @@
                                                 {{$HDCT->soLuong}}
                                             </td>
                                             <td>{{number_format($HDCT->giaSP)}} VND</td>
-                                            <td>{{number_format($HDCT->giamGia)}} VND</td>
+                                            <td>{{$HDCT->giamGia}}%</td>
                                             <td colspan="2">
                                                 {{number_format($HDCT->thanhTien)}} VND
                                             </td>
