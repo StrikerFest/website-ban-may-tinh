@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">PC theo nhu cầu:</h6>
-                                    @foreach ($listTheLoai as $TL)
+                                    @foreach ($listTheLoaiMayTinhBan as $TL)
                                         {{-- Create item page for this - show in controller - Manufacture --}}
                                         <a class="collapse-item"
                                             href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
