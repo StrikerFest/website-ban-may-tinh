@@ -33,8 +33,48 @@
                                     {{-- Size, props container ảnh --}}
                                     <div style="flex-direction: column" class="d-flex width-100 height-auto flex-center">
                                         {{-- Div chứa ảnh và mũi tên --}}
-                                        <div class="d-flex width-100 height-auto flex-center">
-                                            {{-- Mũi tên trái --}}
+                                        {{--  --}}
+                                        {{-- <div id="carouselExampleIndicators"
+                                            class="carousel slide carousel-main-container-custom " data-ride="carousel"
+                                            data-pause="hover" data-interval="5000">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="0"
+                                                    class="active"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                            </ol>
+                                            <div class="d-flex">
+                                                <div class="carousel-inner ">
+                                                    <div class="carousel-item active hide-from-work">
+                                                        <img class="d-block carousel-item-custom"
+                                                            src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
+                                                            alt="First slide">
+                                                    </div>
+                                                    <div class="carousel-item hide-from-work">
+                                                        <img class="d-block carousel-item-custom"
+                                                            src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
+                                                            alt="Second slide">
+                                                    </div>
+                                                    <div class="carousel-item hide-from-work">
+                                                        <img class="d-block carousel-item-custom"
+                                                            src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
+                                                            alt="Third slide">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators"
+                                                role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators"
+                                                role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div> --}}
+                                        {{--  --}}
+                                        <div class="d-flex width-100 height-auto flex-center " style="display: none">
                                             <div>
                                                 <div>
                                                     <i style="transform: scale(3, 8);padding-right: 0px"
@@ -44,7 +84,6 @@
                                             @php
                                                 $tempImg;
                                             @endphp
-                                            {{-- Ảnh --}}
                                             <div class="hide-from-work">
                                                 @foreach ($productImage as $PI)
                                                     @if ($PI->maSP == $sanPham->maSP)
@@ -57,7 +96,6 @@
                                                     @endif
                                                 @endforeach
                                             </div>
-                                            {{-- Mũi tên phải --}}
                                             <div>
                                                 <div>
                                                     <i style="transform: scale(3, 8); padding-left: 0px"

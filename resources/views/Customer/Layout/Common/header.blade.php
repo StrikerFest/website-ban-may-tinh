@@ -21,7 +21,7 @@
                     placeholder="Tìm kiếm vật phẩm" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary"">
-                        <i class="       fas fa-search fa-sm"></i>
+                        <i class="        fas fa-search fa-sm"></i>
                     </button>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                     <div class="dropdown-divider"></div>
                     {{-- Nút logout --}}
                     <a class="dropdown-item" href="{{ route('logout') }}" {{-- data-toggle="modal" data-target="#logoutModal --}} ">
-                        <i class="                     fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <i class="                      fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
                 </div>
@@ -228,7 +228,7 @@
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
                     Liên hệ
                 </a>
             </li>

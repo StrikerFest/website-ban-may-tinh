@@ -503,20 +503,80 @@
                                                 <div class="row">
                                                     @foreach ($computerNew3 as $CN)
                                                         {{-- Vật phẩm 4 --}}
-                                                        <div class="carousel-promo-item col-md-3"
-                                                            style="padding: 10px">
+                                                        <div class="carousel-promo-item col-md-3 " onmouseover=""
+                                                            {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}} style=" padding: 10px">
                                                             <div class="col mb-5">
                                                                 <div class="card product-item"
                                                                     style="height: 450px;width:260px">
-                                                                    <!-- Thẻ Sale-->
+                                                                    <!-- Thẻ sale trên đầu -->
                                                                     <div class="badge bg-dark text-white position-absolute"
                                                                         style="top: 0.5rem; right: 0.5rem">
-                                                                        Sale
+                                                                        Sale!
                                                                     </div>
                                                                     {{-- Overlay hiển thị chi tiết sau khi hover --}}
                                                                     <div class="product-overlay">
                                                                         <div class="text-center">
                                                                             <!-- Tên sản phẩm trong overlay-->
+                                                                            <div class="product-overlay-product-name">
+                                                                                <h5 class="fw-bolder"
+                                                                                    style="font-size:0.9em">
+                                                                                    @php
+                                                                                        $find = '(';
+                                                                                        $positionOfOpenP = strpos($CN->tenSP, $find);
+                                                                                        $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
+                                                                                    @endphp
+                                                                                    {{ $tenSP }}
+                                                                                </h5>
+                                                                            </div>
+                                                                            <!-- Giá sản phẩm trong overlay-->
+                                                                            <div class="product-overlay-product-price">
+                                                                                <span
+                                                                                    class="">{{ number_format($CN->giaSP) }}
+                                                                                    VND</span>
+                                                                            </div>
+                                                                            {{-- Bảo hành sản phẩm trong overlay --}}
+                                                                            <div
+                                                                                class="product-overlay-product-warranty">
+                                                                                12 tháng
+                                                                            </div>
+                                                                            {{-- Thông số sản phẩm trong overlay --}}
+                                                                            <div
+                                                                                class="product-overlay-product-spec text-left">
+                                                                                Core: I9-10925 4.25Ghz-5.1Ghz<br>
+                                                                                Ram: 16GB<br>
+                                                                                SSD: 512GB<br>
+                                                                                PSU: 550W<br>
+                                                                                Card: RTX3080<br>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    {{-- Hết overlay chi tiết --}}
+                                                                    @php
+                                                                        $tempImg;
+                                                                    @endphp
+                                                                    <!-- Ảnh sản phẩm-->
+                                                                    @foreach ($productImage as $PI)
+                                                                        @if ($PI->maSP == $CN->maSP)
+                                                                            @php
+                                                                                $tempImg = $PI->anh;
+                                                                            @endphp
+                                                                            <a
+                                                                                href="{{ route('product.show', $CN->maSP) }}">
+                                                                                <img class="card-img-top hide-from-work"
+                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                    id="{{ $CN->maSP }}"
+                                                                                    alt="..." />
+                                                                            </a>
+                                                                        @endif
+                                                                    @endforeach
+
+                                                                    <!-- Thông tin sản phẩm-->
+                                                                    <div class="card-body p-4 bg- text-light"
+                                                                        style="background-color: black">
+                                                                        <div class="text-center">
+                                                                            <!-- Tên sản phẩm-->
                                                                             <h5 class="fw-bolder"
                                                                                 style="font-size:0.9em">
                                                                                 @php
@@ -524,32 +584,9 @@
                                                                                     $positionOfOpenP = strpos($CN->tenSP, $find);
                                                                                     $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
                                                                                 @endphp
-                                                                                {{ $tenSP }}
-                                                                            </h5>
+                                                                                <a class="link-white"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
 
-                                                                            <!-- Giá sản phẩm trong overlay-->
-                                                                            <span
-                                                                                class="">{{ number_format($CN->giaSP) }}
-                                                                                VND</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    {{-- Hết overlay chi tiết --}}
-                                                                    <!-- Ảnh sản phẩm-->
-                                                                    @foreach ($productImage as $PI)
-                                                                        @if ($PI->maSP == $CN->maSP)
-                                                                            <img class="card-img-top"
-                                                                                style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                alt="..." />
-                                                                        @endif
-                                                                    @endforeach
-                                                                    <!-- Thông tin sản phẩm-->
-                                                                    <div class="card-body p-4 bg-dark text-light">
-                                                                        <div class="text-center">
-                                                                            <!-- Tên sản phẩm-->
-                                                                            <h5 class="fw-bolder"
-                                                                                style="font-size: 0.9em">
-                                                                                {{ $CN->tenSP }}
                                                                             </h5>
 
                                                                             <!-- Giá sản phẩm -->
@@ -559,21 +596,44 @@
                                                                         </div>
                                                                     </div>
                                                                     <!-- Hành động của sản phẩm-->
-                                                                    <div class="card-footer border-top-0 bg-secondary"
-                                                                        style="width: 100%">
-                                                                        <a class="btn btn-outline-light mt-auto text-left"
-                                                                            href="#" style="background-color: navy">Còn
-                                                                            hàng</a>
-                                                                        <a class="btn btn-outline-light mt-auto bg-gradientsecondary text-right"
+                                                                    <div class="card-footer border-top-0 bg-dar d-flex"
+                                                                        style="width: 100%;background-color: black;">
+                                                                        <a class="btn btn-outline-success text-left"
                                                                             href="#"
-                                                                            style="background-color: crimson"><i
-                                                                                class="fa fa-shopping-cart"></i></a>
+                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
+                                                                            hàng</a>
+
+                                                                        <form action="{{ route('cart.store') }}"
+                                                                            method="POST" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <input type="hidden"
+                                                                                value="{{ $CN->maSP }}" name="id">
+                                                                            <input type="hidden"
+                                                                                value="{{ $tenSP }}"
+                                                                                name="name">
+                                                                            <input type="hidden"
+                                                                                value="{{ $CN->giaSP }}"
+                                                                                name="price">
+                                                                            <input type="hidden"
+                                                                                value="{{ $tempImg }}"
+                                                                                name="image">
+                                                                            <input type="hidden" value="1"
+                                                                                name="quantity">
+                                                                            <button
+                                                                                class="btn btn-outline-light  text-right"
+                                                                                style="background-color: crimson"><i
+                                                                                    class="fa fa-shopping-cart"></i></button>
+                                                                        </form>
                                                                     </div>
+
+
                                                                 </div>
+
                                                             </div>
 
                                                         </div>
                                                     @endforeach
+
                                                 </div>
                                             </div>
                                         @endif

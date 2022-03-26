@@ -50,15 +50,19 @@ class SearchController extends Controller
         $priceMin2 = $request->get("priceMin2");
         $priceMax2 = $request->get("priceMax2");
 
-        if ($priceMinInput == null)
+        if ($priceMinInput == null) {
             // $priceMin = 0;
             $priceMin = session()->get('currentPriceMin');
-        else
+            if ($priceMin == null)
+                $priceMin = 0;
+        } else
             $priceMin = $priceMinInput;
-        if ($priceMaxInput == null)
+        if ($priceMaxInput == null) {
             // $priceMax = 10000000000;
             $priceMax = session()->get('currentPriceMax');
-        else
+            if ($priceMax == null)
+                $priceMax = 10000000000;
+        } else
             $priceMax = $priceMaxInput;
         if ($priceMin2 != null && $priceMax2 == null) {
             $priceMin = $priceMin2;
