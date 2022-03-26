@@ -2,13 +2,16 @@
 
 /* Container chứa slide hình ảnh */
 .carousel-container-custom {
-    height: 600;
+    height: 520;
 }
 
+.carousel-main-container-custom {
+    height: 440;
+}
 /* Vật phẩm ảnh trong slide hình ảnh */
 .carousel-item-custom {
-    height: 600;
-    width: 1100px;
+    height: 455;
+    width: 100%;
 }
 
 /* Vật phẩm quảng cáo dưới slide hình ảnh*/

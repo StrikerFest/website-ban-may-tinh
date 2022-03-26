@@ -25,7 +25,7 @@
                                 {{ $sanPham->tenSP }}
                             </div>
                         </div>
-                        {{-- Ảnh, Thông số, Thông tin --}}
+                        {{-- Ảnh, Thông số, Thông tin --------------------- --}}
                         <div class="row">
                             {{-- Container Ảnh --}}
                             <div class="col-md-4 bg-light">
@@ -41,10 +41,16 @@
                                                         class="fa fa-angle-left"></i>
                                                 </div>
                                             </div>
+                                            @php
+                                                $tempImg;
+                                            @endphp
                                             {{-- Ảnh --}}
-                                            <div>
+                                            <div class="hide-from-work">
                                                 @foreach ($productImage as $PI)
                                                     @if ($PI->maSP == $sanPham->maSP)
+                                                        @php
+                                                            $tempImg = $PI->anh;
+                                                        @endphp
                                                         <img class="card-img-top"
                                                             style="height:400px ; width:400px ; "
                                                             src="{{ asset('assets/img/' . $PI->anh) }}" alt="..." />
@@ -62,7 +68,7 @@
                                         {{-- Hết - Div chứa ảnh và mũi tên --}}
 
                                         {{-- Div chứa ảnh khác --}}
-                                        <div class="d-flex width-100 height-auto flex-center">
+                                        <div class="d-flex width-100 height-auto flex-center hide-from-work">
                                             <div class="grid">
                                                 <div class="row">
                                                     @foreach ($productImage as $PI)
@@ -119,27 +125,52 @@
                                         {{-- Thông số --}}
                                         <div>
                                             <ul>
-                                                <li>CPU: AMD R7 5800H</li>
+                                                @php
+                                                    $countSpec = 0;
+                                                @endphp
+                                                @foreach ($productSpec as $PS)
+                                                    @if ($countSpec == 9)
+                                                    @break
+                                                @endif
+                                                @if ($sanPham->maSP == $PS->maSP)
+                                                    @php
+                                                        $countSpec++;
+                                                    @endphp
+                                                    <li>
+                                                        <div class="d-flex">
+                                                            <div
+                                                                class="
+                                                                text-bold text-dark">
+                                                                {{ $PS->tenTS . ' : ' }}
+                                                            </div>
+                                                            <div class="text-danger">
+                                                                {{ strlen($PS->giaTri) > 40 ? ': ' . substr($PS->giaTri, 0, 40) . '...' : ': ' . $PS->giaTri }}
+
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                            {{-- <li>CPU: AMD R7 5800H</li>
                                                 <li>RAM: 8GB</li>
                                                 <li>Ổ cứng: 512GB</li>
                                                 <li>VGA: Onboard</li>
                                                 <li>Màn hình: 60hz</li>
-                                                <li>HĐH: Win11</li>
-                                            </ul>
+                                                <li>HĐH: Win11</li> --}}
+                                        </ul>
 
-                                            <a href="#" class="padding-left-20 link-red">Xem thêm</a>
-                                        </div>
-                                        {{-- Hết - Thông số sản phẩm --}}
+                                        <a href="#productSpec" class="padding-left-20 link-red">Xem thêm</a>
+                                    </div>
+                                    {{-- Hết - Thông số sản phẩm --}}
 
-                                        {{-- Giá sản phẩm --}}
-                                        <div class="padding-top-20">
-                                            <div class="grid border-gray border-radius-10 padding-20">
-                                                {{-- Dòng 1 --}}
-                                                <div class="row">
-                                                    {{-- Giá cuối cùng --}}
-                                                    <div class="col-md-6 text-danger ">
-                                                        <h3>{{ number_format($sanPham->giaSP) }} VNĐ</h3>
-                                                    </div>
+                                    {{-- Giá sản phẩm --}}
+                                    <div class="padding-top-20">
+                                        <div class="grid border-gray border-radius-10 padding-20">
+                                            {{-- Dòng 1 --}}
+                                            <div class="row">
+                                                {{-- Giá cuối cùng --}}
+                                                <div class="col-md-6 text-danger ">
+                                                    <h3>{{ number_format($sanPham->giaSP) }} VNĐ</h3>
                                                 </div>
                                                 {{-- Dòng 2 --}}
                                                 <div class="row">
@@ -153,148 +184,263 @@
                                                         Tiết kiệm {{ number_format($sanPham->giaSP * $sanPham->giamGia / 100) }} VND
                                                     </div>
                                                 </div>
-                                                {{-- Dòng 3 --}}
-                                                <div class="row">
-                                                    {{-- Thẻ --}}
-                                                    <div class="col-md-4">
-                                                        <span class="background-light-gray opacity-85 padding-5">
-                                                            Giá đã có VAT
-                                                        </span>
-                                                    </div>
-                                                    {{-- Thẻ --}}
-                                                    <div class="col-md-6">
+                                            </div>
+                                            {{-- Dòng 3 --}}
+                                            <div class="row">
+                                                {{-- Thẻ --}}
+                                                <div class="col-md-4">
+                                                    <span class="background-light-gray opacity-85 padding-5">
+                                                        Giá đã có VAT
+                                                    </span>
+                                                </div>
+                                                {{-- Thẻ --}}
+                                                {{-- <div class="col-md-6">
                                                         <span class="background-light-gray opacity-85 padding-5">
                                                             Bảo hành 12 tháng
                                                         </span>
-                                                    </div>
-                                                </div>
+                                                    </div> --}}
                                             </div>
                                         </div>
-                                        {{-- Hết - Giá sản phẩm --}}
+                                    </div>
+                                    {{-- Hết - Giá sản phẩm --}}
 
-                                        {{-- Khuyến mãi --}}
-                                        <div class="padding-top-20">
-                                            <div class="border-gray border-radius-25">
-                                                <div
-                                                    class="padding-5 background-light-gray border-top-left-radius-15 border-top-right-radius-15 text-danger padding-left-20 padding-top-5 padding-bottom-5">
-                                                    <i class="fa fa-gift  text-danger"></i> Quà
-                                                    tặng và ưu
-                                                    đãi kèm theo
-                                                </div>
-                                                <div class="padding-10">
-                                                    <h5 class="text-danger">Bộ quà tặng trị giá 1,500,000 VND</h5>
-                                                    <ul>
-                                                        <li>Chuột không dây 1 triệu </li>
-                                                        <li>Tấm lót chuột 200k</li>
-                                                        <li>Bộ vệ sinh laptop 100k</li>
-                                                        <li>Đế làm mát laptop 100k</li>
-                                                    </ul>
-                                                </div>
-
+                                    {{-- Khuyến mãi --}}
+                                    <div class="padding-top-20">
+                                        <div class="border-gray border-radius-25">
+                                            <div
+                                                class="padding-5 background-light-gray border-top-left-radius-15 border-top-right-radius-15 text-danger padding-left-20 padding-top-5 padding-bottom-5">
+                                                <i class="fa fa-gift  text-danger"></i> Quà
+                                                tặng và ưu
+                                                đãi kèm theo
                                             </div>
-                                        </div>
-                                        {{-- Hết -Khuyến mãi --}}
+                                            <div class="padding-top-20 padding-left-20">
+                                                <h5 class="text-danger">Khuyến mãi đặc biệt</h5>
+                                                <ul>
+                                                    @foreach ($productPromotion as $PM)
+                                                        @if ($sanPham->maSP == $PM->maSP)
+                                                            @php
+                                                                echo $PM->khuyenMai;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
 
-                                        {{-- Thêm vào giỏ hàng --}}
-                                        <div class="padding-top-5">
-                                            <div class=" border-radius-25 padding-top-10 padding-left-10">
-                                                <div>
-                                                    <form>
+                                        </div>
+                                    </div>
+                                    {{-- Hết -Khuyến mãi --}}
+
+                                    {{-- Thêm vào giỏ hàng --}}
+                                    <div class="padding-top-5">
+                                        <div
+                                            class=" border-radius-25 padding-top-10 padding-left-10 padding-right-10">
+                                            <div>
+
+                                                @php
+                                                    $find = '(';
+                                                    $positionOfOpenP = strpos($sanPham->tenSP, $find);
+                                                    $tenSP = strlen($sanPham->tenSP) > 40 ? substr($sanPham->tenSP, 0, $positionOfOpenP) . '' : $sanPham->tenSP;
+                                                @endphp
+
+                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="text-center">
                                                         Số lượng:
+                                                        <br>
                                                         <button type="button"
                                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                                                             class="btn btn-danger border-top-left-radius-25 border-bottom-left-radius-25">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
                                                         <input type="number" class="width-10 text-center"
-                                                            name="quantity" value="1">
+                                                            name="quantity" min="1" value="1">
                                                         <button type="button"
                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                                             class="btn btn-danger border-top-right-radius-25 border-bottom-right-radius-25 ">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
-                                                        <button class="btn btn-primary"> <i
-                                                                class="fa fa-shopping-cart"></i>
-                                                            Thêm vào giỏ
-                                                            hàng</button>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                    <input type="hidden" value="{{ $sanPham->maSP }}" name="id">
+                                                    <input type="hidden" value="{{ $tenSP }}" name="name">
+                                                    <input type="hidden" value="{{ $sanPham->giaSP }}"
+                                                        name="price">
+                                                    <input type="hidden" value="{{ $tempImg }}" name="image">
+                                                    {{-- <input type="hidden" value="1" name="quantity"> --}}
+
+
+                                                    <div class="padding-top-5">
+                                                        <div class=" border-radius-25 ">
+                                                            <button class="btn btn-danger width-100 padding-10">
+                                                                <span class="text-bold text-large">Đặt mua
+                                                                    ngay</span>
+                                                                <br>
+                                                                <span class="text-normal">Giao hàng nhanh
+                                                                    chóng</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
 
                                             </div>
-                                        </div>
-                                        {{-- Hết - Thêm vào giỏ hàng --}}
 
-                                        {{-- Nút mua --}}
-                                        <div class="padding-top-5">
+                                        </div>
+                                    </div>
+                                    {{-- Hết - Thêm vào giỏ hàng --}}
+
+                                    {{-- Nút mua --}}
+                                    <form action="{{ route('cart.store') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" value="{{ $sanPham->maSP }}" name="id">
+                                        <input type="hidden" value="{{ $tenSP }}" name="name">
+                                        <input type="hidden" value="{{ $sanPham->giaSP }}" name="price">
+                                        <input type="hidden" value="{{ $tempImg }}" name="image">
+                                        <div class="text-center padding-left-10 padding-right-10">
+                                            Số lượng:
+                                            <br>
+                                            <button type="button"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                class="btn btn-primary border-top-left-radius-25 border-bottom-left-radius-25">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input type="number" class="width-10 text-center" name="quantity"
+                                                min="1" value="1">
+                                            <button type="button"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="btn btn-primary border-top-right-radius-25 border-bottom-right-radius-25 ">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="padding-top-5 padding-left-10 padding-right-10">
                                             <div class=" border-radius-25 ">
-                                                <button class="btn btn-danger width-100 padding-10">
-                                                    <span class="text-bold text-large">Đặt mua ngay</span>
+                                                <button class="btn btn-primary width-100 padding-10">
+                                                    <span class="text-bold text-large">Thêm vào giỏ hàng</span>
                                                     <br>
-                                                    <span class="text-normal">Giao hàng nhanh chóng</span>
+                                                    <span class="text-normal">Tiếp tục mua sắm</span>
                                                 </button>
                                             </div>
                                         </div>
-                                        {{-- Hết - Nút mua --}}
-                                    </div>
+                                    </form>
+
+                                    {{-- Hết - Nút mua --}}
                                 </div>
                             </div>
-                            {{-- Hết - Thông số sản phẩm --}}
 
-                            {{-- Thông tin ngoài --}}
-                            <div class="col-md-3">
-                                {{-- Yên tâm khi mua hàng --}}
-                                <div class="padding-top-20">
-                                    <div class="border-gray border-radius-25">
-                                        <div
-                                            class="padding-5 background-light-gray border-top-left-radius-15 border-top-right-radius-15 text-danger padding-left-20 padding-top-5 padding-bottom-5">
-                                            <i class="fa fa-gift  text-danger"></i> Yên tâm mua hàng
-                                        </div>
-                                        <div class="padding-top-10 padding-bottom-10 padding-right-10">
-                                            <ul>
-                                                <li>Uy tín 10 năm xây dựng và phát triển</li>
-                                                <li>Sản phẩm chính hãng 100%</li>
-                                                <li>Trả bảo hành tận nơi sử d</li>
-                                                <li>Bảo hành tận nơi cho doanh nghiệp</li>
-                                                <li>Ưu đãi riêng cho học sinh, sinh viên</li>
-                                                <li>Vệ sinh máy tính miễn phi trọn đời</li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                {{-- Hết - Yên tâm khi mua hàng --}}
-
-                                {{-- Giao hàng --}}
-                                <div class="padding-top-20">
-                                    <div class="border-gray border-radius-25">
-                                        <div
-                                            class="padding-5 background-light-gray border-top-left-radius-15 border-top-right-radius-15 text-danger padding-left-20 padding-top-5 padding-bottom-5">
-                                            <i class="fa fa-gift  text-danger"></i> Miễn phí giao hàng
-                                        </div>
-                                        <div class="padding-top-10 padding-bottom-10 padding-right-10">
-                                            <ul>
-                                                <li>Giao hàng siêu tốc khu vực nội thành</li>
-                                                <li>Giao hàng toàn quốc miễn phí</li>
-                                                <li>Giao hàng và thanh toán tại nhà ( COD )</li>
-                                                <li>Đội ngũ tư vấn hỗ trợ chuyên nghiệp</li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                {{-- Hết - Giao hàng --}}
-                            </div>
-                            {{-- Hết - Thông tin ngoài --}}
                         </div>
+                        {{-- Hết - Ảnh, Thông số, Thông tin --}}
+
+                        {{-- Thông tin ngoài -------------------- --}}
+                        <div class="col-md-3">
+                            {{-- Yên tâm khi mua hàng ---------------- --}}
+                            <div class="padding-top-20">
+                                <div class="border-gray border-radius-25">
+                                    {{-- Title --}}
+                                    <div
+                                        class="padding-5 background-light-gray border-top-left-radius-15 border-top-right-radius-15 text-danger padding-left-20 padding-top-5 padding-bottom-5">
+                                        <i class="fa fa-gift  text-danger"></i> Yên tâm mua hàng
+                                    </div>
+                                    {{-- Nội dung --}}
+                                    <div class="padding-top-10 padding-bottom-10 padding-right-10">
+                                        <ul>
+                                            <li>Uy tín 10 năm xây dựng và phát triển</li>
+                                            <li>Sản phẩm chính hãng 100%</li>
+                                            <li>Trả bảo hành tận nơi sử d</li>
+                                            <li>Bảo hành tận nơi cho doanh nghiệp</li>
+                                            <li>Ưu đãi riêng cho học sinh, sinh viên</li>
+                                            <li>Vệ sinh máy tính miễn phi trọn đời</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {{-- Hết - Yên tâm khi mua hàng --}}
+
+                            {{-- Giao hàng -------------------- --}}
+                            <div class="padding-top-20">
+                                <div class="border-gray border-radius-25">
+                                    {{-- Title --}}
+                                    <div
+                                        class="padding-5 background-light-gray border-top-left-radius-15 border-top-right-radius-15 text-danger padding-left-20 padding-top-5 padding-bottom-5">
+                                        <i class="fa fa-gift  text-danger"></i> Miễn phí giao hàng
+                                    </div>
+                                    {{-- Nội dung --}}
+                                    <div class="padding-top-10 padding-bottom-10 padding-right-10">
+                                        <ul>
+                                            <li>Giao hàng siêu tốc khu vực nội thành</li>
+                                            <li>Giao hàng toàn quốc miễn phí</li>
+                                            <li>Giao hàng và thanh toán tại nhà ( COD )</li>
+                                            <li>Đội ngũ tư vấn hỗ trợ chuyên nghiệp</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {{-- Hết - Giao hàng --}}
+
+                        </div>
+                        {{-- Hết - Thông tin ngoài --}}
+                    </div>
+                    <div class="row">
+                        {{-- Thông số full -------------------- --}}
+                        <div class="col-md-12 " style="height: auto">
+                            <div class="padding-10" id="productSpec">
+                                <h3>Thông số sản phẩm</h3>
+                                <table class="table-bordered width-100">
+                                    @php
+                                        $countSpec = 0;
+                                    @endphp
+                                    @foreach ($productSpec as $PS)
+                                        @if ($sanPham->maSP == $PS->maSP)
+                                            @php
+                                                $countSpec++;
+                                            @endphp
+                                            <tr>
+                                                <td
+                                                    class=" padding-5
+                                                                text-bold text-dark">
+                                                    {{ $PS->tenTS . ' : ' }}
+                                                </td>
+                                                <td class="padding-5 text-danger">
+                                                    {{ strlen($PS->giaTri) < 0 ? substr($PS->giaTri, 0, 40) . '...' : $PS->giaTri }}
+
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    {{-- <li>CPU: AMD R7 5800H</li>
+                                                <li>RAM: 8GB</li>
+                                                <li>Ổ cứng: 512GB</li>
+                                                <li>VGA: Onboard</li>
+                                                <li>Màn hình: 60hz</li>
+                                                <li>HĐH: Win11</li> --}}
+                                </table>
+                            </div>
+                        </div>
+                        {{-- Hết - Thông số full --}}
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
+            <!-- /.container-fluid -->
         </div>
-
     </div>
-    <!-- End of Page Wrapper -->
-    @include('Customer.Layout.Common.bottom_script')
+
+</div>
+<script>
+    // Trượt xuống id mượt hơn khi ấn link # trong trang
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+<!-- End of Page Wrapper -->
+@include('Customer.Layout.Common.bottom_script')
 </body>
 
 </html>

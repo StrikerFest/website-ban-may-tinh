@@ -17,6 +17,7 @@
                 <!-- Content của trang -->
                 <div class="container-fluid d-flex " {{-- style="position:relative;top: 70px" --}}
                     style="padding: 50px 50px 0px 50px;margin: 0px 50px 100px 50px">
+                    {{-- if (session()->has('khachHang')) { --}}
                     <form action="{{ route('receiptCustomer.store') }}" method="POST">
                         @csrf
                         <div class="grid width-100 text-dark">
@@ -28,45 +29,57 @@
                                     <div class="col-md-12">
                                         <h3>Địa chỉ giao hàng</h3>
                                     </div>
+                                    <div class="col-md-12">
+                                        <h6>Khách hàng có thể điều chỉnh thông tin người nhận hàng và địa chỉ nhận hàng
+                                            tại đây</h6>
+                                    </div>
                                     {{-- Table thông tin khách hàng --}}
                                     <div class="col-md-12">
-                                        <table class="border-gray width-100">
-                                            <tr>
-                                                <td
-                                                    class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
-                                                    Họ tên
-                                                </td>
-                                                <td class="width-75 padding-right-20"><input
-                                                        class="width-100 border-gray" type="text" value="Nguyễn Văn A">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td
-                                                    class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
-                                                    Số
-                                                    điện thoại</td>
-                                                <td class="width-75 padding-right-20"><input
-                                                        class="width-100 border-gray" type="text" value="09748381931">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td
-                                                    class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
-                                                    Email
-                                                </td>
-                                                <td class="width-75 padding-right-20"><input
-                                                        class="width-100 border-gray" type="text" value="NVA@mail.com">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td
-                                                    class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
-                                                    Địa
-                                                    chỉ</td>
-                                                <td class="width-75 padding-right-20"><input
-                                                        class="width-100 border-gray" type="text" value="Viet Nam"></td>
-                                            </tr>
-                                        </table>
+                                        @foreach ($listNguoiDung as $ND)
+                                            <table class="border-gray width-100">
+                                                <tr>
+                                                    <td
+                                                        class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                        Họ tên
+                                                    </td>
+                                                    <td class="width-75 padding-right-20"><input name="receiptName"
+                                                            class="width-100 border-gray" type="text"
+                                                            value="{{ $ND->tenND }}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                        Số
+                                                        điện thoại</td>
+                                                    <td class="width-75 padding-right-20"><input name="receiptPhone"
+                                                            class="width-100 border-gray" type="text"
+                                                            value="0987654321">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                        Email
+                                                    </td>
+                                                    <td class="width-75 padding-right-20"><input name="receiptEmail"
+                                                            class="width-100 border-gray" type="text"
+                                                            value="{{ $ND->emailND }}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                        Địa
+                                                        chỉ nhận hàng</td>
+                                                    <td class="width-75 padding-right-20"><input name="receiptAddress"
+                                                            class="width-100 border-gray" type="text"
+                                                            value="{{ $ND->diaChiND }}">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        @endforeach
+
                                     </div>
                                     {{-- Title hình thức thanh toán --}}
                                     <div class="col-md-12 padding-top-20">
