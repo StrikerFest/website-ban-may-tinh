@@ -33,7 +33,11 @@
     </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2 || session()->get('chucVu') == 3 ){ ?>
+        <?php
+            $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 3->QL sản phẩm
+            if(in_array(1, $arrQH) || in_array(3, $arrQH)){
+        ?>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                 aria-expanded="true" aria-controls="collapseTwo">
@@ -63,11 +67,16 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="{{route('receipt.index')}}">Xem hoá đơn</a>
+                    <a class="collapse-item" href="{{route('paymentMethod.index')}}">Phương thức thanh toán</a>
                 </div>
             </div>
         </li>
 
-        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2 || session()->get('chucVu') == 5 ){ ?>
+        <?php
+            $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 5->QL blog
+            if(in_array(1, $arrQH) || in_array(5, $arrQH)){
+        ?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
@@ -85,7 +94,11 @@
         </li>
         <?php } ?>
 
-        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2){ ?>
+        <?php
+            $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 2->QL nhân sự
+            if(in_array(1, $arrQH) || in_array(2, $arrQH)){
+        ?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -106,7 +119,11 @@
         </li>
         <?php } ?>
 
-        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2 || session()->get('chucVu') == 4 ){ ?>
+        <?php
+            $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 4->QL khách hàng
+            if(in_array(1, $arrQH) || in_array(4, $arrQH)){
+        ?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
@@ -141,8 +158,11 @@
         </li>
         
         <!-- Nav Item - Pages Collapse Menu -->
-        <!-- chucVu 1, 2 (superadmin, admin) -->
-        <?php if(session()->get('chucVu') == 1 || session()->get('chucVu') == 2){ ?>
+        <?php
+            $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 2->QL nhân sự
+            if(in_array(1, $arrQH) || in_array(2, $arrQH)){
+        ?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
                     aria-expanded="true" aria-controls="collapseEight">

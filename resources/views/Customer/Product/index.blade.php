@@ -145,12 +145,12 @@
                                                 <div class="row">
                                                     {{-- Giá cũ --}}
                                                     <div class="col-md-5 text-decoration-line-through">
-                                                        <h5>{{ number_format($sanPham->giaSP + $sanPham->giamGia) }}
+                                                        <h5>{{ number_format($sanPham->giaSP + ($sanPham->giaSP * $sanPham->giamGia / 100)) }}
                                                             VND</h5>
                                                     </div>
                                                     {{-- Giá tiết kiệm --}}
                                                     <div class="col-md-7 text-danger padding-bottom-10">
-                                                        Tiết kiệm {{ number_format($sanPham->giamGia) }} VND
+                                                        Tiết kiệm {{ number_format($sanPham->giaSP * $sanPham->giamGia / 100) }} VND
                                                     </div>
                                                 </div>
                                                 {{-- Dòng 3 --}}

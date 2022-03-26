@@ -34,9 +34,9 @@ class ProductController extends Controller
         $computerNew2 = ProductModel::skip(4)->take(4)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->orderBy('maSP')->get();
 
-        $laptopNew1 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(0)->take(4)->get();
-        $laptopNew2 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(4)->take(4)->get();
-        $laptopNew3 = ProductModel::join('the_loai', 'san_pham.maTL', '=', 'the_loai.maTL')->where('tenTL', 'Laptop gaming')->skip(8)->take(4)->get();
+        $laptopNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(0)->take(4)->get();
+        $laptopNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(4)->take(4)->get();
+        $laptopNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(8)->take(4)->get();
 
 
         return view('Customer.Customer.index', [

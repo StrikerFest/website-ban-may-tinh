@@ -181,7 +181,12 @@
     </div>
     <!-- End of Page Wrapper -->
     @include('Admin.Layout.Common.bottom_script')
-
+    <?php if(session()->has('super')){ ?>
+        alert('{{session()->get('super')}}');
+    <?php } ?>
+    <?php if(session()->has('delete')){ ?>
+        alert('{{session()->get('delete')}}')
+    <?php } ?>
 </body>
 
 </html>

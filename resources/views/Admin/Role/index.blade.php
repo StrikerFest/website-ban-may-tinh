@@ -32,6 +32,7 @@
                                     <tr>
                                         <th>Mã</th>
                                         <th>Tên</th>
+                                        <th>Quyền hạn</th>
                                         <th colspan="2" width="10%">Thao tác</th>
                                     </tr>
                                 </thead>
@@ -43,12 +44,23 @@
                                         <tr>
                                             <td>{{ $CV->maCV }}</td>
                                             <td>{{ $CV->tenCV }}</td>
-                                            <!-- <td>
+                                            <td>
+                                                <ul>
+                                                    <?php 
+                                                        echo(implode('',array_map(function($item)use($CV){
+                                                            if($item->maCV == $CV->maCV){
+                                                                return "<li>".$item->tenQH."</li>";
+                                                            }
+                                                        }, $chucVuQuyenHan))) 
+                                                    ?>
+                                                </ul>
+                                            </td>
+                                            <td>
                                                 <form action="{{route('role.edit', $CV->maCV)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
-                                            </td> -->
+                                            </td>
                                             <td>
                                                 <form action="{{route('role.destroy', $CV->maCV)}}" method="post">
                                                     @method('DELETE')
@@ -117,7 +129,11 @@
     </div>
     <!-- End of Page Wrapper -->
     @include('Admin.Layout.Common.bottom_script')
-
+    <script>
+        <?php if(session()->has('delete')){ ?>
+            alert('{{session()->get('delete')}}')
+        <?php } ?>
+    </script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class AdminEmployeeController extends Controller
 {
@@ -149,8 +150,11 @@ class AdminEmployeeController extends Controller
     public function destroy($id)
     {
         $employee = UserModel::find($id);
-        $employee->delete();
-
-        return redirect(route('employee.index'));
+        try{
+            $employee->delete();
+            return redirect(route('employee.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

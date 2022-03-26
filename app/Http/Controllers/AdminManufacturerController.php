@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ManufacturerModel;
+use Exception;
 
 class AdminManufacturerController extends Controller
 {
@@ -111,8 +112,11 @@ class AdminManufacturerController extends Controller
     public function destroy($id)
     {
         $nhaSanXuat = ManufacturerModel::find($id);
-        $nhaSanXuat->delete();
-
-        return redirect(route('manufacturer.index'));
+        try{
+            $nhaSanXuat->delete();
+            return redirect(route('manufacuturer.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

@@ -99,6 +99,10 @@
     </div>
     <!-- End of Page Wrapper -->
     @include("Admin.Layout.Common.bottom_script")
-
+    <script>
+        <?php if(session()->has('delete')){ ?>
+            alert('{{session()->get('delete')}}')
+        <?php } ?>
+    </script>
 </body>
 </html>

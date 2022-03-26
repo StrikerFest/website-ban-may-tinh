@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BlogStatusModel;
+use Exception;
 
 class AdminBlogStatusController extends Controller
 {
@@ -104,8 +105,11 @@ class AdminBlogStatusController extends Controller
     public function destroy($id)
     {
         $TTBV = BlogStatusModel::find($id);
-        $TTBV->delete();
-
-        return redirect(route('blogStatus.index'));
+        try{
+            $TTBV->delete();
+            return redirect(route('blogStatus.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

@@ -85,7 +85,7 @@
                                             <td>{{$SP->tenSP}}</td>
                                             <td>{{number_format($SP->giaSP)}} VND</td>
                                             <td>{{$SP->soLuong}}</td>
-                                            <td>{{number_format($SP->giamGia)}} VND</td>
+                                            <td>{{$SP->giamGia}}%</td>
                                             <td>
                                                 <?php
                                                     foreach($nhaSanXuat as $NSX){
@@ -218,7 +218,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Discount" name="giamGia" min="0">
+                                            placeholder="Discount" name="giamGia" min="0" max ="100">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -292,6 +292,11 @@
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
     });
+    </script>
+    <script>
+        <?php if(session()->has('delete')){ ?>
+            alert('{{session()->get('delete')}}')
+        <?php } ?>
     </script>
 </body>
 </html>
