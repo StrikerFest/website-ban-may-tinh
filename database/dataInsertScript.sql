@@ -216,19 +216,6 @@ VALUE('Card màn hình NVIDIA T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
 VALUE('Card màn hình NVIDIA T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,'Card đồ họa',28,2000000,1,19,1);
 
--- ==========================================================================================================
--- Bảng Khuyến mãi
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (1, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (2, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (3, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (4, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (5, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (6, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (7, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (8, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (9, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (10, 'Sản phẩm chưa có khuyến mãi');
-INSERT INTO khuyen_mai(`maSP`, `khuyenMai`) VALUE (11, 'Sản phẩm chưa có khuyến mãi');
 
 -- Bang Anh san pham
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'60634_laptop_acer_gaming_predator_triton_500se_10.png');

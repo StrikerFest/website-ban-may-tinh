@@ -23,7 +23,6 @@ return new class extends Migration
             $table->text('noiDung');
             $table->unsignedInteger('maTTBV');
             $table->foreign('maTTBV')->references('maTTBV')->on('tinh_trang_bai_viet');
-            $table->onDelete('cascade');
         });
     }
 
