@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('binh_luan_bai_viet', function(Blueprint $table){
             $table->increments('maBLBV');
             $table->unsignedInteger('maBV');
-            $table->foreign('maBV')->references('maBV')->on('bai_viet');
+            $table->foreign('maBV')->references('maBV')->on('bai_viet')->onDelete('cascade');
             $table->unsignedInteger('maND');
-            $table->foreign('maND')->references('maND')->on('nguoi_dung');
+            $table->foreign('maND')->references('maND')->on('nguoi_dung')->onDelete('cascade');
             $table->dateTime('ngayTao');
             $table->text('noiDung');
         });
