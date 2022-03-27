@@ -99,7 +99,11 @@ class DashboardController extends Controller
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai.maTL = $i
             ")[0];
-            array_push($tiLeDM, ($tiLe->tiLe / $soLuongHDCT * 100));
+            if($soLuongHDCT == 0){
+                array_push($tiLeDM, 0);
+            }else{
+                array_push($tiLeDM, ($tiLe->tiLe / $soLuongHDCT * 100));
+            }
         }
         $tiLeDMC = [];
         $soLuongDMC = DB::table('the_loai_con')->count('maTLC');
@@ -111,7 +115,11 @@ class DashboardController extends Controller
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai_con.maTLC = $i
             ")[0];
-            array_push($tiLeDMC, ($tiLe->tiLe / $soLuongHDCT * 100));
+            if($soLuongHDCT == 0){
+                array_push($tiLeDMC, 0);
+            }else{
+                array_push($tiLeDMC, ($tiLe->tiLe / $soLuongHDCT * 100));
+            }
         }
 
         
