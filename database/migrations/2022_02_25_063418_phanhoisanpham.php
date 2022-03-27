@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('phan_hoi_san_pham', function(Blueprint $table){
             $table->increments('maPHSP');
             $table->unsignedInteger('maND');
-            $table->foreign('maND')->references('maND')->on('nguoi_dung');
+            $table->foreign('maND')->references('maND')->on('nguoi_dung')->onDelete('cascade');
             $table->unsignedInteger('maBLSP');
-            $table->foreign('maBLSP')->references('maBLSP')->on('binh_luan_san_pham');
+            $table->foreign('maBLSP')->references('maBLSP')->on('binh_luan_san_pham')->onDelete('cascade');
             $table->dateTime('ngayTao');
             $table->text('noiDung');
         });
