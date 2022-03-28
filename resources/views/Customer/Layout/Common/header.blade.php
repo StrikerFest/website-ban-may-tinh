@@ -20,8 +20,8 @@
                 <input type="text" class="form-control bg-light border-0 small" name="search"
                     placeholder="Tìm kiếm vật phẩm" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary"">
-                        <i class="                 fas fa-search fa-sm"></i>
+                    <button class=" btn btn-primary">
+                        <i class=" fas fa-search fa-sm"></i>
                     </button>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                 </a>
                 <!-- Dropdown - Thông tin người dùng -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onclick="displayBlock()">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Thông tin khách hàng
                     </a>
@@ -132,6 +132,8 @@
                         Đăng xuất
                     </a>
                 </div>
+
+
             </li>
 
             {{-- Vách ngăn --}}
@@ -244,9 +246,71 @@
 
 
 
+{{-- Thông tin khách hàng --}}
+<div style="display: block" id="profile">
 
+    <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%">
+    </div>
+    <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:25%;z-index:1000">
 
+        <div class="card shadow mb-4">
 
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="fa fa-times border-radius-25" onclick="displayNone()"></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive" style="overflow: hidden">
+                    <form class="user">
+                        <div class="form-group row ">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Tên tài khoản</p>
+                                <p type="text" class="form-control text-black" id="" placeholder="First Name">
+                                    {{ session()->get('tenKhachHang') }}
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-black">Số điện thoại</p>
+                                <p type="text" class="form-control text-black" id="" placeholder="First Name">
+                                    0987654321
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-black">Email</p>
+                            <p type="text" class="form-control text-black" id="" placeholder="First Name">
+                                NVA@mail.com
+                            </p>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Mật khẩu</p>
+                                <input type="password" class="form-control text-black" id="" placeholder="First Name"
+                                    value="matKhauMacDic" readonly>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-black">Đổi thông tin người dùng</p>
+                                <button type="password" class="form-control btn-danger btn-user text-bold" id=""
+                                    placeholder="Repeat Password" style="padding:0">Tùy chỉnh ngay</button>
+                            </div>
+                        </div>
+                        {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            Add data
+                        </a> --}}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

@@ -74,3 +74,13 @@
         this.style.height = (this.scrollHeight) + "px";
     }
 </script>
+
+<script>
+    function displayBlock() {
+        document.getElementById("profile").style.display = "block";
+    }
+
+    function displayNone() {
+        document.getElementById("profile").style.display = "none";
+    }
+</script>
