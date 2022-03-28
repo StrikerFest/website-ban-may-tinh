@@ -41,8 +41,29 @@ class DashboardController extends Controller
         AND hoa_don.maTTHD != 3
         ")[0];
 
+        //Doanh thu theo năm (dự kiến)
+        $doanhThuNamDuKien = DB::select("
+        SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuNamDuKien
+        FROM hoa_don_chi_tiet
+        JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+        WHERE YEAR(hoa_don.ngayTao) = $namHienTai
+        AND hoa_don.maTTHD != 3
+        ")[0];
+
         //Số hoá đơn đang chờ duyệt
         $hoaDonChuaDuyet = DB::table('hoa_don')->where('maTTHD', '=', '2')->count();
+
+        //Tổng số hoá đơn trong tháng
+        $tongHoaDonThang = DB::table('hoa_don')->whereMonth('ngayTao', '=', $thangHienTai)->count();
+
+        //Tổng số lượng sản phẩm bán ra trong tháng
+        $tongSanPhamThang = DB::table('hoa_don_chi_tiet')
+            ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+            ->whereMonth('ngayTao', '=', $thangHienTai)
+            ->sum('soLuong');
+
+        //Tổng số hoá đơn bị huỷ
+        $tongHoaDonHuy = DB::table('hoa_don')->where('maTTHD', '=', '3')->count();
 
 
         //Doanh thu 12 tháng
@@ -154,7 +175,11 @@ class DashboardController extends Controller
                 'doanhThuThang' => $doanhThuThang,
                 'doanhThuNam' => $doanhThuNam,
                 'doanhThuThangDuKien' => $doanhThuThangDuKien,
+                'doanhThuNamDuKien' => $doanhThuNamDuKien,
                 'hoaDonChuaDuyet' => $hoaDonChuaDuyet,
+                'tongHoaDonThang' => $tongHoaDonThang,
+                'tongSanPhamThang' => $tongSanPhamThang,
+                'tongHoaDonHuy' => $tongHoaDonHuy,
                 'doanhThu12Thang' => $doanhThu12Thang,
                 'doanhThuDuKien12Thang' => $doanhThuDuKien12Thang,
                 'namDuocChon' => $namDuocChon,
