@@ -33,10 +33,10 @@
                                                 <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tiêu đề">
                                             </div>
                                             <div class="col-sm-2">
-                                                <input class="form-control" type="date" name="NBD" value="{{$NBD}}">
+                                                <input class="form-control" type="date" name="NBD" value="{{$NBD}}" max="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                             <div class="col-sm-2">
-                                                <input class="form-control" type="date" name="NKT" value="{{$NKT}}">
+                                                <input class="form-control" type="date" name="NKT" value="{{$NKT}}" max="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                             <div class="col-sm-2">
                                                 <button class="btn btn-primary">Tìm kiếm</button>

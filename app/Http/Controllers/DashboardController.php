@@ -75,62 +75,70 @@ class DashboardController extends Controller
         }
         
         //Danh mục bán chạy
-        
         $tenDM = [];
-        $ten = DB::table('the_loai')->get('tenTL')->toArray();
+        $ten = DB::table('the_loai')->orderBy('maTL')->get('tenTL')->toArray();
         for($i=0; $i<sizeof($ten); $i++){
             array_push($tenDM, $ten[$i]->tenTL);
         }
+        $maDM = [];
+        $ma = DB::table('the_loai')->get('maTL')->toArray();
+        for($i=0; $i<sizeof($ma); $i++){
+            array_push($maDM, $ma[$i]->maTL);
+        }
         $tenDMC = [];
-        $ten2 = DB::table('the_loai_con')->get('tenTLC')->toArray();
+        $ten2 = DB::table('the_loai_con')->orderBy('maTLC')->get('tenTLC')->toArray();
         for($i=0; $i<sizeof($ten2); $i++){
             array_push($tenDMC, $ten2[$i]->tenTLC);
         }
-
+        $maDMC = [];
+        $ma2 = DB::table('the_loai_con')->get('maTL')->toArray();
+        for($i=0; $i<sizeof($ma2); $i++){
+            array_push($maDMC, $ma2[$i]->maTL);
+        }
 
         $tiLeDM = [];
         $soLuongDM = DB::table('the_loai')->count('maTL');
-        $soLuongHDCT = DB::table('hoa_don_chi_tiet')->count('maHDCT');
+        $soLuongSanPham = DB::table('hoa_don_chi_tiet')->sum('soLuong');
         for($i = 1; $i <= $soLuongDM; $i++){
             $tiLe = DB::select("
-                SELECT COUNT(hoa_don_chi_tiet.maHDCT) AS tiLe FROM hoa_don_chi_tiet 
+                SELECT SUM(hoa_don_chi_tiet.soLuong) AS tiLe FROM hoa_don_chi_tiet 
                 JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
                 JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai.maTL = $i
             ")[0];
-            if($soLuongHDCT == 0){
+            if($soLuongSanPham == 0){
                 array_push($tiLeDM, 0);
             }else{
-                array_push($tiLeDM, ($tiLe->tiLe / $soLuongHDCT * 100));
+                array_push($tiLeDM, ($tiLe->tiLe / $soLuongSanPham * 100));
             }
         }
         $tiLeDMC = [];
         $soLuongDMC = DB::table('the_loai_con')->count('maTLC');
         for($i = 1; $i <= $soLuongDMC; $i++){
             $tiLe = DB::select("
-                SELECT COUNT(hoa_don_chi_tiet.maHDCT) AS tiLe FROM hoa_don_chi_tiet 
+                SELECT SUM(hoa_don_chi_tiet.soLuong) AS tiLe FROM hoa_don_chi_tiet 
                 JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
                 JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai_con.maTLC = $i
             ")[0];
-            if($soLuongHDCT == 0){
+            if($soLuongSanPham == 0){
                 array_push($tiLeDMC, 0);
             }else{
-                array_push($tiLeDMC, ($tiLe->tiLe / $soLuongHDCT * 100));
+                array_push($tiLeDMC, ($tiLe->tiLe / $soLuongSanPham * 100));
             }
         }
 
-        
         $danhMuc = [];
         for($i = 0; $i < $soLuongDM; $i++){
-            $danhMuc[] = (object) ['name' => $tenDM[$i], 'y'=> $tiLeDM[$i]];
+            $danhMuc[] = (object) ['maDM' => $maDM[$i], 'name' => $tenDM[$i], 'y'=> $tiLeDM[$i]];
         }
         $danhMucCon = [];
         for($i = 0; $i < $soLuongDMC; $i++){
-            $danhMucCon[] = (object) ['name' => $tenDMC[$i], 'y'=> $tiLeDMC[$i]];
+            $danhMucCon[] = (object) ['maDM' => $maDMC[$i], 'name' => $tenDMC[$i], 'y'=> $tiLeDMC[$i]];
         }
+        // dd($danhMucCon);
         
         // Nếu có session của admin - Sửa khi đã có session
         if (session()->has('admin')) {

@@ -388,8 +388,18 @@
 
         //Biểu đồ danh mục bán chạy
         var danhMuc = {!! json_encode($danhMuc, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
-        // var danhMucCon = {!! json_encode($danhMucCon, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
-
+        var danhMucCon = {!! json_encode($danhMucCon, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
+        var colors = Highcharts.getOptions().colors;
+        for(var i = 0; i < danhMuc.length; i++) {
+            danhMuc[i].color = colors[i];
+            
+        }
+        for(var j = 0; j < danhMucCon.length; j++) {
+            var index = (danhMuc.findIndex(x => x.maDM === danhMucCon[j].maDM));
+            danhMucCon[j].color = Highcharts.color(danhMuc[index].color).brighten(0.1).get();
+        }
+        
+        console.log(danhMucCon);
         Highcharts.chart('container2', {
             chart: {
                 type: 'pie'
@@ -415,23 +425,23 @@
                         return this.y > 5 ? this.point.name : null;
                     },
                     color: '#ffffff',
-                    distance: -30
+                    distance: 10
                 }
             }
-            // , {
-            //     name: 'Danh mục con',
-            //     data: 1,
-            //     size: '80%',
-            //     innerSize: '60%',
-            //     dataLabels: {
-            //         formatter: function () {
-            //             // display only if larger than 1
-            //             return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
-            //                 this.y + '%' : null;
-            //         }
-            //     },
-            //     id: 'danh mục con'
-            // }
+            , {
+                name: 'Danh mục con',
+                data: danhMucCon,
+                size: '80%',
+                innerSize: '60%',
+                dataLabels: {
+                    formatter: function () {
+                        // display only if larger than 1
+                        return this.y > 1 ? '<b>' + this.point.name + ':</b> ' +
+                            this.y + '%' : null;
+                    }
+                },
+                id: 'danh mục con'
+            }
             ],
             responsive: {
                 rules: [{
@@ -441,7 +451,7 @@
                     chartOptions: {
                         series: [{
                         }, {
-                            id: 'versions',
+                            id: 'danh mục con',
                             dataLabels: {
                                 enabled: false
                             }
