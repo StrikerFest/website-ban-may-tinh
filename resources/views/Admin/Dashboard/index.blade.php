@@ -405,7 +405,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Danh mục bán chạy'
+                text: 'Biểu đồ danh mục bán chạy'
             },
             plotOptions: {
                 pie: {

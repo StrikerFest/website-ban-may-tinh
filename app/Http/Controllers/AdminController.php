@@ -67,6 +67,7 @@ class AdminController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'phone' => 'required',
             'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
@@ -75,6 +76,7 @@ class AdminController extends Controller
         $admin = new UserModel();
         $admin->tenND = $request->get('name');
         $admin->emailND = $request->get('email');
+        $admin->soDienThoai = $request->get('phone');
         $admin->diaChiND = $request->get('address');
         $admin->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
@@ -127,6 +129,7 @@ class AdminController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND,'. $id,
+            'phone' => 'required',
             'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
@@ -135,6 +138,7 @@ class AdminController extends Controller
         $admin = UserModel::find($id);
         $admin->tenND = $request->get('name');
         $admin->emailND = $request->get('email');
+        $admin->soDienThoai = $request->get('phone');
         $admin->diaChiND = $request->Get('address');
         $admin->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');

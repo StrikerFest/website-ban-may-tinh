@@ -98,14 +98,19 @@ class DashboardController extends Controller
 
         $tiLeDM = [];
         $soLuongDM = DB::table('the_loai')->count('maTL');
-        $soLuongSanPham = DB::table('hoa_don_chi_tiet')->sum('soLuong');
+        $soLuongSanPham = DB::table('hoa_don_chi_tiet')
+            ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+            ->where('hoa_don.maTTHD', '=', '1')
+            ->sum('soLuong');
         for($i = 1; $i <= $soLuongDM; $i++){
             $tiLe = DB::select("
                 SELECT SUM(hoa_don_chi_tiet.soLuong) AS tiLe FROM hoa_don_chi_tiet 
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
                 JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
                 JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai.maTL = $i
+                AND hoa_don.maTTHD = 1
             ")[0];
             if($soLuongSanPham == 0){
                 array_push($tiLeDM, 0);
@@ -117,11 +122,13 @@ class DashboardController extends Controller
         $soLuongDMC = DB::table('the_loai_con')->count('maTLC');
         for($i = 1; $i <= $soLuongDMC; $i++){
             $tiLe = DB::select("
-                SELECT SUM(hoa_don_chi_tiet.soLuong) AS tiLe FROM hoa_don_chi_tiet 
+                SELECT SUM(hoa_don_chi_tiet.soLuong) AS tiLe FROM hoa_don_chi_tiet
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
                 JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
                 JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai_con.maTLC = $i
+                AND hoa_don.maTTHD = 1
             ")[0];
             if($soLuongSanPham == 0){
                 array_push($tiLeDMC, 0);

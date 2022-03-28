@@ -52,13 +52,23 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-inline label">Email</label>
-                                    @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email" required value="{{$nhanVien->emailND}}">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Email</label>
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email" name="email" required value="{{$nhanVien->emailND}}">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Số điện thoại</label>
+                                        @error('phone')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="phone" name="phone" required value="{{$nhanVien->soDienThoai}}">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">

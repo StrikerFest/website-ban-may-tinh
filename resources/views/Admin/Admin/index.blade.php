@@ -98,7 +98,7 @@
                                 {{-- Dòng 1 --}}
                                 <div class="form-group row">
                                     {{-- Tên --}}
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -106,13 +106,21 @@
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Name" name="name" required>
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Email</label>
                                         @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                             placeholder="Email Address" name="email" required>
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Số diện thoại</label>
+                                        @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Phone" name="phone" required>
                                     </div>
                                     {{-- Chức vụ --}}
                                     <input type="hidden" value="2" name="maCV">
