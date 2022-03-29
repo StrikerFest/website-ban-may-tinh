@@ -166,7 +166,30 @@ class DashboardController extends Controller
         for($i = 0; $i < $soLuongDMC; $i++){
             $danhMucCon[] = (object) ['maDM' => $maDMC[$i], 'name' => $tenDMC[$i], 'y'=> $tiLeDMC[$i]];
         }
-        // dd($danhMucCon);
+
+        //Top 5 sản phẩm bán chạy theo danh mục con
+        $ten5SP = [];
+        $soLuong5SP = [];
+        $listDanhMucCon = DB::table('the_loai_con')->get();
+        $maDanhMucConDuocChon = is_null($request->get('danhMucConDuocChon')) ? 1 : $request->get('danhMucConDuocChon');
+        $tenDanhMucConDuocChon = DB::table('the_loai_con')->where('maTLC', '=', $maDanhMucConDuocChon)->get()[0]->tenTLC;
+        $top5SanPham = DB::select("
+            SELECT SUM(hoa_don_chi_tiet.soLuong) AS soLuong, san_pham.tenSP, the_loai_con.tenTLC
+            FROM san_pham
+            JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
+            JOIN hoa_don_chi_tiet ON hoa_don_chi_tiet.maSP = san_pham.maSP
+            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+            WHERE hoa_don.maTTHD = 1
+            AND the_loai_con.maTLC = $maDanhMucConDuocChon
+            GROUP BY san_pham.maSP
+            ORDER BY soLuong DESC, san_pham.maSP ASC
+            LIMIT 5
+        ");
+        for($i = 0; $i < sizeof($top5SanPham); $i++){
+            array_push($ten5SP, $top5SanPham[$i]->tenSP);
+            array_push($soLuong5SP, (int)$top5SanPham[$i]->soLuong);
+        }
+        // dd($ten5SP, $soLuong5SP, $top5SanPham);
         
         // Nếu có session của admin - Sửa khi đã có session
         if (session()->has('admin')) {
@@ -187,6 +210,11 @@ class DashboardController extends Controller
                 'namLonNhat' => $namLonNhat,
                 'danhMuc' => $danhMuc,
                 'danhMucCon' => $danhMucCon,
+                'ten5SP' => $ten5SP,
+                'soLuong5SP' => $soLuong5SP,
+                'listDanhMucCon' => $listDanhMucCon,
+                'maDanhMucConDuocChon' => $maDanhMucConDuocChon,
+                'tenDanhMucConDuocChon' => $tenDanhMucConDuocChon,
             ]);
         } else {
             return Redirect::route('administrator/login')->with("error", "Không được làm vậy bro");
