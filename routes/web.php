@@ -65,11 +65,12 @@ Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard
 Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('CheckLogin')->name('admin.')->group(function () {
     Route::post('product/updateSpecial/{id}', [AdminProductController::class, "updateSpecial"])->name('product.updateSpecial');
     Route::resource('product', AdminProductController::class);
 });
-Route::prefix('admin')->group(function () {
+// Route::prefix('admin')->group(function () {
+Route::group(['prefix'=>'admin', 'middleware'=>'CheckLogin'], function () {
     Route::resource('customer', AdminCustomerController::class);
     Route::resource('admin', AdminController::class);
     Route::resource('employee', AdminEmployeeController::class);
