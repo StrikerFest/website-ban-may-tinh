@@ -49,7 +49,7 @@
                                             {{ $dataError }}
                                         </div>
                                     @endisset
-                                    <form class="user" action="{{ route('loginProcess') }}" method="POST">
+                                    <form class="user" action="{{ route('customerCustomer.store') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" name="email"

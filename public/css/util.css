@@ -437,6 +437,10 @@ a.link-white:active {
     text-decoration: line-through;
 }
 
+.text-black {
+    color: black;
+}
+
 .text-bold {
     font-weight: 800 !important;
 }

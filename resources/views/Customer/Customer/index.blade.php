@@ -2454,27 +2454,27 @@
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
     <script>
-        const toolbox = document.getElementById('product-test');
-        const hoverObject = document.getElementsByClassName('product-item');
-        toolbox.style.display = "none";
-        for (let i = 0; i < hoverObject.length; i++) {
-            hoverObject[i].addEventListener('mouseenter', () => {
-                toolbox.style.display = "block";
-            });
+        // const toolbox = document.getElementById('product-test');
+        // const hoverObject = document.getElementsByClassName('product-item');
+        // toolbox.style.display = "none";
+        // for (let i = 0; i < hoverObject.length; i++) {
+        //     hoverObject[i].addEventListener('mouseenter', () => {
+        //         toolbox.style.display = "block";
+        //     });
 
-            hoverObject[i].addEventListener('mouseleave', () => {
-                toolbox.style.display = "none";
-            });
+        //     hoverObject[i].addEventListener('mouseleave', () => {
+        //         toolbox.style.display = "none";
+        //     });
 
-            toolbox.addEventListener('mouseenter', () => {
-                toolbox.style.display = "block";
-            });
+        //     toolbox.addEventListener('mouseenter', () => {
+        //         toolbox.style.display = "block";
+        //     });
 
-            toolbox.addEventListener('mouseleave', () => {
-                toolbox.style.display = "none";
-            });
-        }
-        toolbox.style.display = "none";
+        //     toolbox.addEventListener('mouseleave', () => {
+        //         toolbox.style.display = "none";
+        //     });
+        // }
+        // toolbox.style.display = "none";
     </script>
     <script>
         let circle = document.getElementById('product-test');
@@ -2484,13 +2484,13 @@
         let spec = document.getElementById('product-test-spec');
 
         const onMouseMove = (e) => {
-            circle.style.left = (e.pageX + 100) + 'px';
-            circle.style.top = e.pageY + 'px';
+            // circle.style.left = (e.pageX + 100) + 'px';
+            // circle.style.top = e.pageY + 'px';
         }
         document.addEventListener('mousemove', onMouseMove);
 
         document.onmouseover = function(e) {
-            console.log("ProductID:::", e.target.id);
+            // console.log("ProductID:::", e.target.id);
             const maSP = document.getElementById("CN-maSP");
             const tenSP = document.getElementById("CN-tenSP");
             const giaSP = document.getElementById("CN-giaSP");
@@ -2505,7 +2505,7 @@
         }
 
         document.onmouseleave = function(e) {
-            console.log("ProductID:::", e.target.id);
+            // console.log("ProductID:::", e.target.id);
             const maSP = document.getElementById("CN-maSP");
             const tenSP = document.getElementById("CN-tenSP");
             const giaSP = document.getElementById("CN-giaSP");

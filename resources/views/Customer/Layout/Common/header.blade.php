@@ -20,8 +20,8 @@
                 <input type="text" class="form-control bg-light border-0 small" name="search"
                     placeholder="Tìm kiếm vật phẩm" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary"">
-                        <i class="        fas fa-search fa-sm"></i>
+                    <button class=" btn btn-primary">
+                        <i class=" fas fa-search fa-sm"></i>
                     </button>
                 </div>
             </div>
@@ -108,35 +108,39 @@
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - Icon và thông tin người dùng -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{-- Tên người dùng --}}
-                    <span class="mr-2 d-none d-lg-inline text-white small">{{ session()->get('tenKhachHang') }}</span>
-                    {{-- Ảnh người dùng --}}
-                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                </a>
+            <li class="nav-item dropdown no-arrow ">
+                @if (session()->has('khachHang'))
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{-- Tên người dùng --}}
+                        <span
+                            class="mr-2 d-none d-lg-inline text-white small">{{ session()->get('tenKhachHang') }}</span>
+
+                        {{-- Ảnh người dùng --}}
+                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                    </a>
+                @else
+                    <br>
+                    <a href="" class="link-white justify-content-center align-items-center">Đăng nhập ngay</a>
+                @endif
                 <!-- Dropdown - Thông tin người dùng -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onclick="displayBlockProfile()">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
+                        Thông tin khách hàng
                     </a>
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
+                        Hóa đơn khách hàng
                     </a>
                     <div class="dropdown-divider"></div>
-                    {{-- Nút logout --}}
-                    <a class="dropdown-item" href="{{ route('logout') }}" {{-- data-toggle="modal" data-target="#logoutModal --}} ">
-                        <i class="                      fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
+                    <a class="dropdown-item" href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Đăng xuất
                     </a>
                 </div>
+
+
             </li>
 
             {{-- Vách ngăn --}}
@@ -249,11 +253,214 @@
 
 
 
+{{-- Thông tin khách hàng --}}
+<div style="display: block" id="profile">
+
+    <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
+        onclick="displayNoneProfile()">
+    </div>
+    <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
+
+        <div class="card shadow mb-4">
+
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="fa fa-times border-radius-25" onclick="displayNoneProfile()"></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive" style="overflow: hidden">
+                    <form class="user">
+                        <div class="form-group row ">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Tên tài khoản</p>
+                                <p type="text" class="form-control text-black" placeholder="First Name">
+                                    {{ session()->get('tenKhachHang') }}
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-black">Số điện thoại</p>
+                                <p type="text" class="form-control text-black" placeholder="First Name">
+                                    0987654321
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-black">Email</p>
+                            <p type="text" class="form-control text-black" placeholder="First Name">
+                                NVA@mail.com
+                            </p>
+                        </div>
+
+                        {{-- <form method="POST" action="{{ route('changePasswordCustomer.store') }}">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Current
+                                    Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control"
+                                        name="current_password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">New
+                                    Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="new_password" type="password" class="form-control"
+                                        name="new_password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">New Confirm
+                                    Password</label>
+
+                                <div class="col-md-6">
+                                    <input id="new_confirm_password" type="password" class="form-control"
+                                        name="new_confirm_password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Update Password
+                                    </button>
+                                </div>
+                            </div>
+                        </form> --}}
+                        <div class="form-group row">
+
+                            <div class="col-sm-12">
+                                <button type="button" class="form-control btn-danger btn-user text-bold"
+                                    placeholder="Repeat Password" style="padding:0">Thay đổi thông tin khách
+                                    hàng</button>
+                            </div>
+                        </div>
+                        {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            Add data
+                        </a> --}}
+                    </form>
+                    <form action="{{ route('changePasswordCustomer.store') }}" method="POST">
+                        @csrf
+
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-12 mb-sm-0">
+                                <p class="text-black">Mật khẩu hiện tại</p>
+                                <input type="password" class="form-control" name="current_password">
+                            </div>
 
 
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Mật khẩu mới</p>
+                                <input type="password" class="form-control" name="new_password">
+                            </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Mật khẩu mới xác nhận lại</p>
+                                <input type="password" class="form-control" name="new_confirm_password">
+                            </div>
 
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <p class="text-white">.</p>
+                                <button class="form-control btn-danger btn-user text-bold"
+                                    placeholder="Repeat Password" style="padding:0">Đổi mật khẩu</button>
 
+                            </div>
+                            @foreach ($errors->all() as $error)
+                                <div class="col-md-6">
+                                    <p class="text-danger">{{ $error }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+{{-- Them moi khách hàng --}}
+<div style="display: none" id="profile">
+
+    <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
+        onclick="displayNone()">
+    </div>
+    <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
+
+        <div class="card shadow mb-4">
+
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="fa fa-times border-radius-25" onclick="displayNone()"></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive" style="overflow: hidden">
+                    <form method="POST" action="{{ route('customerCustomer.store') }}">
+
+                        @csrf
+                        <div class="form-group row ">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Tên khách hàng</p>
+                                <input type="text" class="form-control text-black" name="newName"
+                                    placeholder="Nhập tên khách hàng">
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-black">Số điện thoại</p>
+                                <input type="text" class="form-control text-black" name="newPhone"
+                                    placeholder="Số điện thoại">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-black">Email</p>
+                            <input type="email" class="form-control text-black" name="newEmail"
+                                placeholder="Nhập email">
+                        </div>
+                        <div class="form-group">
+                            <p class="text-black">Địa chỉ</p>
+                            <input type="text" class="form-control text-black" name="newAddress"
+                                placeholder="Nhập địa chỉ">
+                        </div>
+                        <p class="text-black">Password</p>
+                        <input type="password" class="form-control" name="newPassword" placeholder="Nhập password"
+                            autocomplete="current-password">
+                </div>
+                <div class="form-group row">
+
+                    <div class="col-sm-12">
+                        <button type="submit" class="form-control btn-danger btn-user text-bold"
+                            placeholder="Repeat Password" style="padding:0">Đăng ký ngay</button>
+                    </div>
+                </div>
+                {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            Add data
+                        </a> --}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 
 
@@ -435,20 +642,15 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
                 </a>
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                <a class="dropdown-item" href="#">
+                    <a href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    </a>
                 </a>
             </div>
         </li>

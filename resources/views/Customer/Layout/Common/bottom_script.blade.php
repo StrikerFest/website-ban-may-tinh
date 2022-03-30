@@ -74,3 +74,21 @@
         this.style.height = (this.scrollHeight) + "px";
     }
 </script>
+
+<script>
+    function displayBlockProfile() {
+        document.getElementById("profile").style.display = "block";
+    }
+
+    function displayNoneProfile() {
+        document.getElementById("profile").style.display = "none";
+    }
+
+    function displayBlockCreateCustomer() {
+        document.getElementById("createCustomer").style.display = "block";
+    }
+
+    function displayNoneCreateCustomer() {
+        document.getElementById("createCustomer").style.display = "none";
+    }
+</script>
