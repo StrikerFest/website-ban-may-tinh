@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Exception;
 
 class AdminCustomerController extends Controller
 {
@@ -51,6 +52,7 @@ class AdminCustomerController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'phone' => 'required',
             'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
@@ -59,6 +61,7 @@ class AdminCustomerController extends Controller
         $customer = new UserModel();
         $customer->tenND = $request->get('name');
         $customer->emailND = $request->get('email');
+        $customer->soDienThoai = $request->get('phone');
         $customer->diaChiND = $request->get('address');
         $customer->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
@@ -109,6 +112,7 @@ class AdminCustomerController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND,'. $id,
+            'phone' => 'required',
             'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
@@ -117,6 +121,7 @@ class AdminCustomerController extends Controller
         $khachHang = UserModel::find($id);
         $khachHang->tenND = $request->get('name');
         $khachHang->emailND = $request->get('email');
+        $khachHang->soDienThoai = $request->get('phone');
         $khachHang->diaChiND = $request->get('address');
         $khachHang->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
@@ -138,8 +143,11 @@ class AdminCustomerController extends Controller
     public function destroy($id)
     {
         $customer = UserModel::find($id);
-        $customer->delete();
-
-        return redirect(route('customer.index'));
+        try{
+            $customer->delete();
+            return redirect(route('customer.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ReceiptStatusModel;
+use Exception;
 
 
 class AdminReceiptStatusController extends Controller
@@ -106,8 +107,11 @@ class AdminReceiptStatusController extends Controller
     public function destroy($id)
     {
         $TTHD = ReceiptStatusModel::find($id);
-        $TTHD->delete();
-
-        return redirect(route('receiptStatus.index'));
+        try{
+            $TTHD->delete();
+            return redirect(route('receiptStatus.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

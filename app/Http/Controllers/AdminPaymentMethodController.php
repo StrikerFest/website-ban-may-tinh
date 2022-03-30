@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PaymentMethodModel;
+use Exception;
 
 class AdminPaymentMethodController extends Controller
 {
@@ -105,8 +106,11 @@ class AdminPaymentMethodController extends Controller
     public function destroy($id)
     {
         $PTTT = PaymentMethodModel::find($id);
-        $PTTT->delete();
-
-        return redirect(route('paymentMethod.index'));
+        try{
+            $PTTT->delete();
+            return redirect(route('paymentMethod.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

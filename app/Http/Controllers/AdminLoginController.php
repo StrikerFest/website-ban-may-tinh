@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserModel;
+use App\Models\RolePermissionModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -53,10 +54,18 @@ class AdminLoginController extends Controller
                     // })
                     ->where('quyen_han.maQH', '!=', '6')
                     ->firstOrFail();
+                
+                $quyenHan = RolePermissionModel::where('maCV', '=', $admin->maCV)->get('maQH');
+                $arrQuyenHan = [];
+                for($i = 0; $i < sizeof($quyenHan); $i++){
+                    array_push($arrQuyenHan, $quyenHan[$i]->maQH);
+                }
+                
                 // tạo biến session - Sửa thành phần theo db mới
                 $request->session()->put('admin', $admin->maND);
                 $request->session()->put('tenAdmin', $admin->tenND);
                 $request->session()->put('chucVu', $admin->maCV);
+                $request->session()->put('quyenHan', $arrQuyenHan);
                 // chuyển sang dashBoard
                 return Redirect::route('dashBoard');
 

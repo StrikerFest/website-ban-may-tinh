@@ -118,13 +118,23 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-inline label">Email</label>
-                                    @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address" name="email" required>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Email</label>
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email" name="email" required>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Số điện thoại</label>
+                                        @error('phone')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="phone" name="phone" required>
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -177,7 +187,11 @@
     </div>
     <!-- End of Page Wrapper -->
     @include('Admin.Layout.Common.bottom_script')
-
+    <script>
+        <?php if(session()->has('delete')){ ?>
+            alert('{{session()->get('delete')}}')
+        <?php } ?>
+    </script>
 </body>
 
 </html>

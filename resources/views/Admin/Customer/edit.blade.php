@@ -28,7 +28,7 @@
                                     @method('PUT')
                                     @csrf
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tên</label>
                                         @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -36,13 +36,21 @@
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             placeholder="Name" name="name" required value="{{$khachHang->tenND}}">
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label class="form-inline label">Email</label>
                                         @error('email')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail"
                                             placeholder="Email Address" name="email" required value="{{$khachHang->emailND}}">
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Số điện thoại</label>
+                                        @error('phone')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Phone" name="phone" required value="{{$khachHang->soDienThoai}}">
                                     </div>
                                     {{-- Chức vụ --}}
                                     <input type="hidden" value="{{$khachHang->maCV}}" name="maCV">

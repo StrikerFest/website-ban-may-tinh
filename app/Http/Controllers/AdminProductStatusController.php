@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductStatusModel;
+use Exception;
 
 class AdminProductStatusController extends Controller
 {
@@ -105,8 +106,11 @@ class AdminProductStatusController extends Controller
     public function destroy($id)
     {
         $TTSP = ProductStatusModel::find($id);
-        $TTSP->delete();
-
-        return redirect(route('productStatus.index'));
+        try{
+            $TTSP->delete();
+            return redirect(route('productStatus.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

@@ -8,6 +8,7 @@ use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
 use App\Models\PromotionModel;
 use Illuminate\Http\Request;
+use Exception;
 
 class AdminProductController extends Controller
 {
@@ -75,7 +76,7 @@ class AdminProductController extends Controller
             'giaSP' => 'required|numeric|min:0',
             'moTa' => 'required|min:3',
             'soLuong' => 'required|numeric|min:0',
-            'giamGia' => 'required|numeric|min:0',
+            'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
@@ -149,7 +150,7 @@ class AdminProductController extends Controller
             'giaSP' => 'required|numeric|min:0',
             'moTa' => 'required|min:3',
             'soLuong' => 'required|numeric|min:0',
-            'giamGia' => 'required|numeric|min:0',
+            'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
@@ -178,9 +179,12 @@ class AdminProductController extends Controller
     public function destroy($id)
     {
         $sanPham = ProductModel::find($id);
-        $sanPham->delete();
-
-        return redirect(route('admin.product.index'));
+        try{
+            $sanPham->delete();
+            return redirect(route('product.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 
     public function updateSpecial(Request $request, $id)

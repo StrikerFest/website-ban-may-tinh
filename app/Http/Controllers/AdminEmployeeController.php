@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class AdminEmployeeController extends Controller
 {
@@ -58,6 +59,7 @@ class AdminEmployeeController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'phone' => 'required',
             'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
@@ -66,6 +68,7 @@ class AdminEmployeeController extends Controller
         $employee = new UserModel();
         $employee->tenND = $request->get('name');
         $employee->emailND = $request->get('email');
+        $employee->soDienThoai = $request->get('phone');
         $employee->diaChiND = $request->Get('address');
         $employee->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
@@ -120,6 +123,7 @@ class AdminEmployeeController extends Controller
         $validate = $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND,'. $id,
+            'phone' => 'required',
             'address' => 'required|min:3',
             'password' => 'required|min:3',
             'maCV' => 'required'
@@ -128,6 +132,7 @@ class AdminEmployeeController extends Controller
         $nhanVien = UserModel::find($id);
         $nhanVien->tenND = $request->get('name');
         $nhanVien->emailND = $request->get('email');
+        $nhanVien->soDienThoai = $request->get('phone');
         $nhanVien->diaChiND = $request->Get('address');
         $nhanVien->matKhauND = $request->get('password');
         $matKhau2 = $request->get('password2');
@@ -149,8 +154,11 @@ class AdminEmployeeController extends Controller
     public function destroy($id)
     {
         $employee = UserModel::find($id);
-        $employee->delete();
-
-        return redirect(route('employee.index'));
+        try{
+            $employee->delete();
+            return redirect(route('employee.index'));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }

@@ -56,6 +56,7 @@ class ReceiptController extends Controller
         $hoaDon->maKH = $id;
         $hoaDon->ngayTao =  date("Y/m/d");
         $hoaDon->diaChi =  $request->receiptAddress;
+        $hoaDon->soDienThoai = $request->get('receiptPhone');
         if ($request->paymentMethod == "COD") {
             $hoaDon->maPTTT = 1;
         } else if ($request->paymentMethod == "online") {
@@ -63,7 +64,7 @@ class ReceiptController extends Controller
         }
 
 
-        $hoaDon->maTTHD = 1;
+        $hoaDon->maTTHD = 2;
 
         $hoaDon->save();
 

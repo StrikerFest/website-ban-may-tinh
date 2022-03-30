@@ -107,10 +107,10 @@ class AdminReceiptController extends Controller
         $hoaDonChiTiet = DB::select("
             SELECT 
                 san_pham.tenSP,
-                san_pham.giamGia,
+                hoa_don_chi_tiet.giamGia,
                 hoa_don_chi_tiet.soLuong,
                 hoa_don_chi_tiet.giaSP,
-                ((hoa_don_chi_tiet.giaSP - san_pham.giamGia) * hoa_don_chi_tiet.soLuong) AS thanhTien
+                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS thanhTien
                 FROM hoa_don_chi_tiet
                 JOIN san_pham
                 ON hoa_don_chi_tiet.maSP = san_pham.maSP
@@ -118,7 +118,7 @@ class AdminReceiptController extends Controller
         ");
         $tongTien = DB::select("
         SELECT
-            sum((hoa_don_chi_tiet.giaSP - san_pham.giamGia) * hoa_don_chi_tiet.soLuong) as tong
+            sum((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) as tong
             FROM hoa_don_chi_tiet
             JOIN san_pham
             ON hoa_don_chi_tiet.maSP = san_pham.maSP
@@ -154,6 +154,7 @@ class AdminReceiptController extends Controller
     {
         $hoaDon = ReceiptModel::find($id);
         $hoaDon->maTTHD = $request->get('maTTHD');
+        $hoaDon->maNV = session()->get('admin');
         $hoaDon->save();
 
         return redirect()->back();

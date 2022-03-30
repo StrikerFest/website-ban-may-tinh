@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CategoryModel;
 use App\Models\SubCategoryModel;
+use Exception;
 
 class AdminSubCategoryController extends Controller
 {
@@ -117,8 +118,12 @@ class AdminSubCategoryController extends Controller
     public function destroy($id)
     {
         $TLC = SubCategoryModel::find($id);
-        $TLC->delete();
         $maTL = $TLC->maTL;
-        return redirect(route('subCategory.index', $maTL));
+        try{
+            $TLC->delete();
+            return redirect(route('subCategory.index', $maTL));
+        }catch(Exception $e){
+            return back()->with('delete', "Xung đột khoá ngoại!");
+        }
     }
 }
