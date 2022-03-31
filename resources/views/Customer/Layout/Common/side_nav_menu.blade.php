@@ -33,6 +33,7 @@
 
     <!-- Nav Item - Máy tính bàn -->
     <li class="nav-item">
+        {{-- Title --}}
         <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-desktop sidenav-header"></i>
@@ -48,7 +49,6 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">PC theo hãng :</h6>
                                     @foreach ($listNhaSanXuat as $NSX)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
                                         <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
                                             method="GET">
                                             @csrf
@@ -136,16 +136,67 @@
             <i class="fas fa-laptop sidenav-header"></i>
             <span>Laptop</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white collapse-inner rounded " style="width: 400%">
+                <div class="grid">
+                    <div class="row">
+                        @foreach ($listTheLoaiCha as $TLCha)
+                            @if ($TLCha->tenTL == 'Laptop')
+                                {{-- Laptop theo hãng --}}
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Laptop theo hãng :</h6>
+                                    @foreach ($listNhaSanXuat as $NSX)
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
+                                            method="GET">
+                                            @csrf
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100"
+                                                href="">{{ $NSX->tenNSX }}</button>
+                                        </form>
+                                    @endforeach
+                                    <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Laptop theo nhu cầu:</h6>
+                                    @foreach ($listTheLoaiLaptop as $TL)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <a class="collapse-item"
+                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Laptop theo giá:</h6>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
+                                        10
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
+                                        -
+                                        20
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
+                                        -
+                                        30
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
+                                        -
+                                        50
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
+                                        triệu</a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
         </div>
     </li>
@@ -178,17 +229,68 @@
             <i class="fas fa-cog sidenav-header"></i>
             <span>Linh kiện </span>
         </a>
-        <div id="collapseHardware" class="collapse" aria-labelledby="headingPages"
+        <div id="collapseHardware" style="margin-top: -40px" class="collapse" aria-labelledby="headingTwo"
             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+            <div class="bg-white collapse-inner rounded " style="width: 400%">
+                <div class="grid">
+                    <div class="row">
+                        @foreach ($listTheLoaiCha as $TLCha)
+                            @if ($TLCha->tenTL == 'Laptop')
+                                {{-- Laptop theo hãng --}}
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Linh kiện theo hãng :</h6>
+                                    @foreach ($listNhaSanXuat as $NSX)
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
+                                            method="GET">
+                                            @csrf
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100"
+                                                href="">{{ $NSX->tenNSX }}</button>
+                                        </form>
+                                    @endforeach
+                                    <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Linh kiện theo nhu cầu:</h6>
+                                    @foreach ($listTheLoaiLinhKien as $TL)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <a class="collapse-item"
+                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Linh kiện theo giá:</h6>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
+                                        10
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
+                                        -
+                                        20
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
+                                        -
+                                        30
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
+                                        -
+                                        50
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
+                                        triệu</a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
         </div>
     </li>
@@ -198,17 +300,68 @@
             <i class="fas fa-headphones sidenav-header"></i>
             <span>Phụ kiện</span>
         </a>
-        <div id="collapseAccessories" class="collapse" aria-labelledby="headingPages"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+        <div id="collapseAccessories" class="collapse" aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar" style="margin-top: -100px">
+            <div class="bg-white collapse-inner rounded " style="width: 400%">
+                <div class="grid">
+                    <div class="row">
+                        @foreach ($listTheLoaiCha as $TLCha)
+                            @if ($TLCha->tenTL == 'Laptop')
+                                {{-- Laptop theo hãng --}}
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Phu kiện theo hãng :</h6>
+                                    @foreach ($listNhaSanXuat as $NSX)
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
+                                            method="GET">
+                                            @csrf
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100"
+                                                href="">{{ $NSX->tenNSX }}</button>
+                                        </form>
+                                    @endforeach
+                                    <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Phu kiện theo nhu cầu:</h6>
+                                    @foreach ($listTheLoaiPhuKien as $TL)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <a class="collapse-item"
+                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Phu kiện theo giá:</h6>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
+                                        10
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
+                                        -
+                                        20
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
+                                        -
+                                        30
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
+                                        -
+                                        50
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
+                                        triệu</a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
         </div>
     </li>
@@ -218,25 +371,77 @@
 
     <!-- Heading -->
     <div class="sidebar-heading sidenav-header">
-        Văn phòng phẩm
+        Thiết bị khác
     </div>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapsePrinter"
             aria-expanded="true" aria-controls="collapsePrinter">
-            <i class="fas fa-print sidenav-header"></i>
-            <span>Máy in</span>
+            <i class="fas fa-tv sidenav-header"></i>
+            <span>Màn hình</span>
         </a>
-        <div id="collapsePrinter" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+        <div id="collapsePrinter" style="margin-top: -200px" class="collapse" aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar">
+            <div class="bg-white collapse-inner rounded " style="width: 400%">
+                <div class="grid">
+                    <div class="row">
+                        @foreach ($listTheLoaiCha as $TLCha)
+                            @if ($TLCha->tenTL == 'Laptop')
+                                {{-- Laptop theo hãng --}}
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Linh kiện theo hãng :</h6>
+                                    @foreach ($listNhaSanXuat as $NSX)
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
+                                            method="GET">
+                                            @csrf
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100"
+                                                href="">{{ $NSX->tenNSX }}</button>
+                                        </form>
+                                    @endforeach
+                                    <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Linh kiện theo nhu cầu:</h6>
+                                    @foreach ($listTheLoaiManHinh as $TL)
+                                        {{-- Create item page for this - show in controller - Manufacture --}}
+                                        <a class="collapse-item"
+                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="collapse-header text-danger">Linh kiện theo giá:</h6>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
+                                        10
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
+                                        -
+                                        20
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
+                                        -
+                                        30
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
+                                        -
+                                        50
+                                        triệu</a>
+                                    <a class="collapse-item"
+                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
+                                        triệu</a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
         </div>
     </li>
@@ -244,18 +449,16 @@
         <a class="nav-link collapsed sidenav-text" href="#" data-toggle="collapse" data-target="#collapseOther"
             aria-expanded="true" aria-controls="collapseOther">
             <i class="fas fa-laptop sidenav-header"></i>
-            <span>Khác</span>
+            <span>Danh mục khác</span>
         </a>
-        <div id="collapseOther" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseOther" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar"
+            style="position: absolute;bottom: 100px">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                <h6 class="collapse-header">Nhiều hơn nữa trong danh sách các danh mục</h6>
+                <a class="collapse-item" href="login.html">Danh sách danh mục</a>
+
                 <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+
             </div>
         </div>
     </li>
