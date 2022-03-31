@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller
 {
     // Cart list
     public function cartList()
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         $listTheLoaiMayTinhBan = DB::table(
             'the_loai_con'
         )->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
@@ -30,6 +34,9 @@ class CartController extends Controller
     // store
     public function addToCart(Request $request)
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         \Cart::add([
             'id' => $request->id,
             'name' => $request->name,
@@ -46,6 +53,9 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         \Cart::update(
             $request->id,
             [
@@ -63,6 +73,9 @@ class CartController extends Controller
 
     public function removeCart(Request $request)
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         \Cart::remove($request->id);
         session()->flash('success', 'Sản phẩm được loại bỏ thành công !');
 
@@ -71,6 +84,9 @@ class CartController extends Controller
 
     public function clearAllCart()
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         \Cart::clear();
 
         session()->flash('success', 'Tất cả sản phẩm đã được loại bỏ thành công !');

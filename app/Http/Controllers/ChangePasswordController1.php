@@ -27,7 +27,9 @@ class ChangePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        dd("Herer");
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         $request->validate([
             'current_password' => ["required", new MatchOldPassword],
             'new_password' => ['required'],
