@@ -219,7 +219,7 @@
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
                     Sản phẩm
                 </a>
             </li>
@@ -233,7 +233,7 @@
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.create') }}">
                     Liên hệ
                 </a>
             </li>
@@ -241,7 +241,7 @@
         <div class="nav-item-container">
             <li class="nav-item ">
                 <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
-                    Tư vấn
+                    Chính sách
                 </a>
             </li>
         </div>

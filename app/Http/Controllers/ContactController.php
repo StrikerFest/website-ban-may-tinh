@@ -21,7 +21,7 @@ class ContactController extends Controller
         $listTheLoaiMayTinhBan = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
         $listTheLoaiCha = DB::table('the_loai')->get();
         // dd($cartItems);
-        return view('Customer.Customer.contact', [
+        return view('Customer.Customer.contact2', [
             'cartItems' =>  $cartItems,
             'listTheLoaiCha' =>  $listTheLoaiCha,
             'listNhaSanXuat' =>  $listNhaSanXuat,
@@ -37,6 +37,17 @@ class ContactController extends Controller
     public function create()
     {
         //
+        $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
+        $cartItems = \Cart::getContent();
+        $listTheLoaiMayTinhBan = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
+        $listTheLoaiCha = DB::table('the_loai')->get();
+        // dd($cartItems);
+        return view('Customer.Customer.contact', [
+            'cartItems' =>  $cartItems,
+            'listTheLoaiCha' =>  $listTheLoaiCha,
+            'listNhaSanXuat' =>  $listNhaSanXuat,
+            'listTheLoaiMayTinhBan' =>  $listTheLoaiMayTinhBan,
+        ]);
     }
 
     /**
