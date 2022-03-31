@@ -18,7 +18,9 @@ class ChangePasswordController extends Controller
     public function index()
     {
         //
-        dd('index');
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         return Redirect::route('product.index');
     }
 
@@ -41,14 +43,18 @@ class ChangePasswordController extends Controller
     public function store(Request $request)
     {
         //
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         $request->validate([
             'current_password' => ["required"],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-        if (Hash::check($request->get("current_password"), session()->get('matKhau'))) {
+        if (Hash::check($request->get("current_passworde"), session()->get('matKhau'))) {
             $KH = UserModel::find(session()->get('khachHang'));
             $KH->matKhauND = Hash::make($request->get("new_password"));
+            $request->session()->put('matKhau', Hash::make($request->get("new_password")));
             $KH->save();
         } else
             dd("NO");

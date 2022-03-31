@@ -6,6 +6,7 @@ use App\Models\DetailReceiptModel;
 use App\Models\ReceiptModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ReceiptController extends Controller
 {
@@ -28,6 +29,9 @@ class ReceiptController extends Controller
     public function create()
     {
         //
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         $cartItems = \Cart::getContent();
         $listNguoiDung =
             DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
@@ -48,6 +52,9 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         // Thêm vào hóa đơn
 
         $id = session()->get('khachHang');
@@ -97,7 +104,6 @@ class ReceiptController extends Controller
             // echo "<br>------------------<br>";
             $hoaDonChiTiet->save();
             \Cart::clear();
-
         }
         // die();
         return view('Customer.Receipt.success', [

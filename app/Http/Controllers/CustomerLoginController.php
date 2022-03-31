@@ -20,7 +20,7 @@ class CustomerLoginController extends Controller
         }
         // Nếu không có session, quay lại đăng nhập
         else {
-            return view('Customer.customerLogin');
+            return Redirect::route('product.index');
         }
     }
 
@@ -46,14 +46,16 @@ class CustomerLoginController extends Controller
                     $request->session()->put('khachHang', $user->maND);
                     $request->session()->put('tenKhachHang', $user->tenND);
                     $request->session()->put('matKhau', $user->matKhauND);
+                    $request->session()->put('soDienThoai', $user->soDienThoai);
+                    $request->session()->put('email', $user->emailND);
                     return Redirect::route('product.index');
                 } else {
-                    return Redirect::route('login')->with("error", "Email hoặc mật khẩu của bạn đã sai");
+                    return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai");
                 }
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
-                return Redirect::route('login')->with("error", "Đã có lỗi");
+                return Redirect::route('product.index')->with("error", "Đã có lỗi");
             }
         }
     }
@@ -64,11 +66,17 @@ class CustomerLoginController extends Controller
         // Nếu có session
         if (session()->has('khachHang')) {
             session()->pull('khachHang');
-            return Redirect::route('login');
+            \Cart::clear();
+            return Redirect::route('product.index');
+            // return Redirect::route('login');
         }
         // Nếu không có session
         else {
-            return Redirect::route('login')->with("error", "Đăng nhập trước bro");
+            return Redirect::route('product.index')->with(
+                "error",
+                "Đăng nhập trước bro"
+            );
+            // return Redirect::route('login')->with("error", "Đăng nhập trước bro");
         }
     }
 }

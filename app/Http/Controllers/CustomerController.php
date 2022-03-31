@@ -39,10 +39,12 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+
         $validate = $request->validate([
             'newName' => 'required|min:3',
             'newEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
             'newAddress' => 'required|min:3',
+            'newPhone' => 'required|min:3',
             'newPassword' => 'required|min:3',
         ]);
 
@@ -50,6 +52,7 @@ class CustomerController extends Controller
         // Lấy các thông tin từ
         $customer->tenND = $request->get('newName');
         $customer->emailND = $request->get('newEmail');
+        $customer->soDienThoai = $request->get('newPhone');
         $customer->diaChiND = $request->get('newAddress');
         $customer->matKhauND = Hash::make($request->get('newPassword'));
         $customer->maCV = DB::table('chuc_vu')->where('tenCV', 'Khách hàng')->first()->maCV;
@@ -57,7 +60,10 @@ class CustomerController extends Controller
         $customer->save();
 
         // Quay về danh sách Admin
-        return Redirect::route('login');
+        return Redirect::route('product.index')->with(
+            "success",
+            "Tạo tài khoản thành công - Mời bạn đăng nhập"
+        );
     }
 
     /**
@@ -92,6 +98,31 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $validated = $request->validate([]);
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        $request->session()->put('tenKhachHang',  $request->get(
+            'updateName'
+        ));
+        $request->session()->put('soDienThoai', $request->get(
+            'updatePhone'
+        ));
+        $request->session()->put('email', $request->get('updateEmail'));
+
+        $ND = UserModel::find($id);
+
+        $ND->tenND = $request->get(
+            'updateName'
+        );
+        $ND->soDienThoai = $request->get(
+            'updatePhone'
+        );
+        $ND->emailND = $request->get('updateEmail');
+
+        $ND->save();
+
+        return Redirect::route('product.index');
     }
 
     /**
