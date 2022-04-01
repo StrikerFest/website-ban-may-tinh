@@ -455,7 +455,7 @@
             style="position: absolute;bottom: 100px">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Nhiều hơn nữa trong danh sách các danh mục</h6>
-                <a class="collapse-item" href="login.html">Danh sách danh mục</a>
+                <a class="collapse-item" href="{{ route('categoryListCustomer.index') }}">Danh sách danh mục</a>
 
                 <div class="collapse-divider"></div>
 
