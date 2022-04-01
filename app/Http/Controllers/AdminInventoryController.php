@@ -80,7 +80,7 @@ class AdminInventoryController extends Controller
         ->join('nhap_kho', 'nhap_kho.maNK', '=', 'nhap_kho_chi_tiet.maNK')
         ->where('san_pham.maSP', '=', $maSP)
         ->orderBy('nhap_kho.ngayNhap', 'DESC')
-        ->get();
+        ->paginate(10);
 
         $tenNPP = DB::table('san_pham')
             ->join('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'san_pham.maNPP')

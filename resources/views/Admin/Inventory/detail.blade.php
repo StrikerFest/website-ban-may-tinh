@@ -49,6 +49,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                {{$sanPham->links('')}}
                                 <button class="btn btn-primary" onclick="window.location='{{ route("inventory.index") }}'">
                                     Quay lại
                                 </button>
