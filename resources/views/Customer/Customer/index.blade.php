@@ -2338,104 +2338,6 @@
                 </div>
                 {{-- Kết thúc - Linh kiện máy tính --}}
 
-                {{-- Mẫu table --}}
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {{-- Mẫu form --}}
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
-                                    </div>
-                                </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Add data
-                                </a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -2454,27 +2356,27 @@
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
     <script>
-        const toolbox = document.getElementById('product-test');
-        const hoverObject = document.getElementsByClassName('product-item');
-        toolbox.style.display = "none";
-        for (let i = 0; i < hoverObject.length; i++) {
-            hoverObject[i].addEventListener('mouseenter', () => {
-                toolbox.style.display = "block";
-            });
+        // const toolbox = document.getElementById('product-test');
+        // const hoverObject = document.getElementsByClassName('product-item');
+        // toolbox.style.display = "none";
+        // for (let i = 0; i < hoverObject.length; i++) {
+        //     hoverObject[i].addEventListener('mouseenter', () => {
+        //         toolbox.style.display = "block";
+        //     });
 
-            hoverObject[i].addEventListener('mouseleave', () => {
-                toolbox.style.display = "none";
-            });
+        //     hoverObject[i].addEventListener('mouseleave', () => {
+        //         toolbox.style.display = "none";
+        //     });
 
-            toolbox.addEventListener('mouseenter', () => {
-                toolbox.style.display = "block";
-            });
+        //     toolbox.addEventListener('mouseenter', () => {
+        //         toolbox.style.display = "block";
+        //     });
 
-            toolbox.addEventListener('mouseleave', () => {
-                toolbox.style.display = "none";
-            });
-        }
-        toolbox.style.display = "none";
+        //     toolbox.addEventListener('mouseleave', () => {
+        //         toolbox.style.display = "none";
+        //     });
+        // }
+        // toolbox.style.display = "none";
     </script>
     <script>
         let circle = document.getElementById('product-test');
@@ -2484,13 +2386,13 @@
         let spec = document.getElementById('product-test-spec');
 
         const onMouseMove = (e) => {
-            circle.style.left = (e.pageX + 100) + 'px';
-            circle.style.top = e.pageY + 'px';
+            // circle.style.left = (e.pageX + 100) + 'px';
+            // circle.style.top = e.pageY + 'px';
         }
         document.addEventListener('mousemove', onMouseMove);
 
         document.onmouseover = function(e) {
-            console.log("ProductID:::", e.target.id);
+            // console.log("ProductID:::", e.target.id);
             const maSP = document.getElementById("CN-maSP");
             const tenSP = document.getElementById("CN-tenSP");
             const giaSP = document.getElementById("CN-giaSP");
@@ -2505,7 +2407,7 @@
         }
 
         document.onmouseleave = function(e) {
-            console.log("ProductID:::", e.target.id);
+            // console.log("ProductID:::", e.target.id);
             const maSP = document.getElementById("CN-maSP");
             const tenSP = document.getElementById("CN-tenSP");
             const giaSP = document.getElementById("CN-giaSP");

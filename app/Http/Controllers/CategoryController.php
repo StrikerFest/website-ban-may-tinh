@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductImageModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -47,6 +48,9 @@ class CategoryController extends Controller
      */
     public function show(Request $request, $id)
     {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
         // Lấy thể loại
         $theLoaiCha1 = $request->get("theLoaiCha");
         if ($theLoaiCha1 != null) {

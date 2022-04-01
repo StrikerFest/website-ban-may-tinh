@@ -48,6 +48,7 @@ class ManufacturerController extends Controller
      */
     public function show(Request $request, $id)
     {
+
         // Kiểm tra cho vào session thể loại cha
         $theLoaiCha1 = $request->get("theLoaiCha");
         if ($theLoaiCha1 != null) {

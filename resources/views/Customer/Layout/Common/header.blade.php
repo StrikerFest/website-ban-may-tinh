@@ -20,8 +20,8 @@
                 <input type="text" class="form-control bg-light border-0 small" name="search"
                     placeholder="Tìm kiếm vật phẩm" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary"">
-                        <i class="        fas fa-search fa-sm"></i>
+                    <button class=" btn btn-primary">
+                        <i class=" fas fa-search fa-sm"></i>
                     </button>
                 </div>
             </div>
@@ -108,35 +108,40 @@
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - Icon và thông tin người dùng -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{-- Tên người dùng --}}
-                    <span class="mr-2 d-none d-lg-inline text-white small">{{ session()->get('tenKhachHang') }}</span>
-                    {{-- Ảnh người dùng --}}
-                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                </a>
+            <li class="nav-item dropdown no-arrow ">
+                @if (session()->has('khachHang'))
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{-- Tên người dùng --}}
+                        <span
+                            class="mr-2 d-none d-lg-inline text-white small">{{ session()->get('tenKhachHang') }}</span>
+
+                        {{-- Ảnh người dùng --}}
+                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                    </a>
+                @else
+                    <br>
+                    <a href="#" class="link-white justify-content-center align-items-center"
+                        onclick="displayBlockLogin()">Đăng nhập ngay</a>
+                @endif
                 <!-- Dropdown - Thông tin người dùng -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#" onclick="displayBlockProfile()">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
+                        Thông tin khách hàng
                     </a>
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
+                        Hóa đơn khách hàng
                     </a>
                     <div class="dropdown-divider"></div>
-                    {{-- Nút logout --}}
-                    <a class="dropdown-item" href="{{ route('logout') }}" {{-- data-toggle="modal" data-target="#logoutModal --}} ">
-                        <i class="                      fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
+                    <a class="dropdown-item" href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Đăng xuất
                     </a>
                 </div>
+
+
             </li>
 
             {{-- Vách ngăn --}}
@@ -235,7 +240,7 @@
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
                     Tư vấn
                 </a>
             </li>
@@ -249,11 +254,261 @@
 
 
 
+{{-- Thông tin khách hàng --}}
+<div style="display: none" id="profile">
+
+    <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
+        onclick="displayNoneProfile()">
+    </div>
+    <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
+
+        <div class="card shadow mb-4">
+
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="fa fa-times border-radius-25" onclick="displayNoneProfile()"></button>
+                    </div>
+                </div>
+
+            </div>
+            @php
+                $check = false;
+                if (session()->has('khachHang')) {
+                    $check = true;
+                }
+            @endphp
+            @isset($check)
+                <div class="card-body">
+                    <div class="table-responsive" style="overflow: hidden">
+
+                        <form class="user" method="POST"
+                            action="{{ route('customerCustomer.update', session()->get('khachHang') ?? 0) }}">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group row ">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <p class="text-black">Tên tài khoản</p>
+                                    <input type="text" class="form-control text-black" placeholder="Tên tài khoản"
+                                        value="{{ session()->get('tenKhachHang') }}" name="updateName">
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="text-black">Số điện thoại</p>
+                                    <input type="text" class="form-control text-black"
+                                        placeholder="Số điện thoại tài khoản" value="{{ session()->get('soDienThoai') }}"
+                                        name="updatePhone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-black">Email</p>
+                                <input type="text" class="form-control text-black" placeholder="Email" name="updateEmail"
+                                    value="{{ session()->get('email') }}">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="form-control btn-danger btn-user text-bold"
+                                        style="padding:0">Thay đổi thông tin khách
+                                        hàng</button>
+                                </div>
+                            </div>
+                            {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            Add data
+                        </a> --}}
+                        </form>
+                        <form action="{{ route('changePasswordCustomer.store') }}" method="POST">
+                            @csrf
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-12 mb-sm-0">
+                                    <p class="text-black">Mật khẩu hiện tại</p>
+                                    <input type="password" class="form-control" name="current_password">
+                                </div>
 
 
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <p class="text-black">Mật khẩu mới</p>
+                                    <input type="password" class="form-control" name="new_password">
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <p class="text-black">Mật khẩu mới xác nhận lại</p>
+                                    <input type="password" class="form-control" name="new_confirm_password">
+                                </div>
+
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <p class="text-white">.</p>
+                                    <button class="form-control btn-danger btn-user text-bold"
+                                        placeholder="Repeat Password" style="padding:0">Đổi mật khẩu</button>
+
+                                </div>
+                                @foreach ($errors->all() as $error)
+                                    <div class="col-md-6">
+                                        <p class="text-danger">{{ $error }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            @endisset
+        </div>
+    </div>
+</div>
+
+{{-- Them moi khách hàng --}}
+<div style="display: none" id="createCustomer">
+
+    <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
+        onclick="displayNoneCreateCustomer()">
+    </div>
+    <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
+
+        <div class="card shadow mb-4">
+
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="fa fa-times border-radius-25" onclick="displayNoneCreateCustomer()"></button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive" style="overflow: hidden">
+                    <form method="POST" action="{{ route('customerCustomer.store') }}">
+
+                        @csrf
+                        <div class="form-group row ">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p class="text-black">Tên khách hàng</p>
+                                <input type="text" class="form-control text-black" name="newName"
+                                    placeholder="Nhập tên khách hàng">
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-black">Số điện thoại</p>
+                                <input type="text" class="form-control text-black" name="newPhone"
+                                    placeholder="Số điện thoại">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p class="text-black">Email</p>
+                            <input type="email" class="form-control text-black" name="newEmail"
+                                placeholder="Nhập email">
+                        </div>
+                        <div class="form-group">
+                            <p class="text-black">Địa chỉ</p>
+                            <input type="text" class="form-control text-black" name="newAddress"
+                                placeholder="Nhập địa chỉ">
+                        </div>
+                        <p class="text-black">Password</p>
+                        <input type="password" class="form-control" name="newPassword" placeholder="Nhập password"
+                            autocomplete="current-password">
+                </div>
+                <div class="form-group row">
+
+                    <div class="col-sm-12">
+                        <button type="submit" class="form-control btn-danger btn-user text-bold"
+                            placeholder="Repeat Password" style="padding:0">Đăng ký ngay</button>
+                    </div>
+                </div>
+                {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+                            Add data
+                        </a> --}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Đăng nhập --}}
+@php
+$dataError = Session::get('error');
+$dataSuccess = Session::get('success');
+
+@endphp
+@if ($dataError || $dataSuccess)
+    <div style="display: block" class="row justify-content-center" id="login">
+    @else
+        <div style="display: none" class="row justify-content-center" id="login">
+@endif
+<div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
+    onclick="displayNoneLogin()">
+</div>
+<div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
+
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-danger">Đăng nhập</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="fa fa-times border-radius-25" onclick="displayNoneLogin()"></button>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive" style="overflow: hidden">
+                <form action="{{ route('loginProcess') }}" method="POST" class="user">
+
+                    @csrf
+                    @php
+                        $dataError = Session::get('error');
+                        $dateSuccess = Session::get('success');
+                    @endphp
+                    @isset($dataError)
+                        <div class="alert alert-danger">
+                            {{ $dataError }}
+                        </div>
+                    @endisset
+                    @isset($dateSuccess)
+                        <div class="alert alert-success">
+                            {{ $dateSuccess }}
+                        </div>
+                    @endisset
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-user" name="email"
+                            aria-describedby="emailHelp" placeholder="Nhập email của bạn">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-user" name="password"
+                            placeholder="Nhập mật khẩu của bạn">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox small">
+                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                            <label class="custom-control-label" for="customCheck">Nhớ mật khẩu</label>
+                        </div>
+                    </div>
+                    <button class="btn text-light btn-user btn-block" style="background-color: red">
+                        Đăng nhập
+                    </button>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <a class="small link-red" href="forgot-password.html">Quên mật khẩu?</a> |
+                    <a class="small link-red" href="#" onclick="displayBlockCreateCustomer(), displayNoneLogin()">Đăng
+                        ký ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-
+</div>
+</div>
 
 
 
@@ -435,20 +690,15 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
                 </a>
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                <a class="dropdown-item" href="#">
+                    <a href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    </a>
                 </a>
             </div>
         </li>

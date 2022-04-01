@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserModel;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
-class ContactController extends Controller
+class ChangePasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +18,10 @@ class ContactController extends Controller
     public function index()
     {
         //
-
-        $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
-        $cartItems = \Cart::getContent();
-        $listTheLoaiMayTinhBan = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
-        $listTheLoaiCha = DB::table('the_loai')->get();
-        // dd($cartItems);
-        return view('Customer.Customer.contact', [
-            'cartItems' =>  $cartItems,
-            'listTheLoaiCha' =>  $listTheLoaiCha,
-            'listNhaSanXuat' =>  $listNhaSanXuat,
-            'listTheLoaiMayTinhBan' =>  $listTheLoaiMayTinhBan,
-        ]);
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        return Redirect::route('product.index');
     }
 
     /**
@@ -48,9 +43,28 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        $request->validate([
+            'current_password' => ["required"],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+        if (Hash::check($request->get("current_passworde"), session()->get('matKhau'))) {
+            $KH = UserModel::find(session()->get('khachHang'));
+            $KH->matKhauND = Hash::make($request->get("new_password"));
+            $request->session()->put('matKhau', Hash::make($request->get("new_password")));
+            $KH->save();
+        } else
+            dd("NO");
+        // UserModel::find(session()->get('khachHang'))->update(['matKhauND' => Hash::make($request->new_password)]);
+
+
+        return Redirect::route('product.index');
     }
 
-    /**
+    /**e
      * Display the specified resource.
      *
      * @param  int  $id

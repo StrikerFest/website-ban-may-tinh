@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 // Controller quản lý login của khách hàng
@@ -19,7 +20,7 @@ class CustomerLoginController extends Controller
         }
         // Nếu không có session, quay lại đăng nhập
         else {
-            return view('Customer.customerLogin');
+            return Redirect::route('product.index');
         }
     }
 
@@ -40,15 +41,21 @@ class CustomerLoginController extends Controller
         // khi không có session - Sửa khi có db
         else {
             try {
-                $user = UserModel::where('emailND', $email)->where('matKhauND', $password)->firstOrFail();
-
-                $request->session()->put('khachHang', $user->maND);
-                $request->session()->put('tenKhachHang', $user->tenND);
-                return Redirect::route('product.index');
+                $user = UserModel::where('emailND', $email)->first();
+                if (Hash::check($password, $user->matKhauND)) {
+                    $request->session()->put('khachHang', $user->maND);
+                    $request->session()->put('tenKhachHang', $user->tenND);
+                    $request->session()->put('matKhau', $user->matKhauND);
+                    $request->session()->put('soDienThoai', $user->soDienThoai);
+                    $request->session()->put('email', $user->emailND);
+                    return Redirect::route('product.index');
+                } else {
+                    return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai");
+                }
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
-                return Redirect::route('login')->with("error", "Email hoặc mật khẩu của bạn đã sai");
+                return Redirect::route('product.index')->with("error", "Đã có lỗi");
             }
         }
     }
@@ -59,11 +66,17 @@ class CustomerLoginController extends Controller
         // Nếu có session
         if (session()->has('khachHang')) {
             session()->pull('khachHang');
-            return Redirect::route('login');
+            \Cart::clear();
+            return Redirect::route('product.index');
+            // return Redirect::route('login');
         }
         // Nếu không có session
         else {
-            return Redirect::route('login')->with("error", "Đăng nhập trước bro");
+            return Redirect::route('product.index')->with(
+                "error",
+                "Đăng nhập trước bro"
+            );
+            // return Redirect::route('login')->with("error", "Đăng nhập trước bro");
         }
     }
 }

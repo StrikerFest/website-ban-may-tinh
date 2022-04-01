@@ -36,7 +36,9 @@ use App\Http\Controllers\AdminInventoryController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MoneyCategoryController;
 use App\Http\Controllers\ProductController;
@@ -140,6 +142,13 @@ Route::resource('moneyCategoryCustomer', MoneyCategoryController::class);
 Route::resource('searchCustomer', SearchController::class);
 
 Route::resource('contactCustomer', ContactController::class);
+
+Route::resource('customerCustomer', CustomerController::class);
+
+Route::resource('changePasswordCustomer', ChangePasswordController::class);
+
+// Route::get('change-password', 'ChangePasswordController@index');
+// Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
 
 
