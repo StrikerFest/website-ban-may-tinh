@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nguoi_dung', function(Blueprint $table){
-            $table->increments('maND');
-            $table->string('tenND', 50);
-            $table->string('emailND', 75)->unique();
+        Schema::create('nha_phan_phoi', function(Blueprint $table){
+            $table->increments('maNPP');
+            $table->string('tenNPP', 50);
+            $table->string('diaChiNPP', 300);
             $table->string('soDienThoai', 15);
-            $table->string('diaChiND', 400);
-            $table->string('matKhauND', 200);
-            $table->unsignedInteger('maCV');
-            $table->foreign('maCV')->references('maCV')->on('chuc_vu');
         });
     }
 
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nguoi_dung');
+        Schema::drop_if_exists('nha_phan_phoi');
     }
 };

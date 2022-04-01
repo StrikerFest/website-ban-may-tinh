@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giá</label>
                                         @error('giaSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -47,22 +47,14 @@
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Price" name="giaSP" min="0" value="{{$SP->giaSP}}">
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Số lượng</label>
-                                        @error('soLuong')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Quantity" name="soLuong" value="{{$SP->soLuong}}">
-                                    </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giảm giá</label>
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Discount" name="giamGia" min="0" max="100" value="{{$SP->giamGia}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +68,21 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Nhà phân phối</label>
+                                        @error('maNPP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <select class="form-control" name="maNPP">
+                                            <option value="" disabled selected hidden>Supplier</option>
+                                            @foreach($nhaPhanPhoi as $NPP)
+                                                <option value="{{ $NPP->maNPP }}" <?php echo($SP->maNPP == $NPP->maNPP? "selected": "") ?>>
+                                                    {{ $NPP->tenNPP }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -90,7 +96,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>

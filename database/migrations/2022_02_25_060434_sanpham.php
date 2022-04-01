@@ -18,10 +18,12 @@ return new class extends Migration
             $table->string('tenSP', 200);
             $table->double('giaSP');
             $table->text('moTa');
-            $table->unsignedInteger('soLuong');
+            $table->unsignedInteger('soLuong')->default('0');
             $table->unsignedInteger('giamGia')->default('0');
             $table->unsignedInteger('maNSX');
             $table->foreign('maNSX')->references('maNSX')->on('nha_san_xuat');
+            $table->unsignedInteger('maNPP');
+            $table->foreign('maNPP')->references('maNPP')->on('nha_phan_phoi');
             $table->unsignedInteger('maTLC');
             $table->foreign('maTLC')->references('maTLC')->on('the_loai_con');
             $table->unsignedInteger('maTTSP');

@@ -26,6 +26,7 @@ class AdminBlogController extends Controller
         //lấy ngày tạo nhỏ nhất của bảng blog
         $start = date_format(date_create(BlogModel::get('ngayTao')->min('ngayTao')),"Y-m-d");
         //lấy ngày hiện tại
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $end = date('Y-m-d');
         
         $NBD = is_null($request->get('NBD')) ? $start : $request->get('NBD');
@@ -36,6 +37,10 @@ class AdminBlogController extends Controller
             $NBD = $NKT;
             $NKT = $temp;
         }
+
+        $NKTquery = strtotime($NKT)+23*60*60+59*60+59;
+        $NKTquery = date('Y-m-d H:i:s', $NKTquery);
+
 
         $nhanVien = UserModel::all();
 

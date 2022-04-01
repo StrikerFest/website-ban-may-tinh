@@ -92,6 +92,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             <select class="form-control" name="maTS[]">
+                                                <option value="" disabled selected hidden>Status</option>
                                                 @foreach($thongSo as $TS)
                                                     <option value="{{ $TS->maTS }}">{{ $TS->tenTS }}</option>
                                                 @endforeach
@@ -135,6 +136,7 @@
                 html += '<div class="col-sm-5">\
                             <label class="form-inline label">Thông số</label>\
                             <select class="form-control" name="maTS[]">\
+                            <option value="" disabled selected hidden>Product</option>\
                                 @foreach($thongSo as $TS)\
                                     <option value="{{ $TS->maTS }}">{{ $TS->tenTS }}</option>\
                                 @endforeach\
@@ -142,7 +144,7 @@
                         </div>\
                         <div class="col-sm-5">\
                             <label class="form-inline label">Giá trị</label>\
-                            <input class="form-control" type="text" name="giaTri[]">\
+                            <input class="form-control" type="text" name="giaTri[]" placeholder="Value">\
                         </div>\
                         <div class="col-sm-2">\
                             <label class="form-inline label">Xoá</label>\

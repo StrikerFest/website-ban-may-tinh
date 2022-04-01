@@ -7,6 +7,7 @@ use App\Models\ManufacturerModel;
 use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
 use App\Models\PromotionModel;
+use App\Models\SupplierModel;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -27,6 +28,8 @@ class AdminProductController extends Controller
 
         $theLoaiCon = SubCategoryModel::get();
 
+        $nhaPhanPhoi = SupplierModel::get();
+
         $tinhTrangSanPham = ProductStatusModel::get();
         // dd($searchName, $searchManufacturer, $searchSubCategory);
         $sanPham = ProductModel::join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
@@ -46,6 +49,7 @@ class AdminProductController extends Controller
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
+            "nhaPhanPhoi" => $nhaPhanPhoi,
             "sanPham" => $sanPham,
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
@@ -75,9 +79,9 @@ class AdminProductController extends Controller
             'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP',
             'giaSP' => 'required|numeric|min:0',
             'moTa' => 'required|min:3',
-            'soLuong' => 'required|numeric|min:0',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
+            'maNPP' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
@@ -86,9 +90,9 @@ class AdminProductController extends Controller
         $sanPham->tenSP = $request->get('tenSP');
         $sanPham->giaSP = $request->get('giaSP');
         $sanPham->moTa = $request->get('moTa');
-        $sanPham->soLuong = $request->get('soLuong');
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
+        $sanPham->maNPP = $request->get('maNPP');
         $sanPham->maTLC = $request->get('maTLC');
         $sanPham->maTTSP = $request->get('maTTSP');
         $sanPham->save();
@@ -126,12 +130,15 @@ class AdminProductController extends Controller
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
+        $nhaPhanPhoi = SupplierModel::get();
+
         $SP = ProductModel::find($id);
         
         return view('Admin.Product.edit', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
+            "nhaPhanPhoi" => $nhaPhanPhoi,
             "SP" => $SP,
         ]);
     }
@@ -149,9 +156,9 @@ class AdminProductController extends Controller
             'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP,'. $id,
             'giaSP' => 'required|numeric|min:0',
             'moTa' => 'required|min:3',
-            'soLuong' => 'required|numeric|min:0',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
+            'maNPP' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
@@ -160,9 +167,9 @@ class AdminProductController extends Controller
         $SP->tenSP = $request->get('tenSP');
         $SP->giaSP = $request->get('giaSP');
         $SP->moTa = $request->get('moTa');
-        $SP->soLuong = $request->get('soLuong');
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
+        $SP->maNPP = $request->get('maNPP');
         $SP->maTLC = $request->get('maTLC');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();
@@ -180,8 +187,10 @@ class AdminProductController extends Controller
     {
         $sanPham = ProductModel::find($id);
         try{
+            $khuyenMai = PromotionModel::where('maSP', '=', $id);
+            $khuyenMai->delete();
             $sanPham->delete();
-            return redirect(route('product.index'));
+            return redirect(route('admin.product.index'));
         }catch(Exception $e){
             return back()->with('delete', "Xung đột khoá ngoại!");
         }

@@ -74,6 +74,29 @@
 
         <?php
             $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 3->QL sản phẩm
+            if(in_array(1, $arrQH) || in_array(3, $arrQH)){
+        ?>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-box"></i>
+                <span>Quản lý kho</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="{{route('inventory.index')}}">Kho</a>
+                    <a class="collapse-item" href="{{route('import.index')}}">Nhập kho</a>
+                    <a class="collapse-item" href="{{route('supplier.index')}}">Nhà phân phối</a>
+                </div>
+            </div>
+        </li>
+        <?php } ?>
+
+        <?php
+            $arrQH = session()->get('quyenHan');
             //Mã QH: 1->là Admin, 5->QL blog
             if(in_array(1, $arrQH) || in_array(5, $arrQH)){
         ?>

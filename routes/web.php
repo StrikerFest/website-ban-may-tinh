@@ -30,6 +30,9 @@ use App\Http\Controllers\AdminDetailReceiptController;
 use App\Http\Controllers\AdminBannerImageController;
 use App\Http\Controllers\AdminPromotionController;
 use App\Http\Controllers\AdminSubCategoryController;
+use App\Http\Controllers\AdminSupplierController;
+use App\Http\Controllers\AdminImportController;
+use App\Http\Controllers\AdminInventoryController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -104,6 +107,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>'CheckLogin'], function () {
     Route::resource('subCategory', AdminSubCategoryController::class)->except(['index']);
     Route::get('promotion/{maSP}', [AdminPromotionController::class, "index"])->name('promotion.index');
     Route::resource('promotion', AdminPromotionController::class)->except(['index']);
+    Route::resource('supplier', AdminSupplierController::class);
+    Route::get('importProduct/{maNPP}', [AdminImportController::class, "get"])->name('import.get');
+    Route::resource('import', AdminImportController::class);
+    Route::resource('inventory', AdminInventoryController::class);
 });
 
 Route::get('/testAdmin', function () {

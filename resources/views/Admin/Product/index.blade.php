@@ -68,7 +68,6 @@
                                         <tr>
                                             <th>Tên</th>
                                             <th>Giá</th>
-                                            <th>Số lượng</th>
                                             <th>Giảm giá</th>
                                             <th>Nhà sản xuất</th>
                                             <th>Danh mục</th>
@@ -84,7 +83,6 @@
                                         <tr>
                                             <td>{{$SP->tenSP}}</td>
                                             <td>{{number_format($SP->giaSP)}} VND</td>
-                                            <td>{{$SP->soLuong}}</td>
                                             <td>{{$SP->giamGia}}%</td>
                                             <td>
                                                 <?php
@@ -196,7 +194,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giá</label>
                                         @error('giaSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -204,15 +202,7 @@
                                         <input type="number" class="form-control form-control-user" id="exampleProduct"
                                             placeholder="Price" name="giaSP" min="0" value="0">
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Số lượng</label>
-                                        @error('soLuong')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="number" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Quantity" name="soLuong">
-                                    </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Giảm giá</label>
                                         @error('giamGia')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -222,7 +212,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -234,7 +224,19 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Nhà phân phối</label>
+                                        @error('maNPP')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <select class="form-control" name="maNPP">
+                                            <option value="" disabled selected hidden>Supplier</option>
+                                            @foreach($nhaPhanPhoi as $NPP)
+                                                <option value="{{ $NPP->maNPP }}">{{ $NPP->tenNPP }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -246,7 +248,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
