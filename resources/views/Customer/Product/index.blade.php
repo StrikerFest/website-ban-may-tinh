@@ -6,7 +6,7 @@
 @include('Customer.Layout.Common.header')
 
 <body>
-    <div id="collapsePoint">
+    <div>
         <!-- Wrapper - Cả trang -->
         <div id="wrapper">
 
@@ -202,7 +202,7 @@
                                     {{-- Hết - Thông số sản phẩm --}}
 
                                     {{-- Giá sản phẩm --}}
-                                    <div class="padding-top-20">
+                                    <div class="padding-top-20" id="collapsePoint">
                                         <div class="grid border-gray border-radius-10 padding-20">
                                             {{-- Dòng 1 --}}
                                             <div class="row">
@@ -282,7 +282,7 @@
                                                     $tenSP = strlen($sanPham->tenSP) > 40 ? substr($sanPham->tenSP, 0, $positionOfOpenP) . '' : $sanPham->tenSP;
                                                 @endphp
 
-                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                <form action="{{ route('cart.go') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="text-center">

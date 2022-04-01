@@ -57,6 +57,25 @@ class CartController extends Controller
         ]);
         session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
 
+        return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
+    }
+
+    public function goToCart(Request $request)
+    {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'attributes' => array(
+                'image' => $request->image,
+            )
+        ]);
+        session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
+
         return redirect()->route('cart.list');
     }
 

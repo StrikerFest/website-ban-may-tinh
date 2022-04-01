@@ -72,6 +72,9 @@
                                                     </td>
                                                 </tr>
                                             @else
+                                                @php
+                                                    $sum = 0;
+                                                @endphp
                                                 @foreach ($listHoaDonCT as $item)
                                                     <tr>
                                                         @foreach ($listSanPham as $SP)
@@ -132,9 +135,19 @@
                                                                 VND
                                                             </p>
                                                         </td>
-
+                                                        @php
+                                                            $sum += $item->giaSP * $item->soLuong - ($item->soLuong * ($item->giaSP * $item->giamGia)) / 100;
+                                                        @endphp
                                                     </tr>
                                                 @endforeach
+                                                @if ($sum != 0)
+                                                    <tr>
+                                                        <td colspan="6" class="text-center">
+                                                            <h3>Tổng tiền: {{ number_format($sum) }}VND</h3>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
                                                 <tr>
                                                     <td colspan="6" class="text-center">
                                                         <a href="{{ route('receiptCustomer.index') }}">

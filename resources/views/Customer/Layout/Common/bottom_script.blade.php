@@ -116,17 +116,6 @@
 </footer>
 <!-- Footer -->
 
-
-
-
-
-
-
-
-
-
-
-
 {{-- <script type="284550efe2f34c11bdc2fce4-text/javascript" src="{{ asset('js/jquery.min.js')}}"></script>
     <script type="284550efe2f34c11bdc2fce4-text/javascript" src="{{ asset('js/jquery-ui.min.js')}}"></script>
     <script type="284550efe2f34c11bdc2fce4-text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
@@ -228,6 +217,33 @@
     function displayNoneLogin() {
         document.getElementById("login").style.display = "none";
     }
+
+    function displayNoneAlert() {
+
+    }
+
+    function fade(element) {
+        var op = 1; // initial opacity
+        var timer = setInterval(function() {
+            if (op <= 0.1) {
+                clearInterval(timer);
+                element.style.display = 'none';
+            }
+            element.style.zIndex = 1000;
+            element.style.opacity = op;
+            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+            op -= op * 0.1;
+        }, 50);
+    }
+
+    window.onload = function() {
+        //dom not only ready, but everything is loaded
+        setTimeout(function() {
+            // alert('VIDEO HAS STOPPED');
+            // document.getElementById("alert").style.display = "none";
+            fade(document.getElementById("alert"));
+        }, 2000);
+    };
 </script>
 
 <script>
