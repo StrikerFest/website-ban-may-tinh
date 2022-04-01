@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -78,11 +79,12 @@ class AdminController extends Controller
         $admin->emailND = $request->get('email');
         $admin->soDienThoai = $request->get('phone');
         $admin->diaChiND = $request->get('address');
-        $admin->matKhauND = $request->get('password');
+        $admin->matKhauND = Hash::make($request->get('password'));
+        $matKhau = $request->get('password');
         $matKhau2 = $request->get('password2');
         $admin->maCV = $request->get('maCV');
 
-        if($admin->matKhauND != $matKhau2){
+        if($matKhau != $matKhau2){
             return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
         }
         $admin->save();
@@ -140,11 +142,12 @@ class AdminController extends Controller
         $admin->emailND = $request->get('email');
         $admin->soDienThoai = $request->get('phone');
         $admin->diaChiND = $request->Get('address');
-        $admin->matKhauND = $request->get('password');
+        $admin->matKhauND = Hash::make($request->get('password'));
+        $matKhau = $request->get('password');
         $matKhau2 = $request->get('password2');
         $admin->maCV = $request->get('maCV');
 
-        if($admin->matKhauND != $matKhau2){
+        if($matKhau != $matKhau2){
             return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
         }
         $admin->save();

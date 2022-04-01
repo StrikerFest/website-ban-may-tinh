@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Exception;
+use Hash;
 
 class AdminCustomerController extends Controller
 {
@@ -63,11 +64,12 @@ class AdminCustomerController extends Controller
         $customer->emailND = $request->get('email');
         $customer->soDienThoai = $request->get('phone');
         $customer->diaChiND = $request->get('address');
-        $customer->matKhauND = $request->get('password');
+        $customer->matKhauND = Hash::make($request->get('password'));
+        $matKhau = $request->get('password');
         $matKhau2 = $request->get('password2');
         $customer->maCV = $request->get('maCV');
 
-        if($customer->matKhauND != $matKhau2){
+        if($matKhau != $matKhau2){
             return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
         }
         $customer->save();
@@ -123,11 +125,12 @@ class AdminCustomerController extends Controller
         $khachHang->emailND = $request->get('email');
         $khachHang->soDienThoai = $request->get('phone');
         $khachHang->diaChiND = $request->get('address');
-        $khachHang->matKhauND = $request->get('password');
+        $khachHang->matKhauND = Hash::make($request->get('password'));
+        $matKhau = $request->get('password');
         $matKhau2 = $request->get('password2');
         $khachHang->maCV = $request->get('maCV');
 
-        if($khachHang->matKhauND != $matKhau2){
+        if($matKhau != $matKhau2){
             return back()->with("matKhau", "Nhập lại mật khẩu không trùng khớp");
         }
         $khachHang->save();
