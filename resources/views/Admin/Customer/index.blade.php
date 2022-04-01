@@ -48,6 +48,7 @@
                                         <tr>
                                             <th>Tên</th>
                                             <th>Email</th>
+                                            <th>Số điện thoại</th>
                                             <th>Địa chỉ</th>
                                             <th colspan="2" width="10%">Thao tác</th>
                                         </tr>
@@ -60,6 +61,7 @@
                                         <tr>
                                             <td>{{$KH->tenND}}</td>
                                             <td>{{$KH->emailND}}</td>
+                                            <td>{{$KH->soDienThoai}}</td>
                                             <td>{{$KH->diaChiND}}</td>
                                             <td>
                                                 <form action="{{route('customer.edit', $KH->maND)}}" method="get">

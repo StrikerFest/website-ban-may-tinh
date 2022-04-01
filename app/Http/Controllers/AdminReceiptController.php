@@ -30,6 +30,7 @@ class AdminReceiptController extends Controller
         //lấy ngày tạo nhỏ nhất của bảng hoá đơn
         $start = date_format(date_create(ReceiptModel::get('ngayTao')->min('ngayTao')),"Y-m-d");
         //lấy ngày hiện tại
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $end = date('Y-m-d');
         
         $NBD = is_null($request->get('NBD')) ? $start : $request->get('NBD');
@@ -40,6 +41,9 @@ class AdminReceiptController extends Controller
             $NBD = $NKT;
             $NKT = $temp;
         }
+
+        $NKTquery = strtotime($NKT)+23*60*60+59*60+59;
+        $NKTquery = date('Y-m-d H:i:s', $NKTquery);
 
         $nguoiDung = UserModel::all();
 
@@ -52,7 +56,7 @@ class AdminReceiptController extends Controller
             ->join('tinh_trang_hoa_don', 'tinh_trang_hoa_don.maTTHD', '=', 'hoa_don.maTTHD')
             ->where('nguoi_dung.tenND', 'like', "%$searchName%")
             ->where('tinh_trang_hoa_don.tenTTHD', 'like', "%$searchStatus%")
-            ->whereBetween('ngayTao', [$NBD, $NKT])
+            ->whereBetween('ngayTao', [$NBD, $NKTquery])
             ->orderBy('hoa_don.maTTHD', 'DESC')
             ->orderBy('ngayTao', 'ASC')
             ->get();
