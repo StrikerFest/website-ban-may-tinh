@@ -122,9 +122,12 @@
                                     @endif
 
                                     {{-- Tính tổng tiền giỏ hàng --}}
-                                    <div class="d-flex padding-10" style="justify-content: end">
-                                        Tổng : {{ number_format(Cart::getTotal()) }} VND
-                                    </div>
+                                    @if (sizeof($cartItems) == 0)
+                                    @else
+                                        <div class="d-flex padding-10" style="justify-content: end">
+                                            Tổng : {{ number_format(Cart::getTotal()) }} VND
+                                        </div>
+                                    @endif
                                     <div class="d-flex" style="justify-content: end;">
                                         <div class="d-flex-" style="width:50%;justify-content: start">
                                             {{-- Nút quay về trang chủ --}}
@@ -136,21 +139,25 @@
                                             </a>
                                         </div>
                                         <div class="d-flex bg-" style="width:50%;justify-content: end">
-                                            <form action="{{ route('receiptCustomer.create') }}" method="GET">
-                                                @csrf
-                                                {{-- Nút đặt hàng --}}
-                                                <button
-                                                    class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
-                                                    style="border-top-left-radius: 20px;border-bottom-left-radius: 20px">Đặt
-                                                    hàng</button>
-                                            </form>
-                                            <form action="{{ route('cart.clear') }}" method="POST">
-                                                @csrf
-                                                {{-- Nút xóa tất cả các mặt hàng trong giỏ hàng --}}
-                                                <button
-                                                    class="px-6 py-2 text-light bg-gradient-danger btn-secondary btn">Xóa
-                                                    tất cả</button>
-                                            </form>
+                                            @if (sizeof($cartItems) == 0)
+                                            @else
+                                                <form action="{{ route('receiptCustomer.create') }}" method="GET">
+                                                    @csrf
+                                                    {{-- Nút đặt hàng --}}
+                                                    <button
+                                                        class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
+                                                        style="border-top-left-radius: 20px;border-bottom-left-radius: 20px">Đặt
+                                                        hàng</button>
+                                                </form>
+                                                <form action="{{ route('cart.clear') }}" method="POST">
+                                                    @csrf
+                                                    {{-- Nút xóa tất cả các mặt hàng trong giỏ hàng --}}
+                                                    <button
+                                                        class="px-6 py-2 text-light bg-gradient-danger btn-secondary btn">Xóa
+                                                        tất cả</button>
+                                                </form>
+                                            @endif
+
                                         </div>
 
 

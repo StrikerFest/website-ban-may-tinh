@@ -55,7 +55,7 @@ class CustomerLoginController extends Controller
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
-                return Redirect::route('product.index')->with("error", "Đã có lỗi");
+                return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai hoặc không tồn tại");
             }
         }
     }
