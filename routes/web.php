@@ -36,6 +36,7 @@ use App\Http\Controllers\AdminInventoryController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryListController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
@@ -75,7 +76,7 @@ Route::prefix('admin')->middleware('CheckLogin')->name('admin.')->group(function
     Route::resource('product', AdminProductController::class);
 });
 // Route::prefix('admin')->group(function () {
-Route::group(['prefix'=>'admin', 'middleware'=>'CheckLogin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('customer', AdminCustomerController::class);
     Route::resource('admin', AdminController::class);
     Route::resource('employee', AdminEmployeeController::class);
@@ -147,6 +148,8 @@ Route::resource('customerCustomer', CustomerController::class);
 
 Route::resource('changePasswordCustomer', ChangePasswordController::class);
 
+Route::resource('categoryListCustomer', CategoryListController::class);
+
 // Route::get('change-password', 'ChangePasswordController@index');
 // Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
@@ -157,7 +160,8 @@ Route::get('/test', function () {
 })->name("test");
 
 Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
-Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('cart', [CartController::class, 'goToCart'])->name('cart.go');
+Route::post('cart-go', [CartController::class, 'addToCart'])->name('cart.store');
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');

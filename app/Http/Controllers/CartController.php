@@ -17,6 +17,11 @@ class CartController extends Controller
         $listTheLoaiMayTinhBan = DB::table(
             'the_loai_con'
         )->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
+        $listTheLoaiLaptop = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Laptop')->get();
+        $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
+        $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
+        $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
+
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listNhaSanXuat = DB::table(
             'nha_san_xuat'
@@ -27,12 +32,35 @@ class CartController extends Controller
             'cartItems' =>  $cartItems,
             'listNhaSanXuat' =>  $listNhaSanXuat,
             'listTheLoaiCha' =>  $listTheLoaiCha,
+            'listTheLoaiLaptop' =>  $listTheLoaiLaptop,
             'listTheLoaiMayTinhBan' =>  $listTheLoaiMayTinhBan,
+            'listTheLoaiLinhKien' =>  $listTheLoaiLinhKien,
+            'listTheLoaiPhuKien' =>  $listTheLoaiPhuKien,
+            'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
         ]);
     }
 
     // store
     public function addToCart(Request $request)
+    {
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'attributes' => array(
+                'image' => $request->image,
+            )
+        ]);
+        session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
+
+        return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
+    }
+
+    public function goToCart(Request $request)
     {
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");

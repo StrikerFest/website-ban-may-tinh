@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailReceiptModel;
+use App\Models\ProductImageModel;
 use App\Models\ReceiptModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,42 @@ class ReceiptController extends Controller
     public function index()
     {
         //
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        $listTheLoaiMayTinhBan = DB::table(
+            'the_loai_con'
+        )->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
+        $listTheLoaiLaptop = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Laptop')->get();
+        $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
+        $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
+        $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
 
+        $listTheLoaiCha = DB::table('the_loai')->get();
+        $listNhaSanXuat = DB::table(
+            'nha_san_xuat'
+        )->skip(0)->take(7)->get();
+        $cartItems = \Cart::getContent();
+
+        $listHoaDon = DB::table('hoa_don')->where('maKH', session()->get('khachHang'))->get();
+
+        $listPTTT = DB::table('phuong_thuc_thanh_toan')->get();
+        $listTTHD = DB::table('tinh_trang_hoa_don')->get();
+
+        return view('Customer.Receipt.list', [
+            'cartItems' =>  $cartItems,
+            'listNhaSanXuat' =>  $listNhaSanXuat,
+            'listTheLoaiCha' =>  $listTheLoaiCha,
+            'listTheLoaiLaptop' =>  $listTheLoaiLaptop,
+            'listTheLoaiMayTinhBan' =>  $listTheLoaiMayTinhBan,
+            'listTheLoaiLinhKien' =>  $listTheLoaiLinhKien,
+            'listTheLoaiPhuKien' =>  $listTheLoaiPhuKien,
+            'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
+
+            'listHoaDon' =>  $listHoaDon,
+            'listPTTT' =>  $listPTTT,
+            'listTTHD' =>  $listTTHD,
+        ]);
     }
 
     /**
@@ -120,6 +156,46 @@ class ReceiptController extends Controller
     public function show($id)
     {
         //
+        if (!session()->has('khachHang')) {
+            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        }
+        $listTheLoaiMayTinhBan = DB::table(
+            'the_loai_con'
+        )->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
+        $listTheLoaiLaptop = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Laptop')->get();
+        $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
+        $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
+        $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
+
+        $listTheLoaiCha = DB::table('the_loai')->get();
+        $listNhaSanXuat = DB::table(
+            'nha_san_xuat'
+        )->skip(0)->take(7)->get();
+        $cartItems = \Cart::getContent();
+
+        $listHoaDon = DB::table('hoa_don')->where('maKH', session()->get('khachHang'))->get();
+        if (sizeof($listHoaDon) != 0) {
+            $listHoaDonCT = DB::table('hoa_don_chi_tiet')->where('maHD', $id)->get();
+        } else
+            $listHoaDonCT = [];
+
+        $listAnh = ProductImageModel::get();
+        $listSanPham = DB::table('san_pham')->get();
+
+        return view('Customer.Receipt.show', [
+            'cartItems' =>  $cartItems,
+            'listNhaSanXuat' =>  $listNhaSanXuat,
+            'listTheLoaiCha' =>  $listTheLoaiCha,
+            'listTheLoaiLaptop' =>  $listTheLoaiLaptop,
+            'listTheLoaiMayTinhBan' =>  $listTheLoaiMayTinhBan,
+            'listTheLoaiLinhKien' =>  $listTheLoaiLinhKien,
+            'listTheLoaiPhuKien' =>  $listTheLoaiPhuKien,
+            'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
+
+            'listHoaDonCT' =>  $listHoaDonCT,
+            'listAnh' =>  $listAnh,
+            'listSanPham' =>  $listSanPham,
+        ]);
     }
 
     /**

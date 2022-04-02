@@ -102,20 +102,20 @@ INSERT INTO nha_san_xuat(`tenNSX`) VALUE ('LG');
 INSERT INTO the_loai(`tenTL`) VALUE ('Máy tính bàn');
 INSERT INTO the_loai(`tenTL`) VALUE ('Laptop');
 INSERT INTO the_loai(`tenTL`) VALUE ('Màn hình');
-INSERT INTO the_loai(`tenTL`) VALUE ('Chuột');
-INSERT INTO the_loai(`tenTL`) VALUE ('Bàn phím');
-INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
-INSERT INTO the_loai(`tenTL`) VALUE ('Card đồ họa');
+INSERT INTO the_loai(`tenTL`) VALUE ('Linh kiện');
+INSERT INTO the_loai(`tenTL`) VALUE ('Phụ kiện');
+-- INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
+-- INSERT INTO the_loai(`tenTL`) VALUE ('Card đồ họa');
 
 -- =============================== ===========================================================================
 -- Bảng Thể loại con
 INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),(1,'Máy PC trạm'),(1,'Máy PC gaming'),
                                                 (2,'Laptop văn phòng'),(2,'Laptop trạm'),(2,'Laptop gaming'),
                                                 (3,'Màn hình LED'),(3,'Màn hình OLED'),(3,'Màn hình IPS'),
-                                                (4,'Chuột có dây'),(4,'Chuột không dây'),
+                                                (5,'Chuột có dây'),(5,'Chuột không dây'),
                                                 (5,'Bàn phím mềm'),(5,'Bàn phím giả cơ'),(5,'Bàn phím cơ'),
-                                                (6,'Ổ cứng HDD'),(6,'Ổ cứng SSD'),(6,'Ổ cứng NVME'),
-                                                (7,'Card game'),(7,'Card thiết kế đồ họa'),(7,'Card đào coin');
+                                                (4,'Ổ cứng HDD'),(4,'Ổ cứng SSD'),(4,'Ổ cứng NVME'),
+                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin');
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Còn hàng');

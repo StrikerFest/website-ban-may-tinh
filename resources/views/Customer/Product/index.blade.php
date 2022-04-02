@@ -6,7 +6,7 @@
 @include('Customer.Layout.Common.header')
 
 <body>
-    <div id="collapsePoint">
+    <div>
         <!-- Wrapper - Cả trang -->
         <div id="wrapper">
 
@@ -202,7 +202,7 @@
                                     {{-- Hết - Thông số sản phẩm --}}
 
                                     {{-- Giá sản phẩm --}}
-                                    <div class="padding-top-20">
+                                    <div class="padding-top-20" id="collapsePoint">
                                         <div class="grid border-gray border-radius-10 padding-20">
                                             {{-- Dòng 1 --}}
                                             <div class="row">
@@ -214,12 +214,14 @@
                                                 <div class="row">
                                                     {{-- Giá cũ --}}
                                                     <div class="col-md-5 text-decoration-line-through">
-                                                        <h5>{{ number_format($sanPham->giaSP + ($sanPham->giaSP * $sanPham->giamGia / 100)) }}
+                                                        <h5>{{ number_format($sanPham->giaSP + ($sanPham->giaSP * $sanPham->giamGia) / 100) }}
                                                             VND</h5>
                                                     </div>
                                                     {{-- Giá tiết kiệm --}}
                                                     <div class="col-md-7 text-danger padding-bottom-10">
-                                                        Tiết kiệm {{ number_format($sanPham->giaSP * $sanPham->giamGia / 100) }} VND
+                                                        Tiết kiệm
+                                                        {{ number_format(($sanPham->giaSP * $sanPham->giamGia) / 100) }}
+                                                        VND
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,7 +282,7 @@
                                                     $tenSP = strlen($sanPham->tenSP) > 40 ? substr($sanPham->tenSP, 0, $positionOfOpenP) . '' : $sanPham->tenSP;
                                                 @endphp
 
-                                                <form action="{{ route('cart.store') }}" method="POST"
+                                                <form action="{{ route('cart.go') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="text-center">
@@ -384,7 +386,7 @@
                                         <ul>
                                             <li>Uy tín 10 năm xây dựng và phát triển</li>
                                             <li>Sản phẩm chính hãng 100%</li>
-                                            <li>Trả bảo hành tận nơi sử d</li>
+                                            <li>Trả bảo hành tận nơi sử dụng</li>
                                             <li>Bảo hành tận nơi cho doanh nghiệp</li>
                                             <li>Ưu đãi riêng cho học sinh, sinh viên</li>
                                             <li>Vệ sinh máy tính miễn phi trọn đời</li>
@@ -408,7 +410,7 @@
                                         <ul>
                                             <li>Giao hàng siêu tốc khu vực nội thành</li>
                                             <li>Giao hàng toàn quốc miễn phí</li>
-                                            <li>Giao hàng và thanh toán tại nhà ( COD )</li>
+                                            <li>Giao hàng và thanh toán tại nhà</li>
                                             <li>Đội ngũ tư vấn hỗ trợ chuyên nghiệp</li>
                                         </ul>
                                     </div>
