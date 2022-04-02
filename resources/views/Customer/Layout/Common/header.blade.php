@@ -444,7 +444,7 @@ $dataError = Session::get('error');
 $dataSuccess = Session::get('success');
 
 @endphp
-@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0))
+@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || sizeof($errors->all()) != 0)
 <div style="display: block" class="row justify-content-center" id="login">
 @else
     <div style="display: none" class="row justify-content-center" id="login">
@@ -477,6 +477,11 @@ onclick="displayNoneLogin()">
                     $dataError = Session::get('error');
                     $dateSuccess = Session::get('success');
                 @endphp
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">
+                        <li>{{ $error }}</li>
+                    </div>
+                @endforeach
                 @isset($dataError)
                     <div class="alert alert-danger">
                         {{ $dataError }}

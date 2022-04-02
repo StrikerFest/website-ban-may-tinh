@@ -27,12 +27,7 @@ class CustomerLoginController extends Controller
     // Xử lý login khách hàng - SỬa khi có khách hàng
     public function loginProcess(Request $request)
     {
-        $email = $request->get('email');
-        $password = $request->get('password');
-        $validated = $request->validate([
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required',
-        ]);
+
         // khi có session - Sửa khi có db
         if (session()->has('khachHang')) {
 
@@ -40,6 +35,19 @@ class CustomerLoginController extends Controller
         }
         // khi không có session - Sửa khi có db
         else {
+            $email = $request->get('email');
+            $password = $request->get('password');
+            $validated = $request->validate(
+                [
+                    'email' => 'required|email:rfc,dns',
+                    'password' => 'required',
+                ],
+                [
+                    'email.required' => 'Mời quý khách nhập email của mình',
+                    'password.required' => 'Mời quý khách nhập mật khẩu của mình'
+                ]
+            );
+
             try {
                 $user = UserModel::where('emailND', $email)->first();
                 if (Hash::check($password, $user->matKhauND)) {
