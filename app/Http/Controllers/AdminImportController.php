@@ -133,7 +133,7 @@ class AdminImportController extends Controller
     {
         $sanPham = DB::table('san_pham')->get();
 
-        $nhapKhoChiTiet = ImportDetailModel::where('maNK', '=', $id)->get();
+        $nhapKhoChiTiet = ImportDetailModel::where('maNK', '=', $id)->paginate(10);
         
         $tongTien = DB::select("
             SELECT SUM(giaNhap*soLuong) AS tong FROM nhap_kho_chi_tiet

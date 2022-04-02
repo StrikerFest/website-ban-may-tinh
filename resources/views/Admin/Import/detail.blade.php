@@ -65,6 +65,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                {{$nhapKhoChiTiet->links('')}}
                                 <button class="btn btn-primary" onclick="window.location='{{ route("import.index") }}'">
                                     Quay lại
                                 </button>
