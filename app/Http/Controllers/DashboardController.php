@@ -50,16 +50,49 @@ class DashboardController extends Controller
         AND hoa_don.maTTHD != 3
         ")[0];
 
+        //Tổng số sản phẩm đã nhập trong tháng
+        $tongSanPhamNhapThang = DB::table('nhap_kho_chi_tiet')
+            ->join('nhap_kho', 'nhap_kho.maNK', '=', 'nhap_kho_chi_tiet.maNK')
+            ->whereMonth('ngayNhap', '=', $thangHienTai)
+            ->whereYear('ngayNhap', '=', $namHienTai)
+            ->sum('soLuong');
+
+        //Tổng số sản phẩm đã nhập trong năm
+        $tongSanPhamNhapNam = DB::table('nhap_kho_chi_tiet')
+            ->join('nhap_kho', 'nhap_kho.maNK', '=', 'nhap_kho_chi_tiet.maNK')
+            ->whereYear('ngayNhap', '=', $namHienTai)
+            ->sum('soLuong');
+        
+        //Tổng tiền nhập hàng trong tháng
+        $tongTienNhapThang = DB::table('nhap_kho_chi_tiet')
+            ->selectRaw('sum(soLuong * giaNhap) as tong')
+            ->join('nhap_kho', 'nhap_kho.maNK', '=', 'nhap_kho_chi_tiet.maNK')
+            ->whereMonth('ngayNhap', '=', $thangHienTai)
+            ->whereYear('ngayNhap', '=', $namHienTai)
+            ->get()[0]->tong;
+
+        //Tổng tiền nhập hàng trong năm
+        $tongTienNhapNam = DB::table('nhap_kho_chi_tiet')
+            ->selectRaw('sum(soLuong * giaNhap) as tong')
+            ->join('nhap_kho', 'nhap_kho.maNK', '=', 'nhap_kho_chi_tiet.maNK')
+            ->whereYear('ngayNhap', '=', $namHienTai)
+            ->get()[0]->tong;
+        
         //Số hoá đơn đang chờ duyệt
         $hoaDonChuaDuyet = DB::table('hoa_don')->where('maTTHD', '=', '2')->count();
 
         //Tổng số hoá đơn trong tháng
-        $tongHoaDonThang = DB::table('hoa_don')->whereMonth('ngayTao', '=', $thangHienTai)->count();
+        $tongHoaDonThang = DB::table('hoa_don')
+        ->whereMonth('ngayTao', '=', $thangHienTai)
+        ->whereYear('ngayTao', '=', $namHienTai)
+        ->count();
 
         //Tổng số lượng sản phẩm bán ra trong tháng
         $tongSanPhamThang = DB::table('hoa_don_chi_tiet')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->whereMonth('ngayTao', '=', $thangHienTai)
+            ->whereYear('ngayTao', '=', $namHienTai)
+            ->where('maTTHD', '=', 1)
             ->sum('soLuong');
 
         //Tổng số hoá đơn bị huỷ
@@ -199,6 +232,10 @@ class DashboardController extends Controller
                 'doanhThuNam' => $doanhThuNam,
                 'doanhThuThangDuKien' => $doanhThuThangDuKien,
                 'doanhThuNamDuKien' => $doanhThuNamDuKien,
+                'tongSanPhamNhapThang' => $tongSanPhamNhapThang,
+                'tongSanPhamNhapNam' => $tongSanPhamNhapNam,
+                'tongTienNhapThang' => $tongTienNhapThang,
+                'tongTienNhapNam' => $tongTienNhapNam,
                 'hoaDonChuaDuyet' => $hoaDonChuaDuyet,
                 'tongHoaDonThang' => $tongHoaDonThang,
                 'tongSanPhamThang' => $tongSanPhamThang,
