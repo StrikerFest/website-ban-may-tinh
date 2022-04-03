@@ -46,7 +46,7 @@ class AdminProductImageController extends Controller
     {
         $validated = $request->validate([
             'maSP' => 'required',
-            'anh' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'anh.*' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
         ]);
         for($i = 0; $i < sizeof($request->file('anh')); $i++){
             $path = $request->file('anh')[$i]->store('img');
@@ -99,7 +99,7 @@ class AdminProductImageController extends Controller
     {
         $validated = $request->validate([
             'maSP' => 'required',
-            'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'anh.*' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
         ]);
 
         //Xoá ảnh cũ khỏi public/assets/img
