@@ -86,9 +86,7 @@
                                             </td>
                                             <td>{{$HD->soDienThoai}}</td>
                                             <td>
-                                                <textarea class="form-control" cols="15" rows="5" readonly>
-                                                    {{$HD->diaChi}}
-                                                </textarea>
+                                                <textarea class="form-control" cols="15" rows="5" readonly>{{$HD->diaChi}}</textarea>
                                             </td>
                                             <td>
                                                 <?php 
