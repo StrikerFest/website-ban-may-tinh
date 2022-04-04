@@ -128,7 +128,7 @@ class DashboardController extends Controller
             array_push($doanhThuDuKien12Thang, $doanhThuDuKienMoiThang[0]->doanhThuDuKienThang);
         }
         
-        //Danh mục bán chạy
+        //Danh mục đã bán
         $tenDM = [];
         $ten = DB::table('the_loai')->orderBy('maTL')->get('tenTL')->toArray();
         for($i=0; $i<sizeof($ten); $i++){
@@ -200,29 +200,11 @@ class DashboardController extends Controller
             $danhMucCon[] = (object) ['maDM' => $maDMC[$i], 'name' => $tenDMC[$i], 'y'=> $tiLeDMC[$i]];
         }
 
-        //Top 5 sản phẩm bán chạy theo danh mục con
-        $ten5SP = [];
-        $soLuong5SP = [];
         $listDanhMucCon = DB::table('the_loai_con')->get();
-        $maDanhMucConDuocChon = is_null($request->get('danhMucConDuocChon')) ? 1 : $request->get('danhMucConDuocChon');
-        $tenDanhMucConDuocChon = DB::table('the_loai_con')->where('maTLC', '=', $maDanhMucConDuocChon)->get()[0]->tenTLC;
-        $top5SanPham = DB::select("
-            SELECT SUM(hoa_don_chi_tiet.soLuong) AS soLuong, san_pham.tenSP, the_loai_con.tenTLC
-            FROM san_pham
-            JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
-            JOIN hoa_don_chi_tiet ON hoa_don_chi_tiet.maSP = san_pham.maSP
-            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-            WHERE hoa_don.maTTHD = 1
-            AND the_loai_con.maTLC = $maDanhMucConDuocChon
-            GROUP BY san_pham.maSP
-            ORDER BY soLuong DESC, san_pham.maSP ASC
-            LIMIT 5
+
+        $listNamTheoHoaDon = DB::select("
+            SELECT DISTINCT YEAR(ngayTao) AS nam FROM hoa_don ORDER BY nam DESC
         ");
-        for($i = 0; $i < sizeof($top5SanPham); $i++){
-            array_push($ten5SP, $top5SanPham[$i]->tenSP);
-            array_push($soLuong5SP, (int)$top5SanPham[$i]->soLuong);
-        }
-        // dd($ten5SP, $soLuong5SP, $top5SanPham);
         
         // Nếu có session của admin - Sửa khi đã có session
         if (session()->has('admin')) {
@@ -240,21 +222,72 @@ class DashboardController extends Controller
                 'tongHoaDonThang' => $tongHoaDonThang,
                 'tongSanPhamThang' => $tongSanPhamThang,
                 'tongHoaDonHuy' => $tongHoaDonHuy,
-                'doanhThu12Thang' => $doanhThu12Thang,
-                'doanhThuDuKien12Thang' => $doanhThuDuKien12Thang,
-                'namDuocChon' => $namDuocChon,
-                'namNhoNhat' => $namNhoNhat,
-                'namLonNhat' => $namLonNhat,
                 'danhMuc' => $danhMuc,
                 'danhMucCon' => $danhMucCon,
-                'ten5SP' => $ten5SP,
-                'soLuong5SP' => $soLuong5SP,
                 'listDanhMucCon' => $listDanhMucCon,
-                'maDanhMucConDuocChon' => $maDanhMucConDuocChon,
-                'tenDanhMucConDuocChon' => $tenDanhMucConDuocChon,
+                'listNamTheoHoaDon' => $listNamTheoHoaDon,
             ]);
         } else {
             return Redirect::route('administrator/login')->with("error", "Không được làm vậy bro");
         }
+    }
+
+    //Top 5 sản phẩm bán chạy theo danh mục con
+    public function danhMucCon($maDMC){
+        $ten5SP = [];
+        $soLuong5SP = [];
+        $top5SanPham = DB::select("
+            SELECT SUM(hoa_don_chi_tiet.soLuong) AS soLuong, san_pham.tenSP, the_loai_con.tenTLC
+            FROM san_pham
+            JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
+            JOIN hoa_don_chi_tiet ON hoa_don_chi_tiet.maSP = san_pham.maSP
+            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+            WHERE hoa_don.maTTHD = 1
+            AND the_loai_con.maTLC = $maDMC
+            GROUP BY san_pham.maSP
+            ORDER BY soLuong DESC, san_pham.maSP ASC
+            LIMIT 5
+        ");
+        for($i = 0; $i < sizeof($top5SanPham); $i++){
+            array_push($ten5SP, $top5SanPham[$i]->tenSP);
+            array_push($soLuong5SP, (int)$top5SanPham[$i]->soLuong);
+        }
+        
+        return response()->json([
+            'ten5SP' => $ten5SP,
+            'soLuong5SP' => $soLuong5SP,
+        ]);
+    }
+
+    //Doanh thu 12 tháng
+    public function doanhThu12Thang($nam){
+        $doanhThu12Thang = [];
+        $doanhThuDuKien12Thang = [];
+        for($i = 1; $i <= 12; $i++){
+            $doanhThuMoiThang = DB::select("
+            SELECT IFNULL(SUM((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia /100))*hoa_don_chi_tiet.soLuong), 0) AS doanhThuThang
+            FROM hoa_don_chi_tiet
+            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+            WHERE MONTH(hoa_don.ngayTao) = $i
+            AND YEAR(hoa_don.ngayTao) = $nam
+            And hoa_don.maTTHD = 1
+            ");
+            array_push($doanhThu12Thang, $doanhThuMoiThang[0]->doanhThuThang);
+            
+            $doanhThuDuKienMoiThang = DB::select("
+            SELECT IFNULL(SUM((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia /100))*hoa_don_chi_tiet.soLuong), 0) AS doanhThuDuKienThang
+            FROM hoa_don_chi_tiet
+            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+            WHERE MONTH(hoa_don.ngayTao) = $i
+            AND YEAR(hoa_don.ngayTao) = $nam
+            And hoa_don.maTTHD != 3
+            ");
+            array_push($doanhThuDuKien12Thang, $doanhThuDuKienMoiThang[0]->doanhThuDuKienThang);
+        }
+
+        return response()->json([
+            'doanhThu12Thang' => $doanhThu12Thang,
+            'doanhThuDuKien12Thang' => $doanhThuDuKien12Thang,
+        ]);
     }
 }
