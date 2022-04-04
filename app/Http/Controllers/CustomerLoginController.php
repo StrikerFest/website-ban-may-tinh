@@ -56,6 +56,7 @@ class CustomerLoginController extends Controller
                     $request->session()->put('matKhau', $user->matKhauND);
                     $request->session()->put('soDienThoai', $user->soDienThoai);
                     $request->session()->put('email', $user->emailND);
+                    $request->session()->put('diaChi', $user->diaChi);
                     return Redirect::route('product.index');
                 } else {
                     return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai");

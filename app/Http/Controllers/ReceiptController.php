@@ -92,7 +92,10 @@ class ReceiptController extends Controller
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
         // Thêm vào hóa đơn
-
+        $request->session()->put("tenKhachHangDat",$request->receiptName);
+        $request->session()->put("soDienThoaiDat",$request->receiptPhone);
+        $request->session()->put("emailDat",$request->receiptEmail);
+        $request->session()->put("diaChiDat",$request->receiptAddress);
         $id = session()->get('khachHang');
         $hoaDon = new ReceiptModel();
 

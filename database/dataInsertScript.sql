@@ -131,6 +131,16 @@ INSERT INTO `nha_phan_phoi` (`maNPP`, `tenNPP`, `diaChiNPP`, `soDienThoai`) VALU
 (NULL, 'Công ty C', 'Địa chỉ công ty C', '0123456789');
 
 -- ==========================================================================================================
+-- Bảng ảnh quảng cáo
+-- INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+-- (NULL, 'Omen17QC.png', '43');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'asuszenbookQC.jpg', '42');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'asuszenbookQC.jpg', '42');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'asuszenbookQC.jpg', '42');
+-- ==========================================================================================================
 -- Bảng Sản phẩm
 
 -- Laptop gaming
@@ -222,10 +232,16 @@ INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,
 VALUE('Card màn hình NVIDIA T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,'Card đồ họa',28,15,1,1,19,1);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,`maTLC`,`maTTSP`)
 VALUE('Card màn hình NVIDIA T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,'Card đồ họa',28,15,1,1,19,1);
+-- Dac biet
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,`maTLC`,`maTTSP`)
+VALUE('Laptop Asus Zenbook S (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,2,4,1);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,`maTLC`,`maTTSP`)
+VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,2,3,1);
 
 
 -- Bang Anh san pham
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'60634_laptop_acer_gaming_predator_triton_500se_10.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'62709_laptop_acer_gaming_predator_helios_500_12.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (2,'62709_laptop_acer_gaming_predator_helios_500_12.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (3,'61228_laptop_acer_gaming_predator_helios_300_ph315_54_74ru_nhqc1sv002_den_2021_4.png');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (4,'61621_laptop_acer_gaming_aspire_7_a715_42g_18.jpg');
@@ -270,6 +286,10 @@ INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (37,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (38,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (39,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (40,'STOCK_GRAPHIC_CARD.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (41,'STOCK_GRAPHIC_CARD.jpg');
+--
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (42,'zenbook.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (43,'omen17.png');
 
 -- Bảng tình trạng bài viết
 INSERT INTO `tinh_trang_bai_viet` (`maTTBV`, `tenTTBV`) VALUES (NULL, 'Chưa công khai'), (NULL, 'Công khai');

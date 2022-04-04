@@ -68,21 +68,31 @@
                                     {{-- Vật phẩm bên trong slide --}}
                                     <div class="d-flex">
                                         <div class="carousel-inner ">
-                                            <div class="carousel-item active">
-                                                <img class="d-block carousel-item-custom"
-                                                    src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                    alt="First slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block carousel-item-custom"
-                                                    src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                    alt="Second slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block carousel-item-custom"
-                                                    src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                    alt="Third slide">
-                                            </div>
+                                            @php
+                                                $count = 0;
+                                            @endphp
+                                            @foreach ($bannerImage as $BI1)
+                                                @if ($count == 0)
+                                                    <div class="carousel-item active">
+                                                        <a href="{{ route('product.show', $BI1->duongDan) }}">
+                                                            <img class="d-block carousel-item-custom"
+                                                                src="{{ asset('assets/img/' . $BI1->anh) }}"
+                                                                alt="First slide">
+                                                        </a>
+                                                    </div>
+                                                    @php
+                                                        $count = 1;
+                                                    @endphp
+                                                @else
+                                                    <div class="carousel-item">
+                                                        <a href="{{ route('product.show', $BI1->duongDan) }}">
+                                                            <img class="d-block carousel-item-custom"
+                                                                src="{{ asset('assets/img/' . $BI1->anh) }}"
+                                                                alt="Second slide">
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                     {{-- Kết thúc - Vật phẩm bên trong slide --}}
@@ -276,21 +286,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -437,21 +453,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -598,21 +620,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -819,21 +847,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -980,21 +1014,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1280,21 +1320,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1441,21 +1487,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1741,21 +1793,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1902,21 +1960,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -2202,21 +2266,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -2363,21 +2433,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
