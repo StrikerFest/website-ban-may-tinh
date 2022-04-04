@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DemoEmail;
 use App\Models\DetailReceiptModel;
 use App\Models\ProductImageModel;
 use App\Models\ReceiptModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class ReceiptController extends Controller
@@ -92,10 +94,10 @@ class ReceiptController extends Controller
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
         // Thêm vào hóa đơn
-        $request->session()->put("tenKhachHangDat",$request->receiptName);
-        $request->session()->put("soDienThoaiDat",$request->receiptPhone);
-        $request->session()->put("emailDat",$request->receiptEmail);
-        $request->session()->put("diaChiDat",$request->receiptAddress);
+        $request->session()->put("tenKhachHangDat", $request->receiptName);
+        $request->session()->put("soDienThoaiDat", $request->receiptPhone);
+        $request->session()->put("emailDat", $request->receiptEmail);
+        $request->session()->put("diaChiDat", $request->receiptAddress);
         $id = session()->get('khachHang');
         $hoaDon = new ReceiptModel();
 
@@ -114,6 +116,7 @@ class ReceiptController extends Controller
 
         $hoaDon->save();
 
+        $sumPrice = number_format(\Cart::getTotal());
         // Thêm vào hóa đơn chi tiết
         $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
 
@@ -142,9 +145,24 @@ class ReceiptController extends Controller
             // echo $SP->giamGia;
             // echo "<br>------------------<br>";
             $hoaDonChiTiet->save();
-            \Cart::clear();
+
+            // Có thể sẽ lỗi ở đây nếu đặt nhiều
         }
-        // die();
+        $objDemo = new \stdClass();
+        if ($request->paymentMethod == "COD") {
+            $objDemo->demo_one = 'Thanh toán tận nhà';
+        }
+        else{
+            $objDemo->demo_one = 'Chuyển khoản';
+        }
+        $objDemo->demo_two = $sumPrice . " VND";
+        $objDemo->idReceipt = $maHoaDonMoiNhat;
+        $objDemo->sender = 'BKCOM';
+        $objDemo->receiver = session()->get('tenKhachHang');
+        // $request->session()->put('cartObject',)
+        Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
+        \Cart::clear();
+
         return view('Customer.Receipt.success', [
             'cartItems' => $cartItems,
         ]);
