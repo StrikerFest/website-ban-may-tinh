@@ -282,14 +282,18 @@
                         <div class="col-xl-12 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <form>
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Doanh thu năm 
-                                            <input type="number" name="nam" style="width: 4em" value="{{$namDuocChon}}" min="{{$namNhoNhat}}" max="{{$namLonNhat}}">
-                                            <button>Chọn</button>
+                                            <select id="revenueYear" name="nam">
+                                                <option value="" disabled selected hidden>Chọn năm</option>
+                                                @foreach($listNamTheoHoaDon as $nam)
+                                                    <option value="{{$nam->nam}}">
+                                                        {{$nam->nam}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </h6>
                                     </div>
-                                </form>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div id="container">
@@ -308,20 +312,18 @@
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <form>
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary">Sản phẩm bán chạy theo danh mục
-                                            <select name="danhMucConDuocChon">
+                                            <select id="subCategory">
+                                                <option value="" disabled selected hidden>Chọn danh mục</option>
                                                 @foreach($listDanhMucCon as $DMC)
-                                                    <option value="{{$DMC->maTLC}}" <?php if($DMC->maTLC == $maDanhMucConDuocChon)echo "selected" ?>>
+                                                    <option value="{{$DMC->maTLC}}">
                                                         {{$DMC->tenTLC}}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <button>Chọn</button>
                                         </h6>
                                     </div>
-                                </form>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div id="container2">
@@ -337,7 +339,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Danh mục bán chạy</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Danh mục đã bán</h6>
                                     
                                 </div>
                                 <!-- Card Body -->
@@ -367,16 +369,131 @@
     <!-- End of Page Wrapper -->
     @include("Admin.Layout.Common.bottom_script")
     <script type="text/javascript">
-        var doanhThu12Thang = {{json_encode($doanhThu12Thang)}};
-        var doanhThuDuKien12Thang = {{json_encode($doanhThuDuKien12Thang)}};
-        
-        //Biểu đồ doanh thu 12 tháng
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        //Biểu đồ AJAX
+        $(document).ready(function(){
+            //Biểu đồ doanh thu 12 tháng
+            $('#revenueYear').on('change', function(e){
+                var namDuocChon = e.target.value;
+                $.ajax({
+                    url: "{{ url('dashboard/doanhThu12Thang') }}/"+namDuocChon,
+                    type: "get",
+                    success: function(res){
+                        if(res){
+                            Highcharts.chart('container', {
+                                chart: {
+                                    type: 'column'
+                                },
+                                title: {
+                                    text: 'Biểu đồ doanh thu năm '+$('#revenueYear').children(':selected').text()
+                                },
+                                xAxis: {
+                                    categories: [
+                                        'Jan',
+                                        'Feb',
+                                        'Mar',
+                                        'Apr',
+                                        'May',
+                                        'Jun',
+                                        'Jul',
+                                        'Aug',
+                                        'Sep',
+                                        'Oct',
+                                        'Nov',
+                                        'Dec'
+                                    ],
+                                    crosshair: true
+                                },
+                                yAxis: {
+                                    min: 0,
+                                    title: {
+                                        text: 'Việt Nam Đồng (VND)'
+                                    }
+                                },
+                                tooltip: {
+                                    headerFormat: '<span style="font-size:10px">{point.key}</span><table width="400px">',
+                                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                        '<td style="padding:0"><b>{point.y:,.0f} VND</b></td></tr>',
+                                    footerFormat: '</table>',
+                                    shared: true,
+                                    useHTML: true
+                                },
+                                plotOptions: {
+                                    column: {
+                                        pointPadding: 0.1,
+                                        borderWidth: 0
+                                    }
+                                },
+                                series: [
+                                    {name: 'Doanh thu', data: res.doanhThu12Thang}, 
+                                    {name: 'Doanh thu dự kiến', data: res.doanhThuDuKien12Thang}
+                                ]
+                            });
+                        }
+                    }
+                })
+            })
+
+            //Biểu đồ top 5 sản phẩm bán chạy theo danh mục
+            $('#subCategory').on('change', function(e){
+                var maTLC = e.target.value;
+                $.ajax({
+                    url: "{{ url('dashboard/danhMucCon') }}/"+maTLC,
+                    type: "get",
+                    success: function(res){
+                        if(res){
+                            Highcharts.chart('container2', {
+                                chart: {
+                                    type: 'column'
+                                },
+                                title: {
+                                    text: 'Top 5 sản phẩm bán chạy của danh mục '+ $('#subCategory').children(':selected').text()
+                                },
+                                xAxis: {
+                                    categories: res.ten5SP,
+                                    crosshair: true
+                                },
+                                yAxis: {
+                                    min: 0,
+                                    title: {
+                                        text: 'Chiếc'
+                                    }
+                                },
+                                tooltip: {
+                                    headerFormat: '<span style="font-size:10px">{point.key}</span><table width="400px">',
+                                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                        '<td style="padding:0"><b>{point.y:,.0f} Chiếc</b></td></tr>',
+                                    footerFormat: '</table>',
+                                    shared: true,
+                                    useHTML: true
+                                },
+                                plotOptions: {
+                                    column: {
+                                        pointPadding: 0.1,
+                                        borderWidth: 0
+                                    }
+                                },
+                                series: [
+                                    {name: 'Số lượng', data: res.soLuong5SP}
+                                ]
+                            });
+                        }
+                    }
+                })
+            })
+        })
+
+        //Khung của biểu đồ doanh thu 12 tháng (dữ liệu truyền vào = null)
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Biểu đồ doanh thu năm '+{{$namDuocChon}}
+                text: 'Biểu đồ doanh thu năm '
             },
             xAxis: {
                 categories: [
@@ -416,24 +533,21 @@
                 }
             },
             series: [
-                {name: 'Doanh thu', data: doanhThu12Thang}, 
-                {name: 'Doanh thu dự kiến', data: doanhThuDuKien12Thang}
+                {name: 'Doanh thu', data: null}, 
+                {name: 'Doanh thu dự kiến', data: null}
             ]
         });
 
-        //Biểu đồ top 5 sản phẩm bán chạy theo danh mục
-        var ten5SP = {!! json_encode($ten5SP, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
-        var soLuong5SP = {{ json_encode($soLuong5SP) }};
-        // console.log(soLuong5SP);
+        //Khung của biểu đồ top 5 sản phẩm bán chạy theo danh mục (dữ liệu truyền vào = null)
         Highcharts.chart('container2', {
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Top 5 sản phẩm bán chạy của '+ "{{$tenDanhMucConDuocChon}}"
+                text: 'Top 5 sản phẩm bán chạy của danh mục'
             },
             xAxis: {
-                categories: ten5SP,
+                categories: null,
                 crosshair: true
             },
             yAxis: {
@@ -457,11 +571,11 @@
                 }
             },
             series: [
-                {name: 'Số lượng', data: soLuong5SP}
+                {name: 'Số lượng', data: null}
             ]
         });
 
-        //Biểu đồ danh mục bán chạy
+        //Biểu đồ danh mục đã bán
         var danhMuc = {!! json_encode($danhMuc, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
         var danhMucCon = {!! json_encode($danhMucCon, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
         var colors = Highcharts.getOptions().colors;
@@ -480,7 +594,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Biểu đồ danh mục bán chạy'
+                text: 'Biểu đồ danh mục đã bán'
             },
             plotOptions: {
                 pie: {

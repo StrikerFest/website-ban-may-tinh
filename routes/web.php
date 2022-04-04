@@ -67,6 +67,8 @@ Route::get('/login/Admin', [AdminLoginController::class, "login"])->name("admini
 Route::get('/logout/Admin', [AdminLoginController::class, "logout"])->name("administrator/logout");
 
 Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
+Route::get('/dashboard/danhMucCon/{maDMC}', [DashboardController::class, "danhMucCon"])->name('dashboard.doanhMucCon');
+Route::get('/dashboard/doanhThu12Thang/{nam}', [DashboardController::class, "doanhThu12Thang"])->name('dashboard.doanhThu12Thang');
 
 Route::post('/loginProcessAdmin', [AdminLoginController::class, "loginProcess"])->name("administrator/loginProcess");
 Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"])->name("administrator/logoutProcess");
