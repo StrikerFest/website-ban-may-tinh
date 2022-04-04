@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BannerImageModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
@@ -28,7 +29,8 @@ class ProductController extends Controller
         $listTheLoaiCha = DB::table('the_loai')->get();
 
         // Lấy ảnh
-        $productImage = ProductImageModel::get();
+        $productImage = DB::table('anh_san_pham')->get();
+        $bannerImage =  DB::table('anh_quang_cao')->take(3)->get();
         // Get all sản phẩm mới thêm vào - là máy tính
         $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
         $computerNew1 = ProductModel::skip(0)->take(4)->orderBy('maSP')->get();
@@ -97,6 +99,7 @@ class ProductController extends Controller
             'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
             'listTheLoaiCha' =>  $listTheLoaiCha,
 
+            'bannerImage' => $bannerImage,
 
         ]);
     }
@@ -131,12 +134,12 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        // $bannerImage1 =  DB::table('anh_quang_cao')->take(1)->get();
         $productImage = ProductImageModel::get();
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
         $productPromotion = DB::table('khuyen_mai')->get();
         $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
-
         return view('Customer.Product.index', [
             'productImage' => $productImage,
             'sanPham' => $sanPham,
