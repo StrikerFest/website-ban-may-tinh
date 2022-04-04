@@ -493,17 +493,33 @@ onclick="displayNoneLogin()">
                     </div>
                 @endisset
                 <div class="form-group">
+                    @if (session()->has('nhoMatKhau') == 1)
+                    <input type="email" class="form-control form-control-user" name="email"
+                        aria-describedby="emailHelp" placeholder="Nhập email của bạn" value="{{session()->get('nhoTaiKhoan')}}">
+                    @else
                     <input type="email" class="form-control form-control-user" name="email"
                         aria-describedby="emailHelp" placeholder="Nhập email của bạn">
+                    @endif
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control form-control-user" name="password"
-                        placeholder="Nhập mật khẩu của bạn">
+                    @if (session()->has('nhoMatKhau') == 1)
+                        <input type="password" class="form-control form-control-user" name="password"
+                            placeholder="Nhập mật khẩu của bạn" value="{{session()->get('nhoMatKhau')}}">
+                    @else
+                        <input type="password" class="form-control form-control-user" name="password"
+                            placeholder="Nhập mật khẩu của bạn">
+                    @endif
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Nhớ mật khẩu</label>
+                    @if (session()->has('nhoMatKhau') == 1)
+                        <input type="checkbox" class="custom-control-input" id="customCheck"
+                            name="rememberPassword" checked="{{session()->get('nhoCheck')}}">
+                    @else
+                    <input type="checkbox" class="custom-control-input" id="customCheck"
+                            name="rememberPassword">
+                    @endif
+                    <label class="custom-control-label" for="customCheck">Nhớ mật khẩu</label>
                     </div>
                 </div>
                 <button class="btn text-light btn-user btn-block" style="background-color: red">
