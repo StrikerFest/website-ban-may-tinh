@@ -159,6 +159,18 @@ class AdminReceiptController extends Controller
         $hoaDon = ReceiptModel::find($id);
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
+        $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
+        if($request->get('maTTHD') == 1){
+            for($i = 0; $i < sizeof($hdct); $i++){
+                $sanPham = ProductModel::find($hdct[$i]->maSP);
+                $sanPham->soLuong -= $hdct[$i]->soLuong;
+                if($sanPham->soLuong < 0){
+                    $sanPham->soLuong = 0;
+                }
+                $sanPham->save();
+            }
+        }
+        
         $hoaDon->save();
 
         return redirect()->back();
