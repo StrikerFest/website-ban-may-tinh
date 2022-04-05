@@ -153,8 +153,7 @@ class MoneyCategoryController extends Controller
                     ->where('san_pham.maTLC', $request->get('theLoaiCon'))
                     ->get();
             }
-        }
-        else{
+        } else {
             if ($request->get('theLoaiCon') == null) {
                 $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
                     ->whereBetween('giaSP', [$priceMin, $priceMax])
@@ -183,6 +182,7 @@ class MoneyCategoryController extends Controller
             'productImage' => $productImage,
             'listNhaSanXuat' => $listNhaSanXuat,
             'listTheLoai' => $listTheLoai,
+
             'maTLCMin' => $maTLCMin,
             'theLoaiChaMoney' => $theLoaiChaMoney,
             'khoangGia' => $khoangGia,

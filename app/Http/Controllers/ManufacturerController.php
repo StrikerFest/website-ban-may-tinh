@@ -104,19 +104,49 @@ class ManufacturerController extends Controller
         $request->session()->put('currentPriceMin', $priceMin);
         $request->session()->put('currentPriceMax', $priceMax);
 
-        $priceMin = session()->get('currentPriceMin');
-        $priceMax = session()->get('currentPriceMax');
+        // $priceMin = session()->get('currentPriceMin');
+        // $priceMax = session()->get('currentPriceMax');
+        $nhaSanXuatBrand = $request->get('nhaSanXuat');
+
+        if($id != "null"){
+            $nhaSanXuatBrand = $id;
+        }
+
+        if ($nhaSanXuatBrand == null) {
+            if ($request->get('theLoaiCon') == null) {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->get();
+            } else {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->where('san_pham.maTLC', $request->get('theLoaiCon'))
+                    ->get();
+            }
+        } else {
+            if ($request->get('theLoaiCon') == null) {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->where('maNSX', $nhaSanXuatBrand)
+                    ->get();
+            } else {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->where('san_pham.maTLC', $request->get('theLoaiCon'))
+                    ->where('maNSX', $nhaSanXuatBrand)
+                    ->get();
+            }
+        }
+        $maTLCMin = DB::table('the_loai_con')->selectRaw('min(maTLC) as maTLC')->first();
 
         // Kiểm tra nếu không có session thể loại con ( bấm từ ngoài vào hoặc chưa chọn bên trong trang vật phẩm)
-        if ($theLoaiNhaSanXuat1 == null)
-            $listSanPham = DB::table('san_pham')->where('maNSX', $id)->whereBetween('giaSP', [$priceMin, $priceMax])->get();
-        else
-            $listSanPham = DB::table('san_pham')->where('maNSX', $id)->where('maTLC', $theLoaiNhaSanXuat)->whereBetween('giaSP', [$priceMin, $priceMax])->get();
-
-        // Lấy hãng hiện tại
-        $tenNhaSanXuat = DB::table('nha_san_xuat')->where('maNSX', $id)->first();
-        $request->session()->put('currentManufacturer', $tenNhaSanXuat->maNSX);
-        $request->session()->put('currentManufacturerName', $tenNhaSanXuat->tenNSX);
+        $theLoaiChaBrand = $request->get('theLoaiCha');
+        $theLoaiConBrand = $request->get('theLoaiCon');
+        $nhaSanXuatBrand = $request->get('nhaSanXuat');
 
         return view('Customer.Brand.show', [
             'cartItems' => $cartItems,
@@ -124,6 +154,11 @@ class ManufacturerController extends Controller
             'productImage' => $productImage,
             'listNhaSanXuat' => $listNhaSanXuat,
             'listTheLoai' => $listTheLoai,
+
+            'maTLCMin' => $maTLCMin,
+            'theLoaiChaBrand' => $theLoaiChaBrand,
+            'theLoaiConBrand' => $theLoaiConBrand,
+            'nhaSanXuatBrand' => $nhaSanXuatBrand,
 
         ]);
     }

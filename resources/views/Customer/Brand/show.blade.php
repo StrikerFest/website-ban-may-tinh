@@ -43,13 +43,37 @@
                             <div class="col-md-12">
                                 <ul>
                                     @foreach ($listNhaSanXuat as $NSX)
-                                        <a class=" text-bold " style="text-decoration: none"
+                                        {{-- <a class=" text-bold " style="text-decoration: none"
                                             href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
                                             <div class="text-dark">
                                                 <li>{{ $NSX->tenNSX }}</li>
 
                                             </div>
-                                        </a>
+                                        </a> --}}
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                            <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConBrand }}">
+                                            <input type="hidden" name="priceMin"
+                                                value="{{ session()->get('currentPriceMin') }}">
+                                            <input type="hidden" name="priceMax"
+                                                value="{{ session()->get('currentPriceMax') }}">
+                                            <input type="hidden" name="nhaSanXuat" value="{{ $NSX->maNSX }}">
+                                            @if ($NSX->maNSX == $nhaSanXuatBrand)
+                                                <button class=" text-bold btn "
+                                                    style="text-decoration: none; padding:0;list-style: none">
+                                                    <div class="text-light bg-danger rounded padding-right-20">
+                                                        <li>{{ $NSX->tenNSX }}</li>
+                                                    </div>
+                                                </button>
+                                            @else
+                                                <button class=" text-bold btn"
+                                                    style="text-decoration: none; padding:0;list-style: none">
+                                                    <div class="text-dark">
+                                                        <li>{{ $NSX->tenNSX }}</li>
+                                                    </div>
+                                                </button>
+                                            @endif
+                                        </form>
                                     @endforeach
                                 </ul>
                             </div>
@@ -63,8 +87,10 @@
                             {{-- Khoảng giá --}}
 
                             <div class="col-md-12">
-                                <form
-                                    action="{{ route('manufacturerCustomer.show', session()->get('currentManufacturer')) }}">
+                                <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                    <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                    <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConBrand }}">
+                                    <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatBrand }}">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="text-bold text-danger">Từ</div>
@@ -147,16 +173,15 @@
                             {{-- Nhu cầu --}}
                             <div class="col-md-12">
                                 <ul class="p-0">
-                                    @php
+                                    {{-- @php
                                         $count = 0;
-                                    @endphp
-                                    @foreach ($listNhaSanXuat as $NSX)
-                                        @if ($count == 0)
+                                    @endphp --}}
+                                        {{-- @if ($count == 0)
                                             @php
                                                 $count = 1;
-                                            @endphp
-                                            @foreach ($listTheLoai as $TL)
-                                                <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                            @endphp --}}
+                                        @foreach ($listTheLoai as $TL)
+                                            {{-- <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
                                                     <input type="hidden" value="{{ $TL->maTLC }}"
                                                         name="theLoaiNhaSanXuat">
                                                     @if (session()->get('theLoaiNhaSanXuat') == $TL->maTLC)
@@ -174,10 +199,34 @@
                                                             </div>
                                                         </button>
                                                     @endif
-                                                </form>
-                                            @endforeach
-                                        @endif
-                                    @endforeach
+                                                </form> --}}
+                                            <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                                <input type="hidden" name="theLoaiCha"
+                                                    value="{{ $theLoaiChaBrand }}">
+                                                <input type="hidden" name="nhaSanXuat"
+                                                    value="{{ $nhaSanXuatBrand }}">
+                                                <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
+                                                <input type="hidden" name="priceMin"
+                                                    value="{{ session()->get('currentPriceMin') }}">
+                                                <input type="hidden" name="priceMax"
+                                                    value="{{ session()->get('currentPriceMax') }}">
+                                                @if ($TL->maTLC == $theLoaiConBrand)
+                                                    <button class=" text-bold btn "
+                                                        style="text-decoration: none;list-style: none;padding:0">
+                                                        <div class="text-light bg-danger rounded padding-right-20">
+                                                            <li>{{ $TL->tenTLC }}</li>
+                                                        </div>
+                                                    </button>
+                                                @else
+                                                    <button class=" text-bold btn"
+                                                        style="text-decoration: none;list-style: none;padding:0">
+                                                        <div class="text-dark">
+                                                            <li>{{ $TL->tenTLC }}</li>
+                                                        </div>
+                                                    </button>
+                                                @endif
+                                            </form>
+                                        @endforeach
                                 </ul>
                             </div>
 

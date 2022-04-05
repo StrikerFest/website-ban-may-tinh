@@ -186,8 +186,7 @@
                                             method="GET">
                                             @csrf
                                             <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
-                                            <button class="collapse-item width-100"
-                                                href="">{{ $NSX->tenNSX }}</button>
+                                            <button class="collapse-item width-100">{{ $NSX->tenNSX }}</button>
                                         </form>
                                     @endforeach
                                     <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
