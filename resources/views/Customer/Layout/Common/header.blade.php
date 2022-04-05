@@ -167,7 +167,7 @@
                     @foreach ($cartItems as $item)
                         @if ($counterCart < 2)
                             {{--  --}}
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('product.show', $item->id) }}">
                                 <div class="dropdown-list-image mr-3">
                                     <img class="rounded-circle"
                                         src="{{ asset('assets/img/' . $item->attributes->image) }}" alt="...">

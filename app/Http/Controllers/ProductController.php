@@ -140,12 +140,25 @@ class ProductController extends Controller
         $cartItems = \Cart::getContent();
         $productPromotion = DB::table('khuyen_mai')->get();
         $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
+
+        $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
+        $computerNew1 = ProductModel::skip(0)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
+        $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
+        $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
+
+
         return view('Customer.Product.index', [
             'productImage' => $productImage,
             'sanPham' => $sanPham,
             'cartItems' => $cartItems,
             'productPromotion' => $productPromotion,
             'productSpec' => $productSpec,
+
+            'computerNew1' => $computerNew1,
+            'computerNew2' => $computerNew2,
+            'computerNew3' => $computerNew3,
+
+            'computerNew' => $computerNew,
         ]);
     }
 
