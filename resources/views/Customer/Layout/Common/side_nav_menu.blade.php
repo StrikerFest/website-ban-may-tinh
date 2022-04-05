@@ -175,9 +175,6 @@
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
                             @if ($TLCha->tenTL == 'Laptop')
-                                {{-- @php
-                                    session()->put("theLoaiSideNav",$TLCha->maTL);
-                                @endphp --}}
                                 {{-- Laptop theo hãng --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Laptop theo hãng :</h6>
@@ -191,14 +188,21 @@
                                     @endforeach
                                     <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
                                 </div>
+
+                                {{-- Laptop theo nhu cầu --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Laptop theo nhu cầu:</h6>
                                     @foreach ($listTheLoaiLaptop as $TL)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
-                                        <a class="collapse-item"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}" method="GET">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100">
+                                                {{ $TL->tenTLC }}
+                                            </button>
+                                        </form>
                                     @endforeach
                                 </div>
+
+                                {{-- Laptop theo giá --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Laptop theo giá:</h6>
                                     {{--  --}}

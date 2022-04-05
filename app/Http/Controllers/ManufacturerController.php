@@ -146,7 +146,7 @@ class ManufacturerController extends Controller
         // Kiểm tra nếu không có session thể loại con ( bấm từ ngoài vào hoặc chưa chọn bên trong trang vật phẩm)
         $theLoaiChaBrand = $request->get('theLoaiCha');
         $theLoaiConBrand = $request->get('theLoaiCon');
-        $nhaSanXuatBrand = $request->get('nhaSanXuat');
+        // $nhaSanXuatBrand = $request->get('nhaSanXuat');
 
         return view('Customer.Brand.show', [
             'cartItems' => $cartItems,
