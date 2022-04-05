@@ -32,6 +32,16 @@
                         <div class="col-md-2 bg-light " style="margin-top:10px">
                             <div class="col-md-12 text-center padding-top-10 text-bold text-danger">
                                 <h4>Lọc sản phẩm</h4>
+                                <form action="{{ route('categoryCustomer.show', 'null') }}">
+                                    <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
+                                    <input type="hidden" name="theLoaiCon" value="{{ null }}">
+                                    <input type="hidden" name="priceMin" value="{{ 0 }}">
+                                    <input type="hidden" name="priceMax" value="{{ 10000000000 }}">
+                                    <input type="hidden" name="nhaSanXuat" value="{{ null }}">
+                                    <button class="btn btn-danger">
+                                        Hiển thị lại tất cả
+                                    </button>
+                                </form>
                             </div>
                             {{-- --------- --}}
                             <div class="col-md-12 text-center text-danger">

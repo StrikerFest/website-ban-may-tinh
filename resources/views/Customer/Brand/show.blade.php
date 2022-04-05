@@ -32,6 +32,16 @@
                         <div class="col-md-2 bg-light " style="margin-top:10px">
                             <div class="col-md-12 text-center padding-top-10 text-bold text-danger">
                                 <h4>Lọc sản phẩm</h4>
+                                <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                    <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                    <input type="hidden" name="theLoaiCon" value="{{ null }}">
+                                    <input type="hidden" name="priceMin" value="{{ 0 }}">
+                                    <input type="hidden" name="priceMax" value="{{ 10000000000 }}">
+                                    <input type="hidden" name="nhaSanXuat" value="{{ null }}">
+                                    <button class="btn btn-danger">
+                                        Hiển thị lại tất cả
+                                    </button>
+                                </form>
                             </div>
                             {{-- --------- --}}
                             <div class="col-md-12 text-center text-danger">
@@ -176,12 +186,12 @@
                                     {{-- @php
                                         $count = 0;
                                     @endphp --}}
-                                        {{-- @if ($count == 0)
+                                    {{-- @if ($count == 0)
                                             @php
                                                 $count = 1;
                                             @endphp --}}
-                                        @foreach ($listTheLoai as $TL)
-                                            {{-- <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                    @foreach ($listTheLoai as $TL)
+                                        {{-- <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
                                                     <input type="hidden" value="{{ $TL->maTLC }}"
                                                         name="theLoaiNhaSanXuat">
                                                     @if (session()->get('theLoaiNhaSanXuat') == $TL->maTLC)
@@ -200,33 +210,31 @@
                                                         </button>
                                                     @endif
                                                 </form> --}}
-                                            <form action="{{ route('manufacturerCustomer.show', 'null') }}">
-                                                <input type="hidden" name="theLoaiCha"
-                                                    value="{{ $theLoaiChaBrand }}">
-                                                <input type="hidden" name="nhaSanXuat"
-                                                    value="{{ $nhaSanXuatBrand }}">
-                                                <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
-                                                <input type="hidden" name="priceMin"
-                                                    value="{{ session()->get('currentPriceMin') }}">
-                                                <input type="hidden" name="priceMax"
-                                                    value="{{ session()->get('currentPriceMax') }}">
-                                                @if ($TL->maTLC == $theLoaiConBrand)
-                                                    <button class=" text-bold btn "
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div class="text-light bg-danger rounded padding-right-20">
-                                                            <li>{{ $TL->tenTLC }}</li>
-                                                        </div>
-                                                    </button>
-                                                @else
-                                                    <button class=" text-bold btn"
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div class="text-dark">
-                                                            <li>{{ $TL->tenTLC }}</li>
-                                                        </div>
-                                                    </button>
-                                                @endif
-                                            </form>
-                                        @endforeach
+                                        <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                            <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatBrand }}">
+                                            <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
+                                            <input type="hidden" name="priceMin"
+                                                value="{{ session()->get('currentPriceMin') }}">
+                                            <input type="hidden" name="priceMax"
+                                                value="{{ session()->get('currentPriceMax') }}">
+                                            @if ($TL->maTLC == $theLoaiConBrand)
+                                                <button class=" text-bold btn "
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-light bg-danger rounded padding-right-20">
+                                                        <li>{{ $TL->tenTLC }}</li>
+                                                    </div>
+                                                </button>
+                                            @else
+                                                <button class=" text-bold btn"
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-dark">
+                                                        <li>{{ $TL->tenTLC }}</li>
+                                                    </div>
+                                                </button>
+                                            @endif
+                                        </form>
+                                    @endforeach
                                 </ul>
                             </div>
 
