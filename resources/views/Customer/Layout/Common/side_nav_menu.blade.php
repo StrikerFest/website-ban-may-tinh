@@ -122,7 +122,7 @@
 
                                     </form>
                                     {{--  --}}
-                                    <form action="{{ route('moneyCategoryCustomer.show', '50trieu') }}" method="GET">
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <button class="width-75 collapse-item">Trên
                                             50
@@ -258,7 +258,7 @@
 
                                     </form>
                                     {{--  --}}
-                                    <form action="{{ route('moneyCategoryCustomer.show', '50trieu') }}" method="GET">
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <button class="width-75 collapse-item">Trên
                                             50
@@ -374,7 +374,7 @@
 
                                     </form>
                                     {{--  --}}
-                                    <form action="{{ route('moneyCategoryCustomer.show', '50trieu') }}" method="GET">
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <button class="width-75 collapse-item">Trên
                                             50
@@ -479,7 +479,7 @@
 
                                     </form>
                                     {{--  --}}
-                                    <form action="{{ route('moneyCategoryCustomer.show', '50trieu') }}" method="GET">
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <button class="width-75 collapse-item">Trên
                                             50
@@ -593,7 +593,7 @@
 
                                     </form>
                                     {{--  --}}
-                                    <form action="{{ route('moneyCategoryCustomer.show', '50trieu') }}" method="GET">
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <button class="width-75 collapse-item">Trên
                                             50

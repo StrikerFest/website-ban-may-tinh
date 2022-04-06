@@ -224,6 +224,10 @@
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-red">
                                 <h5>CPU</h5>
+                                <input type="checkbox">Core I3<br>
+                                <input type="checkbox">Core I5<br>
+                                <input type="checkbox">Core I7<br>
+                                <input type="checkbox">Core I9
                                 <hr class="border-red">
                             </div>
 
@@ -231,6 +235,18 @@
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-red">
                                 <h5>RAM</h5>
+                                <input type="checkbox">8GB 2666hz<br>
+                                <input type="checkbox">16GB 3222hz
+
+                                <hr class="border-red">
+                            </div>
+                            {{-- --------- --}}
+                            <div class="col-md-12 text-center text-danger">
+                                <hr class="border-red">
+                                <h5>Card</h5>
+                                <input type="checkbox">1650GTX<br>
+                                <input type="checkbox">2070RTX
+
                                 <hr class="border-red">
                             </div>
 

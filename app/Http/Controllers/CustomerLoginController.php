@@ -59,26 +59,27 @@ class CustomerLoginController extends Controller
                     $request->session()->put('diaChi', $user->diaChi);
 
                     $rememberPassword = $request->get('rememberPassword');
-                    if ($rememberPassword == "on"){
-                        $request->session()->put('nhoTaiKhoan',$user->emailND);
+                    if ($rememberPassword == "on") {
+                        $request->session()->put('nhoTaiKhoan', $user->emailND);
                         $request->session()->put('nhoMatKhau', $password);
                         $request->session()->put('checkNho', true);
-                    }
-                    else if ($rememberPassword == null) {
+                    } else if ($rememberPassword == null) {
                         // dd("It's null");
                         $request->session()->forget('nhoTaiKhoan');
                         $request->session()->forget('nhoMatKhau');
-                        $request->session()->forget('checkNho',false);
-
+                        $request->session()->forget('checkNho', false);
                     }
+                    session()->pull('emailSai');
 
                     return Redirect::route('product.index');
                 } else {
+                    $request->session()->put('emailSai', $request->get('email'));
                     return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai");
                 }
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
+                $request->session()->put('emailSai', $request->get('email'));
                 return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai hoặc không tồn tại");
             }
         }

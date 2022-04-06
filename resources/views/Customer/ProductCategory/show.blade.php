@@ -60,7 +60,7 @@
 
                                             </div>
                                         </a> --}}
-                                        <form action="{{ route('categoryCustomer.show', "null") }}">
+                                        <form action="{{ route('categoryCustomer.show', 'null') }}">
                                             <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
                                             <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConCate }}">
                                             <input type="hidden" name="priceMin"
@@ -97,8 +97,7 @@
                             {{-- Khoảng giá --}}
 
                             <div class="col-md-12">
-                                <form
-                                    action="{{ route('categoryCustomer.show', "null") }}">
+                                <form action="{{ route('categoryCustomer.show', 'null') }}">
                                     <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
                                     <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConCate }}">
                                     <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
@@ -193,10 +192,8 @@
 
                                         </a> --}}
                                         <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}">
-                                            <input type="hidden" name="theLoaiCha"
-                                                value="{{ $theLoaiChaCate }}">
-                                            <input type="hidden" name="nhaSanXuat"
-                                                value="{{ $nhaSanXuatCate }}">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
+                                            <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
                                             <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
                                             <input type="hidden" name="priceMin"
                                                 value="{{ session()->get('currentPriceMin') }}">
@@ -226,6 +223,10 @@
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-red">
                                 <h5>CPU</h5>
+                                <input type="checkbox">Core I3<br>
+                                <input type="checkbox">Core I5<br>
+                                <input type="checkbox">Core I7<br>
+                                <input type="checkbox">Core I9
                                 <hr class="border-red">
                             </div>
 
@@ -233,9 +234,20 @@
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-red">
                                 <h5>RAM</h5>
+                                <input type="checkbox">8GB 2666hz<br>
+                                <input type="checkbox">16GB 3222hz
+
                                 <hr class="border-red">
                             </div>
+                            {{-- --------- --}}
+                            <div class="col-md-12 text-center text-danger">
+                                <hr class="border-red">
+                                <h5>Card</h5>
+                                <input type="checkbox">1650GTX<br>
+                                <input type="checkbox">2070RTX
 
+                                <hr class="border-red">
+                            </div>
 
                             {{-- --------- --}}
                             <div class="col-md-12 ">

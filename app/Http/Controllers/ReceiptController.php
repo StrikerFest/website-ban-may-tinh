@@ -93,6 +93,12 @@ class ReceiptController extends Controller
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
+        $validate = $request->validate([
+            'receiptName' => 'required|min:3',
+            'receiptAddress' => 'required|min:3',
+            'receiptEmail' => 'required|email:rfc,dns',
+            'receiptPhone' => 'required|min:9|max:12',
+        ]);
         // Thêm vào hóa đơn
         $request->session()->put("tenKhachHangDat", $request->receiptName);
         $request->session()->put("soDienThoaiDat", $request->receiptPhone);

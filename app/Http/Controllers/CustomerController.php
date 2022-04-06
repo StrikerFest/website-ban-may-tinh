@@ -44,8 +44,8 @@ class CustomerController extends Controller
             'newName' => 'required|min:3',
             'newEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
             'newAddress' => 'required|min:3',
-            'newPhone' => 'required|min:3',
-            'newPassword' => 'required|min:3',
+            'newPhone' => 'required|min:9|max:12',
+            'newPassword' => 'required|min:5',
         ]);
 
         $customer = new UserModel();
@@ -98,6 +98,13 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validate = $request->validate([
+            'updateName' => 'required|min:3',
+            // 'updateEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'updateEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+            'updatePhone' => 'required|min:9|max:12',
+        ]);
+
         // $validated = $request->validate([]);
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
@@ -121,7 +128,7 @@ class CustomerController extends Controller
         $ND->emailND = $request->get('updateEmail');
 
         $ND->save();
-
+        $request->session()->put('displayUpdate',"1");
         return Redirect::route('product.index');
     }
 
