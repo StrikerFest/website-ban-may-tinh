@@ -164,6 +164,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -196,4 +198,5 @@ return [
         'Image'     => Intervention\Image\Facades\Image::class,
     ])->toArray(),
     'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 ];

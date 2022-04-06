@@ -179,6 +179,27 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm mới</h6>
                         </div>
+                        <div class="card-header">
+                            Thêm bằng file Excel
+                            <form action="{{route('admin.product.excel')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="file-excel">
+                                <button>Xác nhận</button>
+                            </form>
+                            <?php if(!session()->has('sanPham')){ ?>
+                                @if(session()->has('success'))
+                                    <div class="alert alert-success">{{session()->get('success')}}</div>
+                                @endif
+                            <?php } ?>
+                            @if(isset($errors) && $errors->any())
+                                <div class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                        {{$error}}
+                                        <br>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <form class="user" action="{{ route('admin.product.store') }}" method="POST">

@@ -76,6 +76,7 @@ Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"
 
 Route::prefix('admin')->middleware('CheckLogin')->name('admin.')->group(function () {
     Route::post('product/updateSpecial/{id}', [AdminProductController::class, "updateSpecial"])->name('product.updateSpecial');
+    Route::post('product/excel', [AdminProductController::class, "excel"])->name('product.excel');
     Route::resource('product', AdminProductController::class);
 });
 // Route::prefix('admin')->group(function () {
@@ -113,6 +114,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('promotion', AdminPromotionController::class)->except(['index']);
     Route::resource('supplier', AdminSupplierController::class);
     Route::get('importProduct/{maNPP}', [AdminImportController::class, "get"])->name('import.get');
+    Route::post('import/excel', [AdminImportController::class, "excel"])->name('import.excel');
     Route::resource('import', AdminImportController::class);
     Route::resource('inventory', AdminInventoryController::class);
 });
