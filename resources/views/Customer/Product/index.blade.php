@@ -282,6 +282,27 @@
                                                     $tenSP = strlen($sanPham->tenSP) > 40 ? substr($sanPham->tenSP, 0, $positionOfOpenP) . '' : $sanPham->tenSP;
                                                 @endphp
 
+                                                @if($sanPham->soLuong <= 0)
+                                                <div class="padding-top-5">
+                                                    <div class=" border-radius-25 ">
+                                                        <button class="btn btn-danger width-100 padding-10">
+                                                            <span class="text-bold text-large">Hàng đã hết</span>
+                                                            <br>
+                                                            <span class="text-normal">Mời quý khách xem các món hàng khác</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @elseif($sanPham->soLuong > 0 && $sanPham->soLuong <= 5)
+                                                <div class="padding-top-5">
+                                                    <div class=" border-radius-25 ">
+                                                        <button class="btn btn-danger width-100 padding-10">
+                                                            <span class="text-bold text-large">Số lượng có hạn</span>
+                                                            <br>
+                                                            <span class="text-normal">Liên hệ ngay với chúng tôi tại 1800 2828</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @else
                                                 <form action="{{ route('cart.go') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
@@ -321,6 +342,7 @@
                                                         </div>
                                                     </div>
                                                 </form>
+                                                @endif
 
                                             </div>
 
@@ -328,6 +350,8 @@
                                     </div>
                                     {{-- Hết - Thêm vào giỏ hàng --}}
 
+                                    @if($sanPham->soLuong <= 5)
+                                    @else
                                     {{-- Nút mua --}}
                                     <form action="{{ route('cart.store') }}" method="POST"
                                         enctype="multipart/form-data">
@@ -363,7 +387,7 @@
                                             </div>
                                         </div>
                                     </form>
-
+                                    @endif
                                     {{-- Hết - Nút mua --}}
                                 </div>
                             </div>

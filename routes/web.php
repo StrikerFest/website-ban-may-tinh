@@ -40,6 +40,7 @@ use App\Http\Controllers\CategoryListController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MoneyCategoryController;
 use App\Http\Controllers\ProductController;
@@ -157,7 +158,8 @@ Route::resource('categoryListCustomer', CategoryListController::class);
 // Route::get('change-password', 'ChangePasswordController@index');
 // Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 
-
+// Email related routes
+// Route::get('mail/send', [MailController::class, 'send']);
 
 Route::get('/test', function () {
     return view('Customer.Customer.index');

@@ -68,21 +68,31 @@
                                     {{-- Vật phẩm bên trong slide --}}
                                     <div class="d-flex">
                                         <div class="carousel-inner ">
-                                            <div class="carousel-item active">
-                                                <img class="d-block carousel-item-custom"
-                                                    src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                    alt="First slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block carousel-item-custom"
-                                                    src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                    alt="Second slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block carousel-item-custom"
-                                                    src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                    alt="Third slide">
-                                            </div>
+                                            @php
+                                                $count = 0;
+                                            @endphp
+                                            @foreach ($bannerImage as $BI1)
+                                                @if ($count == 0)
+                                                    <div class="carousel-item active">
+                                                        <a href="{{ route('product.show', $BI1->duongDan) }}">
+                                                            <img class="d-block carousel-item-custom"
+                                                                src="{{ asset('assets/img/' . $BI1->anh) }}"
+                                                                alt="First slide">
+                                                        </a>
+                                                    </div>
+                                                    @php
+                                                        $count = 1;
+                                                    @endphp
+                                                @else
+                                                    <div class="carousel-item">
+                                                        <a href="{{ route('product.show', $BI1->duongDan) }}">
+                                                            <img class="d-block carousel-item-custom"
+                                                                src="{{ asset('assets/img/' . $BI1->anh) }}"
+                                                                alt="Second slide">
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                     {{-- Kết thúc - Vật phẩm bên trong slide --}}
@@ -276,21 +286,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -320,32 +336,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -415,21 +453,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -459,32 +503,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -554,21 +620,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -598,32 +670,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -753,21 +847,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -797,32 +897,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -892,21 +1014,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -936,32 +1064,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -1170,21 +1320,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1214,32 +1370,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -1309,21 +1487,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1353,32 +1537,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -1587,21 +1793,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1631,32 +1843,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -1726,21 +1960,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -1770,32 +2010,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -2004,21 +2266,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -2048,32 +2316,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 
@@ -2143,21 +2433,27 @@
                                                                     {{-- Hết overlay chi tiết --}}
                                                                     @php
                                                                         $tempImg;
+                                                                        $count = 0;
                                                                     @endphp
                                                                     <!-- Ảnh sản phẩm-->
                                                                     @foreach ($productImage as $PI)
                                                                         @if ($PI->maSP == $CN->maSP)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $CN->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $CN->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
 
@@ -2187,32 +2483,54 @@
                                                                     <!-- Hành động của sản phẩm-->
                                                                     <div class="card-footer border-top-0 bg-dar d-flex"
                                                                         style="width: 100%;background-color: black;">
-                                                                        <a class="btn btn-outline-success text-left"
-                                                                            href="#"
-                                                                            style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                                            hàng</a>
 
-                                                                        <form action="{{ route('cart.store') }}"
-                                                                            method="POST" enctype="multipart/form-data">
-                                                                            @csrf
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->maSP }}" name="id">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tenSP }}"
-                                                                                name="name">
-                                                                            <input type="hidden"
-                                                                                value="{{ $CN->giaSP }}"
-                                                                                name="price">
-                                                                            <input type="hidden"
-                                                                                value="{{ $tempImg }}"
-                                                                                name="image">
-                                                                            <input type="hidden" value="1"
-                                                                                name="quantity">
+                                                                        @if ($CN->soLuong <= 0)
                                                                             <button
-                                                                                class="btn btn-outline-light  text-right"
-                                                                                style="background-color: crimson"><i
-                                                                                    class="fa fa-shopping-cart"></i></button>
-                                                                        </form>
+                                                                                class="btn btn-outline-danger text-left"
+                                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                Hết hàng
+                                                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                                <button
+                                                                                    class="btn btn-outline-success text-left"
+                                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                                    Liên hệ ngay
+                                                                                @else
+                                                                                    <button
+                                                                                        class="btn btn-outline-success text-left"
+                                                                                        href="{{ route('product.show', $CN->maSP) }}"
+                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                        Còn hàng
+                                                                        @endif
+                                                                        </button>
+                                                                        @if ($CN->soLuong <= 0)
+                                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                                        @else
+                                                                            <form action="{{ route('cart.store') }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->maSP }}"
+                                                                                    name="id">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tenSP }}"
+                                                                                    name="name">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $CN->giaSP }}"
+                                                                                    name="price">
+                                                                                <input type="hidden"
+                                                                                    value="{{ $tempImg }}"
+                                                                                    name="image">
+                                                                                <input type="hidden" value="1"
+                                                                                    name="quantity">
+                                                                                <button
+                                                                                    class="btn btn-outline-light  text-right"
+                                                                                    style="background-color: crimson"><i
+                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                            </form>
+                                                                        @endif
                                                                     </div>
 
 

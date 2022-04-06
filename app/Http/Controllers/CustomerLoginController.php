@@ -56,6 +56,22 @@ class CustomerLoginController extends Controller
                     $request->session()->put('matKhau', $user->matKhauND);
                     $request->session()->put('soDienThoai', $user->soDienThoai);
                     $request->session()->put('email', $user->emailND);
+                    $request->session()->put('diaChi', $user->diaChi);
+
+                    $rememberPassword = $request->get('rememberPassword');
+                    if ($rememberPassword == "on"){
+                        $request->session()->put('nhoTaiKhoan',$user->emailND);
+                        $request->session()->put('nhoMatKhau', $password);
+                        $request->session()->put('checkNho', true);
+                    }
+                    else if ($rememberPassword == null) {
+                        // dd("It's null");
+                        $request->session()->forget('nhoTaiKhoan');
+                        $request->session()->forget('nhoMatKhau');
+                        $request->session()->forget('checkNho',false);
+
+                    }
+
                     return Redirect::route('product.index');
                 } else {
                     return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai");
@@ -82,9 +98,9 @@ class CustomerLoginController extends Controller
         else {
             return Redirect::route('product.index')->with(
                 "error",
-                "Đăng nhập trước bro"
+                "Mời quý khách đăng nhập"
             );
-            // return Redirect::route('login')->with("error", "Đăng nhập trước bro");
+            // return Redirect::route('login')->with("error", "Mời quý khách đăng nhập");
         }
     }
 }

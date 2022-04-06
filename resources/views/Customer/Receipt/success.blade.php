@@ -46,28 +46,28 @@
                                         <td class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
                                             Họ tên
                                         </td>
-                                        <td class="width-75 padding-right-20">Nguyễn Văn A
+                                        <td class="width-75 padding-right-20">{{session()->get('tenKhachHangDat')}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
                                             Số
                                             điện thoại</td>
-                                        <td class="width-75 padding-right-20">09748381931
+                                        <td class="width-75 padding-right-20">{{session()->get('soDienThoaiDat')}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
                                             Email
                                         </td>
-                                        <td class="width-75 padding-right-20">NVA@mail.com
+                                        <td class="width-75 padding-right-20">{{session()->get('emailDat')}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
                                             Địa
                                             chỉ</td>
-                                        <td class="width-75 padding-right-20">Viet Nam</td>
+                                        <td class="width-75 padding-right-20">{{session()->get('diaChiDat')}}</td>
                                     </tr>
                                 </table>
 
