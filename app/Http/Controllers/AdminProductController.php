@@ -10,6 +10,8 @@ use App\Models\PromotionModel;
 use App\Models\SupplierModel;
 use Illuminate\Http\Request;
 use Exception;
+use Excel;
+use App\Imports\ProductImport;
 
 class AdminProductController extends Controller
 {
@@ -203,5 +205,15 @@ class AdminProductController extends Controller
         $sanPham->save();
 
         return back();
+    }
+
+    public function excel(Request $request){
+        $this->validate($request, [
+            'file-excel' => 'required|mimes:xls,xlsx'
+        ]);
+
+        $file = $request->file('file-excel');
+        Excel::import(new ProductImport, $file);
+        return back()->with('success', "File imported successfully");
     }
 }
