@@ -100,6 +100,28 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Tạo đơn nhập kho</h6>
                         </div>
+                        
+                        <div class="card-header">
+                            Thêm bằng file Excel
+                            <form action="{{route('import.excel')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" name="file-excel">
+                                <button>Xác nhận</button>
+                            </form>
+                            <?php if(!session()->has('sanPham')){ ?>
+                                @if(session()->has('success'))
+                                    <div class="alert alert-success">{{session()->get('success')}}</div>
+                                @endif
+                            <?php } ?>
+                            @if(isset($errors) && $errors->any())
+                                <div class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                        {{$error}}
+                                        <br>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <form class="user" action="{{ route('import.store') }}" method="POST">
@@ -276,6 +298,9 @@
     <script>
         <?php if(session()->has('delete')){ ?>
             alert('{{session()->get('delete')}}')
+        <?php } ?>
+        <?php if(session()->has('sanPham')){ ?>
+            alert('{{session()->get('sanPham')}}')
         <?php } ?>
     </script>
 </body>

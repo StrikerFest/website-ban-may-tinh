@@ -8,6 +8,9 @@ use App\Models\ImportModel;
 use App\Models\ImportDetailModel;
 use DB;
 use Exception;
+use Excel;
+use App\Imports\StockImport;
+
 
 class AdminImportController extends Controller
 {
@@ -87,7 +90,7 @@ class AdminImportController extends Controller
             'ngayNhap' => 'required|date',
             'maNV' => 'required',
             'maSP' => 'required',
-            'soLuong.*' => 'required|numeric|min:0',
+            'soLuong.*' => 'required|numeric|min:1',
             'giaNhap.*' => 'required|numeric|min:0',
         ]);
         //Nhập kho
@@ -188,5 +191,15 @@ class AdminImportController extends Controller
         $listSP = DB::table('san_pham')->where('maNPP', '=', $maNPP)->get();
         
         return response()->json($listSP);
+    }
+
+    public function excel(Request $request){
+        $this->validate($request, [
+            'file-excel' => 'required|mimes:xls,xlsx'
+        ]);
+
+        $file = $request->file('file-excel');
+        Excel::import(new StockImport, $file);
+        return back()->with('success', "File imported successfully");
     }
 }
