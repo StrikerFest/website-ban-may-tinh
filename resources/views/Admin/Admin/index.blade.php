@@ -67,7 +67,7 @@
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <form action="{{route('admin.destroy', $A->maND)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
@@ -78,7 +78,7 @@
                                                         Xóa
                                                     </button>
                                                 </form>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     @endforeach
                                 </tbody>
