@@ -136,6 +136,10 @@ class ProductController extends Controller
         //
         // $bannerImage1 =  DB::table('anh_quang_cao')->take(1)->get();
         $productImage = ProductImageModel::get();
+
+        $productImageGetFirst = ProductImageModel::take(1)->where('maSP',$id)->get();
+        $productImageSkipFirst = ProductImageModel::skip(1)->take(9)->where('maSP',$id)->get();
+
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
         $productPromotion = DB::table('khuyen_mai')->get();
@@ -159,6 +163,10 @@ class ProductController extends Controller
             'computerNew3' => $computerNew3,
 
             'computerNew' => $computerNew,
+
+            'productImageGetFirst' => $productImageGetFirst,
+            'productImageSkipFirst' => $productImageSkipFirst,
+
         ]);
     }
 

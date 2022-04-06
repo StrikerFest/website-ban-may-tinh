@@ -34,36 +34,51 @@
                                     <div style="flex-direction: column" class="d-flex width-100 height-auto flex-center">
                                         {{-- Div chứa ảnh và mũi tên --}}
                                         {{--  --}}
-                                        {{-- <div id="carouselExampleIndicators"
+                                        <div id="carouselExampleIndicators" style="scroll-margin-block-start: 17rem"
                                             class="carousel slide carousel-main-container-custom " data-ride="carousel"
                                             data-pause="hover" data-interval="5000">
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="0"
+                                            {{-- <ol class="carousel-indicators"> --}}
+                                                {{-- Thay bằng list ảnh --}}
+                                                {{-- <li data-target="#carouselExampleIndicators" data-slide-to="0"
                                                     class="active"></li>
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                            </ol>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> --}}
+                                            {{-- </ol> --}}
                                             <div class="d-flex">
                                                 <div class="carousel-inner ">
-                                                    <div class="carousel-item active hide-from-work">
-                                                        <img class="d-block carousel-item-custom"
-                                                            src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                            alt="First slide">
-                                                    </div>
-                                                    <div class="carousel-item hide-from-work">
-                                                        <img class="d-block carousel-item-custom"
-                                                            src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                            alt="Second slide">
-                                                    </div>
-                                                    <div class="carousel-item hide-from-work">
-                                                        <img class="d-block carousel-item-custom"
-                                                            src="https://i.ytimg.com/vi/pQIbnkOuNoE/maxresdefault.jpg"
-                                                            alt="Third slide">
-                                                    </div>
+                                                    {{-- Thay --}}
+                                                    @php
+                                                        $tempImg;
+                                                    @endphp
+                                                    @foreach ($productImageGetFirst as $PI)
+                                                        <div class="carousel-item active hide-from-work">
+                                                            @if ($PI->maSP == $sanPham->maSP)
+                                                                @php
+                                                                    $tempImg = $PI->anh;
+                                                                @endphp
+                                                                <img class="card-img-top "
+                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                    alt="..." />
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                    @foreach ($productImageSkipFirst as $PI)
+                                                        <div class="carousel-item hide-from-work">
+                                                            @if ($PI->maSP == $sanPham->maSP)
+                                                                @php
+                                                                    $tempImg = $PI->anh;
+                                                                @endphp
+                                                                <img class="card-img-top "
+                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                    alt="..." />
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                    {{--  --}}
                                                 </div>
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleIndicators"
-                                                role="button" data-slide="prev">
+                                                role="button" data-slide="prev" >
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
@@ -72,9 +87,46 @@
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Next</span>
                                             </a>
-                                        </div> --}}
+                                        </div>
                                         {{--  --}}
-                                        <div class="d-flex width-100 height-auto flex-center " style="display: none">
+
+                                        {{-- Div chứa ảnh khác --}}
+                                        <div class="d-flex width-100 height-auto flex-center hide-from-work">
+                                            <div class="grid container">
+                                                <div class="row">
+                                                    @foreach ($productImageGetFirst as $PI)
+                                                        @if ($PI->maSP == $sanPham->maSP)
+                                                            <div class="col-md-3 active" style="cursor: pointer"
+                                                                data-target="#carouselExampleIndicators"
+                                                                data-slide-to="0">
+                                                                <img class="card-img-top img-thumbnail-small"
+                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                    alt="..." />
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                    @php
+                                                        $count = 1;
+                                                    @endphp
+                                                    @foreach ($productImageSkipFirst as $PI)
+                                                        @if ($PI->maSP == $sanPham->maSP)
+                                                            <div class="col-md-3" style="cursor: pointer"
+                                                                data-target="#carouselExampleIndicators"
+                                                                data-slide-to="{{ $count }}">
+                                                                <img class="card-img-top img-thumbnail-small"
+                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                    alt="..." />
+                                                            </div>
+                                                            @php
+                                                                $count += 1;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--  --}}
+                                        {{-- <div class="d-flex width-100 height-auto flex-center " style="display: none">
                                             <div>
                                                 <div>
                                                     <i style="transform: scale(3, 8);padding-right: 0px"
@@ -85,7 +137,7 @@
                                                 $tempImg;
                                             @endphp
                                             <div class="hide-from-work">
-                                                @foreach ($productImage as $PI)
+                                                @foreach ($productImageGetFirst as $PI)
                                                     @if ($PI->maSP == $sanPham->maSP)
                                                         @php
                                                             $tempImg = $PI->anh;
@@ -102,46 +154,10 @@
                                                         class="fa fa-angle-right"></i>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         {{-- Hết - Div chứa ảnh và mũi tên --}}
 
-                                        {{-- Div chứa ảnh khác --}}
-                                        <div class="d-flex width-100 height-auto flex-center hide-from-work">
-                                            <div class="grid">
-                                                <div class="row">
-                                                    @foreach ($productImage as $PI)
-                                                        <div class="col-md-3">
-                                                            @if ($PI->maSP == $sanPham->maSP)
-                                                                <img class="card-img-top img-thumbnail-small"
-                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                    alt="..." />
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            @if ($PI->maSP == $sanPham->maSP)
-                                                                <img class="card-img-top img-thumbnail-small"
-                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                    alt="..." />
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            @if ($PI->maSP == $sanPham->maSP)
-                                                                <img class="card-img-top img-thumbnail-small"
-                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                    alt="..." />
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            @if ($PI->maSP == $sanPham->maSP)
-                                                                <img class="card-img-top img-thumbnail-small"
-                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                    alt="..." />
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -494,9 +510,9 @@
                     <div class="row">
                         {{-- Thông số full -------------------- --}}
                         <div class="col-md-12 " style="height: auto;">
-                            <div class="padding-10" >
+                            <div class="padding-10">
                                 {{-- Danh mục - PC, Laptop phiên bản mới nhất --}}
-                                <div class="card shadow mb-4 background-none" >
+                                <div class="card shadow mb-4 background-none">
                                     {{-- Label danh mục - Thay class bằng class khác --}}
                                     <div class="card-header py-3 black-glass ">
                                         <h4 class="m-0 font-weight-bold text-light text-left carousel-promo-item-label "
@@ -507,11 +523,12 @@
                                     <div class="card-body center-custom">
                                         <div class="table-responsive d-flex">
 
-                                            <div style="overflow: hidden" style="scroll-margin-top: 5rem">
+                                            <div style="overflow: hidden" >
                                                 <div id="carouselExampleIndicators2"
                                                     class="carousel slide carousel-container-custom"
                                                     data-ride="carousel" data-pause="hover" data-interval="5000"
-                                                    style="width:100%;">
+
+                                                    style="width:100%;scroll-margin-block-end: 7rem">
                                                     {{-- Hiển thị vị trí slide --}}
                                                     <ol class="carousel-indicators">
                                                         <li data-target="#carouselExampleIndicators2"
