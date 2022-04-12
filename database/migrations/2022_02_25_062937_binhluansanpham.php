@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreign('maND')->references('maND')->on('nguoi_dung')->onDelete('cascade');
             $table->dateTime('ngayTao');
             $table->text('noiDung');
+            $table->unsignedInteger('maBLC')->nullable();
+            $table->foreign('maBLC')->references('maBLSP')->on('binh_luan_san_pham')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
