@@ -6,7 +6,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+textarea {
+    resize: none;
+}
 /* Custom css thay đổi thuộc tính chung đơn giản*/
 
 /* ------------------------- CENTER  -------------------------*/

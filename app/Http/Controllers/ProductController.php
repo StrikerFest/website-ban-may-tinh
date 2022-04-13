@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BannerImageModel;
+use App\Models\ProductCommentModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
@@ -138,6 +139,9 @@ class ProductController extends Controller
         //
         // $bannerImage1 =  DB::table('anh_quang_cao')->take(1)->get();
         $productImage = ProductImageModel::get();
+        $productComment = ProductCommentModel::where('maBLC','!=',null)->get();
+        $productCommentMain = ProductCommentModel::where('maBLC',null)->get();
+        $user = UserModel::get();
 
         $productImageGetFirst = ProductImageModel::take(1)->where('maSP',$id)->get();
         $productImageSkipFirst = ProductImageModel::skip(1)->take(9)->where('maSP',$id)->get();
@@ -151,10 +155,12 @@ class ProductController extends Controller
         $computerNew1 = ProductModel::skip(0)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
-
-
+        // dd($user);
         return view('Customer.Product.index', [
             'productImage' => $productImage,
+            'productComment' => $productComment,
+            'productCommentMain' => $productCommentMain,
+            'user' => $user,
             'sanPham' => $sanPham,
             'cartItems' => $cartItems,
             'productPromotion' => $productPromotion,

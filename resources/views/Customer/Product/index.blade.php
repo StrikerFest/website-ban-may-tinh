@@ -508,7 +508,7 @@
                         {{-- Hết - Thông số full --}}
                     </div>
                     <div class="row">
-                        {{-- Thông số full -------------------- --}}
+                        {{-- Hàng tương tự -------------------- --}}
                         <div class="col-md-12 " style="height: auto;">
                             <div class="padding-10">
                                 {{-- Danh mục - PC, Laptop phiên bản mới nhất --}}
@@ -1102,7 +1102,103 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Hết - Thông số full --}}
+                        {{-- Hết - Hàng tương tự --}}
+                    </div>
+                    <div class="row">
+                        <div class="container mb-5 mt-5">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="text-center mb-5" id="comment"> Bình luận sản phẩm </h3>
+                                        {{-- Tạo bình luận --}}
+                                        <div class="row" style="padding:  0% 0% 5% 0%">
+                                            <form action="{{route('commentCustomer.store')}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="maNDBinhLuan" value="{{session()->get('khachHang')}}">
+                                                <input type="hidden" name="maSPBinhLuan" value="{{$sanPham->maSP}}">
+                                                <div style="box-sizing: border-box;width:100%;">
+                                                    <textarea name="binhLuan" cols="130" rows="4" placeholder="Nhập bình luận của bạn tại đây"></textarea>
+                                                </div>
+                                                <button class="btn btn-danger" style="margin-top:1%">
+                                                    Gửi ngay
+                                                </button>
+                                            </form>
+                                        </div>
+                                        {{-- Hết - Tạo bình luận --}}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{-- Container bình luận --}}
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        @foreach ($productCommentMain as $PCM)
+                                                            @if($PCM->maSP == $sanPham->maSP)
+
+                                                            <div class="row">
+                                                                <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="http://cdn.onlinewebfonts.com/svg/img_24787.png" style="width:10%;height: 10%;padding:1%" />
+                                                                <div class="col-8 d-flex" style="flex-direction: column">
+                                                                    @foreach($user as $U)
+                                                                        @if($U->maND == $PCM->maND)
+                                                                            <h5>{{$U->tenND}}</h5>
+                                                                        @endif
+                                                                    @endforeach
+                                                                    <div>{{$PCM->ngayTao}}</div>
+                                                                    <h5>{{$PCM->noiDung}}</h5>
+                                                                </div>
+                                                                <div class="col-4">
+
+                                                                    {{-- <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply"></i> reply</span></a> </div> --}}
+                                                                </div>
+                                                            </div>
+
+                                                            @foreach ($productComment as $PC)
+                                                                @if($PC->maBLC == $PCM->maBLSP)
+
+                                                                    {{-- Phản hồi --}}
+                                                                    <div class="media mt-4 " style="padding-left:8%">
+                                                                        <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="http://cdn.onlinewebfonts.com/svg/img_24787.png" style="width:10%;height: 10%;padding:1%" />
+                                                                        <div class="media-body">
+                                                                            <div class="row">
+                                                                                <div class="col-12 d-flex" style="flex-direction: column">
+                                                                                    @foreach($user as $U)
+                                                                                        @if($U->maND == $PC->maND)
+                                                                                            <h5>{{$U->tenND}}</h5>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                    <div>{{$PC->ngayTao}}</div>
+                                                                                    <h5>{{$PC->noiDung}}</h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    {{-- Hết phản hồi --}}
+                                                                @endif
+                                                            @endforeach
+                                                            {{-- Form gửi phản hồi --}}
+                                                            <form action="{{route('commentCustomer.store')}}" method="POST" style="padding-left:8%">
+                                                                @csrf
+                                                                <input type="hidden" name="maNDBinhLuan" value="{{session()->get('khachHang')}}">
+                                                                <input type="hidden" name="maSPBinhLuan" value="{{$sanPham->maSP}}">
+                                                                <input type="hidden" name="maBLC" value="{{$PCM->maBLSP}}">
+                                                                <textarea name="binhLuan" id="BL{{$PCM->maBLSP}}" cols="110" rows="3"></textarea>
+                                                                <button class="btn btn-danger" style="margin-top:1%">
+                                                                    Gửi ngay
+                                                                </button>
+                                                            </form>
+                                                            {{-- Hết - Form gửi phản hồi --}}
+                                                            @endif
+                                                        @endforeach
+                                                        {{-- Hết bình luận cha --}}
+
+
+                                                    </div>
+                                                </div>
+                                                {{-- Hết - Container bình luận --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

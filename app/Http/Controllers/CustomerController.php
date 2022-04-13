@@ -59,6 +59,8 @@ class CustomerController extends Controller
             'newPhone.required'=>'Bạn cần nhập số điện thoại của bạn vào',
             'newPhone.min'=>'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
             'newPhone.max'=>'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
+            'newPassword.required'=>'Bạn cần nhập mật khẩu của bạn vào',
+            'newPassword.min'=>'Mật khẩu của bạn quá ngắn ( Tối thiểu 5 ký tự )',
         ]);
 
         session()->forget('signupError');
