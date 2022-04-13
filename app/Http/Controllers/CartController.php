@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 class CartController extends Controller
 {
     // Cart list
-    public function cartList()
+    public function cartList(Request $request)
     {
+        $request->session()->put('loginError', true);
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
+        session()->forget('loginError');
         $listTheLoaiMayTinhBan = DB::table(
             'the_loai_con'
         )->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();

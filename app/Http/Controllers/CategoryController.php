@@ -98,12 +98,53 @@ class CategoryController extends Controller
         $request->session()->put('currentPriceMin', $priceMin);
         $request->session()->put('currentPriceMax', $priceMax);
 
-        $listSanPham = DB::table('san_pham')->where('maTLC', $id)->whereBetween('giaSP', [$priceMin, $priceMax])->get();
+        // $listSanPham = DB::table('san_pham')->where('maTLC', $id)->whereBetween('giaSP', [$priceMin, $priceMax])->get();
 
-        // Lấy thể loại hiện tại
-        $tenTheLoai = DB::table('the_loai_con')->where('maTLC', $id)->first();
-        $request->session()->put('currentCategory', $tenTheLoai->maTLC);
-        $request->session()->put('currentCategoryName', $tenTheLoai->tenTLC);
+        // // Lấy thể loại hiện tại
+        // $tenTheLoai = DB::table('the_loai_con')->where('maTLC', $id)->first();
+        // $request->session()->put('currentCategory', $tenTheLoai->maTLC);
+        // $request->session()->put('currentCategoryName', $tenTheLoai->tenTLC);
+        $theLoaiConCate = $request->get('theLoaiCon');
+
+        if ($id != "null") {
+            $theLoaiConCate = $id;
+        }
+
+        if ( $request->get('nhaSanXuat') == null) {
+            if ($theLoaiConCate == null) {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->get();
+            } else {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->where('san_pham.maTLC', $theLoaiConCate)
+                    ->get();
+            }
+        } else {
+            if ($theLoaiConCate == null) {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->where('maNSX',  $request->get('nhaSanXuat'))
+                    ->get();
+            } else {
+                $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                    ->whereBetween('giaSP', [$priceMin, $priceMax])
+                    ->where('maTL', $request->get('theLoaiCha'))
+                    ->where('san_pham.maTLC', $theLoaiConCate)
+                    ->where('maNSX',  $request->get('nhaSanXuat'))
+                    ->get();
+            }
+        }
+        $maTLCMin = DB::table('the_loai_con')->selectRaw('min(maTLC) as maTLC')->first();
+
+        // Kiểm tra nếu không có session thể loại con ( bấm từ ngoài vào hoặc chưa chọn bên trong trang vật phẩm)
+        $theLoaiChaCate = $request->get('theLoaiCha');
+        // $theLoaiConCate = $request->get('theLoaiCon');
+        $nhaSanXuatCate = $request->get('nhaSanXuat');
 
         return view('Customer.ProductCategory.show', [
             'cartItems' => $cartItems,
@@ -111,6 +152,11 @@ class CategoryController extends Controller
             'productImage' => $productImage,
             'listNhaSanXuat' => $listNhaSanXuat,
             'listTheLoai' => $listTheLoai,
+
+            'maTLCMin' => $maTLCMin,
+            'theLoaiChaCate' => $theLoaiChaCate,
+            'theLoaiConCate' => $theLoaiConCate,
+            'nhaSanXuatCate' => $nhaSanXuatCate,
 
         ]);
     }

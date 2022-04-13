@@ -117,7 +117,8 @@
                             {{ session()->get('tenKhachHang') }}</span>
 
                         {{-- Ảnh người dùng --}}
-                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+
+                        <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                     </a>
                 @else
                     <br>
@@ -167,7 +168,8 @@
                     @foreach ($cartItems as $item)
                         @if ($counterCart < 2)
                             {{--  --}}
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="{{ route('product.show', $item->id) }}">
                                 <div class="dropdown-list-image mr-3">
                                     <img class="rounded-circle"
                                         src="{{ asset('assets/img/' . $item->attributes->image) }}" alt="...">
@@ -190,18 +192,19 @@
                                 </div>
                             </a>
                         @break
-                    @endif
+                        @endif
 
                     {{--  --}}
-                @endforeach
+                    @endforeach
 
-                <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
-                    hàng</a>
-            </div>
-        </li>
+                    <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
+                        hàng
+                    </a>
+                </div>
+            </li>
 
-    </ul>
-</div>
+        </ul>
+    </div>
 
 
 </header>
@@ -209,43 +212,43 @@
 {{-- Thanh navbar thứ 2 --}}
 <nav class="navbar navbar-expand navbar-light bg-gradient- topbar mb-4 static-top shadow fixed-top second-navbar padding-0"
 style="background-color: rgba(255, 255, 255, 0.9)">
-<div class="center-custom list-style-none">
-    <div class="nav-item-container-highlight">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
-                Trang chủ
-            </a>
-        </li>
+    <div class="center-custom list-style-none">
+        <div class="nav-item-container-highlight">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
+                    Trang chủ
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
+                    Sản phẩm
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                    Blog công nghệ
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.create') }}">
+                    Liên hệ
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
+                    Chính sách
+                </a>
+            </li>
+        </div>
     </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
-                Sản phẩm
-            </a>
-        </li>
-    </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
-                Blog công nghệ
-            </a>
-        </li>
-    </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.create') }}">
-                Liên hệ
-            </a>
-        </li>
-    </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
-                Chính sách
-            </a>
-        </li>
-    </div>
-</div>
 
 </nav>
 
@@ -253,125 +256,168 @@ style="background-color: rgba(255, 255, 255, 0.9)">
 @if (session()->has('cartAddSuccess') == 1)
 <div style="display: block" id="alert">
 @else
-    <div style="display: none" id="alert">
+<div style="display: none" id="alert">
 @endif
-
-<div class="card text-center alert alert-success"
-style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;padding-top:1%">
-<h1>{{ Session::get('cartAddSuccess') }}</h1>
+    <div class="card text-center alert alert-success"
+    style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;padding-top:1%">
+    <h1>{{ Session::get('cartAddSuccess') }}</h1>
+    </div>
 </div>
-</div>
+@php
+$dataError = Session::get('error');
+$dataSuccess = Session::get('success');
 
+@endphp
+{{-- Error alert ------------------------------------- --}}
+@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0) || session()->has('profileError') == 1)
+{{-- @if (sizeof($errors) != 0) --}}
+<div style="display: block" id="alert-error">
+@else
+<div style="display: none" id="alert-error">
+@endif
+    <div class="card text-center alert alert-danger border-red"
+    style="position: fixed; width:25%;left:75%;height:auto;top:15%;z-index:1001;padding-top:1%">
+        @foreach ($errors->all() as $error)
+            <div class="col-md-12">
+                <p class="text-danger">{{ $error }}</p>
+                <hr class="border-red">
+            </div>
+        @endforeach
+        @isset($dataError)
+            @if (session()->has('khachHang') == 0)
+                <div class="alert alert-danger">
+                    {{ $dataError }}
+                <hr class="border-red">
+            </div>
+            @endif
+        @endisset
+    </div>
+</div>
+{{-- Hết - Error alert --}}
 
 {{-- Thông tin khách hàng --}}
-<div style="display: none" id="profile">
-
+{{-- Fix phần này --}}
+{{-- @if (sizeof($errors) != 0)--}}
+@if(session()->has('profileError') == 1)
+<div style="display: block" id="profile">
+    @php
+        session()->forget('profileError');
+    @endphp
+@else
+    <div style="display: none" id="profile">
+@endif
+{{--  --}}
 <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
-    onclick="displayNoneProfile()">
+onclick="displayNoneProfile()">
 </div>
 <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
 
-    <div class="card shadow mb-4">
+<div class="card shadow mb-4">
 
-        <div class="card-header py-3">
-            <div class="row">
-                <div class="col-md-6">
-                    <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
-                </div>
-                <div class="col-md-6 text-right">
-                    <button class="fa fa-times border-radius-25" onclick="displayNoneProfile()"></button>
-                </div>
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
             </div>
-
+            <div class="col-md-6 text-right">
+                <button class="fa fa-times border-radius-25" onclick="displayNoneProfile()"></button>
+            </div>
         </div>
-        @php
-            $check = false;
-            if (session()->has('khachHang')) {
-                $check = true;
-            }
-        @endphp
-        @isset($check)
-            <div class="card-body">
-                <div class="table-responsive" style="overflow: hidden">
 
-                    <form class="user" method="POST"
-                        action="{{ route('customerCustomer.update', session()->get('khachHang') ?? 0) }}">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group row ">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p class="text-black">Tên tài khoản</p>
-                                <input type="text" class="form-control text-black" placeholder="Tên tài khoản"
-                                    value="{{ session()->get('tenKhachHang') }}" name="updateName">
+    </div>
+    @php
+        $check = false;
+        if (session()->has('khachHang')) {
+            $check = true;
+        }
+    @endphp
+    @isset($check)
+        <div class="card-body">
+            <div class="table-responsive" style="overflow: hidden">
 
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="text-black">Số điện thoại</p>
-                                <input type="text" class="form-control text-black"
-                                    placeholder="Số điện thoại tài khoản" value="{{ session()->get('soDienThoai') }}"
-                                    name="updatePhone">
-                            </div>
+                <form class="user" method="POST"
+                    action="{{ route('customerCustomer.update', session()->get('khachHang') ?? 0) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group row ">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <p class="text-black">Tên tài khoản</p>
+                            <input type="text" class="form-control text-black" placeholder="Tên tài khoản"
+                                value="{{ session()->get('tenKhachHang') }}" name="updateName">
+
                         </div>
-                        <div class="form-group">
-                            <p class="text-black">Email</p>
-                            <input type="text" class="form-control text-black" placeholder="Email" name="updateEmail"
-                                value="{{ session()->get('email') }}">
+                        <div class="col-sm-6">
+                            <p class="text-black">Số điện thoại</p>
+                            <input type="text" class="form-control text-black" placeholder="Số điện thoại tài khoản"
+                                value="{{ session()->get('soDienThoai') }}" name="updatePhone">
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="form-control btn-danger btn-user text-bold"
-                                    style="padding:0">Thay đổi thông tin khách
-                                    hàng</button>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="text-black">Email</p>
+                        <input type="text" class="form-control text-black" placeholder="Email" name="updateEmail"
+                            value="{{ session()->get('email') }}">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="form-control btn-danger btn-user text-bold"
+                                style="padding:0">Thay đổi thông tin khách
+                                hàng</button>
                         </div>
-                        {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+                    </div>
+                    {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                             Add data
                         </a> --}}
-                    </form>
-                    <form action="{{ route('changePasswordCustomer.store') }}" method="POST">
-                        @csrf
+                </form>
+                <form action="{{ route('changePasswordCustomer.store') }}" method="POST">
+                    @csrf
 
-                        <div class="form-group row">
-                            <div class="col-sm-12 mb-12 mb-sm-0">
-                                <p class="text-black">Mật khẩu hiện tại</p>
-                                <input type="password" class="form-control" name="current_password">
-                            </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-12 mb-sm-0">
+                            <p class="text-black">Mật khẩu hiện tại</p>
+                            <input type="password" class="form-control" name="current_password">
+                        </div>
 
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <p class="text-black">Mật khẩu mới</p>
+                            <input type="password" class="form-control" name="new_password">
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <p class="text-black">Mật khẩu mới xác nhận lại</p>
+                            <input type="password" class="form-control" name="new_confirm_password">
+                        </div>
+
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            <p class="text-white">.</p>
+                            <button class="form-control btn-danger btn-user text-bold" placeholder="Repeat Password"
+                                style="padding:0">Đổi mật khẩu</button>
 
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p class="text-black">Mật khẩu mới</p>
-                                <input type="password" class="form-control" name="new_password">
+                        {{-- @foreach ($errors->all() as $error)
+                            <div class="col-md-6">
+                                <p class="text-danger">{{ $error }}</p>
                             </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p class="text-black">Mật khẩu mới xác nhận lại</p>
-                                <input type="password" class="form-control" name="new_confirm_password">
-                            </div>
-
-                            <div class="col-sm-12 mb-3 mb-sm-0">
-                                <p class="text-white">.</p>
-                                <button class="form-control btn-danger btn-user text-bold"
-                                    placeholder="Repeat Password" style="padding:0">Đổi mật khẩu</button>
-
-                            </div>
-                            @foreach ($errors->all() as $error)
-                                <div class="col-md-6">
-                                    <p class="text-danger">{{ $error }}</p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </form>
-                </div>
+                        @endforeach --}}
+                    </div>
+                </form>
             </div>
-        @endisset
-    </div>
+        </div>
+    @endisset
+</div>
 </div>
 </div>
 
 {{-- Them moi khách hàng --}}
+@if(session()->has('signupError') == 1)
+<div style="display: block" id="createCustomer">
+    @php
+        session()->forget('signupError');
+    @endphp
+@else
 <div style="display: none" id="createCustomer">
-
+@endif
 <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
     onclick="displayNoneCreateCustomer()">
 </div>
@@ -439,13 +485,15 @@ style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;paddi
 </div>
 
 {{-- Đăng nhập --}}
-@php
-$dataError = Session::get('error');
-$dataSuccess = Session::get('success');
 
-@endphp
-@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || sizeof($errors->all()) != 0)
+{{-- Sửa phần này --}}
+{{-- @if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0)) --}}
+{{--  --}}
+@if(session()->has('loginError') == 1)
 <div style="display: block" class="row justify-content-center" id="login">
+    @php
+        session()->forget('loginError');
+    @endphp
 @else
     <div style="display: none" class="row justify-content-center" id="login">
 @endif
@@ -477,16 +525,20 @@ onclick="displayNoneLogin()">
                     $dataError = Session::get('error');
                     $dateSuccess = Session::get('success');
                 @endphp
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">
-                        <li>{{ $error }}</li>
-                    </div>
+                {{-- @foreach ($errors->all() as $error)
+                    @if (session()->has('khachHang') == 0)
+                        <div class="alert alert-danger">
+                            <li>{{ $error }}</li>
+                        </div>
+                    @endif
                 @endforeach
                 @isset($dataError)
-                    <div class="alert alert-danger">
-                        {{ $dataError }}
-                    </div>
-                @endisset
+                    @if (session()->has('khachHang') == 0)
+                        <div class="alert alert-danger">
+                            {{ $dataError }}
+                        </div>
+                    @endif
+                @endisset --}}
                 @isset($dateSuccess)
                     <div class="alert alert-success">
                         {{ $dateSuccess }}
@@ -494,17 +546,24 @@ onclick="displayNoneLogin()">
                 @endisset
                 <div class="form-group">
                     @if (session()->has('nhoMatKhau') == 1)
-                    <input type="email" class="form-control form-control-user" name="email"
-                        aria-describedby="emailHelp" placeholder="Nhập email của bạn" value="{{session()->get('nhoTaiKhoan')}}">
+                        <input type="email" class="form-control form-control-user" name="email"
+                            aria-describedby="emailHelp" placeholder="Nhập email của bạn"
+                            value="{{ session()->get('nhoTaiKhoan') }}">
+                        {{-- Sửa phần này --}}
+                    @elseif(session()->has('emailSai') == 1)
+                        <input type="email" class="form-control form-control-user" name="email"
+                            aria-describedby="emailHelp" placeholder="Nhập email của bạn"
+                            value="{{ session()->get('emailSai') }}">
+                        {{--  --}}
                     @else
-                    <input type="email" class="form-control form-control-user" name="email"
-                        aria-describedby="emailHelp" placeholder="Nhập email của bạn">
+                        <input type="email" class="form-control form-control-user" name="email"
+                            aria-describedby="emailHelp" placeholder="Nhập email của bạn">
                     @endif
                 </div>
                 <div class="form-group">
                     @if (session()->has('nhoMatKhau') == 1)
                         <input type="password" class="form-control form-control-user" name="password"
-                            placeholder="Nhập mật khẩu của bạn" value="{{session()->get('nhoMatKhau')}}">
+                            placeholder="Nhập mật khẩu của bạn" value="{{ session()->get('nhoMatKhau') }}">
                     @else
                         <input type="password" class="form-control form-control-user" name="password"
                             placeholder="Nhập mật khẩu của bạn">
@@ -512,14 +571,14 @@ onclick="displayNoneLogin()">
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-checkbox small">
-                    @if (session()->has('nhoMatKhau') == 1)
-                        <input type="checkbox" class="custom-control-input" id="customCheck"
-                            name="rememberPassword" checked="{{session()->get('nhoCheck')}}">
-                    @else
-                    <input type="checkbox" class="custom-control-input" id="customCheck"
-                            name="rememberPassword">
-                    @endif
-                    <label class="custom-control-label" for="customCheck">Nhớ mật khẩu</label>
+                        @if (session()->has('nhoMatKhau') == 1)
+                            <input type="checkbox" class="custom-control-input" id="customCheck"
+                                name="rememberPassword" checked="{{ session()->get('nhoCheck') }}">
+                        @else
+                            <input type="checkbox" class="custom-control-input" id="customCheck"
+                                name="rememberPassword">
+                        @endif
+                        <label class="custom-control-label" for="customCheck">Nhớ mật khẩu</label>
                     </div>
                 </div>
                 <button class="btn text-light btn-user btn-block" style="background-color: red">

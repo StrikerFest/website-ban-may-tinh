@@ -35,6 +35,12 @@
                                     </div>
                                     {{-- Table thông tin khách hàng --}}
                                     <div class="col-md-12">
+                                        @foreach ($errors->all() as $error)
+                                            <div class="col-md-12 alert">
+                                                <p class="text-danger">{{ $error }}</p>
+                                                <hr class="border-red">
+                                            </div>
+                                        @endforeach
                                         @foreach ($listNguoiDung as $ND)
                                             <table class="border-gray width-100">
                                                 <tr>
