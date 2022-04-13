@@ -122,6 +122,7 @@ INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Còn hàng');
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Hết hàng');
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Liên hệ');
+INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Đang bán');
 
 -- ==========================================================================================================
 -- Bảng Nhà phân phối
