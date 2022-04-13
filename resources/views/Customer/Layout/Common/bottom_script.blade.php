@@ -196,6 +196,8 @@
 <script>
     function displayBlockProfile() {
         document.getElementById("profile").style.display = "block";
+        document.getElementById("createCustomer").style.display = "none";
+        document.getElementById("login").style.display = "none";
     }
 
     function displayNoneProfile() {
@@ -203,7 +205,9 @@
     }
 
     function displayBlockCreateCustomer() {
+        document.getElementById("profile").style.display = "none";
         document.getElementById("createCustomer").style.display = "block";
+        document.getElementById("login").style.display = "none";
     }
 
     function displayNoneCreateCustomer() {
@@ -211,6 +215,8 @@
     }
 
     function displayBlockLogin() {
+        document.getElementById("profile").style.display = "none";
+        document.getElementById("createCustomer").style.display = "none";
         document.getElementById("login").style.display = "block";
     }
 
@@ -236,6 +242,7 @@
         }, 50);
     }
 
+
     window.onload = function() {
         //dom not only ready, but everything is loaded
         setTimeout(function() {
@@ -243,6 +250,11 @@
             // document.getElementById("alert").style.display = "none";
             fade(document.getElementById("alert"));
         }, 2000);
+        setTimeout(function() {
+            // alert('VIDEO HAS STOPPED');
+            // document.getElementById("alert").style.display = "none";
+            fade(document.getElementById("alert-error"));
+        }, 15000);
     };
 </script>
 

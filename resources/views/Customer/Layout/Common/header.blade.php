@@ -117,7 +117,8 @@
                             {{ session()->get('tenKhachHang') }}</span>
 
                         {{-- Ảnh người dùng --}}
-                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+
+                        <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                     </a>
                 @else
                     <br>
@@ -191,18 +192,19 @@
                                 </div>
                             </a>
                         @break
-                    @endif
+                        @endif
 
                     {{--  --}}
-                @endforeach
+                    @endforeach
 
-                <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
-                    hàng</a>
-            </div>
-        </li>
+                    <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
+                        hàng
+                    </a>
+                </div>
+            </li>
 
-    </ul>
-</div>
+        </ul>
+    </div>
 
 
 </header>
@@ -210,43 +212,43 @@
 {{-- Thanh navbar thứ 2 --}}
 <nav class="navbar navbar-expand navbar-light bg-gradient- topbar mb-4 static-top shadow fixed-top second-navbar padding-0"
 style="background-color: rgba(255, 255, 255, 0.9)">
-<div class="center-custom list-style-none">
-    <div class="nav-item-container-highlight">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
-                Trang chủ
-            </a>
-        </li>
+    <div class="center-custom list-style-none">
+        <div class="nav-item-container-highlight">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
+                    Trang chủ
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
+                    Sản phẩm
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                    Blog công nghệ
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.create') }}">
+                    Liên hệ
+                </a>
+            </li>
+        </div>
+        <div class="nav-item-container">
+            <li class="nav-item ">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
+                    Chính sách
+                </a>
+            </li>
+        </div>
     </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
-                Sản phẩm
-            </a>
-        </li>
-    </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
-                Blog công nghệ
-            </a>
-        </li>
-    </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.create') }}">
-                Liên hệ
-            </a>
-        </li>
-    </div>
-    <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
-                Chính sách
-            </a>
-        </li>
-    </div>
-</div>
 
 </nav>
 
@@ -254,20 +256,53 @@ style="background-color: rgba(255, 255, 255, 0.9)">
 @if (session()->has('cartAddSuccess') == 1)
 <div style="display: block" id="alert">
 @else
-    <div style="display: none" id="alert">
+<div style="display: none" id="alert">
 @endif
-
-<div class="card text-center alert alert-success"
-style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;padding-top:1%">
-<h1>{{ Session::get('cartAddSuccess') }}</h1>
+    <div class="card text-center alert alert-success"
+    style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;padding-top:1%">
+    <h1>{{ Session::get('cartAddSuccess') }}</h1>
+    </div>
 </div>
-</div>
+@php
+$dataError = Session::get('error');
+$dataSuccess = Session::get('success');
 
+@endphp
+{{-- Error alert ------------------------------------- --}}
+@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0) || session()->has('profileError') == 1)
+{{-- @if (sizeof($errors) != 0) --}}
+<div style="display: block" id="alert-error">
+@else
+<div style="display: none" id="alert-error">
+@endif
+    <div class="card text-center alert alert-danger border-red"
+    style="position: fixed; width:25%;left:75%;height:auto;top:15%;z-index:1001;padding-top:1%">
+        @foreach ($errors->all() as $error)
+            <div class="col-md-12">
+                <p class="text-danger">{{ $error }}</p>
+                <hr class="border-red">
+            </div>
+        @endforeach
+        @isset($dataError)
+            @if (session()->has('khachHang') == 0)
+                <div class="alert alert-danger">
+                    {{ $dataError }}
+                <hr class="border-red">
+            </div>
+            @endif
+        @endisset
+    </div>
+</div>
+{{-- Hết - Error alert --}}
 
 {{-- Thông tin khách hàng --}}
 {{-- Fix phần này --}}
-@if (sizeof($errors) != 0)
+{{-- @if (sizeof($errors) != 0)--}}
+@if(session()->has('profileError') == 1)
 <div style="display: block" id="profile">
+    @php
+        session()->forget('profileError');
+    @endphp
 @else
     <div style="display: none" id="profile">
 @endif
@@ -360,11 +395,11 @@ onclick="displayNoneProfile()">
                                 style="padding:0">Đổi mật khẩu</button>
 
                         </div>
-                        @foreach ($errors->all() as $error)
+                        {{-- @foreach ($errors->all() as $error)
                             <div class="col-md-6">
                                 <p class="text-danger">{{ $error }}</p>
                             </div>
-                        @endforeach
+                        @endforeach --}}
                     </div>
                 </form>
             </div>
@@ -375,8 +410,14 @@ onclick="displayNoneProfile()">
 </div>
 
 {{-- Them moi khách hàng --}}
+@if(session()->has('signupError') == 1)
+<div style="display: block" id="createCustomer">
+    @php
+        session()->forget('signupError');
+    @endphp
+@else
 <div style="display: none" id="createCustomer">
-
+@endif
 <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
     onclick="displayNoneCreateCustomer()">
 </div>
@@ -444,15 +485,15 @@ onclick="displayNoneProfile()">
 </div>
 
 {{-- Đăng nhập --}}
-@php
-$dataError = Session::get('error');
-$dataSuccess = Session::get('success');
 
-@endphp
 {{-- Sửa phần này --}}
-@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0))
+{{-- @if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0)) --}}
 {{--  --}}
+@if(session()->has('loginError') == 1)
 <div style="display: block" class="row justify-content-center" id="login">
+    @php
+        session()->forget('loginError');
+    @endphp
 @else
     <div style="display: none" class="row justify-content-center" id="login">
 @endif
@@ -484,7 +525,7 @@ onclick="displayNoneLogin()">
                     $dataError = Session::get('error');
                     $dateSuccess = Session::get('success');
                 @endphp
-                @foreach ($errors->all() as $error)
+                {{-- @foreach ($errors->all() as $error)
                     @if (session()->has('khachHang') == 0)
                         <div class="alert alert-danger">
                             <li>{{ $error }}</li>
@@ -497,7 +538,7 @@ onclick="displayNoneLogin()">
                             {{ $dataError }}
                         </div>
                     @endif
-                @endisset
+                @endisset --}}
                 @isset($dateSuccess)
                     <div class="alert alert-success">
                         {{ $dateSuccess }}

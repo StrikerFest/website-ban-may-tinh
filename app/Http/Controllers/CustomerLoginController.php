@@ -37,6 +37,7 @@ class CustomerLoginController extends Controller
         else {
             $email = $request->get('email');
             $password = $request->get('password');
+            $request->session()->put('loginError', true);
             $validated = $request->validate(
                 [
                     'email' => 'required|email:rfc,dns',
@@ -44,11 +45,13 @@ class CustomerLoginController extends Controller
                 ],
                 [
                     'email.required' => 'Mời quý khách nhập email của mình',
-                    'password.required' => 'Mời quý khách nhập mật khẩu của mình'
+                    'email.email' => 'Định dạng email sai',
+                    'password.required' => 'Mời quý khách nhập mật khẩu của mình',
                 ]
             );
 
             try {
+                session()->forget('loginError');
                 $user = UserModel::where('emailND', $email)->first();
                 if (Hash::check($password, $user->matKhauND)) {
                     $request->session()->put('khachHang', $user->maND);
@@ -74,12 +77,14 @@ class CustomerLoginController extends Controller
                     return Redirect::route('product.index');
                 } else {
                     $request->session()->put('emailSai', $request->get('email'));
+                    $request->session()->put('loginError', true);
                     return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai");
                 }
             }
             // Nếu có lỗi - Báo email hoặc mật khẩu sai
             catch (Exception $e) {
                 $request->session()->put('emailSai', $request->get('email'));
+                $request->session()->put('loginError', true);
                 return Redirect::route('product.index')->with("error", "Email hoặc mật khẩu của bạn đã sai hoặc không tồn tại");
             }
         }

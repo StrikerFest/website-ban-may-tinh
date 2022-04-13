@@ -59,9 +59,11 @@ class ProductController extends Controller
 
         $cartItems = \Cart::getContent();
 
-
+        $saleProduct = ProductModel::where('dacBiet',1)->get();
+        // dd($saleProduct);
         return view('Customer.Customer.index', [
             'productImage' => $productImage,
+            'saleProduct' => $saleProduct,
 
             'computerNew1' => $computerNew1,
             'computerNew2' => $computerNew2,
