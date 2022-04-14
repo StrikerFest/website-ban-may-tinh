@@ -62,36 +62,72 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">PC theo nhu cầu:</h6>
                                     @foreach ($listTheLoaiMayTinhBan as $TL)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
-                                        <a class="collapse-item"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}" method="GET">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100">
+                                                {{ $TL->tenTLC }}
+                                            </button>
+                                        </form>
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">PC theo giá:</h6>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
-                                        10
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu -
-                                        20
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu -
-                                        30
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
-                                        -
-                                        50
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
-                                        triệu</a>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Dưới 5
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">5
+                                            triệu -
+                                            10
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">10
+                                            triệu
+                                            -
+                                            20
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action=" {{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">20
+                                            triệu
+                                            -
+                                            30
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">30
+                                            triệu
+                                            -
+                                            50
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Trên
+                                            50
+                                            triệu</button>
+                                    </form>
                                 </div>
                             @endif
                         @endforeach
@@ -150,47 +186,84 @@
                                             method="GET">
                                             @csrf
                                             <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
-                                            <button class="collapse-item width-100"
-                                                href="">{{ $NSX->tenNSX }}</button>
+                                            <button class="collapse-item width-100">{{ $NSX->tenNSX }}</button>
                                         </form>
                                     @endforeach
                                     <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
                                 </div>
+
+                                {{-- Laptop theo nhu cầu --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Laptop theo nhu cầu:</h6>
                                     @foreach ($listTheLoaiLaptop as $TL)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
-                                        <a class="collapse-item"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}" method="GET">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100">
+                                                {{ $TL->tenTLC }}
+                                            </button>
+                                        </form>
                                     @endforeach
                                 </div>
+
+                                {{-- Laptop theo giá --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Laptop theo giá:</h6>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
-                                        10
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
-                                        -
-                                        20
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
-                                        -
-                                        30
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
-                                        -
-                                        50
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
-                                        triệu</a>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Dưới 5
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">5
+                                            triệu -
+                                            10
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">10
+                                            triệu
+                                            -
+                                            20
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action=" {{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">20
+                                            triệu
+                                            -
+                                            30
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">30
+                                            triệu
+                                            -
+                                            50
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Trên
+                                            50
+                                            triệu</button>
+                                    </form>
                                 </div>
                             @endif
                         @endforeach
@@ -201,19 +274,7 @@
         </div>
     </li>
 
-    {{-- <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-laptop-medical"></i>
-                <span>Gaming laptop</span></a>
-        </li>
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-laptop-code"></i>
-                <span>Workstation Laptop</span></a>
-        </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block  sidenav-divider">
@@ -235,7 +296,7 @@
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
-                            @if ($TLCha->tenTL == 'Laptop')
+                            @if ($TLCha->tenTL == 'Linh kiện')
                                 {{-- Laptop theo hãng --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Linh kiện theo hãng :</h6>
@@ -253,38 +314,72 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Linh kiện theo nhu cầu:</h6>
                                     @foreach ($listTheLoaiLinhKien as $TL)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
-                                        <a class="collapse-item"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}" method="GET">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100">
+                                                {{ $TL->tenTLC }}
+                                            </button>
+                                        </form>
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Linh kiện theo giá:</h6>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
-                                        10
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
-                                        -
-                                        20
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
-                                        -
-                                        30
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
-                                        -
-                                        50
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
-                                        triệu</a>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Dưới 5
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">5
+                                            triệu -
+                                            10
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">10
+                                            triệu
+                                            -
+                                            20
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action=" {{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">20
+                                            triệu
+                                            -
+                                            30
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">30
+                                            triệu
+                                            -
+                                            50
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Trên
+                                            50
+                                            triệu</button>
+                                    </form>
                                 </div>
                             @endif
                         @endforeach
@@ -306,7 +401,7 @@
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
-                            @if ($TLCha->tenTL == 'Laptop')
+                            @if ($TLCha->tenTL == 'Phụ kiện')
                                 {{-- Laptop theo hãng --}}
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Phu kiện theo hãng :</h6>
@@ -324,38 +419,72 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Phu kiện theo nhu cầu:</h6>
                                     @foreach ($listTheLoaiPhuKien as $TL)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
-                                        <a class="collapse-item"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}" method="GET">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100">
+                                                {{ $TL->tenTLC }}
+                                            </button>
+                                        </form>
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <h6 class="collapse-header text-danger">Phu kiện theo giá:</h6>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
-                                        10
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
-                                        -
-                                        20
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
-                                        -
-                                        30
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
-                                        -
-                                        50
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
-                                        triệu</a>
+                                    <h6 class="collapse-header text-danger">Phụ kiện theo giá:</h6>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Dưới 5
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">5
+                                            triệu -
+                                            10
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">10
+                                            triệu
+                                            -
+                                            20
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action=" {{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">20
+                                            triệu
+                                            -
+                                            30
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">30
+                                            triệu
+                                            -
+                                            50
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Trên
+                                            50
+                                            triệu</button>
+                                    </form>
                                 </div>
                             @endif
                         @endforeach
@@ -386,10 +515,10 @@
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
-                            @if ($TLCha->tenTL == 'Laptop')
+                            @if ($TLCha->tenTL == 'Màn hình')
                                 {{-- Laptop theo hãng --}}
                                 <div class="col-md-4">
-                                    <h6 class="collapse-header text-danger">Linh kiện theo hãng :</h6>
+                                    <h6 class="collapse-header text-danger">Màn hình theo hãng :</h6>
                                     @foreach ($listNhaSanXuat as $NSX)
                                         <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}"
                                             method="GET">
@@ -402,40 +531,74 @@
                                     <a class="collapse-item text-danger" href="cards.html">Nhiều hơn nữa</a>
                                 </div>
                                 <div class="col-md-4">
-                                    <h6 class="collapse-header text-danger">Linh kiện theo nhu cầu:</h6>
+                                    <h6 class="collapse-header text-danger">Màn hình theo nhu cầu:</h6>
                                     @foreach ($listTheLoaiManHinh as $TL)
-                                        {{-- Create item page for this - show in controller - Manufacture --}}
-                                        <a class="collapse-item"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">{{ $TL->tenTLC }}</a>
+                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}" method="GET">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                            <button class="collapse-item width-100">
+                                                {{ $TL->tenTLC }}
+                                            </button>
+                                        </form>
                                     @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <h6 class="collapse-header text-danger">Linh kiện theo giá:</h6>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}">Dưới 5
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}">5 triệu -
-                                        10
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}">10 triệu
-                                        -
-                                        20
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}">20 triệu
-                                        -
-                                        30
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}">30 triệu
-                                        -
-                                        50
-                                        triệu</a>
-                                    <a class="collapse-item"
-                                        href="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}">Trên 50
-                                        triệu</a>
+                                    <h6 class="collapse-header text-danger">Màn hình theo giá:</h6>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Dưới 5
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '5trieu-10trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">5
+                                            triệu -
+                                            10
+                                            triệu</button>
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '10trieu-20trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">10
+                                            triệu
+                                            -
+                                            20
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action=" {{ route('moneyCategoryCustomer.show', '20trieu-30trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">20
+                                            triệu
+                                            -
+                                            30
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', '30trieu-50trieu') }}"
+                                        method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">30
+                                            triệu
+                                            -
+                                            50
+                                            triệu</button>
+
+                                    </form>
+                                    {{--  --}}
+                                    <form action="{{ route('moneyCategoryCustomer.show', 'tren50trieu') }}" method="GET">
+                                        <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                        <button class="width-75 collapse-item">Trên
+                                            50
+                                            triệu</button>
+                                    </form>
                                 </div>
                             @endif
                         @endforeach

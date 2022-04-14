@@ -32,6 +32,16 @@
                         <div class="col-md-2 bg-light " style="margin-top:10px">
                             <div class="col-md-12 text-center padding-top-10 text-bold text-danger">
                                 <h4>Lọc sản phẩm</h4>
+                                <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                    <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                    <input type="hidden" name="theLoaiCon" value="{{ null }}">
+                                    <input type="hidden" name="priceMin" value="{{ 0 }}">
+                                    <input type="hidden" name="priceMax" value="{{ 10000000000 }}">
+                                    <input type="hidden" name="nhaSanXuat" value="{{ null }}">
+                                    <button class="btn btn-danger">
+                                        Hiển thị lại tất cả
+                                    </button>
+                                </form>
                             </div>
                             {{-- --------- --}}
                             <div class="col-md-12 text-center text-danger">
@@ -43,13 +53,37 @@
                             <div class="col-md-12">
                                 <ul>
                                     @foreach ($listNhaSanXuat as $NSX)
-                                        <a class=" text-bold " style="text-decoration: none"
+                                        {{-- <a class=" text-bold " style="text-decoration: none"
                                             href="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
                                             <div class="text-dark">
                                                 <li>{{ $NSX->tenNSX }}</li>
 
                                             </div>
-                                        </a>
+                                        </a> --}}
+                                        <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                            <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConBrand }}">
+                                            <input type="hidden" name="priceMin"
+                                                value="{{ session()->get('currentPriceMin') }}">
+                                            <input type="hidden" name="priceMax"
+                                                value="{{ session()->get('currentPriceMax') }}">
+                                            <input type="hidden" name="nhaSanXuat" value="{{ $NSX->maNSX }}">
+                                            @if ($NSX->maNSX == $nhaSanXuatBrand)
+                                                <button class=" text-bold btn "
+                                                    style="text-decoration: none; padding:0;list-style: none">
+                                                    <div class="text-light bg-danger rounded padding-right-20">
+                                                        <li>{{ $NSX->tenNSX }}</li>
+                                                    </div>
+                                                </button>
+                                            @else
+                                                <button class=" text-bold btn"
+                                                    style="text-decoration: none; padding:0;list-style: none">
+                                                    <div class="text-dark">
+                                                        <li>{{ $NSX->tenNSX }}</li>
+                                                    </div>
+                                                </button>
+                                            @endif
+                                        </form>
                                     @endforeach
                                 </ul>
                             </div>
@@ -63,8 +97,10 @@
                             {{-- Khoảng giá --}}
 
                             <div class="col-md-12">
-                                <form
-                                    action="{{ route('manufacturerCustomer.show', session()->get('currentManufacturer')) }}">
+                                <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                    <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                    <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConBrand }}">
+                                    <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatBrand }}">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="text-bold text-danger">Từ</div>
@@ -147,16 +183,15 @@
                             {{-- Nhu cầu --}}
                             <div class="col-md-12">
                                 <ul class="p-0">
-                                    @php
+                                    {{-- @php
                                         $count = 0;
-                                    @endphp
-                                    @foreach ($listNhaSanXuat as $NSX)
-                                        @if ($count == 0)
+                                    @endphp --}}
+                                    {{-- @if ($count == 0)
                                             @php
                                                 $count = 1;
-                                            @endphp
-                                            @foreach ($listTheLoai as $TL)
-                                                <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
+                                            @endphp --}}
+                                    @foreach ($listTheLoai as $TL)
+                                        {{-- <form action="{{ route('manufacturerCustomer.show', $NSX->maNSX) }}">
                                                     <input type="hidden" value="{{ $TL->maTLC }}"
                                                         name="theLoaiNhaSanXuat">
                                                     @if (session()->get('theLoaiNhaSanXuat') == $TL->maTLC)
@@ -174,9 +209,31 @@
                                                             </div>
                                                         </button>
                                                     @endif
-                                                </form>
-                                            @endforeach
-                                        @endif
+                                                </form> --}}
+                                        <form action="{{ route('manufacturerCustomer.show', 'null') }}">
+                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaBrand }}">
+                                            <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatBrand }}">
+                                            <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
+                                            <input type="hidden" name="priceMin"
+                                                value="{{ session()->get('currentPriceMin') }}">
+                                            <input type="hidden" name="priceMax"
+                                                value="{{ session()->get('currentPriceMax') }}">
+                                            @if ($TL->maTLC == $theLoaiConBrand)
+                                                <button class=" text-bold btn "
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-light bg-danger rounded padding-right-20">
+                                                        <li>{{ $TL->tenTLC }}</li>
+                                                    </div>
+                                                </button>
+                                            @else
+                                                <button class=" text-bold btn"
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-dark">
+                                                        <li>{{ $TL->tenTLC }}</li>
+                                                    </div>
+                                                </button>
+                                            @endif
+                                        </form>
                                     @endforeach
                                 </ul>
                             </div>
@@ -188,6 +245,35 @@
                                 <hr class="border-black">
                             </div>
 
+                            {{-- --------- --}}
+                            <div class="col-md-12 text-center text-danger">
+                                <hr class="border-red">
+                                <h5>CPU</h5>
+                                <input type="checkbox">Core I3<br>
+                                <input type="checkbox">Core I5<br>
+                                <input type="checkbox">Core I7<br>
+                                <input type="checkbox">Core I9
+                                <hr class="border-red">
+                            </div>
+
+                            {{-- --------- --}}
+                            <div class="col-md-12 text-center text-danger">
+                                <hr class="border-red">
+                                <h5>RAM</h5>
+                                <input type="checkbox">8GB 2666hz<br>
+                                <input type="checkbox">16GB 3222hz
+
+                                <hr class="border-red">
+                            </div>
+                            {{-- --------- --}}
+                            <div class="col-md-12 text-center text-danger">
+                                <hr class="border-red">
+                                <h5>Card</h5>
+                                <input type="checkbox">1650GTX<br>
+                                <input type="checkbox">2070RTX
+
+                                <hr class="border-red">
+                            </div>
                             {{-- --------- --}}
                             <div class="col-md-12 ">
                                 <hr class="border-black">
@@ -210,19 +296,25 @@
                                                         </div>
                                                         @php
                                                             $tempImg;
+                                                            $count = 0;
                                                         @endphp
                                                         <!-- Ảnh sản phẩm-->
                                                         @foreach ($productImage as $PI)
                                                             @if ($PI->maSP == $CN->maSP)
-                                                                @php
-                                                                    $tempImg = $PI->anh;
-                                                                @endphp
-                                                                <a href="{{ route('product.show', $CN->maSP) }}">
-                                                                    <img class="card-img-top hide-from-work"
-                                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
-                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                        id="{{ $CN->maSP }}" alt="..." />
-                                                                </a>
+                                                                @if ($count == 0)
+                                                                    @php
+                                                                        $tempImg = $PI->anh;
+                                                                    @endphp
+                                                                    <a href="{{ route('product.show', $CN->maSP) }}">
+                                                                        <img class="card-img-top hide-from-work"
+                                                                            style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                            src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                            id="{{ $CN->maSP }}" alt="..." />
+                                                                    </a>
+                                                                    @php
+                                                                        $count = 1;
+                                                                    @endphp
+                                                                @endif
                                                             @endif
                                                         @endforeach
 

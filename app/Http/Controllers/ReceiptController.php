@@ -6,6 +6,7 @@ use App\Mail\DemoEmail;
 use App\Models\DetailReceiptModel;
 use App\Models\ProductImageModel;
 use App\Models\ReceiptModel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -38,7 +39,7 @@ class ReceiptController extends Controller
         )->skip(0)->take(7)->get();
         $cartItems = \Cart::getContent();
 
-        $listHoaDon = DB::table('hoa_don')->where('maKH', session()->get('khachHang'))->get();
+        $listHoaDon = DB::table('hoa_don')->where('maKH', session()->get('khachHang'))->orderBy('maHD', 'DESC')->get();
 
         $listPTTT = DB::table('phuong_thuc_thanh_toan')->get();
         $listTTHD = DB::table('tinh_trang_hoa_don')->get();
@@ -93,79 +94,101 @@ class ReceiptController extends Controller
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
-        // Thêm vào hóa đơn
-        $request->session()->put("tenKhachHangDat", $request->receiptName);
-        $request->session()->put("soDienThoaiDat", $request->receiptPhone);
-        $request->session()->put("emailDat", $request->receiptEmail);
-        $request->session()->put("diaChiDat", $request->receiptAddress);
-        $id = session()->get('khachHang');
-        $hoaDon = new ReceiptModel();
-
-        $hoaDon->maKH = $id;
-        $hoaDon->ngayTao =  date("Y/m/d");
-        $hoaDon->diaChi =  $request->receiptAddress;
-        $hoaDon->soDienThoai = $request->get('receiptPhone');
-        if ($request->paymentMethod == "COD") {
-            $hoaDon->maPTTT = 1;
-        } else if ($request->paymentMethod == "online") {
-            $hoaDon->maPTTT = 2;
-        }
-
-
-        $hoaDon->maTTHD = 2;
-
-        $hoaDon->save();
-
-        $sumPrice = number_format(\Cart::getTotal());
-        // Thêm vào hóa đơn chi tiết
-        $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
-
-        $cartItems = \Cart::getContent();
-        foreach ($cartItems as $cart) {
-            $hoaDonChiTiet = new DetailReceiptModel();
-
-            $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
-            $giaSP = $SP->giaSP;
-            $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
-            $hoaDonChiTiet->maSP = $cart->id;
-            $hoaDonChiTiet->soLuong = $cart->quantity;
-            $hoaDonChiTiet->giaSP = $giaSP;
-            $hoaDonChiTiet->giamGia = $SP->giamGia;
-            // echo $hoaDon;
-            // echo "<br>-------<br>";
-            // echo "<br>MA HD: ";
-            // echo $maHoaDonMoiNhat;
-            // echo "<br>MA SP: ";
-            // echo $cart->id;
-            // echo "<br>quantity: ";
-            // echo $cart->quantity;
-            // echo "<br>GIA: ";
-            // echo $SP->giaSP;
-            // echo "<br>GIAM GIA: ";
-            // echo $SP->giamGia;
-            // echo "<br>------------------<br>";
-            $hoaDonChiTiet->save();
-
-            // Có thể sẽ lỗi ở đây nếu đặt nhiều
-        }
-        $objDemo = new \stdClass();
-        if ($request->paymentMethod == "COD") {
-            $objDemo->demo_one = 'Thanh toán tận nhà';
-        }
-        else{
-            $objDemo->demo_one = 'Chuyển khoản';
-        }
-        $objDemo->demo_two = $sumPrice . " VND";
-        $objDemo->idReceipt = $maHoaDonMoiNhat;
-        $objDemo->sender = 'BKCOM';
-        $objDemo->receiver = session()->get('tenKhachHang');
-        // $request->session()->put('cartObject',)
-        Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
-        \Cart::clear();
-
-        return view('Customer.Receipt.success', [
-            'cartItems' => $cartItems,
+        $validate = $request->validate([
+            'receiptName' => 'required|min:3',
+            'receiptAddress' => 'required|min:3',
+            'receiptEmail' => 'required|email:rfc,dns',
+            'receiptPhone' => 'required|min:9|max:13',
+        ],
+        [
+            'receiptName.required'=>'Bạn cần nhập tên của bạn vào',
+            'receiptName.min'=>'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+            'receiptAddress.required'=>'Bạn cần nhập địa chỉ của bạn vào',
+            'receiptAddress.min'=>'Địa chỉ bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+            'receiptEmail.required'=>'Bạn cần nhập email của bạn vào',
+            'receiptEmail.email'=>'Định dạng email sai',
+            'receiptPhone.required'=>'Bạn cần nhập số điện thoại của bạn vào',
+            'receiptPhone.min'=>'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
+            'receiptPhone.max'=>'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
         ]);
+        try {
+            // Thêm vào hóa đơn
+            $request->session()->put("tenKhachHangDat", $request->receiptName);
+            $request->session()->put("soDienThoaiDat", $request->receiptPhone);
+            $request->session()->put("emailDat", $request->receiptEmail);
+            $request->session()->put("diaChiDat", $request->receiptAddress);
+            $id = session()->get('khachHang');
+            $hoaDon = new ReceiptModel();
+
+            $hoaDon->maKH = $id;
+            $hoaDon->ngayTao =  date("Y/m/d");
+            $hoaDon->diaChi =  $request->receiptAddress;
+            $hoaDon->soDienThoai = $request->get('receiptPhone');
+            if ($request->paymentMethod == "COD") {
+                $hoaDon->maPTTT = 1;
+            } else if ($request->paymentMethod == "online") {
+                $hoaDon->maPTTT = 2;
+            }
+
+
+            $hoaDon->maTTHD = 2;
+
+            $hoaDon->save();
+
+            $sumPrice = number_format(\Cart::getTotal());
+            // Thêm vào hóa đơn chi tiết
+            $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
+
+            $cartItems = \Cart::getContent();
+            foreach ($cartItems as $cart) {
+                $hoaDonChiTiet = new DetailReceiptModel();
+
+                $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
+                $giaSP = $SP->giaSP;
+                $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
+                $hoaDonChiTiet->maSP = $cart->id;
+                $hoaDonChiTiet->soLuong = $cart->quantity;
+                $hoaDonChiTiet->giaSP = $giaSP;
+                $hoaDonChiTiet->giamGia = $SP->giamGia;
+                // echo $hoaDon;
+                // echo "<br>-------<br>";
+                // echo "<br>MA HD: ";
+                // echo $maHoaDonMoiNhat;
+                // echo "<br>MA SP: ";
+                // echo $cart->id;
+                // echo "<br>quantity: ";
+                // echo $cart->quantity;
+                // echo "<br>GIA: ";
+                // echo $SP->giaSP;
+                // echo "<br>GIAM GIA: ";
+                // echo $SP->giamGia;
+                // echo "<br>------------------<br>";
+                $hoaDonChiTiet->save();
+
+                // Có thể sẽ lỗi ở đây nếu đặt nhiều
+            }
+            $objDemo = new \stdClass();
+            if ($request->paymentMethod == "COD") {
+                $objDemo->demo_one = 'Thanh toán tận nhà';
+            } else {
+                $objDemo->demo_one = 'Chuyển khoản';
+            }
+            $objDemo->demo_two = $sumPrice . " VND";
+            $objDemo->idReceipt = $maHoaDonMoiNhat;
+            $objDemo->sender = 'BKCOM';
+            $objDemo->receiver = session()->get('tenKhachHang');
+            // $request->session()->put('cartObject',)
+            Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
+            \Cart::clear();
+
+            return view('Customer.Receipt.success', [
+                'cartItems' => $cartItems,
+            ]);
+        }
+        // Nếu có lỗi - Báo email hoặc mật khẩu sai
+        catch (Exception $e) {
+            return Redirect::back()->with("receiptError", "Thông tin đặt có lỗi");
+        }
     }
 
     /**
