@@ -120,5 +120,10 @@
     <!-- End of Page Wrapper -->
     @include("Admin.Layout.Common.bottom_script")
 
+    <script>
+        <?php if(session()->has('negative_quantity')){ ?>
+            alert('{{session()->get('negative_quantity')}}')
+        <?php } ?>
+    </script>
 </body>
 </html>
