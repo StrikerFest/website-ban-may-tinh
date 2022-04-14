@@ -59,6 +59,7 @@ class AdminReceiptController extends Controller
             ->whereBetween('ngayTao', [$NBD, $NKTquery])
             ->orderBy('hoa_don.maTTHD', 'DESC')
             ->orderBy('ngayTao', 'ASC')
+            ->orderBy('hoa_don.maHD', 'DESC')
             ->get();
         // dd($hoaDon);
         return view('Admin.Receipt.index', [
@@ -160,13 +161,21 @@ class AdminReceiptController extends Controller
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
+        //kiểm tra số lượng sản phẩm
         if($request->get('maTTHD') == 1){
             for($i = 0; $i < sizeof($hdct); $i++){
                 $sanPham = ProductModel::find($hdct[$i]->maSP);
                 $sanPham->soLuong -= $hdct[$i]->soLuong;
                 if($sanPham->soLuong < 0){
-                    $sanPham->soLuong = 0;
+                    return redirect()->back()->with('negative_quantity', 'Số lượng sản phẩm không đủ');
                 }
+            }
+        }
+        //nếu đủ số lượng sẽ giảm số lượng sản phẩm tương ứng
+        if($request->get('maTTHD') == 1){
+            for($i = 0; $i < sizeof($hdct); $i++){
+                $sanPham = ProductModel::find($hdct[$i]->maSP);
+                $sanPham->soLuong -= $hdct[$i]->soLuong;
                 $sanPham->save();
             }
         }

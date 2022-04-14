@@ -117,7 +117,7 @@
                             {{ session()->get('tenKhachHang') }}</span>
 
                         {{-- Ảnh người dùng --}}
-                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                        <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                     </a>
                 @else
                     <br>
