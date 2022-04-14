@@ -142,6 +142,7 @@ INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
 -- ==========================================================================================================
 -- Bảng Sản phẩm
 
+
 -- Laptop gaming
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,`maTLC`,`maTTSP`)
 VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) (i7 11800H/64GB RAM/1TB SSD/RTX 3080 8G/16.0 inch WQXGA 165Hz 100%sRGB/Win10/Xám) (2021)',82990000,'Máy tính lập trình',28,5,7,1,6,3);
