@@ -99,11 +99,6 @@ class AdminProductController extends Controller
         $sanPham->maTTSP = $request->get('maTTSP');
         $sanPham->save();
 
-        $khuyenMai = new PromotionModel();
-        $khuyenMai->maSP = $sanPham->maSP;
-        $khuyenMai->khuyenMai = "Sản phẩm chưa có khuyến mãi";
-        $khuyenMai->save();
-
         return redirect(route('admin.product.index'));
     }
 

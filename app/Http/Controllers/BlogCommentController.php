@@ -46,7 +46,8 @@ class BlogCommentController extends Controller
                 $comment->maBV = $request->get('maBVBinhLuan');
                 $comment->maND = $request->get('maNDBinhLuan');
                 $comment->noiDung = $request->get('binhLuan');
-                $comment->ngayTao = date('Y/m/d h:i:s', time());
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $comment->ngayTao = date('Y/m/d H:i:s', time());
                 $comment->maBLC = null;
                 // dd($comment);
                 $comment->save();
@@ -55,7 +56,8 @@ class BlogCommentController extends Controller
                 $comment->maBV = $request->get('maBVBinhLuan');
                 $comment->maND = $request->get('maNDBinhLuan');
                 $comment->noiDung = $request->get('binhLuan');
-                $comment->ngayTao = date('Y/m/d h:i:s', time());
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $comment->ngayTao = date('Y/m/d H:i:s', time());
                 $comment->maBLC = $request->get('maBLC');
                 // dd($comment);
                 $comment->save();

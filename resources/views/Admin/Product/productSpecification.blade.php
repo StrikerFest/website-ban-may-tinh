@@ -100,7 +100,7 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <label class="form-inline label">Giá trị</label>
-                                            @error('giaTri')
+                                            @error('giaTri.*')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                             <input class="form-control" type="text" name="giaTri[]" placeholder="Value" required>

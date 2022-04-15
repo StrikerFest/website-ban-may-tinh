@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductCommentModel;
+use DB;
 
 class AdminProductCommentController extends Controller
 {
@@ -13,7 +15,16 @@ class AdminProductCommentController extends Controller
      */
     public function index()
     {
-        //
+        $binhLuanSanPham = ProductCommentModel::orderBy('ngayTao', 'DESC')
+            ->where('maBLC', null)
+            ->get();
+
+        $nguoiDung = DB::table('nguoi_dung')->get();
+
+        return view('Admin.Comment.Product.index', [
+            'binhLuanSanPham' => $binhLuanSanPham,
+            'nguoiDung' => $nguoiDung,
+        ]);
     }
 
     /**
@@ -45,7 +56,19 @@ class AdminProductCommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $binhLuanSanPham = ProductCommentModel::find($id);
+
+        $ND = DB::table('nguoi_dung')->where('maND', '=', $binhLuanSanPham->maND)->get()[0];
+
+        $phanHoiSanPham = ProductCommentModel::where('maBLC', '=' , $id)->orderBy('ngayTao', 'DESC')->get();
+
+        $nguoiDung = DB::table('nguoi_dung')->get();
+        return view('Admin.Comment.Product.reply', [
+            'binhLuanSanPham' => $binhLuanSanPham,
+            'ND' => $ND,
+            'phanHoiSanPham' => $phanHoiSanPham,
+            'nguoiDung' =>$nguoiDung,
+        ]);
     }
 
     /**
@@ -79,6 +102,9 @@ class AdminProductCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $BL = ProductCommentModel::find($id);
+        $BL->delete();
+
+        return redirect()->back();
     }
 }

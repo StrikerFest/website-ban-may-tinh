@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\BlogCommentModel;
+use DB;
 
 class AdminBlogCommentController extends Controller
 {
@@ -13,7 +15,16 @@ class AdminBlogCommentController extends Controller
      */
     public function index()
     {
-        //
+        $binhLuanBaiViet = BlogCommentModel::orderBy('ngayTao', 'DESC')
+            ->where('maBLC', null)
+            ->get();
+
+        $nguoiDung = DB::table('nguoi_dung')->get();
+
+        return view('Admin.Comment.Blog.index', [
+            'binhLuanBaiViet' => $binhLuanBaiViet,
+            'nguoiDung' => $nguoiDung,
+        ]);
     }
 
     /**
@@ -45,7 +56,19 @@ class AdminBlogCommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $binhLuanBaiViet = BlogCommentModel::find($id);
+
+        $ND = DB::table('nguoi_dung')->where('maND', '=', $binhLuanBaiViet->maND)->get()[0];
+
+        $phanHoiBaiViet = BlogCommentModel::where('maBLC', '=' , $id)->orderBy('ngayTao', 'DESC')->get();
+
+        $nguoiDung = DB::table('nguoi_dung')->get();
+        return view('Admin.Comment.Blog.reply', [
+            'binhLuanBaiViet' => $binhLuanBaiViet,
+            'ND' => $ND,
+            'phanHoiBaiViet' => $phanHoiBaiViet,
+            'nguoiDung' =>$nguoiDung,
+        ]);
     }
 
     /**
@@ -79,6 +102,9 @@ class AdminBlogCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $BL = BlogCommentModel::find($id);
+        $BL->delete();
+
+        return redirect()->back();
     }
 }
