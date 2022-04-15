@@ -109,8 +109,6 @@ class AdminProductImageController extends Controller
             $oldPath = public_path('assets/img/'.$ASP->anh);
             if(File::exists($oldPath)){
                 File::delete($oldPath);
-            }else{
-                dd('File does not exists.');
             }
 
             $path = $request->file('anh')->store('img');
@@ -137,8 +135,6 @@ class AdminProductImageController extends Controller
         $path = public_path('assets/img/'.$ASP->anh);
         if(File::exists($path)){
             File::delete($path);
-        }else{
-            dd('File does not exists.');
         }
         $ASP->delete();
 

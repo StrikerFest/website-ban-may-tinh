@@ -61,7 +61,7 @@ class AdminProductSpecificationController extends Controller
         $validated = $request->validate([
             'maSP' => 'required',
             'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
-            'giaTri' => 'required|min:1',
+            'giaTri.*' => 'required|min:1',
         ]);
         $maSP = $request->get('maSP');
         for($i = 0; $i < sizeof($request->get('maTS')); $i++){

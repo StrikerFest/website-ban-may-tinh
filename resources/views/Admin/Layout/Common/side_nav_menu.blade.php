@@ -169,13 +169,13 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-comment"></i>
-                <span>Bình luận và phản hồi</span>
+                <span>Bình luận</span>
             </a>
             <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="{{route('customer.index')}}">Danh sách sản phẩm</a>
-                    <a class="collapse-item" href="{{route('customer.create')}}">Thêm sản phẩm</a>
+                    <a class="collapse-item" href="{{route('productComment.index')}}">Bình luận sản phẩm</a>
+                    <a class="collapse-item" href="{{route('blogComment.index')}}">Bình luận bài viết</a>
                 </div>
             </div>
         </li>

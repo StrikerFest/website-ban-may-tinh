@@ -32,9 +32,7 @@
                                         @error('khuyenMai')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <textarea class="form-control" cols="15" rows="5" name="khuyenMai">
-                                            {{$khuyenMai->khuyenMai}}
-                                        </textarea>
+                                        <input type="text" class="form-control" name="khuyenMai" value="{{$khuyenMai->khuyenMai}}"/>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">

@@ -43,7 +43,20 @@ class AdminPromotionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'khuyenMai' => 'required',
+        ]);
+        $maSP = $request->get('maSP');
+        for($i = 0; $i < sizeof($request->get('khuyenMai')); $i++){
+            $KM = new PromotionModel();
+            $KM->maSP = $request->get('maSP');
+            $KM->khuyenMai = $request->get('khuyenMai')[$i];
+
+            $KM->save();
+        };
+        
+        return redirect(route('promotion.index', $maSP));
     }
 
     /**
@@ -102,6 +115,10 @@ class AdminPromotionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $khuyenMai = PromotionModel::find($id);
+        $maSP = $khuyenMai->maSP;
+        $khuyenMai->delete();
+
+        return redirect(route('promotion.index', $maSP));
     }
 }
