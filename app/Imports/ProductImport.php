@@ -38,11 +38,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
             $sanPham->maTLC = $maTLC;
             $sanPham->maTTSP = $maTTSP;
             $sanPham->save();
-            //Tạo khuyến mãi
-            $khuyenMai = new PromotionModel();
-            $khuyenMai->maSP = $sanPham->maSP;
-            $khuyenMai->khuyenMai = "Sản phẩm chưa có khuyến mãi";
-            $khuyenMai->save();
         }
     }
 
