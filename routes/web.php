@@ -33,11 +33,14 @@ use App\Http\Controllers\AdminSubCategoryController;
 use App\Http\Controllers\AdminSupplierController;
 use App\Http\Controllers\AdminImportController;
 use App\Http\Controllers\AdminInventoryController;
+use App\Http\Controllers\BlogCommentController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facade;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryListController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MailController;
@@ -46,6 +49,7 @@ use App\Http\Controllers\MoneyCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\SearchController;
+use App\Models\BlogCommentModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -154,6 +158,12 @@ Route::resource('customerCustomer', CustomerController::class);
 Route::resource('changePasswordCustomer', ChangePasswordController::class);
 
 Route::resource('categoryListCustomer', CategoryListController::class);
+
+Route::resource('commentCustomer', CommentController::class);
+
+Route::resource('blogCustomer', BlogController::class);
+
+Route::resource('blogCommentCustomer', BlogCommentController::class);
 
 // Route::get('change-password', 'ChangePasswordController@index');
 // Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
