@@ -82,7 +82,7 @@
                                                                                     class=" btn btn-danger"
                                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i
                                                                                         class="fa fa-arrow-left"></i></button>
-                                                                                <input type="number" name="quantity"
+                                                                                <input type="number" name="quantity" min="1" readonly
                                                                                     value="{{ $item->quantity }}"
                                                                                     class=" text-center bg-gray-300"
                                                                                     style="width:50" />
