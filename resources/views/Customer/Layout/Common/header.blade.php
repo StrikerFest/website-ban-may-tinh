@@ -229,7 +229,7 @@ style="background-color: rgba(255, 255, 255, 0.9)">
         </div>
         <div class="nav-item-container">
             <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('product.index') }}">
+                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('blogCustomer.index') }}">
                     Blog công nghệ
                 </a>
             </li>

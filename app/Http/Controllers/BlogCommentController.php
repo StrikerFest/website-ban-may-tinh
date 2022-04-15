@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductCommentModel;
+use App\Models\BlogCommentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class CommentController extends Controller
+class BlogCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,10 +40,10 @@ class CommentController extends Controller
         if (!session()->has('khachHang')) {
             return redirect(url()->previous() . '#comment')->with("error", "Mời khách hàng đăng nhập trước");
         }
-        $comment = new ProductCommentModel();
+        $comment = new BlogCommentModel();
         if ($request->get('binhLuan') == !null) {
             if($request->get('maBLC') == null){
-                $comment->maSP = $request->get('maSPBinhLuan');
+                $comment->maBV = $request->get('maBVBinhLuan');
                 $comment->maND = $request->get('maNDBinhLuan');
                 $comment->noiDung = $request->get('binhLuan');
                 $comment->ngayTao = date('Y/m/d h:i:s', time());
@@ -52,7 +52,7 @@ class CommentController extends Controller
                 $comment->save();
             }
             else{
-                $comment->maSP = $request->get('maSPBinhLuan');
+                $comment->maBV = $request->get('maBVBinhLuan');
                 $comment->maND = $request->get('maNDBinhLuan');
                 $comment->noiDung = $request->get('binhLuan');
                 $comment->ngayTao = date('Y/m/d h:i:s', time());
@@ -63,7 +63,7 @@ class CommentController extends Controller
         }
 
         // Quay về danh sách Admin
-        // return Redirect::route('product.show',$request->get('maSPBinhLuan'))->with(
+        // return Redirect::route('product.show',$request->get('maBVBinhLuan'))->with(
         //     "success",
         //     "Tạo tài khoản thành công - Mời bạn đăng nhập"
         // );

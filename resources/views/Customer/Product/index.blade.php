@@ -1145,7 +1145,6 @@
                                                                     <h5>{{$PCM->noiDung}}</h5>
                                                                 </div>
                                                                 <div class="col-4">
-
                                                                     {{-- <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply"></i> reply</span></a> </div> --}}
                                                                 </div>
                                                             </div>
