@@ -275,7 +275,7 @@
                                                     @foreach ($productPromotion as $PM)
                                                         @if ($sanPham->maSP == $PM->maSP)
                                                             @php
-                                                                echo $PM->khuyenMai;
+                                                                echo "+ " . $PM->khuyenMai . "<br>";
                                                             @endphp
                                                         @endif
                                                     @endforeach

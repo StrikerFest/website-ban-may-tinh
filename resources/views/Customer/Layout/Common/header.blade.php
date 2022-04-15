@@ -586,7 +586,6 @@ onclick="displayNoneLogin()">
             </form>
             <hr>
             <div class="text-center">
-                <a class="small link-red" href="forgot-password.html">Quên mật khẩu?</a> |
                 <a class="small link-red" href="#" onclick="displayBlockCreateCustomer(), displayNoneLogin()">Đăng
                     ký ngay</a>
             </div>
