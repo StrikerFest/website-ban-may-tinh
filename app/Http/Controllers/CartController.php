@@ -48,11 +48,15 @@ class CartController extends Controller
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
+        $quantity = $request->quantity;
+        if($request->quantity <=0){
+            $quantity = 1;
+        }
         \Cart::add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
-            'quantity' => $request->quantity,
+            'quantity' => $quantity,
             'attributes' => array(
                 'image' => $request->image,
             )
@@ -67,11 +71,15 @@ class CartController extends Controller
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
+        $quantity = $request->quantity;
+        if($request->quantity <=0){
+            $quantity = 1;
+        }
         \Cart::add([
             'id' => $request->id,
             'name' => $request->name,
             'price' => $request->price,
-            'quantity' => $request->quantity,
+            'quantity' => $quantity,
             'attributes' => array(
                 'image' => $request->image,
             )
@@ -86,12 +94,16 @@ class CartController extends Controller
         if (!session()->has('khachHang')) {
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
+        $quantity = $request->quantity;
+        if($request->quantity <=0){
+            $quantity = 1;
+        }
         \Cart::update(
             $request->id,
             [
                 'quantity' => [
                     'relative' => false,
-                    'value' => $request->quantity
+                    'value' => $quantity
                 ],
             ]
         );
