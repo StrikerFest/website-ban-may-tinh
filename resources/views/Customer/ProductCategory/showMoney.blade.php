@@ -317,22 +317,43 @@
                                                 <!-- Hành động của sản phẩm-->
                                                 <div class="card-footer border-top-0 bg-dar d-flex"
                                                     style="width: 100%;background-color: black;">
-                                                    <a class="btn btn-outline-success text-left" href="#"
-                                                        style="background-color: navy;padding-top: 3px;height:65%">Còn
-                                                        hàng</a>
+                                                    @if ($CN->soLuong <= 0)
+                                                        <button class="btn btn-outline-danger text-left"
+                                                            href="{{ route('product.show', $CN->maSP) }}"
+                                                            style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                            Hết hàng
+                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                            <button class="btn btn-outline-success text-left"
+                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                Liên hệ ngay
+                                                            @else
+                                                                <button class="btn btn-outline-success text-left"
+                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                    style="background-color: navy;padding-top: 3px;height:65%">
+                                                                    Còn hàng
+                                                    @endif
+                                                    </button>
 
-                                                    <form action="{{ route('cart.store') }}" method="POST"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $CN->maSP }}" name="id">
-                                                        <input type="hidden" value="{{ $tenSP }}" name="name">
-                                                        <input type="hidden" value="{{ $CN->giaSP }}" name="price">
-                                                        <input type="hidden" value="{{ $tempImg }}" name="image">
-                                                        <input type="hidden" value="1" name="quantity">
-                                                        <button class="btn btn-outline-light  text-right"
-                                                            style="background-color: crimson"><i
-                                                                class="fa fa-shopping-cart"></i></button>
-                                                    </form>
+                                                    @if ($CN->soLuong <= 0)
+                                                    @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                    @else
+                                                        <form action="{{ route('cart.store') }}" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $CN->maSP }}" name="id">
+                                                            <input type="hidden" value="{{ $tenSP }}"
+                                                                name="name">
+                                                            <input type="hidden" value="{{ $CN->giaSP }}"
+                                                                name="price">
+                                                            <input type="hidden" value="{{ $tempImg }}"
+                                                                name="image">
+                                                            <input type="hidden" value="1" name="quantity">
+                                                            <button class="btn btn-outline-light  text-right"
+                                                                style="background-color: crimson"><i
+                                                                    class="fa fa-shopping-cart"></i></button>
+                                                        </form>
+                                                    @endif
                                                 </div>
 
 
