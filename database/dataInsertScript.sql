@@ -104,6 +104,7 @@ INSERT INTO the_loai(`tenTL`) VALUE ('Laptop');
 INSERT INTO the_loai(`tenTL`) VALUE ('Màn hình');
 INSERT INTO the_loai(`tenTL`) VALUE ('Linh kiện');
 INSERT INTO the_loai(`tenTL`) VALUE ('Phụ kiện');
+INSERT INTO the_loai(`tenTL`) VALUE ('Tặng phẩm');
 -- INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
 -- INSERT INTO the_loai(`tenTL`) VALUE ('Card đồ họa');
 
@@ -115,7 +116,7 @@ INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),(1,'M�
                                                 (5,'Chuột có dây'),(5,'Chuột không dây'),
                                                 (5,'Bàn phím mềm'),(5,'Bàn phím giả cơ'),(5,'Bàn phím cơ'),
                                                 (4,'Ổ cứng HDD'),(4,'Ổ cứng SSD'),(4,'Ổ cứng NVME'),
-                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin');
+                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin'),(6, 'Tặng phẩm');
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');
@@ -237,6 +238,10 @@ INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,
 VALUE('Laptop Asus Zenbook S (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,2,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,`maTLC`,`maTTSP`)
 VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,2,3,3);
+-- Tặng phẩm
+INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, `maNSX`, `maNPP`, `maTLC`, `maTTSP`, `dacBiet`) VALUES (NULL, 'Quà tặng 1', '1500000', 'abc', '10', '0', '3', '2', '21', '1', '0'),
+                                                                                                                                        (NULL, 'Quà tặng 2', '500000', 'asd', '10', '0', '5', '3', '21', '1', '0'),
+                                                                                                                                        (NULL, 'Quà tặng abc...', '1000000', 'Quà tặng ko bán', '10', '0', '1', '1', '21', '1', '0');
 
 
 -- Bang Anh san pham
@@ -540,5 +545,9 @@ INSERT INTO `khuyen_mai` (`maKM`, `maSP`,`khuyenMai`) VALUES    (NULL, 1,"Free s
                                                                 (NULL, 37,"Free ship và giao hàng 19"),(NULL, 38,"Free ship và giao hàng"),
                                                                 (NULL, 39,"Free ship và giao hàng 20"),(NULL, 40,"Free ship và giao hàng");
 
+-- Bảng thể loại voucher
+INSERT INTO `the_loai_voucher` (`maTLV`, `tenTLV`) VALUES (NULL, 'Giảm giá tiền mặt'), (NULL, 'Giảm giá phần trăm'), (NULL, 'Tặng phẩm');
 
-
+INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `moTa`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'abc123', 'Mã voucher giảm giá 1 củ', '1', '1000000', '10', NULL),
+                                                                                                        (NULL, 'def456', 'Mã voucher giảm giá 20%', '2', '20', '10', NULL),
+                                                                                                        (NULL, 'ghi789', 'Mã voucher tặng kèm sản phẩm', '3', '0', '10', '44');

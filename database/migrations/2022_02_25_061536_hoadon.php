@@ -26,6 +26,10 @@ return new class extends Migration
             $table->foreign('maPTTT')->references('maPTTT')->on('phuong_thuc_thanh_toan');
             $table->unsignedInteger('maTTHD');
             $table->foreign('maTTHD')->references('maTTHD')->on('tinh_trang_hoa_don');
+            $table->unsignedInteger('maVoucher')->nullable();
+            $table->foreign('maVoucher')->references('maVoucher')->on('voucher');
+            $table->text('ghiChu');
+            $table->double('tongTienGiam');
         });
     }
 
