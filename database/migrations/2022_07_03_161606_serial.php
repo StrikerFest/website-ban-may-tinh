@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedInteger('maSP');
             $table->foreign('maSP')->references('maSP')->on('san_pham');
             $table->string('serial', 30)->unique();
+            $table->unsignedInteger('maNK');
+            $table->foreign('maNK')->references('maNK')->on('nhap_kho');
         });
     }
 
