@@ -244,6 +244,54 @@ INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, 
                                                                                                                                         (NULL, 'Quà tặng abc...', '1000000', 'Quà tặng ko bán', '10', '0', '1', '1', '21', '1', '0');
 
 
+--Bảng sản phẩm nhà phân phối
+INSERT INTO `san_pham_nha_phan_phoi` (`maSPNPP`, `maSP`, `maNPP`) VALUES (NULL, '1', '1'),
+                                                                        (NULL, '2', '1'),
+                                                                        (NULL, '3', '1'),
+                                                                        (NULL, '4', '1'),
+                                                                        (NULL, '5', '1'),
+                                                                        (NULL, '6', '1'),
+                                                                        (NULL, '7', '1'),
+                                                                        (NULL, '8', '1'),
+                                                                        (NULL, '9', '2'),
+                                                                        (NULL, '10', '2'),
+                                                                        (NULL, '11', '2'),
+                                                                        (NULL, '12', '2'),
+                                                                        (NULL, '13', '2'),
+                                                                        (NULL, '14', '2'),
+                                                                        (NULL, '15', '2'),
+                                                                        (NULL, '16', '2'),
+                                                                        (NULL, '17', '3'),
+                                                                        (NULL, '18', '3'),
+                                                                        (NULL, '19', '3'),
+                                                                        (NULL, '20', '3'),
+                                                                        (NULL, '21', '3'),
+                                                                        (NULL, '22', '3'),
+                                                                        (NULL, '23', '2'),
+                                                                        (NULL, '24', '3'),
+                                                                        (NULL, '25', '2'),
+                                                                        (NULL, '26', '2'),
+                                                                        (NULL, '27', '2'),
+                                                                        (NULL, '28', '2'),
+                                                                        (NULL, '29', '2'),
+                                                                        (NULL, '30', '2'),
+                                                                        (NULL, '31', '2'),
+                                                                        (NULL, '32', '2'),
+                                                                        (NULL, '33', '1'),
+                                                                        (NULL, '34', '1'),
+                                                                        (NULL, '35', '1'),
+                                                                        (NULL, '36', '1'),
+                                                                        (NULL, '37', '1'),
+                                                                        (NULL, '38', '1'),
+                                                                        (NULL, '39', '1'),
+                                                                        (NULL, '40', '1'),
+                                                                        (NULL, '41', '1'),
+                                                                        (NULL, '42', '1'),
+                                                                        (NULL, '43', '1'),
+                                                                        (NULL, '44', '2'),
+                                                                        (NULL, '45', '3'),
+                                                                        (NULL, '46', '1');
+
 -- Bang Anh san pham
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'60634_laptop_acer_gaming_predator_triton_500se_10.png');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'62709_laptop_acer_gaming_predator_helios_500_12.jpg');
@@ -548,6 +596,6 @@ INSERT INTO `khuyen_mai` (`maKM`, `maSP`,`khuyenMai`) VALUES    (NULL, 1,"Free s
 -- Bảng thể loại voucher
 INSERT INTO `the_loai_voucher` (`maTLV`, `tenTLV`) VALUES (NULL, 'Giảm giá tiền mặt'), (NULL, 'Giảm giá phần trăm'), (NULL, 'Tặng phẩm');
 
-INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `moTa`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'abc123', 'Mã voucher giảm giá 1 củ', '1', '1000000', '10', NULL),
-                                                                                                        (NULL, 'def456', 'Mã voucher giảm giá 20%', '2', '20', '10', NULL),
-                                                                                                        (NULL, 'ghi789', 'Mã voucher tặng kèm sản phẩm', '3', '0', '10', '44');
+INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `moTa`, `ngayHetHan`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'abc123', 'Mã voucher giảm giá 1 củ', '2023-07-12 00:00:00', '1', '1000000', '10', NULL),
+                                                                                                        (NULL, 'def456', 'Mã voucher giảm giá 20%', '2023-07-12 00:00:00', '2', '20', '10', NULL),
+                                                                                                        (NULL, 'ghi789', 'Mã voucher tặng kèm sản phẩm', '2023-07-12 00:00:00', '3', '0', '10', '44');
