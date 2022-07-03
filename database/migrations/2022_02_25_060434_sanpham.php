@@ -22,8 +22,6 @@ return new class extends Migration
             $table->unsignedInteger('giamGia')->default('0');
             $table->unsignedInteger('maNSX');
             $table->foreign('maNSX')->references('maNSX')->on('nha_san_xuat');
-            $table->unsignedInteger('maNPP');
-            $table->foreign('maNPP')->references('maNPP')->on('nha_phan_phoi');
             $table->unsignedInteger('maTLC');
             $table->foreign('maTLC')->references('maTLC')->on('the_loai_con');
             $table->unsignedInteger('maTTSP');
