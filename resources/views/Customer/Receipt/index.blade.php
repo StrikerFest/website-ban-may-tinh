@@ -193,7 +193,7 @@
                                     {{-- Hết - Nút mua --}}
 
                                     {{-- Quay về trang chủ --}}
-                                    <a href="{{ route('cart.list') }}">
+                                    <a href="javascript:history.back()">
                                         <div class="padding-top-5">
                                             <div class=" border-radius-25 ">
                                                 <button class="btn btn-warning width-100 padding-10" type="button">

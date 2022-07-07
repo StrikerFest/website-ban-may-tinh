@@ -131,7 +131,7 @@
                                     <div class="d-flex" style="justify-content: end;">
                                         <div class="d-flex-" style="width:50%;justify-content: start">
                                             {{-- Nút quay về trang chủ --}}
-                                            <a href="{{ route('product.index') }}">
+                                            <a href="javascript:history.back()">
                                                 <button
                                                     class="px-6 py-2 text-light bg-gradient-primary padding-10 btn btn-primary"
                                                     style="border-top-right-radius: 20px;border-bottom-right-radius: 20px">Quay

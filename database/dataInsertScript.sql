@@ -104,7 +104,6 @@ INSERT INTO the_loai(`tenTL`) VALUE ('Laptop');
 INSERT INTO the_loai(`tenTL`) VALUE ('Màn hình');
 INSERT INTO the_loai(`tenTL`) VALUE ('Linh kiện');
 INSERT INTO the_loai(`tenTL`) VALUE ('Phụ kiện');
-INSERT INTO the_loai(`tenTL`) VALUE ('Tặng phẩm');
 -- INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
 -- INSERT INTO the_loai(`tenTL`) VALUE ('Card đồ họa');
 
@@ -116,7 +115,7 @@ INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),(1,'M�
                                                 (5,'Chuột có dây'),(5,'Chuột không dây'),
                                                 (5,'Bàn phím mềm'),(5,'Bàn phím giả cơ'),(5,'Bàn phím cơ'),
                                                 (4,'Ổ cứng HDD'),(4,'Ổ cứng SSD'),(4,'Ổ cứng NVME'),
-                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin'),(6, 'Tặng phẩm');
+                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin');
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');
@@ -238,59 +237,7 @@ INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,
 VALUE('Laptop Asus Zenbook S (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,2,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maNPP`,`maTLC`,`maTTSP`)
 VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,2,3,3);
--- Tặng phẩm
-INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, `maNSX`, `maNPP`, `maTLC`, `maTTSP`, `dacBiet`) VALUES (NULL, 'Quà tặng 1', '1500000', 'abc', '10', '0', '3', '2', '21', '1', '0'),
-                                                                                                                                        (NULL, 'Quà tặng 2', '500000', 'asd', '10', '0', '5', '3', '21', '1', '0'),
-                                                                                                                                        (NULL, 'Quà tặng abc...', '1000000', 'Quà tặng ko bán', '10', '0', '1', '1', '21', '1', '0');
 
-
---Bảng sản phẩm nhà phân phối
-INSERT INTO `san_pham_nha_phan_phoi` (`maSPNPP`, `maSP`, `maNPP`) VALUES (NULL, '1', '1'),
-                                                                        (NULL, '2', '1'),
-                                                                        (NULL, '3', '1'),
-                                                                        (NULL, '4', '1'),
-                                                                        (NULL, '5', '1'),
-                                                                        (NULL, '6', '1'),
-                                                                        (NULL, '7', '1'),
-                                                                        (NULL, '8', '1'),
-                                                                        (NULL, '9', '2'),
-                                                                        (NULL, '10', '2'),
-                                                                        (NULL, '11', '2'),
-                                                                        (NULL, '12', '2'),
-                                                                        (NULL, '13', '2'),
-                                                                        (NULL, '14', '2'),
-                                                                        (NULL, '15', '2'),
-                                                                        (NULL, '16', '2'),
-                                                                        (NULL, '17', '3'),
-                                                                        (NULL, '18', '3'),
-                                                                        (NULL, '19', '3'),
-                                                                        (NULL, '20', '3'),
-                                                                        (NULL, '21', '3'),
-                                                                        (NULL, '22', '3'),
-                                                                        (NULL, '23', '2'),
-                                                                        (NULL, '24', '3'),
-                                                                        (NULL, '25', '2'),
-                                                                        (NULL, '26', '2'),
-                                                                        (NULL, '27', '2'),
-                                                                        (NULL, '28', '2'),
-                                                                        (NULL, '29', '2'),
-                                                                        (NULL, '30', '2'),
-                                                                        (NULL, '31', '2'),
-                                                                        (NULL, '32', '2'),
-                                                                        (NULL, '33', '1'),
-                                                                        (NULL, '34', '1'),
-                                                                        (NULL, '35', '1'),
-                                                                        (NULL, '36', '1'),
-                                                                        (NULL, '37', '1'),
-                                                                        (NULL, '38', '1'),
-                                                                        (NULL, '39', '1'),
-                                                                        (NULL, '40', '1'),
-                                                                        (NULL, '41', '1'),
-                                                                        (NULL, '42', '1'),
-                                                                        (NULL, '43', '1'),
-                                                                        (NULL, '44', '2'),
-                                                                        (NULL, '45', '3'),
-                                                                        (NULL, '46', '1');
 
 -- Bang Anh san pham
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (1,'60634_laptop_acer_gaming_predator_triton_500se_10.png');
@@ -593,9 +540,5 @@ INSERT INTO `khuyen_mai` (`maKM`, `maSP`,`khuyenMai`) VALUES    (NULL, 1,"Free s
                                                                 (NULL, 37,"Free ship và giao hàng 19"),(NULL, 38,"Free ship và giao hàng"),
                                                                 (NULL, 39,"Free ship và giao hàng 20"),(NULL, 40,"Free ship và giao hàng");
 
--- Bảng thể loại voucher
-INSERT INTO `the_loai_voucher` (`maTLV`, `tenTLV`) VALUES (NULL, 'Giảm giá tiền mặt'), (NULL, 'Giảm giá phần trăm'), (NULL, 'Tặng phẩm');
 
-INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `moTa`, `ngayHetHan`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'abc123', 'Mã voucher giảm giá 1 củ', '2023-07-12 00:00:00', '1', '1000000', '10', NULL),
-                                                                                                        (NULL, 'def456', 'Mã voucher giảm giá 20%', '2023-07-12 00:00:00', '2', '20', '10', NULL),
-                                                                                                        (NULL, 'ghi789', 'Mã voucher tặng kèm sản phẩm', '2023-07-12 00:00:00', '3', '0', '10', '44');
+
