@@ -21,8 +21,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
             //Lấy mã theo tên nhập từ excel
             $tenNSX = $row['nha_san_xuat'];
             $maNSX = DB::table('nha_san_xuat')->where('tenNSX', 'like', "%$tenNSX%")->first()->maNSX;
-            $tenNPP = $row['nha_phan_phoi'];
-            $maNPP = DB::table('nha_phan_phoi')->where('tenNPP', 'like', "%$tenNPP%")->first()->maNPP;
             $tenTLC = $row['danh_muc'];
             $maTLC = DB::table('the_loai_con')->where('tenTLC', 'like', "%$tenTLC%")->first()->maTLC;
             $tenTTSP = "Đang bán";
@@ -34,7 +32,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
             $sanPham->moTa = $row['mo_ta'];
             $sanPham->giamGia = $row['giam_gia'];
             $sanPham->maNSX = $maNSX;
-            $sanPham->maNPP = $maNPP;
             $sanPham->maTLC = $maTLC;
             $sanPham->maTTSP = $maTTSP;
             $sanPham->save();
@@ -49,12 +46,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
             $validateNSX .= $NSX->tenNSX.",".strtolower($NSX->tenNSX).",";
         }
 
-        $listNPP = DB::table('nha_phan_phoi')->get();
-        $validateNPP = '';
-        foreach($listNPP as $NPP){
-            $validateNPP .= $NPP->tenNPP.",".strtolower($NPP->tenNPP).",";
-        }
-
         $listTLC = DB::table('the_loai_con')->get();
         $validateTLC = '';
         foreach($listTLC as $TLC){
@@ -67,7 +58,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
             'mo_ta' => ['required'],
             'giam_gia' => ['required', 'numeric', 'min:0', 'max:100'],
             'nha_san_xuat' => ['in:'.$validateNSX],
-            'nha_phan_phoi' => ['in:'.$validateNPP],
             'danh_muc' => ['in:'.$validateTLC],
         ];
     }
