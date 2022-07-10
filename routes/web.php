@@ -19,12 +19,10 @@ use App\Http\Controllers\AdminSpecificationController;
 use App\Http\Controllers\AdminCategorySpecificationController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminProductCommentController;
-use App\Http\Controllers\AdminProductResponseController;
 use App\Http\Controllers\AdminProductImageController;
 use App\Http\Controllers\AdminProductSpecificationController;
 use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminBlogCommentController;
-use App\Http\Controllers\AdminBlogResponseController;
 use App\Http\Controllers\AdminReceiptController;
 use App\Http\Controllers\AdminDetailReceiptController;
 use App\Http\Controllers\AdminBannerImageController;
@@ -33,6 +31,8 @@ use App\Http\Controllers\AdminSubCategoryController;
 use App\Http\Controllers\AdminSupplierController;
 use App\Http\Controllers\AdminImportController;
 use App\Http\Controllers\AdminInventoryController;
+use App\Http\Controllers\AdminVoucherController;
+use App\Http\Controllers\AdminVoucherTypeController;
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facade;
@@ -92,7 +92,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('permission', AdminPermissionController::class);
     Route::resource('rolePermission', AdminRolePermissionController::class);
     Route::resource('productComment', AdminProductCommentController::class);
-    Route::resource('productResponse', AdminProductResponseController::class);
     Route::get('productImage/{maSP}', [AdminProductImageController::class, "index"])->name('productImage.index');
     Route::resource('productImage', AdminProductImageController::class)->except(['index']);
     Route::resource('productStatus', AdminProductStatusController::class);
@@ -100,7 +99,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('productSpecification', AdminProductSpecificationController::class)->except(['index']);
     Route::resource('blog', AdminBlogController::class);
     Route::resource('blogComment', AdminBlogCommentController::class);
-    Route::resource('blogResponse', AdminBlogResponseController::class);
     Route::resource('blogStatus', AdminBlogStatusController::class);
     Route::resource('category', AdminCategoryController::class);
     Route::get('categorySpecification/{maTL}', [AdminCategorySpecificationController::class, "index"])->name('categorySpecification.index');
@@ -121,6 +119,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::post('import/excel', [AdminImportController::class, "excel"])->name('import.excel');
     Route::resource('import', AdminImportController::class);
     Route::resource('inventory', AdminInventoryController::class);
+    Route::get('getGiftValue/{maSP}', [AdminVoucherController::class, "getGiftValue"])->name('voucher.value');
+    Route::post('importVoucher', [AdminVoucherController::class, "excel"])->name('voucher.excel');
+    Route::resource('voucher', AdminVoucherController::class);
+    Route::resource('voucherType', AdminVoucherTypeController::class);
 });
 
 Route::get('/testAdmin', function () {

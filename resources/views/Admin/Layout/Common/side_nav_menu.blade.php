@@ -119,6 +119,28 @@
 
         <?php
             $arrQH = session()->get('quyenHan');
+            //Mã QH: 1->là Admin, 3->QL sản phẩm
+            if(in_array(1, $arrQH) || in_array(3, $arrQH)){
+        ?>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTen"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-box"></i>
+                <span>Voucher</span>
+            </a>
+            <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="{{route('voucher.index')}}">Quản lý voucher</a>
+                    <a class="collapse-item" href="{{route('voucherType.index')}}">Thể loại voucher</a>
+                </div>
+            </div>
+        </li>
+        <?php } ?>
+
+        <?php
+            $arrQH = session()->get('quyenHan');
             //Mã QH: 1->là Admin, 2->QL nhân sự
             if(in_array(1, $arrQH) || in_array(2, $arrQH)){
         ?>
@@ -231,12 +253,12 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTen"
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNull"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-ellipsis-h"></i>
                 <span>Khác</span>
             </a>
-            <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseNull" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="#">Danh sách sản phẩm</a>
