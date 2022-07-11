@@ -7,6 +7,7 @@ use App\Models\ProductModel;
 use App\Models\SpecificationModel;
 use App\Models\ProductSpecificationModel;
 use App\Models\SubCategoryModel;
+use Exception;
 
 class AdminProductSpecificationController extends Controller
 {
@@ -60,18 +61,24 @@ class AdminProductSpecificationController extends Controller
     {
         $validated = $request->validate([
             'maSP' => 'required',
+            //Validate two columns unique constraint:
+            //unique:table,column,except,idColumn,extraColumn,extraColumnValue
             'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
             'giaTri.*' => 'required|min:1',
         ]);
         $maSP = $request->get('maSP');
-        for($i = 0; $i < sizeof($request->get('maTS')); $i++){
-            $SPTS = new ProductSpecificationModel();
-            $SPTS->maSP = $request->get('maSP');
-            $SPTS->maTS = $request->get('maTS')[$i];
-            $SPTS->giaTri = $request->get('giaTri')[$i];
-
-            $SPTS->save();
-        };
+        try{
+            for($i = 0; $i < sizeof($request->get('maTS')); $i++){
+                $SPTS = new ProductSpecificationModel();
+                $SPTS->maSP = $request->get('maSP');
+                $SPTS->maTS = $request->get('maTS')[$i];
+                $SPTS->giaTri = $request->get('giaTri')[$i];
+    
+                $SPTS->save();
+            };
+        }catch(Exception $e){
+            return back()->with('duplicate', "Lỗi trùng lặp");
+        }
 
         return redirect(route('productSpecification.index', $maSP));
     }

@@ -114,6 +114,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('subCategory', AdminSubCategoryController::class)->except(['index']);
     Route::get('promotion/{maSP}', [AdminPromotionController::class, "index"])->name('promotion.index');
     Route::resource('promotion', AdminPromotionController::class)->except(['index']);
+    Route::post('supplierProductCreate', [AdminSuppliercontroller::class, "createProduct"])->name('supplier.createProduct');
+    Route::delete('supplierProductDelete/{maSPNPP}', [AdminSupplierController::class, "deleteProduct"])->name('supplier.deleteProduct');
     Route::resource('supplier', AdminSupplierController::class);
     Route::get('importProduct/{maNPP}', [AdminImportController::class, "get"])->name('import.get');
     Route::post('import/excel', [AdminImportController::class, "excel"])->name('import.excel');
