@@ -49,7 +49,7 @@
                                         <th>Tên</th>
                                         <th>Địa chỉ</th>
                                         <th>Số điện thoại</th>
-                                        <th colspan="2" width="10%">Thao tác</th>
+                                        <th colspan="2" width="15%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -62,22 +62,34 @@
                                             <td>{{ $NPP->diaChiNPP }}</td>
                                             <td>{{ $NPP->soDienThoai }}</td>
                                             <td>
-                                                <form action="{{route('supplier.edit', $NPP->maNPP)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Sửa</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('supplier.destroy', $NPP->maNPP)}}" method="post">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button 
-                                                        onclick="return confirm('Xác nhận xóa nhà phân phối?')"
-                                                        class="btn btn-primary btn-user btn-block"
-                                                        >
-                                                        Xóa
-                                                    </button>
-                                                </form>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <form action="{{route('supplier.show', $NPP->maNPP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Xem sản phẩm</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('supplier.edit', $NPP->maNPP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('supplier.destroy', $NPP->maNPP)}}" method="post">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button 
+                                                                onclick="return confirm('Xác nhận xóa nhà phân phối?')"
+                                                                class="btn btn-primary btn-user btn-block"
+                                                                >
+                                                                Xóa
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

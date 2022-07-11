@@ -25,6 +25,7 @@ class AdminProductController extends Controller
         $searchName = $request->get('searchName');
         $searchManufacturer = $request->get('searchManufacturer');
         $searchSubCategory = $request->get('searchSubCategory');
+        $searchSupplier = $request->get('searchSupplier');
 
         $nhaSanXuat = ManufacturerModel::get();
 
@@ -36,15 +37,19 @@ class AdminProductController extends Controller
         // dd($searchName, $searchManufacturer, $searchSubCategory);
         $sanPham = ProductModel::join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+            ->join('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+            ->join('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'san_pham_nha_phan_phoi.maNPP')
             ->where('tenSP', 'like', "%$searchName%")
             ->where('tenNSX', 'like', "%$searchManufacturer%")
             ->where('tenTLC', 'like', "%$searchSubCategory%")
-            ->orderBy('maSP', 'desc')
+            ->where('tenNPP', 'like', "%$searchSupplier%")
+            ->orderBy('san_pham.maSP', 'desc')
             ->paginate(5)
             ->appends([
                 'searchName' => $searchName,
                 'searchManufacturer' => $searchManufacturer,
                 'searchSubCategory' => $searchSubCategory,
+                'searchSupplier' => $searchSupplier,
             ]);
         
         return view('Admin.Product.index', [
@@ -56,6 +61,7 @@ class AdminProductController extends Controller
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
             "searchSubCategory" => $searchSubCategory,
+            "searchSupplier" => $searchSupplier,
         ]);
     }
 
@@ -83,7 +89,6 @@ class AdminProductController extends Controller
             'moTa' => 'required|min:3',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
-            'maNPP' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
@@ -94,7 +99,6 @@ class AdminProductController extends Controller
         $sanPham->moTa = $request->get('moTa');
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
-        $sanPham->maNPP = $request->get('maNPP');
         $sanPham->maTLC = $request->get('maTLC');
         $sanPham->maTTSP = $request->get('maTTSP');
         $sanPham->save();
@@ -127,15 +131,12 @@ class AdminProductController extends Controller
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
-        $nhaPhanPhoi = SupplierModel::get();
-
         $SP = ProductModel::find($id);
         
         return view('Admin.Product.edit', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
-            "nhaPhanPhoi" => $nhaPhanPhoi,
             "SP" => $SP,
         ]);
     }
@@ -155,7 +156,6 @@ class AdminProductController extends Controller
             'moTa' => 'required|min:3',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
-            'maNPP' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
@@ -166,7 +166,6 @@ class AdminProductController extends Controller
         $SP->moTa = $request->get('moTa');
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
-        $SP->maNPP = $request->get('maNPP');
         $SP->maTLC = $request->get('maTLC');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();
