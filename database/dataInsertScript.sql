@@ -244,7 +244,7 @@ INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, 
                                                                                                                                         (NULL, 'Quà tặng abc...', '1000000', 'Quà tặng ko bán', '10', '0', '1', '21', '1');
 
 
---Bảng sản phẩm nhà phân phối
+-- Bảng sản phẩm nhà phân phối
 INSERT INTO `san_pham_nha_phan_phoi` (`maSPNPP`, `maSP`, `maNPP`) VALUES (NULL, '1', '1'),
                                                                         (NULL, '2', '1'),
                                                                         (NULL, '3', '1'),
