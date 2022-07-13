@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -68,21 +68,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Nhà phân phối</label>
-                                        @error('maNPP')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <select class="form-control" name="maNPP">
-                                            <option value="" disabled selected hidden>Supplier</option>
-                                            @foreach($nhaPhanPhoi as $NPP)
-                                                <option value="{{ $NPP->maNPP }}" <?php echo($SP->maNPP == $NPP->maNPP? "selected": "") ?>>
-                                                    {{ $NPP->tenNPP }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -96,7 +82,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>

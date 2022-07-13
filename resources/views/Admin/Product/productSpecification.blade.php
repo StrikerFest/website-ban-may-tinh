@@ -37,9 +37,6 @@
                                             <th>Giá trị</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-
-                                    </tfoot>
                                     <tbody>
                                     <tr>
                                     @foreach ($sanPhamThongSo as $SPTS)
@@ -92,7 +89,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             <select class="form-control" name="maTS[]">
-                                                <option value="" disabled selected hidden>Status</option>
+                                                <option value="" disabled selected hidden>Specification</option>
                                                 @foreach($thongSo as $TS)
                                                     <option value="{{ $TS->maTS }}">{{ $TS->tenTS }}</option>
                                                 @endforeach
@@ -136,7 +133,7 @@
                 html += '<div class="col-sm-5">\
                             <label class="form-inline label">Thông số</label>\
                             <select class="form-control" name="maTS[]">\
-                            <option value="" disabled selected hidden>Product</option>\
+                            <option value="" disabled selected hidden>Specification</option>\
                                 @foreach($thongSo as $TS)\
                                     <option value="{{ $TS->maTS }}">{{ $TS->tenTS }}</option>\
                                 @endforeach\
@@ -160,6 +157,11 @@
                 $(this).closest('div').parent().remove();
             })
         });
+    </script>
+    <script>
+        <?php if(session()->has('duplicate')){ ?>
+            alert('{{session()->get('duplicate')}}')
+        <?php } ?>
     </script>
 </body>
 </html>

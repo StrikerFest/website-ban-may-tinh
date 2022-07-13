@@ -25,6 +25,7 @@ class AdminProductController extends Controller
         $searchName = $request->get('searchName');
         $searchManufacturer = $request->get('searchManufacturer');
         $searchSubCategory = $request->get('searchSubCategory');
+        $searchSupplier = $request->get('searchSupplier');
 
         $nhaSanXuat = ManufacturerModel::get();
 
@@ -33,18 +34,25 @@ class AdminProductController extends Controller
         $nhaPhanPhoi = SupplierModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
-        // dd($searchName, $searchManufacturer, $searchSubCategory);
-        $sanPham = ProductModel::join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
+        // dd($searchName, $searchManufacturer, $searchSubCategory, $searchSupplier);
+        $sanPham = ProductModel::select(['san_pham.*', 'nha_san_xuat.tenNSX', 'the_loai_con.tenTLC', 'san_pham_nha_phan_phoi.maSPNPP', 'san_pham_nha_phan_phoi.maNPP'])
+            ->join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+            ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+            ->leftJoin('nha_phan_phoi', 'san_pham_nha_phan_phoi.maNPP', '=', 'nha_phan_phoi.maNPP')
             ->where('tenSP', 'like', "%$searchName%")
             ->where('tenNSX', 'like', "%$searchManufacturer%")
             ->where('tenTLC', 'like', "%$searchSubCategory%")
-            ->orderBy('maSP', 'desc')
+            ->where('tenNPP', 'like', "%$searchSupplier%")
+            ->orWhereNull('tenNPP')
+            ->groupBy('san_pham.maSP')
+            ->orderBy('san_pham.maSP', 'desc')
             ->paginate(5)
             ->appends([
                 'searchName' => $searchName,
                 'searchManufacturer' => $searchManufacturer,
                 'searchSubCategory' => $searchSubCategory,
+                'searchSupplier' => $searchSupplier,
             ]);
         
         return view('Admin.Product.index', [
@@ -56,6 +64,7 @@ class AdminProductController extends Controller
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
             "searchSubCategory" => $searchSubCategory,
+            "searchSupplier" => $searchSupplier,
         ]);
     }
 
@@ -83,7 +92,6 @@ class AdminProductController extends Controller
             'moTa' => 'required|min:3',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
-            'maNPP' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
@@ -94,9 +102,9 @@ class AdminProductController extends Controller
         $sanPham->moTa = $request->get('moTa');
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
-        $sanPham->maNPP = $request->get('maNPP');
         $sanPham->maTLC = $request->get('maTLC');
         $sanPham->maTTSP = $request->get('maTTSP');
+        // dd($sanPham);
         $sanPham->save();
 
         return redirect(route('admin.product.index'));
@@ -127,15 +135,12 @@ class AdminProductController extends Controller
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
-        $nhaPhanPhoi = SupplierModel::get();
-
         $SP = ProductModel::find($id);
         
         return view('Admin.Product.edit', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
-            "nhaPhanPhoi" => $nhaPhanPhoi,
             "SP" => $SP,
         ]);
     }
@@ -155,7 +160,6 @@ class AdminProductController extends Controller
             'moTa' => 'required|min:3',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
-            'maNPP' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
         ]);
@@ -166,7 +170,6 @@ class AdminProductController extends Controller
         $SP->moTa = $request->get('moTa');
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
-        $SP->maNPP = $request->get('maNPP');
         $SP->maTLC = $request->get('maTLC');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();

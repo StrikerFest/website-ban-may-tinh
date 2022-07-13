@@ -29,10 +29,10 @@
                                     <h6>Bộ lọc</h6>
                                     <form method="get">
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tên sản phẩm">
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <select class="form-control" name="searchManufacturer">
                                                     <option value="" selected>Nhà sản xuất</option>
                                                     @foreach($nhaSanXuat as $NSX)
@@ -42,12 +42,22 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <select class="form-control" name="searchSubCategory">
                                                     <option value="" selected>Danh mục</option>
                                                     @foreach($theLoaiCon as $TLC)
                                                         <option value="{{$TLC->tenTLC}}" <?php if($searchSubCategory == $TLC->tenTLC)echo "selected" ?>>
                                                             {{$TLC->tenTLC}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select class="form-control" name="searchSupplier">
+                                                    <option value="" selected>Nhà phân phối</option>
+                                                    @foreach($nhaPhanPhoi as $NPP)
+                                                        <option value="{{$NPP->tenNPP}}" <?php if($searchSupplier == $NPP->tenNPP)echo "selected" ?>>
+                                                            {{$NPP->tenNPP}}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -233,7 +243,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -245,19 +255,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Nhà phân phối</label>
-                                        @error('maNPP')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <select class="form-control" name="maNPP">
-                                            <option value="" disabled selected hidden>Supplier</option>
-                                            @foreach($nhaPhanPhoi as $NPP)
-                                                <option value="{{ $NPP->maNPP }}">{{ $NPP->tenNPP }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -269,7 +267,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
