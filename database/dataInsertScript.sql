@@ -104,7 +104,6 @@ INSERT INTO the_loai(`tenTL`) VALUE ('Laptop');
 INSERT INTO the_loai(`tenTL`) VALUE ('Màn hình');
 INSERT INTO the_loai(`tenTL`) VALUE ('Linh kiện');
 INSERT INTO the_loai(`tenTL`) VALUE ('Phụ kiện');
-INSERT INTO the_loai(`tenTL`) VALUE ('Tặng phẩm');
 -- INSERT INTO the_loai(`tenTL`) VALUE ('Ổ cứng');
 -- INSERT INTO the_loai(`tenTL`) VALUE ('Card đồ họa');
 
@@ -116,7 +115,7 @@ INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),(1,'M�
                                                 (5,'Chuột có dây'),(5,'Chuột không dây'),
                                                 (5,'Bàn phím mềm'),(5,'Bàn phím giả cơ'),(5,'Bàn phím cơ'),
                                                 (4,'Ổ cứng HDD'),(4,'Ổ cứng SSD'),(4,'Ổ cứng NVME'),
-                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin'),(6, 'Tặng phẩm');
+                                                (4,'Card game'),(4,'Card thiết kế đồ họa'),(4,'Card đào coin');
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');
@@ -593,8 +592,6 @@ INSERT INTO `khuyen_mai` (`maKM`, `maSP`,`khuyenMai`) VALUES    (NULL, 1,"Free s
                                                                 (NULL, 37,"Free ship và giao hàng 19"),(NULL, 38,"Free ship và giao hàng"),
                                                                 (NULL, 39,"Free ship và giao hàng 20"),(NULL, 40,"Free ship và giao hàng");
 
--- Bảng thể loại voucher
-INSERT INTO `the_loai_voucher` (`maTLV`, `tenTLV`) VALUES (NULL, 'Giảm giá tiền mặt'), (NULL, 'Giảm giá phần trăm'), (NULL, 'Tặng phẩm');
 
 INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `moTa`, `ngayHetHan`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'abc123', 'Mã voucher giảm giá 1 củ', '2023-07-12 00:00:00', '1', '1000000', '10', NULL),
                                                                                                         (NULL, 'def456', 'Mã voucher giảm giá 20%', '2023-07-12 00:00:00', '2', '20', '10', NULL),
