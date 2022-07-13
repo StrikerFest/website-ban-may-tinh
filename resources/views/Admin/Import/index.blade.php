@@ -108,7 +108,7 @@
                                 <input type="file" name="file-excel">
                                 <button>Xác nhận</button>
                             </form>
-                            <?php if(!session()->has('sanPham')){ ?>
+                            <?php if(!session()->has('sanPham1') && !session()->has('serial') && !session()->has('duplicate') && !session()->has('quantity')){ ?>
                                 @if(session()->has('success'))
                                     <div class="alert alert-success">{{session()->get('success')}}</div>
                                 @endif
@@ -189,6 +189,15 @@
                                                 <input class="form-control" type="number" name="giaNhap[]" min="0">
                                             </div>
                                         </div>
+                                        <div class="group-form row">
+                                            <div class="col-sm-12">
+                                                <label class="form-inline label">Mã serial</label>
+                                                @error('serial')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                                <textarea style="width: 100%; margin-bottom: 10px;" name="serial[]" id="serial" placeholder="Example: abc001,abc002,abc003,..." rows="3"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                     {{-- Nút Thêm --}}
                                     <button class="btn btn-primary btn-user btn-block">
@@ -234,7 +243,7 @@
 
             //Thêm hàng nhập sản phẩm
             $('#add').on('click', function(){
-                var html = '<div class="form-group row">';//tag mở 1 hàng
+                var html = '<hr style="background: black;"/><div class="form-group row">';
                 html += '<div class="col-sm-7">\
                             <label class="form-inline label">Sản phẩm</label>\
                             <select class="form-control product-list select2" name="maSP[]">\
@@ -255,7 +264,13 @@
                             Xoá\
                             </button>\
                         </div>\
-                    </div>';//tag đóng 1 hàng
+                    </div>\
+                    <div class="form-group row">\
+                        <div class="col-sm-12">\
+                            <label class="form-inline label">Mã serial</label>\
+                            <textarea style="width: 100%; margin-bottom: 10px;" name="serial[]" placeholder="Example: abc001,abc002,abc003,..." rows="3"></textarea>\
+                        </div>\
+                    </div>'
                 $('#dynamic-div').append(html);
 
                 //Thêm searchbox vào hàng mới được thêm
@@ -282,6 +297,8 @@
 
             //Xoá hàng nhập sản phẩm
             $(document).on('click', '#remove', function(){
+                $(this).closest('div').parent().prev().remove();
+                $(this).closest('div').parent().next().remove();
                 $(this).closest('div').parent().remove();
             })
 
@@ -299,8 +316,17 @@
         <?php if(session()->has('delete')){ ?>
             alert('{{session()->get('delete')}}')
         <?php } ?>
-        <?php if(session()->has('sanPham')){ ?>
-            alert('{{session()->get('sanPham')}}')
+        <?php if(session()->has('sanPham1')){ ?>
+            alert('{{session()->get('sanPham1')}}')
+        <?php } ?>
+        <?php if(session()->has('serial')){ ?>
+            alert('{{session()->get('serial')}}')
+        <?php } ?>
+        <?php if(session()->has('duplicate')){ ?>
+            alert('{{session()->get('duplicate')}}')
+        <?php } ?>
+        <?php if(session()->has('quantity')){ ?>
+            alert('{{session()->get('quantity')}}')
         <?php } ?>
     </script>
 </body>

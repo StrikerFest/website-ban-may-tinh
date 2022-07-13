@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use App\Models\ImportModel;
 use App\Models\ImportDetailModel;
+use App\Models\SerialModel;
 use DB;
 use Exception;
 use Excel;
@@ -49,7 +50,7 @@ class AdminImportController extends Controller
             ->whereBetween('ngayNhap', [$NBD, $NKTquery])
             ->orderBy('maNK', 'desc')
             ->paginate(5);
-
+        // dd($nhapKho);
         $nhaPhanPhoi = DB::table('nha_phan_phoi')->get();
 
         $nhanVien = DB::table('nguoi_dung')->get();
@@ -92,7 +93,52 @@ class AdminImportController extends Controller
             'maSP' => 'required',
             'soLuong.*' => 'required|numeric|min:1',
             'giaNhap.*' => 'required|numeric|min:0',
+            'serial.*' => 'required',
         ]);
+        //Check số lượng mã serial
+        // dd(explode(',', $request->serial[0]), DB::table('serial')->first()->serial);
+        $arrSoLuong = [];
+        $arrSerialQuantity = [];
+        for($i = 0; $i < count($request->maSP); $i++) {
+            $serial = explode(',', $request->serial[$i]);
+            array_push($arrSoLuong, (int)$request->soLuong[$i]);
+            array_push($arrSerialQuantity, count($serial));
+        }
+        if($arrSoLuong != $arrSerialQuantity){
+            return back()->with('quantity', "Số lượng mã serial không khớp với số lượng nhập");
+        }
+        //Đưa mã serial từ input vào 1 mảng
+        $arrMaSerialInput = [];
+        foreach($request->get('serial') as $s){
+            $serial = explode(",", $s);
+            $arrMaSerialInput = array_merge($arrMaSerialInput, $serial);
+        }
+        // dd($arrMaSerialInput);
+
+        //Check trùng mã serial nhập từ input
+        $checkUnique = array_unique($arrMaSerialInput);
+        if(count($arrMaSerialInput) != count($checkUnique)){
+            return back()->with('serial', "Mã serial trùng lặp");
+        }
+
+        //Check trùng mã serial trong DB
+        $arrMaSerialDB = [];
+        $listSerial = DB::table('serial')->get('serial');
+        foreach($listSerial as $s){
+            array_push($arrMaSerialDB, $s->serial);
+        }
+        $error = false;
+        $duplicatedSerial = [];
+        foreach($arrMaSerialInput as $input){
+            if(in_array($input, $arrMaSerialDB)){
+                array_push($duplicatedSerial, $input);
+                $error = true;
+            }
+        }
+        if($error){
+            return back()->with('duplicate', "Mã serial: ". implode(', ', $duplicatedSerial) ." đã được sử dụng");
+        }
+
         //Nhập kho
         $NK = new ImportModel();
         $NK->maNPP = $request->get('maNPP');
@@ -100,6 +146,33 @@ class AdminImportController extends Controller
         $NK->ngayNhap = date('Y-m-d H:i:s');
         $NK->maNV = $request->get('maNV');
         $NK->save();
+        
+        //Nhập các mã serial vào bảng
+        $arrProduct = [];
+        $arrSerial = [];
+        
+        for($i = 0; $i < sizeof($request->get('maSP')); $i++){
+            $serial = explode(",", $request->get('serial')[$i]);
+            $maSP = $request->get('maSP')[$i];
+            array_push($arrProduct, $maSP);
+            array_push($arrSerial, $serial);
+        }
+        $combined = array_combine($arrProduct, $arrSerial);
+        // dd($combined);
+        // dd($arrSerial);
+        
+        foreach($combined as $key => $value){
+            // dd($key, $value);
+            //key: maSP, value: [serial]
+            for($i = 0; $i < count($value); $i++){
+                $S = new SerialModel();
+                $S->maSP = $key;
+                $S->serial = $value[$i];
+                $S->maNK = $NK->maNK;
+                $S->save();
+            }
+        }
+
         //Nhập kho chi tiết
         for($i = 0; $i < sizeof($request->get('maSP')); $i++){
             try{
@@ -188,7 +261,10 @@ class AdminImportController extends Controller
     }
 
     public function get($maNPP){
-        $listSP = DB::table('san_pham')->where('maNPP', '=', $maNPP)->get();
+        $listSP = DB::table('san_pham')
+            ->join('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+            ->where('san_pham_nha_phan_phoi.maNPP', '=', $maNPP)
+            ->get();
         
         return response()->json($listSP);
     }

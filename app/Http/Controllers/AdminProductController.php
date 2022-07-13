@@ -34,15 +34,18 @@ class AdminProductController extends Controller
         $nhaPhanPhoi = SupplierModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
-        // dd($searchName, $searchManufacturer, $searchSubCategory);
-        $sanPham = ProductModel::join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
+        // dd($searchName, $searchManufacturer, $searchSubCategory, $searchSupplier);
+        $sanPham = ProductModel::select(['san_pham.*', 'nha_san_xuat.tenNSX', 'the_loai_con.tenTLC', 'san_pham_nha_phan_phoi.maSPNPP', 'san_pham_nha_phan_phoi.maNPP'])
+            ->join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-            ->join('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
-            ->join('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'san_pham_nha_phan_phoi.maNPP')
+            ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+            ->leftJoin('nha_phan_phoi', 'san_pham_nha_phan_phoi.maNPP', '=', 'nha_phan_phoi.maNPP')
             ->where('tenSP', 'like', "%$searchName%")
             ->where('tenNSX', 'like', "%$searchManufacturer%")
             ->where('tenTLC', 'like', "%$searchSubCategory%")
             ->where('tenNPP', 'like', "%$searchSupplier%")
+            ->orWhereNull('tenNPP')
+            ->groupBy('san_pham.maSP')
             ->orderBy('san_pham.maSP', 'desc')
             ->paginate(5)
             ->appends([
@@ -101,6 +104,7 @@ class AdminProductController extends Controller
         $sanPham->maNSX = $request->get('maNSX');
         $sanPham->maTLC = $request->get('maTLC');
         $sanPham->maTTSP = $request->get('maTTSP');
+        // dd($sanPham);
         $sanPham->save();
 
         return redirect(route('admin.product.index'));
