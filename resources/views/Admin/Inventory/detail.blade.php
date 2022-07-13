@@ -28,10 +28,10 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Sản phẩm: {{ $tenSP }}</th>
-                                            <th colspan="2">Nhà phân phối: {{ $tenNPP }}</th>
+                                            <th colspan="5">Sản phẩm: {{ $tenSP }}</th>
                                         </tr>
                                         <tr>
+                                            <th>Nhà phân phối</th>
                                             <th>Ngày nhập</th>
                                             <th>Giá nhập</th>
                                             <th>Số lượng</th>
@@ -41,6 +41,7 @@
                                     <tbody>
                                     @foreach ($sanPham as $SP)
                                         <tr>
+                                            <td>{{$SP->tenNPP}}</td>
                                             <td>{{$SP->ngayNhap}}</td>
                                             <td>{{number_format($SP->giaNhap)}} VND</td>
                                             <td>{{$SP->soLuong}}</td>
