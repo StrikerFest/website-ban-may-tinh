@@ -34,6 +34,9 @@
                                                 <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tên nhà phân phối">
                                             </div>
                                             <div class="col-sm-3">
+                                                <input class="form-control" type="text" name="searchProduct" value="{{$searchProduct}}" placeholder="Nhập tên sản phẩm">
+                                            </div>
+                                            <div class="col-sm-3">
                                                 <button class="btn btn-primary">Tìm kiếm</button>
                                             </div>
                                         </div>

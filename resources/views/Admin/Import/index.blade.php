@@ -40,7 +40,12 @@
                                                 <input class="form-control" type="date" name="NKT" value="{{$NKT}}" max="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                             <div class="col-sm-3">
-                                                <button class="btn btn-primary">Tìm kiếm</button>
+                                                <button class="btn btn-primary">
+                                                    Tìm kiếm
+                                                </button>
+                                                <button type="button" class="btn btn-primary" onclick="window.location='{{ route("inventory.index") }}'">
+                                                    Kho hàng
+                                                </button>
                                             </div>
                                         </div>
                                     </form>

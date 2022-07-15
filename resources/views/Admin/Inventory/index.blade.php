@@ -70,7 +70,7 @@
                                             <th>Tên</th>
                                             <th>Số lượng</th>
                                             <th>Tình trạng</th>
-                                            <th>Chi tiết</th>
+                                            <th width="25%">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -80,10 +80,21 @@
                                             <td>{{$SP->soLuong}}</td>
                                             <td>{{$SP->getProductStatus()}}</td>
                                             <td>
-                                                <form action="{{route('inventory.show', $SP->maSP)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Chi tiết</button>
-                                                </form>
+                                                
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('serial.show', $SP->maSP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Mã serial</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="{{route('inventory.show', $SP->maSP)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-primary btn-user btn-block">Chi tiết nhập</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
