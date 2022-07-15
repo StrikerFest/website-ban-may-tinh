@@ -25,7 +25,7 @@ class AdminProductController extends Controller
         $searchName = $request->get('searchName');
         $searchManufacturer = $request->get('searchManufacturer');
         $searchSubCategory = $request->get('searchSubCategory');
-        $searchSupplier = $request->get('searchSupplier');
+        // $searchSupplier = $request->get('searchSupplier');
 
         $nhaSanXuat = ManufacturerModel::get();
 
@@ -35,16 +35,16 @@ class AdminProductController extends Controller
 
         $tinhTrangSanPham = ProductStatusModel::get();
         // dd($searchName, $searchManufacturer, $searchSubCategory, $searchSupplier);
-        $sanPham = ProductModel::select(['san_pham.*', 'nha_san_xuat.tenNSX', 'the_loai_con.tenTLC', 'san_pham_nha_phan_phoi.maSPNPP', 'san_pham_nha_phan_phoi.maNPP'])
+        $sanPham = ProductModel::select(['san_pham.*', 'nha_san_xuat.tenNSX', 'the_loai_con.tenTLC'])
             ->join('nha_san_xuat', 'nha_san_xuat.maNSX', '=', 'san_pham.maNSX')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-            ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
-            ->leftJoin('nha_phan_phoi', 'san_pham_nha_phan_phoi.maNPP', '=', 'nha_phan_phoi.maNPP')
+            // ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+            // ->leftJoin('nha_phan_phoi', 'san_pham_nha_phan_phoi.maNPP', '=', 'nha_phan_phoi.maNPP')
             ->where('tenSP', 'like', "%$searchName%")
             ->where('tenNSX', 'like', "%$searchManufacturer%")
             ->where('tenTLC', 'like', "%$searchSubCategory%")
-            ->where('tenNPP', 'like', "%$searchSupplier%")
-            ->orWhereNull('tenNPP')
+            // ->where('tenNPP', 'like', "%$searchSupplier%")
+            // ->orWhereNull('tenNPP')
             ->groupBy('san_pham.maSP')
             ->orderBy('san_pham.maSP', 'desc')
             ->paginate(5)
@@ -52,9 +52,9 @@ class AdminProductController extends Controller
                 'searchName' => $searchName,
                 'searchManufacturer' => $searchManufacturer,
                 'searchSubCategory' => $searchSubCategory,
-                'searchSupplier' => $searchSupplier,
+                // 'searchSupplier' => $searchSupplier,
             ]);
-        
+        // dd($sanPham);
         return view('Admin.Product.index', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
@@ -64,7 +64,7 @@ class AdminProductController extends Controller
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
             "searchSubCategory" => $searchSubCategory,
-            "searchSupplier" => $searchSupplier,
+            // "searchSupplier" => $searchSupplier,
         ]);
     }
 
