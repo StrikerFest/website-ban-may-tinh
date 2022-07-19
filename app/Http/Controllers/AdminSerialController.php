@@ -50,7 +50,10 @@ class AdminSerialController extends Controller
     {
         $searchName = $request->get('searchName');
 
-        $Serial = SerialModel::where('maSP', $maSP)
+        $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+            ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+            ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+            ->where('serial.maSP', $maSP)
             ->where('serial', 'like', "%$searchName%")
             ->paginate(10)
             ->appends([
@@ -58,7 +61,7 @@ class AdminSerialController extends Controller
             ]);
 
         $tenSP = ProductModel::find($maSP)->tenSP;
-        
+        // dd($Serial);
         return view('Admin.Serial.index', [
             'Serial' => $Serial,
             'tenSP' => $tenSP,
