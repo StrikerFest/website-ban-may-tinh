@@ -121,7 +121,8 @@ class ReceiptController extends Controller
             $hoaDon = new ReceiptModel();
 
             $hoaDon->maKH = $id;
-            $hoaDon->ngayTao =  date("Y/m/d");
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $hoaDon->ngayTao =  date("Y/m/d H:i:s");
             $hoaDon->diaChi =  $request->receiptAddress;
             $hoaDon->soDienThoai = $request->get('receiptPhone');
             if ($request->paymentMethod == "COD") {

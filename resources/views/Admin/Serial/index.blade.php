@@ -47,28 +47,37 @@
                                         </tr>
                                         <tr>
                                             <th>Mã serial</th>
-                                            <th colspan="2" width="25%">Thao tác</th>
+                                            <th colspan="2" width="20%">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($Serial as $S)
                                         <tr>
                                             <td>{{$S->serial}}</td>
-                                            <td>
-                                                <form action="{{route('serial.edit', $S->maSerial)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Sửa</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('serial.destroy', $S->maSerial)}}" method="post">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button onclick="return confirm('Xác nhận xóa mã serial?')" class="btn btn-primary btn-user btn-block">
-                                                        Xóa
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <?php if($S->maHDCT == null){ ?>
+                                                <td>
+                                                    <form action="{{route('serial.edit', $S->maSerial)}}" method="get">
+                                                        @csrf
+                                                        <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="{{route('serial.destroy', $S->maSerial)}}" method="post">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button onclick="return confirm('Xác nhận xóa mã serial?')" class="btn btn-primary btn-user btn-block">
+                                                            Xóa
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            <?php }else{ ?>
+                                                <td colspan="2">
+                                                    <form action="{{route('receipt.show', $S->maHD)}}" method="get">
+                                                        @csrf
+                                                        <button class="btn btn-primary btn-user btn-block">Xem</button>
+                                                    </form>
+                                                </td>
+                                            <?php } ?>
                                         </tr>
                                     @endforeach
                                     </tbody>

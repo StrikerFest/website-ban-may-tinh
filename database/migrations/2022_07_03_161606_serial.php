@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('serial', 30)->unique();
             $table->unsignedInteger('maNK');
             $table->foreign('maNK')->references('maNK')->on('nhap_kho');
+            $table->unsignedInteger('maHDCT')->nullable();
+            $table->foreign('maHDCT')->references('maHDCT')->on('hoa_don_chi_tiet');
         });
     }
 

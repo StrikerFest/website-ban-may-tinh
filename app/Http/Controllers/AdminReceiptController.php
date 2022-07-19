@@ -9,7 +9,9 @@ use App\Models\DetailReceiptModel;
 use App\Models\UserModel;
 use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
+use App\Models\SerialModel;
 use DB;
+
 
 class AdminReceiptController extends Controller
 {
@@ -105,7 +107,7 @@ class AdminReceiptController extends Controller
     {
         $sanPham = ProductModel::all();
 
-        $hoaDon = ReceiptModel::find($id);
+        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
         
         $tinhTrangHoaDon = ReceiptStatusModel::all();
 
@@ -129,6 +131,7 @@ class AdminReceiptController extends Controller
             ON hoa_don_chi_tiet.maSP = san_pham.maSP
             WHERE hoa_don_chi_tiet.maHD = $id
         ")[0];
+        
         return view('Admin.Receipt.detail', [
             'tongTien' => $tongTien,
             'hoaDon' => $hoaDon,
@@ -177,6 +180,22 @@ class AdminReceiptController extends Controller
                 $sanPham = ProductModel::find($hdct[$i]->maSP);
                 $sanPham->soLuong -= $hdct[$i]->soLuong;
                 $sanPham->save();
+
+                //Lấy số lượng mã serial của sản phẩm đươc mua tương ứng theo số lượng trong HĐCT
+                $serials = SerialModel::join('nhap_kho', 'nhap_kho.maNK', '=', 'serial.maNK')
+                ->where('maSP', $hdct[$i]->maSP)
+                ->whereNull('serial.maHDCT')
+                ->orderBy('nhap_kho.ngayNhap', 'ASC')
+                ->orderBy('serial.maSerial', 'ASC')
+                ->take($hdct[$i]->soLuong)
+                ->get();
+                // dd($serials);
+                //Lưu mã serial của sản phẩm vào hoá đơn chi tiết
+                for($j = 0; $j < sizeof($serials); $j++){
+                    $serial = SerialModel::find($serials[$j]->maSerial);
+                    $serial->maHDCT = $hdct[$i]->maHDCT;
+                    $serial->save();
+                }
             }
         }
         
