@@ -126,7 +126,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTen"
                 aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-box"></i>
+                <i class="fas fa-fw fa-gift"></i>
                 <span>Voucher</span>
             </a>
             <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">

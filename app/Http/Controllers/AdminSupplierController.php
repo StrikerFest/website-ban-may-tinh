@@ -19,12 +19,24 @@ class AdminSupplierController extends Controller
     {
         $searchName = $request->get('searchName');
 
-        $nhaPhanPhoi = SupplierModel::where('tenNPP', 'like', "%$searchName%")
-            ->orderBy('maNPP', 'desc')
-            ->paginate(5);
+        $searchProduct = $request->get('searchProduct');
+        
+        $nhaPhanPhoi = SupplierModel::join('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maNPP', '=', 'nha_phan_phoi.maNPP')
+            ->join('san_pham', 'san_pham.maSP', '=', 'san_pham_nha_phan_phoi.maSP')
+            ->orderBy('nha_phan_phoi.maNPP', 'desc')
+            ->where('tenNPP', 'like', "%$searchName%")
+            ->where('san_pham.tenSP', 'like', "%$searchProduct%")
+            ->groupBy('nha_phan_phoi.maNPP')
+            ->paginate(5)
+            ->appends([
+                'searchName' => $searchName,
+                'searchProduct' => $searchProduct,
+            ]);
+        // dd($nhaPhanPhoi);
         return view('Admin.Supplier.index', [
             "nhaPhanPhoi" => $nhaPhanPhoi,
             "searchName" => $searchName,
+            "searchProduct" => $searchProduct,
         ]);
     }
 
@@ -82,11 +94,13 @@ class AdminSupplierController extends Controller
             ]);
         $nhaPhanPhoi = SupplierModel::find($id);
 
-        $listSanPham = ProductModel::join('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+        $listSanPham = ProductModel::select(['san_pham.*'])
+            ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
             ->whereNotIn('san_pham.maSP', ProductSupplierModel::where('maNPP', $id)->get('maSP')->toArray())
             ->groupBy('san_pham.maSP')
+            ->orderBy('san_pham.maSP', 'desc')
             ->get();
-        
+        // dd($listSanPham, ProductSupplierModel::where('maNPP', $id)->get('maSP')->toArray());
         return view('Admin.Supplier.show', [
             'sanPham' => $sanPham,
             'nhaPhanPhoi' => $nhaPhanPhoi,

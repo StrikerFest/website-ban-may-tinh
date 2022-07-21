@@ -52,16 +52,6 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <select class="form-control" name="searchSupplier">
-                                                    <option value="" selected>Nhà phân phối</option>
-                                                    @foreach($nhaPhanPhoi as $NPP)
-                                                        <option value="{{$NPP->tenNPP}}" <?php if($searchSupplier == $NPP->tenNPP)echo "selected" ?>>
-                                                            {{$NPP->tenNPP}}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
                                             <div class="col-sm-3">
                                                 <button class="btn btn-primary">Tìm kiếm</button>
                                             </div>
@@ -184,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                    {{$sanPham->links('')}}
+                    {{$sanPham->onEachSide(1)->links()}}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm mới</h6>

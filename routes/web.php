@@ -33,6 +33,7 @@ use App\Http\Controllers\AdminImportController;
 use App\Http\Controllers\AdminInventoryController;
 use App\Http\Controllers\AdminVoucherController;
 use App\Http\Controllers\AdminVoucherTypeController;
+use App\Http\Controllers\AdminSerialController;
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facade;
@@ -120,6 +121,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::get('importProduct/{maNPP}', [AdminImportController::class, "get"])->name('import.get');
     Route::post('import/excel', [AdminImportController::class, "excel"])->name('import.excel');
     Route::resource('import', AdminImportController::class);
+    Route::resource('serial', AdminSerialController::class);
     Route::resource('inventory', AdminInventoryController::class);
     Route::get('getGiftValue/{maSP}', [AdminVoucherController::class, "getGiftValue"])->name('voucher.value');
     Route::post('importVoucher', [AdminVoucherController::class, "excel"])->name('voucher.excel');

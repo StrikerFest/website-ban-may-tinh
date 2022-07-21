@@ -26,6 +26,28 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <tr>
+                                        <th>Mã hoá đơn</th>
+                                        <th>Khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Ngày tạo</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{$hoaDon->maHD}}
+                                        </td>
+                                        <td>
+                                            {{$hoaDon->tenND}}
+                                        </td>
+                                        <td>
+                                            {{$hoaDon->soDienThoai}}
+                                        </td>
+                                        <td>
+                                            {{$hoaDon->ngayTao}}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Tên sản phẩm</th>
