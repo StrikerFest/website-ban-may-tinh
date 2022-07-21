@@ -22,9 +22,9 @@ class ReceiptController extends Controller
     public function index()
     {
         //
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         $listTheLoaiMayTinhBan = DB::table(
             'the_loai_con'
         )->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
@@ -68,9 +68,9 @@ class ReceiptController extends Controller
     public function create()
     {
         //
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         $cartItems = \Cart::getContent();
         $listNguoiDung =
             DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
@@ -91,33 +91,39 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
-        $validate = $request->validate([
-            'receiptName' => 'required|min:3',
-            'receiptAddress' => 'required|min:3',
-            'receiptEmail' => 'required|email:rfc,dns',
-            'receiptPhone' => 'required|min:9|max:13',
-        ],
-        [
-            'receiptName.required'=>'Bạn cần nhập tên của bạn vào',
-            'receiptName.min'=>'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
-            'receiptAddress.required'=>'Bạn cần nhập địa chỉ của bạn vào',
-            'receiptAddress.min'=>'Địa chỉ bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
-            'receiptEmail.required'=>'Bạn cần nhập email của bạn vào',
-            'receiptEmail.email'=>'Định dạng email sai',
-            'receiptPhone.required'=>'Bạn cần nhập số điện thoại của bạn vào',
-            'receiptPhone.min'=>'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
-            'receiptPhone.max'=>'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
-        ]);
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
+        $validate = $request->validate(
+            [
+                'receiptName' => 'required|min:3',
+                'receiptAddress' => 'required|min:3',
+                'receiptEmail' => 'required|email:rfc,dns',
+                'receiptPhone' => 'required|min:9|max:13',
+            ],
+            [
+                'receiptName.required' => 'Bạn cần nhập tên của bạn vào',
+                'receiptName.min' => 'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+                'receiptAddress.required' => 'Bạn cần nhập địa chỉ của bạn vào',
+                'receiptAddress.min' => 'Địa chỉ bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+                'receiptEmail.required' => 'Bạn cần nhập email của bạn vào',
+                'receiptEmail.email' => 'Định dạng email sai',
+                'receiptPhone.required' => 'Bạn cần nhập số điện thoại của bạn vào',
+                'receiptPhone.min' => 'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
+                'receiptPhone.max' => 'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
+            ]
+        );
         try {
             // Thêm vào hóa đơn
             $request->session()->put("tenKhachHangDat", $request->receiptName);
             $request->session()->put("soDienThoaiDat", $request->receiptPhone);
             $request->session()->put("emailDat", $request->receiptEmail);
             $request->session()->put("diaChiDat", $request->receiptAddress);
-            $id = session()->get('khachHang');
+            if (session()->has('khachHang')) {
+                $id = session()->get('khachHang');
+            } else {
+                $id = 1;
+            }
             $hoaDon = new ReceiptModel();
 
             $hoaDon->maKH = $id;
@@ -177,7 +183,7 @@ class ReceiptController extends Controller
             $objDemo->idReceipt = $maHoaDonMoiNhat;
             $objDemo->sender = 'BKCOM';
             $objDemo->receiver = session()->get('tenKhachHang');
-            // $request->session()->put('cartObject',)
+            // $request->session()->put('cartObject');
             Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
             \Cart::clear();
 

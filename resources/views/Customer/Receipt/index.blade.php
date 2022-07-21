@@ -35,13 +35,13 @@
                                     </div>
                                     {{-- Table thông tin khách hàng --}}
                                     <div class="col-md-12">
-                                        @foreach ($errors->all() as $error)
-                                            <div class="col-md-12 alert">
+                                        <div class="col-md-12 alert">
+                                            @foreach ($errors->all() as $error)
                                                 <p class="text-danger">{{ $error }}</p>
-                                                <hr class="border-red">
-                                            </div>
-                                        @endforeach
-                                        @foreach ($listNguoiDung as $ND)
+                                            @endforeach
+                                            <hr class="border-red">
+                                        </div>
+                                        @if (count($listNguoiDung) == 0)
                                             <table class="border-gray width-100">
                                                 <tr>
                                                     <td
@@ -49,8 +49,7 @@
                                                         Họ tên
                                                     </td>
                                                     <td class="width-75 padding-right-20"><input name="receiptName"
-                                                            class="width-100 border-gray" type="text"
-                                                            value="{{ $ND->tenND }}">
+                                                            class="width-100 border-gray" type="text">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -59,8 +58,7 @@
                                                         Số
                                                         điện thoại</td>
                                                     <td class="width-75 padding-right-20"><input name="receiptPhone"
-                                                            class="width-100 border-gray" type="text"
-                                                            value="0987654321">
+                                                            class="width-100 border-gray" type="text">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -69,8 +67,7 @@
                                                         Email
                                                     </td>
                                                     <td class="width-75 padding-right-20"><input name="receiptEmail"
-                                                            class="width-100 border-gray" type="text"
-                                                            value="{{ $ND->emailND }}">
+                                                            class="width-100 border-gray" type="text">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -79,12 +76,56 @@
                                                         Địa
                                                         chỉ nhận hàng</td>
                                                     <td class="width-75 padding-right-20"><input name="receiptAddress"
-                                                            class="width-100 border-gray" type="text"
-                                                            value="{{ $ND->diaChiND }}">
+                                                            class="width-100 border-gray" type="text">
                                                     </td>
                                                 </tr>
                                             </table>
-                                        @endforeach
+                                        @else
+                                            @foreach ($listNguoiDung as $ND)
+                                                <table class="border-gray width-100">
+                                                    <tr>
+                                                        <td
+                                                            class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                            Họ tên
+                                                        </td>
+                                                        <td class="width-75 padding-right-20"><input name="receiptName"
+                                                                class="width-100 border-gray" type="text"
+                                                                value="{{ $ND->tenND }}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                            Số
+                                                            điện thoại</td>
+                                                        <td class="width-75 padding-right-20"><input name="receiptPhone"
+                                                                class="width-100 border-gray" type="text"
+                                                                value="0987654321">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                            Email
+                                                        </td>
+                                                        <td class="width-75 padding-right-20"><input name="receiptEmail"
+                                                                class="width-100 border-gray" type="text"
+                                                                value="{{ $ND->emailND }}">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
+                                                            Địa
+                                                            chỉ nhận hàng</td>
+                                                        <td class="width-75 padding-right-20"><input
+                                                                name="receiptAddress" class="width-100 border-gray"
+                                                                type="text" value="{{ $ND->diaChiND }}">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            @endforeach
+                                        @endif
 
                                     </div>
                                     {{-- Title hình thức thanh toán --}}
@@ -94,7 +135,8 @@
                                     {{-- Hình thức thanh toán và giỏ hàng --}}
                                     <div class="col-md-12">
                                         <div class="padding-10">
-                                            <input type="radio" name="paymentMethod" value="COD" checked> Thanh toán khi
+                                            <input type="radio" name="paymentMethod" value="COD" checked> Thanh
+                                            toán khi
                                             nhận hàng (
                                             tiền mặt/ quẹt thẻ ATM)
                                             <br>
@@ -193,7 +235,7 @@
                                     {{-- Hết - Nút mua --}}
 
                                     {{-- Quay về trang chủ --}}
-                                    <a href="{{ route('cart.list') }}">
+                                    <a href="javascript:history.back()">
                                         <div class="padding-top-5">
                                             <div class=" border-radius-25 ">
                                                 <button class="btn btn-warning width-100 padding-10" type="button">

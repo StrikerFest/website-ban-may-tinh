@@ -59,8 +59,8 @@
                                     data-pause="hover" data-interval="5000">
                                     {{-- Hiển thị vị trí slide --}}
                                     <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="0"
-                                            class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                        </li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                     </ol>
@@ -138,10 +138,13 @@
                                     @endphp
                                     <ol class="carousel-indicators" style="margin-bottom: -20px; overflow:hidden">
                                         @for ($i = 0; $i < $conNum; $i++)
-                                            @if($i == 0)
-                                            <li data-target="#saleCarousel" data-slide-to="{{$i}}" class="active" style="background-color: red; transform: scale(1, 8)"></li>
+                                            @if ($i == 0)
+                                                <li data-target="#saleCarousel" data-slide-to="{{ $i }}"
+                                                    class="active"
+                                                    style="background-color: red; transform: scale(1, 8)"></li>
                                             @else
-                                            <li data-target="#saleCarousel" data-slide-to="{{$i}}" style="background-color: red; transform: scale(1, 8)"></li>
+                                                <li data-target="#saleCarousel" data-slide-to="{{ $i }}"
+                                                    style="background-color: red; transform: scale(1, 8)"></li>
                                             @endif
                                         @endfor
                                     </ol>
@@ -154,230 +157,233 @@
                                                 $conNum = ceil($conNum);
                                                 // dd($conNum);
                                             @endphp
-                                                @for ($i = 0; $i < $conNum; $i++)
-                                                    @if ($i == 0)
-                                                        @php
-                                                            // $CN = json_decode(json_encode($CN), true);
-                                                            // dd($CN);
-                                                        @endphp
-                                                        <div class="carousel-item active">
-                                                            <div class="row">
-                                                                @foreach ($saleProduct as $CN)
-                                                                @if($loop->index <= 2)
-
-                                                                <div class="carousel-promo-item col-md-4 "
-                                                                    onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
-                                                                    style=" padding: 10px">
-                                                                    {{-- Quảng cáo 1 --}}
-                                                                    <div class="carousel-promo-item">
-                                                                        <div class=" shadow mb-4 ">
-                                                                            {{-- Label nội dung --}}
-                                                                            <div class="card-header py-3 red-glass">
-                                                                                <h6
-                                                                                    class="m-0 font-weight-bold text-light carousel-promo-item-label">
-                                                                                    Khuyến mãi đặc biệt</h6>
-                                                                            </div>
-                                                                            {{-- Vật phẩm trong nội dung --}}
-                                                                            <div
-                                                                                class="card-body padding-10 black-glass-2">
-                                                                                <div class="table-responsive "
-                                                                                    style="overflow: hidden">
-                                                                                    {{-- <img class="carousel-promo-item-image-size"
-                                                                                    src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png"> --}}
-                                                                                    <div class="card product-item ">
-                                                                                        <!-- Thẻ sale trên đầu -->
-                                                                                        <div class="badge bg-dark text-white position-absolute"
-                                                                                            style="top: 0.5rem; right: 0.5rem">
-                                                                                            Sale!
-                                                                                        </div>
-                                                                                        <div class="row">
-                                                                                            @php
-                                                                                                $tempImg;
-                                                                                                $count = 0;
-                                                                                            @endphp
-                                                                                            <!-- Ảnh sản phẩm-->
-                                                                                            @foreach ($productImage as $PI)
-                                                                                                @if ($PI->maSP == $CN->maSP)
-                                                                                                    @if ($count == 0)
-                                                                                                        @php
-                                                                                                            $tempImg = $PI->anh;
-                                                                                                        @endphp
-                                                                                                        <div
-                                                                                                            class="col-md-6">
-                                                                                                            <a
-                                                                                                                href="{{ route('product.show', $CN->maSP) }}">
-                                                                                                                <img class="card-img-top hide-from-work"
-                                                                                                                    style="height:180px ; width:110% ; border: 1px solid lightgray"
-                                                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                                                    id="{{ $CN->maSP }}"
-                                                                                                                    alt="..." />
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        @php
-                                                                                                            $count = 1;
-                                                                                                        @endphp
-                                                                                                    @endif
-                                                                                                @endif
-                                                                                            @endforeach
-
-                                                                                            <!-- Thông tin sản phẩm-->
-                                                                                            <div class="card-body p-4 col-md-6 bg- text-light"
-                                                                                                style="background-color: black">
-                                                                                                <div
-                                                                                                    class="text-center">
-                                                                                                    <!-- Tên sản phẩm-->
-                                                                                                    <h5 class="fw-bolder"
-                                                                                                        style="font-size:0.9em">
-                                                                                                        @php
-                                                                                                            $find = '(';
-                                                                                                            $positionOfOpenP = strpos($CN->tenSP, $find);
-                                                                                                            $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
-                                                                                                        @endphp
-                                                                                                        <a class="link-white"
-                                                                                                            href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
-
-                                                                                                    </h5>
-
-                                                                                                    <!-- Giá sản phẩm -->
-                                                                                                    <span
-                                                                                                        class="">{{ number_format($CN->giaSP) }}
-                                                                                                        VND</span>
-                                                                                                        <a class="link-white"
-                                                                                                        href="{{ route('product.show', $CN->maSP) }}">
-                                                                                                        <div class="btn btn-danger ">
-                                                                                                            Xem ngay
-                                                                                                        </div>
-                                                                                                        </a>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                            @for ($i = 0; $i < $conNum; $i++)
+                                                @if ($i == 0)
+                                                    @php
+                                                        // $CN = json_decode(json_encode($CN), true);
+                                                        // dd($CN);
+                                                    @endphp
+                                                    <div class="carousel-item active">
+                                                        <div class="row">
+                                                            @foreach ($saleProduct as $CN)
+                                                                @if ($loop->index <= 2)
+                                                                    <div class="carousel-promo-item col-md-4 "
+                                                                        onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
+                                                                        style=" padding: 10px">
+                                                                        {{-- Quảng cáo 1 --}}
+                                                                        <div class="carousel-promo-item">
+                                                                            <div class=" shadow mb-4 ">
+                                                                                {{-- Label nội dung --}}
+                                                                                <div class="card-header py-3 red-glass">
+                                                                                    <h6
+                                                                                        class="m-0 font-weight-bold text-light carousel-promo-item-label">
+                                                                                        Khuyến mãi đặc biệt</h6>
                                                                                 </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        {{-- Hết - Quảng cáo 1 --}}
-                                                                        <div class="col mb-5">
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                                @endif
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    @else
-                                                        {{--  --}}
-                                                        <div class="carousel-item">
-                                                            <div class="row">
-                                                                @foreach ($saleProduct as $CN)
-                                                                    @if($loop->index < ($i+1) * 3 && $loop->index >= ($i  ) * 3)
-                                                                        <div class="carousel-promo-item col-md-4 "
-                                                                            onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
-                                                                            style=" padding: 10px">
-                                                                            {{-- Quảng cáo 1 --}}
-                                                                            <div class="carousel-promo-item">
-                                                                                <div class=" shadow mb-4 ">
-                                                                                    {{-- Label nội dung --}}
-                                                                                    <div class="card-header py-3 red-glass">
-                                                                                        <h6
-                                                                                            class="m-0 font-weight-bold text-light carousel-promo-item-label">
-                                                                                            Khuyến mãi đặc biệt</h6>
-                                                                                    </div>
-                                                                                    {{-- Vật phẩm trong nội dung --}}
-                                                                                    <div
-                                                                                        class="card-body padding-10 black-glass-2">
-                                                                                        <div class="table-responsive "
-                                                                                            style="overflow: hidden">
-                                                                                            {{-- <img class="carousel-promo-item-image-size"
-                                                                                                src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png"> --}}
-                                                                                            <div class="card product-item ">
-                                                                                                <!-- Thẻ sale trên đầu -->
-                                                                                                <div class="badge bg-dark text-white position-absolute"
-                                                                                                    style="top: 0.5rem; right: 0.5rem">
-                                                                                                    Sale!
-                                                                                                </div>
-                                                                                                <div class="row">
-                                                                                                    @php
-                                                                                                        $tempImg;
-                                                                                                        $count = 0;
-                                                                                                    @endphp
-                                                                                                    <!-- Ảnh sản phẩm-->
-                                                                                                    @foreach ($productImage as $PI)
-                                                                                                        @if ($PI->maSP == $CN->maSP)
-                                                                                                            @if ($count == 0)
-                                                                                                                @php
-                                                                                                                    $tempImg = $PI->anh;
-                                                                                                                @endphp
-                                                                                                                <div
-                                                                                                                    class="col-md-6">
-                                                                                                                    <a
-                                                                                                                        href="{{ route('product.show', $CN->maSP) }}">
-                                                                                                                        <img class="card-img-top hide-from-work"
-                                                                                                                            style="height:180px ; width:110% ; border: 1px solid lightgray"
-                                                                                                                            src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                                                            id="{{ $CN->maSP }}"
-                                                                                                                            alt="..." />
-                                                                                                                    </a>
-                                                                                                                </div>
-                                                                                                                @php
-                                                                                                                    $count = 1;
-                                                                                                                @endphp
-                                                                                                            @endif
+                                                                                {{-- Vật phẩm trong nội dung --}}
+                                                                                <div
+                                                                                    class="card-body padding-10 black-glass-2">
+                                                                                    <div class="table-responsive "
+                                                                                        style="overflow: hidden">
+                                                                                        {{-- <img class="carousel-promo-item-image-size"
+                                                                                    src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png"> --}}
+                                                                                        <div class="card product-item ">
+                                                                                            <!-- Thẻ sale trên đầu -->
+                                                                                            <div class="badge bg-dark text-white position-absolute"
+                                                                                                style="top: 0.5rem; right: 0.5rem">
+                                                                                                Sale!
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                @php
+                                                                                                    $tempImg;
+                                                                                                    $count = 0;
+                                                                                                @endphp
+                                                                                                <!-- Ảnh sản phẩm-->
+                                                                                                @foreach ($productImage as $PI)
+                                                                                                    @if ($PI->maSP == $CN->maSP)
+                                                                                                        @if ($count == 0)
+                                                                                                            @php
+                                                                                                                $tempImg = $PI->anh;
+                                                                                                            @endphp
+                                                                                                            <div
+                                                                                                                class="col-md-6">
+                                                                                                                <a
+                                                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                                                    <img class="card-img-top hide-from-work"
+                                                                                                                        style="height:180px ; width:110% ; border: 1px solid lightgray"
+                                                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                                                        id="{{ $CN->maSP }}"
+                                                                                                                        alt="..." />
+                                                                                                                </a>
+                                                                                                            </div>
+                                                                                                            @php
+                                                                                                                $count = 1;
+                                                                                                            @endphp
                                                                                                         @endif
-                                                                                                    @endforeach
+                                                                                                    @endif
+                                                                                                @endforeach
 
-                                                                                                    <!-- Thông tin sản phẩm-->
-                                                                                                    <div class="card-body p-4 col-md-6 bg- text-light"
-                                                                                                        style="background-color: black">
-                                                                                                        <div
-                                                                                                            class="text-center">
-                                                                                                            <!-- Tên sản phẩm-->
-                                                                                                            <h5 class="fw-bolder"
-                                                                                                                style="font-size:0.9em">
-                                                                                                                @php
-                                                                                                                    $find = '(';
-                                                                                                                    $positionOfOpenP = strpos($CN->tenSP, $find);
-                                                                                                                    $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
-                                                                                                                @endphp
-                                                                                                                <a class="link-white"
-                                                                                                                    href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
-
-                                                                                                            </h5>
-
-                                                                                                            <!-- Giá sản phẩm -->
-                                                                                                            <span
-                                                                                                                class="">{{ number_format($CN->giaSP) }}
-                                                                                                                VND</span>
+                                                                                                <!-- Thông tin sản phẩm-->
+                                                                                                <div class="card-body p-4 col-md-6 bg- text-light"
+                                                                                                    style="background-color: black">
+                                                                                                    <div
+                                                                                                        class="text-center">
+                                                                                                        <!-- Tên sản phẩm-->
+                                                                                                        <h5 class="fw-bolder"
+                                                                                                            style="font-size:0.9em">
+                                                                                                            @php
+                                                                                                                $find = '(';
+                                                                                                                $positionOfOpenP = strpos($CN->tenSP, $find);
+                                                                                                                $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
+                                                                                                            @endphp
                                                                                                             <a class="link-white"
+                                                                                                                href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
+
+                                                                                                        </h5>
+
+                                                                                                        <!-- Giá sản phẩm -->
+                                                                                                        <span
+                                                                                                            class="">{{ number_format($CN->giaSP) }}
+                                                                                                            VND</span>
+                                                                                                        <a class="link-white"
                                                                                                             href="{{ route('product.show', $CN->maSP) }}">
-                                                                                                            <div class="btn btn-danger ">
+                                                                                                            <div
+                                                                                                                class="btn btn-danger ">
                                                                                                                 Xem ngay
                                                                                                             </div>
-                                                                                                            </a>
-                                                                                                        </div>
+                                                                                                        </a>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                {{-- Hết - Quảng cáo 1 --}}
-                                                                                <div class="col mb-5">
-
-                                                                                </div>
+                                                                            </div>
+                                                                            {{-- Hết - Quảng cáo 1 --}}
+                                                                            <div class="col mb-5">
 
                                                                             </div>
 
                                                                         </div>
-                                                                    @endif
-                                                                @endforeach
 
-                                                            </div>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
                                                         </div>
-                                                    @endif
-                                                @endfor
+                                                    </div>
+                                                @else
+                                                    {{--  --}}
+                                                    <div class="carousel-item">
+                                                        <div class="row">
+                                                            @foreach ($saleProduct as $CN)
+                                                                @if ($loop->index < ($i + 1) * 3 && $loop->index >= $i * 3)
+                                                                    <div class="carousel-promo-item col-md-4 "
+                                                                        onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
+                                                                        style=" padding: 10px">
+                                                                        {{-- Quảng cáo 1 --}}
+                                                                        <div class="carousel-promo-item">
+                                                                            <div class=" shadow mb-4 ">
+                                                                                {{-- Label nội dung --}}
+                                                                                <div
+                                                                                    class="card-header py-3 red-glass">
+                                                                                    <h6
+                                                                                        class="m-0 font-weight-bold text-light carousel-promo-item-label">
+                                                                                        Khuyến mãi đặc biệt</h6>
+                                                                                </div>
+                                                                                {{-- Vật phẩm trong nội dung --}}
+                                                                                <div
+                                                                                    class="card-body padding-10 black-glass-2">
+                                                                                    <div class="table-responsive "
+                                                                                        style="overflow: hidden">
+                                                                                        {{-- <img class="carousel-promo-item-image-size"
+                                                                                                src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png"> --}}
+                                                                                        <div
+                                                                                            class="card product-item ">
+                                                                                            <!-- Thẻ sale trên đầu -->
+                                                                                            <div class="badge bg-dark text-white position-absolute"
+                                                                                                style="top: 0.5rem; right: 0.5rem">
+                                                                                                Sale!
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                @php
+                                                                                                    $tempImg;
+                                                                                                    $count = 0;
+                                                                                                @endphp
+                                                                                                <!-- Ảnh sản phẩm-->
+                                                                                                @foreach ($productImage as $PI)
+                                                                                                    @if ($PI->maSP == $CN->maSP)
+                                                                                                        @if ($count == 0)
+                                                                                                            @php
+                                                                                                                $tempImg = $PI->anh;
+                                                                                                            @endphp
+                                                                                                            <div
+                                                                                                                class="col-md-6">
+                                                                                                                <a
+                                                                                                                    href="{{ route('product.show', $CN->maSP) }}">
+                                                                                                                    <img class="card-img-top hide-from-work"
+                                                                                                                        style="height:180px ; width:110% ; border: 1px solid lightgray"
+                                                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                                                        id="{{ $CN->maSP }}"
+                                                                                                                        alt="..." />
+                                                                                                                </a>
+                                                                                                            </div>
+                                                                                                            @php
+                                                                                                                $count = 1;
+                                                                                                            @endphp
+                                                                                                        @endif
+                                                                                                    @endif
+                                                                                                @endforeach
+
+                                                                                                <!-- Thông tin sản phẩm-->
+                                                                                                <div class="card-body p-4 col-md-6 bg- text-light"
+                                                                                                    style="background-color: black">
+                                                                                                    <div
+                                                                                                        class="text-center">
+                                                                                                        <!-- Tên sản phẩm-->
+                                                                                                        <h5 class="fw-bolder"
+                                                                                                            style="font-size:0.9em">
+                                                                                                            @php
+                                                                                                                $find = '(';
+                                                                                                                $positionOfOpenP = strpos($CN->tenSP, $find);
+                                                                                                                $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
+                                                                                                            @endphp
+                                                                                                            <a class="link-white"
+                                                                                                                href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
+
+                                                                                                        </h5>
+
+                                                                                                        <!-- Giá sản phẩm -->
+                                                                                                        <span
+                                                                                                            class="">{{ number_format($CN->giaSP) }}
+                                                                                                            VND</span>
+                                                                                                        <a class="link-white"
+                                                                                                            href="{{ route('product.show', $CN->maSP) }}">
+                                                                                                            <div
+                                                                                                                class="btn btn-danger ">
+                                                                                                                Xem ngay
+                                                                                                            </div>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            {{-- Hết - Quảng cáo 1 --}}
+                                                                            <div class="col mb-5">
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
+
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endfor
                                         </div>
                                     </div>
                                     {{-- Kết thúc - Vật phẩm bên trong slide --}}
@@ -402,9 +408,9 @@
                 {{-- Kết thúc - Vật phẩm dưới slide quảng cáo --}}
 
                 {{-- Banner 1 --}}
-                <div class="hide-from-work">
+                {{-- <div class="hide-from-work">
                     <img width="100%" src="{{ asset('assets/img/banner-store-2.jpg') }}" />
-                </div>
+                </div> --}}
 
                 {{-- Danh mục - PC, Laptop phiên bản mới nhất --}}
                 <div class="card shadow mb-4 background-none" id="collapsePoint">
@@ -421,7 +427,8 @@
 
                             <div style="overflow: hidden">
                                 <div id="carouselExampleIndicators2" class="carousel slide carousel-container-custom"
-                                    data-ride="carousel" data-pause="hover" data-interval="5000" style="width:100%;">
+                                    data-ride="carousel" data-pause="hover" data-interval="5000"
+                                    style="width:100%;">
                                     {{-- Hiển thị vị trí slide --}}
                                     <ol class="carousel-indicators">
                                         <li data-target="#carouselExampleIndicators2" class="bg-danger"
@@ -942,16 +949,16 @@
                                 </div>
                                 {{-- Nút điều khiển slide --}}
                                 <div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
-                                        data-slide="prev" style="z-index: 1">
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators2"
+                                        role="button" data-slide="prev" style="z-index: 1">
                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                         {{-- <span class="sr-only">Previous</span> --}}
 
                                         <i class=" fa fa-chevron-left text-primary"
                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
-                                        data-slide="next" style="z-index: 1">
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators2"
+                                        role="button" data-slide="next" style="z-index: 1">
                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}
 
@@ -1393,7 +1400,8 @@
                                                                     <div class="card-footer border-top-0 bg-secondary"
                                                                         style="width: 100%">
                                                                         <a class="btn btn-outline-light mt-auto text-left"
-                                                                            href="#" style="background-color: navy">Còn
+                                                                            href="#"
+                                                                            style="background-color: navy">Còn
                                                                             hàng</a>
                                                                         <a class="btn btn-outline-light mt-auto bg-gradientsecondary text-right"
                                                                             href="#"
@@ -1415,16 +1423,16 @@
                                 </div>
                                 {{-- Nút điều khiển slide --}}
                                 <div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button"
-                                        data-slide="prev" style="z-index: 1">
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators3"
+                                        role="button" data-slide="prev" style="z-index: 1">
                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                         {{-- <span class="sr-only">Previous</span> --}}
 
                                         <i class=" fa fa-chevron-left text-primary"
                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button"
-                                        data-slide="next" style="z-index: 1">
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators3"
+                                        role="button" data-slide="next" style="z-index: 1">
                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}
 
@@ -1598,7 +1606,8 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form action="{{ route('cart.store') }}"
+                                                                            <form
+                                                                                action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -1765,7 +1774,8 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form action="{{ route('cart.store') }}"
+                                                                            <form
+                                                                                action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -1866,7 +1876,8 @@
                                                                     <div class="card-footer border-top-0 bg-secondary"
                                                                         style="width: 100%">
                                                                         <a class="btn btn-outline-light mt-auto text-left"
-                                                                            href="#" style="background-color: navy">Còn
+                                                                            href="#"
+                                                                            style="background-color: navy">Còn
                                                                             hàng</a>
                                                                         <a class="btn btn-outline-light mt-auto bg-gradientsecondary text-right"
                                                                             href="#"
@@ -1888,16 +1899,16 @@
                                 </div>
                                 {{-- Nút điều khiển slide --}}
                                 <div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators4" role="button"
-                                        data-slide="prev" style="z-index: 1">
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators4"
+                                        role="button" data-slide="prev" style="z-index: 1">
                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                         {{-- <span class="sr-only">Previous</span> --}}
 
                                         <i class=" fa fa-chevron-left text-primary"
                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators4" role="button"
-                                        data-slide="next" style="z-index: 1">
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators4"
+                                        role="button" data-slide="next" style="z-index: 1">
                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}
 
@@ -2071,7 +2082,8 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form action="{{ route('cart.store') }}"
+                                                                            <form
+                                                                                action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2238,7 +2250,8 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form action="{{ route('cart.store') }}"
+                                                                            <form
+                                                                                action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2339,7 +2352,8 @@
                                                                     <div class="card-footer border-top-0 bg-secondary"
                                                                         style="width: 100%">
                                                                         <a class="btn btn-outline-light mt-auto text-left"
-                                                                            href="#" style="background-color: navy">Còn
+                                                                            href="#"
+                                                                            style="background-color: navy">Còn
                                                                             hàng</a>
                                                                         <a class="btn btn-outline-light mt-auto bg-gradientsecondary text-right"
                                                                             href="#"
@@ -2361,16 +2375,16 @@
                                 </div>
                                 {{-- Nút điều khiển slide --}}
                                 <div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators5" role="button"
-                                        data-slide="prev" style="z-index: 1">
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators5"
+                                        role="button" data-slide="prev" style="z-index: 1">
                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                         {{-- <span class="sr-only">Previous</span> --}}
 
                                         <i class=" fa fa-chevron-left text-primary"
                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators5" role="button"
-                                        data-slide="next" style="z-index: 1">
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators5"
+                                        role="button" data-slide="next" style="z-index: 1">
                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}
 
@@ -2400,8 +2414,9 @@
                         <div class="table-responsive d-flex">
 
                             <div style="overflow: hidden">
-                                <div id="carouselExampleIndicators6" class="carousel slide carousel-container-custom"
-                                    data-ride="carousel" data-pause="hover" data-interval="5000" style="width:100%">
+                                <div id="carouselExampleIndicators6"
+                                    class="carousel slide carousel-container-custom" data-ride="carousel"
+                                    data-pause="hover" data-interval="5000" style="width:100%">
                                     {{-- Hiển thị vị trí slide --}}
                                     <ol class="carousel-indicators">
                                         <li data-target="#carouselExampleIndicators6" class="bg-danger"
@@ -2445,7 +2460,8 @@
                                                                                 </h5>
                                                                             </div>
                                                                             <!-- Giá sản phẩm trong overlay-->
-                                                                            <div class="product-overlay-product-price">
+                                                                            <div
+                                                                                class="product-overlay-product-price">
                                                                                 <span
                                                                                     class="">{{ number_format($CN->giaSP) }}
                                                                                     VND</span>
@@ -2544,7 +2560,8 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form action="{{ route('cart.store') }}"
+                                                                            <form
+                                                                                action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2612,7 +2629,8 @@
                                                                                 </h5>
                                                                             </div>
                                                                             <!-- Giá sản phẩm trong overlay-->
-                                                                            <div class="product-overlay-product-price">
+                                                                            <div
+                                                                                class="product-overlay-product-price">
                                                                                 <span
                                                                                     class="">{{ number_format($CN->giaSP) }}
                                                                                     VND</span>
@@ -2711,7 +2729,8 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form action="{{ route('cart.store') }}"
+                                                                            <form
+                                                                                action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2812,7 +2831,8 @@
                                                                     <div class="card-footer border-top-0 bg-secondary"
                                                                         style="width: 100%">
                                                                         <a class="btn btn-outline-light mt-auto text-left"
-                                                                            href="#" style="background-color: navy">Còn
+                                                                            href="#"
+                                                                            style="background-color: navy">Còn
                                                                             hàng</a>
                                                                         <a class="btn btn-outline-light mt-auto bg-gradientsecondary text-right"
                                                                             href="#"
@@ -2834,16 +2854,16 @@
                                 </div>
                                 {{-- Nút điều khiển slide --}}
                                 <div>
-                                    <a class="carousel-control-prev" href="#carouselExampleIndicators6" role="button"
-                                        data-slide="prev" style="z-index: 1">
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators6"
+                                        role="button" data-slide="prev" style="z-index: 1">
                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                         {{-- <span class="sr-only">Previous</span> --}}
 
                                         <i class=" fa fa-chevron-left text-primary"
                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                     </a>
-                                    <a class="carousel-control-next" href="#carouselExampleIndicators6" role="button"
-                                        data-slide="next" style="z-index: 1">
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators6"
+                                        role="button" data-slide="next" style="z-index: 1">
                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}
 
