@@ -171,4 +171,9 @@ class AdminVoucherController extends Controller
         Excel::import(new VoucherImport, $file);
         return back()->with('success', "File imported successfully");
     }
+
+    public function sample(){
+        $path = public_path('excel_sample\voucher-sample.xlsx');
+        return response()->download($path);
+    }
 }

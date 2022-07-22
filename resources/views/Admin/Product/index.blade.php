@@ -180,7 +180,10 @@
                             <h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm mới</h6>
                         </div>
                         <div class="card-header">
-                            Thêm bằng file Excel
+                            <form action="{{route('admin.product.sample')}}" method="get">
+                                Thêm bằng file Excel
+                                <button>Tải file mẫu</button>
+                            </form>
                             <form action="{{route('admin.product.excel')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="file" name="file-excel">
