@@ -26,6 +26,24 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <tr>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Nhà phân phối</th>
+                                        <th>Ngày nhập</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{$nhapKho->maNK}}
+                                        </td>
+                                        <td>
+                                            {{$nhapKho->tenNPP}}
+                                        </td>
+                                        <td>
+                                            {{$nhapKho->ngayNhap}}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Tên sản phẩm</th>
@@ -66,7 +84,7 @@
                                     </tbody>
                                 </table>
                                 {{$nhapKhoChiTiet->links('')}}
-                                <button class="btn btn-primary" onclick="window.location='{{ route("import.index") }}'">
+                                <button class="btn btn-primary" onclick="window.history.back()">
                                     Quay lại
                                 </button>
                             </div>
