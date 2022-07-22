@@ -38,7 +38,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Doanh Thu Tháng
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuThang->doanhThuThang)}} VND</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuThang)}} VND</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -55,11 +55,11 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Doanh Thu Tháng (Dự Kiến)
+                                                Tiền nhập hàng trong tháng
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($doanhThuThangDuKien->doanhThuThangDuKien)}} VND</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($tongTienNhapThang)}} VND</div>
                                                 </div>
                                                 <!-- <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -85,9 +85,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Doanh Thu Năm
+                                                Lợi nhuận Tháng
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuNam->doanhThuNam)}} VND</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($doanhThuThang - $tongTienNhapThang)}} VND</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -104,11 +104,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Doanh Thu Năm (Dự Kiến)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuNamDuKien->doanhThuNamDuKien)}} VND</div>
+                                                Tiền lãi tháng
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tienLaiThang)}} VND</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -122,12 +123,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Số sản phẩm nhập trong tháng
+                                                Doanh thu năm
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNhapThang}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuNam)}} VND</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -141,16 +142,16 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Số sản phẩm nhập trong năm
+                                                Tiền nhập hàng trong năm
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$tongSanPhamNhapNam}}</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tongTienNhapNam)}} VND</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -164,9 +165,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Tiền vốn tháng
+                                                Lợi nhuận năm
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tongTienNhapThang)}} VND</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuNam - $tongTienNhapNam)}} VND</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -183,9 +184,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Tiền vốn năm
+                                                Tiền lãi năm
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tongTienNhapNam)}} VND</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tienLaiNam)}} VND</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -202,11 +203,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Số Sản Phẩm Bán Trong Tháng</div>
+                                                Số sản phẩm nhập trong tháng
+                                            </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamThang}}</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-archive fa-2x text-gray-300"></i>
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -216,12 +218,91 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Số Sản Phẩm Bán Trong Tháng
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNhapThang}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                SỐ SẢN PHẨM NHẬP TRONG NĂM
+                                            </div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$tongSanPhamNhapNam}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Số sản phẩm bán trong năm
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNam}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
                                 <a href="{{route('receipt.index', ['NBD' => date('Y-m-01'), 'NKT' => date('Y-m-d')])}}">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Số Đơn Hàng Trong Tháng
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongHoaDonThang}}</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                            <a href="{{route('receipt.index', ['searchStatus' => 'Đã duyệt'])}}">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Số Đơn Hàng Trong Tháng</div>
+                                                    Số Đơn Hàng Đã Duyệt
+                                                </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongHoaDonThang}}</div>
                                             </div>
                                             <div class="col-auto">
@@ -241,7 +322,8 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Đơn Hàng Đang Chờ Duyệt</div>
+                                                    Số Đơn Hàng Đang Chờ Duyệt
+                                                </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonChuaDuyet}}</div>
                                             </div>
                                             <div class="col-auto">
@@ -261,7 +343,8 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Số Lượng Đơn Hàng Đã Huỷ</div>
+                                                    Số Đơn Hàng Đã Huỷ
+                                                </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongHoaDonHuy}}</div>
                                             </div>
                                             <div class="col-auto">
@@ -339,7 +422,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Danh mục đã bán</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Danh mục sản phẩm</h6>
                                     
                                 </div>
                                 <!-- Card Body -->
@@ -429,8 +512,8 @@
                                     }
                                 },
                                 series: [
-                                    {name: 'Doanh thu', data: res.doanhThu12Thang}, 
-                                    {name: 'Doanh thu dự kiến', data: res.doanhThuDuKien12Thang}
+                                    {name: 'Chỉ đơn đã duyệt', data: res.doanhThu12Thang}, 
+                                    {name: 'Gồm cả đơn chưa duyệt', data: res.doanhThuDuKien12Thang}
                                 ]
                             });
                         }
@@ -487,7 +570,7 @@
             })
         })
 
-        //Khung của biểu đồ doanh thu 12 tháng (dữ liệu truyền vào = null)
+        //Khung của biểu đồ doanh thu 12 tháng (dữ liệu truyền vào = null)(được hiển thị trước khi user chọn năm)
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
@@ -533,12 +616,12 @@
                 }
             },
             series: [
-                {name: 'Doanh thu', data: null}, 
-                {name: 'Doanh thu dự kiến', data: null}
+                {name: 'Chỉ đơn đã duyệt', data: null}, 
+                {name: 'Gồm cả đơn chưa duyệt', data: null}
             ]
         });
 
-        //Khung của biểu đồ top 5 sản phẩm bán chạy theo danh mục (dữ liệu truyền vào = null)
+        //Khung của biểu đồ top 5 sản phẩm bán chạy theo danh mục (dữ liệu truyền vào = null)(được hiển thị trước khi user chọ danh mục)
         Highcharts.chart('container2', {
             chart: {
                 type: 'column'
@@ -575,7 +658,7 @@
             ]
         });
 
-        //Biểu đồ danh mục đã bán
+        //Biểu đồ danh mục sản phẩm đã bán
         var danhMuc = {!! json_encode($danhMuc, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
         var danhMucCon = {!! json_encode($danhMucCon, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
         var colors = Highcharts.getOptions().colors;
@@ -594,7 +677,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Biểu đồ danh mục đã bán'
+                text: 'Danh mục sản phẩm đã bán'
             },
             plotOptions: {
                 pie: {

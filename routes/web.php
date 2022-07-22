@@ -82,6 +82,7 @@ Route::post('/logoutProcessAdmin', [AdminLoginController::class, "logoutProcess"
 Route::prefix('admin')->middleware('CheckLogin')->name('admin.')->group(function () {
     Route::post('product/updateSpecial/{id}', [AdminProductController::class, "updateSpecial"])->name('product.updateSpecial');
     Route::post('product/excel', [AdminProductController::class, "excel"])->name('product.excel');
+    Route::get('productSample', [AdminProductController::class, "sample"])->name('product.sample');
     Route::resource('product', AdminProductController::class);
 });
 // Route::prefix('admin')->group(function () {
@@ -120,11 +121,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('supplier', AdminSupplierController::class);
     Route::get('importProduct/{maNPP}', [AdminImportController::class, "get"])->name('import.get');
     Route::post('import/excel', [AdminImportController::class, "excel"])->name('import.excel');
+    Route::get('importSample', [AdminImportController::class, "sample"])->name('import.sample');
     Route::resource('import', AdminImportController::class);
     Route::resource('serial', AdminSerialController::class);
     Route::resource('inventory', AdminInventoryController::class);
     Route::get('getGiftValue/{maSP}', [AdminVoucherController::class, "getGiftValue"])->name('voucher.value');
     Route::post('importVoucher', [AdminVoucherController::class, "excel"])->name('voucher.excel');
+    Route::get('voucherSample', [AdminVoucherController::class, "sample"])->name('voucher.sample');
     Route::resource('voucher', AdminVoucherController::class);
     Route::resource('voucherType', AdminVoucherTypeController::class);
 });

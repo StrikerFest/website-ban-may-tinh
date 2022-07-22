@@ -31,6 +31,16 @@
                                                 <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập mã serial">
                                             </div>
                                             <div class="col-sm-3">
+                                                <input class="form-control" type="number" name="searchReceipt" value="{{$searchReceipt}}" placeholder="Nhập mã hoá đơn">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" name="searchStatus" value="{{$searchStatus}}">
+                                                    <option value="">Tình trạng</option>
+                                                    <option value="1" <?php if($searchStatus == 1)echo "selected" ?>>Đã bán</option>
+                                                    <option value="2" <?php if($searchStatus == 2)echo "selected" ?>>Chưa bán</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
                                                 <button class="btn btn-primary">Tìm kiếm</button>
                                             </div>
                                         </div>
@@ -47,7 +57,7 @@
                                         </tr>
                                         <tr>
                                             <th>Mã serial</th>
-                                            <th colspan="2" width="20%">Thao tác</th>
+                                            <th colspan="2" width="40%">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,26 +66,46 @@
                                             <td>{{$S->serial}}</td>
                                             <?php if($S->maHDCT == null){ ?>
                                                 <td>
-                                                    <form action="{{route('serial.edit', $S->maSerial)}}" method="get">
-                                                        @csrf
-                                                        <button class="btn btn-primary btn-user btn-block">Sửa</button>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action="{{route('serial.destroy', $S->maSerial)}}" method="post">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button onclick="return confirm('Xác nhận xóa mã serial?')" class="btn btn-primary btn-user btn-block">
-                                                            Xóa
-                                                        </button>
-                                                    </form>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <form action="{{route('import.show', $S->maNK)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Đơn nhập</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <form action="{{route('serial.edit', $S->maSerial)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <form action="{{route('serial.destroy', $S->maSerial)}}" method="post">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button onclick="return confirm('Xác nhận xóa mã serial?')" class="btn btn-primary btn-user btn-block">
+                                                                    Xóa
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             <?php }else{ ?>
                                                 <td colspan="2">
-                                                    <form action="{{route('receipt.show', $S->maHD)}}" method="get">
-                                                        @csrf
-                                                        <button class="btn btn-primary btn-user btn-block">Xem</button>
-                                                    </form>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <form action="{{route('import.show', $S->maNK)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Đơn nhập</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <form action="{{route('receipt.show', $S->maHD)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Hoá đơn</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             <?php } ?>
                                         </tr>
