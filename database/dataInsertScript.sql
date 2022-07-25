@@ -70,6 +70,7 @@ INSERT INTO chuc_vu_quyen_han(`maCV`,`maQH`) VALUE (6,6);
 
 -- ==========================================================================================================
 -- Bảng Người dùng
+INSERT INTO nguoi_dung(`tenND`,`emailND`,`soDienThoai`,`diaChiND`,`matKhauND`,`maCV`) VALUE ('Vãng lai','lancerstriker@gmail.com','0123456789','Địa chỉ 6','$2a$12$ZEaOgkX2ZAGcD9BVJ99fQOjJogJe3GYPuo8bQfXzd.zSQdvEYe8Q6',6);
 INSERT INTO nguoi_dung(`tenND`,`emailND`,`soDienThoai`,`diaChiND`,`matKhauND`,`maCV`) VALUE ('SuperAdmin','super@mail.com','0123456789','Địa chỉ 1','12345',1);
 INSERT INTO nguoi_dung(`tenND`,`emailND`,`soDienThoai`,`diaChiND`,`matKhauND`,`maCV`) VALUE ('Admin','admin@mail.com','0123456789','Địa chỉ 2','$2a$12$ZEaOgkX2ZAGcD9BVJ99fQOjJogJe3GYPuo8bQfXzd.zSQdvEYe8Q6',2);
 INSERT INTO nguoi_dung(`tenND`,`emailND`,`soDienThoai`,`diaChiND`,`matKhauND`,`maCV`) VALUE ('Nhân viên 1','NV1@mail.com','0123456789','Địa chỉ 3','$2a$12$ZEaOgkX2ZAGcD9BVJ99fQOjJogJe3GYPuo8bQfXzd.zSQdvEYe8Q6',3);
@@ -244,7 +245,7 @@ INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, 
                                                                                                                                         (NULL, 'Quà tặng abc...', '1000000', 'Quà tặng ko bán', '10', '0', '1', '21', '1');
 
 
---Bảng sản phẩm nhà phân phối
+-- Bảng sản phẩm nhà phân phối
 INSERT INTO `san_pham_nha_phan_phoi` (`maSPNPP`, `maSP`, `maNPP`) VALUES (NULL, '1', '1'),
                                                                         (NULL, '2', '1'),
                                                                         (NULL, '3', '1'),

@@ -12,9 +12,9 @@ class CartController extends Controller
     public function cartList(Request $request)
     {
         $request->session()->put('loginError', true);
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         session()->forget('loginError');
         $listTheLoaiMayTinhBan = DB::table(
             'the_loai_con'
@@ -45,11 +45,11 @@ class CartController extends Controller
     // store
     public function addToCart(Request $request)
     {
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         $quantity = $request->quantity;
-        if($request->quantity <=0){
+        if ($request->quantity <= 0) {
             $quantity = 1;
         }
         \Cart::add([
@@ -72,7 +72,7 @@ class CartController extends Controller
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
         $quantity = $request->quantity;
-        if($request->quantity <=0){
+        if ($request->quantity <= 0) {
             $quantity = 1;
         }
         \Cart::add([
@@ -95,7 +95,7 @@ class CartController extends Controller
             return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         }
         $quantity = $request->quantity;
-        if($request->quantity <=0){
+        if ($request->quantity <= 0) {
             $quantity = 1;
         }
         \Cart::update(
