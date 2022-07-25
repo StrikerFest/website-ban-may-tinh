@@ -21,7 +21,7 @@ class DashboardController extends Controller
         JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
         WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
         AND hoa_don.maTTHD = 1
-        ")[0];
+        ")[0]->doanhThuThang;
         
         //Doanh thu theo năm
         $doanhThuNam = DB::select("
@@ -30,25 +30,47 @@ class DashboardController extends Controller
         JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
         WHERE YEAR(hoa_don.ngayTao) = $namHienTai
         AND hoa_don.maTTHD = 1
-        ")[0];
+        ")[0]->doanhThuNam;
 
-        //Doanh thu theo tháng (dự kiến)
-        $doanhThuThangDuKien = DB::select("
-        SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuThangDuKien
-        FROM hoa_don_chi_tiet
-        JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-        WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-        AND hoa_don.maTTHD != 3
-        ")[0];
+        //Tiền lãi theo tháng
+        $tienLaiThang = DB::select("
+        SELECT SUM((giaSP - (giaSP * giamGia / 100)) - nhap_kho_chi_tiet.giaNhap) AS tienLaiThang
+        FROM `serial`  
+        JOIN hoa_don_chi_tiet ON hoa_don_chi_tiet.maHDCT = serial.maHDCT
+        JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
+        JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
+        JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+        WHERE MONTH(hoa_don.ngayTao) = $thangHienTai
+        ")[0]->tienLaiThang;
+        
+        //Tiền lãi theo năm
+        $tienLaiNam = DB::select("
+        SELECT SUM((giaSP - (giaSP * giamGia / 100)) - nhap_kho_chi_tiet.giaNhap) AS tienLaiNam
+        FROM `serial`  
+        JOIN hoa_don_chi_tiet ON hoa_don_chi_tiet.maHDCT = serial.maHDCT
+        JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
+        JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
+        JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+        WHERE Year(hoa_don.ngayTao) = $namHienTai
+        ")[0]->tienLaiNam;
 
-        //Doanh thu theo năm (dự kiến)
-        $doanhThuNamDuKien = DB::select("
-        SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuNamDuKien
-        FROM hoa_don_chi_tiet
-        JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-        WHERE YEAR(hoa_don.ngayTao) = $namHienTai
-        AND hoa_don.maTTHD != 3
-        ")[0];
+        // //Doanh thu theo tháng (dự kiến)
+        // $doanhThuThangDuKien = DB::select("
+        // SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuThangDuKien
+        // FROM hoa_don_chi_tiet
+        // JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+        // WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
+        // AND hoa_don.maTTHD != 3
+        // ")[0];
+
+        // //Doanh thu theo năm (dự kiến)
+        // $doanhThuNamDuKien = DB::select("
+        // SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuNamDuKien
+        // FROM hoa_don_chi_tiet
+        // JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+        // WHERE YEAR(hoa_don.ngayTao) = $namHienTai
+        // AND hoa_don.maTTHD != 3
+        // ")[0];
 
         //Tổng số sản phẩm đã nhập trong tháng
         $tongSanPhamNhapThang = DB::table('nhap_kho_chi_tiet')
@@ -91,6 +113,13 @@ class DashboardController extends Controller
         $tongSanPhamThang = DB::table('hoa_don_chi_tiet')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->whereMonth('ngayTao', '=', $thangHienTai)
+            ->whereYear('ngayTao', '=', $namHienTai)
+            ->where('maTTHD', '=', 1)
+            ->sum('soLuong');
+        
+        //Tổng số lượng sản phẩm bán ra trong năm
+        $tongSanPhamNam = DB::table('hoa_don_chi_tiet')
+            ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->whereYear('ngayTao', '=', $namHienTai)
             ->where('maTTHD', '=', 1)
             ->sum('soLuong');
@@ -212,8 +241,10 @@ class DashboardController extends Controller
             return view("Admin.Dashboard.index", [
                 'doanhThuThang' => $doanhThuThang,
                 'doanhThuNam' => $doanhThuNam,
-                'doanhThuThangDuKien' => $doanhThuThangDuKien,
-                'doanhThuNamDuKien' => $doanhThuNamDuKien,
+                'tienLaiThang' => $tienLaiThang,
+                'tienLaiNam' => $tienLaiNam,
+                // 'doanhThuThangDuKien' => $doanhThuThangDuKien,
+                // 'doanhThuNamDuKien' => $doanhThuNamDuKien,
                 'tongSanPhamNhapThang' => $tongSanPhamNhapThang,
                 'tongSanPhamNhapNam' => $tongSanPhamNhapNam,
                 'tongTienNhapThang' => $tongTienNhapThang,
@@ -221,6 +252,7 @@ class DashboardController extends Controller
                 'hoaDonChuaDuyet' => $hoaDonChuaDuyet,
                 'tongHoaDonThang' => $tongHoaDonThang,
                 'tongSanPhamThang' => $tongSanPhamThang,
+                'tongSanPhamNam' => $tongSanPhamNam,
                 'tongHoaDonHuy' => $tongHoaDonHuy,
                 'danhMuc' => $danhMuc,
                 'danhMucCon' => $danhMucCon,

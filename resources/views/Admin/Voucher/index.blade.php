@@ -121,7 +121,10 @@
                         <h6 class="m-0 font-weight-bold text-primary">Thêm voucher mới</h6>
                     </div>
                     <div class="card-header">
-                        Thêm bằng file Excel
+                        <form action="{{route('voucher.sample')}}" method="get">
+                            Thêm bằng file Excel
+                            <button>Tải file mẫu</button>
+                        </form>
                         <form action="{{route('voucher.excel')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="file-excel">

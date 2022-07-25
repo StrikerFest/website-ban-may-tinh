@@ -107,7 +107,10 @@
                         </div>
                         
                         <div class="card-header">
-                            Thêm bằng file Excel
+                            <form action="{{route('import.sample')}}" method="get">
+                                Thêm bằng file Excel
+                                <button>Tải file mẫu</button>
+                            </form>
                             <form action="{{route('import.excel')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="file" name="file-excel">

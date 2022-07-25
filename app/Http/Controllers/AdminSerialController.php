@@ -49,23 +49,128 @@ class AdminSerialController extends Controller
     public function show(Request $request, $maSP)
     {
         $searchName = $request->get('searchName');
+        $searchStatus = $request->get('searchStatus');
+        $searchReceipt = $request->get('searchReceipt');
 
-        $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
-            ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
-            ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
-            ->where('serial.maSP', $maSP)
-            ->where('serial', 'like', "%$searchName%")
-            ->paginate(10)
-            ->appends([
-                'searchName' => $searchName,
-            ]);
-
+        if($searchReceipt){
+            switch($searchStatus){
+                case 1:
+                    //Đã bán
+                    $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+                        ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+                        ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+                        ->where('serial.maSP', $maSP)
+                        ->where('serial', 'like', "%$searchName%")
+                        ->where('hoa_don.maHD', 'like', "%$searchReceipt%")
+                        ->whereNotNull('serial.maHDCT')
+                        ->orderBy('maHDCT', 'ASC')
+                        ->orderBy('maSerial', 'ASC')
+                        ->paginate(10)
+                        ->appends([
+                            'searchName' => $searchName,
+                            'searchStatus' => $searchStatus,
+                            'searchReceipt' => $searchReceipt,
+                        ]);
+                    break;
+                case 2:
+                    //Chưa bán
+                    $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+                        ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+                        ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+                        ->where('serial.maSP', $maSP)
+                        ->where('serial', 'like', "%$searchName%")
+                        ->where('hoa_don.maHD', 'like', "%$searchReceipt%")
+                        ->whereNull('serial.maHDCT')
+                        ->orderBy('maHDCT', 'ASC')
+                        ->orderBy('maSerial', 'ASC')
+                        ->paginate(10)
+                        ->appends([
+                            'searchName' => $searchName,
+                            'searchStatus' => $searchStatus,
+                            'searchReceipt' => $searchReceipt,
+                        ]);
+                    break;
+                default:
+                    //Mặc định
+                    $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+                        ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+                        ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+                        ->where('serial.maSP', $maSP)
+                        ->where('serial', 'like', "%$searchName%")
+                        ->where('hoa_don.maHD', 'like', "%$searchReceipt%")
+                        ->orderBy('maHDCT', 'ASC')
+                        ->orderBy('maSerial', 'ASC')
+                        ->paginate(10)
+                        ->appends([
+                            'searchName' => $searchName,
+                            'searchStatus' => $searchStatus,
+                            'searchReceipt' => $searchReceipt,
+                        ]);
+                    break;
+            }
+        }else{
+            switch($searchStatus){
+                case 1:
+                    //Đã bán
+                    $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+                        ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+                        ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+                        ->where('serial.maSP', $maSP)
+                        ->where('serial', 'like', "%$searchName%")
+                        ->whereNotNull('serial.maHDCT')
+                        ->orderBy('maHDCT', 'ASC')
+                        ->orderBy('maSerial', 'ASC')
+                        ->paginate(10)
+                        ->appends([
+                            'searchName' => $searchName,
+                            'searchStatus' => $searchStatus,
+                            'searchReceipt' => $searchReceipt,
+                        ]);
+                    break;
+                case 2:
+                    //Chưa bán
+                    $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+                        ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+                        ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+                        ->where('serial.maSP', $maSP)
+                        ->where('serial', 'like', "%$searchName%")
+                        ->whereNull('serial.maHDCT')
+                        ->orderBy('maHDCT', 'ASC')
+                        ->orderBy('maSerial', 'ASC')
+                        ->paginate(10)
+                        ->appends([
+                            'searchName' => $searchName,
+                            'searchStatus' => $searchStatus,
+                            'searchReceipt' => $searchReceipt,
+                        ]);
+                    break;
+                default:
+                    //Mặc định
+                    $Serial = SerialModel::select(['serial.*', 'hoa_don.maHD'])
+                        ->leftJoin('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'serial.maHDCT')
+                        ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+                        ->where('serial.maSP', $maSP)
+                        ->where('serial', 'like', "%$searchName%")
+                        ->orderBy('maHDCT', 'ASC')
+                        ->orderBy('maSerial', 'ASC')
+                        ->paginate(10)
+                        ->appends([
+                            'searchName' => $searchName,
+                            'searchStatus' => $searchStatus,
+                            'searchReceipt' => $searchReceipt,
+                        ]);
+                    break;
+            }
+        }
+        
         $tenSP = ProductModel::find($maSP)->tenSP;
         // dd($Serial);
         return view('Admin.Serial.index', [
             'Serial' => $Serial,
             'tenSP' => $tenSP,
             'searchName' => $searchName,
+            'searchStatus' => $searchStatus,
+            'searchReceipt' => $searchReceipt,
         ]);
     }
 

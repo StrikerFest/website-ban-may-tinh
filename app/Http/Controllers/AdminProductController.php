@@ -214,4 +214,9 @@ class AdminProductController extends Controller
         Excel::import(new ProductImport, $file);
         return back()->with('success', "File imported successfully");
     }
+
+    public function sample(){
+        $path = public_path('excel_sample\product-sample.xlsx');
+        return response()->download($path);
+    }
 }

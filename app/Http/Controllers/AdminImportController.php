@@ -207,6 +207,10 @@ class AdminImportController extends Controller
      */
     public function show($id)
     {
+        $nhapKho = ImportModel::select(['nhap_kho.maNK', 'nhap_kho.ngayNhap', 'nha_phan_phoi.tenNPP'])
+            ->join('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'nhap_kho.maNPP')
+            ->find($id);
+        
         $sanPham = DB::table('san_pham')->get();
 
         $nhapKhoChiTiet = ImportDetailModel::where('maNK', '=', $id)->paginate(10);
@@ -220,6 +224,7 @@ class AdminImportController extends Controller
             'nhapKhoChiTiet' => $nhapKhoChiTiet,
             'tongTien' => $tongTien,
             'sanPham' => $sanPham,
+            'nhapKho' => $nhapKho,
         ]);
     }
 
@@ -277,5 +282,10 @@ class AdminImportController extends Controller
         $file = $request->file('file-excel');
         Excel::import(new StockImport, $file);
         return back()->with('success', "File imported successfully");
+    }
+
+    public function sample(){
+        $path = public_path('excel_sample\stock-sample.xlsx');
+        return response()->download($path);
     }
 }

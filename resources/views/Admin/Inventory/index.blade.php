@@ -27,10 +27,13 @@
                                     <h6>Bộ lọc</h6>
                                     <form method="get">
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tên sản phẩm">
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" name="searchSerial" value="{{$searchSerial}}" placeholder="Nhập mã serial">
+                                            </div>
+                                            <div class="col-sm-2">
                                                 <select class="form-control" name="searchSupplier">
                                                     <option value="" selected>Nhà phân phối</option>
                                                     @foreach($nhaPhanPhoi as $NPP)
@@ -40,7 +43,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <select class="form-control" name="searchSubCategory">
                                                     <option value="" selected>Danh mục</option>
                                                     @foreach($theLoaiCon as $TLC)

@@ -18,23 +18,48 @@ class AdminInventoryController extends Controller
         $searchName = $request->get('searchName');
         $searchSupplier = $request->get('searchSupplier');
         $searchSubCategory = $request->get('searchSubCategory');
+        $searchSerial = $request->get('searchSerial');
+        if($searchSerial){
+            $sanPham = ProductModel::select(['san_pham.*', 'serial.serial'])
+                ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+                ->leftJoin('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'san_pham_nha_phan_phoi.maNPP')
+                ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                ->leftJoin('serial', 'serial.maSP', '=', 'san_pham.maSP')
+                ->where('tenSP', 'like', "%$searchName%")
+                ->where('tenTLC', 'like', "%$searchSubCategory%")
+                ->where('tenNPP', 'like', "%$searchSupplier%")
+                ->where('serial', 'like', "%$searchSerial%")
+                ->orWhereNull('tenNPP')
+                ->orderBy('soLuong', 'ASC')
+                ->groupBy('san_pham.maSP')
+                ->paginate(10)
+                ->appends([
+                    'searchName' => $searchName,
+                    'searchSupplier' => $searchSupplier,
+                    'searchSubCategory' => $searchSubCategory,
+                    'searchSerial' => $searchSerial,
+                ]);
+        }else{
+            $sanPham = ProductModel::select(['san_pham.*', 'serial.serial'])
+                ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
+                ->leftJoin('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'san_pham_nha_phan_phoi.maNPP')
+                ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+                ->leftJoin('serial', 'serial.maSP', '=', 'san_pham.maSP')
+                ->where('tenSP', 'like', "%$searchName%")
+                ->where('tenTLC', 'like', "%$searchSubCategory%")
+                ->where('tenNPP', 'like', "%$searchSupplier%")
+                ->orWhereNull('tenNPP')
+                ->orderBy('soLuong', 'ASC')
+                ->groupBy('san_pham.maSP')
+                ->paginate(10)
+                ->appends([
+                    'searchName' => $searchName,
+                    'searchSupplier' => $searchSupplier,
+                    'searchSubCategory' => $searchSubCategory,
+                    'searchSerial' => $searchSerial,
+                ]);
 
-        $sanPham = ProductModel::select(['san_pham.*'])
-            ->leftJoin('san_pham_nha_phan_phoi', 'san_pham_nha_phan_phoi.maSP', '=', 'san_pham.maSP')
-            ->leftJoin('nha_phan_phoi', 'nha_phan_phoi.maNPP', '=', 'san_pham_nha_phan_phoi.maNPP')
-            ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-            ->where('tenSP', 'like', "%$searchName%")
-            ->where('tenTLC', 'like', "%$searchSubCategory%")
-            ->where('tenNPP', 'like', "%$searchSupplier%")
-            ->orWhereNull('tenNPP')
-            ->orderBy('soLuong', 'ASC')
-            ->groupBy('san_pham.maSP')
-            ->paginate(10)
-            ->appends([
-                'searchName' => $searchName,
-                'searchSupplier' => $searchSupplier,
-                'searchSubCategory' => $searchSubCategory,
-            ]);
+        }
         // dd($sanPham);
         $nhaPhanPhoi = DB::table('nha_phan_phoi')->get();
 
@@ -47,6 +72,7 @@ class AdminInventoryController extends Controller
             'searchName' => $searchName,
             "searchSupplier" => $searchSupplier,
             "searchSubCategory" => $searchSubCategory,
+            "searchSerial" => $searchSerial,
         ]);
     }
 
