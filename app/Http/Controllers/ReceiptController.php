@@ -6,11 +6,15 @@ use App\Mail\DemoEmail;
 use App\Models\DetailReceiptModel;
 use App\Models\ProductImageModel;
 use App\Models\ReceiptModel;
+use App\Models\UserModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ReceiptController extends Controller
 {
@@ -114,15 +118,44 @@ class ReceiptController extends Controller
             ]
         );
         try {
+            
+            if (session()->has("maillingSession") == 1)
+                session()->put("maillingSession", 0);
+            else
+                session()->put("maillingSession", 1);
+
             // Thêm vào hóa đơn
             $request->session()->put("tenKhachHangDat", $request->receiptName);
             $request->session()->put("soDienThoaiDat", $request->receiptPhone);
             $request->session()->put("emailDat", $request->receiptEmail);
             $request->session()->put("diaChiDat", $request->receiptAddress);
+            // Nếu là khách hàng đã đăng ký
             if (session()->has('khachHang')) {
                 $id = session()->get('khachHang');
-            } else {
-                $id = 1;
+            }
+            // Nếu là khách vãng lai
+            else {
+                if ($request->get('isNotRegister') == 1) {
+                    # code...
+                    $temp = DB::table('nguoi_dung')->where('emailND', $request->get('receiptEmail'))->first();
+                    if (is_null($temp) == true) {
+                        $customerNew = new UserModel();
+                        $customerNew->tenND = $request->get('receiptName');
+                        $customerNew->emailND = $request->get('receiptEmail');
+                        $customerNew->soDienThoai = $request->get('receiptPhone');
+                        $customerNew->diaChiND = $request->get('receiptAddress');
+                        // $customerNew->matKhauND = Hash::make($request->get('newPassword'));
+                        $customerNew->matKhauND = "";
+                        $customerNew->maCV = DB::table('chuc_vu')->where('tenCV', 'Khách hàng')->first()->maCV;
+                        $customerNew->save();
+                        $temp = DB::table('nguoi_dung')->where('emailND', $request->get('receiptEmail'))->first();
+                        $id = $temp->maND;
+                    } else {
+                        $id = $temp->maND;
+                    }
+                }
+                // Lấy id khách sau khi tạo
+
             }
             $hoaDon = new ReceiptModel();
 
@@ -136,7 +169,6 @@ class ReceiptController extends Controller
             } else if ($request->paymentMethod == "online") {
                 $hoaDon->maPTTT = 2;
             }
-
 
             $hoaDon->maTTHD = 2;
 
@@ -185,15 +217,20 @@ class ReceiptController extends Controller
             $objDemo->sender = 'BKCOM';
             $objDemo->receiver = session()->get('tenKhachHang');
             // $request->session()->put('cartObject');
-            Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
-            \Cart::clear();
 
+            if (session()->get('maillingSession') == 1) {
+                Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
+                session()->put('maillingSession', 0);
+                \Cart::clear();
+            }
             return view('Customer.Receipt.success', [
                 'cartItems' => $cartItems,
             ]);
         }
         // Nếu có lỗi - Báo email hoặc mật khẩu sai
         catch (Exception $e) {
+            echo "error";
+            die();
             return Redirect::back()->with("receiptError", "Thông tin đặt có lỗi");
         }
     }

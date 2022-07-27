@@ -41,8 +41,10 @@
                                             @endforeach
                                             <hr class="border-red">
                                         </div>
+                                        {{-- Nếu là khách vãng lai - Không lấy được thông tin người dùng phù hợp với session --}}
                                         @if (count($listNguoiDung) == 0)
                                             <table class="border-gray width-100">
+                                                <input type="hidden" value="1" name="isNotRegister">
                                                 <tr>
                                                     <td
                                                         class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
@@ -83,6 +85,7 @@
                                         @else
                                             @foreach ($listNguoiDung as $ND)
                                                 <table class="border-gray width-100">
+                                                    <input type="hidden" value="0" name="isNotRegister">
                                                     <tr>
                                                         <td
                                                             class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">

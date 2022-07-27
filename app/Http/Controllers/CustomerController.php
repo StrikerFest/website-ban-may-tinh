@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
@@ -41,41 +42,79 @@ class CustomerController extends Controller
         //
         $request->session()->put('signupError', true);
 
-        $validate = $request->validate([
-            'newName' => 'required|min:3',
-            'newEmail' => 'required|email:rfc,dns',
-            // 'newEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
-            'newAddress' => 'required|min:3',
-            'newPhone' => 'required|min:9|max:13',
-            'newPassword' => 'required|min:5',
-        ],
-        [
-            'newName.required'=>'Bạn cần nhập tên của bạn vào',
-            'newName.min'=>'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
-            'newAddress.required'=>'Bạn cần nhập địa chỉ của bạn vào',
-            'newAddress.min'=>'Dịa chỉ bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
-            'newEmail.required'=>'Bạn cần nhập email của bạn vào',
-            'newEmail.email'=>'Định dạng email sai',
-            'newPhone.required'=>'Bạn cần nhập số điện thoại của bạn vào',
-            'newPhone.min'=>'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
-            'newPhone.max'=>'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
-            'newPassword.required'=>'Bạn cần nhập mật khẩu của bạn vào',
-            'newPassword.min'=>'Mật khẩu của bạn quá ngắn ( Tối thiểu 5 ký tự )',
-        ]);
+        $validate = $request->validate(
+            [
+                'newName' => 'required|min:3',
+                'newEmail' => 'required|email:rfc,dns',
+                // 'newEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+                'newAddress' => 'required|min:3',
+                'newPhone' => 'required|min:9|max:13',
+                'newPassword' => 'required|min:5',
+            ],
+            [
+                'newName.required' => 'Bạn cần nhập tên của bạn vào',
+                'newName.min' => 'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+                'newAddress.required' => 'Bạn cần nhập địa chỉ của bạn vào',
+                'newAddress.min' => 'Dịa chỉ bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+                'newEmail.required' => 'Bạn cần nhập email của bạn vào',
+                'newEmail.email' => 'Định dạng email sai',
+                'newPhone.required' => 'Bạn cần nhập số điện thoại của bạn vào',
+                'newPhone.min' => 'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
+                'newPhone.max' => 'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
+                'newPassword.required' => 'Bạn cần nhập mật khẩu của bạn vào',
+                'newPassword.min' => 'Mật khẩu của bạn quá ngắn ( Tối thiểu 5 ký tự )',
+            ]
+        );
 
         session()->forget('signupError');
 
         $customer = new UserModel();
-        // Lấy các thông tin từ
-        $customer->tenND = $request->get('newName');
-        $customer->emailND = $request->get('newEmail');
-        $customer->soDienThoai = $request->get('newPhone');
-        $customer->diaChiND = $request->get('newAddress');
-        $customer->matKhauND = Hash::make($request->get('newPassword'));
-        $customer->maCV = DB::table('chuc_vu')->where('tenCV', 'Khách hàng')->first()->maCV;
-        // dd($customer->maCV);
-        $customer->save();
 
+        // Validate trùng email - Trường hợp khách vãng lai đã từng mua mà ko đăng ký
+
+        $newEmail = $request->get('newEmail');
+        $userModel = DB::table('nguoi_dung')->where('emailND', $newEmail)->first();
+
+        // Nếu đã có email rồi
+        if (is_null($userModel) == false) {
+            // Nếu email được tạo từ việc đặt đơn chưa đăng ký
+            if ($userModel->matKhauND == '') {
+                $ND = UserModel::find($userModel->maND);
+                echo "BUT THIS ONE IS UNREGIST\n";
+                echo $ND->tenND;
+                // die();
+                $ND->tenND = $request->get(
+                    'newName'
+                );
+                $ND->soDienThoai = $request->get(
+                    'newPhone'
+                );
+                $ND->emailND = $request->get('newEmail');
+                $ND->diaChiND = $request->get('newAddress');
+                $ND->matKhauND = Hash::make($request->get('newPassword'));
+
+                $ND->save();
+            }
+            // Nếu email được tạo từ việc tạo tài khoản
+            else {
+                $request->session()->put('signupError', true);
+                throw ValidationException::withMessages(['newEmail' => 'Email này đã được sử dụng']);
+            }
+        }
+        // Chưa có email trùng
+        else {
+            echo "NO RECORD - CONTINUE TO CREATE NEW ONE";
+            // die();
+            // Lấy các thông tin từ
+            $customer->tenND = $request->get('newName');
+            $customer->emailND = $request->get('newEmail');
+            $customer->soDienThoai = $request->get('newPhone');
+            $customer->diaChiND = $request->get('newAddress');
+            $customer->matKhauND = Hash::make($request->get('newPassword'));
+            $customer->maCV = DB::table('chuc_vu')->where('tenCV', 'Khách hàng')->first()->maCV;
+            // dd($customer->maCV);
+            $customer->save();
+        }
         // Quay về danh sách Admin
         return Redirect::route('product.index')->with(
             "success",
@@ -116,22 +155,23 @@ class CustomerController extends Controller
     {
         //
         $request->session()->put('profileError', "Thông tin nhập mới có lỗi, mời bạn thử lại");
-        $validate = $request->validate([
-            'updateName' => 'required|min:3',
-            // 'updateEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
-            'updateEmail' => 'required|email:rfc,dns',
-            'updatePhone' => 'required|min:9|max:13',
-        ],
-        [
-            'updateName.required'=>'Bạn cần nhập tên của bạn vào',
-            'updateName.min'=>'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
-            'updateEmail.required'=>'Bạn cần nhập email của bạn vào',
-            'updateEmail.email'=>'Định dạng email sai',
-            'updatePhone.required'=>'Bạn cần nhập số điện thoại của bạn vào',
-            'updatePhone.min'=>'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
-            'updatePhone.max'=>'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
-        ]
-    );
+        $validate = $request->validate(
+            [
+                'updateName' => 'required|min:3',
+                // 'updateEmail' => 'required|email:rfc,dns|unique:App\Models\UserModel,emailND',
+                'updateEmail' => 'required|email:rfc,dns',
+                'updatePhone' => 'required|min:9|max:13',
+            ],
+            [
+                'updateName.required' => 'Bạn cần nhập tên của bạn vào',
+                'updateName.min' => 'Tên bạn nhập quá ngắn ( Tối thiểu 3 ký tự )',
+                'updateEmail.required' => 'Bạn cần nhập email của bạn vào',
+                'updateEmail.email' => 'Định dạng email sai',
+                'updatePhone.required' => 'Bạn cần nhập số điện thoại của bạn vào',
+                'updatePhone.min' => 'Số điện thoại bạn nhập quá ngắn ( Tối thiểu 9 ký tự )',
+                'updatePhone.max' => 'Số điện thoại bạn nhập quá dài ( Tối đa 13 ký tự )',
+            ]
+        );
         session()->forget('profileError');
 
         // $validated = $request->validate([]);
