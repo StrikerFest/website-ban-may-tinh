@@ -51,6 +51,7 @@ class AdminSerialController extends Controller
         $searchName = $request->get('searchName');
         $searchStatus = $request->get('searchStatus');
         $searchReceipt = $request->get('searchReceipt');
+        $searchImport = $request->get('searchImport');
 
         if($searchReceipt){
             switch($searchStatus){
@@ -61,6 +62,7 @@ class AdminSerialController extends Controller
                         ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
                         ->where('serial.maSP', $maSP)
                         ->where('serial', 'like', "%$searchName%")
+                        ->where('maNK', 'like', "%$searchImport%")
                         ->where('hoa_don.maHD', 'like', "%$searchReceipt%")
                         ->whereNotNull('serial.maHDCT')
                         ->orderBy('maHDCT', 'ASC')
@@ -70,6 +72,7 @@ class AdminSerialController extends Controller
                             'searchName' => $searchName,
                             'searchStatus' => $searchStatus,
                             'searchReceipt' => $searchReceipt,
+                            'searchImport' => $searchImport,
                         ]);
                     break;
                 case 2:
@@ -79,6 +82,7 @@ class AdminSerialController extends Controller
                         ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
                         ->where('serial.maSP', $maSP)
                         ->where('serial', 'like', "%$searchName%")
+                        ->where('maNK', 'like', "%$searchImport%")
                         ->where('hoa_don.maHD', 'like', "%$searchReceipt%")
                         ->whereNull('serial.maHDCT')
                         ->orderBy('maHDCT', 'ASC')
@@ -88,6 +92,7 @@ class AdminSerialController extends Controller
                             'searchName' => $searchName,
                             'searchStatus' => $searchStatus,
                             'searchReceipt' => $searchReceipt,
+                            'searchImport' => $searchImport,
                         ]);
                     break;
                 default:
@@ -97,6 +102,7 @@ class AdminSerialController extends Controller
                         ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
                         ->where('serial.maSP', $maSP)
                         ->where('serial', 'like', "%$searchName%")
+                        ->where('maNK', 'like', "%$searchImport%")
                         ->where('hoa_don.maHD', 'like', "%$searchReceipt%")
                         ->orderBy('maHDCT', 'ASC')
                         ->orderBy('maSerial', 'ASC')
@@ -105,6 +111,7 @@ class AdminSerialController extends Controller
                             'searchName' => $searchName,
                             'searchStatus' => $searchStatus,
                             'searchReceipt' => $searchReceipt,
+                            'searchImport' => $searchImport,
                         ]);
                     break;
             }
@@ -117,6 +124,7 @@ class AdminSerialController extends Controller
                         ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
                         ->where('serial.maSP', $maSP)
                         ->where('serial', 'like', "%$searchName%")
+                        ->where('maNK', 'like', "%$searchImport%")
                         ->whereNotNull('serial.maHDCT')
                         ->orderBy('maHDCT', 'ASC')
                         ->orderBy('maSerial', 'ASC')
@@ -125,6 +133,7 @@ class AdminSerialController extends Controller
                             'searchName' => $searchName,
                             'searchStatus' => $searchStatus,
                             'searchReceipt' => $searchReceipt,
+                            'searchImport' => $searchImport,
                         ]);
                     break;
                 case 2:
@@ -134,6 +143,7 @@ class AdminSerialController extends Controller
                         ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
                         ->where('serial.maSP', $maSP)
                         ->where('serial', 'like', "%$searchName%")
+                        ->where('maNK', 'like', "%$searchImport%")
                         ->whereNull('serial.maHDCT')
                         ->orderBy('maHDCT', 'ASC')
                         ->orderBy('maSerial', 'ASC')
@@ -142,6 +152,7 @@ class AdminSerialController extends Controller
                             'searchName' => $searchName,
                             'searchStatus' => $searchStatus,
                             'searchReceipt' => $searchReceipt,
+                            'searchImport' => $searchImport,
                         ]);
                     break;
                 default:
@@ -151,6 +162,7 @@ class AdminSerialController extends Controller
                         ->leftJoin('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
                         ->where('serial.maSP', $maSP)
                         ->where('serial', 'like', "%$searchName%")
+                        ->where('maNK', 'like', "%$searchImport%")
                         ->orderBy('maHDCT', 'ASC')
                         ->orderBy('maSerial', 'ASC')
                         ->paginate(10)
@@ -158,6 +170,7 @@ class AdminSerialController extends Controller
                             'searchName' => $searchName,
                             'searchStatus' => $searchStatus,
                             'searchReceipt' => $searchReceipt,
+                            'searchImport' => $searchImport,
                         ]);
                     break;
             }
@@ -171,6 +184,7 @@ class AdminSerialController extends Controller
             'searchName' => $searchName,
             'searchStatus' => $searchStatus,
             'searchReceipt' => $searchReceipt,
+            'searchImport' => $searchImport,
         ]);
     }
 

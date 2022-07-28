@@ -3,7 +3,7 @@
     style="background-color: rgba(20, 20, 20, 0.95)  !important" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center sidenav-text side" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center sidenav-text side" href="javascript: window.location.href=window.location.origin">
         <div class="sidebar-brand-icon rotate-n-15 sidenav-header">
             <i class="fas fa-laptop-code"></i>
         </div>

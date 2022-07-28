@@ -22,13 +22,13 @@
                 <form action="{{route('blogCustomer.show',$LB->maBV)}}">
                     <div class="row padding-5">
                         <div class="col-md-3 ">
-                            <img style="height: 200px;width: auto;"
+                            <img style="height: 200px;width: 300px;"
                                 src="{{ asset('assets/img/' . $LB->anh) }}" class="w-20 rounded"
                                 alt="Thumbnail">
                         </div>
                         <div class="col-md-9 ">
                             <h1 onClick="javascript:this.form.submit();" class="bg-danger text-light padding-5 rounded">{{$LB->tieuDe}}</h1>
-                            <h5>{{ substr($LB->noiDung, 0, 350) . '...'}}</h5>
+                            <!-- <h5>{{ substr($LB->noiDung, 0, 350) . '...'}}</h5> -->
                             <button class="btn btn-danger">
                                 Xem thêm
                             </button>

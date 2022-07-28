@@ -93,7 +93,7 @@ class AdminImportController extends Controller
             'maSP' => 'required',
             'soLuong.*' => 'required|numeric|min:1',
             'giaNhap.*' => 'required|numeric|min:0',
-            'serial.*' => 'required',
+            'serial.*' => 'required|regex:/^(\w+,?)*(\w+)$/',
         ]);
         //Check số lượng mã serial
         // dd(explode(',', $request->serial[0]), DB::table('serial')->first()->serial);

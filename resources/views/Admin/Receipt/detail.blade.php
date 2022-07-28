@@ -31,6 +31,7 @@
                                         <th>Khách hàng</th>
                                         <th>Số điện thoại</th>
                                         <th>Ngày tạo</th>
+                                        <th colspan="2">Voucher</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -45,6 +46,18 @@
                                         <td>
                                             {{$hoaDon->ngayTao}}
                                         </td>
+                                        <?php if($hoaDon->tenVoucher){ ?>
+                                            <td>
+                                                {{$hoaDon->tenVoucher}}
+                                            </td>
+                                            <td>
+                                                {{$hoaDon->moTa}}
+                                            </td>
+                                        <?php }else{ ?>
+                                            <td>
+                                                Không có voucher
+                                            </td>
+                                        <?php } ?>
                                     </tr>
                                 </table>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -52,9 +65,12 @@
                                         <tr>
                                             <th>Tên sản phẩm</th>
                                             <th>Số lượng</th>
+                                            <?php if($hoaDon->maTTHD != 2){ ?>
+                                                <th>Mã serial</th>     
+                                            <?php } ?>
                                             <th>Giá</th>
                                             <th>Giảm giá</th>
-                                            <th colspan="2">Thành tiền</th>
+                                            <th colspan="2">Tổng tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -66,25 +82,44 @@
                                             <td>
                                                 {{$HDCT->soLuong}}
                                             </td>
+                                            <?php if($hoaDon->maTTHD != 2){ ?>
+                                                <td>
+                                                    <form action="{{route('serial.show', $HDCT->maSP)}}" method="get">
+                                                        @csrf
+                                                        <input type="hidden" name="searchReceipt" value="{{$hoaDon->maHD}}" />
+                                                        <button class="btn btn-info">
+                                                            Xem
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            <?php } ?>
                                             <td>{{number_format($HDCT->giaSP)}} VND</td>
                                             <td>{{$HDCT->giamGia}}%</td>
                                             <td colspan="2">
-                                                {{number_format($HDCT->thanhTien)}} VND
+                                                {{number_format($HDCT->tongTien)}} VND
                                             </td>
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td colspan="4">
-                                                Tổng tiền
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 4 : 5) ?>">
+                                                Mã voucher giảm
                                             </td>
                                             <td colspan="2">
-                                                {{number_format($tongTien->tong)}} VND
+                                                {{number_format($thanhTien->voucher)}} VND
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 4 : 5) ?>">
+                                                Thành tiền
+                                            </td>
+                                            <td colspan="2">
+                                                {{number_format($thanhTien->tong)}} VND
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="4">
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 4 : 5) ?>">
                                                 <?php 
                                                     if($hoaDon->maTTHD == 2){
                                                         echo('Duyệt đơn');

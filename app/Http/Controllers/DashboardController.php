@@ -16,20 +16,48 @@ class DashboardController extends Controller
 
         //Doanh thu theo tháng
         $doanhThuThang = DB::select("
-        SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuThang
-        FROM hoa_don_chi_tiet
-        JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-        WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-        AND hoa_don.maTTHD = 1
+        SELECT SUM(doanhThuThang) as doanhThuThang FROM
+            (SELECT 
+            IF(
+                maTLV = 1,
+                (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri),
+                IF(
+                    maTLV = 2,
+                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) 
+                    - 
+                    ((SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong)) * giaTri / 100)),
+                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong))
+                )
+            ) AS doanhThuThang
+            FROM hoa_don_chi_tiet
+            JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+            LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
+            WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
+            AND hoa_don.maTTHD = 1
+            GROUP BY hoa_don.maHD) AS x
         ")[0]->doanhThuThang;
         
         //Doanh thu theo năm
         $doanhThuNam = DB::select("
-        SELECT SUM((giaSP - (giaSP * giamGia / 100)) * soLuong) AS doanhThuNam
-        FROM hoa_don_chi_tiet
-        JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-        WHERE YEAR(hoa_don.ngayTao) = $namHienTai
-        AND hoa_don.maTTHD = 1
+        SELECT SUM(doanhThuNam) as doanhThuNam FROM
+            (SELECT 
+            IF(
+                maTLV = 1,
+                (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri),
+                IF(
+                    maTLV = 2,
+                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) 
+                    - 
+                    ((SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong)) * giaTri / 100)),
+                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong))
+                )
+            ) AS doanhThuNam
+            FROM hoa_don_chi_tiet
+            JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+            LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
+            WHERE YEAR(hoa_don.ngayTao) = $namHienTai
+            AND hoa_don.maTTHD = 1
+            GROUP BY hoa_don.maHD) AS x
         ")[0]->doanhThuNam;
 
         //Tiền lãi theo tháng
@@ -40,7 +68,7 @@ class DashboardController extends Controller
         JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
         JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
         JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-        WHERE MONTH(hoa_don.ngayTao) = $thangHienTai
+        WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
         ")[0]->tienLaiThang;
         
         //Tiền lãi theo năm

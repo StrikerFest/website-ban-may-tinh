@@ -27,13 +27,16 @@
                                     <h6>Bộ lọc</h6>
                                     <form method="get">
                                         <div class="row">
-                                            <div class="col-sm-3">
-                                                <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập mã serial">
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Mã serial">
                                             </div>
-                                            <div class="col-sm-3">
-                                                <input class="form-control" type="number" name="searchReceipt" value="{{$searchReceipt}}" placeholder="Nhập mã hoá đơn">
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="number" name="searchReceipt" value="{{$searchReceipt}}" placeholder="Mã hoá đơn">
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="number" name="searchImport" value="{{$searchImport}}" placeholder="Mã đơn nhập hàng">
+                                            </div>
+                                            <div class="col-sm-2">
                                                 <select class="form-control" name="searchStatus" value="{{$searchStatus}}">
                                                     <option value="">Tình trạng</option>
                                                     <option value="1" <?php if($searchStatus == 1)echo "selected" ?>>Đã bán</option>
