@@ -69,6 +69,7 @@ class DashboardController extends Controller
         JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
         JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
         WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
+        AND hoa_don.maTTHD = 1
         ")[0]->tienLaiThang;
         
         //Tiền lãi theo năm
@@ -80,7 +81,28 @@ class DashboardController extends Controller
         JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
         JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
         WHERE Year(hoa_don.ngayTao) = $namHienTai
+        AND hoa_don.maTTHD = 1
         ")[0]->tienLaiNam;
+
+        //Số lượng voucher được áp dụng
+        $soLuongVoucherApDung = DB::table('nguoi_dung_voucher')->where('suDung', 1)->count();
+        
+        //Số tiền giảm giá từ voucher
+        $soTienGiamVoucher = DB::table('hoa_don')->sum('tongTienGiam');
+
+        //Số tặng phẩm được tặng
+        $soLuongTangPham = DB::table('nguoi_dung_voucher')
+            ->join('voucher', 'voucher.maVoucher', '=', 'nguoi_dung_voucher.maVoucher')
+            ->where('maTLV', 3)
+            ->where('suDung', 1)
+            ->count();
+        
+        //Tổng giá trị của tặng phẩm
+        $giaTriTangPham = DB::table('nguoi_dung_voucher')
+            ->join('voucher', 'voucher.maVoucher', '=', 'nguoi_dung_voucher.maVoucher')
+            ->leftJoin('san_pham', 'san_pham.maSP', '=', 'voucher.maSP')
+            ->where('maTLV', 3)
+            ->sum('giaSP');
 
         // //Doanh thu theo tháng (dự kiến)
         // $doanhThuThangDuKien = DB::select("
@@ -257,8 +279,7 @@ class DashboardController extends Controller
             $danhMucCon[] = (object) ['maDM' => $maDMC[$i], 'name' => $tenDMC[$i], 'y'=> $tiLeDMC[$i]];
         }
 
-        $listDanhMucCon = DB::table('the_loai_con')->get();
-
+        $listDanhMucCon = DB::table('the_loai_con')->where('tenTLC', 'not like', '%Tặng phẩm%')->get();
         $listNamTheoHoaDon = DB::select("
             SELECT DISTINCT YEAR(ngayTao) AS nam FROM hoa_don ORDER BY nam DESC
         ");
@@ -271,6 +292,10 @@ class DashboardController extends Controller
                 'doanhThuNam' => $doanhThuNam,
                 'tienLaiThang' => $tienLaiThang,
                 'tienLaiNam' => $tienLaiNam,
+                'soLuongVoucherApDung' => $soLuongVoucherApDung,
+                'soTienGiamVoucher' => $soTienGiamVoucher,
+                'soLuongTangPham' => $soLuongTangPham,
+                'giaTriTangPham' => $giaTriTangPham,
                 // 'doanhThuThangDuKien' => $doanhThuThangDuKien,
                 // 'doanhThuNamDuKien' => $doanhThuNamDuKien,
                 'tongSanPhamNhapThang' => $tongSanPhamNhapThang,

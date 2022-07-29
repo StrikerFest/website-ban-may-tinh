@@ -51,7 +51,15 @@
                                                 {{$hoaDon->tenVoucher}}
                                             </td>
                                             <td>
-                                                {{$hoaDon->moTa}}
+                                                <?php 
+                                                    if($hoaDon->maTLV == 1){
+                                                        echo 'Voucher giảm '.number_format($hoaDon->giaTri) .' vnđ';
+                                                    }else if($hoaDon->maTLV == 2){
+                                                        echo 'Voucher giảm ' .$hoaDon->giaTri .'%';
+                                                    }else{
+                                                        echo 'Tặng sản phẩm '.$hoaDon->tenSP;
+                                                    }
+                                                ?>
                                             </td>
                                         <?php }else{ ?>
                                             <td>
@@ -65,7 +73,7 @@
                                         <tr>
                                             <th>Tên sản phẩm</th>
                                             <th>Số lượng</th>
-                                            <?php if($hoaDon->maTTHD != 2){ ?>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
                                                 <th>Mã serial</th>     
                                             <?php } ?>
                                             <th>Giá</th>
@@ -82,7 +90,7 @@
                                             <td>
                                                 {{$HDCT->soLuong}}
                                             </td>
-                                            <?php if($hoaDon->maTTHD != 2){ ?>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
                                                 <td>
                                                     <form action="{{route('serial.show', $HDCT->maSP)}}" method="get">
                                                         @csrf
@@ -134,6 +142,8 @@
                                                         @method('PUT')
                                                         @csrf
                                                         <input type="hidden" name="maTTHD" value="1">
+                                                        <input type="hidden" name="maVoucher" value="{{$hoaDon->maVoucher}}">
+                                                        <input type="hidden" name="giaTri" value="{{$thanhTien->voucher}}">
                                                         <button class="btn btn-success" onclick="return confirm('Xác nhận duyệt đơn?')">
                                                             Duyệt
                                                         </button>

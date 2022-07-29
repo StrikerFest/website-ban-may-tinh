@@ -10,6 +10,7 @@ use App\Models\UserModel;
 use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
 use App\Models\SerialModel;
+use App\Models\UserVoucherModel;
 use DB;
 
 
@@ -109,6 +110,7 @@ class AdminReceiptController extends Controller
 
         $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')
             ->leftJoin('voucher', 'voucher.maVoucher', '=', 'hoa_don.maVoucher')
+            ->leftJoin('san_pham', 'san_pham.maSP', '=', 'voucher.maSP')
             ->find($id);
         
         $tinhTrangHoaDon = ReceiptStatusModel::all();
@@ -188,9 +190,28 @@ class AdminReceiptController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $voucher = DB::table('voucher')
+            ->where('maVoucher', $request->get('maVoucher'))
+            ->leftJoin('san_pham', 'voucher.maSP', '=', 'san_pham.maSP')
+            ->first();
         $hoaDon = ReceiptModel::find($id);
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
+        $hoaDon->tongTienGiam = $request->get('giaTri');
+        if(!is_null($voucher)){
+            if($voucher->maTLV == 3){
+                //Nếu voucher tặng phẩm -> hoá đơn có trường ghi chú
+                $hoaDon->ghiChu = "Tặng sản phẩm: ".$voucher->tenSP;
+            }
+            $voucherNguoiDung = UserVoucherModel::where('maND', $hoaDon->maKH)
+            ->where('maVoucher', $voucher->maVoucher)
+            ->first();
+            if(!is_null($voucherNguoiDung)){
+                    //Bảng nguoi_dung_voucher suDung = 1 -> voucher đã sử dụng, suDung = 0 -> voucher chưa sử dụng
+                    $voucherNguoiDung->suDung = 1;
+                    $voucherNguoiDung->update();
+                }
+        }
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
         //kiểm tra số lượng sản phẩm
         if($request->get('maTTHD') == 1){

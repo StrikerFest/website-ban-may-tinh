@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('maVoucher');
             $table->foreign('maVoucher')->references('maVoucher')->on('voucher');
             $table->unique(['maND', 'maVoucher']);
+            $table->boolean('suDung');
         });
     }
 
