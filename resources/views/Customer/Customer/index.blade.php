@@ -2898,6 +2898,11 @@
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
     <script>
+        <?php if(session()->has('unknownError')){ ?>
+            alert('{{session()->get('unknownError')}}')
+        <?php } ?>
+    </script>
+    <script>
         // const toolbox = document.getElementById('product-test');
         // const hoverObject = document.getElementsByClassName('product-item');
         // toolbox.style.display = "none";
