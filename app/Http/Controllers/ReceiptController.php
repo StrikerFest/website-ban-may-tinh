@@ -76,8 +76,7 @@ class ReceiptController extends Controller
         //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
         // }
         $cartItems = \Cart::getContent();
-        $listNguoiDung =
-            DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
+        $listNguoiDung = DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
         // echo $listNguoiDung;
         // echo session()->has('khachHang');
         // die();

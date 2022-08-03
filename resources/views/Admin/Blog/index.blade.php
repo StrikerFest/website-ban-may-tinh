@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.tiny.cloud/1/13dhm7ievvt2m5zqgf71jpj7kzxx89vu8bh22bhcrh5717n8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     @include("Admin.Layout.Common.meta")
-    <script src="https://cdn.tiny.cloud/1/13dhm7ievvt2m5zqgf71jpj7kzxx89vu8bh22bhcrh5717n8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
     <!-- Page Wrapper -->
@@ -187,7 +188,7 @@
                                         @error('noiDung')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <textarea class="form-control" name="noiDung" rows="5" placeholder="Content"></textarea>
+                                        <textarea id="abc" class="form-control" name="noiDung" rows="5" placeholder="Content"></textarea>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">
@@ -207,13 +208,10 @@
 
     <script>
     tinymce.init({
-      selector: 'textarea',
-      plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
+        selector: 'textarea#abc',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak table',
+        toolbar_mode: 'floating',
     });
-    </script>
+  </script>
 </body>
 </html>

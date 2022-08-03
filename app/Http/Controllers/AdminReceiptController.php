@@ -10,6 +10,7 @@ use App\Models\UserModel;
 use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
 use App\Models\SerialModel;
+use App\Models\UserVoucherModel;
 use DB;
 
 
@@ -107,33 +108,62 @@ class AdminReceiptController extends Controller
     {
         $sanPham = ProductModel::all();
 
-        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
+        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')
+            ->leftJoin('voucher', 'voucher.maVoucher', '=', 'hoa_don.maVoucher')
+            ->leftJoin('san_pham', 'san_pham.maSP', '=', 'voucher.maSP')
+            ->find($id);
         
         $tinhTrangHoaDon = ReceiptStatusModel::all();
 
         $hoaDonChiTiet = DB::select("
             SELECT 
                 san_pham.tenSP,
+                san_pham.maSP,
                 hoa_don_chi_tiet.giamGia,
                 hoa_don_chi_tiet.soLuong,
                 hoa_don_chi_tiet.giaSP,
-                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS thanhTien
+                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS tongTien
                 FROM hoa_don_chi_tiet
                 JOIN san_pham
                 ON hoa_don_chi_tiet.maSP = san_pham.maSP
                 WHERE hoa_don_chi_tiet.maHD = $id
         ");
-        $tongTien = DB::select("
-        SELECT
-            sum((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) as tong
-            FROM hoa_don_chi_tiet
-            JOIN san_pham
-            ON hoa_don_chi_tiet.maSP = san_pham.maSP
-            WHERE hoa_don_chi_tiet.maHD = $id
+
+        $thanhTien = DB::select("
+            SELECT
+                SUM(
+                    IF(
+                        maTLV = 1,
+                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri,
+                        IF(
+                            maTLV = 2,
+                            ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong)
+                            -
+                            (
+                                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) * giaTri / 100
+                            ),
+                            ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong)
+                        )
+                    )
+                ) AS tong,
+                IF(
+                    maTLV = 1,
+                    giaTri,
+                    IF(
+                        maTLV = 2,
+                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) * giaTri / 100,
+                        0
+                    )
+                )AS voucher
+                FROM hoa_don_chi_tiet
+                JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+                LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
+                WHERE hoa_don_chi_tiet.maHD = $id
         ")[0];
-        
+        // dd($thanhTien);
         return view('Admin.Receipt.detail', [
-            'tongTien' => $tongTien,
+            'thanhTien' => $thanhTien,
             'hoaDon' => $hoaDon,
             'hoaDonChiTiet' => $hoaDonChiTiet,
             'tinhTrangHoaDon' => $tinhTrangHoaDon,
@@ -160,9 +190,28 @@ class AdminReceiptController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $voucher = DB::table('voucher')
+            ->where('maVoucher', $request->get('maVoucher'))
+            ->leftJoin('san_pham', 'voucher.maSP', '=', 'san_pham.maSP')
+            ->first();
         $hoaDon = ReceiptModel::find($id);
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
+        $hoaDon->tongTienGiam = $request->get('giaTri');
+        if(!is_null($voucher)){
+            if($voucher->maTLV == 3){
+                //Nếu voucher tặng phẩm -> hoá đơn có trường ghi chú
+                $hoaDon->ghiChu = "Tặng sản phẩm: ".$voucher->tenSP;
+            }
+            $voucherNguoiDung = UserVoucherModel::where('maND', $hoaDon->maKH)
+            ->where('maVoucher', $voucher->maVoucher)
+            ->first();
+            if(!is_null($voucherNguoiDung)){
+                    //Bảng nguoi_dung_voucher suDung = 1 -> voucher đã sử dụng, suDung = 0 -> voucher chưa sử dụng
+                    $voucherNguoiDung->suDung = 1;
+                    $voucherNguoiDung->update();
+                }
+        }
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
         //kiểm tra số lượng sản phẩm
         if($request->get('maTTHD') == 1){

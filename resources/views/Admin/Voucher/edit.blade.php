@@ -147,6 +147,7 @@
                 //Tặng phẩm
                 $('#dynamic-div').css({display: 'block'})
                 $('span.select2').css({width: '100%'})
+                $('#giaTri').attr({placeholder: 'Value', readonly: true})
             }
 
             //Chọn tặng phẩm sẽ tự động điền vào trường giá trị

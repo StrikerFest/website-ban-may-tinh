@@ -48,6 +48,7 @@
                                         <tr>
                                             <th>Tên sản phẩm</th>
                                             <th>Số lượng</th>
+                                            <th>Mã serial</th>
                                             <th>Giá</th>
                                             <th colspan="2">Thành tiền</th>
                                         </tr>
@@ -67,6 +68,15 @@
                                             <td>
                                                 {{$NKCT->soLuong}}
                                             </td>
+                                            <td>
+                                                <form action="{{route('serial.show', $NKCT->maSP)}}" method="get">
+                                                    @csrf
+                                                    <input type="hidden" name="searchImport" value="{{$nhapKho->maNK}}" />
+                                                    <button class="btn btn-info">
+                                                        Xem
+                                                    </button>
+                                                </form>
+                                            </td>
                                             <td>{{number_format($NKCT->giaNhap)}} VND</td>
                                             <td colspan="2">
                                                 {{number_format($NKCT->giaNhap * $NKCT->soLuong)}} VND
@@ -74,7 +84,7 @@
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 Tổng tiền
                                             </td>
                                             <td colspan="1">

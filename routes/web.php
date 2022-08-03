@@ -50,7 +50,7 @@ use App\Http\Controllers\MoneyCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\SearchController;
-use App\Models\BlogCommentModel;
+use App\Http\Controllers\OnlinePaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -190,3 +190,6 @@ Route::post('cart-go', [CartController::class, 'addToCart'])->name('cart.store')
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+
+Route::post('momoPay', [OnlinePaymentController::class, 'momoPay'])->name('onlinePayment.momo');
+Route::get('onlinePayment/process', [OnlinePaymentController::class, 'process'])->name('onlinePayment.process');

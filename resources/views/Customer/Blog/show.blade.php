@@ -44,7 +44,7 @@
                 {{-- Hết - Hình ảnh --}}
 
                 {{-- Nội dung --}}
-                <div class="row " style="padding-top: 5%">
+                <div class="row " style="padding-top: 5%; justify-content: center; word-break: break-word">
                     <div class="md-col-12" style="padding: 0px 5%;">
                         <p style="font-size: 1.2rem;text-justify: distribute-all-lines">
                             <?php

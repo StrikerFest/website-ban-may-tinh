@@ -220,7 +220,7 @@
                                                     <li>Vệ sinh máy tính miễn phi trọn đời</li>
                                                 </ul>
                                             </div>
-
+                                            
                                         </div>
                                     </div>
                                     {{-- Hết - Yên tâm khi mua hàng --}}
@@ -236,6 +236,22 @@
                                         </div>
                                     </div>
                                     {{-- Hết - Nút mua --}}
+                    </form>
+                                    {{-- Thanh toán momo --}}
+                                    <form style="margin-bottom: 0;" action="{{ route('onlinePayment.momo') }}" method="post" enctype="application/x-www-form-urlencoded">
+                                        @csrf
+                                        <div class="padding-top-5">
+                                            <div class=" border-radius-25 ">
+                                                <input type="hidden" value="{{Cart::getTotal()}}" name="tongTien">
+                                                <button class="btn btn-danger width-100 padding-10">
+                                                    <span class="text-bold text-large">Thanh toán bằng momo</span>
+                                                    <br>
+                                                    <span class="text-normal">Giao hàng nhanh chóng</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {{-- Hết - Thanh toán momo --}}
 
                                     {{-- Quay về trang chủ --}}
                                     <a href="javascript:history.back()">
@@ -268,7 +284,6 @@
                                 {{-- Hết - Thông tin bên cánh phải --}}
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
             <!-- /.container-fluid -->
@@ -277,6 +292,11 @@
 
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
+    <script>
+        <?php if(session()->has('momoCancel')){ ?>
+            alert('{{session()->get('momoCancel')}}')
+        <?php } ?>
+    </script>
 </body>
 
 </html>
