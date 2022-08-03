@@ -20,6 +20,7 @@
                     {{-- if (session()->has('khachHang')) { --}}
                     <form action="{{ route('receiptCustomer.store') }}" method="POST">
                         @csrf
+                        <input type="hidden" value="{{ Cart::getTotal() }}" name="tongTien">
                         <div class="grid width-100 text-dark">
                             <div class="row">
                                 {{-- Form mua hàng --}}
@@ -143,9 +144,8 @@
                                             nhận hàng (
                                             tiền mặt/ quẹt thẻ ATM)
                                             <br>
-                                            <input type="radio" name="paymentMethod" value="online"> Chuyển khoản qua
-                                            ngân
-                                            hàng
+                                            <input type="radio" name="paymentMethod" value="online"> Thanh toán bằng
+                                            Momo
                                         </div>
                                         <div>
                                             <table class="w-full text-sm lg:text-base border-radius-10" cellspacing="0">
@@ -220,7 +220,7 @@
                                                     <li>Vệ sinh máy tính miễn phi trọn đời</li>
                                                 </ul>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     {{-- Hết - Yên tâm khi mua hàng --}}
@@ -228,8 +228,20 @@
                                     {{-- Nút mua --}}
                                     <div class="padding-top-5">
                                         <div class=" border-radius-25 ">
-                                            <button class="btn btn-danger width-100 padding-10">
+                                            <button type="submit" name="COD" value="COD"
+                                                class="btn btn-danger width-100 padding-10">
                                                 <span class="text-bold text-large">Đặt mua ngay</span>
+                                                <br>
+                                                <span class="text-normal">Giao hàng nhanh chóng</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="padding-top-5">
+                                        <div class=" border-radius-25 ">
+                                            <button type="submit" name="momo" value="momo"
+                                                class="btn btn-danger width-100 padding-10">
+                                                <span class="text-bold text-large">Thanh toán bằng ví momo</span>
                                                 <br>
                                                 <span class="text-normal">Giao hàng nhanh chóng</span>
                                             </button>
@@ -237,64 +249,65 @@
                                     </div>
                                     {{-- Hết - Nút mua --}}
                     </form>
-                                    {{-- Thanh toán momo --}}
-                                    <form style="margin-bottom: 0;" action="{{ route('onlinePayment.momo') }}" method="post" enctype="application/x-www-form-urlencoded">
-                                        @csrf
-                                        <div class="padding-top-5">
-                                            <div class=" border-radius-25 ">
-                                                <input type="hidden" value="{{Cart::getTotal()}}" name="tongTien">
-                                                <button class="btn btn-danger width-100 padding-10">
-                                                    <span class="text-bold text-large">Thanh toán bằng momo</span>
-                                                    <br>
-                                                    <span class="text-normal">Giao hàng nhanh chóng</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    {{-- Hết - Thanh toán momo --}}
-
-                                    {{-- Quay về trang chủ --}}
-                                    <a href="javascript:history.back()">
-                                        <div class="padding-top-5">
-                                            <div class=" border-radius-25 ">
-                                                <button class="btn btn-warning width-100 padding-10" type="button">
-                                                    <span class="text-bold text-large">Quay về giỏ hàng</span>
-                                                    <br>
-                                                    <span class="text-normal">Kiểm tra sản phẩm</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    {{-- Hết - Quay về trang chủ --}}
-
-                                    {{-- Quay về giỏ hàng --}}
-                                    <a href="{{ route('product.index') }}">
-                                        <div class="padding-top-5">
-                                            <div class=" border-radius-25 ">
-                                                <button class="btn btn-primary width-100 padding-10" type="button">
-                                                    <span class="text-bold text-large">Quay về trang chủ</span>
-                                                    <br>
-                                                    <span class="text-normal">Chọn thêm sản phẩm</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    {{-- Hết - Quay về giỏ hàng --}}
-                                </div>
-                                {{-- Hết - Thông tin bên cánh phải --}}
+                    {{-- Thanh toán momo --}}
+                    {{-- <form style="margin-bottom: 0;" action="{{ route('onlinePayment.momo') }}" method="post"
+                        enctype="application/x-www-form-urlencoded">
+                        @csrf
+                        <div class="padding-top-5">
+                            <div class=" border-radius-25 ">
+                                <input type="hidden" value="{{ Cart::getTotal() }}" name="tongTien">
+                                <button class="btn btn-danger width-100 padding-10">
+                                    <span class="text-bold text-large">Thanh toán bằng momo</span>
+                                    <br>
+                                    <span class="text-normal">Giao hàng nhanh chóng</span>
+                                </button>
                             </div>
                         </div>
+                    </form> --}}
+                    {{-- Hết - Thanh toán momo --}}
+
+                    {{-- Quay về trang chủ --}}
+                    <a href="javascript:history.back()">
+                        <div class="padding-top-5">
+                            <div class=" border-radius-25 ">
+                                <button class="btn btn-warning width-100 padding-10" type="button">
+                                    <span class="text-bold text-large">Quay về giỏ hàng</span>
+                                    <br>
+                                    <span class="text-normal">Kiểm tra sản phẩm</span>
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                    {{-- Hết - Quay về trang chủ --}}
+
+                    {{-- Quay về giỏ hàng --}}
+                    <a href="{{ route('product.index') }}">
+                        <div class="padding-top-5">
+                            <div class=" border-radius-25 ">
+                                <button class="btn btn-primary width-100 padding-10" type="button">
+                                    <span class="text-bold text-large">Quay về trang chủ</span>
+                                    <br>
+                                    <span class="text-normal">Chọn thêm sản phẩm</span>
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                    {{-- Hết - Quay về giỏ hàng --}}
                 </div>
+                {{-- Hết - Thông tin bên cánh phải --}}
             </div>
-            <!-- /.container-fluid -->
         </div>
+    </div>
+    </div>
+    <!-- /.container-fluid -->
+    </div>
     </div>
 
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
     <script>
         <?php if(session()->has('momoCancel')){ ?>
-            alert('{{session()->get('momoCancel')}}')
+        alert('{{ session()->get('momoCancel') }}')
         <?php } ?>
     </script>
 </body>

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DemoEmail;
+use App\Models\DetailReceiptModel;
+use App\Models\ReceiptModel;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class OnlinePaymentController extends Controller
 {
@@ -70,8 +75,9 @@ class OnlinePaymentController extends Controller
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
         // dd($jsonResult);
-
-        return redirect()->to($jsonResult['payUrl']);
+        $returned_val = $jsonResult['payUrl'];
+        return redirect()->to($returned_val);
+        // return Redirect($this->$jsonResult['payUrl']);
     }
 
     public function process(Request $request)
@@ -103,10 +109,53 @@ class OnlinePaymentController extends Controller
             $partnerSignature = hash_hmac("sha256", $rawHash, 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa');
 
             if ($m2signature == $partnerSignature) {
-                if ($resultCode == '0') {
+                if ($resultCode !== '0') {
                     //Giao dịch thành công
+                    // \Cart::clear();
+                    if (session()->has('khachHang')) {
+                        $id = session()->get('khachHang');
+                    }
+
+                    $hoaDon = new ReceiptModel();
+                    $hoaDon->maKH = $id;
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $hoaDon->ngayTao =  date("Y/m/d H:i:s");
+                    $hoaDon->diaChi =  session()->get('diaChiDat');
+                    $hoaDon->soDienThoai = session()->get('soDienThoaiDat');
+                    $hoaDon->maPTTT = 2;
+                    $hoaDon->maTTHD = 2;
+                    $hoaDon->save();
+
+                    $sumPrice = number_format(\Cart::getTotal());
+                    $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
+
                     $cartItems = \Cart::getContent();
 
+                    foreach ($cartItems as $cart) {
+                        $hoaDonChiTiet = new DetailReceiptModel();
+
+                        $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
+                        $giaSP = $SP->giaSP;
+                        $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
+                        $hoaDonChiTiet->maSP = $cart->id;
+                        $hoaDonChiTiet->soLuong = $cart->quantity;
+                        $hoaDonChiTiet->giaSP = $giaSP;
+                        $hoaDonChiTiet->giamGia = $SP->giamGia;
+                        $hoaDonChiTiet->save();
+                    }
+
+                    $objDemo = new \stdClass();
+                    $objDemo->demo_one = 'Thanh toán bằng ví Momo';
+                    $objDemo->demo_two = $sumPrice . " VND";
+                    $objDemo->idReceipt = $maHoaDonMoiNhat;
+                    $objDemo->sender = 'BKCOM';
+                    $objDemo->receiver = session()->get('tenKhachHang');
+                    Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
+                    session()->put('maillingSession', 0);
+                    \Cart::clear();
+                    // if (session()->get('maillingSession') == 1) {
+
+                    // }
                     return view('Customer.Receipt.success', [
                         'cartItems' => $cartItems,
                     ]);
