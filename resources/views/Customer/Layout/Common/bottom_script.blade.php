@@ -34,6 +34,13 @@
                     <h6 class="text-uppercase fw-bold mb-4 text-danger">
                         <i class="fas fa-gem me-3"></i> BKCOM
                     </h6>
+                    <div class="fb-page" data-href="https://www.facebook.com/BKCOM-101090891924178/"
+                        data-tabs="timeline" data-width="300" data-height="100" data-small-header="true"
+                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/BKCOM-101090891924178/"
+                            class="fb-xfbml-parse-ignore"><a
+                                href="https://www.facebook.com/BKCOM-101090891924178/">BKCOM</a></blockquote>
+                    </div>
                     <p>
                         BKCOM là cửa hàng kinh doanh máy tính, laptop công nghệ cao, được cấp
                         giấy chứng nhận kinh doanh từ các nhà sản xuất chính hãng, đã qua

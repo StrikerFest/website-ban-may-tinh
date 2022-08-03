@@ -1606,8 +1606,7 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form
-                                                                                action="{{ route('cart.store') }}"
+                                                                            <form action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -1774,8 +1773,7 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form
-                                                                                action="{{ route('cart.store') }}"
+                                                                            <form action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2082,8 +2080,7 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form
-                                                                                action="{{ route('cart.store') }}"
+                                                                            <form action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2250,8 +2247,7 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form
-                                                                                action="{{ route('cart.store') }}"
+                                                                            <form action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2560,8 +2556,7 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form
-                                                                                action="{{ route('cart.store') }}"
+                                                                            <form action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
@@ -2729,8 +2724,7 @@
                                                                         @if ($CN->soLuong <= 0)
                                                                         @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
                                                                         @else
-                                                                            <form
-                                                                                action="{{ route('cart.store') }}"
+                                                                            <form action="{{ route('cart.store') }}"
                                                                                 method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
