@@ -91,9 +91,9 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         $quantity = $request->quantity;
         if ($request->quantity <= 0) {
             $quantity = 1;
@@ -115,9 +115,9 @@ class CartController extends Controller
 
     public function removeCart(Request $request)
     {
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         \Cart::remove($request->id);
         session()->flash('success', 'Sản phẩm được loại bỏ thành công !');
 
@@ -126,9 +126,9 @@ class CartController extends Controller
 
     public function clearAllCart()
     {
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         \Cart::clear();
 
         session()->flash('success', 'Tất cả sản phẩm đã được loại bỏ thành công !');
