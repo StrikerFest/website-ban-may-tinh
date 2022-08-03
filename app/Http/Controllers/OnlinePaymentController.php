@@ -70,8 +70,12 @@ class OnlinePaymentController extends Controller
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
         // dd($jsonResult);
+        if(!isset($jsonResult['payUrl'])){
+            return back()->with('moneyLimit', $jsonResult['message']);
+        }else{
+            return redirect()->to($jsonResult['payUrl']);
+        }
 
-        return redirect()->to($jsonResult['payUrl']);
     }
 
     public function process(Request $request)
@@ -116,9 +120,9 @@ class OnlinePaymentController extends Controller
                     $listNguoiDung = DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
 
                     return redirect()->route('receiptCustomer.create')->with('momoCancel', 'Thanh toán đã bị huỷ');
+                } else {
+                    return redirect()->route('product.index')->with('unknownError', 'Đã xảy ra lỗi');
                 }
-            } else {
-                return redirect()->route('product.index')->with('unknownError', 'Đã xảy ra lỗi');
             }
         } catch (Exception $e) {
             echo $response['message'] = $e;
