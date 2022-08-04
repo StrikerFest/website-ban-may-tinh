@@ -49,7 +49,7 @@
                                                 <tr>
                                                     <td
                                                         class="width-25 text-bold padding-left-20 padding-top-20 padding-bottom-20">
-                                                        Họ tên
+                                                        Họ tên người nhận
                                                     </td>
                                                     <td class="width-75 padding-right-20"><input name="receiptName"
                                                             class="width-100 border-gray" type="text">

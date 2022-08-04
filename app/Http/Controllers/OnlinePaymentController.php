@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\DemoEmail;
 use App\Models\DetailReceiptModel;
 use App\Models\ReceiptModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -119,6 +120,29 @@ class OnlinePaymentController extends Controller
                     // \Cart::clear();
                     if (session()->has('khachHang')) {
                         $id = session()->get('khachHang');
+                    } else {
+
+                        if (session()->get('vangLai') == 1) {
+                            # code...
+                            $temp = DB::table('nguoi_dung')->where('emailND', session()->get('emailDat'))->first();
+                            if (is_null($temp) == true) {
+                                $customerNew = new UserModel();
+                                $customerNew->tenND = session()->get('tenKhachHangDat');
+                                $customerNew->emailND = session()->get('emailDat');
+                                $customerNew->soDienThoai =  session()->get('soDienThoaiDat');
+                                $customerNew->diaChiND =  session()->get('diaChiDat');
+                                // $customerNew->matKhauND = Hash::make($request->get('newPassword'));
+                                $customerNew->matKhauND = "";
+                                $customerNew->maCV = DB::table('chuc_vu')->where('tenCV', 'Khách hàng')->first()->maCV;
+                                $customerNew->save();
+                                $temp = DB::table('nguoi_dung')->where('emailND', session()->get('emailDat'))->first();
+                                $id = $temp->maND;
+                            } else {
+                                $id = $temp->maND;
+                            }
+                        }
+                        // Lấy id khách sau khi tạo
+
                     }
 
                     $hoaDon = new ReceiptModel();

@@ -228,6 +228,8 @@ class ReceiptController extends Controller
                 }
             }
             if ($payMethodMomo == "momo") {
+                session()->put("vangLai", $request->get("isNotRegister"));
+                // dd(session()->get('vangLai'));
                 // Thêm vào hóa đơn
                 $request->session()->put("tenKhachHangDat", $request->receiptName);
                 $request->session()->put("soDienThoaiDat", $request->receiptPhone);
