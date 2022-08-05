@@ -93,7 +93,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                {{$nhapKhoChiTiet->links('')}}
+                                <?php
+                                    // {{$nhapKhoChiTiet->links('')}}
+                                ?>
                                 <button class="btn btn-primary" onclick="window.history.back()">
                                     Quay lại
                                 </button>

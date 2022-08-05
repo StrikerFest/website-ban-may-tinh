@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserVoucherModel extends Model
+class ProductVoucherModel extends Model
 {
     use HasFactory;
-    protected $table = 'nguoi_dung_voucher';
+    protected $table = 'san_pham_voucher';
 
     public $timestamps = false;
 
-    public $primaryKey = 'maNDV';
+    public $primaryKey = 'maSPV';
 }

@@ -54,7 +54,6 @@ class AdminProductImageController extends Controller
             $ASP->maSP = $request->get('maSP');
             $ASP->anh = explode("/", $path)[1];
             $ASP->save();
-
         }
         
         $maSP = $request->Get('maSP');

@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductModel;
+use App\Models\ProductImageModel;
 use App\Models\ManufacturerModel;
 use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
 use App\Models\PromotionModel;
 use App\Models\SupplierModel;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
 use Exception;
 use Excel;
-use App\Imports\ProductImport;
+use File;
 
 class AdminProductController extends Controller
 {
@@ -94,6 +96,7 @@ class AdminProductController extends Controller
             'maNSX' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
+            'anh.*' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
         ]);
 
         $sanPham = new ProductModel();
@@ -106,6 +109,14 @@ class AdminProductController extends Controller
         $sanPham->maTTSP = $request->get('maTTSP');
         // dd($sanPham);
         $sanPham->save();
+        
+        for($i = 0; $i < sizeof($request->file('anh')); $i++){
+            $path = $request->file('anh')[$i]->store('img');
+            $ASP = new ProductImageModel();
+            $ASP->maSP = $sanPham->maSP;
+            $ASP->anh = explode("/", $path)[1];
+            $ASP->save();
+        }
 
         return redirect(route('admin.product.index'));
     }
@@ -189,6 +200,17 @@ class AdminProductController extends Controller
         try{
             $khuyenMai = PromotionModel::where('maSP', '=', $id);
             $khuyenMai->delete();
+
+            $ASP = ProductImageModel::where('maSP', $id)->get();
+            
+            for($i = 0; $i < sizeof($ASP); $i++){
+                $path = public_path('assets/img/'.$ASP[$i]->anh);
+                if(File::exists($path)){
+                    File::delete($path);
+                }  
+                $ASP[$i]->delete();
+            }
+
             $sanPham->delete();
             return redirect(route('admin.product.index'));
         }catch(Exception $e){

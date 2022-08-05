@@ -205,7 +205,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('admin.product.store') }}" method="POST">
+                                <form class="user" action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
@@ -271,6 +271,15 @@
                                                 <option value="{{ $TTSP->maTTSP }}">{{ $TTSP->tenTTSP }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Ảnh</label>
+                                        @error('anh')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="file" class="form-control-file" name="anh[]" multiple>
                                     </div>
                                 </div>
                                 <div class="form-group row">

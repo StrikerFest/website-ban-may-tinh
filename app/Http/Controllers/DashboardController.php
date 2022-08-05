@@ -13,52 +13,53 @@ class DashboardController extends Controller
     {
         $thangHienTai = date('m');
         $namHienTai = date('Y');
-
-        //Doanh thu theo tháng
-        $doanhThuThang = DB::select("
-        SELECT SUM(doanhThuThang) as doanhThuThang FROM
-            (SELECT 
-            IF(
-                maTLV = 1,
-                (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri),
-                IF(
-                    maTLV = 2,
-                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) 
-                    - 
-                    ((SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong)) * giaTri / 100)),
-                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong))
-                )
-            ) AS doanhThuThang
-            FROM hoa_don_chi_tiet
-            JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-            LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
-            WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-            AND hoa_don.maTTHD = 1
-            GROUP BY hoa_don.maHD) AS x
-        ")[0]->doanhThuThang;
+        $doanhThuThang = 0;
+        $doanhThuNam = 0;
+        // //Doanh thu theo tháng
+        // $doanhThuThang = DB::select("
+        // SELECT SUM(doanhThuThang) as doanhThuThang FROM
+        //     (SELECT 
+        //     IF(
+        //         maTLV = 1,
+        //         (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri),
+        //         IF(
+        //             maTLV = 2,
+        //             (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) 
+        //             - 
+        //             ((SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong)) * giaTri / 100)),
+        //             (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong))
+        //         )
+        //     ) AS doanhThuThang
+        //     FROM hoa_don_chi_tiet
+        //     JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+        //     LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
+        //     WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
+        //     AND hoa_don.maTTHD = 1
+        //     GROUP BY hoa_don.maHD) AS x
+        // ")[0]->doanhThuThang;
         
-        //Doanh thu theo năm
-        $doanhThuNam = DB::select("
-        SELECT SUM(doanhThuNam) as doanhThuNam FROM
-            (SELECT 
-            IF(
-                maTLV = 1,
-                (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri),
-                IF(
-                    maTLV = 2,
-                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) 
-                    - 
-                    ((SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong)) * giaTri / 100)),
-                    (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong))
-                )
-            ) AS doanhThuNam
-            FROM hoa_don_chi_tiet
-            JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-            LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
-            WHERE YEAR(hoa_don.ngayTao) = $namHienTai
-            AND hoa_don.maTTHD = 1
-            GROUP BY hoa_don.maHD) AS x
-        ")[0]->doanhThuNam;
+        // //Doanh thu theo năm
+        // $doanhThuNam = DB::select("
+        // SELECT SUM(doanhThuNam) as doanhThuNam FROM
+        //     (SELECT 
+        //     IF(
+        //         maTLV = 1,
+        //         (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri),
+        //         IF(
+        //             maTLV = 2,
+        //             (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong) 
+        //             - 
+        //             ((SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong)) * giaTri / 100)),
+        //             (SUM((giaSP - (giaSP * giamGia / 100)) * hoa_don_chi_tiet.soLuong))
+        //         )
+        //     ) AS doanhThuNam
+        //     FROM hoa_don_chi_tiet
+        //     JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
+        //     LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
+        //     WHERE YEAR(hoa_don.ngayTao) = $namHienTai
+        //     AND hoa_don.maTTHD = 1
+        //     GROUP BY hoa_don.maHD) AS x
+        // ")[0]->doanhThuNam;
 
         //Tiền lãi theo tháng
         $tienLaiThang = DB::select("
@@ -84,25 +85,25 @@ class DashboardController extends Controller
         AND hoa_don.maTTHD = 1
         ")[0]->tienLaiNam;
 
-        //Số lượng voucher được áp dụng
-        $soLuongVoucherApDung = DB::table('nguoi_dung_voucher')->where('suDung', 1)->count();
+        // //Số lượng voucher được áp dụng
+        // $soLuongVoucherApDung = DB::table('nguoi_dung_voucher')->where('suDung', 1)->count();
         
-        //Số tiền giảm giá từ voucher
-        $soTienGiamVoucher = DB::table('hoa_don')->sum('tongTienGiam');
+        // //Số tiền giảm giá từ voucher
+        // $soTienGiamVoucher = DB::table('hoa_don')->sum('tongTienGiam');
 
-        //Số tặng phẩm được tặng
-        $soLuongTangPham = DB::table('nguoi_dung_voucher')
-            ->join('voucher', 'voucher.maVoucher', '=', 'nguoi_dung_voucher.maVoucher')
-            ->where('maTLV', 3)
-            ->where('suDung', 1)
-            ->count();
+        // //Số tặng phẩm được tặng
+        // $soLuongTangPham = DB::table('nguoi_dung_voucher')
+        //     ->join('voucher', 'voucher.maVoucher', '=', 'nguoi_dung_voucher.maVoucher')
+        //     ->where('maTLV', 3)
+        //     ->where('suDung', 1)
+        //     ->count();
         
-        //Tổng giá trị của tặng phẩm
-        $giaTriTangPham = DB::table('nguoi_dung_voucher')
-            ->join('voucher', 'voucher.maVoucher', '=', 'nguoi_dung_voucher.maVoucher')
-            ->leftJoin('san_pham', 'san_pham.maSP', '=', 'voucher.maSP')
-            ->where('maTLV', 3)
-            ->sum('giaSP');
+        // //Tổng giá trị của tặng phẩm
+        // $giaTriTangPham = DB::table('nguoi_dung_voucher')
+        //     ->join('voucher', 'voucher.maVoucher', '=', 'nguoi_dung_voucher.maVoucher')
+        //     ->leftJoin('san_pham', 'san_pham.maSP', '=', 'voucher.maSP')
+        //     ->where('maTLV', 3)
+        //     ->sum('giaSP');
 
         // //Doanh thu theo tháng (dự kiến)
         // $doanhThuThangDuKien = DB::select("
@@ -292,10 +293,10 @@ class DashboardController extends Controller
                 'doanhThuNam' => $doanhThuNam,
                 'tienLaiThang' => $tienLaiThang,
                 'tienLaiNam' => $tienLaiNam,
-                'soLuongVoucherApDung' => $soLuongVoucherApDung,
-                'soTienGiamVoucher' => $soTienGiamVoucher,
-                'soLuongTangPham' => $soLuongTangPham,
-                'giaTriTangPham' => $giaTriTangPham,
+                // 'soLuongVoucherApDung' => $soLuongVoucherApDung,
+                // 'soTienGiamVoucher' => $soTienGiamVoucher,
+                // 'soLuongTangPham' => $soLuongTangPham,
+                // 'giaTriTangPham' => $giaTriTangPham,
                 // 'doanhThuThangDuKien' => $doanhThuThangDuKien,
                 // 'doanhThuNamDuKien' => $doanhThuNamDuKien,
                 'tongSanPhamNhapThang' => $tongSanPhamNhapThang,
