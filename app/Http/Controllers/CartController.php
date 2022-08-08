@@ -66,11 +66,56 @@ class CartController extends Controller
         return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
     }
 
+    public function addToCartPCB(Request $request)
+    {
+        // VGA
+        $quantity = $request->PCBCartSoLuongVGA;
+
+        if ($request->PCBCartSoLuongVGA <= 0 || $request->PCBCartSoLuongVGA > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaVGA)->first();
+        \Cart::add([
+            'id' => $sanPham->maSP,
+            'name' => $sanPham->tenSP,
+            'price' => $sanPham->giaSP,
+            'quantity' => $quantity,
+            'attributes' => array(
+                'image' => $request->PCBCartAnhVGA,
+            )
+        ]);
+
+        // - VGA
+
+        // L
+        $quantity = $request->PCBCartSoLuongL;
+
+        if ($request->PCBCartSoLuongL <= 0 || $request->PCBCartSoLuongL > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaL)->first();
+        \Cart::add([
+            'id' => $sanPham->maSP,
+            'name' => $sanPham->tenSP,
+            'price' => $sanPham->giaSP,
+            'quantity' => $quantity,
+            'attributes' => array(
+                'image' => $request->PCBCartAnhL,
+            )
+        ]);
+
+        // - L
+
+        // session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
+
+        return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
+    }
+
     public function goToCart(Request $request)
     {
-        if (!session()->has('khachHang')) {
-            return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
-        }
+        // if (!session()->has('khachHang')) {
+        //     return Redirect::route('product.index')->with("error", "Mời khách hàng đăng nhập trước");
+        // }
         $quantity = $request->quantity;
         if ($request->quantity <= 0) {
             $quantity = 1;

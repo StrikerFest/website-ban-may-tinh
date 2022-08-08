@@ -32,8 +32,8 @@
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-search fa-fw"></i>
                 </a>
                 <!-- Dropdown - Messages -->
@@ -41,8 +41,8 @@
                     aria-labelledby="searchDropdown">
                     <form class="form-inline mr-auto w-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -55,8 +55,8 @@
 
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell fa-fw"></i>
                     <!-- Counter - Alerts -->
                     <span class="badge badge-danger badge-counter">3+</span>
@@ -110,8 +110,8 @@
             <!-- Nav Item - Icon và thông tin người dùng -->
             <li class="nav-item dropdown no-arrow ">
                 @if (session()->has('khachHang'))
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{-- Tên người dùng --}}
                         <span class="mr-2 d-none d-lg-inline text-white small"><i class="fa fa-bars"></i>
                             {{ session()->get('tenKhachHang') }}</span>
@@ -149,8 +149,8 @@
 
             <!-- Nav Item - Giỏ hàng -->
             <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-shopping-cart fa-fw"></i>
                     <!-- Counter - Messages -->
                     <span class="badge badge-danger badge-counter">{{ sizeof($cartItems) }}</span>
@@ -163,6 +163,7 @@
                     </h6>
                     @php
                         $counterCart = 0;
+                        $sumCart = 0;
                     @endphp
                     @foreach ($cartItems as $item)
                         @if ($counterCart < 2)
@@ -178,10 +179,12 @@
                                     <div class="text-truncate">{{ $item->name }}</div>
                                     <div class="small text-gray-500">{{ number_format($item->price) }} VND</div>
                                     <div>Số lượng: {{ $item->quantity }}</div>
+                                    <div>Tổng: {{ number_format($item->price * $item->quantity) }} VND</div>
                                 </div>
                             </a>
                             @php
                                 $counterCart += 1;
+                                $sumCart += $item->price * $item->quantity;
                             @endphp
                         @else
                             <a class="dropdown-item d-flex align-items-center" href="{{ route('cart.list') }}">
@@ -191,19 +194,24 @@
                                 </div>
                             </a>
                         @break
-                        @endif
+                    @endif
 
                     {{--  --}}
-                    @endforeach
+                @endforeach
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('product.show', $item->id) }}">
 
-                    <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
-                        hàng
-                    </a>
-                </div>
-            </li>
+                    <div class="font-weight-bold text-danger">
+                        <div>Tổng: {{ number_format($sumCart) }} VND</div>
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
+                    hàng
+                </a>
+            </div>
+        </li>
 
-        </ul>
-    </div>
+    </ul>
+</div>
 
 
 </header>
@@ -211,43 +219,43 @@
 {{-- Thanh navbar thứ 2 --}}
 <nav class="navbar navbar-expand navbar-light bg-gradient- topbar mb-4 static-top shadow fixed-top second-navbar padding-0"
 style="background-color: rgba(255, 255, 255, 0.9)">
-    <div class="center-custom list-style-none">
-        <div class="nav-item-container-highlight">
-            <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
-                    Trang chủ
-                </a>
-            </li>
-        </div>
-        <div class="nav-item-container">
-            <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
-                    Sản phẩm
-                </a>
-            </li>
-        </div>
-        <div class="nav-item-container">
-            <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('blogCustomer.index') }}">
-                    Blog công nghệ
-                </a>
-            </li>
-        </div>
-        <div class="nav-item-container">
-            <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.create') }}">
-                    Liên hệ
-                </a>
-            </li>
-        </div>
-        <div class="nav-item-container">
-            <li class="nav-item ">
-                <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
-                    Chính sách
-                </a>
-            </li>
-        </div>
+<div class="center-custom list-style-none">
+    <div class="nav-item-container-highlight">
+        <li class="nav-item ">
+            <a class="nav-link nav-item-custom link-white " href="{{ route('product.index') }}">
+                Trang chủ
+            </a>
+        </li>
     </div>
+    <div class="nav-item-container">
+        <li class="nav-item ">
+            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
+                Sản phẩm
+            </a>
+        </li>
+    </div>
+    <div class="nav-item-container">
+        <li class="nav-item ">
+            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('blogCustomer.index') }}">
+                Blog công nghệ
+            </a>
+        </li>
+    </div>
+    <div class="nav-item-container">
+        <li class="nav-item ">
+            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('PCBuilderCustomer.create') }}">
+                PC Builder
+            </a>
+        </li>
+    </div>
+    <div class="nav-item-container">
+        <li class="nav-item ">
+            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('contactCustomer.index') }}">
+                Chính sách
+            </a>
+        </li>
+    </div>
+</div>
 
 </nav>
 
@@ -255,12 +263,12 @@ style="background-color: rgba(255, 255, 255, 0.9)">
 @if (session()->has('cartAddSuccess') == 1)
 <div style="display: block" id="alert">
 @else
-<div style="display: none" id="alert">
+    <div style="display: none" id="alert">
 @endif
-    <div class="card text-center alert alert-success"
-    style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;padding-top:1%">
-    <h1>{{ Session::get('cartAddSuccess') }}</h1>
-    </div>
+<div class="card text-center alert alert-success"
+style="position: fixed; width:50%;left:25%;height:15%;top:15%;z-index:1000;padding-top:1%">
+<h1>{{ Session::get('cartAddSuccess') }}</h1>
+</div>
 </div>
 @php
 $dataError = Session::get('error');
@@ -268,36 +276,39 @@ $dataSuccess = Session::get('success');
 
 @endphp
 {{-- Error alert ------------------------------------- --}}
-@if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0) || session()->has('profileError') == 1)
+@if ($dataError ||
+    ($dataSuccess && session()->has('khachHang') == 0) ||
+    (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0) ||
+    session()->has('profileError') == 1)
 {{-- @if (sizeof($errors) != 0) --}}
 <div style="display: block" id="alert-error">
 @else
-<div style="display: none" id="alert-error">
+    <div style="display: none" id="alert-error">
 @endif
-    <div class="card text-center alert alert-danger border-red"
-    style="position: fixed; width:25%;left:75%;height:auto;top:15%;z-index:1001;padding-top:1%">
-        @foreach ($errors->all() as $error)
-            <div class="col-md-12">
-                <p class="text-danger">{{ $error }}</p>
-                <hr class="border-red">
-            </div>
-        @endforeach
-        @isset($dataError)
-            @if (session()->has('khachHang') == 0)
-                <div class="alert alert-danger">
-                    {{ $dataError }}
-                <hr class="border-red">
-            </div>
-            @endif
-        @endisset
+<div class="card text-center alert alert-danger border-red"
+style="position: fixed; width:25%;left:75%;height:auto;top:15%;z-index:1001;padding-top:1%">
+@foreach ($errors->all() as $error)
+    <div class="col-md-12">
+        <p class="text-danger">{{ $error }}</p>
+        <hr class="border-red">
     </div>
+@endforeach
+@isset($dataError)
+    @if (session()->has('khachHang') == 0)
+        <div class="alert alert-danger">
+            {{ $dataError }}
+            <hr class="border-red">
+        </div>
+    @endif
+@endisset
+</div>
 </div>
 {{-- Hết - Error alert --}}
 
 {{-- Thông tin khách hàng --}}
 {{-- Fix phần này --}}
-{{-- @if (sizeof($errors) != 0)--}}
-@if(session()->has('profileError') == 1)
+{{-- @if (sizeof($errors) != 0) --}}
+@if (session()->has('profileError') == 1)
 <div style="display: block" id="profile">
     @php
         session()->forget('profileError');
@@ -347,8 +358,9 @@ onclick="displayNoneProfile()">
                         </div>
                         <div class="col-sm-6">
                             <p class="text-black">Số điện thoại</p>
-                            <input type="text" class="form-control text-black" placeholder="Số điện thoại tài khoản"
-                                value="{{ session()->get('soDienThoai') }}" name="updatePhone">
+                            <input type="text" class="form-control text-black"
+                                placeholder="Số điện thoại tài khoản" value="{{ session()->get('soDienThoai') }}"
+                                name="updatePhone">
                         </div>
                     </div>
                     <div class="form-group">
@@ -409,77 +421,77 @@ onclick="displayNoneProfile()">
 </div>
 
 {{-- Them moi khách hàng --}}
-@if(session()->has('signupError') == 1)
+@if (session()->has('signupError') == 1)
 <div style="display: block" id="createCustomer">
     @php
         session()->forget('signupError');
     @endphp
 @else
-<div style="display: none" id="createCustomer">
+    <div style="display: none" id="createCustomer">
 @endif
 <div style="background-color: black; position: fixed; width: 100%;height: 100%;z-index:999;opacity:75%"
-    onclick="displayNoneCreateCustomer()">
+onclick="displayNoneCreateCustomer()">
 </div>
 <div class="card " style="position: fixed; width:50%;left:25%;height:50%;top:15%;z-index:1000">
 
-    <div class="card shadow mb-4">
+<div class="card shadow mb-4">
 
-        <div class="card-header py-3">
-            <div class="row">
-                <div class="col-md-6">
-                    <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
-                </div>
-                <div class="col-md-6 text-right">
-                    <button class="fa fa-times border-radius-25" onclick="displayNoneCreateCustomer()"></button>
-                </div>
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="m-0 font-weight-bold text-danger">Thông tin khách hàng</h6>
             </div>
-
+            <div class="col-md-6 text-right">
+                <button class="fa fa-times border-radius-25" onclick="displayNoneCreateCustomer()"></button>
+            </div>
         </div>
-        <div class="card-body">
 
-            <div class="table-responsive" style="overflow: hidden">
-                <form method="POST" action="{{ route('customerCustomer.store') }}">
+    </div>
+    <div class="card-body">
 
-                    @csrf
-                    <div class="form-group row ">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <p class="text-black">Tên khách hàng</p>
-                            <input type="text" class="form-control text-black" name="newName"
-                                placeholder="Nhập tên khách hàng">
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="text-black">Số điện thoại</p>
-                            <input type="text" class="form-control text-black" name="newPhone"
-                                placeholder="Số điện thoại">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <p class="text-black">Email</p>
-                        <input type="email" class="form-control text-black" name="newEmail"
-                            placeholder="Nhập email">
-                    </div>
-                    <div class="form-group">
-                        <p class="text-black">Địa chỉ</p>
-                        <input type="text" class="form-control text-black" name="newAddress"
-                            placeholder="Nhập địa chỉ">
-                    </div>
-                    <p class="text-black">Password</p>
-                    <input type="password" class="form-control" name="newPassword" placeholder="Nhập password"
-                        autocomplete="current-password">
-            </div>
-            <div class="form-group row">
+        <div class="table-responsive" style="overflow: hidden">
+            <form method="POST" action="{{ route('customerCustomer.store') }}">
 
-                <div class="col-sm-12">
-                    <button type="submit" class="form-control btn-danger btn-user text-bold"
-                        placeholder="Repeat Password" style="padding:0">Đăng ký ngay</button>
+                @csrf
+                <div class="form-group row ">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <p class="text-black">Tên khách hàng</p>
+                        <input type="text" class="form-control text-black" name="newName"
+                            placeholder="Nhập tên khách hàng">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="text-black">Số điện thoại</p>
+                        <input type="text" class="form-control text-black" name="newPhone"
+                            placeholder="Số điện thoại">
+                    </div>
                 </div>
+                <div class="form-group">
+                    <p class="text-black">Email</p>
+                    <input type="email" class="form-control text-black" name="newEmail"
+                        placeholder="Nhập email">
+                </div>
+                <div class="form-group">
+                    <p class="text-black">Địa chỉ</p>
+                    <input type="text" class="form-control text-black" name="newAddress"
+                        placeholder="Nhập địa chỉ">
+                </div>
+                <p class="text-black">Password</p>
+                <input type="password" class="form-control" name="newPassword" placeholder="Nhập password"
+                    autocomplete="current-password">
+        </div>
+        <div class="form-group row">
+
+            <div class="col-sm-12">
+                <button type="submit" class="form-control btn-danger btn-user text-bold"
+                    placeholder="Repeat Password" style="padding:0">Đăng ký ngay</button>
             </div>
-            {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
+        </div>
+        {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                             Add data
                         </a> --}}
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 </div>
 </div>
 
@@ -488,7 +500,7 @@ onclick="displayNoneProfile()">
 {{-- Sửa phần này --}}
 {{-- @if ($dataError || ($dataSuccess && session()->has('khachHang') == 0) || (sizeof($errors->all()) != 0 && session()->has('khachHang') == 0)) --}}
 {{--  --}}
-@if(session()->has('loginError') == 1)
+@if (session()->has('loginError') == 1)
 <div style="display: block" class="row justify-content-center" id="login">
     @php
         session()->forget('loginError');
@@ -586,7 +598,8 @@ onclick="displayNoneLogin()">
             </form>
             <hr>
             <div class="text-center">
-                <a class="small link-red" href="#" onclick="displayBlockCreateCustomer(), displayNoneLogin()">Đăng
+                <a class="small link-red" href="#"
+                    onclick="displayBlockCreateCustomer(), displayNoneLogin()">Đăng
                     ký ngay</a>
             </div>
         </div>
@@ -630,8 +643,8 @@ onclick="displayNoneLogin()">
 
     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
     <li class="nav-item dropdown no-arrow d-sm-none">
-        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-search fa-fw"></i>
         </a>
         <!-- Dropdown - Messages -->
@@ -639,8 +652,8 @@ onclick="displayNoneLogin()">
             aria-labelledby="searchDropdown">
             <form class="form-inline mr-auto w-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small"
+                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search fa-sm"></i>
@@ -653,8 +666,8 @@ onclick="displayNoneLogin()">
 
     <!-- Nav Item - Alerts -->
     <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
             <!-- Counter - Alerts -->
             <span class="badge badge-danger badge-counter">3+</span>
@@ -704,8 +717,8 @@ onclick="displayNoneLogin()">
 
     <!-- Nav Item - Messages -->
     <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-envelope fa-fw"></i>
             <!-- Counter - Messages -->
             <span class="badge badge-danger badge-counter">7</span>
@@ -751,7 +764,8 @@ onclick="displayNoneLogin()">
             </a>
             <a class="dropdown-item d-flex align-items-center" href="#">
                 <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        alt="...">
                     <div class="status-indicator bg-success"></div>
                 </div>
                 <div>
@@ -768,8 +782,8 @@ onclick="displayNoneLogin()">
 
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
             <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
         </a>

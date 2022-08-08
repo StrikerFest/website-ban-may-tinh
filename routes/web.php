@@ -51,6 +51,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OnlinePaymentController;
+use App\Http\Controllers\PCBuilderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -162,6 +163,8 @@ Route::resource('searchCustomer', SearchController::class);
 
 Route::resource('contactCustomer', ContactController::class);
 
+Route::resource('PCBuilderCustomer', PCBuilderController::class);
+
 Route::resource('customerCustomer', CustomerController::class);
 
 Route::resource('changePasswordCustomer', ChangePasswordController::class);
@@ -190,6 +193,8 @@ Route::post('cart-go', [CartController::class, 'addToCart'])->name('cart.store')
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+Route::post('cart-PCB', [CartController::class, 'addToCartPCB'])->name('cart.addToCartPCB');
+
 
 Route::post('momoPay', [OnlinePaymentController::class, 'momoPay'])->name('onlinePayment.momo');
 Route::get('onlinePayment/process', [OnlinePaymentController::class, 'process'])->name('onlinePayment.process');
