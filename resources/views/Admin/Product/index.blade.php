@@ -63,6 +63,9 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
+                                    Tổng số bản ghi: {{$sanPham->total()}}
+                                </div>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -112,6 +115,19 @@
                                                 ?>
                                             </td>
                                             <td>
+                                                <?php if($SP->tenTLC != "Tặng phẩm"){ ?>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <form action="{{route('admin.product.createVoucher', $SP->maSP)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Voucher</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <form action="{{route('admin.product.updateSpecial', $SP->maSP)}}" method="post">

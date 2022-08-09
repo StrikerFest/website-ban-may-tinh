@@ -88,6 +88,9 @@
                                                 @error('maTS')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
+                                                @error('maTS.*')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             <select class="form-control" name="maTS[]">
                                                 <option value="" disabled selected hidden>Specification</option>
                                                 @foreach($thongSo as $TS)

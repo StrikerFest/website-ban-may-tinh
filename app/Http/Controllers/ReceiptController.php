@@ -174,7 +174,7 @@ class ReceiptController extends Controller
                 }
 
                 $hoaDon->maTTHD = 2;
-                dd($hoaDon);
+                // dd($hoaDon);
                 $hoaDon->save();
 
                 $sumPrice = number_format(\Cart::getTotal());

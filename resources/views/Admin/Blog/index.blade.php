@@ -49,6 +49,9 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
+                                    Tổng số bản ghi: {{$baiViet->total()}}
+                                </div>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -125,7 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    {{$baiViet->links()}}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Thêm bài viết mới</h6>

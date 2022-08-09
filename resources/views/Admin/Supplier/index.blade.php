@@ -46,6 +46,9 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
+                                Tổng số bản ghi: {{$nhaPhanPhoi->total()}}
+                            </div>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>

@@ -44,11 +44,11 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-6 mb-sm-0">
-                                        <label class="form-inline label">Ngày hết hạn</label>
-                                        @error('ngayHetHan')
+                                        <label class="form-inline label">Số lượng</label>
+                                        @error('soLuong')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="date" class="form-control" id="exampleProduct" name="ngayHetHan" min="<?php echo date("Y-m-d", strtotime("+1 day")); ?>" value="{{ date_format(date_create($Voucher->ngayHetHan), 'Y-m-d') }}">
+                                        <input type="number" class="form-control" id="exampleProduct" placeholder="Quanity" name="soLuong" min="0" value="{{ $Voucher->soLuong }}">
                                     </div>
                                     <div class="col-sm-6 mb-6 mb-sm-0">
                                         <label class="form-inline label">Thể loại voucher</label>
@@ -66,23 +66,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-6 mb-sm-0">
+                                    <div class="col-sm-12 mb-6 mb-sm-0" id="resizable">
                                         <label class="form-inline label">Giá trị</label>
                                         @error('giaTri')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control" id="giaTri" placeholder="Value" name="giaTri" min="0" value="{{ $Voucher->giaTri }}">
                                     </div>
-                                    <div class="col-sm-6 mb-6 mb-sm-0">
-                                        <label class="form-inline label">Số lượng</label>
-                                        @error('soLuong')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="number" class="form-control" id="exampleProduct" placeholder="Quanity" name="soLuong" min="0" value="{{ $Voucher->soLuong }}">
-                                    </div>
-                                </div>
-                                <div class="form-group row" id="dynamic-div" style="display: none;">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="dynamic-div" style="display: none;">
                                         <label class="form-inline label">Tặng phẩm</label>
                                         <select class="form-control select2" name="maSP" id="gift">
                                             <option value="default" disabled selected hidden>Gift</option>
@@ -92,15 +83,6 @@
                                             </option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Mô tả</label>
-                                        @error('moTa')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <textarea class="form-control" name="moTa" rows="5" placeholder="Content">{{ $Voucher->moTa }}</textarea>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">
@@ -170,18 +152,21 @@
             switch(Number(voucherType)){
                 case 1:
                     //Giảm giá tiền mặt
+                    $('#resizable').addClass('col-sm-12 mb-6 mb-sm-0').removeClass('col-sm-6 mb-6 mb-sm-0')
                     $('#giaTri').attr({placeholder: 'Value (VND)', readonly: false})
                     $('#giaTri').val('')
                     $('#dynamic-div').css({display: 'none'})
                     break;
                 case 2:
                     //Giảm giá %
+                    $('#resizable').addClass('col-sm-12 mb-6 mb-sm-0').removeClass('col-sm-6 mb-6 mb-sm-0')
                     $('#giaTri').attr({placeholder: 'Value (%)', readonly: false})
                     $('#giaTri').val('')
                     $('#dynamic-div').css({display: 'none'})
                     break;
                 case 3:
                     //Tặng phẩm
+                    $('#resizable').addClass('col-sm-6 mb-6 mb-sm-0').removeClass('col-sm-12 mb-6 mb-sm-0')
                     $('#giaTri').attr({placeholder: 'Value', readonly: true})
                     $('#giaTri').val('')
                     $('#dynamic-div').css({display: 'block'})

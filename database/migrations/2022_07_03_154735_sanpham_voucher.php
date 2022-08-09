@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreign('maSP')->references('maSP')->on('san_pham');
             $table->unsignedInteger('maVoucher');
             $table->foreign('maVoucher')->references('maVoucher')->on('voucher');
-            $table->boolean('kichHoat');
+            //0 = ko kích hoạt | 1 = kích hoạt
+            $table->boolean('kichHoat')->default('1');
             $table->unique(['maSP', 'maVoucher']);
         });
     }

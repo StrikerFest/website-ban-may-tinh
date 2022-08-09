@@ -115,7 +115,7 @@ class OnlinePaymentController extends Controller
             $partnerSignature = hash_hmac("sha256", $rawHash, 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa');
 
             if ($m2signature == $partnerSignature) {
-                if ($resultCode !== '0') {
+                if ($resultCode == '0') {
                     //Giao dịch thành công
                     // \Cart::clear();
                     if (session()->has('khachHang')) {

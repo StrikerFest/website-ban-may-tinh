@@ -32,6 +32,7 @@ use App\Http\Controllers\AdminSupplierController;
 use App\Http\Controllers\AdminImportController;
 use App\Http\Controllers\AdminInventoryController;
 use App\Http\Controllers\AdminVoucherController;
+use App\Http\Controllers\AdminProductVoucherController;
 use App\Http\Controllers\AdminVoucherTypeController;
 use App\Http\Controllers\AdminSerialController;
 use App\Http\Controllers\BlogCommentController;
@@ -83,6 +84,8 @@ Route::prefix('admin')->middleware('CheckLogin')->name('admin.')->group(function
     Route::post('product/updateSpecial/{id}', [AdminProductController::class, "updateSpecial"])->name('product.updateSpecial');
     Route::post('product/excel', [AdminProductController::class, "excel"])->name('product.excel');
     Route::get('productSample', [AdminProductController::class, "sample"])->name('product.sample');
+    Route::get('createVoucher/{maSP}', [AdminProductController::class, "createVoucher"])->name('product.createVoucher');
+    Route::post('storeVoucher', [AdminProductController::class, "storeVoucher"])->name('product.storeVoucher');
     Route::resource('product', AdminProductController::class);
 });
 // Route::prefix('admin')->group(function () {
@@ -130,6 +133,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::get('voucherSample', [AdminVoucherController::class, "sample"])->name('voucher.sample');
     Route::resource('voucher', AdminVoucherController::class);
     Route::resource('voucherType', AdminVoucherTypeController::class);
+    Route::get('productVoucher/{maVoucher}', [AdminProductVoucherController::class, "index"])->name('productVoucher.index');
+    Route::resource('productVoucher', AdminProductVoucherController::class)->except(['index']);
 });
 
 Route::get('/testAdmin', function () {

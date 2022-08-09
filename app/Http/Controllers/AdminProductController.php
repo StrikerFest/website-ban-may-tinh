@@ -9,6 +9,8 @@ use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
 use App\Models\PromotionModel;
 use App\Models\SupplierModel;
+use App\Models\VoucherModel;
+use App\Models\ProductVoucherModel;
 use Illuminate\Http\Request;
 use App\Imports\ProductImport;
 use Exception;
@@ -240,5 +242,32 @@ class AdminProductController extends Controller
     public function sample(){
         $path = public_path('excel_sample\product-sample.xlsx');
         return response()->download($path);
+    }
+
+    public function createVoucher($id){
+        $Voucher = VoucherModel::all();
+        $SanPham = ProductModel::find($id);
+        $SPV = ProductVoucherModel::join('voucher', 'voucher.maVoucher', '=', 'san_pham_voucher.maVoucher')->where('san_pham_voucher.maSP', $id)->get();
+        // dd($SPV);
+        return view('Admin.Product.voucher', [
+            'Voucher' => $Voucher,
+            'SanPham' => $SanPham,
+            'SPV' => $SPV,
+        ]);
+    }
+
+    public function storeVoucher(Request $request){
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'maVoucher' => 'required|unique:App\Models\ProductVoucherModel,maVoucher,NULL,id,maSP,'.$request->maSP,
+        ]);
+
+        $SPV = new ProductVoucherModel();
+        $SPV->maSP = $request->get('maSP');
+        $SPV->maVoucher = $request->get('maVoucher');
+        $SPV->kichHoat = 1;
+        $SPV->save();
+        
+        return redirect()->back()->with('added', 'Thêm thành công');
     }
 }

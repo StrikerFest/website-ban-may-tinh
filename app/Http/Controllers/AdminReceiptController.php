@@ -62,7 +62,13 @@ class AdminReceiptController extends Controller
             ->orderBy('hoa_don.maTTHD', 'DESC')
             ->orderBy('ngayTao', 'ASC')
             ->orderBy('hoa_don.maHD', 'DESC')
-            ->get();
+            ->paginate(5)
+            ->appends([
+                'searchName' => $searchName,
+                'searchStatus' => $searchStatus,
+                "NBD" => $NBD,
+                "NKT" => $NKT,
+            ]);
         // dd($hoaDon);
         return view('Admin.Receipt.index', [
             'nguoiDung' => $nguoiDung,
