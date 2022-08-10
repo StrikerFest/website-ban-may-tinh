@@ -43,7 +43,7 @@
                                             {{$hoaDon->soDienThoai}}
                                         </td>
                                         <td>
-                                            {{$hoaDon->ngayTao}}
+                                            {{date_format(date_create($hoaDon->ngayTao), 'd-m-Y H:i:s')}}
                                         </td>
                                     </tr>
                                 </table>
@@ -58,6 +58,9 @@
                                             <th>Giá</th>
                                             <th>Giảm giá</th>
                                             <th>Voucher</th>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                                <th colspan="2" width="25%">Bảo hành</th>
+                                            <?php } ?>
                                             <th colspan="2">Tổng tiền</th>
                                         </tr>
                                     </thead>
@@ -92,13 +95,27 @@
                                                     }
                                                 ?>
                                             </td>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                                <td>{{date_format(date_create($HDCT->ngayHetHan), 'd-m-Y')}}</td>
+                                                <td>
+                                                    <?php if($HDCT->hetHan){ ?>
+                                                        Đã hết hạn
+                                                    <?php }else{ ?>
+                                                        <form action="{{route('warrantyInfo.create', $HDCT->maHDCT)}}" method="get">
+                                                            <button class="btn btn-primary" type="submit">
+                                                                Bảo hành
+                                                            </button>
+                                                        </form>
+                                                    <?php } ?>
+                                                </td>
+                                            <?php } ?>
                                             <td colspan="2">
                                                 {{number_format($HDCT->tongTien - $HDCT->tienGiamVoucher)}} VND
                                             </td>
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 6) ?>">
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 8) ?>">
                                                 Thành tiền
                                             </td>
                                             <td colspan="2">
@@ -108,7 +125,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 6) ?>">
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 8) ?>">
                                                 <?php 
                                                     if($hoaDon->maTTHD == 2){
                                                         echo('Duyệt đơn');

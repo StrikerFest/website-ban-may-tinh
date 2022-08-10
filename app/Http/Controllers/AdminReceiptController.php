@@ -119,6 +119,7 @@ class AdminReceiptController extends Controller
 
         $hoaDonChiTiet = DB::select("
             SELECT 
+                hoa_don_chi_tiet.maHDCT,
                 san_pham.tenSP,
                 san_pham.maSP,
                 hoa_don_chi_tiet.giamGia,
@@ -127,10 +128,15 @@ class AdminReceiptController extends Controller
                 voucher.tenVoucher,
                 voucher.giaTri,
                 voucher.maTLV,
+                bao_hanh.tenBH,
+                DATE_ADD(hoa_don.ngayTao, INTERVAL bao_hanh.giaTri MONTH) AS ngayHetHan,
+                IF(DATE_ADD(hoa_don.ngayTao, INTERVAL bao_hanh.giaTri MONTH) < now(), TRUE, FALSE) AS hetHan,
                 ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS tongTien,
-                IF(maTLV = 1, giaTri * hoa_don_chi_tiet.soLuong, If(maTLV = 2, (hoa_don_chi_tiet.giaSP * giaTri /100) * hoa_don_chi_tiet.soLuong, 0)) AS tienGiamVoucher
+                IF(maTLV = 1, voucher.giaTri * hoa_don_chi_tiet.soLuong, If(maTLV = 2, (hoa_don_chi_tiet.giaSP * voucher.giaTri /100) * hoa_don_chi_tiet.soLuong, 0)) AS tienGiamVoucher
                 FROM hoa_don_chi_tiet
                 JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
+                JOIN bao_hanh ON bao_hanh.maBH = san_pham.maBH
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
                 LEFT JOIN voucher ON hoa_don_chi_tiet.maVoucher = voucher.maVoucher
                 WHERE hoa_don_chi_tiet.maHD = $id
         ");

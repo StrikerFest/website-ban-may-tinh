@@ -102,7 +102,7 @@
                                                         <td class="hidden text-center md:table-cell padding-10"
                                                             style="padding-top: 0px">
                                                             <span class="">
-                                                                {{ number_format($item->price) }} VND
+                                                                {{ number_format($item->price * $item->quantity) }} VND
                                                             </span>
                                                         </td>
                                                         <td class="hidden text-right md:table-cell padding-10">

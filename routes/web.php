@@ -35,6 +35,8 @@ use App\Http\Controllers\AdminVoucherController;
 use App\Http\Controllers\AdminProductVoucherController;
 use App\Http\Controllers\AdminVoucherTypeController;
 use App\Http\Controllers\AdminSerialController;
+use App\Http\Controllers\AdminWarrantyController;
+use App\Http\Controllers\AdminWarrantyInfoController;
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facade;
@@ -135,6 +137,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('voucherType', AdminVoucherTypeController::class);
     Route::get('productVoucher/{maVoucher}', [AdminProductVoucherController::class, "index"])->name('productVoucher.index');
     Route::resource('productVoucher', AdminProductVoucherController::class)->except(['index']);
+    Route::resource('warranty', AdminWarrantyController::class);
+    Route::get('warrantyInfo/{maHDCT}', [AdminWarrantyInfoController::class, "create"])->name('warrantyInfo.create');
+    Route::resource('warrantyInfo', AdminWarrantyInfoController::class)->except(['create']);
 });
 
 Route::get('/testAdmin', function () {

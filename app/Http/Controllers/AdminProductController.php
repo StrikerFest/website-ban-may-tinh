@@ -11,6 +11,7 @@ use App\Models\PromotionModel;
 use App\Models\SupplierModel;
 use App\Models\VoucherModel;
 use App\Models\ProductVoucherModel;
+use App\Models\WarrantyModel;
 use Illuminate\Http\Request;
 use App\Imports\ProductImport;
 use Exception;
@@ -36,6 +37,8 @@ class AdminProductController extends Controller
         $theLoaiCon = SubCategoryModel::get();
 
         $nhaPhanPhoi = SupplierModel::get();
+
+        $baoHanh = WarrantyModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
         // dd($searchName, $searchManufacturer, $searchSubCategory, $searchSupplier);
@@ -64,6 +67,7 @@ class AdminProductController extends Controller
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "nhaPhanPhoi" => $nhaPhanPhoi,
+            "baoHanh" => $baoHanh,
             "sanPham" => $sanPham,
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
@@ -98,6 +102,7 @@ class AdminProductController extends Controller
             'maNSX' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
+            'maBH' => 'required',
             'anh.*' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
         ]);
 
@@ -108,6 +113,7 @@ class AdminProductController extends Controller
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
         $sanPham->maTLC = $request->get('maTLC');
+        $sanPham->maBH = $request->get('maBH');
         $sanPham->maTTSP = $request->get('maTTSP');
         // dd($sanPham);
         $sanPham->save();
@@ -148,12 +154,15 @@ class AdminProductController extends Controller
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
+        $baoHanh = WarrantyModel::get();
+
         $SP = ProductModel::find($id);
         
         return view('Admin.Product.edit', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
+            "baoHanh" => $baoHanh,
             "SP" => $SP,
         ]);
     }
@@ -174,6 +183,7 @@ class AdminProductController extends Controller
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
             'maTLC' => 'required',
+            'maBH' => 'required',
             'maTTSP' => 'required',
         ]);
         
@@ -184,6 +194,7 @@ class AdminProductController extends Controller
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
         $SP->maTLC = $request->get('maTLC');
+        $SP->maBH = $request->get('maBH');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();
         

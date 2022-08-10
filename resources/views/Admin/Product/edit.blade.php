@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -68,7 +68,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -82,7 +82,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -92,6 +92,20 @@
                                             @foreach($tinhTrangSanPham as $TTSP)
                                                 <option value="{{ $TTSP->maTTSP }}" <?php echo($SP->maTTSP == $TTSP->maTTSP? "selected": "") ?>>
                                                     {{ $TTSP->tenTTSP }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Bảo hành</label>
+                                        @error('maBH')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <select class="form-control" name="maBH">
+                                            <option value="" disabled selected hidden>Warranty</option>
+                                            @foreach($baoHanh as $BH)
+                                                <option value="{{ $BH->maBH }}" <?php echo($SP->maBH == $BH->maBH? "selected": "") ?>>
+                                                    {{ $BH->tenBH }}
                                                 </option>
                                             @endforeach
                                         </select>

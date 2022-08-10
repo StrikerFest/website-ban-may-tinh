@@ -74,13 +74,11 @@
                                             <th>Giảm giá</th>
                                             <th>Nhà sản xuất</th>
                                             <th>Danh mục</th>
+                                            <th>Bảo hành</th>
                                             <th>Tình trạng</th>
                                             <th width="22%">Thao tác</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-
-                                    </tfoot>
                                     <tbody>
                                     @foreach ($sanPham as $SP)
                                         <tr>
@@ -101,6 +99,15 @@
                                                     foreach($theLoaiCon as $TLC){
                                                         if(($SP->maTLC)==($TLC->maTLC)){
                                                             echo $TLC->tenTLC;
+                                                        }
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    foreach($baoHanh as $BH){
+                                                        if(($SP->maBH)==($BH->maBH)){
+                                                            echo $BH->tenBH;
                                                         }
                                                     }
                                                 ?>
@@ -252,7 +259,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -264,7 +271,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -276,7 +283,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -285,6 +292,18 @@
                                             <option value="" disabled selected hidden>Status</option>
                                             @foreach($tinhTrangSanPham as $TTSP)
                                                 <option value="{{ $TTSP->maTTSP }}">{{ $TTSP->tenTTSP }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Bảo hành</label>
+                                        @error('maBH')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <select class="form-control" name="maBH">
+                                            <option value="" disabled selected hidden>Warranty</option>
+                                            @foreach($baoHanh as $BH)
+                                                <option value="{{ $BH->maBH }}">{{ $BH->tenBH }}</option>
                                             @endforeach
                                         </select>
                                     </div>
