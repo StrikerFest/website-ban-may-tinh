@@ -134,12 +134,16 @@ class PCBuilderController extends Controller
         }
 
         $soLuongVGA = $request->get('PCBSoLuongVGA');
-        if ($soLuongVGA !== 1 && $soLuongVGA !== null)
+        if ($soLuongVGA !== 1 && $soLuongVGA !== null) {
             session()->put('PCBSoLuongVGA', $soLuongVGA);
+            return response()->json(['success' => 'Data is successfully added']);
+        }
 
         $soLuongL = $request->get('PCBSoLuongL');
-        if ($soLuongL !== 1 && $soLuongL !== null)
+        if ($soLuongL !== 1 && $soLuongL !== null) {
             session()->put('PCBSoLuongL', $soLuongL);
+            return response()->json(['ajaxSoLuongL' => session()->get('PCBSoLuongL')]);
+        }
 
         if (session()->get('PCBTheLoai') == 'Card thiết kế đồ họa') {
             if (session()->get('PCBEmpty') !== 1) {

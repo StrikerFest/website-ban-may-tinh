@@ -2,6 +2,8 @@
 
 <head>
     @include('Customer.Layout.Common.meta')
+    <meta name="_token" content="{{ csrf_token() }}" />
+
     <style>
         /* The Modal (background) */
         .modal-PCB {
@@ -244,12 +246,14 @@
                                                             @endphp
                                                             <span class="text-danger text-bold">
                                                                 {{ number_format(session()->get('PCBGiaVGA')) }}
-                                                                VND x <input type="number"
+                                                                VND x <input type="number" id="PCBSoLuongVGA"
                                                                     value="{{ session()->get('PCBSoLuongVGA') }}"
                                                                     min="1" max="9" name="PCBSoLuongVGA">
                                                                 =
-                                                                {{ number_format(session()->get('PCBSoLuongVGA') * session()->get('PCBGiaVGA')) }}
-                                                                VND
+                                                                <span id="PCBTongTienVGA">
+                                                                    {{ number_format(session()->get('PCBSoLuongVGA') * session()->get('PCBGiaVGA')) }}
+                                                                    VND
+                                                                </span>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -328,12 +332,14 @@
                                                             @endphp
                                                             <span class="text-danger text-bold">
                                                                 {{ number_format(session()->get('PCBGiaL')) }}
-                                                                VND x <input type="number"
+                                                                VND x <input type="number" id="PCBSoLuongL"
                                                                     value="{{ session()->get('PCBSoLuongL') }}"
                                                                     min="1" max="9" name="PCBSoLuongL">
                                                                 =
-                                                                {{ number_format(session()->get('PCBSoLuongL') * session()->get('PCBGiaL')) }}
-                                                                VND
+                                                                <span class="hihi" id="PCBTongTienL">
+                                                                    {{ number_format(session()->get('PCBSoLuongL') * session()->get('PCBGiaL')) }}
+                                                                    VND
+                                                                </span>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -355,38 +361,49 @@
                                     </td>
                                 </tr>
                             </table>
+                            <div class="alert alert-success" style="display:none"></div>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="nameS">
+                            </div>
                         </form>
 
                     </div>
                     {{-- Thêm vào giỏ hàng --}}
                     <div class="row padding-10 ">
-                        <div class="w-100">
+                        <div class="w-100" id="PCBCart">
                             <form action="{{ route('cart.addToCartPCB') }}" method="POST">
                                 @csrf
-                                {{-- VGA --}}
-                                {{-- -- Mã --}}
-                                <input type="hidden" name="PCBCartMaVGA"
-                                    value="{{ session()->has('PCBMaVGA') ? session()->get('PCBMaVGA') : 0 }}">
-                                {{-- -- Số lượng --}}
-                                <input type="hidden" name="PCBCartSoLuongVGA"
-                                    value="{{ session()->has('PCBSoLuongVGA') ? session()->get('PCBSoLuongVGA') : 0 }}">
-                                {{-- -- Ảnh --}}
-                                <input type="hidden" name="PCBCartAnhVGA" value="{{ $tempImgVGA }}">
-                                {{-- VGA --}}
 
-                                {{-- L --}}
-                                {{-- -- Mã --}}
-                                <input type="hidden" name="PCBCartMaL"
-                                    value="{{ session()->has('PCBMaL') ? session()->get('PCBMaL') : 0 }}">
-                                {{-- -- Số lượng --}}
-                                <input type="hidden" name="PCBCartSoLuongL"
-                                    value="{{ session()->has('PCBSoLuongL') ? session()->get('PCBSoLuongL') : 0 }}">
-                                {{-- -- Ảnh --}}
-                                <input type="hidden" name="PCBCartAnhL" value="{{ $tempImgL }}">
-                                {{-- L --}}
+                                {{-- VGA --}}
+                                @if ($displayVGA == true)
+                                    {{-- -- Mã --}}
+                                    <input type="hidden" name="PCBCartMaVGA"
+                                        value="{{ session()->has('PCBMaVGA') ? session()->get('PCBMaVGA') : 0 }}">
+                                    {{-- -- Số lượng --}}
+                                    <input type="hidden" name="PCBCartSoLuongVGA"
+                                        value="{{ session()->has('PCBSoLuongVGA') ? session()->get('PCBSoLuongVGA') : 0 }}">
+                                    {{-- -- Ảnh --}}
+                                    <input type="hidden" name="PCBCartAnhVGA" value="{{ $tempImgVGA }}">
+                                    {{-- VGA --}}
+                                @endif
+                                @if ($displayL == true)
+                                    {{-- L --}}
+                                    {{-- -- Mã --}}
+                                    <input type="hidden" name="PCBCartMaL"
+                                        value="{{ session()->has('PCBMaL') ? session()->get('PCBMaL') : 0 }}">
+                                    {{-- -- Số lượng --}}
+                                    <input type="hidden" name="PCBCartSoLuongL"
+                                        value="{{ session()->has('PCBSoLuongL') ? session()->get('PCBSoLuongL') : 0 }}">
+                                    {{-- -- Ảnh --}}
+                                    <input type="hidden" name="PCBCartAnhL" value="{{ $tempImgL }}">
+                                    {{-- L --}}
+                                @endif
 
-                                <button class="btn btn-danger w-100" type="submit">Thêm vào giỏ hàng</button>
+                                <button class="btn btn-danger w-100" type="submit">Thêm vào giỏ
+                                    hàng</button>
                             </form>
+
                         </div>
                     </div>
                     {{-- Hết - Thêm vào giỏ hàng --}}
@@ -399,6 +416,79 @@
 
     </div>
     <!-- End of Page Wrapper -->
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('#ajaxSubmit').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ route('PCBuilderCustomer.store') }}",
+                    method: 'post',
+                    data: {
+                        PCBSoLuongVGA: jQuery('#PCBSoLuongVGA').val(),
+
+                    },
+                    success: function(result) {
+                        console.log("Result::" + result);
+                        jQuery('.alert').show();
+                        jQuery('.alert').html(result.success);
+                    }
+                });
+            });
+        });
+
+        function reloadPCB(url) {
+            $('#PCBTongTienVGA').load(location.href + " #PCBTongTienVGA");
+            $('#PCBTongTienL').load(location.href + " #PCBTongTienL");
+            $('#PCBCart').load(location.href + " #PCBCart");
+        }
+
+        // Kiểm tra số lượng
+
+        // VGA
+        var PCBSoLuongVGA = document.getElementById("PCBSoLuongVGA");
+        PCBSoLuongVGA.addEventListener("keyup", function(e) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('PCBuilderCustomer.store') }}',
+                data: {
+                    PCBSoLuongVGA: jQuery('#PCBSoLuongVGA').val(),
+                },
+                success: function(result) {
+                    reloadPCB(); // this calls the reload function
+                }
+            });
+        });
+
+        // L
+        var PCBSoLuongL = document.getElementById("PCBSoLuongL");
+        PCBSoLuongL.addEventListener("keyup", function(e) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('PCBuilderCustomer.store') }}',
+                data: {
+                    PCBSoLuongL: jQuery('#PCBSoLuongL').val(),
+                },
+                success: function(result) {
+                    reloadPCB(); // this calls the reload function
+                }
+            });
+        });
+    </script>
     <script>
         // Get the modal
         var modal = document.getElementById("PCBuildModal");

@@ -68,6 +68,8 @@ class CartController extends Controller
 
     public function addToCartPCB(Request $request)
     {
+
+        $emptyCartCheck = 1;
         // VGA
         $quantity = $request->PCBCartSoLuongVGA;
 
@@ -75,16 +77,18 @@ class CartController extends Controller
             $quantity = 1;
         }
         $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaVGA)->first();
-        \Cart::add([
-            'id' => $sanPham->maSP,
-            'name' => $sanPham->tenSP,
-            'price' => $sanPham->giaSP,
-            'quantity' => $quantity,
-            'attributes' => array(
-                'image' => $request->PCBCartAnhVGA,
-            )
-        ]);
-
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhVGA,
+                )
+            ]);
+        }
         // - VGA
 
         // L
@@ -94,21 +98,26 @@ class CartController extends Controller
             $quantity = 1;
         }
         $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaL)->first();
-        \Cart::add([
-            'id' => $sanPham->maSP,
-            'name' => $sanPham->tenSP,
-            'price' => $sanPham->giaSP,
-            'quantity' => $quantity,
-            'attributes' => array(
-                'image' => $request->PCBCartAnhL,
-            )
-        ]);
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
 
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhL,
+                )
+            ]);
+        }
         // - L
 
         // session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
-
-        return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
+        if ($emptyCartCheck == 0)
+            return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
+        else
+            return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Không có vật phẩm thêm vào giỏ hàng");
     }
 
     public function goToCart(Request $request)

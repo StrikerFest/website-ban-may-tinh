@@ -198,12 +198,12 @@
 
                     {{--  --}}
                 @endforeach
-                <a class="dropdown-item d-flex align-items-center" href="{{ route('product.show', $item->id) }}">
+                <div class="dropdown-item d-flex align-items-center">
 
                     <div class="font-weight-bold text-danger">
                         <div>Tổng: {{ number_format($sumCart) }} VND</div>
                     </div>
-                </a>
+                </div>
                 <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ
                     hàng
                 </a>
