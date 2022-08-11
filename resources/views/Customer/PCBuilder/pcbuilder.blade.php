@@ -166,7 +166,8 @@
                         <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
                             @csrf
                             <table class="bg- w-100 ">
-                                <tr class="">
+                                {{-- TODO: Khi nào seed xong thì cho thêm vào }}
+                                {{-- <tr class="">
                                     <td class="padding-10" style="width: 10%">Bộ vi xử lý</td>
 
                                     <td class="padding-10 " style="width: 10%">
@@ -177,14 +178,12 @@
                                         </button>
                                     </td>
 
-                                </tr>
+                                </tr> --}}
                                 <tr class="">
                                     <td class="padding-10" style="width: 200px">Card đồ họa</td>
                                     <td class="padding-10" style="width: 200px">
                                         <button id="PCBuilderButton1" type="submit" value="VGA" name="PCBModal"
-                                            class="btn btn-danger" style="width: 200px">Chọn
-                                            bộ
-                                            vi xử lý</button>
+                                            class="btn btn-danger" style="width: 200px">Chọn card đồ họa</button>
                                     </td>
                                     @php
                                         $displayVGA = session()->has('PCBMaVGA');
@@ -258,8 +257,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <button type="submit" name="PCBUpdate"
-                                                            value="1">Update</button>
+
                                                         <button type="submit" name="PCBDeleteVGA" value="1"
                                                             class="btn btn-danger">x</button>
                                                     </div>
@@ -270,11 +268,13 @@
                                     @endif
                                 </tr>
                                 <tr class="">
-                                    <td class="padding-10" style="width: 200px">Laptop Gaming</td>
+                                    <td class="padding-10" style="width: 200px">Sẽ có thêm bộ vi xử lý, ram, nguồn,...
+                                        12/08 sẽ xong
+                                    </td>
                                     <td class="padding-10" style="width: 200px">
                                         <button id="PCBuilderButton2" type="submit" value="LaptopGaming"
-                                            name="PCBModal" class="btn btn-danger"
-                                            style="width: 200px">Lappppp</button>
+                                            name="PCBModal" class="btn btn-danger" style="width: 200px">Chọn
+                                            khác</button>
                                     </td>
                                     @php
                                         $displayL = session()->has('PCBMaL');
@@ -344,8 +344,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <button type="submit" name="PCBUpdate"
-                                                            value="1">Update</button>
                                                         <button type="submit" name="PCBDeleteL" value="1"
                                                             class="btn btn-danger">x</button>
                                                     </div>
@@ -361,11 +359,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            <div class="alert alert-success" style="display:none"></div>
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="nameS">
-                            </div>
                         </form>
 
                     </div>

@@ -121,28 +121,28 @@ class PCBuilderController extends Controller
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
         $PCBTheLoai = "";
 
-        if ($receiver == "VGA") {
-            $PCBTheLoai = "Card thiết kế đồ họa";
-            session()->put('PCBTheLoai', $PCBTheLoai);
-
-            // session()->put('modalClose', 0);
-        } else if ($receiver == "LaptopGaming") {
-            $PCBTheLoai = "Laptop gaming";
-            session()->put('PCBTheLoai', $PCBTheLoai);
-
-            // session()->put('modalClose', 0);
+        switch ($receiver) {
+            case "VGA":
+                $PCBTheLoai = "Card thiết kế đồ họa";
+                session()->put('PCBTheLoai', $PCBTheLoai);
+                break;
+            case "LaptopGaming":
+                $PCBTheLoai = "Laptop gaming";
+                session()->put('PCBTheLoai', $PCBTheLoai);
+                break;
         }
+
 
         $soLuongVGA = $request->get('PCBSoLuongVGA');
         if ($soLuongVGA !== 1 && $soLuongVGA !== null) {
             session()->put('PCBSoLuongVGA', $soLuongVGA);
-            return response()->json(['success' => 'Data is successfully added']);
+            // return response()->json(['success' => 'Data is successfully added']);
         }
 
         $soLuongL = $request->get('PCBSoLuongL');
         if ($soLuongL !== 1 && $soLuongL !== null) {
             session()->put('PCBSoLuongL', $soLuongL);
-            return response()->json(['ajaxSoLuongL' => session()->get('PCBSoLuongL')]);
+            // return response()->json(['ajaxSoLuongL' => session()->get('PCBSoLuongL')]);
         }
 
         if (session()->get('PCBTheLoai') == 'Card thiết kế đồ họa') {
