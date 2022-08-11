@@ -142,11 +142,8 @@
                                         </div>
                                     </form>
                                 @endforeach
-
                             </div>
                         </div>
-
-
                     </div>
 
                 </div>
@@ -177,8 +174,8 @@
                                             vi xử lý
                                         </button>
                                     </td>
-
                                 </tr> --}}
+
                                 {{-- * VGA --}}
                                 <tr class="">
                                     <td class="padding-10" style="width: 170px">Card đồ họa</td>
@@ -193,7 +190,7 @@
                                         @php
                                             // dd('Here');
                                         @endphp
-                                        <td class="padding-10" style="width:60%">
+                                        <td class="padding-10" style="width:60%" id="PCBVGA">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     <!-- Ảnh sản phẩm-->
@@ -259,8 +256,8 @@
                                                     </div>
                                                     <div class="col-2">
 
-                                                        <button type="submit" name="PCBDeleteVGA" value="1"
-                                                            class="btn btn-danger">x</button>
+                                                        <button type="submit" name="PCBDeleteVGA" id="PCBDeleteVGA"
+                                                            value="1" class="btn btn-danger">x</button>
                                                     </div>
                                                     {{-- Hết - Thông tin sản phẩm --}}
                                                 </div>
@@ -270,10 +267,10 @@
                                 </tr>
                                 {{-- * Bộ phận khác --}}
                                 <tr class="">
-                                    <td class="padding-10" style="width: 200px">Sẽ có thêm bộ vi xử lý, ram, nguồn,...
+                                    <td class="padding-10" style="width: 170px">Sẽ có thêm bộ vi xử lý, ram, nguồn,...
                                         12/08 sẽ xong
                                     </td>
-                                    <td class="padding-10" style="width: 200px">
+                                    <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton2" type="submit" value="LaptopGaming"
                                             name="PCBModal" class="btn btn-danger" style="width: 200px">Chọn
                                             khác</button>
@@ -282,7 +279,7 @@
                                         $displayL = session()->has('PCBMaL');
                                     @endphp
                                     @if ($displayL == true)
-                                        <td class="padding-10" style="width:55%">
+                                        <td class="padding-10" style="width:60%" id="PCBL">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     <!-- Ảnh sản phẩm-->
@@ -347,7 +344,7 @@
                                                     </div>
                                                     <div class="col-2">
                                                         <button type="submit" name="PCBDeleteL" value="1"
-                                                            class="btn btn-danger">x</button>
+                                                            id="PCBDeleteL" class="btn btn-danger">x</button>
                                                     </div>
                                                     {{-- Hết - Thông tin sản phẩm --}}
                                                 </div>
@@ -425,7 +422,6 @@
                     method: 'post',
                     data: {
                         PCBSoLuongVGA: jQuery('#PCBSoLuongVGA').val(),
-
                     },
                     success: function(result) {
                         console.log("Result::" + result);
@@ -436,11 +432,88 @@
             });
         });
 
-        function reloadPCB(url) {
+        // Load lại trang
+        function reloadPCBDelete(url) {
+            $('#PCBVGA').load(location.href + " #PCBVGA");
+            $('#PCBL').load(location.href + " #PCBL");
+        }
+
+        function reloadPCBTotalMoney(url) {
             $('#PCBTongTienVGA').load(location.href + " #PCBTongTienVGA");
             $('#PCBTongTienL').load(location.href + " #PCBTongTienL");
+        }
+
+        function reloadPCBCart(url) {
             $('#PCBCart').load(location.href + " #PCBCart");
         }
+
+        // AJAX Delete
+        jQuery(document).ready(function() {
+            jQuery('#PCBDeleteVGA', '#PCBDeleteL').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ route('PCBuilderCustomer.store') }}",
+                    method: 'post',
+                    data: {
+                        PCBDeleteVGA: jQuery('#PCBDeleteVGA').val(),
+                        PCBDeleteL: jQuery('#PCBDeleteL').val(),
+                    },
+                    success: function(result) {
+                        console.log("Result::" + result);
+                        reloadPCBDelete();
+                    }
+                });
+            });
+        });
+
+        // AJAX gọi data modal
+        jQuery(document).ready(function() {
+            jQuery('#PCBDeleteVGA').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ route('PCBuilderCustomer.store') }}",
+                    method: 'post',
+                    data: {
+                        PCBDeleteVGA: jQuery('#PCBDeleteVGA').val(),
+                    },
+                    success: function(result) {
+                        console.log("Result::" + result);
+                        reloadPCBDelete();
+                    }
+                });
+            });
+            jQuery('#PCBDeleteL').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ route('PCBuilderCustomer.store') }}",
+                    method: 'post',
+                    data: {
+                        PCBDeleteL: jQuery('#PCBDeleteL').val(),
+                    },
+                    success: function(result) {
+                        console.log("Result::" + result);
+                        reloadPCBDelete();
+                    }
+                });
+            });
+        });
+
+
 
         // Kiểm tra số lượng
 
@@ -459,7 +532,8 @@
                     PCBSoLuongVGA: jQuery('#PCBSoLuongVGA').val(),
                 },
                 success: function(result) {
-                    reloadPCB(); // this calls the reload function
+                    reloadPCBTotalMoney();
+                    reloadPCBTotalCart();
                 }
             });
         });
@@ -479,7 +553,8 @@
                     PCBSoLuongL: jQuery('#PCBSoLuongL').val(),
                 },
                 success: function(result) {
-                    reloadPCB(); // this calls the reload function
+                    reloadPCBTotalMoney();
+                    reloadPCBTotalCart();
                 }
             });
         });
@@ -539,6 +614,7 @@
             if (event.target == modal) {
                 modal.style.display = "none";
                 console.log("OUTSIDE CLICK");
+                {{ session()->put('modalClose', 1) }}
             }
         }
     </script>

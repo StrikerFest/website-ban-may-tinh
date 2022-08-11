@@ -145,6 +145,7 @@ class PCBuilderController extends Controller
             // return response()->json(['ajaxSoLuongL' => session()->get('PCBSoLuongL')]);
         }
 
+
         if (session()->get('PCBTheLoai') == 'Card thiết kế đồ họa') {
             if (session()->get('PCBEmpty') !== 1) {
                 session()->put('PCBTenVGA', $item->tenSP);
@@ -162,6 +163,21 @@ class PCBuilderController extends Controller
                 session()->put('PCBTinhTrangL', "Còn hàng");
             }
         }
+
+        if ($request->PCBDeleteVGA == 1) {
+            session()->forget('PCBTenVGA');
+            session()->forget('PCBMaVGA');
+            session()->forget('PCBGiaVGA');
+            session()->forget('PCBBaoHanhVGA');
+            session()->forget('PCBTinhTrangVGA');
+        } elseif ($request->PCBDeleteL == 1) {
+            session()->forget('PCBTenL');
+            session()->forget('PCBMaL');
+            session()->forget('PCBGiaL');
+            session()->forget('PCBBaoHanhL');
+            session()->forget('PCBTinhTrangL');
+        }
+
 
 
 
