@@ -333,7 +333,8 @@
                                                                 {{ number_format(session()->get('PCBGiaL')) }}
                                                                 VND x <input type="number" id="PCBSoLuongL"
                                                                     value="{{ session()->get('PCBSoLuongL') }}"
-                                                                    min="1" max="9" name="PCBSoLuongL">
+                                                                    min="1" max="9" name="PCBSoLuongL"
+                                                                    onkeydown="return (event.keyCode!=13);">
                                                                 =
                                                                 <span class="hihi" id="PCBTongTienL">
                                                                     {{ number_format(session()->get('PCBSoLuongL') * session()->get('PCBGiaL')) }}
@@ -520,6 +521,7 @@
         // VGA
         var PCBSoLuongVGA = document.getElementById("PCBSoLuongVGA");
         PCBSoLuongVGA.addEventListener("keyup", function(e) {
+            console.log("HERE");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -533,7 +535,7 @@
                 },
                 success: function(result) {
                     reloadPCBTotalMoney();
-                    reloadPCBTotalCart();
+                    reloadPCBCart();
                 }
             });
         });
@@ -541,6 +543,7 @@
         // L
         var PCBSoLuongL = document.getElementById("PCBSoLuongL");
         PCBSoLuongL.addEventListener("keyup", function(e) {
+            console.log("HERE2");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -554,7 +557,7 @@
                 },
                 success: function(result) {
                     reloadPCBTotalMoney();
-                    reloadPCBTotalCart();
+                    reloadPCBCart();
                 }
             });
         });
