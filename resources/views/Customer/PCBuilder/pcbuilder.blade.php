@@ -179,9 +179,10 @@
                                     </td>
 
                                 </tr> --}}
+                                {{-- * VGA --}}
                                 <tr class="">
-                                    <td class="padding-10" style="width: 200px">Card đồ họa</td>
-                                    <td class="padding-10" style="width: 200px">
+                                    <td class="padding-10" style="width: 170px">Card đồ họa</td>
+                                    <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="VGA" name="PCBModal"
                                             class="btn btn-danger" style="width: 200px">Chọn card đồ họa</button>
                                     </td>
@@ -192,11 +193,11 @@
                                         @php
                                             // dd('Here');
                                         @endphp
-                                        <td class="padding-10" style="width:55%">
-                                            <div class="bg-gray-300 card padding-left-10 padding-right-10 text-left">
+                                        <td class="padding-10" style="width:60%">
+                                            <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     <!-- Ảnh sản phẩm-->
-                                                    <div class="col-2">
+                                                    <div class="col-3">
                                                         @php
                                                             $tempImgVGA;
                                                             $count = 0;
@@ -225,7 +226,7 @@
                                                     {{-- Hết - Ảnh sản phẩm --}}
 
                                                     {{-- Thông tin sản phẩm --}}
-                                                    <div class="col-8">
+                                                    <div class="col-7">
                                                         {{-- Tên sản phẩm --}}
                                                         <div class="text-bold text-dark">
                                                             {{ session()->get('PCBTenVGA') }}
@@ -267,6 +268,7 @@
                                         </td>
                                     @endif
                                 </tr>
+                                {{-- * Bộ phận khác --}}
                                 <tr class="">
                                     <td class="padding-10" style="width: 200px">Sẽ có thêm bộ vi xử lý, ram, nguồn,...
                                         12/08 sẽ xong
@@ -281,10 +283,10 @@
                                     @endphp
                                     @if ($displayL == true)
                                         <td class="padding-10" style="width:55%">
-                                            <div class="bg-gray-300 card padding-left-10 padding-right-10 text-left">
+                                            <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     <!-- Ảnh sản phẩm-->
-                                                    <div class="col-2 ">
+                                                    <div class="col-3 ">
                                                         @php
                                                             $tempImgL;
                                                             $count = 0;
@@ -313,7 +315,7 @@
                                                     {{-- Hết - Ảnh sản phẩm --}}
 
                                                     {{-- Thông tin sản phẩm --}}
-                                                    <div class="col-8">
+                                                    <div class="col-7">
                                                         {{-- Tên sản phẩm --}}
                                                         <div class="text-bold text-dark">
                                                             {{ session()->get('PCBTenL') }}
