@@ -11,6 +11,7 @@ use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
 use App\Models\SerialModel;
 use DB;
+use PDF;
 
 
 class AdminReceiptController extends Controller
@@ -242,5 +243,32 @@ class AdminReceiptController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function printPDF($id)
+    {
+        $HD = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
+        $HDCT = DetailReceiptModel::selectRaw('hoa_don_chi_tiet.soLuong, san_pham.tenSP, hoa_don_chi_tiet.giaSP, IF(
+            maTLV=1,
+            (hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)-voucher.giaTri),
+            IF(
+                maTLV=2,
+                (
+                    hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)-
+                    (hoa_don_chi_tiet.giaSP*voucher.giaTri/100)
+                ),
+                hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)
+            )
+        ) AS donGia')
+            ->leftJoin('voucher', 'voucher.maVoucher', '=' ,'hoa_don_chi_tiet.maVoucher')
+            ->join('san_pham', 'san_pham.maSP', '=', 'hoa_don_chi_tiet.maSP')
+            ->where('maHD', $id)
+            ->get();
+        // return view('Admin.Receipt.pdf', compact('HD', 'HDCT'));
+        $pdf = PDF::loadView('Admin.Receipt.pdf', [
+            'HD' => $HD,
+            'HDCT' => $HDCT,
+        ]);
+        return $pdf->download('receipt.pdf');
     }
 }

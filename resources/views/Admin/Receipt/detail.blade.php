@@ -169,9 +169,16 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <button class="btn btn-primary" onclick="window.location='{{ route("receipt.index") }}'">
-                                    Quay lại
-                                </button>
+                                <form action="{{route('receipt.pdf', $hoaDon->maHD)}}" method="get">
+                                    <button class="btn btn-primary" type="button" onclick="window.location='{{ route("receipt.index") }}'">
+                                        Quay lại
+                                    </button>
+                                    <?php if($hoaDon->maTTHD == 1){ ?>
+                                        <button style="float: right;" class="btn btn-info">
+                                            Xuất file PDF
+                                        </button>
+                                    <?php } ?>
+                                </form>
                             </div>
                         </div>
                     </div>
