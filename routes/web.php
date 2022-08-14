@@ -32,8 +32,11 @@ use App\Http\Controllers\AdminSupplierController;
 use App\Http\Controllers\AdminImportController;
 use App\Http\Controllers\AdminInventoryController;
 use App\Http\Controllers\AdminVoucherController;
+use App\Http\Controllers\AdminProductVoucherController;
 use App\Http\Controllers\AdminVoucherTypeController;
 use App\Http\Controllers\AdminSerialController;
+use App\Http\Controllers\AdminWarrantyController;
+use App\Http\Controllers\AdminWarrantyInfoController;
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facade;
@@ -84,6 +87,8 @@ Route::prefix('admin')->middleware('CheckLogin')->name('admin.')->group(function
     Route::post('product/updateSpecial/{id}', [AdminProductController::class, "updateSpecial"])->name('product.updateSpecial');
     Route::post('product/excel', [AdminProductController::class, "excel"])->name('product.excel');
     Route::get('productSample', [AdminProductController::class, "sample"])->name('product.sample');
+    Route::get('createVoucher/{maSP}', [AdminProductController::class, "createVoucher"])->name('product.createVoucher');
+    Route::post('storeVoucher', [AdminProductController::class, "storeVoucher"])->name('product.storeVoucher');
     Route::resource('product', AdminProductController::class);
 });
 // Route::prefix('admin')->group(function () {
@@ -106,6 +111,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::resource('category', AdminCategoryController::class);
     Route::get('categorySpecification/{maTL}', [AdminCategorySpecificationController::class, "index"])->name('categorySpecification.index');
     Route::resource('categorySpecification', AdminCategorySpecificationController::class)->except(['index']);
+    Route::get('receiptPDF/{maHD}', [AdminReceiptController::class, "printPDF"])->name('receipt.pdf');
     Route::resource('receipt', AdminReceiptController::class);
     Route::resource('receiptStatus', AdminReceiptStatusController::class);
     Route::resource('detailReceipt', AdminDetailReceiptController::class);
@@ -131,6 +137,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::get('voucherSample', [AdminVoucherController::class, "sample"])->name('voucher.sample');
     Route::resource('voucher', AdminVoucherController::class);
     Route::resource('voucherType', AdminVoucherTypeController::class);
+    Route::get('productVoucher/{maVoucher}', [AdminProductVoucherController::class, "index"])->name('productVoucher.index');
+    Route::resource('productVoucher', AdminProductVoucherController::class)->except(['index']);
+    Route::resource('warranty', AdminWarrantyController::class);
+    Route::get('warrantyInfo/{maHDCT}', [AdminWarrantyInfoController::class, "create"])->name('warrantyInfo.create');
+    Route::resource('warrantyInfo', AdminWarrantyInfoController::class)->except(['create']);
 });
 
 Route::get('/testAdmin', function () {

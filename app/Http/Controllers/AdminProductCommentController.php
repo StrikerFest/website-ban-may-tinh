@@ -17,7 +17,7 @@ class AdminProductCommentController extends Controller
     {
         $binhLuanSanPham = ProductCommentModel::orderBy('ngayTao', 'DESC')
             ->where('maBLC', null)
-            ->get();
+            ->paginate(10);
 
         $nguoiDung = DB::table('nguoi_dung')->get();
 
@@ -60,7 +60,7 @@ class AdminProductCommentController extends Controller
 
         $ND = DB::table('nguoi_dung')->where('maND', '=', $binhLuanSanPham->maND)->get()[0];
 
-        $phanHoiSanPham = ProductCommentModel::where('maBLC', '=' , $id)->orderBy('ngayTao', 'DESC')->get();
+        $phanHoiSanPham = ProductCommentModel::where('maBLC', '=' , $id)->orderBy('ngayTao', 'DESC')->paginate(10);
 
         $nguoiDung = DB::table('nguoi_dung')->get();
         return view('Admin.Comment.Product.reply', [

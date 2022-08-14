@@ -17,7 +17,7 @@ class AdminBlogCommentController extends Controller
     {
         $binhLuanBaiViet = BlogCommentModel::orderBy('ngayTao', 'DESC')
             ->where('maBLC', null)
-            ->get();
+            ->paginate(10);
 
         $nguoiDung = DB::table('nguoi_dung')->get();
 
@@ -60,7 +60,9 @@ class AdminBlogCommentController extends Controller
 
         $ND = DB::table('nguoi_dung')->where('maND', '=', $binhLuanBaiViet->maND)->get()[0];
 
-        $phanHoiBaiViet = BlogCommentModel::where('maBLC', '=' , $id)->orderBy('ngayTao', 'DESC')->get();
+        $phanHoiBaiViet = BlogCommentModel::where('maBLC', '=' , $id)
+            ->orderBy('ngayTao', 'DESC')
+            ->paginate(10);
 
         $nguoiDung = DB::table('nguoi_dung')->get();
         return view('Admin.Comment.Blog.reply', [

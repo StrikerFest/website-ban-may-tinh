@@ -165,6 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -196,6 +197,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // ...
         'Image'     => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
     'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
     'Excel' => Maatwebsite\Excel\Facades\Excel::class,

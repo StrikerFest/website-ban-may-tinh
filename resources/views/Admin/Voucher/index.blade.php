@@ -29,16 +29,44 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Bảng voucher hiện tại</h6>
                         <!-- Filter -->
-
+                            <div style="margin-top: 10px">
+                                <table>
+                                    <h6>Bộ lọc</h6>
+                                    <form method="get">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tên voucher">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input class="form-control" type="number" name="searchValue" value="{{$searchValue}}" placeholder="Nhập giá trị">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" name="searchType">
+                                                    <option value="" selected>Thể loại</option>
+                                                    @foreach($TheLoaiVoucher as $TLV)
+                                                        <option value="{{$TLV->tenTLV}}" <?php if($searchType == $TLV->tenTLV)echo "selected" ?>>
+                                                            {{$TLV->tenTLV}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button class="btn btn-primary">Tìm kiếm</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </table>
+                            </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
+                                Tổng số bản ghi: {{$Voucher->total()}}
+                            </div>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Mã Voucher</th>
-                                        <th>Mô tả</th>
-                                        <th>Ngày hết hạn</th>
+                                        <th>Voucher</th>
                                         <th>Thể loại</th>
                                         <th>Giá trị</th>
                                         <th>Số lượng</th>
@@ -53,8 +81,6 @@
                                     @foreach ($Voucher as $V)
                                     <tr>
                                         <td>{{$V->tenVoucher}}</td>
-                                        <td>{{$V->moTa}}</td>
-                                        <td>{{date_format(date_create($V->ngayHetHan),"d-m-Y")}}</td>
                                         <td>
                                             <?php
                                             foreach ($TheLoaiVoucher as $TLV) {
@@ -93,20 +119,30 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
-                                            <form action="{{route('voucher.edit', $V->maVoucher)}}" method="get">
-                                                @csrf
-                                                <button class="btn btn-primary btn-user btn-block">Sửa</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form action="{{route('voucher.destroy', $V->maVoucher)}}" method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button onclick="return confirm('Xác nhận xóa voucher?')" class="btn btn-primary btn-user btn-block">
-                                                    Xóa
-                                                </button>
-                                            </form>
+                                        <td width="35%">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <form action="{{route('productVoucher.index', $V->maVoucher)}}" method="get">
+                                                        @csrf
+                                                        <button class="btn btn-primary btn-user btn-block">Sản phẩm</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <form action="{{route('voucher.edit', $V->maVoucher)}}" method="get">
+                                                        @csrf
+                                                        <button class="btn btn-primary btn-user btn-block">Sửa</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <form action="{{route('voucher.destroy', $V->maVoucher)}}" method="post">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button onclick="return confirm('Xác nhận xóa voucher?')" class="btn btn-primary btn-user btn-block">
+                                                            Xóa
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            <div class="row">
                                         </td>
                                     </tr>
                                     @endforeach
@@ -115,12 +151,12 @@
                         </div>
                     </div>
                 </div>
-                {{$Voucher->links('')}}
+                {{$Voucher->links()}}
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Thêm voucher mới</h6>
                     </div>
-                    <div class="card-header">
+                    <!-- <div class="card-header">
                         <form action="{{route('voucher.sample')}}" method="get">
                             Thêm bằng file Excel
                             <button>Tải file mẫu</button>
@@ -130,11 +166,11 @@
                             <input type="file" name="file-excel">
                             <button>Xác nhận</button>
                         </form>
-                        <?php if(!session()->has('sanPham')){ ?>
+                        <?php //if(!session()->has('sanPham')){ ?>
                             @if(session()->has('success'))
                                 <div class="alert alert-success">{{session()->get('success')}}</div>
                             @endif
-                        <?php } ?>
+                        <?php //} ?>
                         @if(isset($errors) && $errors->any())
                             <div class="alert alert-danger">
                                 @foreach($errors->all() as $error)
@@ -143,14 +179,14 @@
                                 @endforeach
                             </div>
                         @endif
-                    </div>
+                    </div> -->
                     <div class="card-body">
                         <div class="table-responsive">
                             <form class="user" action="{{ route('voucher.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <label class="form-inline label">Mã voucher</label>
+                                        <label class="form-inline label">Tên voucher</label>
                                         @error('tenVoucher')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -159,11 +195,11 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-6 mb-sm-0">
-                                        <label class="form-inline label">Ngày hết hạn</label>
-                                        @error('ngayHetHan')
+                                        <label class="form-inline label">Số lượng</label>
+                                        @error('soLuong')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="date" class="form-control" id="exampleProduct" name="ngayHetHan" min="<?php echo date("Y-m-d", strtotime("+1 day")); ?>">
+                                        <input type="number" class="form-control" id="exampleProduct" placeholder="Quanity" name="soLuong" min="0">
                                     </div>
                                     <div class="col-sm-6 mb-6 mb-sm-0">
                                         <label class="form-inline label">Thể loại voucher</label>
@@ -179,23 +215,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-6 mb-sm-0">
+                                    <div class="col-sm-12 mb-6 mb-sm-0" id="resizable">
                                         <label class="form-inline label">Giá trị</label>
                                         @error('giaTri')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="number" class="form-control" id="giaTri" placeholder="Value" name="giaTri" min="0">
                                     </div>
-                                    <div class="col-sm-6 mb-6 mb-sm-0">
-                                        <label class="form-inline label">Số lượng</label>
-                                        @error('soLuong')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="number" class="form-control" id="exampleProduct" placeholder="Quanity" name="soLuong" min="0">
-                                    </div>
-                                </div>
-                                <div class="form-group row" id="dynamic-div" style="display: none;">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0" id="dynamic-div" style="display: none;">
                                         <label class="form-inline label">Tặng phẩm</label>
                                         <select class="form-control select2" name="maSP" id="gift">
                                             <option value="default" disabled selected hidden>Gift</option>
@@ -203,15 +230,6 @@
                                             <option value="{{ $SP->maSP }}">{{ $SP->tenSP }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Mô tả</label>
-                                        @error('moTa')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <textarea class="form-control" name="moTa" rows="5" placeholder="Content"></textarea>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">
@@ -279,18 +297,21 @@
             switch(Number(voucherType)){
                 case 1:
                     //Giảm giá tiền mặt
+                    $('#resizable').addClass('col-sm-12 mb-6 mb-sm-0').removeClass('col-sm-6 mb-6 mb-sm-0')
                     $('#giaTri').attr({placeholder: 'Value (VND)', readonly: false})
                     $('#giaTri').val('')
                     $('#dynamic-div').css({display: 'none'})
                     break;
                 case 2:
                     //Giảm giá %
+                    $('#resizable').addClass('col-sm-12 mb-6 mb-sm-0').removeClass('col-sm-6 mb-6 mb-sm-0')
                     $('#giaTri').attr({placeholder: 'Value (%)', readonly: false})
                     $('#giaTri').val('')
                     $('#dynamic-div').css({display: 'none'})
                     break;
                 case 3:
                     //Tặng phẩm
+                    $('#resizable').addClass('col-sm-6 mb-6 mb-sm-0').removeClass('col-sm-12 mb-6 mb-sm-0')
                     $('#giaTri').attr({placeholder: 'Value', readonly: true})
                     $('#giaTri').val('')
                     $('#dynamic-div').css({display: 'block'})

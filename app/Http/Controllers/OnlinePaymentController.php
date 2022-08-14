@@ -76,8 +76,13 @@ class OnlinePaymentController extends Controller
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
         // dd($jsonResult);
-        $returned_val = $jsonResult['payUrl'];
-        return redirect()->to($returned_val);
+        if(!isset($jsonResult['payUrl'])){
+            return back()->with('moneyLimit', $jsonResult['message']);
+        }else{
+            return redirect()->to($jsonResult['payUrl']);
+        }
+        // $returned_val = $jsonResult['payUrl'];
+        // return redirect()->to($returned_val);
         // return Redirect($this->$jsonResult['payUrl']);
     }
 
@@ -110,7 +115,7 @@ class OnlinePaymentController extends Controller
             $partnerSignature = hash_hmac("sha256", $rawHash, 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa');
 
             if ($m2signature == $partnerSignature) {
-                if ($resultCode !== '0') {
+                if ($resultCode == '0') {
                     //Giao dịch thành công
                     // \Cart::clear();
                     if (session()->has('khachHang')) {
@@ -189,9 +194,9 @@ class OnlinePaymentController extends Controller
                     $listNguoiDung = DB::table('nguoi_dung')->where('maND', session()->get('khachHang'))->get();
 
                     return redirect()->route('receiptCustomer.create')->with('momoCancel', 'Thanh toán đã bị huỷ');
+                } else {
+                    return redirect()->route('product.index')->with('unknownError', 'Đã xảy ra lỗi');
                 }
-            } else {
-                return redirect()->route('product.index')->with('unknownError', 'Đã xảy ra lỗi');
             }
         } catch (Exception $e) {
             echo $response['message'] = $e;

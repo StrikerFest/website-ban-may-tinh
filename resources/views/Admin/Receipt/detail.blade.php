@@ -31,7 +31,6 @@
                                         <th>Khách hàng</th>
                                         <th>Số điện thoại</th>
                                         <th>Ngày tạo</th>
-                                        <th colspan="2">Voucher</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -44,28 +43,8 @@
                                             {{$hoaDon->soDienThoai}}
                                         </td>
                                         <td>
-                                            {{$hoaDon->ngayTao}}
+                                            {{date_format(date_create($hoaDon->ngayTao), 'd-m-Y H:i:s')}}
                                         </td>
-                                        <?php if($hoaDon->tenVoucher){ ?>
-                                            <td>
-                                                {{$hoaDon->tenVoucher}}
-                                            </td>
-                                            <td>
-                                                <?php 
-                                                    if($hoaDon->maTLV == 1){
-                                                        echo 'Voucher giảm '.number_format($hoaDon->giaTri) .' vnđ';
-                                                    }else if($hoaDon->maTLV == 2){
-                                                        echo 'Voucher giảm ' .$hoaDon->giaTri .'%';
-                                                    }else{
-                                                        echo 'Tặng sản phẩm '.$hoaDon->tenSP;
-                                                    }
-                                                ?>
-                                            </td>
-                                        <?php }else{ ?>
-                                            <td>
-                                                Không có voucher
-                                            </td>
-                                        <?php } ?>
                                     </tr>
                                 </table>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -78,6 +57,10 @@
                                             <?php } ?>
                                             <th>Giá</th>
                                             <th>Giảm giá</th>
+                                            <th>Voucher</th>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                                <th colspan="2" width="25%">Bảo hành</th>
+                                            <?php } ?>
                                             <th colspan="2">Tổng tiền</th>
                                         </tr>
                                     </thead>
@@ -103,31 +86,46 @@
                                             <?php } ?>
                                             <td>{{number_format($HDCT->giaSP)}} VND</td>
                                             <td>{{$HDCT->giamGia}}%</td>
+                                            <td>
+                                                <?php 
+                                                    if(isset($HDCT->tenVoucher)){
+                                                        echo $HDCT->tenVoucher;
+                                                    }else{
+                                                        echo 'Không có voucher';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                                <td>{{date_format(date_create($HDCT->ngayHetHan), 'd-m-Y')}}</td>
+                                                <td>
+                                                    <?php if($HDCT->hetHan){ ?>
+                                                        Đã hết hạn
+                                                    <?php }else{ ?>
+                                                        <form action="{{route('warrantyInfo.create', $HDCT->maHDCT)}}" method="get">
+                                                            <button class="btn btn-primary" type="submit">
+                                                                Bảo hành
+                                                            </button>
+                                                        </form>
+                                                    <?php } ?>
+                                                </td>
+                                            <?php } ?>
                                             <td colspan="2">
-                                                {{number_format($HDCT->tongTien)}} VND
+                                                {{number_format($HDCT->tongTien - $HDCT->tienGiamVoucher)}} VND
                                             </td>
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 4 : 5) ?>">
-                                                Mã voucher giảm
-                                            </td>
-                                            <td colspan="2">
-                                                {{number_format($thanhTien->voucher)}} VND
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 4 : 5) ?>">
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 8) ?>">
                                                 Thành tiền
                                             </td>
                                             <td colspan="2">
-                                                {{number_format($thanhTien->tong)}} VND
+                                                {{number_format($thanhTien) .' VND'}}
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 4 : 5) ?>">
+                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 8) ?>">
                                                 <?php 
                                                     if($hoaDon->maTTHD == 2){
                                                         echo('Duyệt đơn');
@@ -142,8 +140,6 @@
                                                         @method('PUT')
                                                         @csrf
                                                         <input type="hidden" name="maTTHD" value="1">
-                                                        <input type="hidden" name="maVoucher" value="{{$hoaDon->maVoucher}}">
-                                                        <input type="hidden" name="giaTri" value="{{$thanhTien->voucher}}">
                                                         <button class="btn btn-success" onclick="return confirm('Xác nhận duyệt đơn?')">
                                                             Duyệt
                                                         </button>
@@ -173,9 +169,16 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <button class="btn btn-primary" onclick="window.location='{{ route("receipt.index") }}'">
-                                    Quay lại
-                                </button>
+                                <form action="{{route('receipt.pdf', $hoaDon->maHD)}}" method="get">
+                                    <button class="btn btn-primary" type="button" onclick="window.location='{{ route("receipt.index") }}'">
+                                        Quay lại
+                                    </button>
+                                    <?php if($hoaDon->maTTHD == 1){ ?>
+                                        <button style="float: right;" class="btn btn-info">
+                                            Xuất file PDF
+                                        </button>
+                                    <?php } ?>
+                                </form>
                             </div>
                         </div>
                     </div>

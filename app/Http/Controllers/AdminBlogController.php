@@ -48,7 +48,12 @@ class AdminBlogController extends Controller
 
         $baiViet = BlogModel::where('tieuDe', 'like', "%$searchName%")
             ->whereBetween('ngayTao', [$NBD, $NKT])
-            ->get();
+            ->paginate(5)
+            ->appends([
+                "searchName" => $searchName,
+                "NBD" => $NBD,
+                "NKT" => $NKT,
+            ]);
 
         return view('Admin.Blog.index', [
             "nhanVien" => $nhanVien,

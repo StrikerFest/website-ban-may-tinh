@@ -309,6 +309,9 @@
         <?php if(session()->has('momoCancel')){ ?>
         alert('{{ session()->get('momoCancel') }}')
         <?php } ?>
+        <?php if(session()->has('moneyLimit')){ ?>
+            alert('{{session()->get('moneyLimit')}}')
+        <?php } ?>
     </script>
 </body>
 

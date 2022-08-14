@@ -63,6 +63,9 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
+                                    Tổng số bản ghi: {{$sanPham->total()}}
+                                </div>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -71,13 +74,11 @@
                                             <th>Giảm giá</th>
                                             <th>Nhà sản xuất</th>
                                             <th>Danh mục</th>
+                                            <th>Bảo hành</th>
                                             <th>Tình trạng</th>
                                             <th width="22%">Thao tác</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-
-                                    </tfoot>
                                     <tbody>
                                     @foreach ($sanPham as $SP)
                                         <tr>
@@ -104,6 +105,15 @@
                                             </td>
                                             <td>
                                                 <?php
+                                                    foreach($baoHanh as $BH){
+                                                        if(($SP->maBH)==($BH->maBH)){
+                                                            echo $BH->tenBH;
+                                                        }
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
                                                     foreach($tinhTrangSanPham as $TTSP){
                                                         if(($SP->maTTSP)==($TTSP->maTTSP)){
                                                             echo $TTSP->tenTTSP;
@@ -112,6 +122,19 @@
                                                 ?>
                                             </td>
                                             <td>
+                                                <?php if($SP->tenTLC != "Tặng phẩm"){ ?>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <form action="{{route('admin.product.createVoucher', $SP->maSP)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Voucher</button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <form action="{{route('admin.product.updateSpecial', $SP->maSP)}}" method="post">
@@ -205,7 +228,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('admin.product.store') }}" method="POST">
+                                <form class="user" action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
@@ -236,7 +259,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Nhà sản xuất</label>
                                         @error('maNSX')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -248,7 +271,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Danh mục</label>
                                         @error('maTLC')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -260,7 +283,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
                                         <label class="form-inline label">Tình trạng</label>
                                         @error('maTTSP')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -271,6 +294,27 @@
                                                 <option value="{{ $TTSP->maTTSP }}">{{ $TTSP->tenTTSP }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Bảo hành</label>
+                                        @error('maBH')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <select class="form-control" name="maBH">
+                                            <option value="" disabled selected hidden>Warranty</option>
+                                            @foreach($baoHanh as $BH)
+                                                <option value="{{ $BH->maBH }}">{{ $BH->tenBH }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Ảnh</label>
+                                        @error('anh')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <input type="file" class="form-control-file" name="anh[]" multiple>
                                     </div>
                                 </div>
                                 <div class="form-group row">

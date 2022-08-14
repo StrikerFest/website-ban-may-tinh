@@ -16,20 +16,41 @@ class AdminVoucherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Voucher = VoucherModel::orderBy('maVoucher', 'desc')->paginate(5);
+        $searchName = $request->get('searchName');
+        $searchValue = $request->get('searchValue');
+        $searchType = $request->get('searchType');
 
+        $Voucher = VoucherModel::select(['voucher.*'])
+            ->join('the_loai_voucher', 'the_loai_voucher.maTLV', '=', 'voucher.maTLV')
+            ->leftJoin('san_pham_voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+            ->leftJoin('san_pham', 'san_pham.maSP', '=', 'san_pham_voucher.maSP')
+            ->where('tenVoucher', 'like', "%$searchName%")
+            ->where('giaTri', 'like', "%$searchValue%")
+            ->where('tenTLV', 'like', "%$searchType%")
+            ->groupBy('tenVoucher')
+            ->orderBy('voucher.maVoucher', 'desc')
+            ->paginate(5)
+            ->appends([
+                'searchName' => $searchName,
+                'searchValue' => $searchValue,
+                'searchType' => $searchType,
+            ]);
+        // dd($Voucher);
         $TangPham = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
             ->where('the_loai_con.tenTLC', 'like', 'Tặng phẩm')
             ->get();
 
         $TheLoaiVoucher = DB::table('the_loai_voucher')->get();
-
+        // dd($Voucher);
         return view('Admin.Voucher.index', [
             'Voucher' => $Voucher,
             'TheLoaiVoucher' => $TheLoaiVoucher,
             'TangPham' => $TangPham,
+            'searchName' => $searchName,
+            'searchValue' => $searchValue,
+            'searchType' => $searchType,
         ]);
     }
 
@@ -53,21 +74,17 @@ class AdminVoucherController extends Controller
     {
         $validated = $request->validate([
             'tenVoucher' => 'required|min:5|unique:App\Models\VoucherModel,tenVoucher',
-            'ngayHetHan' => 'required|date',
             'maTLV' => 'required',
             'giaTri' => 'required|numeric|min:0',
             'soLuong' => 'required|numeric|min:0',
-            'moTa' => 'required',
         ]);
 
         $V = new VoucherModel();
         $V->tenVoucher = $request->get('tenVoucher');
-        $V->ngayHetHan = $request->get('ngayHetHan');
         $V->maTLV = $request->get('maTLV');
         $V->giaTri = $request->get('giaTri');
         $V->soLuong = $request->get('soLuong');
-        $V->moTa = $request->get('moTa');
-        $V->maSP = $request->get('maTLV') == 3 ? $request->Get('maSP') : null;
+        $V->maSP = $request->get('maTLV') == 3 ? $request->get('maSP') : null;
         $V->save();
 
         return redirect(route('voucher.index'));
@@ -118,20 +135,16 @@ class AdminVoucherController extends Controller
     {
         $validated = $request->validate([
             'tenVoucher' => 'required|min:5|unique:App\Models\VoucherModel,tenVoucher,'. $id,
-            'ngayHetHan' => 'required|date',
             'maTLV' => 'required',
             'giaTri' => 'required|numeric|min:0',
             'soLuong' => 'required|numeric|min:0',
-            'moTa' => 'required',
         ]);
 
         $V = VoucherModel::find($id);
         $V->tenVoucher = $request->get('tenVoucher');
-        $V->ngayHetHan = $request->get('ngayHetHan');
         $V->maTLV = $request->get('maTLV');
         $V->giaTri = $request->get('giaTri');
         $V->soLuong = $request->get('soLuong');
-        $V->moTa = $request->get('moTa');
         $V->maSP = $request->get('maTLV') == 3 ? $request->Get('maSP') : null;
         $V->save();
 

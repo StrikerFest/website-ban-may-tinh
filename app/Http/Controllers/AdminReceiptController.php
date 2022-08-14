@@ -10,8 +10,8 @@ use App\Models\UserModel;
 use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
 use App\Models\SerialModel;
-use App\Models\UserVoucherModel;
 use DB;
+use PDF;
 
 
 class AdminReceiptController extends Controller
@@ -63,7 +63,13 @@ class AdminReceiptController extends Controller
             ->orderBy('hoa_don.maTTHD', 'DESC')
             ->orderBy('ngayTao', 'ASC')
             ->orderBy('hoa_don.maHD', 'DESC')
-            ->get();
+            ->paginate(5)
+            ->appends([
+                'searchName' => $searchName,
+                'searchStatus' => $searchStatus,
+                "NBD" => $NBD,
+                "NKT" => $NKT,
+            ]);
         // dd($hoaDon);
         return view('Admin.Receipt.index', [
             'nguoiDung' => $nguoiDung,
@@ -108,60 +114,53 @@ class AdminReceiptController extends Controller
     {
         $sanPham = ProductModel::all();
 
-        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')
-            ->leftJoin('voucher', 'voucher.maVoucher', '=', 'hoa_don.maVoucher')
-            ->leftJoin('san_pham', 'san_pham.maSP', '=', 'voucher.maSP')
-            ->find($id);
+        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
         
         $tinhTrangHoaDon = ReceiptStatusModel::all();
 
         $hoaDonChiTiet = DB::select("
             SELECT 
+                hoa_don_chi_tiet.maHDCT,
                 san_pham.tenSP,
                 san_pham.maSP,
                 hoa_don_chi_tiet.giamGia,
                 hoa_don_chi_tiet.soLuong,
                 hoa_don_chi_tiet.giaSP,
-                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS tongTien
+                voucher.tenVoucher,
+                voucher.giaTri,
+                voucher.maTLV,
+                bao_hanh.tenBH,
+                DATE_ADD(hoa_don.ngayTao, INTERVAL bao_hanh.giaTri MONTH) AS ngayHetHan,
+                IF(DATE_ADD(hoa_don.ngayTao, INTERVAL bao_hanh.giaTri MONTH) < now(), TRUE, FALSE) AS hetHan,
+                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS tongTien,
+                IF(maTLV = 1, voucher.giaTri * hoa_don_chi_tiet.soLuong, If(maTLV = 2, (hoa_don_chi_tiet.giaSP * voucher.giaTri /100) * hoa_don_chi_tiet.soLuong, 0)) AS tienGiamVoucher
                 FROM hoa_don_chi_tiet
-                JOIN san_pham
-                ON hoa_don_chi_tiet.maSP = san_pham.maSP
+                JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
+                JOIN bao_hanh ON bao_hanh.maBH = san_pham.maBH
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+                LEFT JOIN voucher ON hoa_don_chi_tiet.maVoucher = voucher.maVoucher
                 WHERE hoa_don_chi_tiet.maHD = $id
         ");
 
         $thanhTien = DB::select("
-            SELECT
-                SUM(
-                    IF(
-                        maTLV = 1,
-                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) - giaTri,
-                        IF(
-                            maTLV = 2,
-                            ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong)
-                            -
-                            (
-                                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) * giaTri / 100
-                            ),
-                            ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong)
-                        )
-                    )
-                ) AS tong,
-                IF(
+        SELECT
+            SUM(
+                if(
                     maTLV = 1,
-                    giaTri,
-                    IF(
+                    ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100) - giaTri) * hoa_don_chi_tiet.soLuong),
+                    (IF(
                         maTLV = 2,
-                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) * giaTri / 100,
-                        0
+                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100) - (giaTri * hoa_don_chi_tiet.giaSP / 100)) * hoa_don_chi_tiet.soLuong),
+                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong))
                     )
-                )AS voucher
-                FROM hoa_don_chi_tiet
-                JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
-                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-                LEFT JOIN voucher ON voucher.maVoucher = hoa_don.maVoucher
-                WHERE hoa_don_chi_tiet.maHD = $id
-        ")[0];
-        // dd($thanhTien);
+                )
+            ) as tong
+            FROM hoa_don_chi_tiet
+            JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
+            LEFT JOIN voucher on voucher.maVoucher = hoa_don_chi_tiet.maVoucher
+            WHERE hoa_don_chi_tiet.maHD = $id
+        ")[0]->tong;
+        
         return view('Admin.Receipt.detail', [
             'thanhTien' => $thanhTien,
             'hoaDon' => $hoaDon,
@@ -190,31 +189,14 @@ class AdminReceiptController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $voucher = DB::table('voucher')
-            ->where('maVoucher', $request->get('maVoucher'))
-            ->leftJoin('san_pham', 'voucher.maSP', '=', 'san_pham.maSP')
-            ->first();
         $hoaDon = ReceiptModel::find($id);
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
-        $hoaDon->tongTienGiam = $request->get('giaTri');
-        if(!is_null($voucher)){
-            if($voucher->maTLV == 3){
-                //Nếu voucher tặng phẩm -> hoá đơn có trường ghi chú
-                $hoaDon->ghiChu = "Tặng sản phẩm: ".$voucher->tenSP;
-            }
-            $voucherNguoiDung = UserVoucherModel::where('maND', $hoaDon->maKH)
-            ->where('maVoucher', $voucher->maVoucher)
-            ->first();
-            if(!is_null($voucherNguoiDung)){
-                    //Bảng nguoi_dung_voucher suDung = 1 -> voucher đã sử dụng, suDung = 0 -> voucher chưa sử dụng
-                    $voucherNguoiDung->suDung = 1;
-                    $voucherNguoiDung->update();
-                }
-        }
+        
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
-        //kiểm tra số lượng sản phẩm
+
         if($request->get('maTTHD') == 1){
+            //kiểm tra số lượng sản phẩm
             for($i = 0; $i < sizeof($hdct); $i++){
                 $sanPham = ProductModel::find($hdct[$i]->maSP);
                 $sanPham->soLuong -= $hdct[$i]->soLuong;
@@ -222,14 +204,13 @@ class AdminReceiptController extends Controller
                     return redirect()->back()->with('negative_quantity', 'Số lượng sản phẩm không đủ');
                 }
             }
-        }
-        //nếu đủ số lượng sẽ giảm số lượng sản phẩm tương ứng
-        if($request->get('maTTHD') == 1){
+            
+            //nếu đủ số lượng sẽ giảm số lượng sản phẩm tương ứng
             for($i = 0; $i < sizeof($hdct); $i++){
                 $sanPham = ProductModel::find($hdct[$i]->maSP);
                 $sanPham->soLuong -= $hdct[$i]->soLuong;
                 $sanPham->save();
-
+    
                 //Lấy số lượng mã serial của sản phẩm đươc mua tương ứng theo số lượng trong HĐCT
                 $serials = SerialModel::join('nhap_kho', 'nhap_kho.maNK', '=', 'serial.maNK')
                 ->where('maSP', $hdct[$i]->maSP)
@@ -262,5 +243,32 @@ class AdminReceiptController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function printPDF($id)
+    {
+        $HD = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
+        $HDCT = DetailReceiptModel::selectRaw('hoa_don_chi_tiet.soLuong, san_pham.tenSP, hoa_don_chi_tiet.giaSP, IF(
+            maTLV=1,
+            (hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)-voucher.giaTri),
+            IF(
+                maTLV=2,
+                (
+                    hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)-
+                    (hoa_don_chi_tiet.giaSP*voucher.giaTri/100)
+                ),
+                hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)
+            )
+        ) AS donGia')
+            ->leftJoin('voucher', 'voucher.maVoucher', '=' ,'hoa_don_chi_tiet.maVoucher')
+            ->join('san_pham', 'san_pham.maSP', '=', 'hoa_don_chi_tiet.maSP')
+            ->where('maHD', $id)
+            ->get();
+        // return view('Admin.Receipt.pdf', compact('HD', 'HDCT'));
+        $pdf = PDF::loadView('Admin.Receipt.pdf', [
+            'HD' => $HD,
+            'HDCT' => $HDCT,
+        ]);
+        return $pdf->download('receipt.pdf');
     }
 }

@@ -64,6 +64,7 @@ class AdminProductSpecificationController extends Controller
             //Validate two columns unique constraint:
             //unique:table,column,except,idColumn,extraColumn,extraColumnValue
             'maTS' => 'required|unique:App\Models\ProductSpecificationModel,maTS,NULL,id,maSP,'.$request->maSP,
+            'maTS.*' => 'distinct',
             'giaTri.*' => 'required|min:1',
         ]);
         $maSP = $request->get('maSP');

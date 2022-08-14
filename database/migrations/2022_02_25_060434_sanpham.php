@@ -26,6 +26,8 @@ return new class extends Migration
             $table->foreign('maTLC')->references('maTLC')->on('the_loai_con');
             $table->unsignedInteger('maTTSP');
             $table->foreign('maTTSP')->references('maTTSP')->on('tinh_trang_san_pham');
+            $table->unsignedInteger('maBH');
+            $table->foreign('maBH')->references('maBH')->on('bao_hanh');
             $table->boolean('dacBiet')->default('0');
         });
     }

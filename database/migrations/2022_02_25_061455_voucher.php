@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('voucher', function(Blueprint $table){
             $table->increments('maVoucher');
             $table->string('tenVoucher', 30);
-            $table->text('moTa');
-            $table->dateTime('ngayHetHan');
             $table->unsignedInteger('maTLV');
             $table->foreign('maTLV')->references('maTLV')->on('the_loai_voucher');
             $table->double('giaTri')->default('0');

@@ -148,8 +148,20 @@ INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Đang bán');
 -- Bảng Nhà phân phối
 INSERT INTO `nha_phan_phoi` (`maNPP`, `tenNPP`, `diaChiNPP`, `soDienThoai`) VALUES
 (NULL, 'Công ty A', 'Địa chỉ công ty A', '0123456789'),
+(NULL,
+
+INSERT INTO `nha_phan_phoi` (`maNPP`, `tenNPP`, `diaChiNPP`, `soDienThoai`) VALUES
+(NULL, 'Công ty A', 'Địa chỉ công ty A', '0123456789'),
 (NULL, 'Công ty B', 'Địa chỉ công ty B', '0123456789'),
 (NULL, 'Công ty C', 'Địa chỉ công ty C', '0123456789');
+
+-- ==========================================================================================================
+-- Bảng Bảo hành
+INSERT INTO `bao_hanh` (`maBH`, `tenBH`, `giaTri`) VALUES (NULL, 'Không bảo hành', '0'),
+                                                            (NULL, '3 tháng', '3'),
+                                                            (NULL, '6 tháng', '6'),
+                                                            (NULL, '1 năm', '12'),
+                                                            (NULL, '3 năm', '36');
 
 -- ==========================================================================================================
 -- Bảng ảnh quảng cáo
@@ -166,255 +178,256 @@ INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
 
 
 -- Laptop gaming
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) (i7 11800H/64GB RAM/1TB SSD/RTX 3080 8G/16.0 inch WQXGA 165Hz 100%sRGB/Win10/Xám) (2021)',82990000,'Máy tính lập trình',28,5,7,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Helios 500 PH517-52-797L (NH.QD3SV.001) (i711800H/64GB Ram/2TB SSD/RTX3080 8G/17.3 inch FHD 360Hz/Win 10/Đen)',98000000,'Máy tính lập trình',28,5,7,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',45000000,'Máy tính lập trình',28,5,7,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Acer Gaming Aspire 7 A715-42G-R4XX (NH.QAYSV.008) (R5 5500U/8GB RAM/256GB SSD/15.6 inch FHD/GTX1650 4G/Win11/Đen) (2021)',18000000,'Máy tính lập trình',28,5,7,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Acer Gaming Nitro 5 Eagle AN515-57-54MV (NH.QENSV.003) (i5 11400H/8GB Ram/512GB SSD/RTX3050 4G/15.6 inch FHD 144Hz/Win 11 mới nhất/Đen) (2021)',23000000,'Máy tính lập trình',28,5,7,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Gigabyte Gaming AORUS 15P (XD-73S1224GH) (i7 11800H /16GB Ram/1TB SSD/RTX3070 8G/15.6 inch FHD 240Hz/Win 10/Đen/Balo Aorus) (2021)',50000000,'Máy tính lập trình',28,10,8,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i5 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',23000000,'Máy tính lập trình',28,10,4,6,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i9 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',73000000,'Máy tính lập trình',28,10,4,6,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) (i7 11800H/64GB RAM/1TB SSD/RTX 3080 8G/16.0 inch WQXGA 165Hz 100%sRGB/Win10/Xám) (2021)',82990000,'Máy tính lập trình',10,5,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Predator Helios 500 PH517-52-797L (NH.QD3SV.001) (i711800H/64GB Ram/2TB SSD/RTX3080 8G/17.3 inch FHD 360Hz/Win 10/Đen)',98000000,'Máy tính lập trình',10,5,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',4500000,'Máy tính lập trình',10,5,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Aspire 7 A715-42G-R4XX (NH.QAYSV.008) (R5 5500U/8GB RAM/256GB SSD/15.6 inch FHD/GTX1650 4G/Win11/Đen) (2021)',18000000,'Máy tính lập trình',10,5,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Nitro 5 Eagle AN515-57-54MV (NH.QENSV.003) (i5 11400H/8GB Ram/512GB SSD/RTX3050 4G/15.6 inch FHD 144Hz/Win 11 mới nhất/Đen) (2021)',23000000,'Máy tính lập trình',10,5,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Gigabyte Gaming AORUS 15P (XD-73S1224GH) (i7 11800H /16GB Ram/1TB SSD/RTX3070 8G/15.6 inch FHD 240Hz/Win 10/Đen/Balo Aorus) (2021)',50000000,'Máy tính lập trình',10,10,8,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i5 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',23000000,'Máy tính lập trình',10,10,4,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i9 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',73000000,'Máy tính lập trình',10,10,4,6,2,3);
 -- PC Gaming
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',70000000,'Máy tính lập trình',28,10,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',30000000,'Máy tính lập trình',28,10,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING HACOM 031 (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',13000000,'Máy tính lập trình',28,10,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING HACOM PRO 021 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',16900000,'Máy tính lập trình',28,5,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING VANGUARD O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',123000000,'Máy tính lập trình',28,5,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING SOULREAVER 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',49000000,'Máy tính lập trình',28,5,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING SPEEDO (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',21000000,'Máy tính lập trình',28,5,1,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('PC GAMING LIGHTBEARER 21 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',22900000,'Máy tính lập trình',28,5,1,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',70000000,'Máy tính lập trình',10,10,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',30000000,'Máy tính lập trình',10,10,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM 031 (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',13000000,'Máy tính lập trình',10,10,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 021 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',16900000,'Máy tính lập trình',10,5,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING VANGUARD O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',123000000,'Máy tính lập trình',10,5,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING SOULREAVER 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',49000000,'Máy tính lập trình',10,5,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING SPEEDO (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',21000000,'Máy tính lập trình',10,5,1,3,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING LIGHTBEARER 21 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',22900000,'Máy tính lập trình',10,5,1,3,3,3);
 -- PC trạm
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 3650 (i7-11700/8GB RAM/1TB HDD/T600/DVDRW/K+M)',28900000,'Máy tính lập trình',28,5,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 4443 (i7-11700/12GB RAM/2TB HDD/T800/DVDRW/K+M)',38900000,'Máy tính lập trình',28,5,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 5604 (i7-11700/16GB RAM/2TB HDD/T900/DVDRW/K+M)',48900000,'Máy tính lập trình',28,5,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 6799 (i9-11700/8GB RAM/2TB HDD/T900/DVDRW/K+M)',58900000,'Máy tính lập trình',28,15,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 7022 (i9-11700/16GB RAM/5TB HDD/T1100/DVDRW/K+M)',78900000,'Máy tính lập trình',28,15,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 8055 (i9-11700/32GB RAM/10TB HDD/T1100/DVDRW/K+M)',99000000,'Máy tính lập trình',28,15,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 10565 (i9-11700/64GB RAM/10TB HDD/T1200/DVDRW/K+M)',110000000,'Máy tính lập trình',28,15,1,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Workstation Dell Precision 14050 (i9-11700/128GB RAM/20TB HDD/T1600/DVDRW/K+M)',228900000,'Máy tính lập trình',28,15,1,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 3650 (i7-11700/8GB RAM/1TB HDD/T600/DVDRW/K+M)',28900000,'Máy tính lập trình',10,5,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 4443 (i7-11700/12GB RAM/2TB HDD/T800/DVDRW/K+M)',38900000,'Máy tính lập trình',10,5,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 5604 (i7-11700/16GB RAM/2TB HDD/T900/DVDRW/K+M)',48900000,'Máy tính lập trình',10,5,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 6799 (i9-11700/8GB RAM/2TB HDD/T900/DVDRW/K+M)',58900000,'Máy tính lập trình',10,15,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 7022 (i9-11700/16GB RAM/5TB HDD/T1100/DVDRW/K+M)',78900000,'Máy tính lập trình',10,15,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 8055 (i9-11700/32GB RAM/10TB HDD/T1100/DVDRW/K+M)',99000000,'Máy tính lập trình',10,15,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 10565 (i9-11700/64GB RAM/10TB HDD/T1200/DVDRW/K+M)',110000000,'Máy tính lập trình',10,15,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 14050 (i9-11700/128GB RAM/20TB HDD/T1600/DVDRW/K+M)',228900000,'Máy tính lập trình',10,15,1,2,3,3);
 
 -- Laptop Văn phòng
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus VivoBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',18900000,'Máy tính lập trình',28,15,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus Leafbook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',28900000,'Máy tính lập trình',28,15,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus WinnieBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',38900000,'Máy tính lập trình',28,5,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus CoolBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',48900000,'Máy tính lập trình',28,5,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus HotBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',58900000,'Máy tính lập trình',28,5,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus WarmBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',68900000,'Máy tính lập trình',28,5,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus MarkBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',78900000,'Máy tính lập trình',28,5,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus DakBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus VivoBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',18900000,'Máy tính lập trình',10,15,1,4,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Leafbook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',28900000,'Máy tính lập trình',10,15,1,4,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus WinnieBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',38900000,'Máy tính lập trình',10,5,1,4,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus CoolBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',48900000,'Máy tính lập trình',10,5,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus HotBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',58900000,'Máy tính lập trình',10,5,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus WarmBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',68900000,'Máy tính lập trình',10,5,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus MarkBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',78900000,'Máy tính lập trình',10,5,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus DakBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',10,5,1,4,4,3);
 
 -- Card đồ họa
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T600 (4GB GDDR6, 128-bit, 4x mini DisplayPort)',4900000,'Card đồ họa',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T800 (8GB GDDR6, 128-bit, 4x mini DisplayPort)',5900000,'Card đồ họa',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',6900000,'Card đồ họa',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T11200 (16GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,'Card đồ họa',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T320 (32GB GDDR6, 128-bit, 4x mini DisplayPort)',14900000,'Card đồ họa',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T6600 (64GB GDDR6, 128-bit, 4x mini DisplayPort)',24900000,'Card đồ họa',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T11600 (128GB GDDR6, 128-bit, 4x mini DisplayPort)',22900000,'Card đồ họa',28,15,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,'Card đồ họa',28,15,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,'Card đồ họa',28,15,1,22,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T600 (4GB GDDR6, 128-bit, 4x mini DisplayPort)',4900000,'Card đồ họa',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T800 (8GB GDDR6, 128-bit, 4x mini DisplayPort)',5900000,'Card đồ họa',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',6900000,'Card đồ họa',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T11200 (16GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,'Card đồ họa',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T320 (32GB GDDR6, 128-bit, 4x mini DisplayPort)',14900000,'Card đồ họa',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T6600 (64GB GDDR6, 128-bit, 4x mini DisplayPort)',24900000,'Card đồ họa',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T11600 (128GB GDDR6, 128-bit, 4x mini DisplayPort)',22900000,'Card đồ họa',28,15,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,'Card đồ họa',28,15,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Card màn hình NVIDIA T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,'Card đồ họa',28,15,1,22,4,3);
 
 -- Dac biet
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop Asus Zenbook S (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Zenbook S (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,'Máy tính lập trình',28,5,1,3,4,3);
 
 -- Bộ vi xử lý
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',5500000,'Vi xử lý',28,10,1,16,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('CPU Intel Core i3-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',6500000,'Vi xử lý',28,10,1,16,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',7500000,'Vi xử lý',28,10,1,17,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('CPU Intel Core i5-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',8500000,'Vi xử lý',28,10,1,17,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',9500000,'Vi xử lý',28,10,1,18,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',5500000,'Vi xử lý',28,10,1,16,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i3-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',6500000,'Vi xử lý',28,10,1,16,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',7500000,'Vi xử lý',28,10,1,17,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i5-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',8500000,'Vi xử lý',28,10,1,17,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',9500000,'Vi xử lý',28,10,1,18,4,3);
 
 -- Bo mạch chủ
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B660-I GAMING',5500000,'Bo mạch chủ xử lý',28,10,1,19,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B760-I GAMING',6500000,'Bo mạch chủ xử lý',28,10,1,19,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B860-I GAMING',7500000,'Bo mạch chủ xử lý',28,10,1,19,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B960-I GAMING',8500000,'Bo mạch chủ xử lý',28,10,1,20,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B1660-I GAMING',15500000,'Bo mạch chủ xử lý',28,10,1,20,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B660-I GAMING',5500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B760-I GAMING',6500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B860-I GAMING',7500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B960-I GAMING',8500000,'Bo mạch chủ xử lý',28,10,1,20,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B1660-I GAMING',15500000,'Bo mạch chủ xử lý',28,10,1,20,4,3);
 
 -- RAM
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('RAM Desktop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',799000,'Bộ nhớ trong',28,10,1,21,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('RAM Desktop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR5 2666MHz',899000,'Bộ nhớ trong',28,10,1,21,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('RAM Desktop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR5 2666MHz',999000,'Bộ nhớ trong',28,10,1,21,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('RAM Laptop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',899000,'Bộ nhớ trong',28,10,1,22,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('RAM Laptop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR4 2666MHz',990000,'Bộ nhớ trong',28,10,1,22,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('RAM Desktop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',799000,'Bộ nhớ trong',28,10,1,21,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('RAM Desktop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR5 2666MHz',899000,'Bộ nhớ trong',28,10,1,21,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('RAM Desktop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR5 2666MHz',999000,'Bộ nhớ trong',28,10,1,21,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('RAM Laptop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',899000,'Bộ nhớ trong',28,10,1,22,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('RAM Laptop CORSAIR Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR4 2666MHz',990000,'Bộ nhớ trong',28,10,1,22,4,3);
 
 -- Nguồn
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 550W Bronze ( Màu Đen/80 Plus Bronze )',9990000,'Nguồn máy tính',28,10,1,23,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 650W Bronze ( Màu Đen/80 Plus Bronze )',10990000,'Nguồn máy tính',28,10,1,23,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 750W Bronze ( Màu Đen/80 Plus Bronze )',11990000,'Nguồn máy tính',28,10,1,23,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 850W Titanium ( Màu Đen/80 Plus Titanium )',12990000,'Nguồn máy tính',28,10,1,24,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 950W Titanium  ( Màu Đen/80 Plus Titanium )',13990000,'Nguồn máy tính',28,10,1,24,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Nguồn ASUS TUF GAMING 550W Bronze ( Màu Đen/80 Plus Bronze )',9990000,'Nguồn máy tính',28,10,1,23,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Nguồn ASUS TUF GAMING 650W Bronze ( Màu Đen/80 Plus Bronze )',10990000,'Nguồn máy tính',28,10,1,23,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Nguồn ASUS TUF GAMING 750W Bronze ( Màu Đen/80 Plus Bronze )',11990000,'Nguồn máy tính',28,10,1,23,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Nguồn ASUS TUF GAMING 850W Titanium ( Màu Đen/80 Plus Titanium )',12990000,'Nguồn máy tính',28,10,1,24,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Nguồn ASUS TUF GAMING 950W Titanium  ( Màu Đen/80 Plus Titanium )',13990000,'Nguồn máy tính',28,10,1,24,4,3);
 
 -- Vỏ case
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R12 BLACK (Mid Tower/Màu Đen)',709000,'Vỏ case',28,10,1,25,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R22 BLACK (Mid Tower/Màu Đen)',809000,'Vỏ case',28,10,1,25,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R32 BLACK (Mid Tower/Màu Đen)',889000,'Vỏ case',28,10,1,25,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R42 BLACK (Mid Tower/Màu Đen)',909000,'Vỏ case',28,10,1,26,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R82 BLACK (Mid Tower/Màu Đen)',1009000,'Vỏ case',28,10,1,26,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Vỏ Case Vitra POSEIDON R12 BLACK (Mid Tower/Màu Đen)',709000,'Vỏ case',28,10,1,25,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Vỏ Case Vitra POSEIDON R22 BLACK (Mid Tower/Màu Đen)',809000,'Vỏ case',28,10,1,25,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Vỏ Case Vitra POSEIDON R32 BLACK (Mid Tower/Màu Đen)',889000,'Vỏ case',28,10,1,25,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Vỏ Case Vitra POSEIDON R42 BLACK (Mid Tower/Màu Đen)',909000,'Vỏ case',28,10,1,26,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Vỏ Case Vitra POSEIDON R82 BLACK (Mid Tower/Màu Đen)',1009000,'Vỏ case',28,10,1,26,4,3);
 
 -- Quạt làm mát
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST120 Triple White ARGB 3 in1',990000,'Quạt làm mát',28,10,1,27,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST220 Triple White ARGB 3 in1',1090000,'Quạt làm mát',28,10,1,27,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST320 Triple White ARGB 3 in1',1100000,'Quạt làm mát',28,10,1,27,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST420 Triple White ARGB 3 in1',1200000,'Quạt làm mát',28,10,1,27,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST520 Triple White ARGB 3 in1',1300000,'Quạt làm mát',28,10,1,27,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Fan Case LIAN-LI  ST120 Triple White ARGB 3 in1',990000,'Quạt làm mát',28,10,1,27,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Fan Case LIAN-LI  ST220 Triple White ARGB 3 in1',1090000,'Quạt làm mát',28,10,1,27,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Fan Case LIAN-LI  ST320 Triple White ARGB 3 in1',1100000,'Quạt làm mát',28,10,1,27,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Fan Case LIAN-LI  ST420 Triple White ARGB 3 in1',1200000,'Quạt làm mát',28,10,1,27,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Fan Case LIAN-LI  ST520 Triple White ARGB 3 in1',1300000,'Quạt làm mát',28,10,1,27,4,3);
 -- Tản nhiệt khí
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt khí Thermalright Frost Commander 140 Black',1800000,'Tản nhiệt khí làm mát',28,10,1,28,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt khí Thermalright Frost Commander 200 Black',1900000,'Tản nhiệt khí làm mát',28,10,1,28,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt khí Thermalright Frost Commander 240 Black',2100000,'Tản nhiệt khí làm mát',28,10,1,28,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt khí Thermalright Frost Commander 300 Black',2200000,'Tản nhiệt khí làm mát',28,10,1,28,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt khí Thermalright Frost Commander 340 Black',2690000,'Tản nhiệt khí làm mát',28,10,1,28,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt khí Thermalright Frost Commander 140 Black',1800000,'Tản nhiệt khí làm mát',28,10,1,28,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt khí Thermalright Frost Commander 200 Black',1900000,'Tản nhiệt khí làm mát',28,10,1,28,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt khí Thermalright Frost Commander 240 Black',2100000,'Tản nhiệt khí làm mát',28,10,1,28,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt khí Thermalright Frost Commander 300 Black',2200000,'Tản nhiệt khí làm mát',28,10,1,28,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt khí Thermalright Frost Commander 340 Black',2690000,'Tản nhiệt khí làm mát',28,10,1,28,4,3);
 
 -- Tản nhiệt nước
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW6 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2000000,'Tản nhiệt nước làm mát',28,10,1,29,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW7 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2400000,'Tản nhiệt nước làm mát',28,10,1,29,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW8 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3100000,'Tản nhiệt nước làm mát',28,10,1,29,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW9 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3300000,'Tản nhiệt nước làm mát',28,10,1,30,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW12 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',4000000,'Tản nhiệt nước làm mát',28,10,1,30,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt nước AIO Jonsbo TW6 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2000000,'Tản nhiệt nước làm mát',28,10,1,29,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt nước AIO Jonsbo TW7 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2400000,'Tản nhiệt nước làm mát',28,10,1,29,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt nước AIO Jonsbo TW8 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3100000,'Tản nhiệt nước làm mát',28,10,1,29,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt nước AIO Jonsbo TW9 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3300000,'Tản nhiệt nước làm mát',28,10,1,30,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Tản nhiệt nước AIO Jonsbo TW12 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',4000000,'Tản nhiệt nước làm mát',28,10,1,30,4,3);
 
 -- Chuột
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Chuột game dây Asus TUF M4 (USB)',1100000,'Chuột gaming',28,10,1,31,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Chuột game dây Asus TUF M5 (USB)',2100000,'Chuột gaming',28,10,1,31,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Chuột game dây Asus TUF M6 (USB)',3100000,'Chuột gaming',28,10,1,31,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Chuột game không dây Asus TUF M6 Wireless (USB)',4100000,'Chuột gaming',28,10,1,32,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Chuột game không dây Asus TUF M8 Wireless (USB)',5100000,'Chuột gaming',28,10,1,32,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Chuột game dây Asus TUF M4 (USB)',1100000,'Chuột gaming',28,10,1,31,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Chuột game dây Asus TUF M5 (USB)',2100000,'Chuột gaming',28,10,1,31,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Chuột game dây Asus TUF M6 (USB)',3100000,'Chuột gaming',28,10,1,31,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Chuột game không dây Asus TUF M6 Wireless (USB)',4100000,'Chuột gaming',28,10,1,32,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Chuột game không dây Asus TUF M8 Wireless (USB)',5100000,'Chuột gaming',28,10,1,32,4,3);
 -- Bàn phím
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Bàn phím Logitech G813 Lightsync RGB (USB)',1990000,'Bàn phím gaming',28,10,1,33,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Bàn phím giả cơ Logitech G813 Lightsync RGB (USB)',2100000,'Bàn phím gaming',28,10,1,34,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Bàn phím giả cơ Logitech G913 Lightsync RGB GL Clicky (USB)',2200000,'Bàn phím gaming',28,10,1,34,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Bàn phím cơ Logitech G813 Lightsync RGB GL Clicky (USB)',2900000,'Bàn phím gaming',28,10,1,35,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Bàn phím cơ Logitech G913 Lightsync RGB GL Clicky (USB)',3100000,'Bàn phím gaming',28,10,1,35,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Bàn phím Logitech G813 Lightsync RGB (USB)',1990000,'Bàn phím gaming',28,10,1,33,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Bàn phím giả cơ Logitech G813 Lightsync RGB (USB)',2100000,'Bàn phím gaming',28,10,1,34,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Bàn phím giả cơ Logitech G913 Lightsync RGB GL Clicky (USB)',2200000,'Bàn phím gaming',28,10,1,34,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Bàn phím cơ Logitech G813 Lightsync RGB GL Clicky (USB)',2900000,'Bàn phím gaming',28,10,1,35,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Bàn phím cơ Logitech G913 Lightsync RGB GL Clicky (USB)',3100000,'Bàn phím gaming',28,10,1,35,4,3);
 -- Màn hình
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Màn hình Viewsonic VA903-H',1200000,'Màn hình',28,10,1,7,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Màn hình Viewsonic VA1203-H',2200000,'Màn hình',28,10,1,8,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Màn hình Viewsonic VA1703-H',3200000,'Màn hình',28,10,1,9,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Màn hình Viewsonic VA1903-H',4200000,'Màn hình',28,10,1,9,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Màn hình Viewsonic VA2903-H',8200000,'Màn hình',28,10,1,9,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Màn hình Viewsonic VA903-H',1200000,'Màn hình',28,10,1,7,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Màn hình Viewsonic VA1203-H',2200000,'Màn hình',28,10,1,8,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Màn hình Viewsonic VA1703-H',3200000,'Màn hình',28,10,1,9,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Màn hình Viewsonic VA1903-H',4200000,'Màn hình',28,10,1,9,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Màn hình Viewsonic VA2903-H',8200000,'Màn hình',28,10,1,9,4,3);
 -- HDD
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WD',870000,'Màn hình',28,10,1,10,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WD',900000,'Màn hình',28,10,1,10,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WD',1020000,'Màn hình',28,10,1,10,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng HDD 3TB WD',1400000,'Màn hình',28,10,1,10,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng HDD 6TB WD',1600000,'Màn hình',28,10,1,10,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng HDD 500GB WD',870000,'Màn hình',28,10,1,10,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng HDD 1TB WD',900000,'Màn hình',28,10,1,10,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng HDD 2TB WD',1020000,'Màn hình',28,10,1,10,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng HDD 3TB WD',1400000,'Màn hình',28,10,1,10,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng HDD 6TB WD',1600000,'Màn hình',28,10,1,10,4,3);
 -- SSD
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng SSD 500GB WD',1200000,'Màn hình',28,10,1,11,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng SSD 1TB WD',2200000,'Màn hình',28,10,1,11,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng SSD 2TB WD',3200000,'Màn hình',28,10,1,11,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng SSD 3TB WD',4200000,'Màn hình',28,10,1,11,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maTTSP`)
-VALUE('Ổ cứng SSD 6TB WD',8200000,'Màn hình',28,10,1,11,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng SSD 500GB WD',1200000,'Màn hình',28,10,1,11,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng SSD 1TB WD',2200000,'Màn hình',28,10,1,11,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng SSD 2TB WD',3200000,'Màn hình',28,10,1,11,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng SSD 3TB WD',4200000,'Màn hình',28,10,1,11,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Ổ cứng SSD 6TB WD',8200000,'Màn hình',28,10,1,11,4,3);
 -- Tặng phẩm
-INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, `maNSX`, `maTLC`, `maTTSP`) VALUES (NULL, 'Quà tặng 1', '1500000', 'abc', '10', '0', '3', '21', '1'),
-                                                                                                                                        (NULL, 'Quà tặng 2', '500000', 'asd', '10', '0', '5', '21', '1'),
-                                                                                                                                        (NULL, 'Quà tặng abc...', '1000000', 'Quà tặng ko bán', '10', '0', '1', '21', '1');
+INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `moTa`, `soLuong`, `giamGia`, `maNSX`, `maTLC`, `maBH`, `maTTSP`) VALUES (NULL, 'Chuột không dây Logitech B175', '150000', 'Quà tặng không bán', '10', '0', '3', '21', '1', '1'),
+                                                                                                                    (NULL, 'Bàn phím cơ không dây Dareu EK807G TKL', '500000', 'Quà tặng không bán', '10', '0', '5', '21', '1', '1'),
+                                                                                                                    (NULL, 'Chuột chơi game có dây Logitech G203 Lightsync', '300000', 'Quà tặng không bán', '10', '0', '1', '21', '1', '1');
+
 
 
 -- Bảng sản phẩm nhà phân phối
@@ -440,7 +453,7 @@ INSERT INTO `san_pham_nha_phan_phoi` (`maSPNPP`, `maSP`, `maNPP`) VALUES (NULL, 
                                                                         (NULL, '20', '3'),
                                                                         (NULL, '21', '3'),
                                                                         (NULL, '22', '3'),
-                                                                        (NULL, '23', '2'),
+                                                                        (NULL, '23', '3'),
                                                                         (NULL, '24', '3'),
                                                                         (NULL, '25', '2'),
                                                                         (NULL, '26', '2'),
@@ -521,6 +534,9 @@ INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (41,'STOCK_GRAPHIC_CARD.jpg');
 --
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (42,'zenbook.png');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (43,'omen17.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'chuot-khong-day-logitech-b175.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (45,'ban-phim-co-khong-day-dareu-ek807g-2.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (46,'34_1_41.jpg');
 
 -- Bộ vi xử lý
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'CPU_i3.jpg');
@@ -1698,6 +1714,529 @@ INSERT INTO `khuyen_mai` (`maKM`, `maSP`,`khuyenMai`) VALUES    (NULL, 1,"Free s
 -- Bảng thể loại voucher
 INSERT INTO `the_loai_voucher` (`maTLV`, `tenTLV`) VALUES (NULL, 'Giảm giá tiền mặt'), (NULL, 'Giảm giá phần trăm'), (NULL, 'Tặng phẩm');
 
-INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `moTa`, `ngayHetHan`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'abc123', 'Mã voucher giảm giá 1 củ', '2023-07-12 00:00:00', '1', '1000000', '10', NULL),
-                                                                                                        (NULL, 'def456', 'Mã voucher giảm giá 20%', '2023-07-12 00:00:00', '2', '20', '10', NULL),
-                                                                                                        (NULL, 'ghi789', 'Mã voucher tặng kèm sản phẩm', '2023-07-12 00:00:00', '3', '0', '10', '44');
+-- Bảng voucher
+INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `maTLV`, `giaTri`, `soLuong`, `maSP`) VALUES (NULL, 'Giảm 100.000 VNĐ', '1', '100000', '30', NULL),
+                                                                                                (NULL, 'Giảm 200.000 VNĐ', '1', '200000', '30', NULL),
+                                                                                                (NULL, 'Giảm 500.000 VNĐ', '1', '500000', '10', NULL),
+                                                                                                (NULL, 'Giảm 5%', '2', '5', '20', NULL),
+                                                                                                (NULL, 'Giảm 10%', '2', '10', '20', NULL),
+                                                                                                (NULL, 'Giảm 15%', '2', '15', '20', NULL),
+                                                                                                (NULL, 'Tặng Chuột không dây Logitech B175', '3', '150000', '10', '44'),
+                                                                                                (NULL, 'Tặng Bàn phím cơ không dây Dareu EK807G TKL', '3', '500000', '10', '45'),
+                                                                                                (NULL, 'Tặng Chuột chơi game có dây Logitech G203 Lightsync', '3', '300000', '10', '46');
+
+-- Bảng nhập kho
+INSERT INTO `nhap_kho` (`maNK`, `maNPP`, `ngayNhap`, `maNV`) VALUES (NULL, '1', '2022-08-03 09:59:39.000000', '1'),
+                                                                    (NULL, '2', '2022-08-03 09:59:39.000000', '1'),
+                                                                    (NULL, '3', '2022-08-03 09:59:39.000000', '1');
+
+-- Bảng nhập kho chi tiết
+INSERT INTO `nhap_kho_chi_tiet` (`maNKCT`, `maNK`, `maSP`, `soLuong`, `giaNhap`) VALUES (NULL, '1', '1', '10', '1000000'),
+                                                                                        (NULL, '1', '2', '10', '1000000'),
+                                                                                        (NULL, '1', '3', '10', '1000000'),
+                                                                                        (NULL, '1', '4', '10', '1000000'),
+                                                                                        (NULL, '1', '5', '10', '1000000'),
+                                                                                        (NULL, '1', '6', '10', '1000000'),
+                                                                                        (NULL, '1', '7', '10', '1000000'),
+                                                                                        (NULL, '1', '8', '10', '1000000'),
+                                                                                        (NULL, '1', '33', '10', '1000000'),
+                                                                                        (NULL, '1', '34', '10', '1000000'),
+                                                                                        (NULL, '1', '35', '10', '1000000'),
+                                                                                        (NULL, '1', '36', '10', '1000000'),
+                                                                                        (NULL, '1', '37', '10', '1000000'),
+                                                                                        (NULL, '1', '38', '10', '1000000'),
+                                                                                        (NULL, '1', '39', '10', '1000000'),
+                                                                                        (NULL, '1', '40', '10', '1000000'),
+                                                                                        (NULL, '1', '41', '10', '1000000'),
+                                                                                        (NULL, '1', '42', '10', '1000000'),
+                                                                                        (NULL, '1', '43', '10', '1000000'),
+                                                                                        (NULL, '1', '46', '10', '1000000'),
+                                                                                        (NULL, '2', '9', '10', '1500000'),
+                                                                                        (NULL, '2', '10', '10', '1500000'),
+                                                                                        (NULL, '2', '11', '10', '1500000'),
+                                                                                        (NULL, '2', '12', '10', '1500000'),
+                                                                                        (NULL, '2', '13', '10', '1500000'),
+                                                                                        (NULL, '2', '14', '10', '1500000'),
+                                                                                        (NULL, '2', '15', '10', '1500000'),
+                                                                                        (NULL, '2', '16', '10', '1500000'),
+                                                                                        (NULL, '2', '25', '10', '1500000'),
+                                                                                        (NULL, '2', '26', '10', '1500000'),
+                                                                                        (NULL, '2', '27', '10', '1500000'),
+                                                                                        (NULL, '2', '28', '10', '1500000'),
+                                                                                        (NULL, '2', '29', '10', '1500000'),
+                                                                                        (NULL, '2', '30', '10', '1500000'),
+                                                                                        (NULL, '2', '31', '10', '1500000'),
+                                                                                        (NULL, '2', '32', '10', '1500000'),
+                                                                                        (NULL, '2', '44', '10', '1500000'),
+                                                                                        (NULL, '3', '17', '10', '2000000'),
+                                                                                        (NULL, '3', '18', '10', '2000000'),
+                                                                                        (NULL, '3', '19', '10', '2000000'),
+                                                                                        (NULL, '3', '20', '10', '2000000'),
+                                                                                        (NULL, '3', '21', '10', '2000000'),
+                                                                                        (NULL, '3', '22', '10', '2000000'),
+                                                                                        (NULL, '3', '23', '10', '2000000'),
+                                                                                        (NULL, '3', '24', '10', '2000000'),
+                                                                                        (NULL, '3', '45', '10', '2000000');
+
+
+-- Bảng serial
+INSERT INTO `serial` (`maSerial`, `maSP`, `serial`, `maNK`, `maHDCT`) VALUES (NULL, '1', '500SE1', '1', NULL),
+                                                                            (NULL, '1', '500SE2', '1', NULL),
+                                                                            (NULL, '1', '500SE3', '1', NULL),
+                                                                            (NULL, '1', '500SE4', '1', NULL),
+                                                                            (NULL, '1', '500SE5', '1', NULL),
+                                                                            (NULL, '1', '500SE6', '1', NULL),
+                                                                            (NULL, '1', '500SE7', '1', NULL),
+                                                                            (NULL, '1', '500SE8', '1', NULL),
+                                                                            (NULL, '1', '500SE9', '1', NULL),
+                                                                            (NULL, '1', '500SE10', '1', NULL),
+                                                                            (NULL, '2', 'Helios5001', '1', NULL),
+                                                                            (NULL, '2', 'Helios5002', '1', NULL),
+                                                                            (NULL, '2', 'Helios5003', '1', NULL),
+                                                                            (NULL, '2', 'Helios5004', '1', NULL),
+                                                                            (NULL, '2', 'Helios5005', '1', NULL),
+                                                                            (NULL, '2', 'Helios5006', '1', NULL),
+                                                                            (NULL, '2', 'Helios5007', '1', NULL),
+                                                                            (NULL, '2', 'Helios5008', '1', NULL),
+                                                                            (NULL, '2', 'Helios5009', '1', NULL),
+                                                                            (NULL, '2', 'Helios50010', '1', NULL),
+                                                                            (NULL, '3', 'Helios3001', '1', NULL),
+                                                                            (NULL, '3', 'Helios3002', '1', NULL),
+                                                                            (NULL, '3', 'Helios3003', '1', NULL),
+                                                                            (NULL, '3', 'Helios3004', '1', NULL),
+                                                                            (NULL, '3', 'Helios3005', '1', NULL),
+                                                                            (NULL, '3', 'Helios3006', '1', NULL),
+                                                                            (NULL, '3', 'Helios3007', '1', NULL),
+                                                                            (NULL, '3', 'Helios3008', '1', NULL),
+                                                                            (NULL, '3', 'Helios3009', '1', NULL),
+                                                                            (NULL, '3', 'Helios30010', '1', NULL),
+                                                                            (NULL, '4', 'Aspire1', '1', NULL),
+                                                                            (NULL, '4', 'Aspire2', '1', NULL),
+                                                                            (NULL, '4', 'Aspire3', '1', NULL),
+                                                                            (NULL, '4', 'Aspire4', '1', NULL),
+                                                                            (NULL, '4', 'Aspire5', '1', NULL),
+                                                                            (NULL, '4', 'Aspire6', '1', NULL),
+                                                                            (NULL, '4', 'Aspire7', '1', NULL),
+                                                                            (NULL, '4', 'Aspire8', '1', NULL),
+                                                                            (NULL, '4', 'Aspire9', '1', NULL),
+                                                                            (NULL, '4', 'Aspire10', '1', NULL),
+                                                                            (NULL, '5', 'Eagle1', '1', NULL),
+                                                                            (NULL, '5', 'Eagle2', '1', NULL),
+                                                                            (NULL, '5', 'Eagle3', '1', NULL),
+                                                                            (NULL, '5', 'Eagle4', '1', NULL),
+                                                                            (NULL, '5', 'Eagle5', '1', NULL),
+                                                                            (NULL, '5', 'Eagle6', '1', NULL),
+                                                                            (NULL, '5', 'Eagle7', '1', NULL),
+                                                                            (NULL, '5', 'Eagle8', '1', NULL),
+                                                                            (NULL, '5', 'Eagle9', '1', NULL),
+                                                                            (NULL, '5', 'Eagle10', '1', NULL),
+                                                                            (NULL, '6', 'Aorus1', '1', NULL),
+                                                                            (NULL, '6', 'Aorus2', '1', NULL),
+                                                                            (NULL, '6', 'Aorus3', '1', NULL),
+                                                                            (NULL, '6', 'Aorus4', '1', NULL),
+                                                                            (NULL, '6', 'Aorus5', '1', NULL),
+                                                                            (NULL, '6', 'Aorus6', '1', NULL),
+                                                                            (NULL, '6', 'Aorus7', '1', NULL),
+                                                                            (NULL, '6', 'Aorus8', '1', NULL),
+                                                                            (NULL, '6', 'Aorus9', '1', NULL),
+                                                                            (NULL, '6', 'Aorus10', '1', NULL),
+                                                                            (NULL, '7', 'TUFi51', '1', NULL),
+                                                                            (NULL, '7', 'TUFi52', '1', NULL),
+                                                                            (NULL, '7', 'TUFi53', '1', NULL),
+                                                                            (NULL, '7', 'TUFi54', '1', NULL),
+                                                                            (NULL, '7', 'TUFi55', '1', NULL),
+                                                                            (NULL, '7', 'TUFi56', '1', NULL),
+                                                                            (NULL, '7', 'TUFi57', '1', NULL),
+                                                                            (NULL, '7', 'TUFi58', '1', NULL),
+                                                                            (NULL, '7', 'TUFi59', '1', NULL),
+                                                                            (NULL, '7', 'TUFi510', '1', NULL),
+                                                                            (NULL, '8', 'TUFi91', '1', NULL),
+                                                                            (NULL, '8', 'TUFi92', '1', NULL),
+                                                                            (NULL, '8', 'TUFi93', '1', NULL),
+                                                                            (NULL, '8', 'TUFi94', '1', NULL),
+                                                                            (NULL, '8', 'TUFi95', '1', NULL),
+                                                                            (NULL, '8', 'TUFi96', '1', NULL),
+                                                                            (NULL, '8', 'TUFi97', '1', NULL),
+                                                                            (NULL, '8', 'TUFi98', '1', NULL),
+                                                                            (NULL, '8', 'TUFi99', '1', NULL),
+                                                                            (NULL, '8', 'TUFi910', '1', NULL),
+                                                                            (NULL, '9', 'LianLi1', '2', NULL),
+                                                                            (NULL, '9', 'LianLi2', '2', NULL),
+                                                                            (NULL, '9', 'LianLi3', '2', NULL),
+                                                                            (NULL, '9', 'LianLi4', '2', NULL),
+                                                                            (NULL, '9', 'LianLi5', '2', NULL),
+                                                                            (NULL, '9', 'LianLi6', '2', NULL),
+                                                                            (NULL, '9', 'LianLi7', '2', NULL),
+                                                                            (NULL, '9', 'LianLi8', '2', NULL),
+                                                                            (NULL, '9', 'LianLi9', '2', NULL),
+                                                                            (NULL, '9', 'LianLi10', '2', NULL),
+                                                                            (NULL, '10', 'Ha0201', '2', NULL),
+                                                                            (NULL, '10', 'Ha0202', '2', NULL),
+                                                                            (NULL, '10', 'Ha0203', '2', NULL),
+                                                                            (NULL, '10', 'Ha0204', '2', NULL),
+                                                                            (NULL, '10', 'Ha0205', '2', NULL),
+                                                                            (NULL, '10', 'Ha0206', '2', NULL),
+                                                                            (NULL, '10', 'Ha0207', '2', NULL),
+                                                                            (NULL, '10', 'Ha0208', '2', NULL),
+                                                                            (NULL, '10', 'Ha0209', '2', NULL),
+                                                                            (NULL, '10', 'Ha02010', '2', NULL),
+                                                                            (NULL, '11', 'Ha0311', '2', NULL),
+                                                                            (NULL, '11', 'Ha0312', '2', NULL),
+                                                                            (NULL, '11', 'Ha0313', '2', NULL),
+                                                                            (NULL, '11', 'Ha0314', '2', NULL),
+                                                                            (NULL, '11', 'Ha0315', '2', NULL),
+                                                                            (NULL, '11', 'Ha0316', '2', NULL),
+                                                                            (NULL, '11', 'Ha0317', '2', NULL),
+                                                                            (NULL, '11', 'Ha0318', '2', NULL),
+                                                                            (NULL, '11', 'Ha0319', '2', NULL),
+                                                                            (NULL, '11', 'Ha03110', '2', NULL),
+                                                                            (NULL, '12', 'Ha0211', '2', NULL),
+                                                                            (NULL, '12', 'Ha0212', '2', NULL),
+                                                                            (NULL, '12', 'Ha0213', '2', NULL),
+                                                                            (NULL, '12', 'Ha0214', '2', NULL),
+                                                                            (NULL, '12', 'Ha0215', '2', NULL),
+                                                                            (NULL, '12', 'Ha0216', '2', NULL),
+                                                                            (NULL, '12', 'Ha0217', '2', NULL),
+                                                                            (NULL, '12', 'Ha0218', '2', NULL),
+                                                                            (NULL, '12', 'Ha0219', '2', NULL),
+                                                                            (NULL, '12', 'Ha02110', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard1', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard2', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard3', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard4', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard5', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard6', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard7', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard8', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard9', '2', NULL),
+                                                                            (NULL, '13', 'Vanguard10', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver1', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver2', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver3', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver4', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver5', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver6', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver7', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver8', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver9', '2', NULL),
+                                                                            (NULL, '14', 'SoulReaver10', '2', NULL),
+                                                                            (NULL, '15', 'Speedo1', '2', NULL),
+                                                                            (NULL, '15', 'Speedo2', '2', NULL),
+                                                                            (NULL, '15', 'Speedo3', '2', NULL),
+                                                                            (NULL, '15', 'Speedo4', '2', NULL),
+                                                                            (NULL, '15', 'Speedo5', '2', NULL),
+                                                                            (NULL, '15', 'Speedo6', '2', NULL),
+                                                                            (NULL, '15', 'Speedo7', '2', NULL),
+                                                                            (NULL, '15', 'Speedo8', '2', NULL),
+                                                                            (NULL, '15', 'Speedo9', '2', NULL),
+                                                                            (NULL, '15', 'Speedo10', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer1', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer2', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer3', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer4', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer5', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer6', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer7', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer8', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer9', '2', NULL),
+                                                                            (NULL, '16', 'LightBearer10', '2', NULL),
+                                                                            (NULL, '17', 'Pre36501', '3', NULL),
+                                                                            (NULL, '17', 'Pre36502', '3', NULL),
+                                                                            (NULL, '17', 'Pre36503', '3', NULL),
+                                                                            (NULL, '17', 'Pre36504', '3', NULL),
+                                                                            (NULL, '17', 'Pre36505', '3', NULL),
+                                                                            (NULL, '17', 'Pre36506', '3', NULL),
+                                                                            (NULL, '17', 'Pre36507', '3', NULL),
+                                                                            (NULL, '17', 'Pre36508', '3', NULL),
+                                                                            (NULL, '17', 'Pre36509', '3', NULL),
+                                                                            (NULL, '17', 'Pre365010', '3', NULL),
+                                                                            (NULL, '18', 'Pre44431', '3', NULL),
+                                                                            (NULL, '18', 'Pre44432', '3', NULL),
+                                                                            (NULL, '18', 'Pre44433', '3', NULL),
+                                                                            (NULL, '18', 'Pre44434', '3', NULL),
+                                                                            (NULL, '18', 'Pre44435', '3', NULL),
+                                                                            (NULL, '18', 'Pre44436', '3', NULL),
+                                                                            (NULL, '18', 'Pre44437', '3', NULL),
+                                                                            (NULL, '18', 'Pre44438', '3', NULL),
+                                                                            (NULL, '18', 'Pre44439', '3', NULL),
+                                                                            (NULL, '18', 'Pre444310', '3', NULL),
+                                                                            (NULL, '19', 'Pre56041', '3', NULL),
+                                                                            (NULL, '19', 'Pre56042', '3', NULL),
+                                                                            (NULL, '19', 'Pre56043', '3', NULL),
+                                                                            (NULL, '19', 'Pre56044', '3', NULL),
+                                                                            (NULL, '19', 'Pre56045', '3', NULL),
+                                                                            (NULL, '19', 'Pre56046', '3', NULL),
+                                                                            (NULL, '19', 'Pre56047', '3', NULL),
+                                                                            (NULL, '19', 'Pre56048', '3', NULL),
+                                                                            (NULL, '19', 'Pre56049', '3', NULL),
+                                                                            (NULL, '19', 'Pre560410', '3', NULL),
+                                                                            (NULL, '20', 'Pre67991', '3', NULL),
+                                                                            (NULL, '20', 'Pre67992', '3', NULL),
+                                                                            (NULL, '20', 'Pre67993', '3', NULL),
+                                                                            (NULL, '20', 'Pre67994', '3', NULL),
+                                                                            (NULL, '20', 'Pre67995', '3', NULL),
+                                                                            (NULL, '20', 'Pre67996', '3', NULL),
+                                                                            (NULL, '20', 'Pre67997', '3', NULL),
+                                                                            (NULL, '20', 'Pre67998', '3', NULL),
+                                                                            (NULL, '20', 'Pre67999', '3', NULL),
+                                                                            (NULL, '20', 'Pre679910', '3', NULL),
+                                                                            (NULL, '21', 'Pre70221', '3', NULL),
+                                                                            (NULL, '21', 'Pre70222', '3', NULL),
+                                                                            (NULL, '21', 'Pre70223', '3', NULL),
+                                                                            (NULL, '21', 'Pre70224', '3', NULL),
+                                                                            (NULL, '21', 'Pre70225', '3', NULL),
+                                                                            (NULL, '21', 'Pre70226', '3', NULL),
+                                                                            (NULL, '21', 'Pre70227', '3', NULL),
+                                                                            (NULL, '21', 'Pre70228', '3', NULL),
+                                                                            (NULL, '21', 'Pre70229', '3', NULL),
+                                                                            (NULL, '21', 'Pre702210', '3', NULL),
+                                                                            (NULL, '22', 'Pre80551', '3', NULL),
+                                                                            (NULL, '22', 'Pre80552', '3', NULL),
+                                                                            (NULL, '22', 'Pre80553', '3', NULL),
+                                                                            (NULL, '22', 'Pre80554', '3', NULL),
+                                                                            (NULL, '22', 'Pre80555', '3', NULL),
+                                                                            (NULL, '22', 'Pre80556', '3', NULL),
+                                                                            (NULL, '22', 'Pre80557', '3', NULL),
+                                                                            (NULL, '22', 'Pre80558', '3', NULL),
+                                                                            (NULL, '22', 'Pre80559', '3', NULL),
+                                                                            (NULL, '22', 'Pre805510', '3', NULL),
+                                                                            (NULL, '23', 'Pre105651', '3', NULL),
+                                                                            (NULL, '23', 'Pre105652', '3', NULL),
+                                                                            (NULL, '23', 'Pre105653', '3', NULL),
+                                                                            (NULL, '23', 'Pre105654', '3', NULL),
+                                                                            (NULL, '23', 'Pre105655', '3', NULL),
+                                                                            (NULL, '23', 'Pre105656', '3', NULL),
+                                                                            (NULL, '23', 'Pre105657', '3', NULL),
+                                                                            (NULL, '23', 'Pre105658', '3', NULL),
+                                                                            (NULL, '23', 'Pre105659', '3', NULL),
+                                                                            (NULL, '23', 'Pre1056510', '3', NULL),
+                                                                            (NULL, '24', 'Pre140501', '3', NULL),
+                                                                            (NULL, '24', 'Pre140502', '3', NULL),
+                                                                            (NULL, '24', 'Pre140503', '3', NULL),
+                                                                            (NULL, '24', 'Pre140504', '3', NULL),
+                                                                            (NULL, '24', 'Pre140505', '3', NULL),
+                                                                            (NULL, '24', 'Pre140506', '3', NULL),
+                                                                            (NULL, '24', 'Pre140507', '3', NULL),
+                                                                            (NULL, '24', 'Pre140508', '3', NULL),
+                                                                            (NULL, '24', 'Pre140509', '3', NULL),
+                                                                            (NULL, '24', 'Pre1405010', '3', NULL),
+                                                                            (NULL, '25', 'Vivo1', '2', NULL),
+                                                                            (NULL, '25', 'Vivo2', '2', NULL),
+                                                                            (NULL, '25', 'Vivo3', '2', NULL),
+                                                                            (NULL, '25', 'Vivo4', '2', NULL),
+                                                                            (NULL, '25', 'Vivo5', '2', NULL),
+                                                                            (NULL, '25', 'Vivo6', '2', NULL),
+                                                                            (NULL, '25', 'Vivo7', '2', NULL),
+                                                                            (NULL, '25', 'Vivo8', '2', NULL),
+                                                                            (NULL, '25', 'Vivo9', '2', NULL),
+                                                                            (NULL, '25', 'Vivo10', '2', NULL),
+                                                                            (NULL, '26', 'Leaf1', '2', NULL),
+                                                                            (NULL, '26', 'Leaf2', '2', NULL),
+                                                                            (NULL, '26', 'Leaf3', '2', NULL),
+                                                                            (NULL, '26', 'Leaf4', '2', NULL),
+                                                                            (NULL, '26', 'Leaf5', '2', NULL),
+                                                                            (NULL, '26', 'Leaf6', '2', NULL),
+                                                                            (NULL, '26', 'Leaf7', '2', NULL),
+                                                                            (NULL, '26', 'Leaf8', '2', NULL),
+                                                                            (NULL, '26', 'Leaf9', '2', NULL),
+                                                                            (NULL, '26', 'Leaf10', '2', NULL),
+                                                                            (NULL, '27', 'Winnie1', '2', NULL),
+                                                                            (NULL, '27', 'Winnie2', '2', NULL),
+                                                                            (NULL, '27', 'Winnie3', '2', NULL),
+                                                                            (NULL, '27', 'Winnie4', '2', NULL),
+                                                                            (NULL, '27', 'Winnie5', '2', NULL),
+                                                                            (NULL, '27', 'Winnie6', '2', NULL),
+                                                                            (NULL, '27', 'Winnie7', '2', NULL),
+                                                                            (NULL, '27', 'Winnie8', '2', NULL),
+                                                                            (NULL, '27', 'Winnie9', '2', NULL),
+                                                                            (NULL, '27', 'Winnie10', '2', NULL),
+                                                                            (NULL, '28', 'Cool1', '2', NULL),
+                                                                            (NULL, '28', 'Cool2', '2', NULL),
+                                                                            (NULL, '28', 'Cool3', '2', NULL),
+                                                                            (NULL, '28', 'Cool4', '2', NULL),
+                                                                            (NULL, '28', 'Cool5', '2', NULL),
+                                                                            (NULL, '28', 'Cool6', '2', NULL),
+                                                                            (NULL, '28', 'Cool7', '2', NULL),
+                                                                            (NULL, '28', 'Cool8', '2', NULL),
+                                                                            (NULL, '28', 'Cool9', '2', NULL),
+                                                                            (NULL, '28', 'Cool10', '2', NULL),
+                                                                            (NULL, '29', 'Hot1', '2', NULL),
+                                                                            (NULL, '29', 'Hot2', '2', NULL),
+                                                                            (NULL, '29', 'Hot3', '2', NULL),
+                                                                            (NULL, '29', 'Hot4', '2', NULL),
+                                                                            (NULL, '29', 'Hot5', '2', NULL),
+                                                                            (NULL, '29', 'Hot6', '2', NULL),
+                                                                            (NULL, '29', 'Hot7', '2', NULL),
+                                                                            (NULL, '29', 'Hot8', '2', NULL),
+                                                                            (NULL, '29', 'Hot9', '2', NULL),
+                                                                            (NULL, '29', 'Hot10', '2', NULL),
+                                                                            (NULL, '30', 'Warm1', '2', NULL),
+                                                                            (NULL, '30', 'Warm2', '2', NULL),
+                                                                            (NULL, '30', 'Warm3', '2', NULL),
+                                                                            (NULL, '30', 'Warm4', '2', NULL),
+                                                                            (NULL, '30', 'Warm5', '2', NULL),
+                                                                            (NULL, '30', 'Warm6', '2', NULL),
+                                                                            (NULL, '30', 'Warm7', '2', NULL),
+                                                                            (NULL, '30', 'Warm8', '2', NULL),
+                                                                            (NULL, '30', 'Warm9', '2', NULL),
+                                                                            (NULL, '30', 'Warm10', '2', NULL),
+                                                                            (NULL, '31', 'Mark1', '2', NULL),
+                                                                            (NULL, '31', 'Mark2', '2', NULL),
+                                                                            (NULL, '31', 'Mark3', '2', NULL),
+                                                                            (NULL, '31', 'Mark4', '2', NULL),
+                                                                            (NULL, '31', 'Mark5', '2', NULL),
+                                                                            (NULL, '31', 'Mark6', '2', NULL),
+                                                                            (NULL, '31', 'Mark7', '2', NULL),
+                                                                            (NULL, '31', 'Mark8', '2', NULL),
+                                                                            (NULL, '31', 'Mark9', '2', NULL),
+                                                                            (NULL, '31', 'Mark10', '2', NULL),
+                                                                            (NULL, '32', 'Dak1', '2', NULL),
+                                                                            (NULL, '32', 'Dak2', '2', NULL),
+                                                                            (NULL, '32', 'Dak3', '2', NULL),
+                                                                            (NULL, '32', 'Dak4', '2', NULL),
+                                                                            (NULL, '32', 'Dak5', '2', NULL),
+                                                                            (NULL, '32', 'Dak6', '2', NULL),
+                                                                            (NULL, '32', 'Dak7', '2', NULL),
+                                                                            (NULL, '32', 'Dak8', '2', NULL),
+                                                                            (NULL, '32', 'Dak9', '2', NULL),
+                                                                            (NULL, '32', 'Dak10', '2', NULL),
+                                                                            (NULL, '33', 'T6001', '1', NULL),
+                                                                            (NULL, '33', 'T6002', '1', NULL),
+                                                                            (NULL, '33', 'T6003', '1', NULL),
+                                                                            (NULL, '33', 'T6004', '1', NULL),
+                                                                            (NULL, '33', 'T6005', '1', NULL),
+                                                                            (NULL, '33', 'T6006', '1', NULL),
+                                                                            (NULL, '33', 'T6007', '1', NULL),
+                                                                            (NULL, '33', 'T6008', '1', NULL),
+                                                                            (NULL, '33', 'T6009', '1', NULL),
+                                                                            (NULL, '33', 'T60010', '1', NULL),
+                                                                            (NULL, '34', 'T8001', '1', NULL),
+                                                                            (NULL, '34', 'T8002', '1', NULL),
+                                                                            (NULL, '34', 'T8003', '1', NULL),
+                                                                            (NULL, '34', 'T8004', '1', NULL),
+                                                                            (NULL, '34', 'T8005', '1', NULL),
+                                                                            (NULL, '34', 'T8006', '1', NULL),
+                                                                            (NULL, '34', 'T8007', '1', NULL),
+                                                                            (NULL, '34', 'T8008', '1', NULL),
+                                                                            (NULL, '34', 'T8009', '1', NULL),
+                                                                            (NULL, '34', 'T80010', '1', NULL),
+                                                                            (NULL, '35', 'T12001', '1', NULL),
+                                                                            (NULL, '35', 'T12002', '1', NULL),
+                                                                            (NULL, '35', 'T12003', '1', NULL),
+                                                                            (NULL, '35', 'T12004', '1', NULL),
+                                                                            (NULL, '35', 'T12005', '1', NULL),
+                                                                            (NULL, '35', 'T12006', '1', NULL),
+                                                                            (NULL, '35', 'T12007', '1', NULL),
+                                                                            (NULL, '35', 'T12008', '1', NULL),
+                                                                            (NULL, '35', 'T12009', '1', NULL),
+                                                                            (NULL, '35', 'T120010', '1', NULL),
+                                                                            (NULL, '36', 'T112001', '1', NULL),
+                                                                            (NULL, '36', 'T112002', '1', NULL),
+                                                                            (NULL, '36', 'T112003', '1', NULL),
+                                                                            (NULL, '36', 'T112004', '1', NULL),
+                                                                            (NULL, '36', 'T112005', '1', NULL),
+                                                                            (NULL, '36', 'T112006', '1', NULL),
+                                                                            (NULL, '36', 'T112007', '1', NULL),
+                                                                            (NULL, '36', 'T112008', '1', NULL),
+                                                                            (NULL, '36', 'T112009', '1', NULL),
+                                                                            (NULL, '36', 'T1120010', '1', NULL),
+                                                                            (NULL, '37', 'T3201', '1', NULL),
+                                                                            (NULL, '37', 'T3202', '1', NULL),
+                                                                            (NULL, '37', 'T3203', '1', NULL),
+                                                                            (NULL, '37', 'T3204', '1', NULL),
+                                                                            (NULL, '37', 'T3205', '1', NULL),
+                                                                            (NULL, '37', 'T3206', '1', NULL),
+                                                                            (NULL, '37', 'T3207', '1', NULL),
+                                                                            (NULL, '37', 'T3208', '1', NULL),
+                                                                            (NULL, '37', 'T3209', '1', NULL),
+                                                                            (NULL, '37', 'T32010', '1', NULL),
+                                                                            (NULL, '38', 'T66001', '1', NULL),
+                                                                            (NULL, '38', 'T66002', '1', NULL),
+                                                                            (NULL, '38', 'T66003', '1', NULL),
+                                                                            (NULL, '38', 'T66004', '1', NULL),
+                                                                            (NULL, '38', 'T66005', '1', NULL),
+                                                                            (NULL, '38', 'T66006', '1', NULL),
+                                                                            (NULL, '38', 'T66007', '1', NULL),
+                                                                            (NULL, '38', 'T66008', '1', NULL),
+                                                                            (NULL, '38', 'T66009', '1', NULL),
+                                                                            (NULL, '38', 'T660010', '1', NULL),
+                                                                            (NULL, '39', 'T116001', '1', NULL),
+                                                                            (NULL, '39', 'T116002', '1', NULL),
+                                                                            (NULL, '39', 'T116003', '1', NULL),
+                                                                            (NULL, '39', 'T116004', '1', NULL),
+                                                                            (NULL, '39', 'T116005', '1', NULL),
+                                                                            (NULL, '39', 'T116006', '1', NULL),
+                                                                            (NULL, '39', 'T116007', '1', NULL),
+                                                                            (NULL, '39', 'T116008', '1', NULL),
+                                                                            (NULL, '39', 'T116009', '1', NULL),
+                                                                            (NULL, '39', 'T1160010', '1', NULL),
+                                                                            (NULL, '40', 'T85001', '1', NULL),
+                                                                            (NULL, '40', 'T85002', '1', NULL),
+                                                                            (NULL, '40', 'T85003', '1', NULL),
+                                                                            (NULL, '40', 'T85004', '1', NULL),
+                                                                            (NULL, '40', 'T85005', '1', NULL),
+                                                                            (NULL, '40', 'T85006', '1', NULL),
+                                                                            (NULL, '40', 'T85007', '1', NULL),
+                                                                            (NULL, '40', 'T85008', '1', NULL),
+                                                                            (NULL, '40', 'T85009', '1', NULL),
+                                                                            (NULL, '40', 'T850010', '1', NULL),
+                                                                            (NULL, '41', 'T163601', '1', NULL),
+                                                                            (NULL, '41', 'T163602', '1', NULL),
+                                                                            (NULL, '41', 'T163603', '1', NULL),
+                                                                            (NULL, '41', 'T163604', '1', NULL),
+                                                                            (NULL, '41', 'T163605', '1', NULL),
+                                                                            (NULL, '41', 'T163606', '1', NULL),
+                                                                            (NULL, '41', 'T163607', '1', NULL),
+                                                                            (NULL, '41', 'T163608', '1', NULL),
+                                                                            (NULL, '41', 'T163609', '1', NULL),
+                                                                            (NULL, '41', 'T1636010', '1', NULL),
+                                                                            (NULL, '42', 'Zen1', '1', NULL),
+                                                                            (NULL, '42', 'Zen2', '1', NULL),
+                                                                            (NULL, '42', 'Zen3', '1', NULL),
+                                                                            (NULL, '42', 'Zen4', '1', NULL),
+                                                                            (NULL, '42', 'Zen5', '1', NULL),
+                                                                            (NULL, '42', 'Zen6', '1', NULL),
+                                                                            (NULL, '42', 'Zen7', '1', NULL),
+                                                                            (NULL, '42', 'Zen8', '1', NULL),
+                                                                            (NULL, '42', 'Zen9', '1', NULL),
+                                                                            (NULL, '42', 'Zen10', '1', NULL),
+                                                                            (NULL, '43', 'Omen1', '1', NULL),
+                                                                            (NULL, '43', 'Omen2', '1', NULL),
+                                                                            (NULL, '43', 'Omen3', '1', NULL),
+                                                                            (NULL, '43', 'Omen4', '1', NULL),
+                                                                            (NULL, '43', 'Omen5', '1', NULL),
+                                                                            (NULL, '43', 'Omen6', '1', NULL),
+                                                                            (NULL, '43', 'Omen7', '1', NULL),
+                                                                            (NULL, '43', 'Omen8', '1', NULL),
+                                                                            (NULL, '43', 'Omen9', '1', NULL),
+                                                                            (NULL, '43', 'Omen10', '1', NULL),
+                                                                            (NULL, '44', 'QT101', '2', NULL),
+                                                                            (NULL, '44', 'QT102', '2', NULL),
+                                                                            (NULL, '44', 'QT103', '2', NULL),
+                                                                            (NULL, '44', 'QT104', '2', NULL),
+                                                                            (NULL, '44', 'QT105', '2', NULL),
+                                                                            (NULL, '44', 'QT106', '2', NULL),
+                                                                            (NULL, '44', 'QT107', '2', NULL),
+                                                                            (NULL, '44', 'QT108', '2', NULL),
+                                                                            (NULL, '44', 'QT109', '2', NULL),
+                                                                            (NULL, '44', 'QT1010', '2', NULL),
+                                                                            (NULL, '45', 'QT201', '3', NULL),
+                                                                            (NULL, '45', 'QT202', '3', NULL),
+                                                                            (NULL, '45', 'QT203', '3', NULL),
+                                                                            (NULL, '45', 'QT204', '3', NULL),
+                                                                            (NULL, '45', 'QT205', '3', NULL),
+                                                                            (NULL, '45', 'QT206', '3', NULL),
+                                                                            (NULL, '45', 'QT207', '3', NULL),
+                                                                            (NULL, '45', 'QT208', '3', NULL),
+                                                                            (NULL, '45', 'QT209', '3', NULL),
+                                                                            (NULL, '45', 'QT2010', '3', NULL),
+                                                                            (NULL, '46', 'QT301', '1', NULL),
+                                                                            (NULL, '46', 'QT302', '1', NULL),
+                                                                            (NULL, '46', 'QT303', '1', NULL),
+                                                                            (NULL, '46', 'QT304', '1', NULL),
+                                                                            (NULL, '46', 'QT305', '1', NULL),
+                                                                            (NULL, '46', 'QT306', '1', NULL),
+                                                                            (NULL, '46', 'QT307', '1', NULL),
+                                                                            (NULL, '46', 'QT308', '1', NULL),
+                                                                            (NULL, '46', 'QT309', '1', NULL),
+                                                                            (NULL, '46', 'QT3010', '1', NULL);

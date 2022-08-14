@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductModel;
+use App\Models\ProductImageModel;
 use App\Models\ManufacturerModel;
 use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
 use App\Models\PromotionModel;
 use App\Models\SupplierModel;
+use App\Models\VoucherModel;
+use App\Models\ProductVoucherModel;
+use App\Models\WarrantyModel;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
 use Exception;
 use Excel;
-use App\Imports\ProductImport;
+use File;
 
 class AdminProductController extends Controller
 {
@@ -32,6 +37,8 @@ class AdminProductController extends Controller
         $theLoaiCon = SubCategoryModel::get();
 
         $nhaPhanPhoi = SupplierModel::get();
+
+        $baoHanh = WarrantyModel::get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
         // dd($searchName, $searchManufacturer, $searchSubCategory, $searchSupplier);
@@ -60,6 +67,7 @@ class AdminProductController extends Controller
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "nhaPhanPhoi" => $nhaPhanPhoi,
+            "baoHanh" => $baoHanh,
             "sanPham" => $sanPham,
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
@@ -94,6 +102,8 @@ class AdminProductController extends Controller
             'maNSX' => 'required',
             'maTLC' => 'required',
             'maTTSP' => 'required',
+            'maBH' => 'required',
+            'anh.*' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
         ]);
 
         $sanPham = new ProductModel();
@@ -103,9 +113,18 @@ class AdminProductController extends Controller
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
         $sanPham->maTLC = $request->get('maTLC');
+        $sanPham->maBH = $request->get('maBH');
         $sanPham->maTTSP = $request->get('maTTSP');
         // dd($sanPham);
         $sanPham->save();
+        
+        for($i = 0; $i < sizeof($request->file('anh')); $i++){
+            $path = $request->file('anh')[$i]->store('img');
+            $ASP = new ProductImageModel();
+            $ASP->maSP = $sanPham->maSP;
+            $ASP->anh = explode("/", $path)[1];
+            $ASP->save();
+        }
 
         return redirect(route('admin.product.index'));
     }
@@ -135,12 +154,15 @@ class AdminProductController extends Controller
 
         $tinhTrangSanPham = ProductStatusModel::get();
 
+        $baoHanh = WarrantyModel::get();
+
         $SP = ProductModel::find($id);
         
         return view('Admin.Product.edit', [
             "nhaSanXuat" => $nhaSanXuat,
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
+            "baoHanh" => $baoHanh,
             "SP" => $SP,
         ]);
     }
@@ -161,6 +183,7 @@ class AdminProductController extends Controller
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
             'maTLC' => 'required',
+            'maBH' => 'required',
             'maTTSP' => 'required',
         ]);
         
@@ -171,6 +194,7 @@ class AdminProductController extends Controller
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
         $SP->maTLC = $request->get('maTLC');
+        $SP->maBH = $request->get('maBH');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();
         
@@ -189,6 +213,17 @@ class AdminProductController extends Controller
         try{
             $khuyenMai = PromotionModel::where('maSP', '=', $id);
             $khuyenMai->delete();
+
+            $ASP = ProductImageModel::where('maSP', $id)->get();
+            
+            for($i = 0; $i < sizeof($ASP); $i++){
+                $path = public_path('assets/img/'.$ASP[$i]->anh);
+                if(File::exists($path)){
+                    File::delete($path);
+                }  
+                $ASP[$i]->delete();
+            }
+
             $sanPham->delete();
             return redirect(route('admin.product.index'));
         }catch(Exception $e){
@@ -218,5 +253,32 @@ class AdminProductController extends Controller
     public function sample(){
         $path = public_path('excel_sample\product-sample.xlsx');
         return response()->download($path);
+    }
+
+    public function createVoucher($id){
+        $Voucher = VoucherModel::all();
+        $SanPham = ProductModel::find($id);
+        $SPV = ProductVoucherModel::join('voucher', 'voucher.maVoucher', '=', 'san_pham_voucher.maVoucher')->where('san_pham_voucher.maSP', $id)->get();
+        // dd($SPV);
+        return view('Admin.Product.voucher', [
+            'Voucher' => $Voucher,
+            'SanPham' => $SanPham,
+            'SPV' => $SPV,
+        ]);
+    }
+
+    public function storeVoucher(Request $request){
+        $validated = $request->validate([
+            'maSP' => 'required',
+            'maVoucher' => 'required|unique:App\Models\ProductVoucherModel,maVoucher,NULL,id,maSP,'.$request->maSP,
+        ]);
+
+        $SPV = new ProductVoucherModel();
+        $SPV->maSP = $request->get('maSP');
+        $SPV->maVoucher = $request->get('maVoucher');
+        $SPV->kichHoat = 1;
+        $SPV->save();
+        
+        return redirect()->back()->with('added', 'Thêm thành công');
     }
 }

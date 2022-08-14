@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nguoi_dung_voucher', function(Blueprint $table){
-            $table->increments('maNDV');
-            $table->unsignedInteger('maND');
-            $table->foreign('maND')->references('maND')->on('nguoi_dung');
+        Schema::create('san_pham_voucher', function(Blueprint $table){
+            $table->increments('maSPV');
+            $table->unsignedInteger('maSP');
+            $table->foreign('maSP')->references('maSP')->on('san_pham');
             $table->unsignedInteger('maVoucher');
             $table->foreign('maVoucher')->references('maVoucher')->on('voucher');
-            $table->unique(['maND', 'maVoucher']);
-            $table->boolean('suDung');
+            //0 = ko kích hoạt | 1 = kích hoạt
+            $table->boolean('kichHoat')->default('1');
+            $table->unique(['maSP', 'maVoucher']);
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nguoi_dung_voucher');
+        Schema::dropIfExists('san_pham_voucher');
     }
 };
