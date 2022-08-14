@@ -23,7 +23,7 @@
 
         <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
         <div id="content-wrapper" class="d-flex flex-row">
-
+            
             <!-- Content của trang -->
             <div class="container-fluid" style="padding-top: 60px;min-height: 400px">
                 <div class="grid">

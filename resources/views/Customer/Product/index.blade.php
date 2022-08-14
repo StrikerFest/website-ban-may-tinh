@@ -25,21 +25,23 @@
                                 {{ $sanPham->tenSP }}
                             </div>
                         </div>
+
                         {{-- Ảnh, Thông số, Thông tin --------------------- --}}
                         <div class="row">
                             {{-- Container Ảnh --}}
                             <div class="col-md-4 bg-light">
                                 <div class="d-flex">
                                     {{-- Size, props container ảnh --}}
-                                    <div style="flex-direction: column" class="d-flex width-100 height-auto flex-center">
+                                    <div style="flex-direction: column"
+                                        class="d-flex width-100 height-auto flex-center">
                                         {{-- Div chứa ảnh và mũi tên --}}
                                         {{--  --}}
                                         <div id="carouselExampleIndicators" style="scroll-margin-block-start: 17rem"
                                             class="carousel slide carousel-main-container-custom " data-ride="carousel"
                                             data-pause="hover" data-interval="5000">
                                             {{-- <ol class="carousel-indicators"> --}}
-                                                {{-- Thay bằng list ảnh --}}
-                                                {{-- <li data-target="#carouselExampleIndicators" data-slide-to="0"
+                                            {{-- Thay bằng list ảnh --}}
+                                            {{-- <li data-target="#carouselExampleIndicators" data-slide-to="0"
                                                     class="active"></li>
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> --}}
@@ -48,7 +50,7 @@
                                                 <div class="carousel-inner ">
                                                     {{-- Thay --}}
                                                     @php
-                                                        $tempImg;
+                                                        $tempImg = '';
                                                     @endphp
                                                     @foreach ($productImageGetFirst as $PI)
                                                         <div class="carousel-item active hide-from-work">
@@ -62,6 +64,15 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
+                                                    @if ($tempImg == '')
+                                                        @php
+                                                            $tempImg = 'STOCK.jpg';
+                                                        @endphp
+                                                        <img class="card-img-top "
+                                                            src="{{ asset('assets/img/' . $tempImg) }}"
+                                                            alt="..." />
+                                                    @endif
+
                                                     @foreach ($productImageSkipFirst as $PI)
                                                         <div class="carousel-item hide-from-work">
                                                             @if ($PI->maSP == $sanPham->maSP)
@@ -74,11 +85,12 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
+
                                                     {{--  --}}
                                                 </div>
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleIndicators"
-                                                role="button" data-slide="prev" >
+                                                role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
@@ -275,7 +287,7 @@
                                                     @foreach ($productPromotion as $PM)
                                                         @if ($sanPham->maSP == $PM->maSP)
                                                             @php
-                                                                echo "+ " . $PM->khuyenMai . "<br>";
+                                                                echo '+ ' . $PM->khuyenMai . '<br>';
                                                             @endphp
                                                         @endif
                                                     @endforeach
@@ -355,7 +367,8 @@
 
                                                         <div class="padding-top-5">
                                                             <div class=" border-radius-25 ">
-                                                                <button class="btn btn-danger width-100 padding-10">
+                                                                <button
+                                                                    class="btn btn-danger width-100 padding-10">
                                                                     <span class="text-bold text-large">Đặt mua
                                                                         ngay</span>
                                                                     <br>
@@ -391,8 +404,8 @@
                                                     class="btn btn-primary border-top-left-radius-25 border-bottom-left-radius-25">
                                                     <i class="fa fa-minus"></i>
                                                 </button>
-                                                <input type="number" class="width-10 text-center" name="quantity"
-                                                    min="1" value="1">
+                                                <input type="number" class="width-10 text-center"
+                                                    name="quantity" min="1" value="1">
                                                 <button type="button"
                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                                     class="btn btn-primary border-top-right-radius-25 border-bottom-right-radius-25 ">
@@ -523,17 +536,16 @@
                                     <div class="card-body center-custom">
                                         <div class="table-responsive d-flex">
 
-                                            <div style="overflow: hidden" >
+                                            <div style="overflow: hidden">
                                                 <div id="carouselExampleIndicators2"
                                                     class="carousel slide carousel-container-custom"
                                                     data-ride="carousel" data-pause="hover" data-interval="5000"
-
                                                     style="width:100%;scroll-margin-block-end: 7rem">
                                                     {{-- Hiển thị vị trí slide --}}
                                                     <ol class="carousel-indicators">
                                                         <li data-target="#carouselExampleIndicators2"
-                                                            class="bg-danger" data-slide-to="0"
-                                                            class="active"></li>
+                                                            class="bg-danger" data-slide-to="0" class="active">
+                                                        </li>
                                                         <li data-target="#carouselExampleIndicators2"
                                                             class="bg-danger" data-slide-to="1"></li>
                                                         <li data-target="#carouselExampleIndicators2"
@@ -560,8 +572,7 @@
                                                                                     </div>
                                                                                     {{-- Overlay hiển thị chi tiết sau khi hover --}}
                                                                                     <div class="product-overlay">
-                                                                                        <div
-                                                                                            class="text-center">
+                                                                                        <div class="text-center">
                                                                                             <!-- Tên sản phẩm trong overlay-->
                                                                                             <div
                                                                                                 class="product-overlay-product-name">
@@ -602,8 +613,9 @@
                                                                                     </div>
                                                                                     {{-- Hết overlay chi tiết --}}
                                                                                     @php
-                                                                                        $tempImg;
+                                                                                        $tempImg = 'STOCK.jpg';
                                                                                         $count = 0;
+                                                                                        // dd($tempImg);
                                                                                     @endphp
                                                                                     <!-- Ảnh sản phẩm-->
                                                                                     @foreach ($productImage as $PI)
@@ -614,7 +626,7 @@
                                                                                                 @endphp
                                                                                                 <a
                                                                                                     href="{{ route('product.show', $CN->maSP) }}">
-                                                                                                    <img class="card-img-top hide-from-work"
+                                                                                                    <img class="card-img-top "
                                                                                                         style="height:240px ; width:260px ; border: 1px solid lightgray"
                                                                                                         src="{{ asset('assets/img/' . $PI->anh) }}"
                                                                                                         id="{{ $CN->maSP }}"
@@ -626,12 +638,15 @@
                                                                                             @endif
                                                                                         @endif
                                                                                     @endforeach
-
+                                                                                    @if ($tempImg == 'STOCK.jpg')
+                                                                                        <img class="card-img-top "
+                                                                                            src="{{ asset('assets/img/' . $tempImg) }}"
+                                                                                            alt="..." />
+                                                                                    @endif
                                                                                     <!-- Thông tin sản phẩm-->
                                                                                     <div class="card-body p-4 bg- text-light"
                                                                                         style="background-color: black">
-                                                                                        <div
-                                                                                            class="text-center">
+                                                                                        <div class="text-center">
                                                                                             <!-- Tên sản phẩm-->
                                                                                             <h5 class="fw-bolder"
                                                                                                 style="font-size:0.9em">
@@ -683,19 +698,24 @@
                                                                                                 method="POST"
                                                                                                 enctype="multipart/form-data">
                                                                                                 @csrf
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $CN->maSP }}"
                                                                                                     name="id">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $tenSP }}"
                                                                                                     name="name">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $CN->giaSP }}"
                                                                                                     name="price">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $tempImg }}"
                                                                                                     name="image">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="1"
                                                                                                     name="quantity">
                                                                                                 <button
@@ -735,8 +755,7 @@
                                                                                     </div>
                                                                                     {{-- Overlay hiển thị chi tiết sau khi hover --}}
                                                                                     <div class="product-overlay">
-                                                                                        <div
-                                                                                            class="text-center">
+                                                                                        <div class="text-center">
                                                                                             <!-- Tên sản phẩm trong overlay-->
                                                                                             <div
                                                                                                 class="product-overlay-product-name">
@@ -801,12 +820,15 @@
                                                                                             @endif
                                                                                         @endif
                                                                                     @endforeach
-
+                                                                                    @if ($tempImg == 'STOCK.jpg')
+                                                                                        <img class="card-img-top "
+                                                                                            src="{{ asset('assets/img/' . $tempImg) }}"
+                                                                                            alt="..." />
+                                                                                    @endif
                                                                                     <!-- Thông tin sản phẩm-->
                                                                                     <div class="card-body p-4 bg- text-light"
                                                                                         style="background-color: black">
-                                                                                        <div
-                                                                                            class="text-center">
+                                                                                        <div class="text-center">
                                                                                             <!-- Tên sản phẩm-->
                                                                                             <h5 class="fw-bolder"
                                                                                                 style="font-size:0.9em">
@@ -858,19 +880,24 @@
                                                                                                 method="POST"
                                                                                                 enctype="multipart/form-data">
                                                                                                 @csrf
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $CN->maSP }}"
                                                                                                     name="id">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $tenSP }}"
                                                                                                     name="name">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $CN->giaSP }}"
                                                                                                     name="price">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $tempImg }}"
                                                                                                     name="image">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="1"
                                                                                                     name="quantity">
                                                                                                 <button
@@ -910,8 +937,7 @@
                                                                                     </div>
                                                                                     {{-- Overlay hiển thị chi tiết sau khi hover --}}
                                                                                     <div class="product-overlay">
-                                                                                        <div
-                                                                                            class="text-center">
+                                                                                        <div class="text-center">
                                                                                             <!-- Tên sản phẩm trong overlay-->
                                                                                             <div
                                                                                                 class="product-overlay-product-name">
@@ -976,12 +1002,15 @@
                                                                                             @endif
                                                                                         @endif
                                                                                     @endforeach
-
+                                                                                    @if ($tempImg == 'STOCK.jpg')
+                                                                                        <img class="card-img-top "
+                                                                                            src="{{ asset('assets/img/' . $tempImg) }}"
+                                                                                            alt="..." />
+                                                                                    @endif
                                                                                     <!-- Thông tin sản phẩm-->
                                                                                     <div class="card-body p-4 bg- text-light"
                                                                                         style="background-color: black">
-                                                                                        <div
-                                                                                            class="text-center">
+                                                                                        <div class="text-center">
                                                                                             <!-- Tên sản phẩm-->
                                                                                             <h5 class="fw-bolder"
                                                                                                 style="font-size:0.9em">
@@ -1033,19 +1062,24 @@
                                                                                                 method="POST"
                                                                                                 enctype="multipart/form-data">
                                                                                                 @csrf
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $CN->maSP }}"
                                                                                                     name="id">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $tenSP }}"
                                                                                                     name="name">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $CN->giaSP }}"
                                                                                                     name="price">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="{{ $tempImg }}"
                                                                                                     name="image">
-                                                                                                <input type="hidden"
+                                                                                                <input
+                                                                                                    type="hidden"
                                                                                                     value="1"
                                                                                                     name="quantity">
                                                                                                 <button
@@ -1112,10 +1146,12 @@
                                         <h3 class="text-center mb-5" id="comment"> Bình luận sản phẩm </h3>
                                         {{-- Tạo bình luận --}}
                                         <div class="row" style="padding:  0% 0% 5% 0%">
-                                            <form action="{{route('commentCustomer.store')}}" method="POST">
+                                            <form action="{{ route('commentCustomer.store') }}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="maNDBinhLuan" value="{{session()->get('khachHang')}}">
-                                                <input type="hidden" name="maSPBinhLuan" value="{{$sanPham->maSP}}">
+                                                <input type="hidden" name="maNDBinhLuan"
+                                                    value="{{ session()->get('khachHang') }}">
+                                                <input type="hidden" name="maSPBinhLuan"
+                                                    value="{{ $sanPham->maSP }}">
                                                 <div style="box-sizing: border-box;width:100%;">
                                                     <textarea name="binhLuan" cols="130" rows="4" placeholder="Nhập bình luận của bạn tại đây"></textarea>
                                                 </div>
@@ -1131,59 +1167,75 @@
                                                 <div class="media">
                                                     <div class="media-body">
                                                         @foreach ($productCommentMain as $PCM)
-                                                            @if($PCM->maSP == $sanPham->maSP)
-
-                                                            <div class="row">
-                                                                <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="http://cdn.onlinewebfonts.com/svg/img_24787.png" style="width:10%;height: 10%;padding:1%" />
-                                                                <div class="col-8 d-flex" style="flex-direction: column">
-                                                                    @foreach($user as $U)
-                                                                        @if($U->maND == $PCM->maND)
-                                                                            <h5>{{$U->tenND}}</h5>
-                                                                        @endif
-                                                                    @endforeach
-                                                                    <div>{{$PCM->ngayTao}}</div>
-                                                                    <h5>{{$PCM->noiDung}}</h5>
+                                                            @if ($PCM->maSP == $sanPham->maSP)
+                                                                <div class="row">
+                                                                    <img class="mr-3 rounded-circle"
+                                                                        alt="Bootstrap Media Preview"
+                                                                        src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
+                                                                        style="width:10%;height: 10%;padding:1%" />
+                                                                    <div class="col-8 d-flex"
+                                                                        style="flex-direction: column">
+                                                                        @foreach ($user as $U)
+                                                                            @if ($U->maND == $PCM->maND)
+                                                                                <h5>{{ $U->tenND }}</h5>
+                                                                            @endif
+                                                                        @endforeach
+                                                                        <div>{{ $PCM->ngayTao }}</div>
+                                                                        <h5>{{ $PCM->noiDung }}</h5>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        {{-- <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply"></i> reply</span></a> </div> --}}
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-4">
-                                                                    {{-- <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply"></i> reply</span></a> </div> --}}
-                                                                </div>
-                                                            </div>
 
-                                                            @foreach ($productComment as $PC)
-                                                                @if($PC->maBLC == $PCM->maBLSP)
-
-                                                                    {{-- Phản hồi --}}
-                                                                    <div class="media mt-4 " style="padding-left:8%">
-                                                                        <img class="rounded-circle" alt="Bootstrap Media Another Preview" src="http://cdn.onlinewebfonts.com/svg/img_24787.png" style="width:10%;height: 10%;padding:1%" />
-                                                                        <div class="media-body">
-                                                                            <div class="row">
-                                                                                <div class="col-12 d-flex" style="flex-direction: column">
-                                                                                    @foreach($user as $U)
-                                                                                        @if($U->maND == $PC->maND)
-                                                                                            <h5>{{$U->tenND}}</h5>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                    <div>{{$PC->ngayTao}}</div>
-                                                                                    <h5>{{$PC->noiDung}}</h5>
+                                                                @foreach ($productComment as $PC)
+                                                                    @if ($PC->maBLC == $PCM->maBLSP)
+                                                                        {{-- Phản hồi --}}
+                                                                        <div class="media mt-4 "
+                                                                            style="padding-left:8%">
+                                                                            <img class="rounded-circle"
+                                                                                alt="Bootstrap Media Another Preview"
+                                                                                src="http://cdn.onlinewebfonts.com/svg/img_24787.png"
+                                                                                style="width:10%;height: 10%;padding:1%" />
+                                                                            <div class="media-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-12 d-flex"
+                                                                                        style="flex-direction: column">
+                                                                                        @foreach ($user as $U)
+                                                                                            @if ($U->maND == $PC->maND)
+                                                                                                <h5>{{ $U->tenND }}
+                                                                                                </h5>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                        <div>{{ $PC->ngayTao }}
+                                                                                        </div>
+                                                                                        <h5>{{ $PC->noiDung }}
+                                                                                        </h5>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    {{-- Hết phản hồi --}}
-                                                                @endif
-                                                            @endforeach
-                                                            {{-- Form gửi phản hồi --}}
-                                                            <form action="{{route('commentCustomer.store')}}" method="POST" style="padding-left:8%">
-                                                                @csrf
-                                                                <input type="hidden" name="maNDBinhLuan" value="{{session()->get('khachHang')}}">
-                                                                <input type="hidden" name="maSPBinhLuan" value="{{$sanPham->maSP}}">
-                                                                <input type="hidden" name="maBLC" value="{{$PCM->maBLSP}}">
-                                                                <textarea name="binhLuan" id="BL{{$PCM->maBLSP}}" cols="110" rows="3"></textarea>
-                                                                <button class="btn btn-danger" style="margin-top:1%">
-                                                                    Gửi ngay
-                                                                </button>
-                                                            </form>
-                                                            {{-- Hết - Form gửi phản hồi --}}
+                                                                        {{-- Hết phản hồi --}}
+                                                                    @endif
+                                                                @endforeach
+                                                                {{-- Form gửi phản hồi --}}
+                                                                <form
+                                                                    action="{{ route('commentCustomer.store') }}"
+                                                                    method="POST" style="padding-left:8%">
+                                                                    @csrf
+                                                                    <input type="hidden" name="maNDBinhLuan"
+                                                                        value="{{ session()->get('khachHang') }}">
+                                                                    <input type="hidden" name="maSPBinhLuan"
+                                                                        value="{{ $sanPham->maSP }}">
+                                                                    <input type="hidden" name="maBLC"
+                                                                        value="{{ $PCM->maBLSP }}">
+                                                                    <textarea name="binhLuan" id="BL{{ $PCM->maBLSP }}" cols="110" rows="3"></textarea>
+                                                                    <button class="btn btn-danger"
+                                                                        style="margin-top:1%">
+                                                                        Gửi ngay
+                                                                    </button>
+                                                                </form>
+                                                                {{-- Hết - Form gửi phản hồi --}}
                                                             @endif
                                                         @endforeach
                                                         {{-- Hết bình luận cha --}}

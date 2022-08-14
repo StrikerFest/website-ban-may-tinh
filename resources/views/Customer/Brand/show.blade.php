@@ -23,7 +23,7 @@
 
         <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
         <div id="content-wrapper" class="d-flex flex-row">
-
+            
             <!-- Content của trang -->
             <div class="container-fluid" style="padding-top: 60px">
                 <div class="grid">
@@ -126,7 +126,8 @@
                                                 <input type="radio" name="priceMin2" value="100000000">100 triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMin2" value="200000000">200 triệu<br>
+                                                <input type="radio" name="priceMin2" value="200000000">200
+                                                triệu<br>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -150,10 +151,12 @@
                                                 <input type="radio" name="priceMax2" value="75000000">75 triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMax2" value="100000000">100 triệu<br>
+                                                <input type="radio" name="priceMax2" value="100000000">100
+                                                triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMax2" value="200000000">200 triệu<br>
+                                                <input type="radio" name="priceMax2" value="200000000">200
+                                                triệu<br>
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +312,8 @@
                                                                         <img class="card-img-top hide-from-work"
                                                                             style="height:240px ; width:260px ; border: 1px solid lightgray"
                                                                             src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                            id="{{ $CN->maSP }}" alt="..." />
+                                                                            id="{{ $CN->maSP }}"
+                                                                            alt="..." />
                                                                     </a>
                                                                     @php
                                                                         $count = 1;
@@ -335,8 +339,7 @@
                                                                 </h5>
 
                                                                 <!-- Giá sản phẩm -->
-                                                                <span
-                                                                    class="">{{ number_format($CN->giaSP) }}
+                                                                <span class="">{{ number_format($CN->giaSP) }}
                                                                     VND</span>
                                                             </div>
                                                         </div>
@@ -376,7 +379,8 @@
                                                                         name="price">
                                                                     <input type="hidden" value="{{ $tempImg }}"
                                                                         name="image">
-                                                                    <input type="hidden" value="1" name="quantity">
+                                                                    <input type="hidden" value="1"
+                                                                        name="quantity">
                                                                     <button class="btn btn-outline-light  text-right"
                                                                         style="background-color: crimson"><i
                                                                             class="fa fa-shopping-cart"></i></button>

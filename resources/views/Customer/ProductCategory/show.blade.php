@@ -23,7 +23,7 @@
 
         <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
         <div id="content-wrapper" class="d-flex flex-row">
-
+            
             <!-- Content của trang -->
             <div class="container-fluid" style="padding-top: 60px">
                 <div class="grid">
@@ -126,7 +126,8 @@
                                                 <input type="radio" name="priceMin2" value="100000000">100 triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMin2" value="200000000">200 triệu<br>
+                                                <input type="radio" name="priceMin2" value="200000000">200
+                                                triệu<br>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -150,10 +151,12 @@
                                                 <input type="radio" name="priceMax2" value="75000000">75 triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMax2" value="100000000">100 triệu<br>
+                                                <input type="radio" name="priceMax2" value="100000000">100
+                                                triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMax2" value="200000000">200 triệu<br>
+                                                <input type="radio" name="priceMax2" value="200000000">200
+                                                triệu<br>
                                             </div>
                                         </div>
                                     </div>
@@ -268,7 +271,7 @@
                                                     Sale!
                                                 </div>
                                                 @php
-                                                    $tempImg;
+                                                    $tempImg = 'STOCK.jpg';
                                                     $count = 0;
                                                 @endphp
                                                 <!-- Ảnh sản phẩm-->
@@ -290,7 +293,11 @@
                                                         @endif
                                                     @endif
                                                 @endforeach
-
+                                                @if ($tempImg == 'STOCK.jpg')
+                                                    <img class="card-img-top "
+                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                        src="{{ asset('assets/img/' . $tempImg) }}" alt="..." />
+                                                @endif
                                                 <!-- Thông tin sản phẩm-->
                                                 <div class="card-body p-4 bg- text-light"
                                                     style="background-color: black">
@@ -339,7 +346,8 @@
                                                         <form action="{{ route('cart.store') }}" method="POST"
                                                             enctype="multipart/form-data">
                                                             @csrf
-                                                            <input type="hidden" value="{{ $CN->maSP }}" name="id">
+                                                            <input type="hidden" value="{{ $CN->maSP }}"
+                                                                name="id">
                                                             <input type="hidden" value="{{ $tenSP }}"
                                                                 name="name">
                                                             <input type="hidden" value="{{ $CN->giaSP }}"
