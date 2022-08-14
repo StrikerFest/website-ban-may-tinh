@@ -70,6 +70,101 @@ class CartController extends Controller
     {
 
         $emptyCartCheck = 1;
+        // CPU
+        $quantity = $request->PCBCartSoLuongCPU;
+
+        if ($request->PCBCartSoLuongCPU <= 0 || $request->PCBCartSoLuongCPU > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaCPU)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhCPU,
+                )
+            ]);
+        }
+        // BMC
+        $quantity = $request->PCBCartSoLuongBMC;
+
+        if ($request->PCBCartSoLuongBMC <= 0 || $request->PCBCartSoLuongBMC > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaBMC)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhBMC,
+                )
+            ]);
+        }
+        // RAM
+        $quantity = $request->PCBCartSoLuongRAM;
+
+        if ($request->PCBCartSoLuongRAM <= 0 || $request->PCBCartSoLuongRAM > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaRAM)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhRAM,
+                )
+            ]);
+        }
+        // HDD
+        $quantity = $request->PCBCartSoLuongHDD;
+
+        if ($request->PCBCartSoLuongHDD <= 0 || $request->PCBCartSoLuongHDD > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaHDD)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhHDD,
+                )
+            ]);
+        }
+        // SSD
+        $quantity = $request->PCBCartSoLuongSSD;
+
+        if ($request->PCBCartSoLuongSSD <= 0 || $request->PCBCartSoLuongSSD > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaSSD)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhSSD,
+                )
+            ]);
+        }
         // VGA
         $quantity = $request->PCBCartSoLuongVGA;
 
@@ -89,7 +184,158 @@ class CartController extends Controller
                 )
             ]);
         }
-        // - VGA
+        // PSU
+        $quantity = $request->PCBCartSoLuongPSU;
+
+        if ($request->PCBCartSoLuongPSU <= 0 || $request->PCBCartSoLuongPSU > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaPSU)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhPSU,
+                )
+            ]);
+        }
+        // Case
+        $quantity = $request->PCBCartSoLuongCase;
+
+        if ($request->PCBCartSoLuongCase <= 0 || $request->PCBCartSoLuongCase > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaCase)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhCase,
+                )
+            ]);
+        }
+        // MH
+        $quantity = $request->PCBCartSoLuongMH;
+
+        if ($request->PCBCartSoLuongMH <= 0 || $request->PCBCartSoLuongMH > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaMH)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhMH,
+                )
+            ]);
+        }
+        // Mouse
+        $quantity = $request->PCBCartSoLuongMouse;
+
+        if ($request->PCBCartSoLuongMouse <= 0 || $request->PCBCartSoLuongMouse > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaMouse)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhMouse,
+                )
+            ]);
+        }
+        // BP
+        $quantity = $request->PCBCartSoLuongBP;
+
+        if ($request->PCBCartSoLuongBP <= 0 || $request->PCBCartSoLuongBP > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaBP)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhBP,
+                )
+            ]);
+        }
+        // Fan
+        $quantity = $request->PCBCartSoLuongFan;
+
+        if ($request->PCBCartSoLuongFan <= 0 || $request->PCBCartSoLuongFan > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaFan)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhFan,
+                )
+            ]);
+        }
+        // TNK
+        $quantity = $request->PCBCartSoLuongTNK;
+
+        if ($request->PCBCartSoLuongTNK <= 0 || $request->PCBCartSoLuongTNK > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaTNK)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhTNK,
+                )
+            ]);
+        }
+        // TNN
+        $quantity = $request->PCBCartSoLuongTNN;
+
+        if ($request->PCBCartSoLuongTNN <= 0 || $request->PCBCartSoLuongTNN > 9) {
+            $quantity = 1;
+        }
+        $sanPham = DB::table('san_pham')->where('maSP', $request->PCBCartMaTNN)->first();
+        if ($sanPham !== null) {
+            $emptyCartCheck = 0;
+            \Cart::add([
+                'id' => $sanPham->maSP,
+                'name' => $sanPham->tenSP,
+                'price' => $sanPham->giaSP,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->PCBCartAnhTNN,
+                )
+            ]);
+        }
 
         // L
         $quantity = $request->PCBCartSoLuongL;
