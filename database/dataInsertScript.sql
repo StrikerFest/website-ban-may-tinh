@@ -148,10 +148,6 @@ INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Đang bán');
 -- Bảng Nhà phân phối
 INSERT INTO `nha_phan_phoi` (`maNPP`, `tenNPP`, `diaChiNPP`, `soDienThoai`) VALUES
 (NULL, 'Công ty A', 'Địa chỉ công ty A', '0123456789'),
-(NULL,
-
-INSERT INTO `nha_phan_phoi` (`maNPP`, `tenNPP`, `diaChiNPP`, `soDienThoai`) VALUES
-(NULL, 'Công ty A', 'Địa chỉ công ty A', '0123456789'),
 (NULL, 'Công ty B', 'Địa chỉ công ty B', '0123456789'),
 (NULL, 'Công ty C', 'Địa chỉ công ty C', '0123456789');
 
@@ -183,7 +179,7 @@ VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('Laptop Acer Gaming Predator Helios 500 PH517-52-797L (NH.QD3SV.001) (i711800H/64GB Ram/2TB SSD/RTX3080 8G/17.3 inch FHD 360Hz/Win 10/Đen)',98000000,'Máy tính lập trình',10,5,7,6,2,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',4500000,'Máy tính lập trình',10,5,7,6,2,3);
+VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',45000000,'Máy tính lập trình',10,5,7,6,2,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('Laptop Acer Gaming Aspire 7 A715-42G-R4XX (NH.QAYSV.008) (R5 5500U/8GB RAM/256GB SSD/15.6 inch FHD/GTX1650 4G/Win11/Đen) (2021)',18000000,'Máy tính lập trình',10,5,7,6,2,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
@@ -249,23 +245,23 @@ VALUE('Laptop Asus DakBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win1
 
 -- Card đồ họa
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T600 (4GB GDDR6, 128-bit, 4x mini DisplayPort)',4900000,'Card đồ họa',28,10,1,22,4,3);
+VALUE('Card màn hình NVIDIA T600 (4GB GDDR6, 128-bit, 4x mini DisplayPort)',4900000,'Card đồ họa',28,10,1,13,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T800 (8GB GDDR6, 128-bit, 4x mini DisplayPort)',5900000,'Card đồ họa',28,10,1,22,4,3);
+VALUE('Card màn hình NVIDIA T800 (8GB GDDR6, 128-bit, 4x mini DisplayPort)',5900000,'Card đồ họa',28,10,1,13,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',6900000,'Card đồ họa',28,10,1,22,4,3);
+VALUE('Card màn hình NVIDIA T1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',6900000,'Card đồ họa',28,10,1,13,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T11200 (16GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,'Card đồ họa',28,10,1,22,4,3);
+VALUE('Card màn hình NVIDIA T11200 (16GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,'Card đồ họa',28,10,1,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T320 (32GB GDDR6, 128-bit, 4x mini DisplayPort)',14900000,'Card đồ họa',28,10,1,22,4,3);
+VALUE('Card màn hình NVIDIA T320 (32GB GDDR6, 128-bit, 4x mini DisplayPort)',14900000,'Card đồ họa',28,10,1,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T6600 (64GB GDDR6, 128-bit, 4x mini DisplayPort)',24900000,'Card đồ họa',28,10,1,22,4,3);
+VALUE('Card màn hình NVIDIA T6600 (64GB GDDR6, 128-bit, 4x mini DisplayPort)',24900000,'Card đồ họa',28,10,1,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T11600 (128GB GDDR6, 128-bit, 4x mini DisplayPort)',22900000,'Card đồ họa',28,15,1,22,4,3);
+VALUE('Card màn hình NVIDIA T11600 (128GB GDDR6, 128-bit, 4x mini DisplayPort)',22900000,'Card đồ họa',28,15,1,15,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,'Card đồ họa',28,15,1,22,4,3);
+VALUE('Card màn hình NVIDIA T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,'Card đồ họa',28,15,1,15,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,'Card đồ họa',28,15,1,22,4,3);
+VALUE('Card màn hình NVIDIA T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,'Card đồ họa',28,15,1,15,4,3);
 
 -- Dac biet
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
@@ -275,9 +271,9 @@ VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',8
 
 -- Bộ vi xử lý
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',5500000,'Vi xử lý',28,10,1,16,4,3);
+VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',5500000,'Vi xử lý',28,10,1,16,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',6500000,'Vi xử lý',28,10,1,16,4,3);
+VALUE('CPU Intel Core i3-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',6500000,'Vi xử lý',28,10,1,16,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',7500000,'Vi xử lý',28,10,1,17,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
@@ -287,15 +283,15 @@ VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W
 
 -- Bo mạch chủ
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B660-I GAMING',5500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
+VALUE('Mainboard Asus ROG STRIX B660-I GAMING mini-iTX LG 1200',5500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B760-I GAMING',6500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
+VALUE('Mainboard Asus ROG STRIX B760-I GAMING mini-iTX LG 1300',6500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B860-I GAMING',7500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
+VALUE('Mainboard Asus ROG STRIX B860-I GAMING iTX LG 1700',7500000,'Bo mạch chủ xử lý',28,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B960-I GAMING',8500000,'Bo mạch chủ xử lý',28,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B960-I GAMING ATX LG 1700',8500000,'Bo mạch chủ xử lý',28,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B1660-I GAMING',15500000,'Bo mạch chủ xử lý',28,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B1660-I GAMING ATX LG 1700',15500000,'Bo mạch chủ xử lý',28,10,1,20,4,3);
 
 -- RAM
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
@@ -323,15 +319,15 @@ VALUE('Nguồn ASUS TUF GAMING 950W Titanium  ( Màu Đen/80 Plus Titanium )',13
 
 -- Vỏ case
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R12 BLACK (Mid Tower/Màu Đen)',709000,'Vỏ case',28,10,1,25,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R12 BLACK (Mini Tower/Màu Đen)',709000,'Vỏ case',28,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R22 BLACK (Mid Tower/Màu Đen)',809000,'Vỏ case',28,10,1,25,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R22 BLACK (Mini Tower/Màu Đen)',809000,'Vỏ case',28,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('Vỏ Case Vitra POSEIDON R32 BLACK (Mid Tower/Màu Đen)',889000,'Vỏ case',28,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R42 BLACK (Mid Tower/Màu Đen)',909000,'Vỏ case',28,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R42 BLACK (Full Tower/Màu Đen)',909000,'Vỏ case',28,10,1,26,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R82 BLACK (Mid Tower/Màu Đen)',1009000,'Vỏ case',28,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R82 BLACK (Full Tower/Màu Đen)',1009000,'Vỏ case',28,10,1,26,4,3);
 
 -- Quạt làm mát
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
@@ -403,15 +399,15 @@ INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,
 VALUE('Màn hình Viewsonic VA2903-H',8200000,'Màn hình',28,10,1,9,4,3);
 -- HDD
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WD',870000,'Màn hình',28,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WD 2.5 inch',870000,'Màn hình',28,10,1,10,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WD',900000,'Màn hình',28,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WD 3.5 inch',900000,'Màn hình',28,10,1,10,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WD',1020000,'Màn hình',28,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WD 3.5 inch',1020000,'Màn hình',28,10,1,10,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 3TB WD',1400000,'Màn hình',28,10,1,10,4,3);
+VALUE('Ổ cứng HDD 3TB WD 3.5 inch',1400000,'Màn hình',28,10,1,10,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 6TB WD',1600000,'Màn hình',28,10,1,10,4,3);
+VALUE('Ổ cứng HDD 6TB WD 3.5 inch',1600000,'Màn hình',28,10,1,10,4,3);
 -- SSD
 INSERT INTO san_pham(`tenSP`,`giaSP`,`moTa`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('Ổ cứng SSD 500GB WD',1200000,'Màn hình',28,10,1,11,4,3);
@@ -532,11 +528,11 @@ INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (39,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (40,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (41,'STOCK_GRAPHIC_CARD.jpg');
 --
-INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (42,'zenbook.png');
-INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (43,'omen17.png');
-INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'chuot-khong-day-logitech-b175.jpg');
-INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (45,'ban-phim-co-khong-day-dareu-ek807g-2.jpg');
-INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (46,'34_1_41.jpg');
+-- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (42,'zenbook.png');
+-- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (43,'omen17.png');
+-- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'chuot-khong-day-logitech-b175.jpg');
+-- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (45,'ban-phim-co-khong-day-dareu-ek807g-2.jpg');
+-- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (46,'34_1_41.jpg');
 
 -- Bộ vi xử lý
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'CPU_i3.jpg');
@@ -746,7 +742,7 @@ INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 2,1),
 INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 8,28),(NULL, 8,29),(NULL, 8,30),(NULL, 8,31);
 
 -- Bo mạch chủ
-INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 9,32),(NULL, 9,33),(NULL, 9,34),(NULL, 9,35);
+INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 9,32),(NULL, 9,28),(NULL, 9,33),(NULL, 9,34),(NULL, 9,35),(NULL, 9,39);
 
 -- RAM
 INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 10,36),(NULL, 10,37),(NULL, 10, 38),(NULL, 10,39),(NULL,10,40);
@@ -764,7 +760,7 @@ INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 16,45
 INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 11,48),(NULL, 11,49);
 
 -- Vỏ case
-INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 12,50),(NULL, 12,51),(NULL, 12,52);
+INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 12,50),(NULL, 12,51),(NULL, 12,52),(NULL,12,15);
 
 -- Quạt tản nhiệt
 INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 13,15),(NULL, 13,64),(NULL, 13,65);
@@ -1448,28 +1444,33 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 49,32,"Intel B460"),
                                                                             (NULL, 49,28,"LGA 1200"),
                                                                             (NULL, 49,33,"2"),
-                                                                            (NULL, 49,34,"iTX"),
-                                                                            (NULL, 49,35,"Không");
+                                                                            (NULL, 49,34,"mini-iTX"),
+                                                                            (NULL, 49,35,"Không"),
+                                                                            (NULL, 49,39,"2667 max");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 50,32,"Intel B460"),
                                                                             (NULL, 50,28,"LGA 1200"),
                                                                             (NULL, 50,33,"2"),
-                                                                            (NULL, 50,34,"iTX"),
-                                                                            (NULL, 50,35,"Không");
+                                                                            (NULL, 50,34,"mini-iTX"),
+                                                                            (NULL, 50,35,"Không"),
+                                                                            (NULL, 50,39,"2667 max");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 51,32,"Intel B660"),
                                                                             (NULL, 51,28,"LGA 1700"),
                                                                             (NULL, 51,33,"iTX"),
                                                                             (NULL, 51,34,"4"),
-                                                                            (NULL, 51,35,"Bluetooth");
+                                                                            (NULL, 51,35,"Bluetooth"),
+                                                                            (NULL, 51,39,"3200 max");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 52,32,"Intel B660"),
                                                                             (NULL, 52,28,"LGA 1700"),
                                                                             (NULL, 52,33,"4"),
-                                                                            (NULL, 52,34,"iTX"),
-                                                                            (NULL, 52,35,"Bluetooth");
+                                                                            (NULL, 52,34,"ATX"),
+                                                                            (NULL, 52,35,"Bluetooth"),
+                                                                            (NULL, 52,39,"3200 max");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 53,32,"Intel B660"),
                                                                             (NULL, 53,28,"LGA 1700"),
                                                                             (NULL, 53,33,"4"),
-                                                                            (NULL, 53,34,"iTX"),
-                                                                            (NULL, 53,35,"Bluetooth");
+                                                                            (NULL, 53,34,"ATX"),
+                                                                            (NULL, 53,35,"Bluetooth"),
+                                                                            (NULL, 53,39,"4800 max");
 
 -- RAM
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 54,36,"DDR4"),
@@ -1554,19 +1555,24 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
 -- Vỏ case
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 64,50,"Cao cấp + RGB"),
                                                                             (NULL, 64,51,"3 quạt tản nhiệt"),
-                                                                            (NULL, 64,52,"Khí cao 160mm");
+                                                                            (NULL, 64,52,"Khí cao 160mm"),
+                                                                            (NULL, 64,15,"Mini");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 65,50,"Cao cấp + RGB"),
                                                                             (NULL, 65,51,"3 quạt tản nhiệt"),
-                                                                            (NULL, 65,52,"Khí cao 160mm");
+                                                                            (NULL, 65,52,"Khí cao 160mm"),
+                                                                            (NULL, 65,15,"Mini");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 66,50,"Cao cấp + RGB"),
                                                                             (NULL, 66,51,"3 quạt tản nhiệt"),
-                                                                            (NULL, 66,52,"Khí cao 180mm");
+                                                                            (NULL, 66,52,"Khí cao 180mm"),
+                                                                            (NULL, 66,15,"Mid");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 67,50,"Cao cấp + RGB"),
                                                                             (NULL, 67,51,"3 quạt tản nhiệt"),
-                                                                            (NULL, 67,52,"Khí cao 180mm");
+                                                                            (NULL, 67,52,"Khí cao 180mm"),
+                                                                            (NULL, 67,15,"Full");
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 68,50,"Cao cấp + RGB"),
                                                                             (NULL, 68,51,"4 quạt tản nhiệt"),
-                                                                            (NULL, 68,52,"Khí cao 220mm");
+                                                                            (NULL, 68,52,"Khí cao 220mm"),
+                                                                            (NULL, 68,15,"Full");
 -- Quạt tản nhiệt
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 69,15,"120mm"),
                                                                             (NULL, 69,64,"Cao"),
