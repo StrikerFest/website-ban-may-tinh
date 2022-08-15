@@ -78,18 +78,126 @@ class PCBuilderController extends Controller
         // else
         //     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', $PCBTheLoai)->get();
         // dd($PCBTheLoai);
+        $listCheckCPU = null;
+        $listCheckCase = null;
         switch ($PCBTheLoai) {
             case "CPU":
-                $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'CPU%')->get();
+                if (session()->has('PCBSocketBMC'))
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'CPU%')
+                        ->where('tenTS', 'Socket')
+                        ->where('giaTri', session()->get('PCBSocketBMC'))
+                        ->get();
+                else
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'CPU%')
+                        ->get();
                 break;
             case "BMC":
-                $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')->get();
+
+                // dd(session()->has('PCBSizeCase'));
+
+
+                if (session()->has('PCBSocketCPU') && session()->has('PCBSizeCase')) {
+                    $listCheckCPU = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                        ->where('tenTS', 'Socket')
+                        ->where('giaTri', 'like', session()->get('PCBSocketCPU'))
+                        ->get('san_pham.maSP');
+                    if (session()->get('PCBSizeCase') == 'Mini')
+                        $listCheckCase = DB::table('san_pham')
+                            ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                            ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                            ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                            ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                            ->where('tenTS', 'Kích thước bộ')
+                            ->where('giaTri', 'like',  'mini%')
+                            ->get('san_pham.maSP');
+                    else
+                        $listCheckCase = DB::table('san_pham')
+                            ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                            ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                            ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                            ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                            ->where('tenTS', 'Kích thước bộ')
+                            ->where('giaTri', 'like',  '%%')
+                            ->get('san_pham.maSP');
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                        ->get();
+                    // dd($listCheckCPU);
+
+                    // $listSanPhamModal = DB::table('san_pham')
+                    //     ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                    //     ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                    //     ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                    //     ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                    //     ->where(function ($query) {
+                    //         $query->where('tenTS', 'Socket')
+                    //             ->where('giaTri', 'like', session()->get('PCBSocketCPU'));
+                    //     })->orWhere(function ($query) {
+                    //         $query->where('tenTS', 'Kích thước bộ')
+                    //             ->where('giaTri', 'like',  'mini%');
+                    //     })
+                    //     // ->where('tenTS', 'Socket')
+                    //     // ->where('tenTS', 'Kích thước bộ')
+                    //     // ->where('giaTri', 'like', session()->get('PCBSocketCPU'))
+                    //     // ->where('giaTri', 'like',  'mini%')
+                    //     ->get();
+                    // dd($listSanPhamModal);
+                } elseif (session()->has('PCBSocketCPU'))
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                        ->where('tenTS', 'Socket')
+                        ->where('giaTri', 'like', session()->get('PCBSocketCPU'))
+                        ->get();
+                elseif (session()->get('PCBSizeCase') == 'Mini')
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                        ->where('tenTS', 'Kích thước bộ')
+                        ->where('giaTri', 'like',  'mini%')
+                        ->get();
+                elseif (session()->get('PCBSizeCase') == 'Mid' || session()->get('PCBSizeCase') == 'Full')
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                        ->where('tenTS', 'Kích thước bộ')
+                        ->where('giaTri', 'like',  '%%')
+                        ->get();
+                else
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
+                        ->get();
                 break;
             case "RAM":
                 $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'RAM%')->get();
                 break;
             case "HDD":
-                $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Ổ cứng HDD%')->get();
+                $listSanPhamModal = DB::table('san_pham')
+                    ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                    ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                    ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                    ->skip(0)->take(7)->where('tenTLC', 'like', 'Ổ cứng HDD%')
+                    ->where('tenTS', 'Kích thước')
+                    ->where('giaTri', 'like', '3.5%')
+                    ->get();
                 break;
             case "SSD":
                 $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Ổ cứng SSD%')->get();
@@ -101,7 +209,40 @@ class PCBuilderController extends Controller
                 $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Nguồn%')->get();
                 break;
             case "Case":
-                $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')->get();
+                if (substr(session()->get('PCBSizeBMC'), 0, 4) == 'mini')
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')
+                        ->where('tenTS', 'Kích thước')
+                        ->where('giaTri', 'like', 'Mini')
+                        ->get();
+                //     // default:
+                //     //     // dd(session()->get('PCBSizeBMC'));
+                //     //     $listSanPhamModal = DB::table('san_pham')
+                //     //         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                //     //         ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                //     //         ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                //     //         ->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')
+                //     //         ->get();
+                //     //     break;
+                // } else
+                // dd(session()->get('PCBSizeBMC'));
+                // dd(substr(session()->get('PCBSizeBMC'), 0, 4) == 'mini');
+                else
+                    // $listSanPhamModal = DB::table('san_pham')
+                    //     ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                    //     ->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')
+                    //     ->get();
+                    $listSanPhamModal = DB::table('san_pham')
+                        ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
+                        ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
+                        ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                        ->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')
+                        ->where('tenTS', 'Kích thước')
+                        ->where('giaTri', 'not like', 'Mini')
+                        ->get();
                 break;
             case "MH":
                 $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Màn hình%')->get();
@@ -122,7 +263,8 @@ class PCBuilderController extends Controller
                 $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Tản nhiệt nước%')->get();
                 break;
             default:
-                $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', $PCBTheLoai)->get();
+                $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', '%%')->get();
+                // $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', $PCBTheLoai)->get();
                 break;
         }
         $productImage = DB::table('anh_san_pham')->get();
@@ -139,6 +281,8 @@ class PCBuilderController extends Controller
             'listSanPhamModal' =>  $listSanPhamModal,
             'PCBTheLoai' =>  $PCBTheLoai,
             'productImage' =>  $productImage,
+            'listCheckCPU' =>  $listCheckCPU,
+            'listCheckCase' =>  $listCheckCase,
 
         ]);
     }
@@ -177,6 +321,7 @@ class PCBuilderController extends Controller
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
         $PCBTheLoai = "";
 
+        // Lấy thể loại - Cho thể loại vào session
         switch ($receiver) {
             case "CPU":
                 $PCBTheLoai = "CPU";
@@ -239,6 +384,8 @@ class PCBuilderController extends Controller
                 session()->put('PCBTheLoai', $PCBTheLoai);
                 break;
         }
+
+        // Xử lý số lượng cho AJAX
 
         // CPU
         $soLuongCPU = $request->get('PCBSoLuongCPU');
@@ -332,6 +479,7 @@ class PCBuilderController extends Controller
 
         // // return response()->json(['ajaxSoLuongL' => session()->get('PCBSoLuongL')]);
 
+        // Dựa vào thể loại trong session, cho các giá trị lấy được từ mã SP vào session
         switch (session()->get('PCBTheLoai')) {
             case 'CPU':
                 if (session()->get('PCBEmpty') !== 1) {
@@ -340,6 +488,11 @@ class PCBuilderController extends Controller
                     session()->put('PCBGiaCPU', $item->giaSP);
                     session()->put('PCBBaoHanhCPU', "1 năm");
                     session()->put('PCBTinhTrangCPU', "Còn hàng");
+                }
+                // Validate data
+                if (session()->has('PCBMaCPU')) {
+                    $socket = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaCPU'))->where('tenTS', 'Socket')->first();
+                    session()->put('PCBSocketCPU', $socket->giaTri);
                 }
                 break;
             case 'BMC':
@@ -350,6 +503,15 @@ class PCBuilderController extends Controller
                     session()->put('PCBBaoHanhBMC', "1 năm");
                     session()->put('PCBTinhTrangBMC', "Còn hàng");
                 }
+                // Validate data
+                if (session()->has('PCBMaBMC')) {
+                    $socket = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaBMC'))->where('tenTS', 'Socket')->first();
+                    session()->put('PCBSocketBMC', $socket->giaTri);
+                    $bus = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaBMC'))->where('tenTS', 'Bus')->first();
+                    session()->put('PCBBusBMC', $bus->giaTri);
+                    $size = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaBMC'))->where('tenTS', 'Kích thước bộ')->first();
+                    session()->put('PCBSizeBMC', $size->giaTri);
+                }
                 break;
             case 'RAM':
                 if (session()->get('PCBEmpty') !== 1) {
@@ -358,6 +520,11 @@ class PCBuilderController extends Controller
                     session()->put('PCBGiaRAM', $item->giaSP);
                     session()->put('PCBBaoHanhRAM', "1 năm");
                     session()->put('PCBTinhTrangRAM', "Còn hàng");
+                    // Validate data
+                    if (session()->has('PCBMaRAM')) {
+                        $bus = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaRAM'))->where('tenTS', 'Bus')->first();
+                        session()->put('PCBBusRAM', $bus->giaTri);
+                    }
                 }
                 break;
             case 'HDD':
@@ -404,6 +571,12 @@ class PCBuilderController extends Controller
                     session()->put('PCBBaoHanhCase', "1 năm");
                     session()->put('PCBTinhTrangCase', "Còn hàng");
                 }
+                // Validate data
+                if (session()->has('PCBMaCase')) {
+                    $size = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaCase'))->where('tenTS', 'Kích thước')->first();
+                    session()->put('PCBSizeCase', $size->giaTri);
+                }
+
                 break;
             case 'MH':
                 if (session()->get('PCBEmpty') !== 1) {
@@ -440,6 +613,11 @@ class PCBuilderController extends Controller
                     session()->put('PCBBaoHanhFan', "1 năm");
                     session()->put('PCBTinhTrangFan', "Còn hàng");
                 }
+                // Validate data
+                // if (session()->has('PCBMaFan')) {
+                //     $size = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaCase'))->where('tenTS', 'Kích thước')->first();
+                //     session()->put('PCBSizeFan', $size->giaTri);
+                // }
                 break;
             case 'TNK':
                 if (session()->get('PCBEmpty') !== 1) {
@@ -457,6 +635,10 @@ class PCBuilderController extends Controller
                     session()->put('PCBGiaTNN', $item->giaSP);
                     session()->put('PCBBaoHanhTNN', "1 năm");
                     session()->put('PCBTinhTrangTNN', "Còn hàng");
+                }
+                if (session()->has('PCBMaTNN')) {
+                    $socket = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaTNN'))->where('tenTS', 'Socket')->first();
+                    session()->put('PCBSocketTNN', $socket->giaTri);
                 }
                 break;
             case 'Laptop gaming':
@@ -487,6 +669,7 @@ class PCBuilderController extends Controller
         ////     }
         //// }
 
+        // Xóa - Quên đi session của sản phẩm xóa
         // CPU
         if ($request->PCBDeleteCPU == 1) {
             session()->forget('PCBTenCPU');
@@ -494,6 +677,8 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaCPU');
             session()->forget('PCBBaoHanhCPU');
             session()->forget('PCBTinhTrangCPU');
+            session()->forget('PCBSoLuongCPU');
+            session()->forget('PCBSocketCPU');
         }
         // BMC
         elseif ($request->PCBDeleteBMC == 1) {
@@ -502,6 +687,10 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaBMC');
             session()->forget('PCBBaoHanhBMC');
             session()->forget('PCBTinhTrangBMC');
+            session()->forget('PCBSoLuongBMC');
+            session()->forget('PCBSocketBMC');
+            session()->forget('PCBBusBMC');
+            session()->forget('PCBSizeBMC');
         }
         // RAM
         elseif ($request->PCBDeleteRAM == 1) {
@@ -510,6 +699,8 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaRAM');
             session()->forget('PCBBaoHanhRAM');
             session()->forget('PCBTinhTrangRAM');
+            session()->forget('PCBSoLuongRAM');
+            session()->forget('PCBBusRAM');
         }
         // HDD
         elseif ($request->PCBDeleteHDD == 1) {
@@ -518,6 +709,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaHDD');
             session()->forget('PCBBaoHanhHDD');
             session()->forget('PCBTinhTrangHDD');
+            session()->forget('PCBSoLuongHDD');
         }
         // SSD
         elseif ($request->PCBDeleteSSD == 1) {
@@ -526,6 +718,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaSSD');
             session()->forget('PCBBaoHanhSSD');
             session()->forget('PCBTinhTrangSSD');
+            session()->forget('PCBSoLuongSSD');
         }
         // VGA
         elseif ($request->PCBDeleteVGA == 1) {
@@ -534,6 +727,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaVGA');
             session()->forget('PCBBaoHanhVGA');
             session()->forget('PCBTinhTrangVGA');
+            session()->forget('PCBSoLuongVGA');
         }
         // PSU
         elseif ($request->PCBDeletePSU == 1) {
@@ -542,6 +736,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaPSU');
             session()->forget('PCBBaoHanhPSU');
             session()->forget('PCBTinhTrangPSU');
+            session()->forget('PCBSoLuongPSU');
         }
         // Case
         elseif ($request->PCBDeleteCase == 1) {
@@ -550,6 +745,8 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaCase');
             session()->forget('PCBBaoHanhCase');
             session()->forget('PCBTinhTrangCase');
+            session()->forget('PCBSoLuongCase');
+            session()->forget('PCBSizeCase');
         }
         // MH
         elseif ($request->PCBDeleteMH == 1) {
@@ -558,6 +755,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaMH');
             session()->forget('PCBBaoHanhMH');
             session()->forget('PCBTinhTrangMH');
+            session()->forget('PCBSoLuongMH');
         }
         // Mouse
         elseif ($request->PCBDeleteMouse == 1) {
@@ -566,6 +764,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaMouse');
             session()->forget('PCBBaoHanhMouse');
             session()->forget('PCBTinhTrangMouse');
+            session()->forget('PCBSoLuongMouse');
         }
         // BP
         elseif ($request->PCBDeleteBP == 1) {
@@ -574,6 +773,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaBP');
             session()->forget('PCBBaoHanhBP');
             session()->forget('PCBTinhTrangBP');
+            session()->forget('PCBSoLuongBP');
         }
         // Fan
         elseif ($request->PCBDeleteFan == 1) {
@@ -582,6 +782,8 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaFan');
             session()->forget('PCBBaoHanhFan');
             session()->forget('PCBTinhTrangFan');
+            session()->forget('PCBSoLuongFan');
+            // session()->forget('PCBSizeFan');
         }
         // TNK
         elseif ($request->PCBDeleteTNK == 1) {
@@ -590,6 +792,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaTNK');
             session()->forget('PCBBaoHanhTNK');
             session()->forget('PCBTinhTrangTNK');
+            session()->forget('PCBSoLuongTNK');
         }
         // TNN
         elseif ($request->PCBDeleteTNN == 1) {
@@ -598,6 +801,8 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaTNN');
             session()->forget('PCBBaoHanhTNN');
             session()->forget('PCBTinhTrangTNN');
+            session()->forget('PCBSoLuongTNN');
+            session()->forget('PCBSocketTNN');
         }
         // L
         elseif ($request->PCBDeleteL == 1) {
@@ -606,6 +811,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBGiaL');
             session()->forget('PCBBaoHanhL');
             session()->forget('PCBTinhTrangL');
+            session()->forget('PCBSoLuongL');
         }
 
 

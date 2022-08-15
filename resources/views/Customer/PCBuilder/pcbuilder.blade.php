@@ -82,7 +82,81 @@
                             <span id="close-x" class="close-PCB">&times;</span>
                             <h1>{{ $PCBTheLoai }}</h1>
                             <div style="overflow: scroll; overflow-x: hidden ;height: 90%">
+                                @php
+                                    $countCheck1 = 0;
+                                    $countCheck2 = 0;
+                                @endphp
+
                                 @foreach ($listSanPhamModal as $SPM)
+                                    @if ($listCheckCase !== null && $listCheckCPU !== null)
+                                        @foreach ($listCheckCPU as $CPU)
+                                            @foreach ($listCheckCase as $Case)
+                                                @if ($SPM->maSP == $CPU->maSP && $SPM->maSP == $Case->maSP)
+                                                <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" value="{{ $SPM->maSP }}" name="PCBMa">
+                                                    <div
+                                                        class="bg-gray-300 card padding-left-10 padding-right-10 text-center">
+                                                        <div class="row">
+                                                            <!-- Ảnh sản phẩm-->
+                                                            <div class="col-2 bg-primary">
+                                                                @php
+                                                                    $tempImg;
+                                                                    $count = 0;
+                                                                @endphp
+                                                                @foreach ($productImage as $PI)
+                                                                    @if ($PI->maSP == $SPM->maSP)
+                                                                        @if ($count == 0)
+                                                                            @php
+                                                                                $tempImg = $PI->anh;
+                                                                            @endphp
+                                                                            <a
+                                                                                href="{{ route('product.show', $SPM->maSP) }}">
+                                                                                <img class="card-img-top hide-from-work"
+                                                                                    style="height:110px ; width:110px ; border: 1px solid lightgray"
+                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                    id="{{ $SPM->maSP }}"
+                                                                                    alt="..." />
+                                                                            </a>
+                                                                            @php
+                                                                                $count = 1;
+                                                                            @endphp
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                            {{-- Hết - Ảnh sản phẩm --}}
+
+                                                            {{-- Thông tin sản phẩm --}}
+                                                            <div class="col-8">
+                                                                {{-- Tên sản phẩm --}}
+                                                                <div class="text-bold text-dark">
+                                                                    {{ $SPM->tenSP }}
+                                                                </div>
+                                                                <div class=" text-dark">
+                                                                    Mã sản phẩm: {{ $SPM->maSP }}
+                                                                    <br>
+                                                                    Bảo hành: 1 năm
+                                                                    <br>
+                                                                    Tình trạng sản phẩm: Còn hàng
+                                                                    <br>
+                                                                    <span
+                                                                        class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
+                                                                        VND</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <button type="submit" name="PCBSubmit"
+                                                                    class="btn btn-danger">+</button>
+                                                            </div>
+                                                            {{-- Hết - Thông tin sản phẩm --}}
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                        @else
                                     <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
                                         @csrf
                                         <input type="hidden" value="{{ $SPM->maSP }}" name="PCBMa">
@@ -141,11 +215,16 @@
                                             </div>
                                         </div>
                                     </form>
-                                @endforeach
+                                    @endif
+                                    @endforeach
                             </div>
                         </div>
                     </div>
-
+                    @php
+                    // dd($countCheck2);
+                    // dd($countaaa);
+                    // dd($countaaa);
+                @endphp
                 </div>
             </div>
             {{--  --}}
@@ -171,7 +250,7 @@
                                         $displayCPU = session()->has('PCBMaCPU');
                                     @endphp
                                     @if ($displayCPU == true)
-                                        <td class="padding-10" style="width:75%" id="PCBCPU">
+                                        <td class="padding-10" style="width:900px" id="PCBCPU">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -226,7 +305,8 @@
                                                                 {{ number_format(session()->get('PCBGiaCPU')) }}
                                                                 VND x <input type="number" id="PCBSoLuongCPU"
                                                                     value="{{ session()->get('PCBSoLuongCPU') }}"
-                                                                    min="1" max="9" name="PCBSoLuongCPU">
+                                                                    min="1" max="9"
+                                                                    name="PCBSoLuongCPU">
                                                                 =
                                                                 <span id="PCBTongTienCPU">
                                                                     {{ number_format(session()->get('PCBSoLuongCPU') * session()->get('PCBGiaCPU')) }}
@@ -257,7 +337,7 @@
                                         $displayBMC = session()->has('PCBMaBMC');
                                     @endphp
                                     @if ($displayBMC == true)
-                                        <td class="padding-10" style="width:75%" id="PCBBMC">
+                                        <td class="padding-10" style="width:900px" id="PCBBMC">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -344,7 +424,7 @@
                                         $displayRAM = session()->has('PCBMaRAM');
                                     @endphp
                                     @if ($displayRAM == true)
-                                        <td class="padding-10" style="width:75%" id="PCBRAM">
+                                        <td class="padding-10" style="width:900px" id="PCBRAM">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -431,7 +511,7 @@
                                         $displayHDD = session()->has('PCBMaHDD');
                                     @endphp
                                     @if ($displayHDD == true)
-                                        <td class="padding-10" style="width:75%" id="PCBHDD">
+                                        <td class="padding-10" style="width:900px" id="PCBHDD">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -518,7 +598,7 @@
                                         $displaySSD = session()->has('PCBMaSSD');
                                     @endphp
                                     @if ($displaySSD == true)
-                                        <td class="padding-10" style="width:75%" id="PCBSSD">
+                                        <td class="padding-10" style="width:900px" id="PCBSSD">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -605,7 +685,7 @@
                                         $displayVGA = session()->has('PCBMaVGA');
                                     @endphp
                                     @if ($displayVGA == true)
-                                        <td class="padding-10" style="width:75%" id="PCBVGA">
+                                        <td class="padding-10" style="width:900px" id="PCBVGA">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -692,7 +772,7 @@
                                         $displayPSU = session()->has('PCBMaPSU');
                                     @endphp
                                     @if ($displayPSU == true)
-                                        <td class="padding-10" style="width:75%" id="PCBPSU">
+                                        <td class="padding-10" style="width:900px" id="PCBPSU">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -779,7 +859,7 @@
                                         $displayCase = session()->has('PCBMaCase');
                                     @endphp
                                     @if ($displayCase == true)
-                                        <td class="padding-10" style="width:75%" id="PCBCase">
+                                        <td class="padding-10" style="width:900px" id="PCBCase">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -867,7 +947,7 @@
                                         $displayMH = session()->has('PCBMaMH');
                                     @endphp
                                     @if ($displayMH == true)
-                                        <td class="padding-10" style="width:75%" id="PCBMH">
+                                        <td class="padding-10" style="width:900px" id="PCBMH">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -954,7 +1034,7 @@
                                         $displayBP = session()->has('PCBMaBP');
                                     @endphp
                                     @if ($displayBP == true)
-                                        <td class="padding-10" style="width:75%" id="PCBBP">
+                                        <td class="padding-10" style="width:900px" id="PCBBP">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -1041,7 +1121,7 @@
                                         $displayMouse = session()->has('PCBMaMouse');
                                     @endphp
                                     @if ($displayMouse == true)
-                                        <td class="padding-10" style="width:75%" id="PCBMouse">
+                                        <td class="padding-10" style="width:900px" id="PCBMouse">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -1129,7 +1209,7 @@
                                         $displayFan = session()->has('PCBMaFan');
                                     @endphp
                                     @if ($displayFan == true)
-                                        <td class="padding-10" style="width:75%" id="PCBFan">
+                                        <td class="padding-10" style="width:900px" id="PCBFan">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -1216,7 +1296,7 @@
                                         $displayTNK = session()->has('PCBMaTNK');
                                     @endphp
                                     @if ($displayTNK == true)
-                                        <td class="padding-10" style="width:75%" id="PCBTNK">
+                                        <td class="padding-10" style="width:900px" id="PCBTNK">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -1303,7 +1383,7 @@
                                         $displayTNN = session()->has('PCBMaTNN');
                                     @endphp
                                     @if ($displayTNN == true)
-                                        <td class="padding-10" style="width:75%" id="PCBTNN">
+                                        <td class="padding-10" style="width:900px" id="PCBTNN">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     {{-- * Ảnh sản phẩm --}}
@@ -1392,7 +1472,7 @@
                                         $displayL = session()->has('PCBMaL');
                                     @endphp
                                     @if ($displayL == true)
-                                        <td class="padding-10" style="width:75%" id="PCBL">
+                                        <td class="padding-10" style="width:900px" id="PCBL">
                                             <div class="bg-gray-300 card padding-10 text-left">
                                                 <div class="row">
                                                     <!-- Ảnh sản phẩm-->
@@ -1674,737 +1754,8 @@
 
     </div>
     <!-- End of Page Wrapper -->
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#ajaxSubmit').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBSoLuongVGA: jQuery('#PCBSoLuongVGA').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        jQuery('.alert').show();
-                        jQuery('.alert').html(result.success);
-                    }
-                });
-            });
-        });
+    @include('Customer.PCBuilder.pcbuilderScript')
 
-        // Load lại trang
-        function reloadPCBDelete(url) {
-            $('#PCBCPU').load(location.href + " #PCBCPU");
-            $('#PCBBMC').load(location.href + " #PCBBMC");
-            $('#PCBRAM').load(location.href + " #PCBRAM");
-            $('#PCBHDD').load(location.href + " #PCBHDD");
-            $('#PCBSSD').load(location.href + " #PCBSSD");
-            $('#PCBVGA').load(location.href + " #PCBVGA");
-            $('#PCBPSU').load(location.href + " #PCBPSU");
-            $('#PCBCase').load(location.href + " #PCBCase");
-            $('#PCBMH').load(location.href + " #PCBMH");
-            $('#PCBMouse').load(location.href + " #PCBMouse");
-            $('#PCBBP').load(location.href + " #PCBBP");
-            $('#PCBFan').load(location.href + " #PCBFan");
-            $('#PCBTNK').load(location.href + " #PCBTNK");
-            $('#PCBTNN').load(location.href + " #PCBTNN");
-            $('#PCBL').load(location.href + " #PCBL");
-        }
-
-        function reloadPCBTotalMoney(url) {
-            $('#PCBTongTienCPU').load(location.href + " #PCBTongTienCPU");
-            $('#PCBTongTienBMC').load(location.href + " #PCBTongTienBMC");
-            $('#PCBTongTienRAM').load(location.href + " #PCBTongTienRAM");
-            $('#PCBTongTienHDD').load(location.href + " #PCBTongTienHDD");
-            $('#PCBTongTienSSD').load(location.href + " #PCBTongTienSSD");
-            $('#PCBTongTienVGA').load(location.href + " #PCBTongTienVGA");
-            $('#PCBTongTienPSU').load(location.href + " #PCBTongTienPSU");
-            $('#PCBTongTienCase').load(location.href + " #PCBTongTienCase");
-            $('#PCBTongTienMH').load(location.href + " #PCBTongTienMH");
-            $('#PCBTongTienMouse').load(location.href + " #PCBTongTienMouse");
-            $('#PCBTongTienBP').load(location.href + " #PCBTongTienBP");
-            $('#PCBTongTienFan').load(location.href + " #PCBTongTienFan");
-            $('#PCBTongTienTNK').load(location.href + " #PCBTongTienTNK");
-            $('#PCBTongTienTNN').load(location.href + " #PCBTongTienTNN");
-            $('#PCBTongTienL').load(location.href + " #PCBTongTienL");
-        }
-
-        function reloadPCBCart(url) {
-            $('#PCBCart').load(location.href + " #PCBCart");
-        }
-
-        // AJAX Delete
-        jQuery(document).ready(function() {
-            jQuery('#PCBDeleteL', '#PCBDeleteCPU', '#PCBDeleteBMC', '#PCBDeleteRAM',
-                '#PCBDeleteHDD', '#PCBDeleteSSD', '#PCBDeleteVGA', '#PCBDeletePSU', '#PCBDeleteCase',
-                '#PCBDeleteMH', '#PCBDeleteMouse', '#PCBDeleteBP', '#PCBDeleteFan', '#PCBDeleteTNK',
-                '#PCBDeleteTNN').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteCPU: jQuery('#PCBDeleteCPU').val(),
-                        PCBDeleteBMC: jQuery('#PCBDeleteBMC').val(),
-                        PCBDeleteRAM: jQuery('#PCBDeleteRAM').val(),
-                        PCBDeleteHDD: jQuery('#PCBDeleteHDD').val(),
-                        PCBDeleteSSD: jQuery('#PCBDeleteSSD').val(),
-                        PCBDeleteVGA: jQuery('#PCBDeleteVGA').val(),
-                        PCBDeletePSU: jQuery('#PCBDeletePSU').val(),
-                        PCBDeleteCase: jQuery('#PCBDeleteCase').val(),
-                        PCBDeleteMH: jQuery('#PCBDeleteMH').val(),
-                        PCBDeleteMouse: jQuery('#PCBDeleteMouse').val(),
-                        PCBDeleteBP: jQuery('#PCBDeleteBP').val(),
-                        PCBDeleteFan: jQuery('#PCBDeleteFan').val(),
-                        PCBDeleteTNK: jQuery('#PCBDeleteTNK').val(),
-                        PCBDeleteTNN: jQuery('#PCBDeleteTNN').val(),
-                        PCBDeleteL: jQuery('#PCBDeleteL').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-        });
-
-        // AJAX gọi data modal
-        jQuery(document).ready(function() {
-            // Bộ vi xử lý
-            jQuery('#PCBDeleteCPU').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteCPU: jQuery('#PCBDeleteCPU').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // BMC
-            jQuery('#PCBDeleteBMC').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteBMC: jQuery('#PCBDeleteBMC').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // RAM
-            jQuery('#PCBDeleteRAM').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteRAM: jQuery('#PCBDeleteRAM').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // HDD
-            jQuery('#PCBDeleteHDD').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteHDD: jQuery('#PCBDeleteHDD').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // SSD
-            jQuery('#PCBDeleteSSD').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteSSD: jQuery('#PCBDeleteSSD').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // VGA
-            jQuery('#PCBDeleteVGA').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteVGA: jQuery('#PCBDeleteVGA').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // PSU
-            jQuery('#PCBDeletePSU').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeletePSU: jQuery('#PCBDeletePSU').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // Case
-            jQuery('#PCBDeleteCase').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteCase: jQuery('#PCBDeleteCase').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // MH
-            jQuery('#PCBDeleteMH').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteMH: jQuery('#PCBDeleteMH').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // Mouse
-            jQuery('#PCBDeleteMouse').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteMouse: jQuery('#PCBDeleteMouse').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // BP
-            jQuery('#PCBDeleteBP').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteBP: jQuery('#PCBDeleteBP').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // Fan
-            jQuery('#PCBDeleteFan').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteFan: jQuery('#PCBDeleteFan').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // TNK
-            jQuery('#PCBDeleteTNK').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteTNK: jQuery('#PCBDeleteTNK').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // TNN
-            jQuery('#PCBDeleteTNN').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteTNN: jQuery('#PCBDeleteTNN').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-            // Khác
-            jQuery('#PCBDeleteL').click(function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
-                    url: "{{ route('PCBuilderCustomer.store') }}",
-                    method: 'post',
-                    data: {
-                        PCBDeleteL: jQuery('#PCBDeleteL').val(),
-                    },
-                    success: function(result) {
-                        console.log("Result::" + result);
-                        reloadPCBDelete();
-                    }
-                });
-            });
-        });
-
-
-
-        // Kiểm tra số lượng
-
-        // CPU
-        var PCBSoLuongCPU = document.getElementById("PCBSoLuongCPU");
-        PCBSoLuongCPU.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongCPU: jQuery('#PCBSoLuongCPU').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-
-        // BMC
-        var PCBSoLuongBMC = document.getElementById("PCBSoLuongBMC");
-        PCBSoLuongBMC.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongBMC: jQuery('#PCBSoLuongBMC').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // RAM
-        var PCBSoLuongRAM = document.getElementById("PCBSoLuongRAM");
-        PCBSoLuongRAM.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongRAM: jQuery('#PCBSoLuongRAM').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // HDD
-        var PCBSoLuongHDD = document.getElementById("PCBSoLuongHDD");
-        PCBSoLuongHDD.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongHDD: jQuery('#PCBSoLuongHDD').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // SSD
-        var PCBSoLuongSSD = document.getElementById("PCBSoLuongSSD");
-        PCBSoLuongSSD.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongSSD: jQuery('#PCBSoLuongSSD').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // VGA
-        var PCBSoLuongVGA = document.getElementById("PCBSoLuongVGA");
-        PCBSoLuongVGA.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongVGA: jQuery('#PCBSoLuongVGA').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // PSU
-        var PCBSoLuongPSU = document.getElementById("PCBSoLuongPSU");
-        PCBSoLuongPSU.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongPSU: jQuery('#PCBSoLuongPSU').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // Case
-        var PCBSoLuongCase = document.getElementById("PCBSoLuongCase");
-        PCBSoLuongCase.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongCase: jQuery('#PCBSoLuongCase').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // MH
-        var PCBSoLuongMH = document.getElementById("PCBSoLuongMH");
-        PCBSoLuongMH.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongMH: jQuery('#PCBSoLuongMH').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // Mouse
-        var PCBSoLuongMouse = document.getElementById("PCBSoLuongMouse");
-        PCBSoLuongMouse.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongMouse: jQuery('#PCBSoLuongMouse').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // BP
-        var PCBSoLuongBP = document.getElementById("PCBSoLuongBP");
-        PCBSoLuongBP.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongBP: jQuery('#PCBSoLuongBP').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // Fan
-        var PCBSoLuongFan = document.getElementById("PCBSoLuongFan");
-        PCBSoLuongFan.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongFan: jQuery('#PCBSoLuongFan').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // TNK
-        var PCBSoLuongTNK = document.getElementById("PCBSoLuongTNK");
-        PCBSoLuongTNK.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongTNK: jQuery('#PCBSoLuongTNK').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-        // TNN
-        var PCBSoLuongTNN = document.getElementById("PCBSoLuongTNN");
-        PCBSoLuongTNN.addEventListener("keyup", function(e) {
-            console.log("HERE");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongTNN: jQuery('#PCBSoLuongTNN').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-
-        // L
-        var PCBSoLuongL = document.getElementById("PCBSoLuongL");
-        PCBSoLuongL.addEventListener("keyup", function(e) {
-            console.log("HERE2");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('PCBuilderCustomer.store') }}',
-                data: {
-                    PCBSoLuongL: jQuery('#PCBSoLuongL').val(),
-                },
-                success: function(result) {
-                    reloadPCBTotalMoney();
-                    reloadPCBCart();
-                }
-            });
-        });
-    </script>
     <script>
         // Get the modal
         var modal = document.getElementById("PCBuildModal");
