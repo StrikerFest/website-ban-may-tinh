@@ -1764,27 +1764,6 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 98,57,"5 ms"),
                                                                             (NULL, 98,58,"VGA + HDMI");
 
--- Bảng khuyến mại
-INSERT INTO `khuyen_mai` (`maKM`, `maSP`,`khuyenMai`) VALUES    (NULL, 1,"Free ship và giao hàng 1"),(NULL, 2,"Free ship và giao hàng"),
-                                                                (NULL, 3,"Free ship và giao hàng 2"),(NULL, 4,"Free ship và giao hàng"),
-                                                                (NULL, 5,"Free ship và giao hàng 3"),(NULL, 6,"Free ship và giao hàng"),
-                                                                (NULL, 7,"Free ship và giao hàng 4"),(NULL, 8,"Free ship và giao hàng"),
-                                                                (NULL, 9,"Free ship và giao hàng 5"),(NULL, 10,"Free ship và giao hàng"),
-                                                                (NULL, 11,"Free ship và giao hàng 6"),(NULL, 12,"Free ship và giao hàng"),
-                                                                (NULL, 13,"Free ship và giao hàng 7"),(NULL, 14,"Free ship và giao hàng"),
-                                                                (NULL, 15,"Free ship và giao hàng 8"),(NULL, 16,"Free ship và giao hàng"),
-                                                                (NULL, 17,"Free ship và giao hàng 9"),(NULL, 18,"Free ship và giao hàng"),
-                                                                (NULL, 19,"Free ship và giao hàng 10"),(NULL, 20,"Free ship và giao hàng"),
-                                                                (NULL, 21,"Free ship và giao hàng 11"),(NULL, 22,"Free ship và giao hàng"),
-                                                                (NULL, 23,"Free ship và giao hàng 12"),(NULL, 24,"Free ship và giao hàng"),
-                                                                (NULL, 25,"Free ship và giao hàng 13"),(NULL, 26,"Free ship và giao hàng"),
-                                                                (NULL, 27,"Free ship và giao hàng 14"),(NULL, 28,"Free ship và giao hàng"),
-                                                                (NULL, 29,"Free ship và giao hàng 15"),(NULL, 30,"Free ship và giao hàng"),
-                                                                (NULL, 31,"Free ship và giao hàng 16"),(NULL, 32,"Free ship và giao hàng"),
-                                                                (NULL, 33,"Free ship và giao hàng 17"),(NULL, 34,"Free ship và giao hàng"),
-                                                                (NULL, 35,"Free ship và giao hàng 18"),(NULL, 36,"Free ship và giao hàng"),
-                                                                (NULL, 37,"Free ship và giao hàng 19"),(NULL, 38,"Free ship và giao hàng"),
-                                                                (NULL, 39,"Free ship và giao hàng 20"),(NULL, 40,"Free ship và giao hàng");
 
 -- Bảng thể loại voucher
 INSERT INTO `the_loai_voucher` (`maTLV`, `tenTLV`) VALUES (NULL, 'Giảm giá tiền mặt'), (NULL, 'Giảm giá phần trăm'), (NULL, 'Tặng phẩm');
