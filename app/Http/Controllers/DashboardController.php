@@ -31,7 +31,7 @@ class DashboardController extends Controller
                 JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
                 LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
                 WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-                AND hoa_don.maTTHD = 1
+                AND hoa_don.maTTHD = 5
             ) as X;
         ")[0]->Tong;
         // dd($doanhThuThang);
@@ -54,7 +54,7 @@ class DashboardController extends Controller
                 JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
                 LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
                 WHERE YEAR(hoa_don.ngayTao) = $namHienTai
-                AND hoa_don.maTTHD = 1
+                AND hoa_don.maTTHD = 5
             ) as X;
         ")[0]->Tong;
         // dd($doanhThuNam);
@@ -80,7 +80,7 @@ class DashboardController extends Controller
             LEFT JOIN voucher on hoa_don_chi_tiet.maVoucher = voucher.maVoucher
             WHERE serial.maHDCT IS NOT NULL
             AND MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-            AND hoa_don.maTTHD = 1
+            AND hoa_don.maTTHD = 5
             GROUP BY serial.maSerial
             ORDER BY `serial`.`maHDCT` DESC) AS X;
         ")[0]->tienLaiThang;
@@ -106,7 +106,7 @@ class DashboardController extends Controller
             LEFT JOIN voucher on hoa_don_chi_tiet.maVoucher = voucher.maVoucher
             WHERE serial.maHDCT IS NOT NULL
             AND YEAR(hoa_don.ngayTao) = $namHienTai
-            AND hoa_don.maTTHD = 1
+            AND hoa_don.maTTHD = 5
             GROUP BY serial.maSerial
             ORDER BY `serial`.`maHDCT` DESC) AS X;
         ")[0]->tienLaiNam;
@@ -115,7 +115,7 @@ class DashboardController extends Controller
         $soLuongVoucherApDung = DB::table('hoa_don_chi_tiet')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->whereNotNull('maVoucher')
-            ->where('hoa_don.maTTHD', '!=', 3)
+            ->where('hoa_don.maTTHD', '!=', 2)
             ->sum('soLuong');
         // dd($soLuongVoucherApDung);
         
@@ -135,7 +135,7 @@ class DashboardController extends Controller
             FROM hoa_don_chi_tiet
             JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
             JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
-            WHERE hoa_don.maTTHD !=3) AS X;
+            WHERE hoa_don.maTTHD !=2) AS X;
         ")[0]->tienVoucherGiam;
         // dd($soTienGiamVoucher);
 
@@ -144,7 +144,7 @@ class DashboardController extends Controller
             ->join('voucher', 'voucher.maVoucher', '=', 'hoa_don_chi_tiet.maVoucher')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->where('maTLV', 3)
-            ->where('hoa_don.maTTHD', '!=', 3)
+            ->where('hoa_don.maTTHD', '!=', 2)
             ->sum('hoa_don_chi_tiet.soLuong');
         // dd($soLuongTangPham);
         
@@ -153,7 +153,7 @@ class DashboardController extends Controller
             ->join('voucher', 'voucher.maVoucher', '=', 'hoa_don_chi_tiet.maVoucher')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->where('maTLV', 3)
-            ->where('hoa_don.maTTHD', '!=', 3)
+            ->where('hoa_don.maTTHD', '!=', 2)
             ->sum(DB::raw('giaTri*hoa_don_chi_tiet.soLuong'));
         // dd($giaTriTangPham);
 
@@ -163,7 +163,7 @@ class DashboardController extends Controller
         // FROM hoa_don_chi_tiet
         // JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
         // WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-        // AND hoa_don.maTTHD != 3
+        // AND hoa_don.maTTHD != 2
         // ")[0];
 
         //Doanh thu theo năm (dự kiến)
@@ -172,7 +172,7 @@ class DashboardController extends Controller
         // FROM hoa_don_chi_tiet
         // JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
         // WHERE YEAR(hoa_don.ngayTao) = $namHienTai
-        // AND hoa_don.maTTHD != 3
+        // AND hoa_don.maTTHD != 2
         // ")[0];
 
         //Tổng số sản phẩm đã nhập trong tháng
@@ -204,13 +204,19 @@ class DashboardController extends Controller
             ->get()[0]->tong;
         
         //Tổng số hoá đơn đang chờ duyệt
-        $hoaDonChuaDuyet = DB::table('hoa_don')->where('maTTHD', '=', '2')->count();
+        $hoaDonChuaDuyet = DB::table('hoa_don')->where('maTTHD', '=', '1')->count();
         
-        //Tổng số hoá đơn đã duyệt
-        $hoaDonDaDuyet = DB::table('hoa_don')->where('maTTHD', '=', '1')->count();
+        //Tổng số hoá đơn đang chờ lấy hàng
+        $hoaDonChoLayHang = DB::table('hoa_don')->where('maTTHD', '=', '3')->count();
+        
+        //Tổng số hoá đơn đang giao hàng
+        $hoaDonDangGiao = DB::table('hoa_don')->where('maTTHD', '=', '4')->count();
+        
+        //Tổng số hoá đơn đã giao
+        $hoaDonDaGiao = DB::table('hoa_don')->where('maTTHD', '=', '5')->count();
         
         //Tổng số hoá đơn đã huỷ
-        $tongHoaDonHuy = DB::table('hoa_don')->where('maTTHD', '=', '3')->count();
+        $tongHoaDonHuy = DB::table('hoa_don')->where('maTTHD', '=', '2')->count();
 
         //Tổng số hoá đơn trong tháng
         $tongHoaDonThang = DB::table('hoa_don')
@@ -223,14 +229,14 @@ class DashboardController extends Controller
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->whereMonth('ngayTao', '=', $thangHienTai)
             ->whereYear('ngayTao', '=', $namHienTai)
-            ->where('maTTHD', '=', 1)
+            ->where('maTTHD', '=', 5)
             ->sum('soLuong');
         
         //Tổng số lượng sản phẩm bán ra trong năm
         $tongSanPhamNam = DB::table('hoa_don_chi_tiet')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->whereYear('ngayTao', '=', $namHienTai)
-            ->where('maTTHD', '=', 1)
+            ->where('maTTHD', '=', 5)
             ->sum('soLuong');
 
 
@@ -248,7 +254,7 @@ class DashboardController extends Controller
             JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
             WHERE MONTH(hoa_don.ngayTao) = $i
             AND YEAR(hoa_don.ngayTao) = $namDuocChon
-            And hoa_don.maTTHD = 1
+            And hoa_don.maTTHD = 5
             ");
             array_push($doanhThu12Thang, $doanhThuMoiThang[0]->doanhThuThang);
             
@@ -258,7 +264,7 @@ class DashboardController extends Controller
             JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
             WHERE MONTH(hoa_don.ngayTao) = $i
             AND YEAR(hoa_don.ngayTao) = $namDuocChon
-            And hoa_don.maTTHD != 3
+            And hoa_don.maTTHD != 2
             ");
             array_push($doanhThuDuKien12Thang, $doanhThuDuKienMoiThang[0]->doanhThuDuKienThang);
         }
@@ -289,7 +295,7 @@ class DashboardController extends Controller
         $soLuongDM = DB::table('the_loai')->count('maTL');
         $soLuongSanPham = DB::table('hoa_don_chi_tiet')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
-            ->where('hoa_don.maTTHD', '=', '1')
+            ->where('hoa_don.maTTHD', '=', '5')
             ->sum('soLuong');
         for($i = 1; $i <= $soLuongDM; $i++){
             $tiLe = DB::select("
@@ -299,7 +305,7 @@ class DashboardController extends Controller
                 JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai.maTL = $i
-                AND hoa_don.maTTHD = 1
+                AND hoa_don.maTTHD = 5
             ")[0];
             if($soLuongSanPham == 0){
                 array_push($tiLeDM, 0);
@@ -317,7 +323,7 @@ class DashboardController extends Controller
                 JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
                 JOIN the_loai ON the_loai.maTL = the_loai_con.maTL
                 WHERE the_loai_con.maTLC = $i
-                AND hoa_don.maTTHD = 1
+                AND hoa_don.maTTHD = 5
             ")[0];
             if($soLuongSanPham == 0){
                 array_push($tiLeDMC, 0);
@@ -359,7 +365,9 @@ class DashboardController extends Controller
                 'tongTienNhapThang' => $tongTienNhapThang,
                 'tongTienNhapNam' => $tongTienNhapNam,
                 'hoaDonChuaDuyet' => $hoaDonChuaDuyet,
-                'hoaDonDaDuyet' => $hoaDonDaDuyet,
+                'hoaDonChoLayHang' => $hoaDonChoLayHang,
+                'hoaDonDangGiao' => $hoaDonDangGiao,
+                'hoaDonDaGiao' => $hoaDonDaGiao,
                 'tongHoaDonThang' => $tongHoaDonThang,
                 'tongSanPhamThang' => $tongSanPhamThang,
                 'tongSanPhamNam' => $tongSanPhamNam,
@@ -384,7 +392,7 @@ class DashboardController extends Controller
             JOIN the_loai_con ON the_loai_con.maTLC = san_pham.maTLC
             JOIN hoa_don_chi_tiet ON hoa_don_chi_tiet.maSP = san_pham.maSP
             JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-            WHERE hoa_don.maTTHD = 1
+            WHERE hoa_don.maTTHD = 5
             AND the_loai_con.maTLC = $maDMC
             GROUP BY san_pham.maSP
             ORDER BY soLuong DESC, san_pham.maSP ASC
@@ -416,14 +424,14 @@ class DashboardController extends Controller
                         IF(
                             maTLV=2,
                             (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))*hoa_don_chi_tiet.soLuong,
-                            giaSP-(giaSP*giamGia/100)*hoa_don_chi_tiet.soLuong
+                            (giaSP-(giaSP*giamGia/100))*hoa_don_chi_tiet.soLuong
                         )
                     )AS Tong
                     FROM hoa_don_chi_tiet
                     JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
                     LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
                     WHERE MONTH(hoa_don.ngayTao) = $i AND YEAR(hoa_don.ngayTao) = $nam
-                    AND hoa_don.maTTHD = 1
+                    AND hoa_don.maTTHD = 5
                 ) as X;
             ")[0]->Tong;
 
@@ -439,14 +447,14 @@ class DashboardController extends Controller
                         IF(
                             maTLV=2,
                             (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))*hoa_don_chi_tiet.soLuong,
-                            giaSP-(giaSP*giamGia/100)*hoa_don_chi_tiet.soLuong
+                            (giaSP-(giaSP*giamGia/100))*hoa_don_chi_tiet.soLuong
                         )
                     )AS Tong
                     FROM hoa_don_chi_tiet
                     JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
                     LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
                     WHERE MONTH(hoa_don.ngayTao) = $i AND YEAR(hoa_don.ngayTao) = $nam
-                    AND hoa_don.maTTHD != 3
+                    AND hoa_don.maTTHD != 2
                 ) as X;
             ")[0]->Tong;
 

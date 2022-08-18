@@ -22,8 +22,8 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
                     <!-- Content Row -->
@@ -55,11 +55,11 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Tiền nhập hàng trong tháng
+                                                Doanh Thu Năm
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($tongTienNhapThang)}} VND</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($doanhThuNam)}} VND</div>
                                                 </div>
                                                 <!-- <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -85,12 +85,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Lợi nhuận Tháng
+                                                Số sản phẩm bán trong tháng
                                             </div>
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($doanhThuThang - $tongTienNhapThang)}} VND</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$tongSanPhamThang}}</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -104,12 +104,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Tiền lãi tháng
+                                                Số sản phẩm bán trong năm
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tienLaiThang)}} VND</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$tongSanPhamNam}}</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -123,9 +123,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Doanh thu năm
+                                                Tiền nhập hàng trong tháng
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuNam)}} VND</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($tongTienNhapThang)}} VND</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -165,12 +165,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Lợi nhuận năm
+                                                Số sản phẩm nhập trong tháng
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($doanhThuNam - $tongTienNhapNam)}} VND</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNhapThang}}</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -184,12 +184,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Tiền lãi năm
+                                                Số sản phẩm nhập trong năm
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($tienLaiNam)}} VND</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNhapNam}}</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -197,7 +197,7 @@
                         </div>
 
                         <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -213,10 +213,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -232,10 +232,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -251,10 +251,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
+                        <!-- <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -270,7 +270,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -279,12 +279,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Số sản phẩm nhập trong tháng
+                                                Lợi nhuận tháng
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNhapThang}}</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($doanhThuThang - $tongTienNhapThang)}} VND</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -298,12 +298,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Số Sản Phẩm Bán Trong Tháng
+                                                Lợi nhuận năm
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamThang}}</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($doanhThuNam - $tongTienNhapNam)}} VND</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -313,38 +313,42 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                SỐ SẢN PHẨM NHẬP TRONG NĂM
+                                <a href="{{route('receipt.index', ['NBD' => date('Y-m-01'), 'NKT' => date('Y-m-d')])}}">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Số đơn hàng trong tháng
+                                                </div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$tongHoaDonThang}}</div>
                                             </div>
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$tongSanPhamNhapNam}}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
 
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Số sản phẩm bán trong năm
+                                <a href="{{route('receipt.index', ['searchStatus' => 'Đã nhận hàng'])}}">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Số đơn hàng đã giao
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonDaGiao}}</div>
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongSanPhamNam}}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
 
@@ -353,14 +357,14 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
-                                <a href="{{route('receipt.index', ['NBD' => date('Y-m-01'), 'NKT' => date('Y-m-d')])}}">
+                                <a href="{{route('receipt.index', ['searchStatus' => 'Chưa duyệt'])}}">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Số Đơn Hàng Trong Tháng
+                                                    Số Đơn Hàng Đang Chờ Duyệt
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tongHoaDonThang}}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonChuaDuyet}}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -374,14 +378,14 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
-                            <a href="{{route('receipt.index', ['searchStatus' => 'Đã duyệt'])}}">
+                                <a href="{{route('receipt.index', ['searchStatus' => 'Đang lấy hàng'])}}">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Số Đơn Hàng Đã Duyệt
+                                                    Số Đơn Hàng Đang Lấy Hàng
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonDaDuyet}}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonChoLayHang}}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -395,14 +399,14 @@
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
-                                <a href="{{route('receipt.index', ['searchStatus' => 'Chưa duyệt'])}}">
+                                <a href="{{route('receipt.index', ['searchStatus' => 'Đang giao hàng'])}}">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Số Đơn Hàng Đang Chờ Duyệt
+                                                    Số Đơn Hàng Đang Giao
                                                 </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonChuaDuyet}}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$hoaDonDangGiao}}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -591,8 +595,8 @@
                                     }
                                 },
                                 series: [
-                                    {name: 'Chỉ đơn đã duyệt', data: res.doanhThu12Thang}, 
-                                    {name: 'Gồm cả đơn chưa duyệt', data: res.doanhThuDuKien12Thang}
+                                    {name: 'Chỉ đơn đã hoàn thành', data: res.doanhThu12Thang}, 
+                                    {name: 'Gồm cả đơn chưa hoàn thành', data: res.doanhThuDuKien12Thang}
                                 ]
                             });
                         }
@@ -695,8 +699,8 @@
                 }
             },
             series: [
-                {name: 'Chỉ đơn đã duyệt', data: null}, 
-                {name: 'Gồm cả đơn chưa duyệt', data: null}
+                {name: 'Chỉ đơn đã hoàn thành', data: null}, 
+                {name: 'Gồm cả đơn chưa hoàn thành', data: null}
             ]
         });
 

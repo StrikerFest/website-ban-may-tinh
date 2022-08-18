@@ -31,6 +31,8 @@
                                         <th>Khách hàng</th>
                                         <th>Số điện thoại</th>
                                         <th>Ngày tạo</th>
+                                        <th>Tình trạng</th>
+                                        <th>Thanh toán</th>
                                     </tr>
                                     <tr>
                                         <td>
@@ -45,6 +47,32 @@
                                         <td>
                                             {{date_format(date_create($hoaDon->ngayTao), 'd-m-Y H:i:s')}}
                                         </td>
+                                        <td>
+                                            <?php
+                                                foreach($tinhTrangHoaDon as $TTHD){
+                                                    if(($TTHD->maTTHD)==($hoaDon->maTTHD)){
+                                                        echo $TTHD->tenTTHD;
+                                                    }
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if($hoaDon->maPTTT == 1){
+                                                    if($hoaDon->maTTHD == 5){
+                                                        echo "Đã thanh toán";
+                                                    }else{
+                                                        echo "Chưa thanh toán";
+                                                    }
+                                                }else{
+                                                    if($hoaDon->maTTHD == 2){
+                                                        echo "Hoàn tiền";
+                                                    }else {
+                                                        echo "Đã thanh toán";
+                                                    }
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>
                                 </table>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -52,13 +80,13 @@
                                         <tr>
                                             <th>Tên sản phẩm</th>
                                             <th>Số lượng</th>
-                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                            <?php if($hoaDon->maTTHD == 4 || $hoaDon->maTTHD == 5){ ?>
                                                 <th>Mã serial</th>     
                                             <?php } ?>
                                             <th>Giá</th>
                                             <th>Giảm giá</th>
                                             <th>Voucher</th>
-                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                            <?php if($hoaDon->maTTHD == 5){ ?>
                                                 <th colspan="2" width="25%">Bảo hành</th>
                                             <?php } ?>
                                             <th colspan="2">Tổng tiền</th>
@@ -73,7 +101,7 @@
                                             <td>
                                                 {{$HDCT->soLuong}}
                                             </td>
-                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                            <?php if($hoaDon->maTTHD == 4 || $hoaDon->maTTHD == 5){ ?>
                                                 <td>
                                                     <form action="{{route('serial.show', $HDCT->maSP)}}" method="get">
                                                         @csrf
@@ -95,7 +123,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <?php if($hoaDon->maTTHD == 1){ ?>
+                                            <?php if($hoaDon->maTTHD == 5){ ?>
                                                 <td>{{date_format(date_create($HDCT->ngayHetHan), 'd-m-Y')}}</td>
                                                 <td>
                                                     <?php if($HDCT->hetHan){ ?>
@@ -115,7 +143,7 @@
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 8) ?>">
+                                            <td colspan="<?php echo (($hoaDon->maTTHD == 1 || $hoaDon->maTTHD == 2 || $hoaDon->maTTHD ==3) ? 5 : ($hoaDon->maTTHD == 4 ? 6 : 8)) ?>">
                                                 Thành tiền
                                             </td>
                                             <td colspan="2">
@@ -125,45 +153,61 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="<?php echo ($hoaDon->maTTHD == 2 ? 5 : 8) ?>">
-                                                <?php 
-                                                    if($hoaDon->maTTHD == 2){
-                                                        echo('Duyệt đơn');
-                                                    }else{
-                                                        echo('Tình trạng');
-                                                    }
-                                                ?>
-                                            </td>
-                                            <?php if($hoaDon->maTTHD == 2){ ?>
+                                            <?php if(!($hoaDon->maTTHD == 2 || $hoaDon->maTTHD == 5 || $hoaDon->maTTHD == 6)){ ?>
+                                                <td colspan="<?php echo (($hoaDon->maTTHD == 1 || $hoaDon->maTTHD == 2 || $hoaDon->maTTHD ==3) ? 5 : ($hoaDon->maTTHD == 4 ? 6 : 8)) ?>">
+                                                    Thao tác
+                                                </td>
+                                            <?php } ?>
+                                            <?php if($hoaDon->maTTHD == 1){ ?>
                                                 <td>
                                                     <form action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
-                                                        <input type="hidden" name="maTTHD" value="1">
+                                                        <!-- Đang lấy hàng -->
+                                                        <input type="hidden" name="maTTHD" value="3">
                                                         <button class="btn btn-success" onclick="return confirm('Xác nhận duyệt đơn?')">
                                                             Duyệt
                                                         </button>
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                    <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
-                                                        <input type="hidden" name="maTTHD" value="3">
                                                         <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
                                                             Huỷ
                                                         </button>
                                                     </form>
                                                 </td>
-                                            <?php }else { ?>
+                                            <?php }else if ($hoaDon->maTTHD == 3){ ?>
+                                                <td width="11%">
+                                                    <form action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input type="hidden" name="maTTHD" value="4">
+                                                        <button class="btn btn-primary" onclick="return confirm('Xác nhận giao hàng?')">
+                                                            Giao hàng
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                            Huỷ
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            <?php }else if ($hoaDon->maTTHD == 4){ ?>
                                                 <td colspan="2">
-                                                    <?php
-                                                        foreach($tinhTrangHoaDon as $TTHD){
-                                                            if(($TTHD->maTTHD)==($hoaDon->maTTHD)){
-                                                                echo $TTHD->tenTTHD;
-                                                            }
-                                                        }
-                                                    ?>
+                                                    <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                            Huỷ
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             <?php } ?>
                                         </tr>
@@ -173,7 +217,7 @@
                                     <button class="btn btn-primary" type="button" onclick="window.location='{{ route("receipt.index") }}'">
                                         Quay lại
                                     </button>
-                                    <?php if($hoaDon->maTTHD == 1){ ?>
+                                    <?php if($hoaDon->maTTHD == 5){ ?>
                                         <button style="float: right;" class="btn btn-info">
                                             Xuất file PDF
                                         </button>
@@ -193,6 +237,9 @@
     <script>
         <?php if(session()->has('negative_quantity')){ ?>
             alert('{{session()->get('negative_quantity')}}')
+        <?php } ?>
+        <?php if(session()->has('canceled')){ ?>
+            alert('{{session()->get('canceled')}}')
         <?php } ?>
     </script>
 </body>
