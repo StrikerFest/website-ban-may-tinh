@@ -1,0 +1,41 @@
+// copy1
+{{-- <ol class="carousel-indicators"> --}}
+{{-- Thay bằng list ảnh --}}
+{{-- <li data-target="#carouselExampleIndicators" data-slide-to="0"
+        class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> --}}
+{{-- </ol> --}}
+
+// copy2
+{{--  --}}
+{{-- <div class="d-flex width-100 height-auto flex-center " style="display: none">
+    <div>
+        <div>
+            <i style="transform: scale(3, 8);padding-right: 0px"
+                class="fa fa-angle-left"></i>
+        </div>
+    </div>
+    @php
+        $tempImg;
+    @endphp
+    <div class="hide-from-work">
+        @foreach ($productImageGetFirst as $PI)
+            @if ($PI->maSP == $sanPham->maSP)
+                @php
+                    $tempImg = $PI->anh;
+                @endphp
+                <img class="card-img-top"
+                    style="height:400px ; width:400px ; "
+                    src="{{ asset('assets/img/' . $PI->anh) }}" alt="..." />
+            @endif
+        @endforeach
+    </div>
+    <div>
+        <div>
+            <i style="transform: scale(3, 8); padding-left: 0px"
+                class="fa fa-angle-right"></i>
+        </div>
+    </div>
+</div> --}}
+{{-- Hết - Div chứa ảnh và mũi tên --}}
