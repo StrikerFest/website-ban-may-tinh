@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BlogModel;
 use App\Models\UserModel;
+use App\Models\BlogContentModel;
 use App\Models\BlogStatusModel;
 use File;
 
@@ -46,7 +47,7 @@ class AdminBlogController extends Controller
 
         // $tinhTrangBaiViet = BlogStatusModel::all();
 
-        $baiViet = BlogModel::where('tieuDe', 'like', "%$searchName%")
+        $baiViet = BlogModel::where('tenBV', 'like', "%$searchName%")
             ->whereBetween('ngayTao', [$NBD, $NKT])
             ->paginate(5)
             ->appends([
@@ -84,24 +85,39 @@ class AdminBlogController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tieuDe' => 'required|min:3',
-            'anh' => 'required|mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'tenBV' => 'required|min:3',
+            'anh.*' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
             'maNV' => 'required',
             'ngayTao' => 'required|date',
-            'noiDung' => 'required|min:5',
+            'theLoai' => 'required',
+            // 'noiDung.*' => 'min:5',
+            // 'tieuDe.*' => 'min:3',
             // 'maTTBV' => 'required',
         ]);
+        // dd($request->tenBV, $request->theLoai, $request->noiDung, $request->tieuDe, $request->anh);
 
-        $path = $request->file('anh')->store('img');
         $baiViet = new BlogModel();
-        $baiViet->tieuDe = $request->get('tieuDe');
-        $baiViet->anh = explode("/", $path)[1];
+        $baiViet->tenBV = $request->get('tenBV');
         $baiViet->maNV = $request->get('maNV');
+        $baiViet->theLoai = $request->get('theLoai');
         $baiViet->ngayTao = $request->get('ngayTao');
-        $baiViet->noiDung = $request->get('noiDung');
+        $baiViet->save();
+        
+        for($i=0; $i<sizeof($request->tieuDe); $i++){
+            $NDBV = new BlogContentModel();
+            $NDBV->maBV = $baiViet->maBV;
+            $NDBV->tieuDe = $request->tieuDe[$i];
+            $NDBV->noiDung = $request->noiDung[$i];
+            if(isset($request->file('anh')[$i])){
+                $path = $request->file('anh')[$i]->store('img');
+                $NDBV->anh = explode("/", $path)[1];
+            }
+            $NDBV->save();
+        }
+
+        
         // $baiViet->maTTBV = $request->get('maTTBV');
         
-        $baiViet->save();
 
         return redirect(route('blog.index'));
     }
@@ -114,7 +130,11 @@ class AdminBlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $NDBV = BlogContentModel::where('maBV', $id)->paginate(5);
+
+        return view('Admin.Blog.show', [
+            'NDBV' => $NDBV,
+        ]);
     }
 
     /**
@@ -152,30 +172,29 @@ class AdminBlogController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'tieuDe' => 'required|min:3',
-            'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'tenBV' => 'required|min:3',
+            // 'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
             'maNV' => 'required',
             'ngayTao' => 'required|date',
-            'noiDung' => 'required|min:5',
+            // 'noiDung' => 'required|min:5',
             // 'maTTBV' => 'required',
         ]);
 
         $BV = BlogModel::find($id);
-        $BV->tieuDe = $request->get('tieuDe');
+        $BV->tenBV = $request->get('tenBV');
         $BV->maNV = $request->get('maNV');
         $BV->ngayTao = date_create($request->get('ngayTao'));
-        $BV->noiDung = $request->get('noiDung');
         // $BV->maTTBV = $request->get('maTTBV');
 
-        if(!is_null($request->file('anh'))){
-            $oldPath = public_path('assets/img/'.$BV->anh);
-            if(File::exists($oldPath)){
-                File::delete($oldPath);
-            }
+        // if(!is_null($request->file('anh'))){
+        //     $oldPath = public_path('assets/img/'.$BV->anh);
+        //     if(File::exists($oldPath)){
+        //         File::delete($oldPath);
+        //     }
 
-            $path = $request->file('anh')->store('img');
-            $BV->anh = explode("/", $path)[1];
-        }
+        //     $path = $request->file('anh')->store('img');
+        //     $BV->anh = explode("/", $path)[1];
+        // }
         $BV->save();
 
         return redirect(route('blog.index'));
@@ -190,12 +209,89 @@ class AdminBlogController extends Controller
     public function destroy($id)
     {
         $BV = BlogModel::find($id);
-        $path = public_path('assets/img/'.$BV->anh);
-        if(File::exists($path)){
-            File::delete($path);
-        }
+        $NDBV = BlogContentModel::where('maBV', $id)->get();
+        $NDBV->each(function($record){
+            $path = public_path('assets/img/'.$record->anh);
+            if(File::exists($path)){
+                File::delete($path);
+            }
+            $record->delete();
+        });
+
         $BV->delete();
         
         return redirect(route('blog.index'));
+    }
+
+    public function storeContent(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'anh.*' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'noiDung.*' => 'min:5',
+            'tieuDe.*' => 'min:3',
+        ]);
+
+        
+        for($i=0; $i<sizeof($request->tieuDe); $i++){
+            $NDBV = new BlogContentModel();
+            $NDBV->maBV = $id;
+            $NDBV->tieuDe = $request->tieuDe[$i];
+            $NDBV->noiDung = $request->noiDung[$i];
+            if(isset($request->file('anh')[$i])){
+                $path = $request->file('anh')[$i]->store('img');
+                $NDBV->anh = explode("/", $path)[1];
+            }
+            $NDBV->save();
+        }
+
+        return redirect(route('blog.show', $id));
+    }
+
+    public function editContent($id)
+    {
+        $NDBV = BlogContentModel::find($id);
+
+        return view('Admin.Blog.editContent', [
+            'NDBV' => $NDBV,
+        ]);
+    }
+
+    public function updateContent(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'anh' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp',
+            'noiDung' => 'min:5',
+            'tieuDe' => 'min:4',
+        ]);
+
+        $NDBV = BlogContentModel::find($id);
+        $maBV = $NDBV->maBV;
+        $NDBV->noiDung = $request->get('noiDung');
+        $NDBV->tieuDe = $request->get('tieuDe');
+        if(!is_null($request->file('anh'))){
+            $oldPath = public_path('assets/img/'.$NDBV->anh);
+            if(File::exists($oldPath)){
+                File::delete($oldPath);
+            }
+
+            $path = $request->file('anh')->store('img');
+            $NDBV->anh = explode("/", $path)[1];
+        }
+
+        $NDBV->save();
+        return redirect(route('blog.show', $maBV));
+    }
+
+    public function deleteContent($id)
+    {
+        $NDBV = BlogContentModel::find($id);
+
+        $path = public_path('assets/img/'.$NDBV->anh);
+        if(File::exists($path)){
+            File::delete($path);
+        }
+        $NDBV->delete();
+
+        return back();
     }
 }

@@ -24,90 +24,50 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Bảng blog hiện tại</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng nội dung blog hiện tại</h6>
                             <!-- Filter -->
-                            <div style="margin-top: 10px">
-                                <table>
-                                    <h6>Bộ lọc</h6>
-                                    <form method="get">
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tiêu đề">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="date" name="NBD" value="{{$NBD}}" max="<?php echo date('Y-m-d'); ?>">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="date" name="NKT" value="{{$NKT}}" max="<?php echo date('Y-m-d'); ?>">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <button class="btn btn-primary">Tìm kiếm</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </table>
-                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
-                                    Tổng số bản ghi: {{$baiViet->total()}}
+                                    Tổng số bản ghi: {{$NDBV->total()}}
                                 </div>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Tên bài viết</th>
-                                            <th>Người viết</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Thể loại</th>
-                                            <!-- <th>Tình trạng</th> -->
-                                            <th colspan="3" width="25%">Thao tác</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Ảnh</th>
+                                            <th>Nội dung</th>
+                                            <th colspan="2" width="10%">Thao tác</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-
-                                    </tfoot>
                                     <tbody>
-                                    @foreach ($baiViet as $BV)
+                                    @foreach ($NDBV as $BV)
                                         <tr>
-                                            <td>{{$BV->tenBV}}</td>
-                                            <!-- <td>
+                                            <td>{{$BV->tieuDe}}</td>
+                                            <td>
+                                                <?php if(!is_null($BV->anh)){ ?>
                                                 <img
                                                     class="card-img-top"
                                                     style="height: 150px; width: 150px; border: 1px solid lightgray"
                                                     src="{{ asset('assets/img/'.$BV->anh) }}"
                                                     alt="..."
                                                 />
-                                            </td> -->
-                                            <td>
-                                                <?php
-                                                    foreach($nhanVien as $NV){
-                                                        if(($BV->maNV)==($NV->maND)){
-                                                            echo $NV->tenND;
-                                                        }
-                                                    }
-                                                ?>
+                                                <?php } ?>
                                             </td>
-                                            <td>{{date_format(date_create($BV->ngayTao),"d-m-Y")}}</td>
-                                            <td>{{$BV->theLoai==0 ? "Bài blog" : "Bài viết về sản phẩm"}}</td>
+                                            <td>{{$BV->noiDung}}</td>
                                             <td>
-                                                <form action="{{route('blog.show', $BV->maBV)}}" method="get">
-                                                    @csrf
-                                                    <button class="btn btn-primary btn-user btn-block">Nội dung</button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="{{route('blog.edit', $BV->maBV)}}" method="get">
+                                                <form action="{{route('blog.editContent', $BV->maNDBV)}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-primary btn-user btn-block">Sửa</button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <form action="{{route('blog.destroy', $BV->maBV)}}" method="post">
+                                                <form action="{{route('blog.deleteContent', $BV->maNDBV)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button 
-                                                        onclick="return confirm('Xác nhận xóa bài viết?')"
+                                                        onclick="return confirm('Xác nhận xóa nội dung?')"
                                                         class="btn btn-primary btn-user btn-block"
                                                         >
                                                         Xóa
@@ -121,58 +81,17 @@
                             </div>
                         </div>
                     </div>
-                    {{$baiViet->links()}}
+                    {{$NDBV->links()}}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Thêm bài viết mới</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Thêm nội dung bài viết mới</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form class="user" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
+                                <form class="user" action="{{ route('blog.storeContent', $NDBV[0]->maBV) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <label class="form-inline label">Tên bài viết</label>
-                                        @error('tenBV')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="text" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Blog main title" name="tenBV">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
-                                        <label class="form-inline label">Thể loại</label>
-                                        @error('theLoai')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <select class="form-control" name="theLoai">
-                                            <option value="" disabled selected hidden>Type</option>
-                                            <option value="0">Bài blog</option>
-                                            <option value="1">Bài viết về sản phẩm</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
-                                        <input type="hidden" name="maNV" value="<?php echo(session()->get('admin')) ?>">
-                                        <label class="form-inline label">Người viết</label>
-                                        @error('maNV')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="text" class="form-control" id="exampleProduct"
-                                            placeholder="Creator" value="<?php echo(session()->get('tenAdmin')) ?>" readonly>
-                                    </div>
-                                    <div class="col-sm-4 mb-4 mb-sm-0">
-                                        <label class="form-inline label">Ngày tạo</label>
-                                        @error('ngayTao')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="<?php echo date('Y-m-d'); ?>" readonly>
-                                    </div>
-                                </div>
                                 <div id="sample-div">
                                     <div>
-                                        <hr style="background: #333;margin-top: 50px;"/>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label class="form-inline label">Tiêu đề</label>

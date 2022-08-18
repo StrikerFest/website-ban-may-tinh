@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     @include("Admin.Layout.Common.meta")
-    <script src="https://cdn.tiny.cloud/1/13dhm7ievvt2m5zqgf71jpj7kzxx89vu8bh22bhcrh5717n8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
     <!-- Page Wrapper -->
@@ -31,34 +30,16 @@
                                     @csrf
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <label class="form-inline label">Tiêu đề</label>
-                                        @error('tieuDe')
+                                        <label class="form-inline label">Tên bài viết</label>
+                                        @error('tenBV')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="text" class="form-control form-control-user" id="exampleProduct"
-                                            placeholder="Blog title" name="tieuDe" value="{{$BV->tieuDe}}">
+                                            placeholder="Blog title" name="tenBV" value="{{$BV->tenBV}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <label class="form-inline label">Ảnh hiện tại</label>
-                                        <img
-                                            class="card-img-top"
-                                            style="height: 150px; width: 150px; border: 1px solid lightgray"
-                                            src="{{ asset('assets/img/'.$BV->anh) }}"
-                                            alt="..."
-                                        />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="form-inline label">Ảnh mới</label>
-                                        @error('anh')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input type="file" class="form-control-file" name="anh">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-6 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Người viết</label>
                                         @error('maNV')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -71,21 +52,26 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-6 mb-6 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Ngày tạo</label>
                                         @error('ngayTao')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="{{$BV->ngayTao}}">
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Nội dung</label>
-                                        @error('noiDung')
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
+                                        <label class="form-inline label">Thể loại</label>
+                                        @error('theLoai')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <textarea id="abc" class="form-control" name="noiDung" rows="5" placeholder="Content">{{$BV->noiDung}}</textarea>
+                                        <select class="form-control" name="theLoai">
+                                            <option value="0" <?php if($BV->theLoai == 0)echo("selected") ?>>
+                                                Bài blog
+                                            </option>
+                                            <option value="1" <?php if($BV->theLoai == 1)echo("selected") ?>>
+                                                Bài viết về sản phẩm
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">
@@ -103,12 +89,5 @@
     <!-- End of Page Wrapper -->
     @include("Admin.Layout.Common.bottom_script")
 
-    <script>
-    tinymce.init({
-        selector: 'textarea#abc',
-        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak table',
-        toolbar_mode: 'floating',
-    });
-    </script>
 </body>
 </html>
