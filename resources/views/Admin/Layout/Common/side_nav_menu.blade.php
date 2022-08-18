@@ -258,7 +258,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="{{route('productStatus.index')}}">Tình trạng sản phẩm</a>
-                    <a class="collapse-item" href="{{route('blogStatus.index')}}">Tình trạng blog</a>
+                    <!-- <a class="collapse-item" href="{{route('blogStatus.index')}}">Tình trạng blog</a> -->
                     <a class="collapse-item" href="{{route('receiptStatus.index')}}">Tình trạng hoá đơn</a>
                 </div>
             </div>

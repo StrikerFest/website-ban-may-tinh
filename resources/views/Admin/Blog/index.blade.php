@@ -60,7 +60,7 @@
                                             <th>Người viết</th>
                                             <th>Ngày tạo</th>
                                             <th>Nội dung</th>
-                                            <th>Tình trạng</th>
+                                            <!-- <th>Tình trạng</th> -->
                                             <th colspan="2" width="10%">Thao tác</th>
                                         </tr>
                                     </thead>
@@ -93,15 +93,6 @@
                                                 <textarea class="form-control" cols="15" rows="5" readonly>
                                                     {{$BV->noiDung}}
                                                 </textarea>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                    foreach($tinhTrangBaiViet as $TTBV){
-                                                        if(($BV->maTTBV)==($TTBV->maTTBV)){
-                                                            echo $TTBV->tenTTBV;
-                                                        }
-                                                    }
-                                                ?>
                                             </td>
                                             <td>
                                                 <form action="{{route('blog.edit', $BV->maBV)}}" method="get">
@@ -149,14 +140,14 @@
                                     
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Ảnh</label>
                                         @error('anh')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="file" class="form-control-file" id="exampleProduct" name="anh">
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <input type="hidden" name="maNV" value="<?php echo(session()->get('admin')) ?>">
                                         <label class="form-inline label">Người viết</label>
                                         @error('maNV')
@@ -165,24 +156,12 @@
                                         <input type="text" class="form-control" id="exampleProduct"
                                             placeholder="Creator" value="<?php echo(session()->get('tenAdmin')) ?>" readonly>
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-4 mb-sm-0">
                                         <label class="form-inline label">Ngày tạo</label>
                                         @error('ngayTao')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="<?php echo date('Y-m-d'); ?>" readonly>
-                                    </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Tình trạng</label>
-                                        @error('maTTBV')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <select class="form-control" name="maTTBV">
-                                            <option value="" disabled selected hidden>Status</option>
-                                            @foreach($tinhTrangBaiViet as $TTBV)
-                                                <option value="{{ $TTBV->maTTBV }}">{{ $TTBV->tenTTBV }}</option>
-                                            @endforeach
-                                        </select>    
                                     </div>
                                 </div>
                                 <div class="form-group row">

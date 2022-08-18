@@ -44,7 +44,7 @@ class AdminBlogController extends Controller
 
         $nhanVien = UserModel::all();
 
-        $tinhTrangBaiViet = BlogStatusModel::all();
+        // $tinhTrangBaiViet = BlogStatusModel::all();
 
         $baiViet = BlogModel::where('tieuDe', 'like', "%$searchName%")
             ->whereBetween('ngayTao', [$NBD, $NKT])
@@ -57,7 +57,7 @@ class AdminBlogController extends Controller
 
         return view('Admin.Blog.index', [
             "nhanVien" => $nhanVien,
-            "tinhTrangBaiViet" => $tinhTrangBaiViet,
+            // "tinhTrangBaiViet" => $tinhTrangBaiViet,
             "baiViet" => $baiViet,
             "searchName" => $searchName,
             "NBD" => $NBD,
@@ -89,7 +89,7 @@ class AdminBlogController extends Controller
             'maNV' => 'required',
             'ngayTao' => 'required|date',
             'noiDung' => 'required|min:5',
-            'maTTBV' => 'required',
+            // 'maTTBV' => 'required',
         ]);
 
         $path = $request->file('anh')->store('img');
@@ -99,7 +99,7 @@ class AdminBlogController extends Controller
         $baiViet->maNV = $request->get('maNV');
         $baiViet->ngayTao = $request->get('ngayTao');
         $baiViet->noiDung = $request->get('noiDung');
-        $baiViet->maTTBV = $request->get('maTTBV');
+        // $baiViet->maTTBV = $request->get('maTTBV');
         
         $baiViet->save();
 
@@ -133,12 +133,12 @@ class AdminBlogController extends Controller
             ->where('chuc_vu_quyen_han.maQH', '=', '5')
             ->get();
 
-        $tinhTrangBaiViet = BlogStatusModel::all();
+        // $tinhTrangBaiViet = BlogStatusModel::all();
 
         return view('Admin.Blog.edit', [
             'BV' => $BV,
             'nhanVien' => $nhanVien,
-            'tinhTrangBaiViet' => $tinhTrangBaiViet,
+            // 'tinhTrangBaiViet' => $tinhTrangBaiViet,
         ]);
     }
 
@@ -157,7 +157,7 @@ class AdminBlogController extends Controller
             'maNV' => 'required',
             'ngayTao' => 'required|date',
             'noiDung' => 'required|min:5',
-            'maTTBV' => 'required',
+            // 'maTTBV' => 'required',
         ]);
 
         $BV = BlogModel::find($id);
@@ -165,7 +165,7 @@ class AdminBlogController extends Controller
         $BV->maNV = $request->get('maNV');
         $BV->ngayTao = date_create($request->get('ngayTao'));
         $BV->noiDung = $request->get('noiDung');
-        $BV->maTTBV = $request->get('maTTBV');
+        // $BV->maTTBV = $request->get('maTTBV');
 
         if(!is_null($request->file('anh'))){
             $oldPath = public_path('assets/img/'.$BV->anh);

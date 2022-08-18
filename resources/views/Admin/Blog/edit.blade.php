@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-6 mb-sm-0">
                                         <label class="form-inline label">Người viết</label>
                                         @error('maNV')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -71,25 +71,12 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-6 mb-sm-0">
                                         <label class="form-inline label">Ngày tạo</label>
                                         @error('ngayTao')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="date" class="form-control" id="exampleProduct" name="ngayTao" value="{{$BV->ngayTao}}">
-                                    </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Tình trạng</label>
-                                        @error('maTTBV')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        <select class="form-control" name="maTTBV">
-                                            @foreach($tinhTrangBaiViet as $TTBV)
-                                                <option value="{{ $TTBV->maTTBV }}" <?php if($TTBV->maTTBV == $BV->maTTBV)echo("selected") ?>>
-                                                    {{ $TTBV->tenTTBV }}
-                                                </option>
-                                            @endforeach
-                                        </select>    
                                     </div>
                                 </div>
                                 <div class="form-group row">

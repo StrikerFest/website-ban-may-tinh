@@ -23,7 +23,6 @@ return new class extends Migration
             $table->double('giaSP');
             $table->unsignedInteger('giamGia');
             $table->unsignedInteger('maVoucher')->nullable();
-            $table->foreign('maVoucher')->references('maVoucher')->on('voucher');
             $table->unique(['maHD', 'maSP']);
         });
     }

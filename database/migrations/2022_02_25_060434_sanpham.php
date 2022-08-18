@@ -17,9 +17,10 @@ return new class extends Migration
             $table->increments('maSP');
             $table->string('tenSP', 200);
             $table->double('giaSP');
-            $table->text('moTa');
             $table->unsignedInteger('soLuong')->default('0');
             $table->unsignedInteger('giamGia')->default('0');
+            $table->unsignedInteger('maBV')->nullable();
+            $table->foreign('maBV')->references('maBV')->on('bai_viet');
             $table->unsignedInteger('maNSX');
             $table->foreign('maNSX')->references('maNSX')->on('nha_san_xuat');
             $table->unsignedInteger('maTLC');
