@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('maVoucher');
             $table->foreign('maVoucher')->references('maVoucher')->on('voucher');
             $table->unsignedInteger('maHDCT');
-            $table->foreign('maHDCT')->references('maHDCT')->on('maHDCT');
+            $table->foreign('maHDCT')->references('maHDCT')->on('hoa_don_chi_tiet');
         });
     }
 
