@@ -36,6 +36,7 @@ class ReceiptController extends Controller
         $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
         $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
+        $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
 
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listNhaSanXuat = DB::table(
@@ -57,6 +58,7 @@ class ReceiptController extends Controller
             'listTheLoaiLinhKien' =>  $listTheLoaiLinhKien,
             'listTheLoaiPhuKien' =>  $listTheLoaiPhuKien,
             'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
+            'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
 
             'listHoaDon' =>  $listHoaDon,
             'listPTTT' =>  $listPTTT,
@@ -369,6 +371,7 @@ class ReceiptController extends Controller
         $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
         $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
+        $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
 
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listNhaSanXuat = DB::table(
@@ -394,6 +397,7 @@ class ReceiptController extends Controller
             'listTheLoaiLinhKien' =>  $listTheLoaiLinhKien,
             'listTheLoaiPhuKien' =>  $listTheLoaiPhuKien,
             'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
+            'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
 
             'listHoaDonCT' =>  $listHoaDonCT,
             'listAnh' =>  $listAnh,

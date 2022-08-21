@@ -1,5 +1,9 @@
 <!-- Topbar -->
 {{-- Thanh navbar thứ nhất --}}
+@isset($listTheLoaiCha)
+        @include('Customer.Layout.Common.side_nav_menu')
+@endisset
+
 <header class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow fixed-top "
     style="padding: 0; background-color: rgba(20, 20, 20, 0.97) !important">
     <div style="display: flex;justify-content: center;align-items: center; margin: auto;">
@@ -14,8 +18,10 @@
             </div>
         </a>
         <!-- Topbar tìm kiếm -->
+        {{-- <form class="d-flex align-items-center justify-content-center mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            action="{{ route('searchCustomer.index') }}"> --}}
         <form class="d-flex align-items-center justify-content-center mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-            action="{{ route('searchCustomer.index') }}">
+            action="{{ route('categoryCustomer.show', 'null') }}">
             <div class="input-group">
                 <input type="text" class="form-control bg-light border-0 small" name="search"
                     placeholder="Tìm kiếm vật phẩm" aria-label="Search" aria-describedby="basic-addon2">
@@ -219,6 +225,13 @@
 {{-- Thanh navbar thứ 2 --}}
 <nav class="navbar navbar-expand navbar-light bg-gradient- topbar mb-4 static-top shadow fixed-top second-navbar padding-0"
 style="background-color: rgba(255, 255, 255, 0.9)">
+@isset($listTheLoaiCha)
+<div id="cateShow1" class="padding-15 bg- text-light" style="width: 200px;margin-right: -230px">
+    <div class="nav-item-container-highlight">
+        Danh mục
+    </div>
+</div>
+@endisset
 <div class="center-custom list-style-none">
     <div class="nav-item-container-highlight">
         <li class="nav-item ">

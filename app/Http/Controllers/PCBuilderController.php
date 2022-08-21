@@ -40,6 +40,7 @@ class PCBuilderController extends Controller
         $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
         $PCBTheLoai = session()->has('PCBTheLoai') ? session()->get('PCBTheLoai') : '';
+        $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
 
         // // if ($receiver == "VGA") {
         //     // $PCBTheLoai = "Card thiết kế đồ họa";
@@ -283,6 +284,7 @@ class PCBuilderController extends Controller
             'productImage' =>  $productImage,
             'listCheckCPU' =>  $listCheckCPU,
             'listCheckCase' =>  $listCheckCase,
+            'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
 
         ]);
     }
@@ -320,6 +322,7 @@ class PCBuilderController extends Controller
         $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
         $PCBTheLoai = "";
+        $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
 
         // Lấy thể loại - Cho thể loại vào session
         switch ($receiver) {
@@ -853,6 +856,7 @@ class PCBuilderController extends Controller
             'listTheLoaiPhuKien' =>  $listTheLoaiPhuKien,
             'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
             'listNhaSanXuat' =>  $listNhaSanXuat,
+            'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
             // 'listSanPhamModal' =>  $listSanPhamModal,
             // 'PCBTheLoai' =>  $PCBTheLoai,
 

@@ -19,7 +19,7 @@
                     style="padding: 50px 50px 0px 50px;margin: 0px 50px 100px 50px">
                     <div class="grid">
                         <div class="row">
-                            <div class="col-12 bg-danger" style="height: 50px">
+                            <div class="col-12 bg-" style="height: 50px">
 
                             </div>
                         </div>
@@ -649,7 +649,7 @@
                                                                                                     <button
                                                                                                         class="btn btn-outline-success text-left"
                                                                                                         href="{{ route('product.show', $CN->maSP) }}"
-                                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                                        style="background-color: ;padding-top: 3px;height:65%">
                                                                                                         Còn hàng
                                                                                         @endif
                                                                                         </button>
@@ -831,7 +831,7 @@
                                                                                                     <button
                                                                                                         class="btn btn-outline-success text-left"
                                                                                                         href="{{ route('product.show', $CN->maSP) }}"
-                                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                                        style="background-color: ;padding-top: 3px;height:65%">
                                                                                                         Còn hàng
                                                                                         @endif
                                                                                         </button>
@@ -1013,7 +1013,7 @@
                                                                                                     <button
                                                                                                         class="btn btn-outline-success text-left"
                                                                                                         href="{{ route('product.show', $CN->maSP) }}"
-                                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                                        style="background-color: ;padding-top: 3px;height:65%">
                                                                                                         Còn hàng
                                                                                         @endif
                                                                                         </button>

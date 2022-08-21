@@ -26,7 +26,7 @@ class ProductController extends Controller
         $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
         $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
-
+        $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
         $listTheLoaiCha = DB::table('the_loai')->get();
 
         // Lấy ảnh
@@ -60,7 +60,7 @@ class ProductController extends Controller
 
         $cartItems = \Cart::getContent();
 
-        $saleProduct = ProductModel::where('dacBiet',1)->get();
+        $saleProduct = ProductModel::where('dacBiet', 1)->get();
         // dd($saleProduct);
         return view('Customer.Customer.index', [
             'productImage' => $productImage,
@@ -103,6 +103,7 @@ class ProductController extends Controller
             'listTheLoaiCha' =>  $listTheLoaiCha,
 
             'bannerImage' => $bannerImage,
+            'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
 
         ]);
     }
@@ -139,12 +140,12 @@ class ProductController extends Controller
         //
         // $bannerImage1 =  DB::table('anh_quang_cao')->take(1)->get();
         $productImage = ProductImageModel::get();
-        $productComment = ProductCommentModel::where('maBLC','!=',null)->get();
-        $productCommentMain = ProductCommentModel::where('maBLC',null)->get();
+        $productComment = ProductCommentModel::where('maBLC', '!=', null)->get();
+        $productCommentMain = ProductCommentModel::where('maBLC', null)->get();
         $user = UserModel::get();
 
-        $productImageGetFirst = ProductImageModel::take(1)->where('maSP',$id)->get();
-        $productImageSkipFirst = ProductImageModel::skip(1)->take(9)->where('maSP',$id)->get();
+        $productImageGetFirst = ProductImageModel::take(1)->where('maSP', $id)->get();
+        $productImageSkipFirst = ProductImageModel::skip(1)->take(9)->where('maSP', $id)->get();
 
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
@@ -152,9 +153,9 @@ class ProductController extends Controller
         $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
 
         $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
-        $computerNew1 = ProductModel::skip(0)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
-        $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
-        $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC',$sanPham->maTLC)->orderBy('maSP')->get();
+        $computerNew1 = ProductModel::skip(0)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
+        $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
+        $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
         // dd($user);
         return view('Customer.Product.index', [
             'productImage' => $productImage,

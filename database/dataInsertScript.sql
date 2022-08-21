@@ -629,7 +629,7 @@ INSERT INTO `tinh_trang_hoa_don` (`maTTHD`, `tenTTHD`) VALUES (NULL, 'Đã duy�
 INSERT INTO `phuong_thuc_thanh_toan` (`maPTTT`, `tenPTTT`) VALUES (NULL, 'COD'), (NULL, 'Chuyển khoản');
 
 -- Bảng thông số
-INSERT INTO `thong_so` (`maTS`, `tenTS`) VALUES (NULL, 'Hãng sản xuất'),
+INSERT INTO `thong_so` (`maTS`, `tenTS`) VALUES (NULL, 'Loại chip'),
                                                 (NULL, 'Chủng loại'),
                                                 (NULL, 'Bộ vi xử lý'),
                                                 (NULL, 'Bộ nhớ trong'),
@@ -720,6 +720,9 @@ INSERT INTO `thong_so` (`maTS`, `tenTS`) VALUES (NULL, 'Hãng sản xuất'),
                                                 -- (NULL, 'Kích thước'),
                                                 (NULL, 'Số quạt')
 
+
+
+
                                                 -- (NULL, 'Socket'),
                                                 -- (NULL, 'Kích thước'),
                                                 -- (NULL, 'Thiết kế')
@@ -783,9 +786,9 @@ INSERT INTO `the_loai_thong_so` (`maTLTS`, `maTL`,`maTS`) VALUES    (NULL, 3,53)
 -- Bảng sản phẩm thông số
 
 -- Laptop
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 1,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 1,1,"Intel core i3"),
                                                                             (NULL, 1,2,"PT516-51s-71RW"),
-                                                                            (NULL, 1,3,"i7 11800H"),
+                                                                            (NULL, 1,3,"i3 11800H"),
                                                                             (NULL, 1,4,"64GB RAM"),
                                                                             (NULL, 1,5,"4 khe"),
                                                                             (NULL, 1,6,"256GB"),
@@ -801,9 +804,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 1,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 1,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 2,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 2,1,"Intel core i3"),
                                                                             (NULL, 2,2,"PT516-51s-71RW"),
-                                                                            (NULL, 2,3,"i7 11800H"),
+                                                                            (NULL, 2,3,"i3 11800H"),
                                                                             (NULL, 2,4,"64GB RAM"),
                                                                             (NULL, 2,5,"4 khe"),
                                                                             (NULL, 2,6,"256GB"),
@@ -819,9 +822,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 2,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 2,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 3,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 3,1,"Intel core i3"),
                                                                             (NULL, 3,2,"PT516-51s-71RW"),
-                                                                            (NULL, 3,3,"i7 11800H"),
+                                                                            (NULL, 3,3,"i3 11800H"),
                                                                             (NULL, 3,4,"64GB RAM"),
                                                                             (NULL, 3,5,"4 khe"),
                                                                             (NULL, 3,6,"256GB"),
@@ -837,9 +840,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 3,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 3,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 4,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 4,1,"Intel core i3"),
                                                                             (NULL, 4,2,"PT516-51s-71RW"),
-                                                                            (NULL, 4,3,"i7 11800H"),
+                                                                            (NULL, 4,3,"i3 11800H"),
                                                                             (NULL, 4,4,"64GB RAM"),
                                                                             (NULL, 4,5,"4 khe"),
                                                                             (NULL, 4,6,"256GB"),
@@ -855,9 +858,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 4,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 4,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 5,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 5,1,"Intel core i5"),
                                                                             (NULL, 5,2,"PT516-51s-71RW"),
-                                                                            (NULL, 5,3,"i7 11800H"),
+                                                                            (NULL, 5,3,"i5 11800H"),
                                                                             (NULL, 5,4,"64GB RAM"),
                                                                             (NULL, 5,5,"4 khe"),
                                                                             (NULL, 5,6,"256GB"),
@@ -873,9 +876,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 5,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 5,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 6,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 6,1,"Intel core i5"),
                                                                             (NULL, 6,2,"PT516-51s-71RW"),
-                                                                            (NULL, 6,3,"i7 11800H"),
+                                                                            (NULL, 6,3,"i5 11800H"),
                                                                             (NULL, 6,4,"64GB RAM"),
                                                                             (NULL, 6,5,"4 khe"),
                                                                             (NULL, 6,6,"256GB"),
@@ -891,9 +894,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 6,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 6,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 7,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 7,1,"Intel core i5"),
                                                                             (NULL, 7,2,"PT516-51s-71RW"),
-                                                                            (NULL, 7,3,"i7 11800H"),
+                                                                            (NULL, 7,3,"i5 11800H"),
                                                                             (NULL, 7,4,"64GB RAM"),
                                                                             (NULL, 7,5,"4 khe"),
                                                                             (NULL, 7,6,"256GB"),
@@ -909,9 +912,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 7,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 7,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 8,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 8,1,"Intel core i5"),
                                                                             (NULL, 8,2,"PT516-51s-71RW"),
-                                                                            (NULL, 8,3,"i7 11800H"),
+                                                                            (NULL, 8,3,"i5 11800H"),
                                                                             (NULL, 8,4,"64GB RAM"),
                                                                             (NULL, 8,5,"4 khe"),
                                                                             (NULL, 8,6,"256GB"),
@@ -927,9 +930,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 8,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 8,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 42,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 42,1,"Intel core i5"),
                                                                             (NULL, 42,2,"PT516-51s-71RW"),
-                                                                            (NULL, 42,3,"i7 11800H"),
+                                                                            (NULL, 42,3,"i5 11800H"),
                                                                             (NULL, 42,4,"64GB RAM"),
                                                                             (NULL, 42,5,"4 khe"),
                                                                             (NULL, 42,6,"256GB"),
@@ -945,7 +948,7 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 42,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 42,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 43,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 43,1,"Intel core i7"),
                                                                             (NULL, 43,2,"PT516-51s-71RW"),
                                                                             (NULL, 43,3,"i7 11800H"),
                                                                             (NULL, 43,4,"64GB RAM"),
@@ -964,7 +967,7 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 43,21,"57 Wh");
 -- PC
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 9,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 9,1,"Intel core i7"),
                                                                             (NULL, 9,2,"PT516-51s-71RW"),
                                                                             (NULL, 9,3,"i7 11800H"),
                                                                             (NULL, 9,4,"64GB RAM"),
@@ -981,7 +984,7 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 9,19,"Gigabit"),
                                                                             (NULL, 9,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 10,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 10,1,"Intel core i7"),
                                                                             (NULL, 10,2,"PT516-51s-71RW"),
                                                                             (NULL, 10,3,"i7 11800H"),
                                                                             (NULL, 10,4,"64GB RAM"),
@@ -998,9 +1001,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 10,19,"Gigabit"),
                                                                             (NULL, 10,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 11,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 11,1,"Intel core i5"),
                                                                             (NULL, 11,2,"PT516-51s-71RW"),
-                                                                            (NULL, 11,3,"i7 11800H"),
+                                                                            (NULL, 11,3,"i5 11800H"),
                                                                             (NULL, 11,4,"64GB RAM"),
                                                                             (NULL, 11,5,"4 khe"),
                                                                             (NULL, 11,6,"256GB"),
@@ -1015,9 +1018,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 11,19,"Gigabit"),
                                                                             (NULL, 11,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 12,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 12,1,"Intel core i5"),
                                                                             (NULL, 12,2,"PT516-51s-71RW"),
-                                                                            (NULL, 12,3,"i7 11800H"),
+                                                                            (NULL, 12,3,"i5 11800H"),
                                                                             (NULL, 12,4,"64GB RAM"),
                                                                             (NULL, 12,5,"4 khe"),
                                                                             (NULL, 12,6,"256GB"),
@@ -1032,9 +1035,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 12,19,"Gigabit"),
                                                                             (NULL, 12,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 13,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 13,1,"Intel core i5"),
                                                                             (NULL, 13,2,"PT516-51s-71RW"),
-                                                                            (NULL, 13,3,"i7 11800H"),
+                                                                            (NULL, 13,3,"i5 11800H"),
                                                                             (NULL, 13,4,"64GB RAM"),
                                                                             (NULL, 13,5,"4 khe"),
                                                                             (NULL, 13,6,"256GB"),
@@ -1049,9 +1052,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 13,19,"Gigabit"),
                                                                             (NULL, 13,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 14,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 14,1,"Intel core i5"),
                                                                             (NULL, 14,2,"PT516-51s-71RW"),
-                                                                            (NULL, 14,3,"i7 11800H"),
+                                                                            (NULL, 14,3,"i5 11800H"),
                                                                             (NULL, 14,4,"64GB RAM"),
                                                                             (NULL, 14,5,"4 khe"),
                                                                             (NULL, 14,6,"256GB"),
@@ -1066,9 +1069,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 14,19,"Gigabit"),
                                                                             (NULL, 14,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 15,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 15,1,"Intel core i5"),
                                                                             (NULL, 15,2,"PT516-51s-71RW"),
-                                                                            (NULL, 15,3,"i7 11800H"),
+                                                                            (NULL, 15,3,"i5 11800H"),
                                                                             (NULL, 15,4,"64GB RAM"),
                                                                             (NULL, 15,5,"4 khe"),
                                                                             (NULL, 15,6,"256GB"),
@@ -1083,9 +1086,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 15,19,"Gigabit"),
                                                                             (NULL, 15,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 16,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 16,1,"Intel core i3"),
                                                                             (NULL, 16,2,"PT516-51s-71RW"),
-                                                                            (NULL, 16,3,"i7 11800H"),
+                                                                            (NULL, 16,3,"i3 11800H"),
                                                                             (NULL, 16,4,"64GB RAM"),
                                                                             (NULL, 16,5,"4 khe"),
                                                                             (NULL, 16,6,"256GB"),
@@ -1100,9 +1103,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 16,19,"Gigabit"),
                                                                             (NULL, 16,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 17,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 17,1,"Intel core i3"),
                                                                             (NULL, 17,2,"PT516-51s-71RW"),
-                                                                            (NULL, 17,3,"i7 11800H"),
+                                                                            (NULL, 17,3,"i3 11800H"),
                                                                             (NULL, 17,4,"64GB RAM"),
                                                                             (NULL, 17,5,"4 khe"),
                                                                             (NULL, 17,6,"256GB"),
@@ -1117,9 +1120,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 17,19,"Gigabit"),
                                                                             (NULL, 17,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 18,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 18,1,"Intel core i3"),
                                                                             (NULL, 18,2,"PT516-51s-71RW"),
-                                                                            (NULL, 18,3,"i7 11800H"),
+                                                                            (NULL, 18,3,"i3 11800H"),
                                                                             (NULL, 18,4,"64GB RAM"),
                                                                             (NULL, 18,5,"4 khe"),
                                                                             (NULL, 18,6,"256GB"),
@@ -1134,9 +1137,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 18,19,"Gigabit"),
                                                                             (NULL, 18,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 19,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 19,1,"Intel core i3"),
                                                                             (NULL, 19,2,"PT516-51s-71RW"),
-                                                                            (NULL, 19,3,"i7 11800H"),
+                                                                            (NULL, 19,3,"i3 11800H"),
                                                                             (NULL, 19,4,"64GB RAM"),
                                                                             (NULL, 19,5,"4 khe"),
                                                                             (NULL, 19,6,"256GB"),
@@ -1151,9 +1154,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 19,19,"Gigabit"),
                                                                             (NULL, 19,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 20,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 20,1,"Intel core i3"),
                                                                             (NULL, 20,2,"PT516-51s-71RW"),
-                                                                            (NULL, 20,3,"i7 11800H"),
+                                                                            (NULL, 20,3,"i3 11800H"),
                                                                             (NULL, 20,4,"64GB RAM"),
                                                                             (NULL, 20,5,"4 khe"),
                                                                             (NULL, 20,6,"256GB"),
@@ -1168,9 +1171,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 20,19,"Gigabit"),
                                                                             (NULL, 20,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 21,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 21,1,"Intel core i9"),
                                                                             (NULL, 21,2,"PT516-51s-71RW"),
-                                                                            (NULL, 21,3,"i7 11800H"),
+                                                                            (NULL, 21,3,"i9 11800H"),
                                                                             (NULL, 21,4,"64GB RAM"),
                                                                             (NULL, 21,5,"4 khe"),
                                                                             (NULL, 21,6,"256GB"),
@@ -1185,9 +1188,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 21,19,"Gigabit"),
                                                                             (NULL, 21,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 22,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 22,1,"Intel core i9"),
                                                                             (NULL, 22,2,"PT516-51s-71RW"),
-                                                                            (NULL, 22,3,"i7 11800H"),
+                                                                            (NULL, 22,3,"i9 11800H"),
                                                                             (NULL, 22,4,"64GB RAM"),
                                                                             (NULL, 22,5,"4 khe"),
                                                                             (NULL, 22,6,"256GB"),
@@ -1202,9 +1205,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 22,19,"Gigabit"),
                                                                             (NULL, 22,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 23,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 23,1,"Intel core i9"),
                                                                             (NULL, 23,2,"PT516-51s-71RW"),
-                                                                            (NULL, 23,3,"i7 11800H"),
+                                                                            (NULL, 23,3,"i9 11800H"),
                                                                             (NULL, 23,4,"64GB RAM"),
                                                                             (NULL, 23,5,"4 khe"),
                                                                             (NULL, 23,6,"256GB"),
@@ -1219,9 +1222,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 23,19,"Gigabit"),
                                                                             (NULL, 23,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 24,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 24,1,"Intel core i9"),
                                                                             (NULL, 24,2,"PT516-51s-71RW"),
-                                                                            (NULL, 24,3,"i7 11800H"),
+                                                                            (NULL, 24,3,"i9 11800H"),
                                                                             (NULL, 24,4,"64GB RAM"),
                                                                             (NULL, 24,5,"4 khe"),
                                                                             (NULL, 24,6,"256GB"),
@@ -1236,9 +1239,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 24,19,"Gigabit"),
                                                                             (NULL, 24,20,"802.11 SX +Bluetooth 5.0");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 25,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 25,1,"Intel core i9"),
                                                                             (NULL, 25,2,"PT516-51s-71RW"),
-                                                                            (NULL, 25,3,"i7 11800H"),
+                                                                            (NULL, 25,3,"i9 11800H"),
                                                                             (NULL, 25,4,"64GB RAM"),
                                                                             (NULL, 25,5,"4 khe"),
                                                                             (NULL, 25,6,"256GB"),
@@ -1254,9 +1257,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 25,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 25,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 26,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 26,1,"Intel core i3"),
                                                                             (NULL, 26,2,"PT516-51s-71RW"),
-                                                                            (NULL, 26,3,"i7 11800H"),
+                                                                            (NULL, 26,3,"i3 11800H"),
                                                                             (NULL, 26,4,"64GB RAM"),
                                                                             (NULL, 26,5,"4 khe"),
                                                                             (NULL, 26,6,"256GB"),
@@ -1272,9 +1275,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 26,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 26,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 27,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 27,1,"Intel core i3"),
                                                                             (NULL, 27,2,"PT516-51s-71RW"),
-                                                                            (NULL, 27,3,"i7 11800H"),
+                                                                            (NULL, 27,3,"i3 11800H"),
                                                                             (NULL, 27,4,"64GB RAM"),
                                                                             (NULL, 27,5,"4 khe"),
                                                                             (NULL, 27,6,"256GB"),
@@ -1290,9 +1293,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 27,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 27,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 28,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 28,1,"Intel core i3"),
                                                                             (NULL, 28,2,"PT516-51s-71RW"),
-                                                                            (NULL, 28,3,"i7 11800H"),
+                                                                            (NULL, 28,3,"i3 11800H"),
                                                                             (NULL, 28,4,"64GB RAM"),
                                                                             (NULL, 28,5,"4 khe"),
                                                                             (NULL, 28,6,"256GB"),
@@ -1308,9 +1311,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 28,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 28,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 29,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 29,1,"Intel core i3"),
                                                                             (NULL, 29,2,"PT516-51s-71RW"),
-                                                                            (NULL, 29,3,"i7 11800H"),
+                                                                            (NULL, 29,3,"i3 11800H"),
                                                                             (NULL, 29,4,"64GB RAM"),
                                                                             (NULL, 29,5,"4 khe"),
                                                                             (NULL, 29,6,"256GB"),
@@ -1326,9 +1329,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 29,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 29,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 30,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 30,1,"Intel core i3"),
                                                                             (NULL, 30,2,"PT516-51s-71RW"),
-                                                                            (NULL, 30,3,"i7 11800H"),
+                                                                            (NULL, 30,3,"i3 11800H"),
                                                                             (NULL, 30,4,"64GB RAM"),
                                                                             (NULL, 30,5,"4 khe"),
                                                                             (NULL, 30,6,"256GB"),
@@ -1344,9 +1347,9 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 30,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 30,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 31,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 31,1,"Intel core i3"),
                                                                             (NULL, 31,2,"PT516-51s-71RW"),
-                                                                            (NULL, 31,3,"i7 11800H"),
+                                                                            (NULL, 31,3,"i3 11800H"),
                                                                             (NULL, 31,4,"64GB RAM"),
                                                                             (NULL, 31,5,"4 khe"),
                                                                             (NULL, 31,6,"256GB"),
@@ -1362,7 +1365,7 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
                                                                             (NULL, 31,20,"802.11 SX +Bluetooth 5.0"),
                                                                             (NULL, 31,21,"57 Wh");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 32,1,"Acer"),
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 32,1,"Intel core i7"),
                                                                             (NULL, 32,2,"PT516-51s-71RW"),
                                                                             (NULL, 32,3,"i7 11800H"),
                                                                             (NULL, 32,4,"64GB RAM"),
