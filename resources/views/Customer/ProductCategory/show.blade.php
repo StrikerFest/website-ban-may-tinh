@@ -263,14 +263,38 @@
                                 </ul>
                             </div>
 
-                            {{-- --------- --}}
+                            {{-- Thông số --}}
                             @foreach ($listThongSo as $TS)
                                 <div class="col-md-12 text-center text-danger">
                                     <hr class="border-red">
                                     <h5>{{ $TS->tenTS }}</h5>
                                     @foreach ($listSanPhamThongSo as $SPTS)
                                         @if ($SPTS->maTS == $TS->maTS)
-                                            <input type="checkbox">{{$SPTS->giaTri}}<br>
+                                            {{-- <input type="checkbox">{{$SPTS->giaTri}}<br> --}}
+                                            <form action="{{ route('categoryCustomer.show', 'null') }}">
+                                                @isset($theLoaiChaCate)
+                                                    <input type="hidden" name="theLoaiCha"
+                                                        value="{{ $theLoaiChaCate }}">
+                                                @endisset
+                                                @isset($theLoaiChaCate)
+                                                    <input type="hidden" name="theLoaiCon"
+                                                        value="{{ $theLoaiConCate }}">
+                                                @endisset
+                                                <input type="hidden" name="thongSo" value="{{ $SPTS->maTS }}">
+                                                <input type="hidden" name="giaTriThongSo"
+                                                    value="{{ $SPTS->giaTri }}">
+                                                @isset($nhaSanXuatCate)
+                                                    <input type="hidden" name="nhaSanXuat"
+                                                        value="{{ $nhaSanXuatCate }}">
+                                                @endisset
+
+                                                <button class=" text- btn"
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-dark">
+                                                        <li>{{ $SPTS->giaTri }}</li>
+                                                    </div>
+                                                </button>
+                                            </form>
                                         @endif
                                     @endforeach
                                     <hr class="border-red">

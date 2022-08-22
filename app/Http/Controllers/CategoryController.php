@@ -203,8 +203,13 @@ class CategoryController extends Controller
             ->get();
         // dd($listSanPhamThongSo);
 
+        $thongSo = $request->get('thongSo');
+        $giaTriThongSo = $request->get('giaTriThongSo');
+        // dd($listSanPhamThongSo);
+
         $listSanPham = DB::table('san_pham')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
+            ->join('san_pham_thong_so', 'san_pham_thong_so.maSP', '=', 'san_pham.maSP')
             // Nhà sản xuất
             ->where(function ($query) use ($productBrand) {
                 if ($productBrand != null)
@@ -231,15 +236,23 @@ class CategoryController extends Controller
                 if ($theLoaiCha1 != null)
                     $query->where('maTL', $theLoaiCha1);
             })
+            // Thông số
+            ->where(function ($query) use ($thongSo,$giaTriThongSo) {
+                if ($thongSo != null)
+                $query->where('maTS', $thongSo)
+                    ->where('giaTri',$giaTriThongSo);
+            })
+            // Tìm kiếm
             ->where(function ($query) use ($search) {
                 if ($search !== "")
                     $query->where('tenSP', 'like', '%' . $search . '%');
                 else
                     $query->where('tenSP', 'like', '%%');
             })
+            ->groupBy('san_pham.maSP')
             ->get();
 
-
+            // dd($listSanPham);
 
 
         // session()->forget('search');
