@@ -113,8 +113,8 @@ class DashboardController extends Controller
 
         //Số lượng voucher được áp dụng
         $soLuongVoucherApDung = DB::table('hoa_don_chi_tiet')
+            ->join('voucher_hoa_don_chi_tiet', 'voucher_hoa_don_chi_tiet.maHDCT', '=', 'hoa_don_chi_tiet.maHDCT')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
-            ->whereNotNull('maVoucher')
             ->where('hoa_don.maTTHD', '!=', 2)
             ->sum('soLuong');
         // dd($soLuongVoucherApDung);
@@ -131,18 +131,20 @@ class DashboardController extends Controller
                     (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
                     0
                 )
-            ) AS tong
+            ) as tong
             FROM hoa_don_chi_tiet
+            JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
             JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-            JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
+            JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
             WHERE hoa_don.maTTHD !=2) AS X;
         ")[0]->tienVoucherGiam;
         // dd($soTienGiamVoucher);
 
         //Số tặng phẩm được tặng
         $soLuongTangPham = DB::table('hoa_don_chi_tiet')
-            ->join('voucher', 'voucher.maVoucher', '=', 'hoa_don_chi_tiet.maVoucher')
+            ->join('voucher_hoa_don_chi_tiet', 'voucher_hoa_don_chi_tiet.maHDCT', '=', 'hoa_don_chi_tiet.maHDCT')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+            ->join('voucher', 'voucher.maVoucher', '=', 'voucher_hoa_don_chi_tiet.maVoucher')
             ->where('maTLV', 3)
             ->where('hoa_don.maTTHD', '!=', 2)
             ->sum('hoa_don_chi_tiet.soLuong');
@@ -150,7 +152,8 @@ class DashboardController extends Controller
         
         //Tổng giá trị của tặng phẩm
         $giaTriTangPham = DB::table('hoa_don_chi_tiet')
-            ->join('voucher', 'voucher.maVoucher', '=', 'hoa_don_chi_tiet.maVoucher')
+            ->join('voucher_hoa_don_chi_tiet', 'voucher_hoa_don_chi_tiet.maHDCT', '=', 'hoa_don_chi_tiet.maHDCT')
+            ->join('voucher', 'voucher.maVoucher', '=', 'voucher_hoa_don_chi_tiet.maVoucher')
             ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
             ->where('maTLV', 3)
             ->where('hoa_don.maTTHD', '!=', 2)

@@ -275,12 +275,15 @@ class AdminReceiptController extends Controller
         return $pdf->download('receipt.pdf');
     }
 
-    public function cancelOrder($id)
+    public function cancelOrder(Request $request, $id)
     {
         $hoaDon = ReceiptModel::find($id);
         if($hoaDon->maTTHD == 5){
             return back()->with('canceled', "Đơn hàng đã được giao");
         }
+        dd($request->cancelReason);//Lý do huỷ đơn do admin nhập
+        //Gửi mail thông báo huỷ đơn ở đây
+
         // dd($hoaDon->maTTHD);
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
         // dd($hdct);

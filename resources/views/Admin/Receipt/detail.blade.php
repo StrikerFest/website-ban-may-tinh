@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
     @include("Admin.Layout.Common.meta")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <!-- Page Wrapper -->
@@ -174,7 +175,8 @@
                                                     <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
-                                                        <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                        <input type="hidden" name="cancelReason" class="cancelReason"/>
+                                                        <button class="btn btn-danger c-cancel" onclick="return confirm('Xác nhận huỷ đơn?')">
                                                             Huỷ
                                                         </button>
                                                     </form>
@@ -194,7 +196,8 @@
                                                     <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
-                                                        <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                        <input type="hidden" name="cancelReason" class="cancelReason"/>
+                                                        <button class="btn btn-danger c-cancel" onclick="return confirm('Xác nhận huỷ đơn?')">
                                                             Huỷ
                                                         </button>
                                                     </form>
@@ -204,7 +207,8 @@
                                                     <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
-                                                        <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                        <input type="hidden" name="cancelReason" class="cancelReason"/>
+                                                        <button class="btn btn-danger c-cancel" onclick="return confirm('Xác nhận huỷ đơn?')">
                                                             Huỷ
                                                         </button>
                                                     </form>
@@ -241,6 +245,20 @@
         <?php if(session()->has('canceled')){ ?>
             alert('{{session()->get('canceled')}}')
         <?php } ?>
+        $(function(){
+            $('.c-cancel').on('click', function(){
+                let message = prompt('Nhập lý do huỷ đơn')
+                if(message === null){
+                    alert('Huỷ đơn thất bại')
+                    return false
+                }else if(message === ''){
+                    alert('Không được để trống lý do huỷ đơn')
+                    return false
+                }
+                $('.cancelReason').val(message)
+            });
+
+        });
     </script>
 </body>
 </html>

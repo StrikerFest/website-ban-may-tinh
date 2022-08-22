@@ -129,10 +129,10 @@
                                                             @csrf
                                                             <?php if($SP->dacBiet == 0){ ?>
                                                                 <input type="hidden" name="dacBiet" value="1">
-                                                                <button class="btn btn-danger btn-user btn-block">Thêm vào sale</button>
+                                                                <button class="btn btn-danger btn-user btn-block">Sale</button>
                                                             <?php }else{ ?>
                                                                 <input type="hidden" name="dacBiet" value="0">
-                                                                <button class="btn btn-success btn-user btn-block">Bỏ khỏi sale</button>
+                                                                <button class="btn btn-success btn-user btn-block">Sale</button>
                                                             <?php } ?>
                                                         </form>
                                                     </div>

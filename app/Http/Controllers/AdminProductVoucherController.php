@@ -39,8 +39,8 @@ class AdminProductVoucherController extends Controller
         
         $giaTriVoucher = $V->getVoucherValue($getGiftValue());
 
-        //maTLC 21 = Tặng phẩm
-        $SanPham = DB::table('san_pham')->where('maTLC', '!=', 21)->get();
+        //maTLC 36 = Tặng phẩm
+        $SanPham = DB::table('san_pham')->where('maTLC', '!=', 36)->get();
 
         return view('Admin.Voucher.show', [
             'V' => $V,
@@ -116,7 +116,15 @@ class AdminProductVoucherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'kichHoat' => 'required',
+        ]);
+
+        $SPV = ProductVoucherModel::find($id);
+        $SPV->kichHoat = $request->get('kichHoat');
+        $SPV->save();
+
+        return back();
     }
 
     /**

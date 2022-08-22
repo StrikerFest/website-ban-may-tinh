@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedInteger('soLuong');
             $table->double('giaSP');
             $table->unsignedInteger('giamGia');
-            $table->unsignedInteger('maVoucher')->nullable();
             $table->unique(['maHD', 'maSP']);
         });
     }
