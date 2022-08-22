@@ -280,20 +280,43 @@
                                                     <input type="hidden" name="theLoaiCon"
                                                         value="{{ $theLoaiConCate }}">
                                                 @endisset
-                                                <input type="hidden" name="thongSo" value="{{ $SPTS->maTS }}">
-                                                <input type="hidden" name="giaTriThongSo"
-                                                    value="{{ $SPTS->giaTri }}">
+                                                {{-- @isset($thongSoCate) --}}
+                                                    <input type="hidden" name="thongSo" value="{{ $SPTS->maTS }}">
+                                                {{-- @endisset --}}
+                                                {{-- @isset($giaTriThongSoCate) --}}
+                                                    <input type="hidden" name="giaTriThongSo"
+                                                        value="{{ $SPTS->giaTri }}">
+                                                {{-- @endisset --}}
                                                 @isset($nhaSanXuatCate)
                                                     <input type="hidden" name="nhaSanXuat"
                                                         value="{{ $nhaSanXuatCate }}">
                                                 @endisset
+                                                @isset($priceMinCate)
+                                                    <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">
+                                                @endisset
+                                                @isset($priceMaxCate)
+                                                    <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
+                                                @endisset
 
-                                                <button class=" text- btn"
-                                                    style="text-decoration: none;list-style: none;padding:0">
-                                                    <div class="text-dark">
-                                                        <li>{{ $SPTS->giaTri }}</li>
-                                                    </div>
-                                                </button>
+                                                @if ($SPTS->giaTri == $giaTriThongSoCate)
+                                                    <button class=" text- btn "
+                                                        style="text-decoration: none;list-style: none;padding:0">
+                                                        <div
+                                                            class="text-light bg-danger rounded padding-left-5 padding-right-5">
+                                                            <li>{{ $SPTS->giaTri }}</li>
+                                                        </div>
+                                                    </button>
+                                                @else
+                                                    <button class=" text- btn"
+                                                        style="text-decoration: none;list-style: none;padding:0">
+                                                        <div class="text-dark">
+                                                            <li>{{ $SPTS->giaTri }}</li>
+                                                        </div>
+                                                    </button>
+                                                @endif
+
+
+
                                             </form>
                                         @endif
                                     @endforeach

@@ -192,20 +192,29 @@ class CategoryController extends Controller
             ->where('thong_so.tenTS', '!=', 'Khe cắm')
             ->where('thong_so.tenTS', '!=', 'Dung lượng tối đa')
             ->get();
-
         $listSanPhamThongSo = DB::table('san_pham_thong_so')
             ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
             ->join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
             ->join('the_loai', 'the_loai_thong_so.maTL', '=', 'the_loai.maTL')
+            ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
             ->where('the_loai_thong_so.maTL', $theLoaiCha)
+            ->where('the_loai_con.maTLC', $theLoaiConCate)
+            // ->select('*', DB::raw('COUNT(CASE giaTri WHEN the_loai_con.maTLC = ' . $theLoaiConCate .' THEN 1 ELSE NULL END) AS soSPCungGiaTri'))
+            // ->select('*', DB::raw('count( giaTri) as soSPCungGiaTri'))
+
             // ->where('thongSo.ten',)
             ->groupBy('giaTri')
+            // ->groupBy('san_pham_thong_so.maTS')
             ->get();
-        // dd($listSanPhamThongSo);
 
-        $thongSo = $request->get('thongSo');
-        $giaTriThongSo = $request->get('giaTriThongSo');
-        // dd($listSanPhamThongSo);
+        // dd($theLoaiConCate);
+
+
+        $thongSoCate = $request->get('thongSo');
+        $giaTriThongSoCate = $request->get('giaTriThongSo');
+        $priceMinCate = $priceMin;
+        $priceMaxCate = $priceMax;
+
 
         $listSanPham = DB::table('san_pham')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
@@ -237,10 +246,13 @@ class CategoryController extends Controller
                     $query->where('maTL', $theLoaiCha1);
             })
             // Thông số
-            ->where(function ($query) use ($thongSo,$giaTriThongSo) {
-                if ($thongSo != null)
-                $query->where('maTS', $thongSo)
-                    ->where('giaTri',$giaTriThongSo);
+            ->where(function ($query) use ($thongSoCate) {
+                if ($thongSoCate != null)
+                    $query->where('maTS', $thongSoCate);
+            })
+            ->where(function ($query) use ($giaTriThongSoCate) {
+                if ($giaTriThongSoCate != null)
+                    $query->where('giaTri', $giaTriThongSoCate);
             })
             // Tìm kiếm
             ->where(function ($query) use ($search) {
@@ -252,7 +264,7 @@ class CategoryController extends Controller
             ->groupBy('san_pham.maSP')
             ->get();
 
-            // dd($listSanPham);
+        // dd($listSanPham);
 
 
         // session()->forget('search');
@@ -303,8 +315,6 @@ class CategoryController extends Controller
         // $theLoaiConCate = $request->get('theLoaiCon');
         $nhaSanXuatCate = $request->get('nhaSanXuat');
 
-
-
         return view('Customer.ProductCategory.show', [
             'cartItems' => $cartItems,
             'listSanPham' => $listSanPham,
@@ -316,7 +326,12 @@ class CategoryController extends Controller
             'theLoaiChaCate' => $theLoaiChaCate,
             'theLoaiConCate' => $theLoaiConCate,
             'nhaSanXuatCate' => $nhaSanXuatCate,
+            'thongSoCate' => $thongSoCate,
+            'giaTriThongSoCate' => $giaTriThongSoCate,
+            'priceMinCate' => $priceMinCate,
+            'priceMaxCate' => $priceMaxCate,
             'search' => $search,
+
             'listThongSo' => $listThongSo,
             'listSanPhamThongSo' => $listSanPhamThongSo,
 
