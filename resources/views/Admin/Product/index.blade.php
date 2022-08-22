@@ -1,7 +1,8 @@
 <html lang="en">
 <head>
     @include("Admin.Layout.Common.meta")
-    <script src="https://cdn.tiny.cloud/1/13dhm7ievvt2m5zqgf71jpj7kzxx89vu8bh22bhcrh5717n8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
 </head>
 <body>
     <!-- Page Wrapper -->
@@ -122,37 +123,26 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <?php if($SP->tenTLC != "Tặng phẩm"){ ?>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <form action="{{route('admin.product.createVoucher', $SP->maSP)}}" method="get">
-                                                                @csrf
-                                                                <button class="btn btn-primary btn-user btn-block">Voucher</button>
-                                                            </form>
-                                                        </div>
-                                                        <div class="col-sm-6">
-
-                                                        </div>
-                                                    </div>
-                                                <?php } ?>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <form action="{{route('admin.product.updateSpecial', $SP->maSP)}}" method="post">
                                                             @csrf
                                                             <?php if($SP->dacBiet == 0){ ?>
                                                                 <input type="hidden" name="dacBiet" value="1">
-                                                                <button class="btn btn-danger btn-user btn-block">Thêm vào sale</button>
+                                                                <button class="btn btn-danger btn-user btn-block">Sale</button>
                                                             <?php }else{ ?>
                                                                 <input type="hidden" name="dacBiet" value="0">
-                                                                <button class="btn btn-success btn-user btn-block">Bỏ khỏi sale</button>
+                                                                <button class="btn btn-success btn-user btn-block">Sale</button>
                                                             <?php } ?>
                                                         </form>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <form action="{{route('promotion.index', $SP->maSP)}}" method="get">
+                                                    <?php if($SP->tenTLC != "Tặng phẩm"){ ?>
+                                                        <form action="{{route('admin.product.createVoucher', $SP->maSP)}}" method="get">
                                                             @csrf
-                                                            <button class="btn btn-primary btn-user btn-block">Khuyến mãi</button>
+                                                            <button class="btn btn-primary btn-user btn-block">Voucher</button>
                                                         </form>
+                                                    <?php } ?>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -309,23 +299,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label class="form-inline label">Ảnh</label>
                                         @error('anh')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <input type="file" class="form-control-file" name="anh[]" multiple>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Mô tả</label>
-                                        @error('moTa')
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="form-inline label">Bài viết</label>
+                                        @error('maBV')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <textarea class="form-control" name="moTa" rows="5" placeholder="Description"></textarea>
+                                        <select class="form-control select2" name="maBV">
+                                            <option value="" selected>Post</option>
+                                            @foreach($baiViet as $BV)
+                                                <option value="{{ $BV->maBV }}">{{ $BV->tenBV }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+                                
                                 <button class="btn btn-primary btn-user btn-block">
                                     Add data
                                 </button>
@@ -342,14 +336,15 @@
     @include("Admin.Layout.Common.bottom_script")
 
     <script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
-    });
+        $(document).ready(function(){
+            //Hàm thêm searchbox vào select option
+            const searchboxInDropdown = () => {
+                $('.select2').select2({
+                    theme: "classic"
+                });
+            }
+            searchboxInDropdown();
+        });
     </script>
     <script>
         <?php if(session()->has('delete')){ ?>

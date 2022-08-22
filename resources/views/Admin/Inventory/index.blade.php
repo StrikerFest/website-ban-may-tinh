@@ -34,16 +34,6 @@
                                                 <input class="form-control" type="text" name="searchSerial" value="{{$searchSerial}}" placeholder="Nhập mã serial">
                                             </div>
                                             <div class="col-sm-2">
-                                                <select class="form-control" name="searchSupplier">
-                                                    <option value="" selected>Nhà phân phối</option>
-                                                    @foreach($nhaPhanPhoi as $NPP)
-                                                        <option value="{{$NPP->tenNPP}}" <?php if($searchSupplier == $NPP->tenNPP)echo "selected" ?>>
-                                                            {{$NPP->tenNPP}}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-2">
                                                 <select class="form-control" name="searchSubCategory">
                                                     <option value="" selected>Danh mục</option>
                                                     @foreach($theLoaiCon as $TLC)
@@ -109,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    {{$sanPham->links('')}}
+                    {{$sanPham->onEachSide(1)->links('')}}
                 </div>
                 <!-- /.container-fluid -->
         </div>

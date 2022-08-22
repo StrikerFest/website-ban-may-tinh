@@ -60,7 +60,7 @@ class AdminReceiptController extends Controller
             ->where('nguoi_dung.tenND', 'like', "%$searchName%")
             ->where('tinh_trang_hoa_don.tenTTHD', 'like', "%$searchStatus%")
             ->whereBetween('ngayTao', [$NBD, $NKTquery])
-            ->orderBy('hoa_don.maTTHD', 'DESC')
+            ->orderByRaw('FIELD(hoa_don.maTTHD, "1", "3", "4", "5", "2")')
             ->orderBy('ngayTao', 'ASC')
             ->orderBy('hoa_don.maHD', 'DESC')
             ->paginate(5)
@@ -190,12 +190,15 @@ class AdminReceiptController extends Controller
     public function update(Request $request, $id)
     {
         $hoaDon = ReceiptModel::find($id);
+        if($hoaDon->maTTHD == 2){
+            return back()->with('canceled', "Đơn hàng đã bị huỷ");
+        }
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
         
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
 
-        if($request->get('maTTHD') == 1){
+        if($request->get('maTTHD') == 4){
             //kiểm tra số lượng sản phẩm
             for($i = 0; $i < sizeof($hdct); $i++){
                 $sanPham = ProductModel::find($hdct[$i]->maSP);
@@ -270,5 +273,41 @@ class AdminReceiptController extends Controller
             'HDCT' => $HDCT,
         ]);
         return $pdf->download('receipt.pdf');
+    }
+
+    public function cancelOrder(Request $request, $id)
+    {
+        $hoaDon = ReceiptModel::find($id);
+        if($hoaDon->maTTHD == 5){
+            return back()->with('canceled', "Đơn hàng đã được giao");
+        }
+        dd($request->cancelReason);//Lý do huỷ đơn do admin nhập
+        //Gửi mail thông báo huỷ đơn ở đây
+
+        // dd($hoaDon->maTTHD);
+        $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
+        // dd($hdct);
+        if($hoaDon->maTTHD == 4){
+            //Tăng số lượng sp sau khi huỷ đơn
+            for($i = 0; $i < sizeof($hdct); $i++){
+                $sp = ProductModel::find($hdct[$i]->maSP);
+                $sp->soLuong += $hdct[$i]->soLuong;
+                $sp->save();
+
+                //Bỏ liên kết của serial với hoá đơn chi tiết
+                $serials = SerialModel::where('maHDCT', $hdct[$i]->maHDCT)->get();
+                // dd($serial);
+                for($j = 0; $j < sizeof($serials); $j++){
+                    $serial = SerialModel::find($serials[$j]->maSerial);
+                    $serial->maHDCT = null;
+                    $serial->save();
+                }
+            }
+            
+        }
+        $hoaDon->maTTHD = 2;//Huỷ đơn
+        $hoaDon->save();
+        
+        return back();
     }
 }

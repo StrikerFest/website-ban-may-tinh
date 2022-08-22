@@ -4,7 +4,6 @@ namespace App\Imports;
 
 use Illuminate\Support\Collection;
 use App\Models\ProductModel;
-use App\Models\PromotionModel;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\withHeadingRow;
 use Maatwebsite\Excel\Concerns\withValidation;

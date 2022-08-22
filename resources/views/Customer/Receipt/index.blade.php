@@ -134,11 +134,12 @@
                                     </div>
                                     {{-- Title hình thức thanh toán --}}
                                     <div class="col-md-12 padding-top-20">
-                                        <h3>Chọn hình thức giao hàng</h3>
+                                        <!-- <h3>Chọn hình thức giao hàng</h3> -->
+                                        <h3>Sản phẩm</h3>
                                     </div>
                                     {{-- Hình thức thanh toán và giỏ hàng --}}
                                     <div class="col-md-12">
-                                        <div class="padding-10">
+                                        <!-- <div class="padding-10">
                                             <input type="radio" name="paymentMethod" value="COD" checked> Thanh
                                             toán khi
                                             nhận hàng (
@@ -146,7 +147,7 @@
                                             <br>
                                             <input type="radio" name="paymentMethod" value="online"> Thanh toán bằng
                                             Momo
-                                        </div>
+                                        </div> -->
                                         <div>
                                             <table class="w-full text-sm lg:text-base border-radius-10" cellspacing="0">
                                                 {{-- Tiêu đề bảng --}}
@@ -232,7 +233,7 @@
                                                 class="btn btn-danger width-100 padding-10">
                                                 <span class="text-bold text-large">Đặt mua ngay</span>
                                                 <br>
-                                                <span class="text-normal">Giao hàng nhanh chóng</span>
+                                                <span class="text-normal">Thanh toán khi nhận hàng</span>
                                             </button>
                                         </div>
                                     </div>
@@ -243,7 +244,7 @@
                                                 class="btn btn-danger width-100 padding-10">
                                                 <span class="text-bold text-large">Thanh toán bằng ví momo</span>
                                                 <br>
-                                                <span class="text-normal">Giao hàng nhanh chóng</span>
+                                                <span class="text-normal">Thanh toán trực tuyến</span>
                                             </button>
                                         </div>
                                     </div>

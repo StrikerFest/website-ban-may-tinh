@@ -53,7 +53,7 @@
                                 <thead>
                                     <tr>
                                         <th>Tên</th>
-                                        <th width="22%">Thao tác</th>
+                                        <th width="30%">Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,13 +63,26 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-6">
+                                                    <form action="{{route('productVoucher.update', $spv->maSPV)}}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <?php if($spv->kichHoat == 0){ ?>
+                                                            <input type="hidden" name="kichHoat" value="1">
+                                                            <button class="btn btn-danger btn-user btn-block">Kích hoạt</button>
+                                                        <?php }else{ ?>
+                                                            <input type="hidden" name="kichHoat" value="0">
+                                                            <button class="btn btn-success btn-user btn-block">Kích hoạt</button>
+                                                        <?php } ?>
+                                                    </form>
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form action="{{route('admin.product.index')}}" method="get">
                                                         @csrf
                                                         <input type="hidden" name="searchName" value="{{$spv->tenSP}}">
                                                         <button class="btn btn-primary btn-user btn-block">Xem</button>
                                                     </form>
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3">
                                                     <form action="{{route('productVoucher.destroy', $spv->maSPV)}}" method="post">
                                                         @method('DELETE')
                                                         @csrf

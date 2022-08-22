@@ -169,13 +169,13 @@ class ReceiptController extends Controller
                 $hoaDon->ngayTao =  date("Y/m/d H:i:s");
                 $hoaDon->diaChi =  $request->receiptAddress;
                 $hoaDon->soDienThoai = $request->get('receiptPhone');
-                if ($request->paymentMethod == "COD") {
+                // if ($request->paymentMethod == "COD") {
                     $hoaDon->maPTTT = 1;
-                } else if ($request->paymentMethod == "online") {
-                    $hoaDon->maPTTT = 2;
-                }
+                // } else if ($request->paymentMethod == "online") {
+                //     $hoaDon->maPTTT = 2;
+                // }
 
-                $hoaDon->maTTHD = 2;
+                $hoaDon->maTTHD = 1;
                 // dd($hoaDon);
                 $hoaDon->save();
 
@@ -212,11 +212,11 @@ class ReceiptController extends Controller
                     // Có thể sẽ lỗi ở đây nếu đặt nhiều
                 }
                 $objDemo = new \stdClass();
-                if ($request->paymentMethod == "COD") {
+                // if ($request->paymentMethod == "COD") {
                     $objDemo->demo_one = 'Thanh toán tận nhà';
-                } else {
-                    $objDemo->demo_one = 'Chuyển khoản';
-                }
+                // } else {
+                //     $objDemo->demo_one = 'Chuyển khoản';
+                // }
                 $objDemo->demo_two = $sumPrice . " VND";
                 $objDemo->idReceipt = $maHoaDonMoiNhat;
                 $objDemo->sender = 'BKCOM';
@@ -280,13 +280,13 @@ class ReceiptController extends Controller
                 $hoaDon->ngayTao =  date("Y/m/d H:i:s");
                 $hoaDon->diaChi =  $request->receiptAddress;
                 $hoaDon->soDienThoai = $request->get('receiptPhone');
-                if ($request->paymentMethod == "COD") {
-                    $hoaDon->maPTTT = 1;
-                } else if ($request->paymentMethod == "online") {
+                // if ($request->paymentMethod == "COD") {
+                //     $hoaDon->maPTTT = 1;
+                // } else if ($request->paymentMethod == "online") {
                     $hoaDon->maPTTT = 2;
-                }
+                // }
 
-                $hoaDon->maTTHD = 2;
+                $hoaDon->maTTHD = 1;
                 // dd($hoaDon);
                 $hoaDon->save();
 
@@ -323,11 +323,11 @@ class ReceiptController extends Controller
                     // Có thể sẽ lỗi ở đây nếu đặt nhiều
                 }
                 $objDemo = new \stdClass();
-                if ($request->paymentMethod == "COD") {
-                    $objDemo->demo_one = 'Thanh toán tận nhà';
-                } else {
+                // if ($request->paymentMethod == "COD") {
+                //     $objDemo->demo_one = 'Thanh toán tận nhà';
+                // } else {
                     $objDemo->demo_one = 'Chuyển khoản';
-                }
+                // }
                 $objDemo->demo_two = $sumPrice . " VND";
                 $objDemo->idReceipt = $maHoaDonMoiNhat;
                 $objDemo->sender = 'BKCOM';
@@ -388,6 +388,8 @@ class ReceiptController extends Controller
         $listAnh = ProductImageModel::get();
         $listSanPham = DB::table('san_pham')->get();
 
+        $hoaDon = DB::table('hoa_don')->where('maHD', $id)->first();
+
         return view('Customer.Receipt.show', [
             'cartItems' =>  $cartItems,
             'listNhaSanXuat' =>  $listNhaSanXuat,
@@ -402,6 +404,7 @@ class ReceiptController extends Controller
             'listHoaDonCT' =>  $listHoaDonCT,
             'listAnh' =>  $listAnh,
             'listSanPham' =>  $listSanPham,
+            'hoaDon' =>  $hoaDon,
         ]);
     }
 

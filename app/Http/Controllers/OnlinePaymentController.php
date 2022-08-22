@@ -152,7 +152,7 @@ class OnlinePaymentController extends Controller
                     $hoaDon->diaChi =  session()->get('diaChiDat');
                     $hoaDon->soDienThoai = session()->get('soDienThoaiDat');
                     $hoaDon->maPTTT = 2;
-                    $hoaDon->maTTHD = 2;
+                    $hoaDon->maTTHD = 1;
                     $hoaDon->save();
 
                     $sumPrice = number_format(\Cart::getTotal());

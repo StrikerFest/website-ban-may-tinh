@@ -1,7 +1,8 @@
 <html lang="en">
 <head>
     @include("Admin.Layout.Common.meta")
-    <script src="https://cdn.tiny.cloud/1/13dhm7ievvt2m5zqgf71jpj7kzxx89vu8bh22bhcrh5717n8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
 </head>
 <body>
     <!-- Page Wrapper -->
@@ -113,11 +114,16 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                        <label class="form-inline label">Mô tả</label>
-                                        @error('moTa')
+                                        <label class="form-inline label">Bài viết</label>
+                                        @error('maBV')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <textarea class="form-control" name="moTa" rows="5" placeholder="Description">{{$SP->moTa}}</textarea>
+                                        <select class="form-control select2" name="maBV">
+                                            <option value="" selected>Post</option>
+                                            @foreach($baiViet as $BV)
+                                                <option value="{{ $BV->maBV }}" <?php echo($SP->maBV == $BV->maBV? "selected": "") ?>>{{ $BV->tenBV }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block">
@@ -136,13 +142,14 @@
     @include("Admin.Layout.Common.bottom_script")
 
     <script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
+    $(function(){
+        //Hàm thêm searchbox vào select option
+        const searchboxInDropdown = () => {
+                $('.select2').select2({
+                    theme: "classic"
+                });
+            }
+            searchboxInDropdown();
     });
     </script>
 </body>

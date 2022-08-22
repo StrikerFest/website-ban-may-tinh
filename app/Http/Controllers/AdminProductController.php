@@ -7,11 +7,11 @@ use App\Models\ProductImageModel;
 use App\Models\ManufacturerModel;
 use App\Models\SubCategoryModel;
 use App\Models\ProductStatusModel;
-use App\Models\PromotionModel;
 use App\Models\SupplierModel;
 use App\Models\VoucherModel;
 use App\Models\ProductVoucherModel;
 use App\Models\WarrantyModel;
+use App\Models\BlogModel;
 use Illuminate\Http\Request;
 use App\Imports\ProductImport;
 use Exception;
@@ -39,6 +39,8 @@ class AdminProductController extends Controller
         $nhaPhanPhoi = SupplierModel::get();
 
         $baoHanh = WarrantyModel::get();
+
+        $baiViet = BlogModel::where('theLoai', 1)->get();
 
         $tinhTrangSanPham = ProductStatusModel::get();
         // dd($searchName, $searchManufacturer, $searchSubCategory, $searchSupplier);
@@ -68,6 +70,7 @@ class AdminProductController extends Controller
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "nhaPhanPhoi" => $nhaPhanPhoi,
             "baoHanh" => $baoHanh,
+            "baiViet" => $baiViet,
             "sanPham" => $sanPham,
             "searchName" => $searchName,
             "searchManufacturer" => $searchManufacturer,
@@ -97,7 +100,6 @@ class AdminProductController extends Controller
         $validated = $request->validate([
             'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP',
             'giaSP' => 'required|numeric|min:0',
-            'moTa' => 'required|min:3',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
             'maTLC' => 'required',
@@ -109,11 +111,11 @@ class AdminProductController extends Controller
         $sanPham = new ProductModel();
         $sanPham->tenSP = $request->get('tenSP');
         $sanPham->giaSP = $request->get('giaSP');
-        $sanPham->moTa = $request->get('moTa');
         $sanPham->giamGia = $request->get('giamGia');
         $sanPham->maNSX = $request->get('maNSX');
         $sanPham->maTLC = $request->get('maTLC');
         $sanPham->maBH = $request->get('maBH');
+        $sanPham->maBV = $request->get('maBV');
         $sanPham->maTTSP = $request->get('maTTSP');
         // dd($sanPham);
         $sanPham->save();
@@ -156,6 +158,8 @@ class AdminProductController extends Controller
 
         $baoHanh = WarrantyModel::get();
 
+        $baiViet = BlogModel::get();
+
         $SP = ProductModel::find($id);
         
         return view('Admin.Product.edit', [
@@ -163,6 +167,7 @@ class AdminProductController extends Controller
             "theLoaiCon" => $theLoaiCon,
             "tinhTrangSanPham" => $tinhTrangSanPham,
             "baoHanh" => $baoHanh,
+            "baiViet" => $baiViet,
             "SP" => $SP,
         ]);
     }
@@ -179,7 +184,6 @@ class AdminProductController extends Controller
         $validated = $request->validate([
             'tenSP' => 'required|min:3|unique:App\Models\ProductModel,tenSP,'. $id,
             'giaSP' => 'required|numeric|min:0',
-            'moTa' => 'required|min:3',
             'giamGia' => 'required|numeric|min:0|max:100',
             'maNSX' => 'required',
             'maTLC' => 'required',
@@ -190,11 +194,11 @@ class AdminProductController extends Controller
         $SP = ProductModel::find($id);
         $SP->tenSP = $request->get('tenSP');
         $SP->giaSP = $request->get('giaSP');
-        $SP->moTa = $request->get('moTa');
         $SP->giamGia = $request->get('giamGia');
         $SP->maNSX = $request->get('maNSX');
         $SP->maTLC = $request->get('maTLC');
         $SP->maBH = $request->get('maBH');
+        $SP->maBV = $request->get('maBV');
         $SP->maTTSP = $request->get('maTTSP');
         $SP->save();
         
@@ -211,9 +215,6 @@ class AdminProductController extends Controller
     {
         $sanPham = ProductModel::find($id);
         try{
-            $khuyenMai = PromotionModel::where('maSP', '=', $id);
-            $khuyenMai->delete();
-
             $ASP = ProductImageModel::where('maSP', $id)->get();
             
             for($i = 0; $i < sizeof($ASP); $i++){

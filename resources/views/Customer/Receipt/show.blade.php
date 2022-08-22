@@ -147,11 +147,35 @@
                                                         </td>
                                                     </tr>
                                                 @endif
-
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <div style="display: flex; justify-content: flex-end;">
+                                                            <?php if($hoaDon->maTTHD == 4){ ?>
+                                                                <form style="margin-right: 10px;" action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                                    @method('PUT')
+                                                                    @csrf
+                                                                    <input type="hidden" name="maTTHD" value="5">
+                                                                    <button class="btn btn-success" onclick="return confirm('Xác nhận đã nhận hàng?')">
+                                                                        Đã nhận được hàng
+                                                                    </button>
+                                                                </form>
+                                                            <?php } ?>
+                                                            <?php if($hoaDon->maTTHD != 5 && $hoaDon->maTTHD != 2){ ?>
+                                                                <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
+                                                                    @method('PUT')
+                                                                    @csrf
+                                                                    <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                                        Huỷ đơn
+                                                                    </button>
+                                                                </form>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td colspan="6" class="text-center">
                                                         <a href="{{ route('receiptCustomer.index') }}">
-                                                            <button class="btn btn-danger">
+                                                            <button class="btn btn-primary">
                                                                 Quay lại hóa đơn
                                                             </button>
                                                         </a>
@@ -174,6 +198,9 @@
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
     <script>
+        <?php if(session()->has('canceled')){ ?>
+            alert('{{session()->get('canceled')}}')
+        <?php } ?>
     </script>
 </body>
 
