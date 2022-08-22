@@ -1385,41 +1385,41 @@ INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NUL
 
 -- VGA
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 33,38,"4GB"),
-                                                                            (NULL, 33,43,"GTX 1660"),
-                                                                            (NULL, 33,44,"1770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 33,45,"4GB"),
+                                                                            (NULL, 33,46,"GTX 1660"),
+                                                                            (NULL, 33,47,"1770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 34,38,"4GB"),
-                                                                            (NULL, 34,43,"GTX 1660"),
-                                                                            (NULL, 34,44,"1770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 34,45,"4GB"),
+                                                                            (NULL, 34,46,"GTX 1660"),
+                                                                            (NULL, 34,47,"1770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 35,38,"4GB"),
-                                                                            (NULL, 35,43,"GTX 1660"),
-                                                                            (NULL, 35,44,"1770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 35,45,"4GB"),
+                                                                            (NULL, 35,46,"GTX 1660"),
+                                                                            (NULL, 35,47,"1770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 36,38,"4GB"),
-                                                                            (NULL, 36,43,"GTX 1660"),
-                                                                            (NULL, 36,44,"1770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 36,45,"4GB"),
+                                                                            (NULL, 36,46,"GTX 1660"),
+                                                                            (NULL, 36,47,"1770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 37,38,"4GB"),
-                                                                            (NULL, 37,43,"GTX 1660"),
-                                                                            (NULL, 37,44,"1770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 37,45,"4GB"),
+                                                                            (NULL, 37,46,"GTX 1660"),
+                                                                            (NULL, 37,47,"1770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 38,38,"4GB"),
-                                                                            (NULL, 38,43,"GTX 2660"),
-                                                                            (NULL, 38,44,"2770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 38,45,"4GB"),
+                                                                            (NULL, 38,46,"GTX 2660"),
+                                                                            (NULL, 38,47,"2770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 39,38,"4GB"),
-                                                                            (NULL, 39,43,"GTX 2660"),
-                                                                            (NULL, 39,44,"2770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 39,45,"4GB"),
+                                                                            (NULL, 39,46,"GTX 2660"),
+                                                                            (NULL, 39,47,"2770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 40,38,"4GB"),
-                                                                            (NULL, 40,43,"GTX 2660"),
-                                                                            (NULL, 40,44,"2770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 40,45,"4GB"),
+                                                                            (NULL, 40,46,"GTX 2660"),
+                                                                            (NULL, 40,47,"2770 MHz");
 
-INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 41,38,"4GB"),
-                                                                            (NULL, 41,43,"GTX 2660"),
-                                                                            (NULL, 41,44,"2770 MHz");
+INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 41,45,"4GB"),
+                                                                            (NULL, 41,46,"GTX 2660"),
+                                                                            (NULL, 41,47,"2770 MHz");
 
 -- Bộ vi xử lý
 INSERT INTO `san_pham_thong_so` (`maSPTS`, `maSP`,`maTS`,`giaTri`) VALUES   (NULL, 44,28,"LGA 1200"),
