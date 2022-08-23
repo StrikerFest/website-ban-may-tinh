@@ -210,5 +210,8 @@ Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear'
 Route::post('cart-PCB', [CartController::class, 'addToCartPCB'])->name('cart.addToCartPCB');
 
 
-Route::post('momoPay', [OnlinePaymentController::class, 'momoPay'])->name('onlinePayment.momo');
-Route::get('onlinePayment/process', [OnlinePaymentController::class, 'process'])->name('onlinePayment.process');
+// Route::post('momoPay', [OnlinePaymentController::class, 'momoPay'])->name('onlinePayment.momo');
+// Route::get('onlinePayment/process', [OnlinePaymentController::class, 'process'])->name('onlinePayment.process');
+
+Route::post('momoPay', [ReceiptController::class, 'momoPay'])->name('onlinePayment.momo');
+Route::get('onlinePayment/process', [ReceiptController::class, 'process'])->name('onlinePayment.process');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CancelOrderMail;
 use Illuminate\Http\Request;
 use App\Models\ReceiptModel;
 use App\Models\ProductModel;
@@ -11,6 +12,7 @@ use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
 use App\Models\SerialModel;
 use DB;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 
 
@@ -35,10 +37,10 @@ class AdminReceiptController extends Controller
         //lấy ngày hiện tại
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $end = date('Y-m-d');
-        
+
         $NBD = is_null($request->get('NBD')) ? $start : $request->get('NBD');
         $NKT = is_null($request->get('NKT')) ? $end : $request->get('NKT');
-        
+
         if($NBD > $NKT){
             $temp = $NBD;
             $NBD = $NKT;
@@ -115,11 +117,11 @@ class AdminReceiptController extends Controller
         $sanPham = ProductModel::all();
 
         $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
-        
+
         $tinhTrangHoaDon = ReceiptStatusModel::all();
 
         $hoaDonChiTiet = DB::select("
-            SELECT 
+            SELECT
                 hoa_don_chi_tiet.maHDCT,
                 san_pham.tenSP,
                 san_pham.maSP,
@@ -160,7 +162,7 @@ class AdminReceiptController extends Controller
             LEFT JOIN voucher on voucher.maVoucher = hoa_don_chi_tiet.maVoucher
             WHERE hoa_don_chi_tiet.maHD = $id
         ")[0]->tong;
-        
+
         return view('Admin.Receipt.detail', [
             'thanhTien' => $thanhTien,
             'hoaDon' => $hoaDon,
@@ -195,7 +197,7 @@ class AdminReceiptController extends Controller
         }
         $hoaDon->maTTHD = $request->get('maTTHD');
         $hoaDon->maNV = session()->get('admin');
-        
+
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
 
         if($request->get('maTTHD') == 4){
@@ -207,13 +209,13 @@ class AdminReceiptController extends Controller
                     return redirect()->back()->with('negative_quantity', 'Số lượng sản phẩm không đủ');
                 }
             }
-            
+
             //nếu đủ số lượng sẽ giảm số lượng sản phẩm tương ứng
             for($i = 0; $i < sizeof($hdct); $i++){
                 $sanPham = ProductModel::find($hdct[$i]->maSP);
                 $sanPham->soLuong -= $hdct[$i]->soLuong;
                 $sanPham->save();
-    
+
                 //Lấy số lượng mã serial của sản phẩm đươc mua tương ứng theo số lượng trong HĐCT
                 $serials = SerialModel::join('nhap_kho', 'nhap_kho.maNK', '=', 'serial.maNK')
                 ->where('maSP', $hdct[$i]->maSP)
@@ -231,7 +233,7 @@ class AdminReceiptController extends Controller
                 }
             }
         }
-        
+
         $hoaDon->save();
 
         return redirect()->back();
@@ -281,8 +283,19 @@ class AdminReceiptController extends Controller
         if($hoaDon->maTTHD == 5){
             return back()->with('canceled', "Đơn hàng đã được giao");
         }
-        dd($request->cancelReason);//Lý do huỷ đơn do admin nhập
-        //Gửi mail thông báo huỷ đơn ở đây
+        // dd($request->cancelReason);//Lý do huỷ đơn do admin nhập
+        // Gửi mail thông báo huỷ đơn ở đây
+        $objDemo = new \stdClass();
+        // Mã hóa đơn
+        $objDemo->idReceipt = 1;
+        // Tên người gửi
+        $objDemo->sender = 'BKCOM';
+        // Tên người nhận
+        $objDemo->receiver = 'Tên khách hàng nhận';
+        // Lý do
+        $objDemo->receiver = $request->cancelReason;
+        Mail::to(session()->get('emailDat'))->send(new CancelOrderMail($objDemo));
+
 
         // dd($hoaDon->maTTHD);
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
@@ -303,11 +316,11 @@ class AdminReceiptController extends Controller
                     $serial->save();
                 }
             }
-            
+
         }
         $hoaDon->maTTHD = 2;//Huỷ đơn
         $hoaDon->save();
-        
+
         return back();
     }
 }
