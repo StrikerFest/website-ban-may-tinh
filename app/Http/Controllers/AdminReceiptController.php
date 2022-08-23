@@ -54,7 +54,8 @@ class AdminReceiptController extends Controller
 
         $tinhTrangHoaDon = ReceiptStatusModel::all();
 
-        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')
+        $hoaDon = ReceiptModel::select(['hoa_don.*'])
+            ->join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')
             ->join('phuong_thuc_thanh_toan', 'phuong_thuc_thanh_toan.maPTTT', '=', 'hoa_don.maPTTT')
             ->join('tinh_trang_hoa_don', 'tinh_trang_hoa_don.maTTHD', '=', 'hoa_don.maTTHD')
             ->where('nguoi_dung.tenND', 'like', "%$searchName%")
@@ -160,7 +161,7 @@ class AdminReceiptController extends Controller
             LEFT JOIN voucher on voucher.maVoucher = hoa_don_chi_tiet.maVoucher
             WHERE hoa_don_chi_tiet.maHD = $id
         ")[0]->tong;
-        
+        // dd($hoaDon);
         return view('Admin.Receipt.detail', [
             'thanhTien' => $thanhTien,
             'hoaDon' => $hoaDon,
