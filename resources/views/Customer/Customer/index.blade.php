@@ -23,7 +23,7 @@
 
         <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
         <div id="content-wrapper" class="d-flex flex-row">
-            @include('Customer.Layout.Common.side_nav_menu')
+            {{-- @include('Customer.Layout.Common.side_nav_menu') --}}
 
             <!-- Content của trang -->
             <div class="container-fluid" style="padding-top: 55px">

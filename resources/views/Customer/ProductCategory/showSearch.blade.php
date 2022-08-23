@@ -2,6 +2,9 @@
 
 <head>
     @include('Customer.Layout.Common.meta')
+    <script type="text/javascript">
+
+    </script>
 </head>
 
 <body class="sidebar-toggled">
@@ -23,7 +26,6 @@
 
         <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
         <div id="content-wrapper" class="d-flex flex-row">
-
             <!-- Content của trang -->
             <div class="container-fluid" style="padding-top: 60px">
                 <div class="grid">

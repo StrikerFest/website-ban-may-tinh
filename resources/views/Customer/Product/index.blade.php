@@ -15,12 +15,18 @@
                 {{-- @include('Customer.Layout.Common.side_nav_menu') --}}
 
                 <!-- Content của trang -->
-                <div class="container-fluid d-flex" {{-- style="position:relative;top: 70px" --}}
+                <div class="container-fluid d-flex pt-0" {{-- style="position:relative;top: 70px" --}}
                     style="padding: 50px 50px 0px 50px;margin: 0px 50px 100px 50px">
                     <div class="grid">
+                        <div class="row">
+                            <div class="col-12 bg-" style="height: 50px">
+
+                            </div>
+                        </div>
                         {{-- Tiêu đề tên sản phẩm --}}
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 text-dark"
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-dark pt-1"
                                 style="font-size: 1.4em;font-weight: bold">
                                 {{ $sanPham->tenSP }}
                             </div>
@@ -37,15 +43,9 @@
                                         {{-- Div chứa ảnh và mũi tên --}}
                                         {{--  --}}
                                         <div id="carouselExampleIndicators" style="scroll-margin-block-start: 17rem"
-                                            class="carousel slide carousel-main-container-custom " data-ride="carousel"
+                                            class="carousel slide carousel-main-container-customx " data-ride="carousel"
                                             data-pause="hover" data-interval="5000">
-                                            {{-- <ol class="carousel-indicators"> --}}
-                                            {{-- Thay bằng list ảnh --}}
-                                            {{-- <li data-target="#carouselExampleIndicators" data-slide-to="0"
-                                                    class="active"></li>
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> --}}
-                                            {{-- </ol> --}}
+                                            {{-- copy1 --}}
                                             <div class="d-flex">
                                                 <div class="carousel-inner ">
                                                     {{-- Thay --}}
@@ -53,12 +53,13 @@
                                                         $tempImg = '';
                                                     @endphp
                                                     @foreach ($productImageGetFirst as $PI)
-                                                        <div class="carousel-item active hide-from-work">
+                                                        <div class="carousel-item active hide-from-work bg-secondary ">
                                                             @if ($PI->maSP == $sanPham->maSP)
                                                                 @php
                                                                     $tempImg = $PI->anh;
                                                                 @endphp
-                                                                <img class="card-img-top "
+                                                                <img class="card-img-top1 center-custom"
+                                                                    style="height: 100%;width:75%"
                                                                     src="{{ asset('assets/img/' . $PI->anh) }}"
                                                                     alt="..." />
                                                             @endif
@@ -72,20 +73,21 @@
                                                             src="{{ asset('assets/img/' . $tempImg) }}"
                                                             alt="..." />
                                                     @endif
+                                                    <div class="row bg-secondary">
 
-                                                    @foreach ($productImageSkipFirst as $PI)
-                                                        <div class="carousel-item hide-from-work">
-                                                            @if ($PI->maSP == $sanPham->maSP)
-                                                                @php
-                                                                    $tempImg = $PI->anh;
-                                                                @endphp
-                                                                <img class="card-img-top "
-                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                    alt="..." />
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
-
+                                                        @foreach ($productImageSkipFirst as $PI)
+                                                            <div class="carousel-item hide-from-work ">
+                                                                @if ($PI->maSP == $sanPham->maSP)
+                                                                    @php
+                                                                        $tempImg = $PI->anh;
+                                                                    @endphp
+                                                                    <img class="card-img-top "
+                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                        alt="..." />
+                                                                @endif
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                     {{--  --}}
                                                 </div>
                                             </div>
@@ -100,8 +102,6 @@
                                                 <span class="sr-only">Next</span>
                                             </a>
                                         </div>
-                                        {{--  --}}
-
                                         {{-- Div chứa ảnh khác --}}
                                         <div class="d-flex width-100 height-auto flex-center hide-from-work">
                                             <div class="grid container">
@@ -137,42 +137,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--  --}}
-                                        {{-- <div class="d-flex width-100 height-auto flex-center " style="display: none">
-                                            <div>
-                                                <div>
-                                                    <i style="transform: scale(3, 8);padding-right: 0px"
-                                                        class="fa fa-angle-left"></i>
-                                                </div>
-                                            </div>
-                                            @php
-                                                $tempImg;
-                                            @endphp
-                                            <div class="hide-from-work">
-                                                @foreach ($productImageGetFirst as $PI)
-                                                    @if ($PI->maSP == $sanPham->maSP)
-                                                        @php
-                                                            $tempImg = $PI->anh;
-                                                        @endphp
-                                                        <img class="card-img-top"
-                                                            style="height:400px ; width:400px ; "
-                                                            src="{{ asset('assets/img/' . $PI->anh) }}" alt="..." />
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                            <div>
-                                                <div>
-                                                    <i style="transform: scale(3, 8); padding-left: 0px"
-                                                        class="fa fa-angle-right"></i>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-                                        {{-- Hết - Div chứa ảnh và mũi tên --}}
-
-
+                                        {{-- copy2 --}}
                                     </div>
                                 </div>
                             </div>
+
                             {{-- Thông số --}}
                             <div class="col-md-5 ">
                                 <div class="width-100 height-auto padding-10 ">
@@ -183,14 +152,13 @@
                                     {{-- Thông số --}}
                                     <div>
                                         {{-- Title thông số sản phẩm --}}
-                                        <div class="text-danger">
+                                        <div class="text-danger text-bold">
                                             <h5>Thông số sản phẩm</h5>
                                         </div>
                                         {{-- Hết - Title thông số sản phẩm --}}
-
                                         {{-- Thông số --}}
                                         <div>
-                                            <ul>
+                                            <ul style="padding: 5px">
                                                 @php
                                                     $countSpec = 0;
                                                 @endphp
@@ -205,26 +173,18 @@
                                                     <li>
                                                         <div class="d-flex">
                                                             <div
-                                                                class="
-                                                                text-bold text-dark">
+                                                                class="text-dark">
                                                                 {{ $PS->tenTS . ' : ' }}
                                                             </div>
                                                             <div class="text-danger">
-                                                                {{ strlen($PS->giaTri) > 40 ? ': ' . substr($PS->giaTri, 0, 40) . '...' : ': ' . $PS->giaTri }}
+                                                                {{ strlen($PS->giaTri) > 30 ? ': ' . substr($PS->giaTri, 0, 30) . '...' : ': ' . $PS->giaTri }}
 
                                                             </div>
                                                         </div>
                                                     </li>
                                                 @endif
                                             @endforeach
-                                            {{-- <li>CPU: AMD R7 5800H</li>
-                                                <li>RAM: 8GB</li>
-                                                <li>Ổ cứng: 512GB</li>
-                                                <li>VGA: Onboard</li>
-                                                <li>Màn hình: 60hz</li>
-                                                <li>HĐH: Win11</li> --}}
                                         </ul>
-
                                         <a href="#productSpec" class="padding-left-20 link-red">Xem thêm</a>
                                     </div>
                                     {{-- Hết - Thông số sản phẩm --}}
@@ -233,24 +193,22 @@
                                     <div class="padding-top-20" id="collapsePoint">
                                         <div class="grid border-gray border-radius-10 padding-20">
                                             {{-- Dòng 1 --}}
-                                            <div class="row">
+                                            <div class="row w-100">
                                                 {{-- Giá cuối cùng --}}
-                                                <div class="col-md-6 text-danger ">
-                                                    <h3>{{ number_format($sanPham->giaSP) }} VNĐ</h3>
+                                                <div class="col-md-12 text-danger ">
+                                                    <h5>{{ number_format($sanPham->giaSP) }} VNĐ</h5>
                                                 </div>
                                                 {{-- Dòng 2 --}}
-                                                <div class="row">
-                                                    {{-- Giá cũ --}}
-                                                    <div class="col-md-5 text-decoration-line-through">
-                                                        <h5>{{ number_format($sanPham->giaSP + ($sanPham->giaSP * $sanPham->giamGia) / 100) }}
-                                                            VND</h5>
-                                                    </div>
-                                                    {{-- Giá tiết kiệm --}}
-                                                    <div class="col-md-7 text-danger padding-bottom-10">
-                                                        Tiết kiệm
-                                                        {{ number_format(($sanPham->giaSP * $sanPham->giamGia) / 100) }}
-                                                        VND
-                                                    </div>
+                                                {{-- Giá cũ --}}
+                                                <div class="col-md-6  text-decoration-line-through">
+                                                    <h6>{{ number_format($sanPham->giaSP + ($sanPham->giaSP * $sanPham->giamGia) / 100) }}
+                                                        VND</h6>
+                                                </div>
+                                                {{-- Giá tiết kiệm --}}
+                                                <div class="col-md-6 text-danger padding-bottom-10">
+                                                    Tiết kiệm
+                                                    {{ number_format(($sanPham->giaSP * $sanPham->giamGia) / 100) }}
+                                                    VND
                                                 </div>
                                             </div>
                                             {{-- Dòng 3 --}}
@@ -483,8 +441,13 @@
                         {{-- Hết - Thông tin ngoài --}}
                     </div>
                     <div class="row">
+                        {{-- Bai viet --}}
+                        <div class="col-8">
+                            <h1>Nội dung bài viết</h1>
+                        </div>
+
                         {{-- Thông số full -------------------- --}}
-                        <div class="col-md-12 " style="height: auto">
+                        <div class="col-md-4 " style="height: auto">
                             <div class="padding-10" id="productSpec">
                                 <h3>Thông số sản phẩm</h3>
                                 <table class="table-bordered width-100">
@@ -686,7 +649,7 @@
                                                                                                     <button
                                                                                                         class="btn btn-outline-success text-left"
                                                                                                         href="{{ route('product.show', $CN->maSP) }}"
-                                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                                        style="background-color: ;padding-top: 3px;height:65%">
                                                                                                         Còn hàng
                                                                                         @endif
                                                                                         </button>
@@ -868,7 +831,7 @@
                                                                                                     <button
                                                                                                         class="btn btn-outline-success text-left"
                                                                                                         href="{{ route('product.show', $CN->maSP) }}"
-                                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                                        style="background-color: ;padding-top: 3px;height:65%">
                                                                                                         Còn hàng
                                                                                         @endif
                                                                                         </button>
@@ -1050,7 +1013,7 @@
                                                                                                     <button
                                                                                                         class="btn btn-outline-success text-left"
                                                                                                         href="{{ route('product.show', $CN->maSP) }}"
-                                                                                                        style="background-color: navy;padding-top: 3px;height:65%">
+                                                                                                        style="background-color: ;padding-top: 3px;height:65%">
                                                                                                         Còn hàng
                                                                                         @endif
                                                                                         </button>

@@ -2,6 +2,18 @@
 
 <head>
     @include('Customer.Layout.Common.meta')
+    <script>
+        funtion myFunc() {
+            alert('ASS');
+            // const params = new Proxy(new URLSearchParams(window.location.search), {
+            //     get: (searchParams, prop) => searchParams.get(prop),
+            // });
+            // // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+            // let value = params.theLoaiCha; // "some_value"
+
+            // console.log('::8' + value);
+        }
+    </script>
 </head>
 
 <body class="sidebar-toggled">
@@ -23,13 +35,13 @@
 
         <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
         <div id="content-wrapper" class="d-flex flex-row">
-            
+
             <!-- Content của trang -->
             <div class="container-fluid" style="padding-top: 60px">
                 <div class="grid">
                     <div class="row">
                         {{-- Lọc sản phẩm --}}
-                        <div class="col-md-2 bg-light " style="margin-top:10px">
+                        <div class="col-md-3 bg-light " style="margin-top:10px;margin-right:20px;margin-left:20px">
                             <div class="col-md-12 text-center padding-top-10 text-bold text-danger">
                                 <h4>Lọc sản phẩm</h4>
                                 <form action="{{ route('categoryCustomer.show', 'null') }}">
@@ -44,47 +56,55 @@
                                 </form>
                             </div>
                             {{-- --------- --}}
-                            <div class="col-md-12 text-center text-danger">
+                            <div class="col-md-12 text-center  text-danger">
                                 <hr class="border-red">
                                 <h5>Nhà sản xuất CH</h5>
                                 <hr class="border-red">
                             </div>
                             {{-- Chọn hãng --}}
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <ul>
-                                    @foreach ($listNhaSanXuat as $NSX)
-                                        {{-- <a class=" text-bold " style="text-decoration: none"
+                                    <div class="row">
+                                        @foreach ($listNhaSanXuat as $NSX)
+                                            {{-- <a class=" text-bold " style="text-decoration: none"
                                             href="{{ route('categoryCustomer.show', $NSX->maNSX) }}">
                                             <div class="text-dark">
                                                 <li>{{ $NSX->tenNSX }}</li>
 
                                             </div>
                                         </a> --}}
-                                        <form action="{{ route('categoryCustomer.show', 'null') }}">
-                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
-                                            <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConCate }}">
-                                            <input type="hidden" name="priceMin"
-                                                value="{{ session()->get('currentPriceMin') }}">
-                                            <input type="hidden" name="priceMax"
-                                                value="{{ session()->get('currentPriceMax') }}">
-                                            <input type="hidden" name="nhaSanXuat" value="{{ $NSX->maNSX }}">
-                                            @if ($NSX->maNSX == $nhaSanXuatCate)
-                                                <button class=" text-bold btn "
-                                                    style="text-decoration: none; padding:0;list-style: none">
-                                                    <div class="text-light bg-danger rounded padding-right-20">
-                                                        <li>{{ $NSX->tenNSX }}</li>
-                                                    </div>
-                                                </button>
-                                            @else
-                                                <button class=" text-bold btn"
-                                                    style="text-decoration: none; padding:0;list-style: none">
-                                                    <div class="text-dark">
-                                                        <li>{{ $NSX->tenNSX }}</li>
-                                                    </div>
-                                                </button>
-                                            @endif
-                                        </form>
-                                    @endforeach
+                                            <div class="col-6">
+                                                <form action="{{ route('categoryCustomer.show', 'null') }}">
+                                                    <input type="hidden" name="theLoaiCha"
+                                                        value="{{ $theLoaiChaCate }}">
+                                                    <input type="hidden" name="theLoaiCon"
+                                                        value="{{ $theLoaiConCate }}">
+                                                    <input type="hidden" name="priceMin"
+                                                        value="{{ session()->get('currentPriceMin') }}">
+                                                    <input type="hidden" name="priceMax"
+                                                        value="{{ session()->get('currentPriceMax') }}">
+                                                    <input type="hidden" name="nhaSanXuat"
+                                                        value="{{ $NSX->maNSX }}">
+                                                    @if ($NSX->maNSX == $nhaSanXuatCate)
+                                                        <button class=" text-center btn "
+                                                            style="text-decoration: none; padding:0;list-style: none">
+                                                            <div
+                                                                class="text-light bg-danger  rounded padding-left-5 padding-right-5">
+                                                                <li>{{ $NSX->tenNSX }}</li>
+                                                            </div>
+                                                        </button>
+                                                    @else
+                                                        <button class=" text- btn"
+                                                            style="text-decoration: none; padding:0;list-style: none">
+                                                            <div class="text-dark">
+                                                                <li>{{ $NSX->tenNSX }}</li>
+                                                            </div>
+                                                        </button>
+                                                    @endif
+                                                </form>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </ul>
                             </div>
 
@@ -96,13 +116,22 @@
 
                             {{-- Khoảng giá --}}
 
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <form action="{{ route('categoryCustomer.show', 'null') }}">
-                                    <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
-                                    <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConCate }}">
-                                    <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
+                                    @isset($theLoaiChaCate)
+                                        <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
+                                    @endisset
+                                    @isset($theLoaiConCate)
+                                        <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConCate }}">
+                                    @endisset
+                                    @isset($nhaSanXuatCate)
+                                        <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
+                                    @endisset
+                                    @isset($search)
+                                        <input type="hidden" name="search" value="{{ $search }}">
+                                    @endisset
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 text-center ">
                                             <div class="text-bold text-danger">Từ</div>
                                             <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMin2" value="10000000">10 triệu<br>
@@ -113,9 +142,9 @@
                                             <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMin2" value="30000000">30 triệu<br>
                                             </div>
-                                            <div class="padding-bottom-5">
+                                            {{-- <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMin2" value="40000000">40 triệu<br>
-                                            </div>
+                                            </div> --}}
                                             <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMin2" value="50000000">50 triệu<br>
                                             </div>
@@ -123,14 +152,15 @@
                                                 <input type="radio" name="priceMin2" value="75000000">75 triệu<br>
                                             </div>
                                             <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMin2" value="100000000">100 triệu<br>
-                                            </div>
-                                            <div class="padding-bottom-5">
-                                                <input type="radio" name="priceMin2" value="200000000">200
+                                                <input type="radio" name="priceMin2" value="100000000">100
                                                 triệu<br>
                                             </div>
+                                            {{-- <div class="padding-bottom-5">
+                                                <input type="radio" name="priceMin2" value="200000000">200
+                                                triệu<br>
+                                            </div> --}}
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 text-center ">
                                             <div class="text-bold text-danger">Đến</div>
                                             <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMax2" value="10000000">10 triệu<br>
@@ -141,9 +171,9 @@
                                             <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMax2" value="30000000">30 triệu<br>
                                             </div>
-                                            <div class="padding-bottom-5">
+                                            {{-- <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMax2" value="40000000">40 triệu<br>
-                                            </div>
+                                            </div> --}}
                                             <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMax2" value="50000000">50 triệu<br>
                                             </div>
@@ -154,22 +184,27 @@
                                                 <input type="radio" name="priceMax2" value="100000000">100
                                                 triệu<br>
                                             </div>
-                                            <div class="padding-bottom-5">
+                                            {{-- <div class="padding-bottom-5">
                                                 <input type="radio" name="priceMax2" value="200000000">200
                                                 triệu<br>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
-                                    Giá từ
-                                    <input type="number" name="priceMin"
-                                        value="{{ session()->get('currentPriceMin') }}">
-                                    Giá đến
-                                    @if (session()->get('currentPriceMax') == 10000000000)
-                                        <input type="number" name="priceMax">
-                                    @else
-                                        <input type="number" name="priceMax"
-                                            value="{{ session()->get('currentPriceMax') }}">
-                                    @endif
+                                    <div class="text-center">
+                                        Giá từ
+                                        <br>
+                                        <input type="number" name="priceMin"
+                                            value="{{ session()->get('currentPriceMin') }}">
+                                        <br>
+                                        Giá đến
+                                        <br>
+                                        @if (session()->get('currentPriceMax') == 10000000000)
+                                            <input type="number" name="priceMax">
+                                        @else
+                                            <input type="number" name="priceMax"
+                                                value="{{ session()->get('currentPriceMax') }}">
+                                        @endif
+                                    </div>
                                     <div class="text-center padding-top-10">
                                         <button class="btn btn-danger">Lọc giá</button>
                                     </div>
@@ -184,7 +219,7 @@
                             </div>
 
                             {{-- Nhu cầu --}}
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <ul>
                                     @foreach ($listTheLoai as $TL)
                                         {{-- <a class=" text-bold " style="text-decoration: none"
@@ -195,22 +230,28 @@
 
                                         </a> --}}
                                         <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}">
-                                            <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
-                                            <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
+                                            @isset($theLoaiChaCate)
+                                                <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
+                                            @endisset
+                                            @isset($nhaSanXuatCate)
+                                                <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
+                                            @endisset
                                             <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
                                             <input type="hidden" name="priceMin"
                                                 value="{{ session()->get('currentPriceMin') }}">
+
                                             <input type="hidden" name="priceMax"
                                                 value="{{ session()->get('currentPriceMax') }}">
                                             @if ($TL->maTLC == $theLoaiConCate)
-                                                <button class=" text-bold btn "
+                                                <button class=" text- btn "
                                                     style="text-decoration: none;list-style: none;padding:0">
-                                                    <div class="text-light bg-danger rounded padding-right-20">
+                                                    <div
+                                                        class="text-light bg-danger rounded padding-left-5 padding-right-5">
                                                         <li>{{ $TL->tenTLC }}</li>
                                                     </div>
                                                 </button>
                                             @else
-                                                <button class=" text-bold btn"
+                                                <button class=" text- btn"
                                                     style="text-decoration: none;list-style: none;padding:0">
                                                     <div class="text-dark">
                                                         <li>{{ $TL->tenTLC }}</li>
@@ -222,49 +263,83 @@
                                 </ul>
                             </div>
 
-                            {{-- --------- --}}
-                            <div class="col-md-12 text-center text-danger">
-                                <hr class="border-red">
-                                <h5>CPU</h5>
-                                <input type="checkbox">Core I3<br>
-                                <input type="checkbox">Core I5<br>
-                                <input type="checkbox">Core I7<br>
-                                <input type="checkbox">Core I9
-                                <hr class="border-red">
-                            </div>
+                            {{-- Thông số --}}
+                            @foreach ($listThongSo as $TS)
+                                <div class="col-md-12 text-center text-danger">
+                                    <hr class="border-red">
+                                    <h5>{{ $TS->tenTS }}</h5>
+                                    @foreach ($listSanPhamThongSo as $SPTS)
+                                        @if ($SPTS->maTS == $TS->maTS)
+                                            {{-- <input type="checkbox">{{$SPTS->giaTri}}<br> --}}
+                                            <form action="{{ route('categoryCustomer.show', 'null') }}">
+                                                @isset($theLoaiChaCate)
+                                                    <input type="hidden" name="theLoaiCha"
+                                                        value="{{ $theLoaiChaCate }}">
+                                                @endisset
+                                                @isset($theLoaiChaCate)
+                                                    <input type="hidden" name="theLoaiCon"
+                                                        value="{{ $theLoaiConCate }}">
+                                                @endisset
+                                                {{-- @isset($thongSoCate) --}}
+                                                    <input type="hidden" name="thongSo" value="{{ $SPTS->maTS }}">
+                                                {{-- @endisset --}}
+                                                {{-- @isset($giaTriThongSoCate) --}}
+                                                    <input type="hidden" name="giaTriThongSo"
+                                                        value="{{ $SPTS->giaTri }}">
+                                                {{-- @endisset --}}
+                                                @isset($nhaSanXuatCate)
+                                                    <input type="hidden" name="nhaSanXuat"
+                                                        value="{{ $nhaSanXuatCate }}">
+                                                @endisset
+                                                @isset($priceMinCate)
+                                                    <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">
+                                                @endisset
+                                                @isset($priceMaxCate)
+                                                    <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
+                                                @endisset
 
-                            {{-- --------- --}}
-                            <div class="col-md-12 text-center text-danger">
-                                <hr class="border-red">
-                                <h5>RAM</h5>
-                                <input type="checkbox">8GB 2666hz<br>
-                                <input type="checkbox">16GB 3222hz
+                                                @if ($SPTS->giaTri == $giaTriThongSoCate)
+                                                    <button class=" text- btn "
+                                                        style="text-decoration: none;list-style: none;padding:0">
+                                                        <div
+                                                            class="text-light bg-danger rounded padding-left-5 padding-right-5">
+                                                            <li>{{ $SPTS->giaTri }}</li>
+                                                        </div>
+                                                    </button>
+                                                @else
+                                                    <button class=" text- btn"
+                                                        style="text-decoration: none;list-style: none;padding:0">
+                                                        <div class="text-dark">
+                                                            <li>{{ $SPTS->giaTri }}</li>
+                                                        </div>
+                                                    </button>
+                                                @endif
 
-                                <hr class="border-red">
-                            </div>
-                            {{-- --------- --}}
-                            <div class="col-md-12 text-center text-danger">
-                                <hr class="border-red">
-                                <h5>Card</h5>
-                                <input type="checkbox">1650GTX<br>
-                                <input type="checkbox">2070RTX
 
-                                <hr class="border-red">
-                            </div>
+
+                                            </form>
+                                        @endif
+                                    @endforeach
+                                    <hr class="border-red">
+                                </div>
+                            @endforeach
+
+
 
                             {{-- --------- --}}
                             <div class="col-md-12 ">
                                 <hr class="border-red">
                             </div>
                         </div>
+
                         {{-- Sản phẩm --}}
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <div class="row">
                                 @foreach ($listSanPham as $CN)
                                     <div class="carousel-promo-item col-md-3 " onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
                                         style=" padding: 10px">
-                                        <div class="col mb-5">
-                                            <div class="card product-item" style="height: 450px;width:260px">
+                                        <div class="">
+                                            <div class="card product-item" style="height: 400px;width:220px">
                                                 <!-- Thẻ sale trên đầu -->
                                                 <div class="badge bg-dark text-white position-absolute"
                                                     style="top: 0.5rem; right: 0.5rem">
@@ -282,8 +357,8 @@
                                                                 $tempImg = $PI->anh;
                                                             @endphp
                                                             <a href="{{ route('product.show', $CN->maSP) }}">
-                                                                <img class="card-img-top hide-from-work"
-                                                                    style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                                <img class="card-img-top hide-from-work -10"
+                                                                    style="height:220px ; width:220px ; border: 1px solid gray"
                                                                     src="{{ asset('assets/img/' . $PI->anh) }}"
                                                                     id="{{ $CN->maSP }}" alt="..." />
                                                             </a>
@@ -295,7 +370,7 @@
                                                 @endforeach
                                                 @if ($tempImg == 'STOCK.jpg')
                                                     <img class="card-img-top "
-                                                        style="height:240px ; width:260px ; border: 1px solid lightgray"
+                                                        style="height:220px ; width:220px ; border: 1px solid lightgray"
                                                         src="{{ asset('assets/img/' . $tempImg) }}" alt="..." />
                                                 @endif
                                                 <!-- Thông tin sản phẩm-->
@@ -335,7 +410,7 @@
                                                             @else
                                                                 <button class="btn btn-outline-success text-left"
                                                                     href="{{ route('product.show', $CN->maSP) }}"
-                                                                    style="background-color: navy;padding-top: 3px;height:65%">
+                                                                    style="background-color: ;padding-top: 3px;height:65%">
                                                                     Còn hàng
                                                     @endif
                                                     </button>
@@ -378,7 +453,18 @@
         </div>
 
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // alert("Ready!");
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+            let value = params.theLoaiCha; // "some_value"
+            console.log(params);
+            console.log('::8-' + value);
+        }, false);
+    </script>
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
 
