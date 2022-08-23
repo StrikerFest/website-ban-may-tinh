@@ -280,22 +280,22 @@ class AdminReceiptController extends Controller
 
     public function cancelOrder(Request $request, $id)
     {
-        $hoaDon = ReceiptModel::find($id);
+        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
+        // dd($hoaDon);
         if($hoaDon->maTTHD == 5){
             return back()->with('canceled', "Đơn hàng đã được giao");
         }
-        // dd($request->cancelReason);//Lý do huỷ đơn do admin nhập
-        // Gửi mail thông báo huỷ đơn ở đây
+        // Gửi mail thông báo huỷ đơn
         $objDemo = new \stdClass();
         // Mã hóa đơn
-        $objDemo->idReceipt = 1;
+        $objDemo->idReceipt = $hoaDon->maHD;
         // Tên người gửi
         $objDemo->sender = 'BKCOM';
         // Tên người nhận
-        $objDemo->receiver = 'Tên khách hàng nhận';
+        $objDemo->receiver = $hoaDon->tenND;
         // Lý do
-        $objDemo->receiver = $request->cancelReason;
-        Mail::to(session()->get('emailDat'))->send(new CancelOrderMail($objDemo));
+        $objDemo->reason = $request->cancelReason;
+        Mail::to($hoaDon->emailND)->send(new CancelOrderMail($objDemo));
 
 
         // dd($hoaDon->maTTHD);
