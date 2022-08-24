@@ -242,13 +242,13 @@
                                             <div class="padding-top-20 padding-left-20">
                                                 <h5 class="text-danger">Khuyến mãi đặc biệt</h5>
                                                 <ul>
-                                                    @foreach ($productPromotion as $PM)
+                                                    {{-- @foreach ($productPromotion as $PM)
                                                         @if ($sanPham->maSP == $PM->maSP)
                                                             @php
                                                                 echo '+ ' . $PM->khuyenMai . '<br>';
                                                             @endphp
                                                         @endif
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </ul>
                                             </div>
 

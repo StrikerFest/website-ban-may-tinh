@@ -149,7 +149,7 @@ class ProductController extends Controller
 
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
-        $productPromotion = DB::table('khuyen_mai')->get();
+        // $productPromotion = DB::table('khuyen_mai')->get();
         $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
 
         $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
@@ -164,7 +164,7 @@ class ProductController extends Controller
             'user' => $user,
             'sanPham' => $sanPham,
             'cartItems' => $cartItems,
-            'productPromotion' => $productPromotion,
+            // 'productPromotion' => $productPromotion,
             'productSpec' => $productSpec,
 
             'computerNew1' => $computerNew1,

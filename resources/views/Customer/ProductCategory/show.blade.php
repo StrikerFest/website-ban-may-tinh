@@ -262,7 +262,9 @@
                                     @endforeach
                                 </ul>
                             </div>
-
+                            @php
+                                $countTS = 0;
+                            @endphp
                             {{-- Thông số --}}
                             @foreach ($listThongSo as $TS)
                                 <div class="col-md-12 text-center text-danger">
@@ -270,6 +272,9 @@
                                     <h5>{{ $TS->tenTS }}</h5>
                                     @foreach ($listSanPhamThongSo as $SPTS)
                                         @if ($SPTS->maTS == $TS->maTS)
+                                            @php
+                                                $countTS = 0;
+                                            @endphp
                                             {{-- <input type="checkbox">{{$SPTS->giaTri}}<br> --}}
                                             <form action="{{ route('categoryCustomer.show', 'null') }}">
                                                 @isset($theLoaiChaCate)
@@ -280,13 +285,60 @@
                                                     <input type="hidden" name="theLoaiCon"
                                                         value="{{ $theLoaiConCate }}">
                                                 @endisset
-                                                {{-- @isset($thongSoCate) --}}
-                                                    <input type="hidden" name="thongSo" value="{{ $SPTS->maTS }}">
-                                                {{-- @endisset --}}
-                                                {{-- @isset($giaTriThongSoCate) --}}
-                                                    <input type="hidden" name="giaTriThongSo"
+                                                {{-- Không rỗng --}}
+                                                @php
+                                                    $sizeTS = sizeof($thongSoCate);
+                                                @endphp
+                                                @if ($sizeTS > 1)
+                                                    @foreach ($thongSoCate as $key => $value)
+                                                        {{-- Thông số thứ 2 trở đi --}}
+                                                        @if ($countTS !== 0)
+                                                            <input type="hidden" name="ass2nd">
+                                                            <input type="hidden" name="{{ 'thongSo' . $key }}"
+                                                                value="{{ $key }}">
+                                                            <input type="hidden" name="{{ 'giaTriThongSo' . $key }}"
+                                                                value="{{ $value }}">
+                                                            {{-- Thông số đầu tiên --}}
+                                                        @else
+                                                            @php
+                                                                $countTS++;
+                                                            @endphp
+                                                            <input type="hidden" name="ass1st">
+                                                            <input type="hidden" name="thongSoDau"
+                                                                value="{{ $key }}">
+                                                            <input type="hidden" name="giaTriThongSoDau"
+                                                                value="{{ $value }}">
+                                                        @endif
+                                                    @endforeach
+                                                    <input type="hidden" name="{{ 'thongSo' . $SPTS->maTS }}"
+                                                        value="{{ $SPTS->maTS }}">
+                                                    <input type="hidden" name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
                                                         value="{{ $SPTS->giaTri }}">
-                                                {{-- @endisset --}}
+                                                @elseif($sizeTS == 0)
+                                                    {{-- <input type="hidden" name="{{ 'thongSo' . $SPTS->maTS }}"
+                                                        value="{{ $SPTS->maTS }}">
+                                                    <input type="hidden" name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
+                                                        value="{{ $SPTS->giaTri }}"> --}}
+                                                    <input type="hidden" name="ass">
+                                                    <input type="hidden" name="thongSoDau"
+                                                        value="{{ $SPTS->maTS }}">
+                                                    <input type="hidden" name="giaTriThongSoDau"
+                                                        value="{{ $SPTS->giaTri }}">
+                                                @elseif($sizeTS == 1)
+                                                    @foreach ($thongSoCate as $key => $value)
+                                                        <input type="hidden" name="ass1st">
+                                                        <input type="hidden" name="thongSoDau"
+                                                            value="{{ $key }}">
+                                                        <input type="hidden" name="giaTriThongSoDau"
+                                                            value="{{ $value }}">
+                                                    @endforeach
+                                                    <input type="hidden" name="{{ 'thongSo' . $SPTS->maTS }}"
+                                                        value="{{ $SPTS->maTS }}">
+                                                    <input type="hidden" name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
+                                                        value="{{ $SPTS->giaTri }}">
+                                                @endif
+
+
                                                 @isset($nhaSanXuatCate)
                                                     <input type="hidden" name="nhaSanXuat"
                                                         value="{{ $nhaSanXuatCate }}">
@@ -297,24 +349,23 @@
                                                 @isset($priceMaxCate)
                                                     <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
                                                 @endisset
-
-                                                @if ($SPTS->giaTri == $giaTriThongSoCate)
-                                                    <button class=" text- btn "
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div
-                                                            class="text-light bg-danger rounded padding-left-5 padding-right-5">
-                                                            <li>{{ $SPTS->giaTri }}</li>
-                                                        </div>
-                                                    </button>
-                                                @else
-                                                    <button class=" text- btn"
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div class="text-dark">
-                                                            <li>{{ $SPTS->giaTri }}</li>
-                                                        </div>
-                                                    </button>
+                                                @if ($thongSoCate[$SPTS->maTS] ?? null)
+                                                    @if ($SPTS->giaTri == $thongSoCate[$SPTS->maTS])
+                                                        <button class=" text- btn "
+                                                            style="text-decoration: none;list-style: none;padding:0">
+                                                            <div
+                                                                class="text-light bg-danger rounded padding-left-5 padding-right-5">
+                                                                <li>{{ $SPTS->giaTri }}</li>
+                                                            </div>
+                                                        </button>
+                                                    @endif
                                                 @endif
-
+                                                <button class=" text- btn"
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-dark">
+                                                        <li>{{ $SPTS->giaTri }}</li>
+                                                    </div>
+                                                </button>
 
 
                                             </form>
