@@ -117,12 +117,16 @@
                                             <td>{{$HDCT->giamGia}}%</td>
                                             <td>
                                                 <?php 
-                                                    if(isset($HDCT->tenVoucher)){
-                                                        echo $HDCT->tenVoucher;
-                                                    }else{
+                                                    if($HDCT->maVoucher === null){
                                                         echo 'Không có voucher';
-                                                    }
-                                                ?>
+                                                    }else{ ?>
+                                                        <form action="{{route('voucher.show', $HDCT->maHDCT)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-info">
+                                                                Xem
+                                                            </button>
+                                                        </form>
+                                                <?php } ?>
                                             </td>
                                             <?php if($hoaDon->maTTHD == 5){ ?>
                                                 <td>{{date_format(date_create($HDCT->ngayHetHan), 'd-m-Y')}}</td>

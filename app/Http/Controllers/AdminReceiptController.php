@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ReceiptModel;
 use App\Models\ProductModel;
 use App\Models\DetailReceiptModel;
+use App\Models\VoucherDetailReceiptModel;
 use App\Models\UserModel;
 use App\Models\PaymentMethodModel;
 use App\Models\ReceiptStatusModel;
@@ -121,7 +122,13 @@ class AdminReceiptController extends Controller
 
         $tinhTrangHoaDon = ReceiptStatusModel::all();
 
-        $hoaDonChiTiet = DB::select("
+        // $VHDCT = VoucherDetailReceiptModel::join('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'voucher_hoa_don_chi_tiet.maHDCT')
+        //     ->join('hoa_don', 'hoa_don.maHD', '=', 'hoa_don_chi_tiet.maHD')
+        //     ->where('hoa_don.maHD', $id)
+        //     ->orderBy('hoa_don_chi_tiet.maHDCT')
+        //     ->get();
+        // dd($VHDCT);
+        $hoaDonChiTietTemp = DB::select("
             SELECT
                 hoa_don_chi_tiet.maHDCT,
                 san_pham.tenSP,
@@ -129,41 +136,52 @@ class AdminReceiptController extends Controller
                 hoa_don_chi_tiet.giamGia,
                 hoa_don_chi_tiet.soLuong,
                 hoa_don_chi_tiet.giaSP,
-                voucher.tenVoucher,
-                voucher.giaTri,
-                voucher.maTLV,
                 bao_hanh.tenBH,
+                voucher_hoa_don_chi_tiet.maVoucher,
                 DATE_ADD(hoa_don.ngayTao, INTERVAL bao_hanh.giaTri MONTH) AS ngayHetHan,
                 IF(DATE_ADD(hoa_don.ngayTao, INTERVAL bao_hanh.giaTri MONTH) < now(), TRUE, FALSE) AS hetHan,
-                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS tongTien,
-                IF(maTLV = 1, voucher.giaTri * hoa_don_chi_tiet.soLuong, If(maTLV = 2, (hoa_don_chi_tiet.giaSP * voucher.giaTri /100) * hoa_don_chi_tiet.soLuong, 0)) AS tienGiamVoucher
+                ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong) AS tongTien
                 FROM hoa_don_chi_tiet
                 JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
                 JOIN bao_hanh ON bao_hanh.maBH = san_pham.maBH
                 JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-                LEFT JOIN voucher ON hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+                LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
                 WHERE hoa_don_chi_tiet.maHD = $id
+                GROUP BY hoa_don_chi_tiet.maHDCT
+                ORDER BY maHDCT;
         ");
 
-        $thanhTien = DB::select("
-        SELECT
-            SUM(
-                if(
-                    maTLV = 1,
-                    ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100) - giaTri) * hoa_don_chi_tiet.soLuong),
-                    (IF(
-                        maTLV = 2,
-                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100) - (giaTri * hoa_don_chi_tiet.giaSP / 100)) * hoa_don_chi_tiet.soLuong),
-                        ((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia / 100)) * hoa_don_chi_tiet.soLuong))
-                    )
-                )
-            ) as tong
-            FROM hoa_don_chi_tiet
-            JOIN san_pham ON hoa_don_chi_tiet.maSP = san_pham.maSP
-            LEFT JOIN voucher on voucher.maVoucher = hoa_don_chi_tiet.maVoucher
-            WHERE hoa_don_chi_tiet.maHD = $id
-        ")[0]->tong;
-        // dd($hoaDon);
+        $tienGiamVoucher = DB::select("
+            SELECT SUM(tienGiamVoucher) as tienGiamVoucher FROM
+                (SELECT
+                    hoa_don_chi_tiet.maHDCT,
+                    IF(
+                        maTLV=1,
+                        giaTri*hoa_don_chi_tiet.soLuong,
+                        IF(
+                            maTLV=2,
+                            (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                            0
+                        )
+                    ) AS tienGiamVoucher
+                FROM hoa_don_chi_tiet
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+                LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+                WHERE hoa_don_chi_tiet.maHD = $id
+                ORDER BY maHDCT) AS X
+                GROUP BY maHDCT;
+        ");
+        
+        $thanhTien = 0;
+        $hoaDonChiTiet = [];
+        for($i = 0; $i < sizeof($hoaDonChiTietTemp); $i++){
+            $mergedObj = (object)array_merge((array)$hoaDonChiTietTemp[$i], (array)$tienGiamVoucher[$i]);
+            array_push($hoaDonChiTiet, $mergedObj);
+            $thanhTien += ($hoaDonChiTietTemp[$i]->tongTien - $tienGiamVoucher[$i]->tienGiamVoucher);
+        }
+        // dd($hoaDonChiTietTemp, $tienGiamVoucher);
+        // dd($hoaDonChiTiet, $thanhTien);
         return view('Admin.Receipt.detail', [
             'thanhTien' => $thanhTien,
             'hoaDon' => $hoaDon,
@@ -202,6 +220,8 @@ class AdminReceiptController extends Controller
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
 
         if($request->get('maTTHD') == 4){
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $hoaDon->updated_at = date('Y-m-d H:i:s');
             //kiểm tra số lượng sản phẩm
             for($i = 0; $i < sizeof($hdct); $i++){
                 $sanPham = ProductModel::find($hdct[$i]->maSP);

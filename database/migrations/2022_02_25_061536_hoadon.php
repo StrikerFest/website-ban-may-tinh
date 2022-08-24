@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('maPTTT')->references('maPTTT')->on('phuong_thuc_thanh_toan');
             $table->unsignedInteger('maTTHD');
             $table->foreign('maTTHD')->references('maTTHD')->on('tinh_trang_hoa_don');
+            $table->dateTime('updated_at')->useCurrent();//Đặt ngày hiện tại làm giá trị mặc định
         });
     }
 
