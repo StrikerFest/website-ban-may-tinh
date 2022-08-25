@@ -13,103 +13,137 @@ class DashboardController extends Controller
     {
         $thangHienTai = date('m');
         $namHienTai = date('Y');
-        // //Doanh thu theo tháng
-        $doanhThuThang = DB::select("
-        SELECT SUM(Tong) as Tong FROM
+        //Doanh thu theo tháng
+        $voucherGiamThang = DB::select("
+        SELECT SUM(tong) as Tong FROM
             (
             SELECT
                 IF(
                     maTLV=1,
-                    (giaSP-(giaSP*giamGia/100)-giaTri)*hoa_don_chi_tiet.soLuong,
+                    giaTri*hoa_don_chi_tiet.soLuong,
                     IF(
                         maTLV=2,
-                        (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))*hoa_don_chi_tiet.soLuong,
-                        giaSP-(giaSP*giamGia/100)*hoa_don_chi_tiet.soLuong
+                        (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                        0
                     )
-                )AS Tong
+                ) as tong
                 FROM hoa_don_chi_tiet
-                JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-                LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
+                JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
+                LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
                 WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
                 AND hoa_don.maTTHD = 5
-            ) as X;
+            ) AS x;
         ")[0]->Tong;
+        // dd($voucherGiamThang);
+
+        $doanhThuThangKoVoucher = DB::select("
+            SELECT SUM(Tong) AS Tong FROM
+            (
+                SELECT (giaSP-(giaSP*giamGia/100))*soLuong AS Tong
+                FROM hoa_don_chi_tiet
+                JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
+                WHERE MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
+                AND hoa_don.maTTHD = 5
+                GROUP BY hoa_don_chi_tiet.maHDCT
+            )AS x;
+        ")[0]->Tong;
+        // dd($doanhThuThangKoVoucher);
+        $doanhThuThang = $doanhThuThangKoVoucher-$voucherGiamThang;
         // dd($doanhThuThang);
 
+
         // //Doanh thu theo năm
-        $doanhThuNam = DB::select("
-        SELECT SUM(Tong) as Tong FROM
+        $voucherGiamNam = DB::select("
+        SELECT SUM(tong) as Tong FROM
             (
             SELECT
                 IF(
                     maTLV=1,
-                    (giaSP-(giaSP*giamGia/100)-giaTri)*hoa_don_chi_tiet.soLuong,
+                    giaTri*hoa_don_chi_tiet.soLuong,
                     IF(
                         maTLV=2,
-                        (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))*hoa_don_chi_tiet.soLuong,
-                        giaSP-(giaSP*giamGia/100)*hoa_don_chi_tiet.soLuong
+                        (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                        0
                     )
-                )AS Tong
+                ) as tong
                 FROM hoa_don_chi_tiet
-                JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-                LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
+                JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
+                LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
                 WHERE YEAR(hoa_don.ngayTao) = $namHienTai
                 AND hoa_don.maTTHD = 5
-            ) as X;
+            ) AS x;
         ")[0]->Tong;
+        // dd($voucherGiamNam);
+
+        $doanhThuNamKoVoucher = DB::select("
+            SELECT SUM(Tong) AS Tong FROM
+            (
+                SELECT (giaSP-(giaSP*giamGia/100))*soLuong AS Tong
+                FROM hoa_don_chi_tiet
+                JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
+                WHERE YEAR(hoa_don.ngayTao) = $namHienTai
+                AND hoa_don.maTTHD = 5
+                GROUP BY hoa_don_chi_tiet.maHDCT
+            )AS x;
+        ")[0]->Tong;
+        // dd($doanhThuNamKoVoucher);
+        $doanhThuNam = $doanhThuNamKoVoucher-$voucherGiamNam;
         // dd($doanhThuNam);
 
+
         //Tiền lãi theo tháng
-        $tienLaiThang = DB::select("
-        SELECT SUM(tienLai) AS tienLaiThang FROM
-            (SELECT
-            IF(
-                maTLV=1,
-                (giaSP-(giaSP*giamGia/100)-giaTri)-giaNhap,
-                IF(
-                    maTLV=2,
-                    (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))-giaNhap,
-                    (giaSP-(giaSP*giamGia/100))-giaNhap
-                )
-            ) AS tienLai
-            FROM serial
-            JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
-            JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
-            JOIN hoa_don_chi_tiet ON serial.maHDCT = hoa_don_chi_tiet.maHDCT
-            JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don_chi_tiet.maHD
-            LEFT JOIN voucher on hoa_don_chi_tiet.maVoucher = voucher.maVoucher
-            WHERE serial.maHDCT IS NOT NULL
-            AND MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
-            AND hoa_don.maTTHD = 5
-            GROUP BY serial.maSerial
-            ORDER BY `serial`.`maHDCT` DESC) AS X;
-        ")[0]->tienLaiThang;
+        // $tienLaiThang = DB::select("
+        // SELECT SUM(tienLai) AS tienLaiThang FROM
+        //     (SELECT
+        //     IF(
+        //         maTLV=1,
+        //         (giaSP-(giaSP*giamGia/100)-giaTri)-giaNhap,
+        //         IF(
+        //             maTLV=2,
+        //             (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))-giaNhap,
+        //             (giaSP-(giaSP*giamGia/100))-giaNhap
+        //         )
+        //     ) AS tienLai
+        //     FROM serial
+        //     JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
+        //     JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
+        //     JOIN hoa_don_chi_tiet ON serial.maHDCT = hoa_don_chi_tiet.maHDCT
+        //     JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don_chi_tiet.maHD
+        //     LEFT JOIN voucher on hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+        //     WHERE serial.maHDCT IS NOT NULL
+        //     AND MONTH(hoa_don.ngayTao) = $thangHienTai AND YEAR(hoa_don.ngayTao) = $namHienTai
+        //     AND hoa_don.maTTHD = 5
+        //     GROUP BY serial.maSerial
+        //     ORDER BY `serial`.`maHDCT` DESC) AS X;
+        // ")[0]->tienLaiThang;
         
         //Tiền lãi theo năm
-        $tienLaiNam = DB::select("
-        SELECT SUM(tienLai) AS tienLaiNam FROM
-            (SELECT
-            IF(
-                maTLV=1,
-                (giaSP-(giaSP*giamGia/100)-giaTri)-giaNhap,
-                IF(
-                    maTLV=2,
-                    (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))-giaNhap,
-                    (giaSP-(giaSP*giamGia/100))-giaNhap
-                )
-            ) AS tienLai
-            FROM serial
-            JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
-            JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
-            JOIN hoa_don_chi_tiet ON serial.maHDCT = hoa_don_chi_tiet.maHDCT
-            JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don_chi_tiet.maHD
-            LEFT JOIN voucher on hoa_don_chi_tiet.maVoucher = voucher.maVoucher
-            WHERE serial.maHDCT IS NOT NULL
-            AND YEAR(hoa_don.ngayTao) = $namHienTai
-            AND hoa_don.maTTHD = 5
-            GROUP BY serial.maSerial
-            ORDER BY `serial`.`maHDCT` DESC) AS X;
-        ")[0]->tienLaiNam;
+        // $tienLaiNam = DB::select("
+        // SELECT SUM(tienLai) AS tienLaiNam FROM
+        //     (SELECT
+        //     IF(
+        //         maTLV=1,
+        //         (giaSP-(giaSP*giamGia/100)-giaTri)-giaNhap,
+        //         IF(
+        //             maTLV=2,
+        //             (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))-giaNhap,
+        //             (giaSP-(giaSP*giamGia/100))-giaNhap
+        //         )
+        //     ) AS tienLai
+        //     FROM serial
+        //     JOIN nhap_kho ON nhap_kho.maNK = serial.maNK
+        //     JOIN nhap_kho_chi_tiet ON nhap_kho_chi_tiet.maNK = nhap_kho.maNK
+        //     JOIN hoa_don_chi_tiet ON serial.maHDCT = hoa_don_chi_tiet.maHDCT
+        //     JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don_chi_tiet.maHD
+        //     LEFT JOIN voucher on hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+        //     WHERE serial.maHDCT IS NOT NULL
+        //     AND YEAR(hoa_don.ngayTao) = $namHienTai
+        //     AND hoa_don.maTTHD = 5
+        //     GROUP BY serial.maSerial
+        //     ORDER BY `serial`.`maHDCT` DESC) AS X;
+        // ")[0]->tienLaiNam;
 
         //Số lượng voucher được áp dụng
         $soLuongVoucherApDung = DB::table('hoa_don_chi_tiet')
@@ -244,33 +278,33 @@ class DashboardController extends Controller
 
 
         //Doanh thu 12 tháng
-        $namNhoNhat = date_format(date_create(DB::table('hoa_don')->min('ngayTao')), 'Y');
-        $namLonNhat = date('Y');
-        $namDuocChon = is_null($request->get('nam')) ? $namLonNhat : $request->get('nam');
+        // $namNhoNhat = date_format(date_create(DB::table('hoa_don')->min('ngayTao')), 'Y');
+        // $namLonNhat = date('Y');
+        // $namDuocChon = is_null($request->get('nam')) ? $namLonNhat : $request->get('nam');
 
-        $doanhThu12Thang = [];
-        $doanhThuDuKien12Thang = [];
-        for($i = 1; $i <= 12; $i++){
-            $doanhThuMoiThang = DB::select("
-            SELECT IFNULL(SUM((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia /100))*hoa_don_chi_tiet.soLuong), 0) AS doanhThuThang
-            FROM hoa_don_chi_tiet
-            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-            WHERE MONTH(hoa_don.ngayTao) = $i
-            AND YEAR(hoa_don.ngayTao) = $namDuocChon
-            And hoa_don.maTTHD = 5
-            ");
-            array_push($doanhThu12Thang, $doanhThuMoiThang[0]->doanhThuThang);
+        // $doanhThu12Thang = [];
+        // $doanhThuDuKien12Thang = [];
+        // for($i = 1; $i <= 12; $i++){
+        //     $doanhThuMoiThang = DB::select("
+        //     SELECT IFNULL(SUM((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia /100))*hoa_don_chi_tiet.soLuong), 0) AS doanhThuThang
+        //     FROM hoa_don_chi_tiet
+        //     JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+        //     WHERE MONTH(hoa_don.ngayTao) = $i
+        //     AND YEAR(hoa_don.ngayTao) = $namDuocChon
+        //     And hoa_don.maTTHD = 5
+        //     ");
+        //     array_push($doanhThu12Thang, $doanhThuMoiThang[0]->doanhThuThang);
             
-            $doanhThuDuKienMoiThang = DB::select("
-            SELECT IFNULL(SUM((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia /100))*hoa_don_chi_tiet.soLuong), 0) AS doanhThuDuKienThang
-            FROM hoa_don_chi_tiet
-            JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
-            WHERE MONTH(hoa_don.ngayTao) = $i
-            AND YEAR(hoa_don.ngayTao) = $namDuocChon
-            And hoa_don.maTTHD != 2
-            ");
-            array_push($doanhThuDuKien12Thang, $doanhThuDuKienMoiThang[0]->doanhThuDuKienThang);
-        }
+        //     $doanhThuDuKienMoiThang = DB::select("
+        //     SELECT IFNULL(SUM((hoa_don_chi_tiet.giaSP - (hoa_don_chi_tiet.giaSP * hoa_don_chi_tiet.giamGia /100))*hoa_don_chi_tiet.soLuong), 0) AS doanhThuDuKienThang
+        //     FROM hoa_don_chi_tiet
+        //     JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+        //     WHERE MONTH(hoa_don.ngayTao) = $i
+        //     AND YEAR(hoa_don.ngayTao) = $namDuocChon
+        //     And hoa_don.maTTHD != 2
+        //     ");
+        //     array_push($doanhThuDuKien12Thang, $doanhThuDuKienMoiThang[0]->doanhThuDuKienThang);
+        // }
         
         //Danh mục đã bán
         $tenDM = [];
@@ -355,8 +389,8 @@ class DashboardController extends Controller
             return view("Admin.Dashboard.index", [
                 'doanhThuThang' => $doanhThuThang,
                 'doanhThuNam' => $doanhThuNam,
-                'tienLaiThang' => $tienLaiThang,
-                'tienLaiNam' => $tienLaiNam,
+                // 'tienLaiThang' => $tienLaiThang,
+                // 'tienLaiNam' => $tienLaiNam,
                 'soLuongVoucherApDung' => $soLuongVoucherApDung,
                 'soTienGiamVoucher' => $soTienGiamVoucher,
                 'soLuongTangPham' => $soLuongTangPham,
@@ -417,51 +451,81 @@ class DashboardController extends Controller
         $doanhThu12Thang = [];
         $doanhThuDuKien12Thang = [];
         for($i = 1; $i <= 12; $i++){
-            $doanhThuMoiThang = DB::select("
-            SELECT IFNULL(SUM(Tong), 0) as Tong FROM
-                (
-                SELECT
-                    IF(
-                        maTLV=1,
-                        (giaSP-(giaSP*giamGia/100)-giaTri)*hoa_don_chi_tiet.soLuong,
+            $voucherGiamThang = DB::select("
+                SELECT SUM(tong) as Tong FROM
+                    (
+                    SELECT
                         IF(
-                            maTLV=2,
-                            (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))*hoa_don_chi_tiet.soLuong,
-                            (giaSP-(giaSP*giamGia/100))*hoa_don_chi_tiet.soLuong
-                        )
-                    )AS Tong
+                            maTLV=1,
+                            giaTri*hoa_don_chi_tiet.soLuong,
+                            IF(
+                                maTLV=2,
+                                (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                                0
+                            )
+                        ) as tong
+                        FROM hoa_don_chi_tiet
+                        JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
+                        LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                        LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+                        WHERE MONTH(hoa_don.ngayTao) = $i AND YEAR(hoa_don.ngayTao) = $nam
+                        AND hoa_don.maTTHD = 5
+                    ) AS x;
+                ")[0]->Tong;
+
+            $doanhThuThangKoVoucher = DB::select("
+                SELECT SUM(Tong) AS Tong FROM
+                (
+                    SELECT (giaSP-(giaSP*giamGia/100))*soLuong AS Tong
                     FROM hoa_don_chi_tiet
-                    JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-                    LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
+                    JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
                     WHERE MONTH(hoa_don.ngayTao) = $i AND YEAR(hoa_don.ngayTao) = $nam
                     AND hoa_don.maTTHD = 5
-                ) as X;
+                    GROUP BY hoa_don_chi_tiet.maHDCT
+                )AS x;
             ")[0]->Tong;
+
+            $doanhThuMoiThang = $doanhThuThangKoVoucher-$voucherGiamThang;
 
             array_push($doanhThu12Thang, $doanhThuMoiThang);
 
-            $doanhThuDuKienMoiThang = DB::select("
-            SELECT IFNULL(SUM(Tong), 0) as Tong FROM
-                (
-                SELECT
-                    IF(
-                        maTLV=1,
-                        (giaSP-(giaSP*giamGia/100)-giaTri)*hoa_don_chi_tiet.soLuong,
+            $voucherGiamThangDuKien = DB::select("
+                SELECT SUM(tong) as Tong FROM
+                    (
+                    SELECT
                         IF(
-                            maTLV=2,
-                            (giaSP-(giaSP*giamGia/100)-(giaSP*giaTri/100))*hoa_don_chi_tiet.soLuong,
-                            (giaSP-(giaSP*giamGia/100))*hoa_don_chi_tiet.soLuong
-                        )
-                    )AS Tong
+                            maTLV=1,
+                            giaTri*hoa_don_chi_tiet.soLuong,
+                            IF(
+                                maTLV=2,
+                                (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                                0
+                            )
+                        ) as tong
+                        FROM hoa_don_chi_tiet
+                        JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
+                        LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                        LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+                        WHERE MONTH(hoa_don.ngayTao) = $i AND YEAR(hoa_don.ngayTao) = $nam
+                        AND hoa_don.maTTHD != 2
+                    ) AS x;
+                ")[0]->Tong;
+
+            $doanhThuThangKoVoucherDuKien = DB::select("
+                SELECT SUM(Tong) AS Tong FROM
+                (
+                    SELECT (giaSP-(giaSP*giamGia/100))*soLuong AS Tong
                     FROM hoa_don_chi_tiet
-                    JOIN hoa_don on hoa_don.maHD = hoa_don_chi_tiet.maHD
-                    LEFT JOIN voucher ON voucher.maVoucher = hoa_don_chi_tiet.maVoucher
+                    JOIN hoa_don ON hoa_don_chi_tiet.maHD = hoa_don.maHD
                     WHERE MONTH(hoa_don.ngayTao) = $i AND YEAR(hoa_don.ngayTao) = $nam
                     AND hoa_don.maTTHD != 2
-                ) as X;
+                    GROUP BY hoa_don_chi_tiet.maHDCT
+                )AS x;
             ")[0]->Tong;
+            
+            $doanhThuMoiThangDuKien = $doanhThuThangKoVoucherDuKien-$voucherGiamThangDuKien;
 
-            array_push($doanhThuDuKien12Thang, $doanhThuDuKienMoiThang);
+            array_push($doanhThuDuKien12Thang, $doanhThuMoiThangDuKien);
         }
 
         return response()->json([

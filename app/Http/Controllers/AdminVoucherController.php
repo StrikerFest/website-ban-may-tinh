@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VoucherModel;
+use App\Models\DetailReceiptModel;
+use App\Models\VoucherDetailReceiptModel;
 use DB;
 use Exception;
 use App\Imports\VoucherImport;
@@ -96,9 +98,23 @@ class AdminVoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($maHDCT)
     {
-        //
+        $VHDCT = VoucherDetailReceiptModel::selectRaw('voucher.tenVoucher, voucher.giaTri, hoa_don_chi_tiet.giaSP, voucher.maTLV, giaSP*giaTri/100 AS giaTriPhanTram')
+            ->join('voucher', 'voucher.maVoucher', '=', 'voucher_hoa_don_chi_tiet.maVoucher')
+            ->join('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'voucher_hoa_don_chi_tiet.maHDCT')
+            ->where('voucher_hoa_don_chi_tiet.maHDCT', $maHDCT)
+            ->get();
+        
+        $HDCT = DetailReceiptModel::select(['san_pham.tenSP', 'hoa_don_chi_tiet.giaSP', 'hoa_don_chi_tiet.soLuong'])
+            ->join('san_pham', 'san_pham.maSP', '=', 'hoa_don_chi_tiet.maSP')
+            ->find($maHDCT);
+            
+        // dd($VHDCT);
+        return view('Admin.voucher.detailReceipt', [
+            'VHDCT' => $VHDCT,
+            'HDCT' => $HDCT,
+        ]);
     }
 
     /**

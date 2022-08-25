@@ -117,12 +117,16 @@
                                             <td>{{$HDCT->giamGia}}%</td>
                                             <td>
                                                 <?php 
-                                                    if(isset($HDCT->tenVoucher)){
-                                                        echo $HDCT->tenVoucher;
-                                                    }else{
+                                                    if($HDCT->maVoucher === null){
                                                         echo 'Không có voucher';
-                                                    }
-                                                ?>
+                                                    }else{ ?>
+                                                        <form action="{{route('voucher.show', $HDCT->maHDCT)}}" method="get">
+                                                            @csrf
+                                                            <button class="btn btn-info">
+                                                                Xem
+                                                            </button>
+                                                        </form>
+                                                <?php } ?>
                                             </td>
                                             <?php if($hoaDon->maTTHD == 5){ ?>
                                                 <td>{{date_format(date_create($HDCT->ngayHetHan), 'd-m-Y')}}</td>
@@ -202,8 +206,20 @@
                                                         </button>
                                                     </form>
                                                 </td>
-                                            <?php }else if ($hoaDon->maTTHD == 4){ ?>
-                                                <td colspan="2">
+                                            <?php }else if ($hoaDon->maTTHD == 4){
+                                                if($hoaDon->matKhauND==null){ ?>
+                                                <td width="17%">
+                                                    <form action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input type="hidden" name="maTTHD" value="5">
+                                                        <button class="btn btn-success" onclick="return confirm('Xác nhận đã nhận hàng?')">
+                                                            Đã nhận được hàng
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <?php } ?>
+                                                <td colspan="<?php echo($hoaDon->matKhauND=='' ? 2 : 1) ?>">
                                                     <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
                                                         @method('PUT')
                                                         @csrf
