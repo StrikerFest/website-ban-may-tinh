@@ -165,6 +165,7 @@ Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])
 
 Route::resource('product', ProductController::class);
 
+Route::get('receiptVoucher/{maHDCT}', [Receiptcontroller::class, "voucher"])->name('receiptCustomer.voucher');
 Route::resource('receiptCustomer', ReceiptController::class);
 
 Route::resource('manufacturerCustomer', ManufacturerController::class);

@@ -576,9 +576,56 @@ class ReceiptController extends Controller
 
         $listHoaDon = DB::table('hoa_don')->where('maKH', session()->get('khachHang'))->get();
         if (sizeof($listHoaDon) != 0) {
-            $listHoaDonCT = DB::table('hoa_don_chi_tiet')->where('maHD', $id)->get();
+            $hoaDonCT = DB::table('hoa_don_chi_tiet')
+                ->select(['hoa_don_chi_tiet.maHDCT', 'maSP', 'soLuong', 'giaSP', 'giamGia', 'maVoucher'])
+                ->leftJoin('voucher_hoa_don_chi_tiet', 'voucher_hoa_don_chi_tiet.maHDCT', '=', 'hoa_don_chi_tiet.maHDCT')
+                ->where('maHD', $id)
+                ->groupBy('hoa_don_chi_tiet.maHDCT')
+                ->orderBy('hoa_don_chi_tiet.maHDCT', 'ASC')
+                ->get();
         } else
-            $listHoaDonCT = [];
+            $hoaDonCT = [];
+        // dd($hoaDonCT);
+        $tienGiamVoucher = DB::select("
+            SELECT SUM(tienGiamVoucher) as tienGiamVoucher FROM
+                (SELECT
+                    hoa_don_chi_tiet.maHDCT,
+                    IF(
+                        maTLV=1,
+                        giaTri*hoa_don_chi_tiet.soLuong,
+                        IF(
+                            maTLV=2,
+                            (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                            0
+                        )
+                    ) AS tienGiamVoucher
+                FROM hoa_don_chi_tiet
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+                LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+                WHERE hoa_don_chi_tiet.maHD = $id
+                ORDER BY maHDCT) AS X
+                GROUP BY maHDCT;
+        ");
+        // dd($hoaDonCT->toArray(), $tienGiamVoucher);
+        $listHoaDonCT = [];
+        for($i = 0; $i < sizeof($hoaDonCT); $i++){
+            // $listVHDCT = DB::table('voucher_hoa_don_chi_tiet')
+            //     ->join('voucher', 'voucher_hoa_don_chi_tiet.maVoucher', '=', 'voucher.maVoucher')
+            //     ->where('maHDCT', $hoaDonCT[$i]->maHDCT)
+            //     ->get()
+            //     ->toArray();
+            // $obj = new \stdClass();
+            // $obj->vouchers = $listVHDCT;
+            // dd($listVHDCT);
+            // $mergedObj = (object)array_merge((array)$hoaDonCT[$i], (array)$tienGiamVoucher[$i], (array)$obj);
+            
+            //Kết hợp object HDCT với object tiền giảm voucher
+            $mergedObj = (object)array_merge((array)$hoaDonCT[$i], (array)$tienGiamVoucher[$i]);
+            //Đưa object đã kết hợp vào $listHoaDonCT
+            array_push($listHoaDonCT, $mergedObj);
+        }
+        // dd($listHoaDonCT);
 
         $listAnh = ProductImageModel::get();
         $listSanPham = DB::table('san_pham')->get();
@@ -635,5 +682,16 @@ class ReceiptController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function voucher($maHDCT){
+        $listVHDCT = DB::table('voucher_hoa_don_chi_tiet')
+            ->selectRaw('voucher.tenVoucher, voucher.giaTri, hoa_don_chi_tiet.soLuong, voucher.maTLV, giaSP*giaTri/100 AS giaTriPhanTram')
+            ->join('voucher', 'voucher_hoa_don_chi_tiet.maVoucher', '=', 'voucher.maVoucher')
+            ->join('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'voucher_hoa_don_chi_tiet.maHDCT')
+            ->where('voucher_hoa_don_chi_tiet.maHDCT', $maHDCT)
+            ->get();
+
+        return response()->json($listVHDCT);
     }
 }

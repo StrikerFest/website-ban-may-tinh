@@ -2,6 +2,23 @@
 
 <head>
     @include('Customer.Layout.Common.meta')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .card{
+            position: absolute;
+            width: 80%;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+        .voucher-table {
+            width: 100%;
+        }
+        .voucher-table th, td {
+            text-align: center;
+        }
+    </style>
 </head>
 @include('Customer.Layout.Common.header')
 
@@ -50,6 +67,7 @@
                                                         Khuyến
                                                         mãi
                                                     </th>
+                                                    <th class="text-center padding-5">Voucher</th>
                                                     <th class="text-center padding-5" style="width: 8%">Số lượng
                                                     </th>
 
@@ -123,32 +141,40 @@
                                                             </p>
                                                         </td>
                                                         <td>
+                                                            <?php 
+                                                                if($item->maVoucher === null){
+                                                                    echo 'Không có voucher';
+                                                                }else{ ?>
+                                                                    <button class="btn btn-info voucher" value="{{$item->maHDCT}}">
+                                                                        Voucher
+                                                                    </button>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td>
                                                             <p class="mb-2 md:ml-4 text-center">
                                                                 {{ $item->soLuong }}
                                                             </p>
                                                         </td>
                                                         <td>
                                                             <p class="mb-2 md:ml-4 text-center">
-
-
-                                                                {{ number_format($item->giaSP * $item->soLuong - $item->soLuong * $item->giaSP * ($item->giamGia / 100)) }}
+                                                                {{ number_format($item->giaSP * $item->soLuong - $item->soLuong * $item->giaSP * ($item->giamGia / 100) - $item->tienGiamVoucher) }}
                                                                 VND
                                                             </p>
                                                         </td>
                                                         @php
-                                                            $sum += $item->giaSP * $item->soLuong - ($item->soLuong * ($item->giaSP * $item->giamGia)) / 100;
+                                                            $sum += $item->giaSP * $item->soLuong - ($item->soLuong * ($item->giaSP * $item->giamGia)) / 100 - $item->tienGiamVoucher;
                                                         @endphp
                                                     </tr>
                                                 @endforeach
                                                 @if ($sum != 0)
                                                     <tr>
-                                                        <td colspan="6" class="text-center">
+                                                        <td colspan="7" class="text-center">
                                                             <h3>Tổng tiền: {{ number_format($sum) }}VND</h3>
                                                         </td>
                                                     </tr>
                                                 @endif
                                                 <tr>
-                                                    <td colspan="6">
+                                                    <td colspan="7">
                                                         <div style="display: flex; justify-content: flex-end;">
                                                             <?php if($hoaDon->maTTHD == 4){ ?>
                                                                 <form style="margin-right: 10px;" action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
@@ -173,7 +199,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="6" class="text-center">
+                                                    <td colspan="7" class="text-center">
                                                         <a href="{{ route('receiptCustomer.index') }}">
                                                             <button class="btn btn-primary">
                                                                 Quay lại hóa đơn
@@ -194,9 +220,96 @@
             <!-- /.container-fluid -->
         </div>
 
+        <!-- Modal voucher -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="m-0 font-weight-bold text-danger">Voucher được áp dụng</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="fa fa-times border-radius-25" id="closeModal"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="voucher-table">
+                    <tr>
+                        <th>Voucher</th>
+                        <th>Giá trị voucher</th>
+                        <th>Số lượng</th>
+                        <th>Giá trị</th>
+                    </tr>
+                    
+                </table>
+            </div>
+        </div>
     </div>
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(function(){
+            //Bấm nút xem voucher sẽ mở bảng và in dữ liệu
+            $('.voucher').on('click', function(e){
+                $('.card').show();
+                e.preventDefault();
+                let maHDCT = $(this)[0].value;
+                $.ajax({
+                    url: "{{ url('receiptVoucher') }}/"+maHDCT,
+                    type: "get",
+                    success: function(res){
+                        console.log(res);
+                        if(res){
+                            $('.voucher-table').empty();
+                            $('.voucher-table').append(`<tr>
+                                                            <th>Voucher</th>
+                                                            <th>Giá trị voucher</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Giá trị</th>
+                                                        </tr>`);
+                            let tongGiaTri = 0;
+                            $.each(res, function(key, value){
+                                let giaTri = value.maTLV == 2 ? value.giaTriPhanTram : value.giaTri;
+                                tongGiaTri += giaTri*value.soLuong;
+                                let html = '';
+                                html += `<tr>
+                                            <td style="padding: 8px;">${value.tenVoucher}</td>
+                                            <td style="padding: 8px;">${giaTri.toLocaleString()+' VND'}</td>
+                                            <td style="padding: 8px;">${value.soLuong}</td>
+                                            <td style="padding: 8px;">${(value.soLuong*giaTri).toLocaleString()+' VND'}</td>
+                                        </tr>`;
+                                $('.voucher-table').append(html);
+                            })
+                            $('.voucher-table').append(`<tr>
+                                                            <td colspan="3" style="padding: 8px; text-align: right; border-top: solid #777 1px;">
+                                                                Tổng giá trị
+                                                            </td>
+                                                            <td style="padding: 8px; border-top: solid #777 1px;">
+                                                            ${(tongGiaTri).toLocaleString()+' VND'}
+                                                            </td>
+                                                        </tr>`);
+                        }
+                    }
+                })
+            });
+            
+            //Tắt modal nếu bấm nút x
+            $('#closeModal').on('click', function(){
+                $('.card').hide();
+            });
+            //Tắt modal nếu bấm ra ngoài
+            $(document).on('click',function(e){
+                if(!(($(e.target).closest(".card").length > 0 ) || ($(e.target).closest(".voucher").length > 0))){
+                    $(".card").hide();
+                }
+            });
+        })
+    </script>
     <script>
         <?php if(session()->has('canceled')){ ?>
             alert('{{session()->get('canceled')}}')
