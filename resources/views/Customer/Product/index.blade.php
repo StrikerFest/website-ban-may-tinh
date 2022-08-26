@@ -91,12 +91,12 @@
                                                     {{--  --}}
                                                 </div>
                                             </div>
-                                            <a class="carousel-control-prev" href="#carouselExampleIndicators"
+                                            <a class="carousel-control-prev" data-target="#carouselExampleIndicators"
                                                 role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
-                                            <a class="carousel-control-next" href="#carouselExampleIndicators"
+                                            <a class="carousel-control-next" data-target="#carouselExampleIndicators"
                                                 role="button" data-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Next</span>
@@ -469,7 +469,7 @@
                         </div>
 
                         {{-- Thông số full -------------------- --}}
-                        <div class="col-md-4 " >
+                        <div class="col-md-4 ">
                             <div class="padding-10" id="productSpec">
                                 <h3>Thông số sản phẩm</h3>
                                 <table class="table-bordered width-100">
@@ -1093,8 +1093,8 @@
                                                 </div>
                                                 {{-- Nút điều khiển slide --}}
                                                 <div>
-                                                    <a class="carousel-control-prev"
-                                                        href="#carouselExampleIndicators2" role="button"
+                                                    <a class="carousel-control-prev" role="button"
+                                                        data-target="#carouselExampleIndicators2"
                                                         data-slide="prev" style="z-index: 1">
                                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                                         {{-- <span class="sr-only">Previous</span> --}}
@@ -1102,8 +1102,8 @@
                                                         <i class=" fa fa-chevron-left text-primary"
                                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                                     </a>
-                                                    <a class="carousel-control-next"
-                                                        href="#carouselExampleIndicators2" role="button"
+                                                    <a class="carousel-control-next" role="button"
+                                                        data-target="#carouselExampleIndicators2"
                                                         data-slide="next" style="z-index: 1">
                                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}
