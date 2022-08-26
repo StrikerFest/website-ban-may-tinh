@@ -190,13 +190,13 @@ VALUES (NULL, 'Màn hình chất lượng 5',3,'2022-08-25',1);
 INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
 VALUES (NULL, 'Blog chất lượng 6',3,'2022-08-25',0);
 INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
-VALUES (NULL, 'Blog chất lượng 6',3,'2022-08-25',0);
+VALUES (NULL, 'Blog chất lượng 7',3,'2022-08-25',0);
 INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
-VALUES (NULL, 'Blog chất lượng 6',3,'2022-08-25',0);
+VALUES (NULL, 'Blog chất lượng 8',3,'2022-08-25',0);
 INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
-VALUES (NULL, 'Blog chất lượng 6',3,'2022-08-25',0);
+VALUES (NULL, 'Blog chất lượng 9',3,'2022-08-25',0);
 INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
-VALUES (NULL, 'Blog chất lượng 6',3,'2022-08-25',0);
+VALUES (NULL, 'Blog chất lượng 10',3,'2022-08-25',0);
 -- ==========================================================================================================
 -- Bảng nội dung bài viết
 -- PC
@@ -206,6 +206,7 @@ VALUES (NULL,1,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','
 INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
 VALUES (NULL,1,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
 'PC hiệu suất cao, với CPU thuộc các dòng đời mới nhất, tối ưu hóa để xử lý các tác vụ nhẹ như lướt web và tin học văn phòng đến các tác vụ yêu cầu cao như gaming và xử lý đồ họa');
+
 -- Laptop
 INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
 VALUES (NULL,2,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',
@@ -213,6 +214,10 @@ VALUES (NULL,2,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','
 INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
 VALUES (NULL,2,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
 'Laptop hiệu suất cao, với CPU thuộc các dòng đời mới nhất, tối ưu hóa để xử lý các tác vụ nhẹ như lướt web và tin học văn phòng đến các tác vụ yêu cầu cao như gaming và xử lý đồ họa');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,2,'Video',null,
+'https://www.youtube.com/embed/lwSEmrNkQjw');
+
 -- Linh kiện
 INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
 VALUES (NULL,3,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',

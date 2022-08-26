@@ -11,7 +11,7 @@
         <div id="wrapper">
 
             <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
-            <div id="content-wrapper" class="d-flex flex-row">
+            <div id="content-wrapper" class="d-flex flex-row text-dark">
                 {{-- @include('Customer.Layout.Common.side_nav_menu') --}}
 
                 <!-- Content của trang -->
@@ -172,8 +172,7 @@
                                                     @endphp
                                                     <li>
                                                         <div class="d-flex">
-                                                            <div
-                                                                class="text-dark">
+                                                            <div class="text-dark">
                                                                 {{ $PS->tenTS . ' : ' }}
                                                             </div>
                                                             <div class="text-danger">
@@ -440,14 +439,37 @@
                         </div>
                         {{-- Hết - Thông tin ngoài --}}
                     </div>
-                    <div class="row">
+                    <div class="row" style="height: 30%">
                         {{-- Bai viet --}}
                         <div class="col-8">
-                            <h1>Nội dung bài viết</h1>
+                            <h1>Mô tả sản phẩm</h1>
+                            @foreach ($productReview as $PR)
+                                @foreach ($productReviewDetail as $PRD)
+                                    @if ($PR->maBV == $PRD->maBV)
+                                        @if ($PRD->tieuDe !== null)
+                                            <h4 style="color: black">{{ $PRD->tieuDe }}</h4>
+                                        @endif
+                                        @if ($PRD->anh !== null)
+                                            <img class="card-img-top1 center-custom" style="height: 20%;"
+                                                src="{{ asset('assets/img/' . $PRD->anh) }}" alt="..." />
+                                        @endif
+                                        @if ($PRD->noiDung !== null)
+                                            @if ($PRD->tieuDe !== 'Video')
+                                                <p>{{ $PRD->noiDung }}</p>
+                                            @else
+                                                <iframe width="100%" height="315" src="{{ $PRD->noiDung }}"
+                                                    title="YouTube video player" frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen></iframe>
+                                            @endif
+                                        @endif
+                                    @endif
+                                @endforeach
+                            @endforeach
                         </div>
 
                         {{-- Thông số full -------------------- --}}
-                        <div class="col-md-4 " style="height: auto">
+                        <div class="col-md-4 " >
                             <div class="padding-10" id="productSpec">
                                 <h3>Thông số sản phẩm</h3>
                                 <table class="table-bordered width-100">

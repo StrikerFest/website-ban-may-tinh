@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BannerImageModel;
+use App\Models\BlogContentModel;
+use App\Models\BlogModel;
 use App\Models\ProductCommentModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductModel;
@@ -156,7 +158,13 @@ class ProductController extends Controller
         $computerNew1 = ProductModel::skip(0)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
-        // dd($user);
+
+        $productReview = BlogModel::where('theLoai',1)
+        ->where('maBV',$sanPham->maBV)
+        ->get();
+
+        $productReviewDetail = BlogContentModel::where('maBV',$sanPham->maBV)->get();
+        // dd($productReview);
         return view('Customer.Product.index', [
             'productImage' => $productImage,
             'productComment' => $productComment,
@@ -166,6 +174,8 @@ class ProductController extends Controller
             'cartItems' => $cartItems,
             // 'productPromotion' => $productPromotion,
             'productSpec' => $productSpec,
+            'productReview' => $productReview,
+            'productReviewDetail' => $productReviewDetail,
 
             'computerNew1' => $computerNew1,
             'computerNew2' => $computerNew2,
