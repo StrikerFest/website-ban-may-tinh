@@ -403,7 +403,7 @@
                             <div class="carousel-promo-item col-md-3 " onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
                                 style=" padding: 10px">
                                 <div class="">
-                                    <div class="card product-item" style="height: 400px;width:220px">
+                                    <div class="card product-item" style="height: 430px;width:220px">
                                         <!-- Thẻ sale trên đầu -->
                                         <div class="badge bg-dark text-white position-absolute"
                                             style="top: 0.5rem; right: 0.5rem">
@@ -442,7 +442,7 @@
                                             style="background-color: black">
                                             <div class="text-center">
                                                 <!-- Tên sản phẩm-->
-                                                <h5 class="fw-bolder" style="font-size:0.9em">
+                                                <h5 class="fw-bolder" style="font-size:0.8em">
                                                     @php
                                                         $find = '(';
                                                         $positionOfOpenP = strpos($CN->tenSP, $find);
@@ -453,8 +453,32 @@
 
                                                 </h5>
 
+                                                @php
+                                                    $reducedMoneyPercent = $CN->giamGia;
+                                                    $reducedMoneyFlat = 0;
+                                                @endphp
+                                                @foreach ($productPromotion as $PP)
+                                                    @if ($PP->maSP == $CN->maSP)
+                                                        @php
+                                                            if ($PP->kichHoat == 1) {
+                                                                $ten = $PP->tenVoucher;
+                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                    $reducedMoneyPercent += $PP->giaTri;
+                                                                } elseif ($PP->giaTri > 100) {
+                                                                    $reducedMoneyFlat += $PP->giaTri;
+                                                                }
+                                                            }
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+
                                                 <!-- Giá sản phẩm -->
-                                                <span class="">{{ number_format($CN->giaSP) }}
+                                                <span style="font-size: 0.8em"
+                                                    class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
+                                                    VND</span>
+                                                    <br>
+                                                <span
+                                                    style="font-size: 0.9em">{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
                                                     VND</span>
                                             </div>
                                         </div>
@@ -474,7 +498,7 @@
                                                     @else
                                                         <button class="btn btn-outline-success text-left"
                                                             href="{{ route('product.show', $CN->maSP) }}"
-                                                            style="background-color: ;padding-top: 3px;height:65%">
+                                                            style="background-color: ;padding-top: 3px;height:65%;font-size: 0.9em">
                                                             Còn hàng
                                             @endif
                                             </button>
@@ -493,6 +517,10 @@
                                                         name="price">
                                                     <input type="hidden" value="{{ $tempImg }}"
                                                         name="image">
+                                                    <input type="hidden" value="{{ $reducedMoneyFlat }}"
+                                                        name="reduceFlat">
+                                                    <input type="hidden" value="{{ $reducedMoneyPercent }}"
+                                                        name="reducePercent">
                                                     <input type="hidden" value="1" name="quantity">
                                                     <button class="btn btn-outline-light  text-right"
                                                         style="background-color: crimson"><i

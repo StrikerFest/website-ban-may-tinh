@@ -635,8 +635,9 @@
 
                                                                                                         <!-- Giá sản phẩm -->
                                                                                                         <span
-                                                                                                            class="text-decoration-line-through">{{ number_format($CN->giaSP) }}
+                                                                                                            class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
                                                                                                             VND</span>
+                                                                                                            <br>
                                                                                                         <span>{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
                                                                                                             VND</span>
                                                                                                     </div>
@@ -859,8 +860,31 @@
                                                                                                         </h5>
 
                                                                                                         <!-- Giá sản phẩm -->
+                                                                                                        @php
+                                                                                                            $reducedMoneyPercent = $CN->giamGia;
+                                                                                                            $reducedMoneyFlat = 0;
+                                                                                                        @endphp
+                                                                                                        @foreach ($productPromotion as $PP)
+                                                                                                            @if ($PP->maSP == $CN->maSP)
+                                                                                                                @php
+                                                                                                                    if ($PP->kichHoat == 1) {
+                                                                                                                        $ten = $PP->tenVoucher;
+                                                                                                                        if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                                                            $reducedMoneyPercent += $PP->giaTri;
+                                                                                                                        } elseif ($PP->giaTri > 100) {
+                                                                                                                            $reducedMoneyFlat += $PP->giaTri;
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                @endphp
+                                                                                                            @endif
+                                                                                                        @endforeach
+
+                                                                                                        <!-- Giá sản phẩm -->
                                                                                                         <span
-                                                                                                            class="">{{ number_format($CN->giaSP) }}
+                                                                                                            class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
+                                                                                                            VND</span>
+                                                                                                            <br>
+                                                                                                        <span>{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
                                                                                                             VND</span>
                                                                                                     </div>
                                                                                                 </div>
@@ -918,6 +942,14 @@
                                                                                                                 type="hidden"
                                                                                                                 value="1"
                                                                                                                 name="quantity">
+                                                                                                            <input
+                                                                                                                type="hidden"
+                                                                                                                value="{{ $reducedMoneyFlat }}"
+                                                                                                                name="reduceFlat">
+                                                                                                            <input
+                                                                                                                type="hidden"
+                                                                                                                value="{{ $reducedMoneyPercent }}"
+                                                                                                                name="reducePercent">
                                                                                                             <button
                                                                                                                 class="btn btn-outline-light  text-right"
                                                                                                                 style="background-color: crimson"><i

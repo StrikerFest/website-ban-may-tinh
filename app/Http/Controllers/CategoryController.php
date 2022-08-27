@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductImageModel;
+use App\Models\ProductVoucherModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -480,12 +481,16 @@ class CategoryController extends Controller
         $theLoaiChaCate = $request->get('theLoaiCha');
         // $theLoaiConCate = $request->get('theLoaiCon');
         $nhaSanXuatCate = $request->get('nhaSanXuat');
+        $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+            ->select('san_pham_voucher.*','voucher.tenVoucher','voucher.giaTri','voucher.soLuong')
+            ->get();
         return view('Customer.ProductCategory.show', [
             'cartItems' => $cartItems,
             'listSanPham' => $listSanPham,
             'productImage' => $productImage,
             'listNhaSanXuat' => $listNhaSanXuat,
             'listTheLoai' => $listTheLoai,
+            'productPromotion' => $productPromotion,
 
             // 'maTLCMin' => $maTLCMin,
             'theLoaiChaCate' => $theLoaiChaCate,

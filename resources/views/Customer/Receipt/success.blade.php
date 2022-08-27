@@ -28,17 +28,16 @@
                             {{-- Thông tin --}}
                             <div class="col-md-8">
                                 <h3>Cảm ơn bạn đã mua hàng tại BKCOM</h3>
-                                <p>Mã số đơn hàng của bạn:</p>
+                                {{-- <p>Mã số đơn hàng của bạn:</p>
                                 <div class="padding-bottom-20">
                                     <button class="btn btn-danger" type="button">
                                         #03391
                                     </button>
-                                </div>
+                                </div> --}}
                                 <p>Đơn hàng đã được tiếp nhận. Thông tin chi tiết đơn hàng của bạn đã được gửi về địa
                                     chỉ
                                     email của bạn. Nếu không tìm thấy vui lòng kiểm tra hộp thư Spam.</p>
-                                <p>Nếu quý khách có yêu cầu hay thắc mắc, vui lòng liên hệ tại
-                                    <a href="#">Facebook BKCOM</a> hoặc gọi hotline 1900 1009
+                                <p>Nếu quý khách có yêu cầu hay thắc mắc, vui lòng liên hệ tại chatbox hỗ trợ hoặc gọi hotline 1900 1009
                                 </p>
 
                                 <table class="border-gray width-100">
