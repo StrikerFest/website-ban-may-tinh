@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BannerImageModel;
+use App\Models\BlogContentModel;
+use App\Models\BlogModel;
 use App\Models\ProductCommentModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductModel;
@@ -149,14 +151,20 @@ class ProductController extends Controller
 
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
-        $productPromotion = DB::table('khuyen_mai')->get();
+        // $productPromotion = DB::table('khuyen_mai')->get();
         $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
 
         $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
         $computerNew1 = ProductModel::skip(0)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
-        // dd($user);
+
+        $productReview = BlogModel::where('theLoai',1)
+        ->where('maBV',$sanPham->maBV)
+        ->get();
+
+        $productReviewDetail = BlogContentModel::where('maBV',$sanPham->maBV)->get();
+        // dd($productReview);
         return view('Customer.Product.index', [
             'productImage' => $productImage,
             'productComment' => $productComment,
@@ -164,8 +172,10 @@ class ProductController extends Controller
             'user' => $user,
             'sanPham' => $sanPham,
             'cartItems' => $cartItems,
-            'productPromotion' => $productPromotion,
+            // 'productPromotion' => $productPromotion,
             'productSpec' => $productSpec,
+            'productReview' => $productReview,
+            'productReviewDetail' => $productReviewDetail,
 
             'computerNew1' => $computerNew1,
             'computerNew2' => $computerNew2,

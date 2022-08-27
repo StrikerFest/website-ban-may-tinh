@@ -11,7 +11,7 @@
         <div id="wrapper">
 
             <!-- Wrapper - Chỉ riêng phần nội dung - Không bao gồm navbar -->
-            <div id="content-wrapper" class="d-flex flex-row">
+            <div id="content-wrapper" class="d-flex flex-row text-dark">
                 {{-- @include('Customer.Layout.Common.side_nav_menu') --}}
 
                 <!-- Content của trang -->
@@ -91,12 +91,12 @@
                                                     {{--  --}}
                                                 </div>
                                             </div>
-                                            <a class="carousel-control-prev" href="#carouselExampleIndicators"
+                                            <a class="carousel-control-prev" data-target="#carouselExampleIndicators"
                                                 role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
-                                            <a class="carousel-control-next" href="#carouselExampleIndicators"
+                                            <a class="carousel-control-next" data-target="#carouselExampleIndicators"
                                                 role="button" data-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Next</span>
@@ -172,8 +172,7 @@
                                                     @endphp
                                                     <li>
                                                         <div class="d-flex">
-                                                            <div
-                                                                class="text-dark">
+                                                            <div class="text-dark">
                                                                 {{ $PS->tenTS . ' : ' }}
                                                             </div>
                                                             <div class="text-danger">
@@ -242,13 +241,13 @@
                                             <div class="padding-top-20 padding-left-20">
                                                 <h5 class="text-danger">Khuyến mãi đặc biệt</h5>
                                                 <ul>
-                                                    @foreach ($productPromotion as $PM)
+                                                    {{-- @foreach ($productPromotion as $PM)
                                                         @if ($sanPham->maSP == $PM->maSP)
                                                             @php
                                                                 echo '+ ' . $PM->khuyenMai . '<br>';
                                                             @endphp
                                                         @endif
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </ul>
                                             </div>
 
@@ -440,14 +439,37 @@
                         </div>
                         {{-- Hết - Thông tin ngoài --}}
                     </div>
-                    <div class="row">
+                    <div class="row" style="height: 30%">
                         {{-- Bai viet --}}
                         <div class="col-8">
-                            <h1>Nội dung bài viết</h1>
+                            <h1>Mô tả sản phẩm</h1>
+                            @foreach ($productReview as $PR)
+                                @foreach ($productReviewDetail as $PRD)
+                                    @if ($PR->maBV == $PRD->maBV)
+                                        @if ($PRD->tieuDe !== null)
+                                            <h4 style="color: black">{{ $PRD->tieuDe }}</h4>
+                                        @endif
+                                        @if ($PRD->anh !== null)
+                                            <img class="card-img-top1 center-custom" style="height: 20%;"
+                                                src="{{ asset('assets/img/' . $PRD->anh) }}" alt="..." />
+                                        @endif
+                                        @if ($PRD->noiDung !== null)
+                                            @if ($PRD->tieuDe !== 'Video')
+                                                <p>{{ $PRD->noiDung }}</p>
+                                            @else
+                                                <iframe width="100%" height="315" src="{{ $PRD->noiDung }}"
+                                                    title="YouTube video player" frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen></iframe>
+                                            @endif
+                                        @endif
+                                    @endif
+                                @endforeach
+                            @endforeach
                         </div>
 
                         {{-- Thông số full -------------------- --}}
-                        <div class="col-md-4 " style="height: auto">
+                        <div class="col-md-4 ">
                             <div class="padding-10" id="productSpec">
                                 <h3>Thông số sản phẩm</h3>
                                 <table class="table-bordered width-100">
@@ -1071,8 +1093,8 @@
                                                 </div>
                                                 {{-- Nút điều khiển slide --}}
                                                 <div>
-                                                    <a class="carousel-control-prev"
-                                                        href="#carouselExampleIndicators2" role="button"
+                                                    <a class="carousel-control-prev" role="button"
+                                                        data-target="#carouselExampleIndicators2"
                                                         data-slide="prev" style="z-index: 1">
                                                         {{-- <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span> --}}
                                                         {{-- <span class="sr-only">Previous</span> --}}
@@ -1080,8 +1102,8 @@
                                                         <i class=" fa fa-chevron-left text-primary"
                                                             style="font-size: 42px;padding-right: 70px;transform: scale(2, 5.5);"></i>
                                                     </a>
-                                                    <a class="carousel-control-next"
-                                                        href="#carouselExampleIndicators2" role="button"
+                                                    <a class="carousel-control-next" role="button"
+                                                        data-target="#carouselExampleIndicators2"
                                                         data-slide="next" style="z-index: 1">
                                                         {{-- <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span> --}}

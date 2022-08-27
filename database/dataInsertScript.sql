@@ -170,78 +170,155 @@ INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
 INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
 (NULL, 'asuszenbookQC.jpg', '42');
 -- ==========================================================================================================
+-- Bảng bài viết
+-- PC
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'PC chất lượng 1',3,'2022-08-25',1);
+-- Laptop
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Laptop chất lượng 2',3,'2022-08-25',1);
+-- Linh kiện
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Linh kiện chất lượng 3',3,'2022-08-25',1);
+-- Phụ kiện
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Phụ kiện chất lượng 4',3,'2022-08-25',1);
+-- Màn hình
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Màn hình chất lượng 5',3,'2022-08-25',1);
+-- Blog review
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Blog chất lượng 6',3,'2022-08-25',0);
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Blog chất lượng 7',3,'2022-08-25',0);
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Blog chất lượng 8',3,'2022-08-25',0);
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Blog chất lượng 9',3,'2022-08-25',0);
+INSERT INTO `bai_viet` (`maBV`, `tenBV`, `maNV`,`ngayTao`,`theLoai`)
+VALUES (NULL, 'Blog chất lượng 10',3,'2022-08-25',0);
+-- ==========================================================================================================
+-- Bảng nội dung bài viết
+-- PC
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,1,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',
+'PC có thể chơi được hầu hết các game có mặt trên thị trường ở mức thiết lập cao nhất mà vẫn đem lại tốc độ khung hình ổn đỉnh. Ngoài ra cỗ máy này cũng có thể đảm nhiệm tốt các tác vụ liên quan đến lập trình, thiết kế 2D/3D, hay làm phim đều ổn. Đúc kết từ kinh nghiệm thực tiễn, HACOM giúp quý khách hàng tiết kiệm tối đa thời gian tìm hiểu phần cứng. Cam kết các phần cứng đều tương thích 100%. Cùng với đó là giá thành cực kì tối ưu, vừa đảm bảo hiệu năng và tính thẩm mỹ.');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,1,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
+'PC hiệu suất cao, với CPU thuộc các dòng đời mới nhất, tối ưu hóa để xử lý các tác vụ nhẹ như lướt web và tin học văn phòng đến các tác vụ yêu cầu cao như gaming và xử lý đồ họa');
+
+-- Laptop
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,2,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',
+'Laptop có thể chơi được hầu hết các game có mặt trên thị trường ở mức thiết lập cao nhất mà vẫn đem lại tốc độ khung hình ổn đỉnh. Ngoài ra cỗ máy này cũng có thể đảm nhiệm tốt các tác vụ liên quan đến lập trình, thiết kế 2D/3D, hay làm phim đều ổn. Đúc kết từ kinh nghiệm thực tiễn, HACOM giúp quý khách hàng tiết kiệm tối đa thời gian tìm hiểu phần cứng. Cam kết các phần cứng đều tương thích 100%. Cùng với đó là giá thành cực kì tối ưu, vừa đảm bảo hiệu năng và tính thẩm mỹ.');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,2,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
+'Laptop hiệu suất cao, với CPU thuộc các dòng đời mới nhất, tối ưu hóa để xử lý các tác vụ nhẹ như lướt web và tin học văn phòng đến các tác vụ yêu cầu cao như gaming và xử lý đồ họa');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,2,'Video',null,
+'https://www.youtube.com/embed/lwSEmrNkQjw');
+
+-- Linh kiện
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,3,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',
+'Linh kiện cao cấp, thiết kế vừa vặn, hỗ trợ các chuẩn kết nối cũng như backward compatibility');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,3,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
+'Sản xuất với năng suất là điểm đến, sản phẩm sẽ mang đến công suất bền bỉ và chất lượng');
+-- Phụ kiện
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,4,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',
+'Phụ kiện cao cấp, thiết kế vừa vặn, hỗ trợ các chuẩn kết nối cũng như backward compatibility');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,4,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
+'Sản xuất với năng suất là điểm đến, sản phẩm sẽ mang đến công suất bền bỉ và chất lượng');
+-- Màn hình
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,5,'Thiết kế linh hoạt, chất lượng chuẩn quốc tế','STOCK.jpg',
+'Màn hình cao cấp, thiết kế vừa vặn, hỗ trợ các chuẩn kết nối cũng như backward compatibility');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,5,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
+'Sản xuất với năng suất là điểm đến, sản phẩm sẽ mang đến công suất bền bỉ và chất lượng');
+-- Blog
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,6,'Chất lượng và chính hãng','STOCK.jpg',
+'Cửa hàng kinh doanh máy tính lâu đời từ 2008, sản phẩm chính hãng, có giấy phép kinh doanh từ các hãng sản xuất điện tử lớn nhất toàn cầu');
+INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
+VALUES (NULL,6,'Giá cả hợp lý - Khuyến mãi không ngừng',null,
+'BKCOM hướng đến sinh viên và giới trẻ, giá cả luôn hợp lý, giao hàng miễn phí và luôn luôn có khuyến mãi cho mỗi món hàng, đặc biệt là cho sinh viên');
+
+-- ==========================================================================================================
 -- Bảng Sản phẩm
 
-
 -- Laptop gaming
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) (i7 11800H/64GB RAM/1TB SSD/RTX 3080 8G/16.0 inch WQXGA 165Hz 100%sRGB/Win10/Xám) (2021)',82990000,10,5,7,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Helios 500 PH517-52-797L (NH.QD3SV.001) (i711800H/64GB Ram/2TB SSD/RTX3080 8G/17.3 inch FHD 360Hz/Win 10/Đen)',98000000,10,5,7,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',45000000,10,5,7,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Acer Gaming Aspire 7 A715-42G-R4XX (NH.QAYSV.008) (R5 5500U/8GB RAM/256GB SSD/15.6 inch FHD/GTX1650 4G/Win11/Đen) (2021)',18000000,10,5,7,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Acer Gaming Nitro 5 Eagle AN515-57-54MV (NH.QENSV.003) (i5 11400H/8GB Ram/512GB SSD/RTX3050 4G/15.6 inch FHD 144Hz/Win 11 mới nhất/Đen) (2021)',23000000,10,5,7,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Gigabyte Gaming AORUS 15P (XD-73S1224GH) (i7 11800H /16GB Ram/1TB SSD/RTX3070 8G/15.6 inch FHD 240Hz/Win 10/Đen/Balo Aorus) (2021)',50000000,10,10,8,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i5 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',23000000,10,10,4,6,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i9 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',73000000,10,10,4,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Predator Triton 500SE (PT516-51s-71RW) (NH.QAKSV.001) (i7 11800H/64GB RAM/1TB SSD/RTX 3080 8G/16.0 inch WQXGA 165Hz 100%sRGB/Win10/Xám) (2021)',82990000,10,5,2,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Predator Helios 500 PH517-52-797L (NH.QD3SV.001) (i711800H/64GB Ram/2TB SSD/RTX3080 8G/17.3 inch FHD 360Hz/Win 10/Đen)',98000000,10,5,2,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Predator Helios 300 PH315-54-74RU (NH.QC1SV.002) (i7 11800H/16GB Ram/512GB SSD/RTX3070 8G/15.6 inch QHD 165Hz/Win 10/Đen) (2021)',45000000,10,5,2,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Aspire 7 A715-42G-R4XX (NH.QAYSV.008) (R5 5500U/8GB RAM/256GB SSD/15.6 inch FHD/GTX1650 4G/Win11/Đen) (2021)',18000000,10,5,2,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Acer Gaming Nitro 5 Eagle AN515-57-54MV (NH.QENSV.003) (i5 11400H/8GB Ram/512GB SSD/RTX3050 4G/15.6 inch FHD 144Hz/Win 11 mới nhất/Đen) (2021)',23000000,10,5,2,7,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Gigabyte Gaming AORUS 15P (XD-73S1224GH) (i7 11800H /16GB Ram/1TB SSD/RTX3070 8G/15.6 inch FHD 240Hz/Win 10/Đen/Balo Aorus) (2021)',50000000,10,10,2,8,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i5 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',23000000,10,10,2,4,6,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Gaming TUF FX706HCB-HX105W (i9 11400H/8GB RAM/512GB SSD/17.3 FHD 144hz/RTX 3050 4GB/Win11/Đen)',73000000,10,10,2,4,6,2,3);
 -- PC Gaming
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',70000000,10,10,1,3,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',30000000,10,10,1,3,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING HACOM 031 (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',13000000,10,10,1,3,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING HACOM PRO 021 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',16900000,10,5,1,3,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING VANGUARD O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',123000000,10,5,1,3,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING SOULREAVER 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',49000000,10,5,1,3,2,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING SPEEDO (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',21000000,10,5,1,3,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('PC GAMING LIGHTBEARER 21 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',22900000,10,5,1,3,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM LIAN-LI O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',70000000,10,10,1,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',30000000,10,10,1,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM 031 (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',13000000,10,10,1,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING HACOM PRO 021 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',16900000,10,5,1,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING VANGUARD O11DX LIMITED (I7 12700KF/Z690/32GB RAM/1TB SSD/RTX 3070TI/1050W)',123000000,10,5,1,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING SOULREAVER 020 (I5 11400F/B560/16GB RAM/500GB SSD/RTX 2060/650W)',49000000,10,5,1,1,3,2,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING SPEEDO (I3 10105F/H510/8GB RAM/500GB SSD/GTX 1650/700W)',21000000,10,5,1,1,3,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('PC GAMING LIGHTBEARER 21 (R5 5600G/B550/16GB RAM/250GB SSD/RADEON RX VEGA/650W)',22900000,10,5,1,1,3,3,3);
 -- PC trạm
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 3650 (i7-11700/8GB RAM/1TB HDD/T600/DVDRW/K+M)',28900000,10,5,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 4443 (i7-11700/12GB RAM/2TB HDD/T800/DVDRW/K+M)',38900000,10,5,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 5604 (i7-11700/16GB RAM/2TB HDD/T900/DVDRW/K+M)',48900000,10,5,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 6799 (i9-11700/8GB RAM/2TB HDD/T900/DVDRW/K+M)',58900000,10,15,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 7022 (i9-11700/16GB RAM/5TB HDD/T1100/DVDRW/K+M)',78900000,10,15,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 8055 (i9-11700/32GB RAM/10TB HDD/T1100/DVDRW/K+M)',99000000,10,15,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 10565 (i9-11700/64GB RAM/10TB HDD/T1200/DVDRW/K+M)',110000000,10,15,1,2,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Workstation Dell Precision 14050 (i9-11700/128GB RAM/20TB HDD/T1600/DVDRW/K+M)',228900000,10,15,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 3650 (i7-11700/8GB RAM/1TB HDD/T600/DVDRW/K+M)',28900000,10,5,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 4443 (i7-11700/12GB RAM/2TB HDD/T800/DVDRW/K+M)',38900000,10,5,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 5604 (i7-11700/16GB RAM/2TB HDD/T900/DVDRW/K+M)',48900000,10,5,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 6799 (i9-11700/8GB RAM/2TB HDD/T900/DVDRW/K+M)',58900000,10,15,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 7022 (i9-11700/16GB RAM/5TB HDD/T1100/DVDRW/K+M)',78900000,10,15,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 8055 (i9-11700/32GB RAM/10TB HDD/T1100/DVDRW/K+M)',99000000,10,15,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 10565 (i9-11700/64GB RAM/10TB HDD/T1200/DVDRW/K+M)',110000000,10,15,1,1,2,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Workstation Dell Precision 14050 (i9-11700/128GB RAM/20TB HDD/T1600/DVDRW/K+M)',228900000,10,15,1,1,2,3,3);
 
 -- Laptop Văn phòng
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus VivoBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',18900000,10,15,1,4,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus Leafbook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',28900000,10,15,1,4,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus WinnieBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',38900000,10,5,1,4,3,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus CoolBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',48900000,10,5,1,4,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus HotBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',58900000,10,5,1,4,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus WarmBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',68900000,10,5,1,4,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus MarkBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',78900000,10,5,1,4,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Laptop Asus DakBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,10,5,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus VivoBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',18900000,10,15,2,1,4,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus Leafbook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',28900000,10,15,2,1,4,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus WinnieBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',38900000,10,5,2,1,4,3,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus CoolBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',48900000,10,5,2,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus HotBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',58900000,10,5,2,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus WarmBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',68900000,10,5,2,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus MarkBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',78900000,10,5,2,1,4,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Laptop Asus DakBook M3401QA (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',88900000,10,5,2,1,4,4,3);
 
 -- Card đồ họa
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)

@@ -173,7 +173,7 @@ class AdminReceiptController extends Controller
                 ORDER BY maHDCT) AS X
                 GROUP BY maHDCT;
         ");
-        
+
         $thanhTien = 0;
         $hoaDonChiTiet = [];
         for($i = 0; $i < sizeof($hoaDonChiTietTemp); $i++){
