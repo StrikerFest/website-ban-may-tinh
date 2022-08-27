@@ -34,9 +34,9 @@
                                 <td style="width: 20%;">{{ number_format($item->price) }} VND </td>
                                 <td style="width: 10%;">{{ $item->quantity }}</td>
                                 <td style="width: 20%;">
-                                    {{ number_format($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) }}
+                                    {{ number_format($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) }} VND
                                 </td>
-                                <td style="width: 25%;">{{ number_format(($item->price - $item->attributes->reduceFlat - $item->price * $item->attributes->reducePercent / 100) * $item->quantity) }}</td>
+                                <td style="width: 25%;">{{ number_format(($item->price - $item->attributes->reduceFlat - $item->price * $item->attributes->reducePercent / 100) * $item->quantity) }} VND</td>
                             </tr>
                         </tbody>
                     </table>
