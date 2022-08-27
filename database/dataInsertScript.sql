@@ -136,8 +136,8 @@ INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),(1,'M�
                                                 (13,'Quạt làm mát phổ thông'),
                                                 (14,'Tản nhiệt khí phổ thông'),
                                                 (15,'Tản nhiệt nước factory'),(15,'Tản nhiệt nước custom'),
-                                                (5,'Chuột có dây'),(5,'Chuột không dây'),
-                                                (5,'Bàn phím mềm'),(5,'Bàn phím giả cơ'),(5,'Bàn phím cơ'),(6, 'Tặng phẩm');
+                                                (17,'Chuột có dây'),(17,'Chuột không dây'),
+                                                (18,'Bàn phím mềm'),(18,'Bàn phím giả cơ'),(18,'Bàn phím cơ'),(6, 'Tặng phẩm');
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');

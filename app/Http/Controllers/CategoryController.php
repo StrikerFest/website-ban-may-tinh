@@ -177,6 +177,9 @@ class CategoryController extends Controller
                 $priceMin = $priceRangeMin;
                 $priceMax = $priceRangeMax;
                 break;
+            case 'all':
+                $theLoaiConCate = null;
+                break;
             default:
                 break;
         }
@@ -214,6 +217,7 @@ class CategoryController extends Controller
         // dd($giaTriThongSoDauCate);
 
         $thongSoCate = [];
+        $giaTriThongSoCate = null;
         foreach ($listSanPhamThongSo as $SPTS) {
             if ($countTS == 0) {
                 $countTS++;
@@ -476,7 +480,6 @@ class CategoryController extends Controller
         $theLoaiChaCate = $request->get('theLoaiCha');
         // $theLoaiConCate = $request->get('theLoaiCon');
         $nhaSanXuatCate = $request->get('nhaSanXuat');
-
         return view('Customer.ProductCategory.show', [
             'cartItems' => $cartItems,
             'listSanPham' => $listSanPham,

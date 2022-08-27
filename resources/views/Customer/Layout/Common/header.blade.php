@@ -1,7 +1,7 @@
 <!-- Topbar -->
 {{-- Thanh navbar thứ nhất --}}
 @isset($listTheLoaiCha)
-        @include('Customer.Layout.Common.side_nav_menu')
+    @include('Customer.Layout.Common.side_nav_menu')
 @endisset
 
 <header class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow fixed-top "
@@ -187,14 +187,18 @@
                                     <div class="text-truncate">{{ $item->name }}</div>
                                     <div class="small text-gray-500">{{ number_format($item->price) }} VND</div>
                                     <div>Số lượng: {{ $item->quantity }}</div>
-                                    <div>Tổng: {{ number_format($item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity) }} VND</div>
-                                    <div>Tiết kiệm: {{ number_format(($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity) }} VNĐ </div>
+                                    <div>Tổng:
+                                        {{ number_format($item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity) }}
+                                        VND</div>
+                                    <div>Tiết kiệm:
+                                        {{ number_format(($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity) }}
+                                        VNĐ </div>
                                 </div>
                             </a>
                             @php
                                 $counterCart += 1;
-                                $sumCart += $item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity;
-                                $reduceCart +=  ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity;
+                                $sumCart += $item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity;
+                                $reduceCart += ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity;
                             @endphp
                         @else
                             <a class="dropdown-item d-flex align-items-center" href="{{ route('cart.list') }}">
@@ -231,11 +235,11 @@
 <nav class="navbar navbar-expand navbar-light bg-gradient- topbar mb-4 static-top shadow fixed-top second-navbar padding-0"
 style="background-color: rgba(255, 255, 255, 0.9)">
 @isset($listTheLoaiCha)
-<div id="cateShow1" class="padding-15 bg- text-light" style="width: 200px;margin-right: -230px">
-    <div class="nav-item-container-highlight">
-        Danh mục
+    <div id="cateShow1" class="padding-15 bg- text-light" style="width: 200px;margin-right: -230px">
+        <div class="nav-item-container-highlight">
+            Danh mục
+        </div>
     </div>
-</div>
 @endisset
 <div class="center-custom list-style-none">
     <div class="nav-item-container-highlight">
@@ -245,12 +249,19 @@ style="background-color: rgba(255, 255, 255, 0.9)">
             </a>
         </li>
     </div>
+
     <div class="nav-item-container">
-        <li class="nav-item ">
-            <a class="nav-link nav-item-custom link-red-nav" href="{{ route('searchCustomer.index') }}">
-                Sản phẩm
-            </a>
-        </li>
+        <form action="{{ route('categoryCustomer.show', 'null') }}">
+            <input type="hidden" name="search">
+            <input type="hidden" name="loai" value="all">
+            <div style="padding-top: 15px">
+            <li class="nav-item ">
+                <button class="btn nav-link nav-item-btn link-red-nav">
+                    Sản phẩm
+                </button>
+            </li>
+        </div>
+        </form>
     </div>
     <div class="nav-item-container">
         <li class="nav-item ">

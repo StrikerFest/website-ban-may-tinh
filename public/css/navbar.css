@@ -1,5 +1,15 @@
 /* CSS Nav bar */
+.nav-item-btn{
+    color: black;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
 
+.nav-item-btn:hover{
+    color: red;
+    background-color: transparent;
+}
 /* Nút đường link navbar  */
 a.nav-item-custom:link {
     color: black;
