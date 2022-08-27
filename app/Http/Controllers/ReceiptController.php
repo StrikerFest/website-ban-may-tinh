@@ -9,6 +9,7 @@ use App\Models\ProductVoucherModel;
 use App\Models\ReceiptModel;
 use App\Models\UserModel;
 use App\Models\VoucherDetailReceiptModel;
+use App\Models\VoucherModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -315,10 +316,10 @@ class ReceiptController extends Controller
         try {
             $payMethodCOD = $request->get('COD');
             $payMethodMomo = $request->get('momo');
-                if (session()->has("maillingSession") == 1)
-                session()->put("maillingSession", 0);
-            else
-                session()->put("maillingSession", 1);
+            // if (session()->has("maillingSession") == 1)
+            //     session()->put("maillingSession", 0);
+            // else
+            //     session()->put("maillingSession", 1);
             $cartItems = \Cart::getContent();
 
             if ($payMethodCOD == 'COD') {
@@ -410,13 +411,19 @@ class ReceiptController extends Controller
                         ->get();
                     $maHoaDonCTMoiNhat = DB::table('hoa_don_chi_tiet')->max('maHDCT');
                     foreach ($productPromotion as $PP) {
-                        if ($PP->kichHoat == 1){
+                        if ($PP->kichHoat == 1) {
                             $voucherHDCT = new VoucherDetailReceiptModel();
 
-                        $voucherHDCT->maHDCT = $maHoaDonCTMoiNhat;
+                            $voucherHDCT->maHDCT = $maHoaDonCTMoiNhat;
 
-                        $voucherHDCT->maVoucher = $PP->maVoucher;
-                        $voucherHDCT->save();
+                            $voucherHDCT->maVoucher = $PP->maVoucher;
+                            $voucherHDCT->save();
+
+                            //
+                            $voucher = VoucherModel::find($PP->maVoucher);
+                            $voucher->soLuong -= 1;
+                            $voucher->save();
+                            //
                         }
                     }
                 }
@@ -433,11 +440,11 @@ class ReceiptController extends Controller
                 $objDemo->receiver = session()->get('tenKhachHang');
                 // $request->session()->put('cartObject');
 
-                if (session()->get('maillingSession') == 1) {
+                // if (session()->get('maillingSession') == 1) {
                     Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
                     session()->put('maillingSession', 0);
                     \Cart::clear();
-                }
+                // }
             }
             if ($payMethodMomo == "momo") {
                 session()->put("vangLai", $request->get("isNotRegister"));
