@@ -164,11 +164,21 @@ INSERT INTO `bao_hanh` (`maBH`, `tenBH`, `giaTri`) VALUES (NULL, 'Không bảo h
 -- INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
 -- (NULL, 'Omen17QC.png', '43');
 INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
-(NULL, 'asuszenbookQC.jpg', '42');
+(NULL, 'sn-anhQuangCao1.png', 'product/1');
 INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
-(NULL, 'asuszenbookQC.jpg', '42');
+(NULL, 'sn-anhQuangCao2.png', 'categoryCustomer/14?theLoaiCha=16&loai=TLC');
 INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
-(NULL, 'asuszenbookQC.jpg', '42');
+(NULL, 'sn-anhQuangCao3.png', 'categoryCustomer/9?theLoaiCha=3&theLoaiCon=9');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'st-anhQuangCao4.png', 'categoryCustomer/9?theLoaiCha=3&theLoaiCon=9');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'st-anhQuangCao5.png', 'categoryCustomer/3?theLoaiCha=1&loai=TLC');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'sl-asuszenbookQC.jpg', 'product/42');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'sl-asuszenbookQC.jpg', 'product/42');
+INSERT INTO `anh_quang_cao` (`maAQC`, `anh`, `duongDan`) VALUES
+(NULL, 'sl-asuszenbookQC.jpg', 'product/42');
 -- ==========================================================================================================
 -- Bảng bài viết
 -- PC
@@ -670,11 +680,11 @@ INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (39,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (40,'STOCK_GRAPHIC_CARD.jpg');
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (41,'STOCK_GRAPHIC_CARD.jpg');
 --
--- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (42,'zenbook.png');
--- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (43,'omen17.png');
--- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'chuot-khong-day-logitech-b175.jpg');
--- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (45,'ban-phim-co-khong-day-dareu-ek807g-2.jpg');
--- INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (46,'34_1_41.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (42,'zenbook.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (43,'omen17.png');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (109,'chuot-khong-day-logitech-b175.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (110,'ban-phim-co-khong-day-dareu-ek807g-2.jpg');
+INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (111,'34_1_41.jpg');
 
 -- Bộ vi xử lý
 INSERT INTO anh_san_pham(`maSP`,`anh`) VALUE (44,'CPU_i3.jpg');

@@ -37,7 +37,15 @@ class ProductController extends Controller
 
         // Lấy ảnh
         $productImage = DB::table('anh_san_pham')->get();
-        $bannerImage =  DB::table('anh_quang_cao')->take(3)->get();
+        $bannerImageN =  DB::table('anh_quang_cao')
+        ->where('anh','LIKE','sn%')
+        ->take(3)->get();
+        $bannerImageT =  DB::table('anh_quang_cao')
+        ->where('anh','LIKE','st%')
+        ->take(2)->get();
+        $bannerImageL =  DB::table('anh_quang_cao')
+        ->where('anh','LIKE','sl%')
+        ->take(3)->get();
         // // Get all sản phẩm mới thêm vào - là máy tính
         // $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
         // $computerNew1 = ProductModel::skip(0)->take(4)->orderBy('maSP')->get();
@@ -132,7 +140,9 @@ class ProductController extends Controller
             'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
             'listTheLoaiCha' =>  $listTheLoaiCha,
 
-            'bannerImage' => $bannerImage,
+            'bannerImageN' => $bannerImageN,
+            'bannerImageT' => $bannerImageT,
+            'bannerImageL' => $bannerImageL,
             'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
 
         ]);

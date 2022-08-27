@@ -32,30 +32,34 @@
                 {{-- Slide quảng cáo --}}
                 <div class="hide-from-work">
                     <div class="grid">
-                        <div class="row">
+                        <div class="row" style="height: 13.8%">
                             {{-- Banner trái nhỏ --}}
                             <div class="col-md-4 ">
-                                <div class="" style="margin-left:3%; height: 100%">
-                                    <div class=" shadow mb-4 ">
+                                <div class="" style="margin-right: 0%; height: 100%">
+                                 @foreach ($bannerImageN as $BIN)
+                                 <div class=" shadowx mb-0 " style="width: 420px">
                                         {{-- Label nội dung --}}
-                                        <div class="card-header py-3 " style="background-color: black">
+                                        {{-- <div class="card-header py-3 " style="background-color: black">
                                             <h6 class="m-0 font-weight-bold text-light carousel-promo-item-label"></h6>
-                                        </div>
+                                        </div> --}}
                                         {{-- Vật phẩm trong nội dung --}}
-                                        <div class="card-body padding-10 black-glass">
+                                        <div class=" padding-10x black-glassx" style="height: 32%">
                                             <div class="table-responsive center-custom">
+                                                        <a href="http://localhost:8000/{{$BIN->duongDan}}">
                                                 <img class=""
-                                                    style="height: 400px; overflow: hidden;width: 100%;object-fit: cover;"
-                                                    src="https://gamingcentral.in/wp-content/uploads/2018/02/Omen17.png">
+                                                    style="height: 170px; overflow: hidden;width: 420px;object-fit: cover ;"
+                                                    src="{{ asset('assets/img/' . $BIN->anh) }}">
+                                                        </a>
                                             </div>
                                         </div>
                                     </div>
+                                @endforeach
                                 </div>
                             </div>
                             {{-- Slide banner --}}
-                            <div class="col-md-8">
+                            <div class="col-md-8 " >
                                 <div id="carouselExampleIndicators"
-                                    class="carousel slide carousel-main-container-custom" data-ride="carousel"
+                                    class="carousel slide carousel-main-container-custom card-" data-ride="carousel"
                                     data-pause="hover" data-interval="5000">
                                     {{-- Hiển thị vị trí slide --}}
                                     <ol class="carousel-indicators">
@@ -71,10 +75,10 @@
                                             @php
                                                 $count = 0;
                                             @endphp
-                                            @foreach ($bannerImage as $BI1)
+                                            @foreach ($bannerImageL as $BI1)
                                                 @if ($count == 0)
                                                     <div class="carousel-item active">
-                                                        <a href="{{ route('product.show', $BI1->duongDan) }}">
+                                                        <a href="http://localhost:8000/{{$BI1->duongDan}}">
                                                             <img class="d-block carousel-item-custom"
                                                                 src="{{ asset('assets/img/' . $BI1->anh) }}"
                                                                 alt="First slide">
@@ -85,7 +89,7 @@
                                                     @endphp
                                                 @else
                                                     <div class="carousel-item">
-                                                        <a href="{{ route('product.show', $BI1->duongDan) }}">
+                                                        <a href="http://localhost:8000/{{$BI1->duongDan}}">
                                                             <img class="d-block carousel-item-custom"
                                                                 src="{{ asset('assets/img/' . $BI1->anh) }}"
                                                                 alt="Second slide">
@@ -110,12 +114,22 @@
                                     {{-- Kết thúc - Nút điều khiển slide --}}
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="row" style="padding-bottom: 50px">
+                            @foreach ($bannerImageT as $BIT)
+                                <div class="col-6">
+                                        <a href="http://localhost:8000/{{$BIT->duongDan}}">
+                                            <img class=""
+                                        style="height: 150px; overflow: hiddenx;width: 100%;object-fit: ;"
+                                        src="{{ asset('assets/img/' . $BIT->anh) }}">
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 {{-- Kết thúc - Slide quảng cảo --}}
-
-                <br>
 
                 {{-- Vật phẩm dưới slide quảng cáo --}}
                 <div class="card shadow bg-gradient-  background-none hide-from-work" style="margin-top: -3%;">
@@ -186,7 +200,8 @@
                                                                                         style="overflow: visible">
                                                                                         {{-- <img class="carousel-promo-item-image-size"
                                                                                     src="https://w7.pngwing.com/pngs/257/925/png-transparent-desktop-computers-personal-computer-computer-icons-computer-monitors-computer-rectangle-computer-computer-monitor-accessory-thumbnail.png"> --}}
-                                                                                        <div class="card product-item ">
+                                                                                        <div
+                                                                                            class="card product-item ">
                                                                                             <!-- Thẻ sale trên đầu -->
                                                                                             <div class="badge bg-dark text-white position-absolute"
                                                                                                 style="top: 0.5rem; right: 0.5rem">
@@ -637,7 +652,7 @@
                                                                                                         <span
                                                                                                             class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
                                                                                                             VND</span>
-                                                                                                            <br>
+                                                                                                        <br>
                                                                                                         <span>{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
                                                                                                             VND</span>
                                                                                                     </div>
@@ -883,7 +898,7 @@
                                                                                                         <span
                                                                                                             class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
                                                                                                             VND</span>
-                                                                                                            <br>
+                                                                                                        <br>
                                                                                                         <span>{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
                                                                                                             VND</span>
                                                                                                     </div>

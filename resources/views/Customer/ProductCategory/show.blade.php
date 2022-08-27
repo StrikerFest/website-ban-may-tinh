@@ -212,13 +212,13 @@
                             </div>
 
                             {{-- --------- --}}
-                            @isset($nhaSanXuatCate)
+                            {{-- @isset($nhaSanXuatCate) --}}
                                 <div class="col-md-12 text-center text-danger">
                                     <hr class="border-red">
                                     <h5>Nhu cầu sử dụng</h5>
                                     <hr class="border-red">
                                 </div>
-                            @endisset
+                            {{-- @endisset --}}
                             {{-- Nhu cầu --}}
                             <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <ul>
@@ -243,7 +243,7 @@
 
                                             <input type="hidden" name="priceMax"
                                                 value="{{ session()->get('currentPriceMax') }}">
-                                            @isset($nhaSanXuatCate)
+                                            {{-- @isset($nhaSanXuatCate) --}}
                                                 @if ($TL->maTLC == $theLoaiConCate)
                                                     <button class=" text- btn "
                                                         style="text-decoration: none;list-style: none;padding:0">
@@ -260,7 +260,7 @@
                                                         </div>
                                                     </button>
                                                 @endif
-                                            @endisset
+                                            {{-- @endisset --}}
                                         </form>
                                     @endforeach
                                 </ul>
