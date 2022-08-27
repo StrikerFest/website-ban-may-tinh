@@ -9,6 +9,7 @@ use App\Models\ProductCommentModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductModel;
 use App\Models\ProductVoucherModel;
+use App\Models\SubCategoryModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,42 +25,48 @@ class ProductController extends Controller
     {
         // Lấy hãng
         $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
+
         $listTheLoaiMayTinhBan = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Máy tính bàn')->get();
         $listTheLoaiLaptop = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Laptop')->get();
         $listTheLoaiLinhKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Linh kiện')->get();
         $listTheLoaiPhuKien = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Phụ kiện')->get();
         $listTheLoaiManHinh = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->skip(0)->take(7)->where('tenTL', 'Màn hình')->get();
+
         $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
         $listTheLoaiCha = DB::table('the_loai')->get();
 
         // Lấy ảnh
         $productImage = DB::table('anh_san_pham')->get();
         $bannerImage =  DB::table('anh_quang_cao')->take(3)->get();
-        // Get all sản phẩm mới thêm vào - là máy tính
-        $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
-        $computerNew1 = ProductModel::skip(0)->take(4)->orderBy('maSP')->get();
-        $computerNew2 = ProductModel::skip(4)->take(4)->orderBy('maSP')->get();
-        $computerNew3 = ProductModel::skip(8)->take(4)->orderBy('maSP')->get();
-        // Laptop gaming
-        $laptopGamingNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(0)->take(4)->get();
-        $laptopGamingNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(4)->take(4)->get();
-        $laptopGamingNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(8)->take(4)->get();
-        // Laptop văn phòng
-        $laptopOfficeNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(0)->take(4)->get();
-        $laptopOfficeNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(4)->take(4)->get();
-        $laptopOfficeNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(8)->take(4)->get();
-        // Máy tính gaming
-        $computerGamingNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(0)->take(4)->get();
-        $computerGamingNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(4)->take(4)->get();
-        $computerGamingNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(8)->take(4)->get();
-        // Máy trạm
-        $computerStationNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(0)->take(4)->get();
-        $computerStationNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(4)->take(4)->get();
-        $computerStationNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(8)->take(4)->get();
-        // Linh kiện
-        $hardwareNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(0)->take(4)->get();
-        $hardwareNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(4)->take(4)->get();
-        $hardwareNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(8)->take(4)->get();
+        // // Get all sản phẩm mới thêm vào - là máy tính
+        // $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
+        // $computerNew1 = ProductModel::skip(0)->take(4)->orderBy('maSP')->get();
+        // $computerNew2 = ProductModel::skip(4)->take(4)->orderBy('maSP')->get();
+        // $computerNew3 = ProductModel::skip(8)->take(4)->orderBy('maSP')->get();
+        // // Laptop gaming
+        // $laptopGamingNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(0)->take(4)->get();
+        // $laptopGamingNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(4)->take(4)->get();
+        // $laptopGamingNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop gaming')->skip(8)->take(4)->get();
+        // // Laptop văn phòng
+        // $laptopOfficeNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(0)->take(4)->get();
+        // $laptopOfficeNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(4)->take(4)->get();
+        // $laptopOfficeNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Laptop văn phòng')->skip(8)->take(4)->get();
+        // // Máy tính gaming
+        // $computerGamingNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(0)->take(4)->get();
+        // $computerGamingNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(4)->take(4)->get();
+        // $computerGamingNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC gaming')->skip(8)->take(4)->get();
+        // // Máy trạm
+        // $computerStationNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(0)->take(4)->get();
+        // $computerStationNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(4)->take(4)->get();
+        // $computerStationNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Máy PC trạm')->skip(8)->take(4)->get();
+        // // Linh kiện
+        // $hardwareNew1 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(0)->take(4)->get();
+        // $hardwareNew2 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(4)->take(4)->get();
+        // $hardwareNew3 = ProductModel::join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->where('tenTLC', 'Card thiết kế đồ họa')->skip(8)->take(4)->get();
+
+        $sanPham = DB::table('san_pham')->orderBy('maSP')
+            ->get();
+        $theLoaiCon = SubCategoryModel::take(10)->get();
 
         $cartItems = \Cart::getContent();
 
@@ -68,32 +75,34 @@ class ProductController extends Controller
         return view('Customer.Customer.index', [
             'productImage' => $productImage,
             'saleProduct' => $saleProduct,
+            'sanPham' => $sanPham,
+            'theLoaiCon' => $theLoaiCon,
 
-            'computerNew1' => $computerNew1,
-            'computerNew2' => $computerNew2,
-            'computerNew3' => $computerNew3,
+            // 'computerNew1' => $computerNew1,
+            // 'computerNew2' => $computerNew2,
+            // 'computerNew3' => $computerNew3,
 
-            'computerNew' => $computerNew,
+            // 'computerNew' => $computerNew,
 
-            'laptopGamingNew1' => $laptopGamingNew1,
-            'laptopGamingNew2' => $laptopGamingNew2,
-            'laptopGamingNew3' => $laptopGamingNew3,
+            // 'laptopGamingNew1' => $laptopGamingNew1,
+            // 'laptopGamingNew2' => $laptopGamingNew2,
+            // 'laptopGamingNew3' => $laptopGamingNew3,
 
-            'laptopOfficeNew1' => $laptopOfficeNew1,
-            'laptopOfficeNew2' => $laptopOfficeNew2,
-            'laptopOfficeNew3' => $laptopOfficeNew3,
+            // 'laptopOfficeNew1' => $laptopOfficeNew1,
+            // 'laptopOfficeNew2' => $laptopOfficeNew2,
+            // 'laptopOfficeNew3' => $laptopOfficeNew3,
 
-            'computerGamingNew1' => $computerGamingNew1,
-            'computerGamingNew2' => $computerGamingNew2,
-            'computerGamingNew3' => $computerGamingNew3,
+            // 'computerGamingNew1' => $computerGamingNew1,
+            // 'computerGamingNew2' => $computerGamingNew2,
+            // 'computerGamingNew3' => $computerGamingNew3,
 
-            'computerStationNew1' => $computerStationNew1,
-            'computerStationNew2' => $computerStationNew2,
-            'computerStationNew3' => $computerStationNew3,
+            // 'computerStationNew1' => $computerStationNew1,
+            // 'computerStationNew2' => $computerStationNew2,
+            // 'computerStationNew3' => $computerStationNew3,
 
-            'hardwareNew1' => $hardwareNew1,
-            'hardwareNew2' => $hardwareNew2,
-            'hardwareNew3' => $hardwareNew3,
+            // 'hardwareNew1' => $hardwareNew1,
+            // 'hardwareNew2' => $hardwareNew2,
+            // 'hardwareNew3' => $hardwareNew3,
 
             'cartItems' =>  $cartItems,
 
