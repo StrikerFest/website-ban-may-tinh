@@ -215,8 +215,10 @@ class AdminReceiptController extends Controller
         if($hoaDon->maTTHD == 2){
             return back()->with('canceled', "Đơn hàng đã bị huỷ");
         }
+        if($hoaDon->maTTHD == 1){
+            $hoaDon->maNV = session()->get('admin');//Chỉ lưu lại admin đã duyệt lần đầu
+        }
         $hoaDon->maTTHD = $request->get('maTTHD');
-        $hoaDon->maNV = session()->get('admin');
 
         $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
 
