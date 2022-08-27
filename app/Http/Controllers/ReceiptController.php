@@ -408,13 +408,13 @@ class ReceiptController extends Controller
                 foreach ($cartItems as $cart) {
                     $hoaDonChiTiet = new DetailReceiptModel();
 
-                    // $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
+                    $SP = DB::table('san_pham')->where('maSP', $cart->attributes->itemId)->first();
                     $giaSP = $cart->price;
                     $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
                     $hoaDonChiTiet->maSP = $cart->attributes->itemId;
                     $hoaDonChiTiet->soLuong = $cart->quantity;
                     $hoaDonChiTiet->giaSP = $giaSP;
-                    $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
+                    $hoaDonChiTiet->giamGia = $SP->giamGia;
                     $reducePrice += $hoaDonChiTiet->giamGia;
                     // echo $hoaDon;
                     // echo "<br>-------<br>";
@@ -671,7 +671,7 @@ class ReceiptController extends Controller
             // $obj->vouchers = $listVHDCT;
             // dd($listVHDCT);
             // $mergedObj = (object)array_merge((array)$hoaDonCT[$i], (array)$tienGiamVoucher[$i], (array)$obj);
-            
+
             //Kết hợp object HDCT với object tiền giảm voucher
             $mergedObj = (object)array_merge((array)$hoaDonCT[$i], (array)$tienGiamVoucher[$i]);
             //Đưa object đã kết hợp vào $listHoaDonCT
