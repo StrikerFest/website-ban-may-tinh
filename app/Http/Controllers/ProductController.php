@@ -8,6 +8,7 @@ use App\Models\BlogModel;
 use App\Models\ProductCommentModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductModel;
+use App\Models\ProductVoucherModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -151,7 +152,32 @@ class ProductController extends Controller
 
         $sanPham = ProductModel::findOrFail($id);
         $cartItems = \Cart::getContent();
-        // $productPromotion = DB::table('khuyen_mai')->get();
+        $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+            ->where('san_pham_voucher.maSP', $id)
+            ->get();
+        function get_string_between($string, $start, $end)
+        {
+            $string = ' ' . $string;
+            $ini = strpos($string, $start);
+            if ($ini == 0) return '';
+            $ini += strlen($start);
+            $len = strpos($string, $end, $ini) - $ini;
+            return substr($string, $ini, $len);
+        }
+        $reducedMoneyFlat = 0;
+        $reducedMoneyPercent = $sanPham->giamGia;
+
+        foreach ($productPromotion as $PP) {
+            if ($PP->kichHoat == 1) {
+                $ten = $PP->tenVoucher;
+                if ($PP->giaTri >= 0 && $PP->giaTri <= 100)
+                    $reducedMoneyPercent += $PP->giaTri;
+                elseif ($PP->giaTri > 100)
+                    $reducedMoneyFlat += $PP->giaTri;
+            }
+        }
+
+
         $productSpec = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->get();
 
         $computerNew = ProductModel::skip(0)->take(12)->orderBy('maSP')->get();
@@ -159,11 +185,11 @@ class ProductController extends Controller
         $computerNew2 = ProductModel::skip(4)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
         $computerNew3 = ProductModel::skip(8)->take(4)->where('maTLC', $sanPham->maTLC)->orderBy('maSP')->get();
 
-        $productReview = BlogModel::where('theLoai',1)
-        ->where('maBV',$sanPham->maBV)
-        ->get();
+        $productReview = BlogModel::where('theLoai', 1)
+            ->where('maBV', $sanPham->maBV)
+            ->get();
 
-        $productReviewDetail = BlogContentModel::where('maBV',$sanPham->maBV)->get();
+        $productReviewDetail = BlogContentModel::where('maBV', $sanPham->maBV)->get();
         // dd($productReview);
         return view('Customer.Product.index', [
             'productImage' => $productImage,
@@ -172,10 +198,12 @@ class ProductController extends Controller
             'user' => $user,
             'sanPham' => $sanPham,
             'cartItems' => $cartItems,
-            // 'productPromotion' => $productPromotion,
+            'productPromotion' => $productPromotion,
             'productSpec' => $productSpec,
             'productReview' => $productReview,
             'productReviewDetail' => $productReviewDetail,
+            'reducedMoneyFlat' => $reducedMoneyFlat,
+            'reducedMoneyPercent' => $reducedMoneyPercent,
 
             'computerNew1' => $computerNew1,
             'computerNew2' => $computerNew2,

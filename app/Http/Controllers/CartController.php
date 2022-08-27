@@ -54,15 +54,33 @@ class CartController extends Controller
         if ($request->quantity <= 0) {
             $quantity = 1;
         }
-        \Cart::add([
-            'id' => $request->id,
-            'name' => $request->name,
-            'price' => $request->price,
-            'quantity' => $quantity,
-            'attributes' => array(
-                'image' => $request->image,
-            )
-        ]);
+
+        if ($request->noVoucher == null)
+            \Cart::add([
+                'id' => $request->id,
+                'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->image,
+                    'reduceFlat' => $request->reduceFlat,
+                    'reducePercent' => $request->reducePercent,
+                    'itemId' => $request->id,
+                )
+            ]);
+        else
+            \Cart::add([
+                'id' => $request->id . 'NV',
+                'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->image,
+                    'reduceFlat' => $request->reduceFlat,
+                    'reducePercent' => $request->reducePercent,
+                    'itemId' => $request->id,
+                )
+            ]);
         session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
 
         return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
@@ -377,15 +395,32 @@ class CartController extends Controller
         if ($request->quantity <= 0) {
             $quantity = 1;
         }
-        \Cart::add([
-            'id' => $request->id,
-            'name' => $request->name,
-            'price' => $request->price,
-            'quantity' => $quantity,
-            'attributes' => array(
-                'image' => $request->image,
-            )
-        ]);
+        if ($request->noVoucher == null)
+            \Cart::add([
+                'id' => $request->id,
+                'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->image,
+                    'reduceFlat' => $request->reduceFlat,
+                    'reducePercent' => $request->reducePercent,
+                    'itemId' => $request->id,
+                )
+            ]);
+        else
+            \Cart::add([
+                'id' => $request->id . 'NV',
+                'name' => $request->name,
+                'price' => $request->price,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'image' => $request->image,
+                    'reduceFlat' => $request->reduceFlat,
+                    'reducePercent' => $request->reducePercent,
+                    'itemId' => $request->id,
+                )
+            ]);
         session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
 
         return redirect()->route('cart.list');

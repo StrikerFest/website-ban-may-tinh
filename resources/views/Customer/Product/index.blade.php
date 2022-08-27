@@ -147,7 +147,7 @@
                                 <div class="width-100 height-auto padding-10 ">
                                     {{-- Thông tin con --}}
                                     <div class="width-100 height-auto">
-                                        Ma SP: LTAU660 | Danh gia: X X X X X (0) | Binh luan: 1 |
+                                        Mã SP: {{ $sanPham->maSP }}
                                     </div>
                                     {{-- Thông số --}}
                                     <div>
@@ -193,20 +193,22 @@
                                         <div class="grid border-gray border-radius-10 padding-20">
                                             {{-- Dòng 1 --}}
                                             <div class="row w-100">
+
                                                 {{-- Giá cuối cùng --}}
                                                 <div class="col-md-12 text-danger ">
-                                                    <h5>{{ number_format($sanPham->giaSP) }} VNĐ</h5>
+                                                    <h5>{{ number_format($sanPham->giaSP - $reducedMoneyFlat - ($sanPham->giaSP * $reducedMoneyPercent) / 100) }}
+                                                        VNĐ</h5>
                                                 </div>
                                                 {{-- Dòng 2 --}}
                                                 {{-- Giá cũ --}}
                                                 <div class="col-md-6  text-decoration-line-through">
-                                                    <h6>{{ number_format($sanPham->giaSP + ($sanPham->giaSP * $sanPham->giamGia) / 100) }}
+                                                    <h6>{{ number_format($sanPham->giaSP) }}
                                                         VND</h6>
                                                 </div>
                                                 {{-- Giá tiết kiệm --}}
                                                 <div class="col-md-6 text-danger padding-bottom-10">
                                                     Tiết kiệm
-                                                    {{ number_format(($sanPham->giaSP * $sanPham->giamGia) / 100) }}
+                                                    {{ number_format($reducedMoneyFlat + ($sanPham->giaSP * $reducedMoneyPercent) / 100) }}
                                                     VND
                                                 </div>
                                             </div>
@@ -239,16 +241,21 @@
                                                 đãi kèm theo
                                             </div>
                                             <div class="padding-top-20 padding-left-20">
-                                                <h5 class="text-danger">Khuyến mãi đặc biệt</h5>
-                                                <ul>
-                                                    {{-- @foreach ($productPromotion as $PM)
-                                                        @if ($sanPham->maSP == $PM->maSP)
+                                                @if (count($productPromotion) !== 0)
+                                                    <h5 class="text-danger">Khuyến mãi đặc biệt</h5>
+                                                    <ul>
+                                                        @foreach ($productPromotion as $PM)
                                                             @php
-                                                                echo '+ ' . $PM->khuyenMai . '<br>';
+                                                                if($PM->kichHoat == 1)
+                                                                echo '+ ' . $PM->tenVoucher . '<br>';
                                                             @endphp
-                                                        @endif
-                                                    @endforeach --}}
-                                                </ul>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    <h5 class="text-danger">Khuyến mãi cho sản phẩm hiện tại đã hết
+                                                    </h5>
+                                                @endif
+
                                             </div>
 
                                         </div>
@@ -319,6 +326,14 @@
                                                             name="price">
                                                         <input type="hidden" value="{{ $tempImg }}"
                                                             name="image">
+                                                        <input type="hidden" value="{{ $reducedMoneyFlat }}"
+                                                            name="reduceFlat">
+                                                        <input type="hidden" value="{{ $reducedMoneyPercent }}"
+                                                            name="reducePercent">
+                                                        @if ($reducedMoneyPercent - $sanPham->giamGia - $reducedMoneyFlat == 0)
+                                                            <input type="hidden" value="1"
+                                                                name="noVoucher">
+                                                        @endif
                                                         {{-- <input type="hidden" value="1" name="quantity"> --}}
 
 
@@ -353,6 +368,13 @@
                                             <input type="hidden" value="{{ $tenSP }}" name="name">
                                             <input type="hidden" value="{{ $sanPham->giaSP }}" name="price">
                                             <input type="hidden" value="{{ $tempImg }}" name="image">
+                                            <input type="hidden" value="{{ $reducedMoneyFlat }}"
+                                                name="reduceFlat">
+                                            <input type="hidden" value="{{ $reducedMoneyPercent }}"
+                                                name="reducePercent">
+                                            @if ($reducedMoneyPercent - $sanPham->giamGia - $reducedMoneyFlat == 0)
+                                                <input type="hidden" value="1" name="noVoucher">
+                                            @endif
                                             <div class="text-center padding-left-10 padding-right-10">
                                                 Số lượng:
                                                 <br>
@@ -543,6 +565,9 @@
                                                             <div class="carousel-item active" style="width:100%">
                                                                 <div class="row">
                                                                     @foreach ($computerNew1 as $CN)
+                                                                        @foreach ($productPromotion as $PP)
+
+                                                                        @endforeach
                                                                         {{-- Vật phẩm 4 --}}
                                                                         <div class="carousel-promo-item col-md-3 "
                                                                             onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
@@ -703,10 +728,10 @@
                                                                                                     type="hidden"
                                                                                                     value="1"
                                                                                                     name="quantity">
-                                                                                                <button
+                                                                                                {{-- <button
                                                                                                     class="btn btn-outline-light  text-right"
                                                                                                     style="background-color: crimson"><i
-                                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                                                        class="fa fa-shopping-cart"></i></button> --}}
                                                                                             </form>
                                                                                         @endif
                                                                                     </div>
@@ -885,10 +910,10 @@
                                                                                                     type="hidden"
                                                                                                     value="1"
                                                                                                     name="quantity">
-                                                                                                <button
+                                                                                                {{-- <button
                                                                                                     class="btn btn-outline-light  text-right"
                                                                                                     style="background-color: crimson"><i
-                                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                                                        class="fa fa-shopping-cart"></i></button> --}}
                                                                                             </form>
                                                                                         @endif
                                                                                     </div>
@@ -1067,10 +1092,10 @@
                                                                                                     type="hidden"
                                                                                                     value="1"
                                                                                                     name="quantity">
-                                                                                                <button
+                                                                                                {{-- <button
                                                                                                     class="btn btn-outline-light  text-right"
                                                                                                     style="background-color: crimson"><i
-                                                                                                        class="fa fa-shopping-cart"></i></button>
+                                                                                                        class="fa fa-shopping-cart"></i></button> --}}
                                                                                             </form>
                                                                                         @endif
                                                                                     </div>

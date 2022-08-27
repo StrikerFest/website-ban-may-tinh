@@ -118,7 +118,7 @@
                                                             <p class="mb-2 md:ml-4 text-center">
 
                                                                 Giảm
-                                                                {{ number_format($item->giaSP * ($item->giamGia / 100)) }}
+                                                                {{ number_format($item->giamGia) }}
                                                                 VND
                                                             </p>
                                                         </td>
@@ -131,12 +131,12 @@
                                                             <p class="mb-2 md:ml-4 text-center">
 
 
-                                                                {{ number_format($item->giaSP * $item->soLuong - $item->soLuong * $item->giaSP * ($item->giamGia / 100)) }}
+                                                                {{ number_format($item->giaSP * $item->soLuong - $item->soLuong * $item->giamGia) }}
                                                                 VND
                                                             </p>
                                                         </td>
                                                         @php
-                                                            $sum += $item->giaSP * $item->soLuong - ($item->soLuong * ($item->giaSP * $item->giamGia)) / 100;
+                                                            $sum += $item->giaSP * $item->soLuong - $item->giamGia* $item->soLuong;
                                                         @endphp
                                                     </tr>
                                                 @endforeach

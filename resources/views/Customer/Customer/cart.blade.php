@@ -51,6 +51,9 @@
                                             </thead>
                                             {{-- Content của giỏ hàng --}}
                                             <tbody style="border: 1px solid lightgray">
+                                                @php
+                                                    $countReducePrice = 0;
+                                                @endphp
                                                 @foreach ($cartItems as $item)
                                                     <tr>
                                                         <td class="hidden pb-4 md:table-cell" style="width: 25%">
@@ -82,7 +85,8 @@
                                                                                     class=" btn btn-danger"
                                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i
                                                                                         class="fa fa-arrow-left"></i></button>
-                                                                                <input type="number" name="quantity" min="1" readonly
+                                                                                <input type="number" name="quantity"
+                                                                                    min="1" readonly
                                                                                     value="{{ $item->quantity }}"
                                                                                     class=" text-center bg-gray-300"
                                                                                     style="width:50" />
@@ -101,8 +105,15 @@
                                                         </td>
                                                         <td class="hidden text-center md:table-cell padding-10"
                                                             style="padding-top: 0px">
+                                                            @php
+                                                                $countReducePrice += $item->attributes->reduceFlat * $item->quantity + ($item->price * $item->attributes->reducePercent / 100) * $item->quantity;
+                                                            @endphp
                                                             <span class="">
-                                                                {{ number_format($item->price * $item->quantity) }} VND
+                                                                {{ number_format($item->price * $item->quantity - $item->attributes->reduceFlat * $item->quantity - ($item->price * $item->attributes->reducePercent) / 100 * $item->quantity) }}
+                                                                VND
+                                                                <br>
+                                                                (Giảm
+                                                                {{ number_format($item->attributes->reduceFlat * $item->quantity + ($item->price * $item->attributes->reducePercent) / 100  * $item->quantity)}} VNĐ từ voucher và giảm giá)
                                                             </span>
                                                         </td>
                                                         <td class="hidden text-right md:table-cell padding-10">
@@ -125,7 +136,7 @@
                                     @if (sizeof($cartItems) == 0)
                                     @else
                                         <div class="d-flex padding-10" style="justify-content: end">
-                                            Tổng : {{ number_format(Cart::getTotal()) }} VND
+                                            Tổng : {{ number_format(Cart::getTotal() - $countReducePrice) }} VND (Tổng voucher giảm {{number_format($countReducePrice)}} VNĐ)
                                         </div>
                                     @endif
                                     <div class="d-flex" style="justify-content: end;">
@@ -175,8 +186,7 @@
     </div>
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
-    <script>
-    </script>
+    <script></script>
 </body>
 
 </html>
