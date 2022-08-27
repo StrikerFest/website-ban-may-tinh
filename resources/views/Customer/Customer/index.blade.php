@@ -451,17 +451,19 @@
                                                         @php
                                                             $countItem++;
                                                         @endphp
-                                                        @if($countItem == 4)
+                                                        @if ($countItem == 4)
                                                             @php
                                                                 $countSlide++;
                                                                 $countItem = 0;
                                                             @endphp
-                                                            @if($countSlide == 1)
-                                                            <li data-target="#carouselExampleIndicators{{ $TLC->maTLC }}"
-                                                                class="bg-danger" data-slide-to="0" class="active"></li>
-                                                                @else
+                                                            @if ($countSlide == 1)
                                                                 <li data-target="#carouselExampleIndicators{{ $TLC->maTLC }}"
-                                                                    class="bg-danger" data-slide-to="{{$countSlide - 1}}"></li>
+                                                                    class="bg-danger" data-slide-to="0"
+                                                                    class="active"></li>
+                                                            @else
+                                                                <li data-target="#carouselExampleIndicators{{ $TLC->maTLC }}"
+                                                                    class="bg-danger"
+                                                                    data-slide-to="{{ $countSlide - 1 }}"></li>
                                                             @endif
                                                         @endif
                                                     @endif
@@ -514,7 +516,7 @@
                                                                                         style=" padding: 10px">
                                                                                         <div class="col mb-5">
                                                                                             <div class="card product-item"
-                                                                                                style="height: 420px;width:260px">
+                                                                                                style="height: 440px;width:260px">
                                                                                                 <!-- Thẻ sale trên đầu -->
                                                                                                 <div class="badge bg-dark text-white position-absolute"
                                                                                                     style="top: 0.5rem; right: 0.5rem">
@@ -612,10 +614,30 @@
                                                                                                                 href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
 
                                                                                                         </h5>
+                                                                                                        @php
+                                                                                                            $reducedMoneyPercent = $CN->giamGia;
+                                                                                                            $reducedMoneyFlat = 0;
+                                                                                                        @endphp
+                                                                                                        @foreach ($productPromotion as $PP)
+                                                                                                            @if ($PP->maSP == $CN->maSP)
+                                                                                                                @php
+                                                                                                                    if ($PP->kichHoat == 1) {
+                                                                                                                        $ten = $PP->tenVoucher;
+                                                                                                                        if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                                                            $reducedMoneyPercent += $PP->giaTri;
+                                                                                                                        } elseif ($PP->giaTri > 100) {
+                                                                                                                            $reducedMoneyFlat += $PP->giaTri;
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                @endphp
+                                                                                                            @endif
+                                                                                                        @endforeach
 
                                                                                                         <!-- Giá sản phẩm -->
                                                                                                         <span
-                                                                                                            class="">{{ number_format($CN->giaSP) }}
+                                                                                                            class="text-decoration-line-through">{{ number_format($CN->giaSP) }}
+                                                                                                            VND</span>
+                                                                                                        <span>{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
                                                                                                             VND</span>
                                                                                                     </div>
                                                                                                 </div>
@@ -673,6 +695,14 @@
                                                                                                                 type="hidden"
                                                                                                                 value="1"
                                                                                                                 name="quantity">
+                                                                                                            <input
+                                                                                                                type="hidden"
+                                                                                                                value="{{ $reducedMoneyFlat }}"
+                                                                                                                name="reduceFlat">
+                                                                                                            <input
+                                                                                                                type="hidden"
+                                                                                                                value="{{ $reducedMoneyPercent }}"
+                                                                                                                name="reducePercent">
                                                                                                             <button
                                                                                                                 class="btn btn-outline-light  text-right"
                                                                                                                 style="background-color: crimson"><i

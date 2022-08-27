@@ -68,6 +68,23 @@ class ProductController extends Controller
             ->get();
         $theLoaiCon = SubCategoryModel::take(10)->get();
 
+        $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+            ->select('san_pham_voucher.*','voucher.tenVoucher','voucher.giaTri','voucher.soLuong')
+            ->get();
+
+        // $reducedMoneyFlat = 0;
+        // $reducedMoneyPercent = $sanPham->giamGia;
+
+        // foreach ($productPromotion as $PP) {
+        //     if ($PP->kichHoat == 1) {
+        //         $ten = $PP->tenVoucher;
+        //         if ($PP->giaTri >= 0 && $PP->giaTri <= 100)
+        //             $reducedMoneyPercent += $PP->giaTri;
+        //         elseif ($PP->giaTri > 100)
+        //             $reducedMoneyFlat += $PP->giaTri;
+        //     }
+        // }
+
         $cartItems = \Cart::getContent();
 
         $saleProduct = ProductModel::where('dacBiet', 1)->get();
@@ -77,6 +94,7 @@ class ProductController extends Controller
             'saleProduct' => $saleProduct,
             'sanPham' => $sanPham,
             'theLoaiCon' => $theLoaiCon,
+            'productPromotion' => $productPromotion,
 
             // 'computerNew1' => $computerNew1,
             // 'computerNew2' => $computerNew2,
