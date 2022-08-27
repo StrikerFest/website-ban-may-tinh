@@ -446,8 +446,9 @@ class CartController extends Controller
         );
 
         session()->flash('success', 'Số lượng sản phẩm cập nhật thành công !');
-
-        return redirect()->route('cart.list');
+        $res = [$request->id, $request->quantity];
+        // return redirect()->route('cart.list');
+        return response()->json($res);
     }
 
     public function removeCart(Request $request)
