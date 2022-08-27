@@ -116,7 +116,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::get('categorySpecification/{maTL}', [AdminCategorySpecificationController::class, "index"])->name('categorySpecification.index');
     Route::resource('categorySpecification', AdminCategorySpecificationController::class)->except(['index']);
     Route::get('receiptPDF/{maHD}', [AdminReceiptController::class, "printPDF"])->name('receipt.pdf');
-    Route::put('receiptCacncel/{maHD}', [AdminReceiptController::class, "cancelOrder"])->name('receipt.cancelOrder');
+    Route::put('receiptCancel/{maHD}', [AdminReceiptController::class, "cancelOrder"])->name('receipt.cancelOrder');
     Route::resource('receipt', AdminReceiptController::class);
     Route::resource('receiptStatus', AdminReceiptStatusController::class);
     Route::resource('detailReceipt', AdminDetailReceiptController::class);

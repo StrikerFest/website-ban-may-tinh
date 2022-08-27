@@ -6,6 +6,7 @@ use App\Mail\CancelOrderMail;
 use Illuminate\Http\Request;
 use App\Models\ReceiptModel;
 use App\Models\ProductModel;
+use App\Models\VoucherModel;
 use App\Models\DetailReceiptModel;
 use App\Models\VoucherDetailReceiptModel;
 use App\Models\UserModel;
@@ -339,6 +340,21 @@ class AdminReceiptController extends Controller
             }
 
         }
+        //Tăng số lượng voucher sau khi huỷ đơn
+        for($i = 0; $i < sizeof($hdct); $i++){
+            $vhdct = VoucherDetailReceiptModel::select(['voucher_hoa_don_chi_tiet.*', 'voucher.soLuong AS soLuongV', 'hoa_don_chi_tiet.soLuong AS soLuongSP'])
+                ->join('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'voucher_hoa_don_chi_tiet.maHDCT')
+                ->join('voucher', 'voucher.maVoucher', '=', 'voucher_hoa_don_chi_tiet.maVoucher')
+                ->where('voucher_hoa_don_chi_tiet.maHDCT', $hdct[$i]->maHDCT)
+                ->get();
+            // dd($vhdct);
+            foreach($vhdct as $item){
+                $voucher = VoucherModel::find($item->maVoucher);
+                $voucher->soLuong += $item->soLuongSP;
+                $voucher->save();
+            }
+        }
+        // dd($hdct);
         $hoaDon->maTTHD = 2;//Huỷ đơn
         $hoaDon->save();
 

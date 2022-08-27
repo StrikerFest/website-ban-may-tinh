@@ -420,9 +420,9 @@ VALUE('Ổ cứng SSD 3TB WD',4200000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('Ổ cứng SSD 6TB WD',8200000,10,10,1,11,4,3);
 -- Tặng phẩm
-INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `soLuong`, `giamGia`, `maNSX`, `maTLC`, `maBH`, `maTTSP`) VALUES (NULL, 'Chuột không dây Logitech B175', '150000', '10', '0', '3', '21', '1', '1'),
-                                                                                                                    (NULL, 'Bàn phím cơ không dây Dareu EK807G TKL', '500000', '10', '0', '5', '21', '1', '1'),
-                                                                                                                    (NULL, 'Chuột chơi game có dây Logitech G203 Lightsync', '300000', '10', '0', '1', '21', '1', '1');
+INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `soLuong`, `giamGia`, `maNSX`, `maTLC`, `maBH`, `maTTSP`) VALUES (NULL, 'Chuột không dây Logitech B175', '150000', '10', '0', '3', '36', '1', '1'),
+                                                                                                                    (NULL, 'Bàn phím cơ không dây Dareu EK807G TKL', '500000', '10', '0', '5', '36', '1', '1'),
+                                                                                                                    (NULL, 'Chuột chơi game có dây Logitech G203 Lightsync', '300000', '10', '0', '1', '36', '1', '1');
 
 
 
@@ -1778,9 +1778,9 @@ INSERT INTO `voucher` (`maVoucher`, `tenVoucher`, `maTLV`, `giaTri`, `soLuong`, 
                                                                                                 (NULL, 'Giảm 5%', '2', '5', '20', NULL),
                                                                                                 (NULL, 'Giảm 10%', '2', '10', '20', NULL),
                                                                                                 (NULL, 'Giảm 15%', '2', '15', '20', NULL),
-                                                                                                (NULL, 'Tặng Chuột không dây Logitech B175', '3', '150000', '10', '44'),
-                                                                                                (NULL, 'Tặng Bàn phím cơ không dây Dareu EK807G TKL', '3', '500000', '10', '45'),
-                                                                                                (NULL, 'Tặng Chuột chơi game có dây Logitech G203 Lightsync', '3', '300000', '10', '46');
+                                                                                                (NULL, 'Tặng Chuột không dây Logitech B175', '3', '150000', '10', '109'),
+                                                                                                (NULL, 'Tặng Bàn phím cơ không dây Dareu EK807G TKL', '3', '500000', '10', '110'),
+                                                                                                (NULL, 'Tặng Chuột chơi game có dây Logitech G203 Lightsync', '3', '300000', '10', '111');
 
 -- Bảng nhập kho
 INSERT INTO `nhap_kho` (`maNK`, `maNPP`, `ngayNhap`, `maNV`) VALUES (NULL, '1', '2022-08-03 09:59:39.000000', '1'),

@@ -180,7 +180,7 @@
                                                         @method('PUT')
                                                         @csrf
                                                         <input type="hidden" name="cancelReason" class="cancelReason"/>
-                                                        <button class="btn btn-danger c-cancel" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                        <button class="btn btn-danger c-cancel" >
                                                             Huỷ
                                                         </button>
                                                     </form>
@@ -201,7 +201,7 @@
                                                         @method('PUT')
                                                         @csrf
                                                         <input type="hidden" name="cancelReason" class="cancelReason"/>
-                                                        <button class="btn btn-danger c-cancel" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                        <button class="btn btn-danger c-cancel" >
                                                             Huỷ
                                                         </button>
                                                     </form>
@@ -224,7 +224,7 @@
                                                         @method('PUT')
                                                         @csrf
                                                         <input type="hidden" name="cancelReason" class="cancelReason"/>
-                                                        <button class="btn btn-danger c-cancel" onclick="return confirm('Xác nhận huỷ đơn?')">
+                                                        <button class="btn btn-danger c-cancel" >
                                                             Huỷ
                                                         </button>
                                                     </form>
@@ -263,6 +263,10 @@
         <?php } ?>
         $(function(){
             $('.c-cancel').on('click', function(){
+                let c = confirm('Xác nhận huỷ đơn?')
+                if(!c){
+                    return false
+                }
                 let message = prompt('Nhập lý do huỷ đơn')
                 if(message === null){
                     alert('Huỷ đơn thất bại')

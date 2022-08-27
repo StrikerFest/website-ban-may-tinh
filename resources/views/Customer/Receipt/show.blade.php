@@ -12,6 +12,10 @@
             transform: translateX(-50%);
             display: none;
         }
+        .card-header {
+            color: #fff;
+            background: #ff0000;
+        }
         .voucher-table {
             width: 100%;
         }
@@ -225,7 +229,7 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="m-0 font-weight-bold text-danger">Voucher được áp dụng</h6>
+                        <h6 class="m-0 font-weight-bold">Voucher được áp dụng</h6>
                     </div>
                     <div class="col-md-6 text-right">
                         <button class="fa fa-times border-radius-25" id="closeModal"></button>

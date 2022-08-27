@@ -39,7 +39,7 @@
                                         @error('tenVoucher')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="text" class="form-control" id="exampleProduct" placeholder="Voucher code" name="tenVoucher" value="{{ $Voucher->tenVoucher }}">
+                                        <input type="text" class="form-control" id="exampleProduct" placeholder="Voucher name" name="tenVoucher" value="{{ $Voucher->tenVoucher }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -130,6 +130,7 @@
                 $('#dynamic-div').css({display: 'block'})
                 $('span.select2').css({width: '100%'})
                 $('#giaTri').attr({placeholder: 'Value', readonly: true})
+                $('#resizable').addClass('col-sm-6 mb-6 mb-sm-0').removeClass('col-sm-12 mb-6 mb-sm-0')
             }
 
             //Chọn tặng phẩm sẽ tự động điền vào trường giá trị
