@@ -141,8 +141,8 @@
                                                             <p class="mb-2 md:ml-4 text-center">
 
                                                                 Giảm
-                                                                {{ number_format($item->giaSP * ($item->giamGia / 100)) }}
-                                                                VND
+                                                                {{ number_format($item->giamGia) }}
+                                                                %
                                                             </p>
                                                         </td>
                                                         <td>

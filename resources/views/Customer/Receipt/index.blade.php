@@ -20,7 +20,6 @@
                     {{-- if (session()->has('khachHang')) { --}}
                     <form action="{{ route('receiptCustomer.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" value="{{ Cart::getTotal() }}" name="tongTien">
                         <div class="grid width-100 text-dark">
                             <div class="row">
                                 {{-- Form mua hàng --}}
@@ -153,7 +152,13 @@
                                                 {{-- Tiêu đề bảng --}}
 
                                                 <tbody style="border: 1px solid lightgray">
+                                                    @php
+                                                        $countReduce = 0;
+                                                    @endphp
                                                     @foreach ($cartItems as $item)
+                                                        @php
+                                                            $countReduce += ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity;
+                                                        @endphp
                                                         <tr>
                                                             <td class="hidden pb-4 md:table-cell" style="width: 15%">
                                                                 <a href="{{ route('product.show', $item->id) }}">
@@ -166,14 +171,20 @@
                                                             <td>
                                                                 <a href="{{ route('product.show', $item->id) }}">
                                                                     <p class="mb-2 md:ml-4">{{ $item->name }}</p>
-
+                                                                    Sản phẩm
                                                                 </a>
                                                                 <h5>Số lượng: {{ $item->quantity }}</h5>
                                                             </td>
                                                             <td class="hidden text-center md:table-cell padding-10"
                                                                 style="padding-top: 0px">
-                                                                <span class="">
-                                                                    {{ number_format($item->price) }} VND
+                                                                <span class="text-dark">
+                                                                    {{ number_format($item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity) }}
+                                                                    VND
+                                                                </span>
+                                                                <br>
+                                                                <span>
+                                                                    Giảm
+                                                                    {{ number_format(($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity) }}
                                                                 </span>
                                                             </td>
 
@@ -196,10 +207,12 @@
                                     <div class="col-md-12">
                                         <div class="d-flex text-bold"
                                             style="justify-content: end;font-size: 2.3em;color:red">
-                                            {{ number_format(Cart::getTotal()) }} VND
+                                            {{ number_format(Cart::getTotal() - $countReduce) }} VND
                                         </div>
+                                        <input type="hidden" value="{{ Cart::getTotal() - $countReduce }}"
+                                            name="tongTien">
                                         <div class="d-flex  text-bold" style="justify-content: end;font-size: 1em;">
-                                            ( Đã bao gồm VAT nếu có)
+                                            ( Tiết kiệm được {{ number_format($countReduce) }} VNĐ!!!)
                                         </div>
                                     </div>
                                     {{-- Hết - Thành tiền --}}
@@ -311,7 +324,7 @@
         alert('{{ session()->get('momoCancel') }}')
         <?php } ?>
         <?php if(session()->has('moneyLimit')){ ?>
-            alert('{{session()->get('moneyLimit')}}')
+        alert('{{ session()->get('moneyLimit') }}')
         <?php } ?>
     </script>
 </body>

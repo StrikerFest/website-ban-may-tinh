@@ -170,6 +170,8 @@
                     @php
                         $counterCart = 0;
                         $sumCart = 0;
+                        $reduceCart = 0;
+
                     @endphp
                     @foreach ($cartItems as $item)
                         @if ($counterCart < 2)
@@ -185,12 +187,14 @@
                                     <div class="text-truncate">{{ $item->name }}</div>
                                     <div class="small text-gray-500">{{ number_format($item->price) }} VND</div>
                                     <div>Số lượng: {{ $item->quantity }}</div>
-                                    <div>Tổng: {{ number_format($item->price * $item->quantity) }} VND</div>
+                                    <div>Tổng: {{ number_format($item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity) }} VND</div>
+                                    <div>Tiết kiệm: {{ number_format(($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity) }} VNĐ </div>
                                 </div>
                             </a>
                             @php
                                 $counterCart += 1;
-                                $sumCart += $item->price * $item->quantity;
+                                $sumCart += $item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity;
+                                $reduceCart +=  ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent / 100)) * $item->quantity;
                             @endphp
                         @else
                             <a class="dropdown-item d-flex align-items-center" href="{{ route('cart.list') }}">
@@ -208,6 +212,7 @@
 
                     <div class="font-weight-bold text-danger">
                         <div>Tổng: {{ number_format($sumCart) }} VND</div>
+                        <div>Tiết kiệm: {{ number_format($reduceCart) }} VND</div>
                     </div>
                 </div>
                 <a class="dropdown-item text-center small text-dark" href="{{ route('cart.list') }}">Mở giỏ

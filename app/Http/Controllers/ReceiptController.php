@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Mail\DemoEmail;
 use App\Models\DetailReceiptModel;
 use App\Models\ProductImageModel;
+use App\Models\ProductVoucherModel;
 use App\Models\ReceiptModel;
 use App\Models\UserModel;
+use App\Models\VoucherDetailReceiptModel;
+use App\Models\VoucherModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -130,9 +133,9 @@ class ReceiptController extends Controller
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
         // dd($jsonResult);
-        if(!isset($jsonResult['payUrl'])){
+        if (!isset($jsonResult['payUrl'])) {
             return back()->with('moneyLimit', $jsonResult['message']);
-        }else{
+        } else {
             return redirect()->to($jsonResult['payUrl']);
         }
         // $returned_val = $jsonResult['payUrl'];
@@ -213,23 +216,48 @@ class ReceiptController extends Controller
                     $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
 
                     $cartItems = \Cart::getContent();
+                    $reducePrice = 0;
 
                     foreach ($cartItems as $cart) {
                         $hoaDonChiTiet = new DetailReceiptModel();
 
                         $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
-                        $giaSP = $SP->giaSP;
+                        $giaSP = $cart->price;
                         $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
-                        $hoaDonChiTiet->maSP = $cart->id;
+                        $hoaDonChiTiet->maSP = $cart->attributes->itemId;
                         $hoaDonChiTiet->soLuong = $cart->quantity;
                         $hoaDonChiTiet->giaSP = $giaSP;
-                        $hoaDonChiTiet->giamGia = $SP->giamGia;
+                        $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
+                        $reducePrice += $hoaDonChiTiet->giamGia;
                         $hoaDonChiTiet->save();
+
+                        $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+                            ->where('san_pham_voucher.maSP', $cart->attributes->itemId)
+                            ->get();
+
+                        $maHoaDonCTMoiNhat = DB::table('hoa_don_chi_tiet')->max('maHDCT');
+                        foreach ($productPromotion as $PP) {
+                            if ($PP->kichHoat == 1) {
+                                $voucherHDCT = new VoucherDetailReceiptModel();
+
+                                $voucherHDCT->maHDCT = $maHoaDonCTMoiNhat;
+
+                                $voucherHDCT->maVoucher = $PP->maVoucher;
+                                $voucherHDCT->save();
+
+                                //
+                                $voucher = VoucherModel::find($PP->maVoucher);
+                                $voucher->soLuong -= 1;
+                                $voucher->save();
+                                //
+                            }
+                        }
                     }
 
                     $objDemo = new \stdClass();
                     $objDemo->demo_one = 'Thanh toán bằng ví Momo';
                     $objDemo->demo_two = $sumPrice . " VND";
+                    $objDemo->reduce_price = number_format($reducePrice) . " VND";
                     $objDemo->idReceipt = $maHoaDonMoiNhat;
                     $objDemo->sender = 'BKCOM';
                     $objDemo->receiver = session()->get('tenKhachHang');
@@ -313,10 +341,10 @@ class ReceiptController extends Controller
         try {
             $payMethodCOD = $request->get('COD');
             $payMethodMomo = $request->get('momo');
-            if (session()->has("maillingSession") == 1)
-                session()->put("maillingSession", 0);
-            else
-                session()->put("maillingSession", 1);
+            // if (session()->has("maillingSession") == 1)
+            //     session()->put("maillingSession", 0);
+            // else
+            //     session()->put("maillingSession", 1);
             $cartItems = \Cart::getContent();
 
             if ($payMethodCOD == 'COD') {
@@ -376,16 +404,18 @@ class ReceiptController extends Controller
                 $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
 
                 $cartItems = \Cart::getContent();
+                $reducePrice = 0;
                 foreach ($cartItems as $cart) {
                     $hoaDonChiTiet = new DetailReceiptModel();
 
-                    $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
-                    $giaSP = $SP->giaSP;
+                    // $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
+                    $giaSP = $cart->price;
                     $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
-                    $hoaDonChiTiet->maSP = $cart->id;
+                    $hoaDonChiTiet->maSP = $cart->attributes->itemId;
                     $hoaDonChiTiet->soLuong = $cart->quantity;
                     $hoaDonChiTiet->giaSP = $giaSP;
-                    $hoaDonChiTiet->giamGia = $SP->giamGia;
+                    $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
+                    $reducePrice += $hoaDonChiTiet->giamGia;
                     // echo $hoaDon;
                     // echo "<br>-------<br>";
                     // echo "<br>MA HD: ";
@@ -402,7 +432,28 @@ class ReceiptController extends Controller
                     $hoaDonChiTiet->save();
 
                     // Có thể sẽ lỗi ở đây nếu đặt nhiều
+                    $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+                        ->where('san_pham_voucher.maSP', $cart->attributes->itemId)
+                        ->get();
+                    $maHoaDonCTMoiNhat = DB::table('hoa_don_chi_tiet')->max('maHDCT');
+                    foreach ($productPromotion as $PP) {
+                        if ($PP->kichHoat == 1) {
+                            $voucherHDCT = new VoucherDetailReceiptModel();
+
+                            $voucherHDCT->maHDCT = $maHoaDonCTMoiNhat;
+
+                            $voucherHDCT->maVoucher = $PP->maVoucher;
+                            $voucherHDCT->save();
+
+                            //
+                            $voucher = VoucherModel::find($PP->maVoucher);
+                            $voucher->soLuong -= 1;
+                            $voucher->save();
+                            //
+                        }
+                    }
                 }
+
                 $objDemo = new \stdClass();
                 // if ($request->paymentMethod == "COD") {
                 $objDemo->demo_one = 'Thanh toán tận nhà';
@@ -410,16 +461,17 @@ class ReceiptController extends Controller
                 //     $objDemo->demo_one = 'Chuyển khoản';
                 // }
                 $objDemo->demo_two = $sumPrice . " VND";
+                $objDemo->reduce_price = $reducePrice . " VND";
                 $objDemo->idReceipt = $maHoaDonMoiNhat;
                 $objDemo->sender = 'BKCOM';
                 $objDemo->receiver = session()->get('tenKhachHang');
                 // $request->session()->put('cartObject');
 
-                if (session()->get('maillingSession') == 1) {
-                    Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
-                    session()->put('maillingSession', 0);
-                    \Cart::clear();
-                }
+                // if (session()->get('maillingSession') == 1) {
+                Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
+                session()->put('maillingSession', 0);
+                \Cart::clear();
+                // }
             }
             if ($payMethodMomo == "momo") {
                 session()->put("vangLai", $request->get("isNotRegister"));
