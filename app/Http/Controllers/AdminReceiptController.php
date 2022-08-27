@@ -275,22 +275,45 @@ class AdminReceiptController extends Controller
     public function printPDF($id)
     {
         $HD = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
-        $HDCT = DetailReceiptModel::selectRaw('hoa_don_chi_tiet.soLuong, san_pham.tenSP, hoa_don_chi_tiet.giaSP, IF(
-            maTLV=1,
-            (hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)-voucher.giaTri),
-            IF(
-                maTLV=2,
-                (
-                    hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)-
-                    (hoa_don_chi_tiet.giaSP*voucher.giaTri/100)
-                ),
-                hoa_don_chi_tiet.giaSP-(hoa_don_chi_tiet.giaSP*hoa_don_chi_tiet.giamGia/100)
-            )
-        ) AS donGia')
-            ->leftJoin('voucher', 'voucher.maVoucher', '=' ,'hoa_don_chi_tiet.maVoucher')
-            ->join('san_pham', 'san_pham.maSP', '=', 'hoa_don_chi_tiet.maSP')
-            ->where('maHD', $id)
-            ->get();
+
+        $hoaDonCT = DB::table('hoa_don_chi_tiet')
+                ->select(['hoa_don_chi_tiet.*', 'maVoucher', 'tenSP'])
+                ->leftJoin('voucher_hoa_don_chi_tiet', 'voucher_hoa_don_chi_tiet.maHDCT', '=', 'hoa_don_chi_tiet.maHDCT')
+                ->join('san_pham', 'san_pham.maSP', '=', 'hoa_don_chi_tiet.maSP')
+                ->where('maHD', $id)
+                ->groupBy('hoa_don_chi_tiet.maHDCT')
+                ->orderBy('hoa_don_chi_tiet.maHDCT', 'ASC')
+                ->get();
+
+        $tienGiamVoucher = DB::select("
+            SELECT SUM(tienGiamVoucher) as tienGiamVoucher FROM
+                (SELECT
+                    hoa_don_chi_tiet.maHDCT,
+                    IF(
+                        maTLV=1,
+                        giaTri*hoa_don_chi_tiet.soLuong,
+                        IF(
+                            maTLV=2,
+                            (giaSP*giaTri/100)*hoa_don_chi_tiet.soLuong,
+                            0
+                        )
+                    ) AS tienGiamVoucher
+                FROM hoa_don_chi_tiet
+                JOIN hoa_don ON hoa_don.maHD = hoa_don_chi_tiet.maHD
+                LEFT JOIN voucher_hoa_don_chi_tiet ON voucher_hoa_don_chi_tiet.maHDCT = hoa_don_chi_tiet.maHDCT
+                LEFT JOIN voucher ON voucher_hoa_don_chi_tiet.maVoucher = voucher.maVoucher
+                WHERE hoa_don_chi_tiet.maHD = $id
+                ORDER BY maHDCT) AS X
+                GROUP BY maHDCT;
+            ");
+        $HDCT = [];
+        for($i = 0; $i < sizeof($hoaDonCT); $i++){
+            //Kết hợp object HDCT với object tiền giảm voucher
+            $mergedObj = (object)array_merge((array)$hoaDonCT[$i], (array)$tienGiamVoucher[$i]);
+            //Đưa object đã kết hợp vào $HDCT
+            array_push($HDCT, $mergedObj);
+        }
+        // dd($HDCT);
         // return view('Admin.Receipt.pdf', compact('HD', 'HDCT'));
         $pdf = PDF::loadView('Admin.Receipt.pdf', [
             'HD' => $HD,
