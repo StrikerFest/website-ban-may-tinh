@@ -379,7 +379,7 @@ class ReceiptController extends Controller
                 $maHoaDonMoiNhat = DB::table('hoa_don')->max('maHD');
 
                 $cartItems = \Cart::getContent();
-
+                $reducePrice = 0;
                 foreach ($cartItems as $cart) {
                     $hoaDonChiTiet = new DetailReceiptModel();
 
@@ -390,6 +390,7 @@ class ReceiptController extends Controller
                     $hoaDonChiTiet->soLuong = $cart->quantity;
                     $hoaDonChiTiet->giaSP = $giaSP;
                     $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
+                    $reducePrice += $hoaDonChiTiet->giamGia;
                     // echo $hoaDon;
                     // echo "<br>-------<br>";
                     // echo "<br>MA HD: ";
@@ -435,6 +436,7 @@ class ReceiptController extends Controller
                 //     $objDemo->demo_one = 'Chuyển khoản';
                 // }
                 $objDemo->demo_two = $sumPrice . " VND";
+                $objDemo->reduce_price = $reducePrice . " VND";
                 $objDemo->idReceipt = $maHoaDonMoiNhat;
                 $objDemo->sender = 'BKCOM';
                 $objDemo->receiver = session()->get('tenKhachHang');
