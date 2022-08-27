@@ -14,7 +14,7 @@
     <hr class="sidebar-divider my-0">
 
     <div class="text-center d-none d-md-inline p-1">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0 admin-toggle-sidebar" id="sidebarToggle"></button>
     </div>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
@@ -295,7 +295,7 @@
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0 admin-toggle-sidebar" id="sidebarToggle"></button>
     </div>
 
     <!-- Sidebar Message -->

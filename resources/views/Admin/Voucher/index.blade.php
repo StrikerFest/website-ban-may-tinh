@@ -190,7 +190,7 @@
                                         @error('tenVoucher')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                        <input type="text" class="form-control" id="exampleProduct" placeholder="Voucher code" name="tenVoucher">
+                                        <input type="text" class="form-control" id="exampleProduct" placeholder="Voucher name" name="tenVoucher">
                                     </div>
                                 </div>
                                 <div class="form-group row">

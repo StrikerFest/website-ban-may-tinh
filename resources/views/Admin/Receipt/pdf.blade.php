@@ -103,13 +103,13 @@
                         Tên hàng hoá
                     </th>
                     <th width="10%">
-                        Đơn giá gốc
-                    </th>
-                    <th width="10%">
                         Đơn giá
                     </th>
                     <th width="10%">
                         Số lượng
+                    </th>
+                    <th width="10%">
+                        Tiền giảm
                     </th>
                     <th width="15%">
                         Thành tiền
@@ -128,14 +128,17 @@
                         {{number_format($hdct->giaSP)}}
                     </td>
                     <td>
-                        {{number_format($hdct->donGia)}}
-                    </td>
-                    <td>
                         {{$hdct->soLuong}}
                     </td>
                     <td>
-                        {{number_format($hdct->donGia * $hdct->soLuong)}}
-                        <?php $tongTien += $hdct->donGia * $hdct->soLuong ?>
+                        <?php 
+                            $tienGiam = $hdct->tienGiamVoucher + ($hdct->giaSP * $hdct->giamGia /100) * $hdct->soLuong;
+                            echo number_format($tienGiam);
+                        ?>
+                    </td>
+                    <td>
+                        {{number_format($hdct->giaSP * $hdct->soLuong - $tienGiam)}}
+                        <?php $tongTien += $hdct->giaSP * $hdct->soLuong - $tienGiam ?>
                     </td>
                 </tr>
                 @endforeach
