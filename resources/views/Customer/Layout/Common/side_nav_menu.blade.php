@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-primary toggled  sidebar sidebar-dark accordion fixed-top "
-    style="background-color: rgba(20, 20, 20, 0.95)  !important;" id="accordionSidebar">
+    style="background-color: rgba(20, 20, 20, 0.95)  !important; " id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <div class="sidebar-brand d-flex align-items-center justify-content-center sidenav-text side" ">
@@ -38,13 +38,13 @@
         <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-desktop sidenav-header"></i>
-            <span>Máy tính bàn</span>
+            <span style="color: gray !important">Máy tính bàn</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
                 <div class="grid">
                     <div class="row">
-                           @foreach ($listTheLoaiCha as $TLCha)
+                            @foreach ($listTheLoaiCha as $TLCha)
         @if ($TLCha->tenTL == 'Máy tính bàn')
             {{-- PC theo hãng --}}
             <div class="col-md-4">
@@ -164,7 +164,7 @@
         <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
             data-target="#collapseLaptop" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-laptop sidenav-header"></i>
-            <span>Laptop</span>
+            <span style="color: gray !important">Laptop</span>
         </a>
         <div id="collapseLaptop" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -295,10 +295,10 @@
     <!-- Nav Item - Màn hình-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseMH"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseMH" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-desktop sidenav-header"></i>
-            <span>Màn hình</span>
+            <span style="color: gray !important">Màn hình</span>
         </a>
         <div id="collapseMH" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -418,10 +418,10 @@
     <!-- Nav Item - Chuột-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseMouse"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseMouse" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-solid fa-mouse sidenav-header"></i>
-            <span>Chuột</span>
+            <span style="color: gray !important">Chuột</span>
         </a>
         <div id="collapseMouse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -541,10 +541,10 @@
     <!-- Nav Item - Bàn phím-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseBP"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseBP" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-keyboard sidenav-header"></i>
-            <span>Bàn phím</span>
+            <span style="color: gray !important">Bàn phím</span>
         </a>
         <div id="collapseBP" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -671,10 +671,10 @@
     <!-- Nav Item - CPU-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseCPU"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseCPU" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-microchip sidenav-header"></i>
-            <span>CPU</span>
+            <span style="color: gray !important">CPU</span>
         </a>
         <div id="collapseCPU" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -794,10 +794,10 @@
     <!-- Nav Item - Bo mạch chủ-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseBMC"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseBMC" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-keyboard sidenav-header"></i>
-            <span>Bo mạch chủ</span>
+            <span style="color: gray !important">Bo mạch chủ</span>
         </a>
         <div id="collapseBMC" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -826,7 +826,8 @@
                                         @if ($TL->tenTL == 'Bo mạch chủ')
                                             <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}"
                                                 method="GET">
-                                                <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                                <input type="hidden" name="theLoaiCha"
+                                                    value="{{ $TLCha->maTL }}">
                                                 <input type="hidden" name="loai" value="TLC">
                                                 <button class="collapse-item width-100">
                                                     {{ $TL->tenTLC }}
@@ -838,7 +839,8 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Bo mạch chủ theo giá:</h6>
                                     {{--  --}}
-                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}" method="GET">
+                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <input type="hidden" name="loai" value="tien">
 
@@ -917,10 +919,10 @@
     <!-- Nav Item - RAM-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseRAM"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseRAM" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-memory sidenav-header"></i>
-            <span>RAM</span>
+            <span style="color: gray !important">RAM</span>
         </a>
         <div id="collapseRAM" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -949,7 +951,8 @@
                                         @if ($TL->tenTL == 'RAM')
                                             <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}"
                                                 method="GET">
-                                                <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                                <input type="hidden" name="theLoaiCha"
+                                                    value="{{ $TLCha->maTL }}">
                                                 <input type="hidden" name="loai" value="TLC">
                                                 <button class="collapse-item width-100">
                                                     {{ $TL->tenTLC }}
@@ -961,7 +964,8 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">RAM theo giá:</h6>
                                     {{--  --}}
-                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}" method="GET">
+                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <input type="hidden" name="loai" value="tien">
 
@@ -1040,10 +1044,10 @@
     <!-- Nav Item - VGA-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseVGA"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseVGA" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-memory sidenav-header"></i>
-            <span>VGA</span>
+            <span style="color: gray !important">VGA</span>
         </a>
         <div id="collapseVGA" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -1072,7 +1076,8 @@
                                         @if ($TL->tenTL == 'VGA')
                                             <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}"
                                                 method="GET">
-                                                <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                                <input type="hidden" name="theLoaiCha"
+                                                    value="{{ $TLCha->maTL }}">
                                                 <input type="hidden" name="loai" value="TLC">
                                                 <button class="collapse-item width-100">
                                                     {{ $TL->tenTLC }}
@@ -1084,7 +1089,8 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">VGA theo giá:</h6>
                                     {{--  --}}
-                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}" method="GET">
+                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <input type="hidden" name="loai" value="tien">
 
@@ -1163,10 +1169,10 @@
     <!-- Nav Item - Nguồn-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse" data-target="#collapseNguon"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
+            data-target="#collapseNguon" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-car-battery sidenav-header"></i>
-            <span>Nguồn</span>
+            <span style="color: gray !important">Nguồn</span>
         </a>
         <div id="collapseNguon" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white collapse-inner rounded " style="width: 400%">
@@ -1195,7 +1201,8 @@
                                         @if ($TL->tenTL == 'Nguồn')
                                             <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}"
                                                 method="GET">
-                                                <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
+                                                <input type="hidden" name="theLoaiCha"
+                                                    value="{{ $TLCha->maTL }}">
                                                 <input type="hidden" name="loai" value="TLC">
                                                 <button class="collapse-item width-100">
                                                     {{ $TL->tenTLC }}
@@ -1207,7 +1214,8 @@
                                 <div class="col-md-4">
                                     <h6 class="collapse-header text-danger">Nguồn theo giá:</h6>
                                     {{--  --}}
-                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}" method="GET">
+                                    <form action="{{ route('categoryCustomer.show', 'duoi5trieu') }}"
+                                        method="GET">
                                         <input type="hidden" name="theLoaiCha" value="{{ $TLCha->maTL }}">
                                         <input type="hidden" name="loai" value="tien">
 
@@ -1297,15 +1305,15 @@
     </form> --}}
     <li class="nav-item" style="color: black">
         {{-- Title --}}
-    <form action="{{ route('categoryCustomer.show', 'null') }}">
-        <input type="hidden" name="search">
-        <input type="hidden" name="loai" value="all">
-        <button class="nav-link collapsed sidenav-text  pt-0 pb-0"  data-toggle="collapse" data-target=""
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-memory sidenav-header"></i>
-            <span>Xem thêm nữa</span>
-        </button>
-    </form>
+        <form action="{{ route('categoryCustomer.show', 'null') }}">
+            <input type="hidden" name="search">
+            <input type="hidden" name="loai" value="all">
+            <button class="nav-link collapsed sidenav-text  pt-0 pb-0" data-toggle="collapse" data-target=""
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-memory sidenav-header"></i>
+                <span>Xem thêm nữa</span>
+            </button>
+        </form>
 
     </li>
     <!-- Nav Item - Pages Collapse Menu -->

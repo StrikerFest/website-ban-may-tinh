@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogCommentModel;
+use App\Models\BlogContentModel;
 use App\Models\BlogModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class BlogController extends Controller
 
         $listTheLoaiCha = DB::table('the_loai')->get();
 
-        $listBlog = DB::table('bai_viet')->get();
+        $listBlog = DB::table('bai_viet')->where('theLoai',0)->get();
         // dd($cartItems);
         return view('Customer.Blog.index', [
             'cartItems' =>  $cartItems,
@@ -87,11 +88,14 @@ class BlogController extends Controller
         // dd($cartItems);
         $listNguoiDung = UserModel::get();
         $baiViet = BlogModel::findOrFail($id);
+        $listNoiDung = BlogContentModel::where('maBV',$id)->get();
         $blogComment = BlogCommentModel::where('maBLC','!=',null)->get();
         $blogCommentMain = BlogCommentModel::where('maBLC',null)->get();
+
         return view('Customer.Blog.show', [
             'cartItems' =>  $cartItems,
             'baiViet' =>  $baiViet,
+            'listNoiDung' =>  $listNoiDung,
             'blogComment' =>  $blogComment,
             'blogCommentMain' =>  $blogCommentMain,
             'listNguoiDung' =>  $listNguoiDung,

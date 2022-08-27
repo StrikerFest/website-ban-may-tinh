@@ -484,8 +484,12 @@ class CategoryController extends Controller
         $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
             ->select('san_pham_voucher.*','voucher.tenVoucher','voucher.giaTri','voucher.soLuong')
             ->get();
+        $listTheLoaiCha = DB::table('the_loai')->get();
+        $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
         return view('Customer.ProductCategory.show', [
             'cartItems' => $cartItems,
+            'listTheLoaiCha' => $listTheLoaiCha,
+            'listTheLoaiSidenav' => $listTheLoaiSidenav,
             'listSanPham' => $listSanPham,
             'productImage' => $productImage,
             'listNhaSanXuat' => $listNhaSanXuat,

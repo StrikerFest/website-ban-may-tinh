@@ -242,10 +242,10 @@ VALUES (NULL,5,'Năng suất kinh ngạc, chất lượng bền bỉ',null,
 -- Blog
 INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
 VALUES (NULL,6,'Chất lượng và chính hãng','STOCK.jpg',
-'Cửa hàng kinh doanh máy tính lâu đời từ 2008, sản phẩm chính hãng, có giấy phép kinh doanh từ các hãng sản xuất điện tử lớn nhất toàn cầu');
+'. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum');
 INSERT INTO `noi_dung_bai_viet` (`maNDBV`, `maBV`, `tieuDe`,`anh`,`noiDung`)
 VALUES (NULL,6,'Giá cả hợp lý - Khuyến mãi không ngừng',null,
-'BKCOM hướng đến sinh viên và giới trẻ, giá cả luôn hợp lý, giao hàng miễn phí và luôn luôn có khuyến mãi cho mỗi món hàng, đặc biệt là cho sinh viên');
+'BKCOM hướng đến sinh viên và giới trẻ, giá cả luôn hợp lý, giao hàng miễn phí và luôn luôn có khuyến mãi cho mỗi món hàng, đặc biệt là cho sinh viên. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum');
 
 -- ==========================================================================================================
 -- Bảng Sản phẩm
