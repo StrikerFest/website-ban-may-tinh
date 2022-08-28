@@ -2,6 +2,7 @@
 
 <head>
     @include('Customer.Layout.Common.meta')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 @include('Customer.Layout.Common.header')
 
@@ -73,44 +74,47 @@
                                                             <div class="h-10 w-28">
                                                                 <div class="relative flex flex-row w-full h-8">
 
-                                                                    <form action="{{ route('cart.update') }}"
+                                                                    <!-- <form action="{{ route('cart.update') }}"
                                                                         method="POST">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id"
+                                                                        @csrf -->
+                                                                        <input type="hidden" name="id" class="cart-id"
                                                                             value="{{ $item->id }}">
                                                                         <div
                                                                             style="display:flex; flex-direction: column; justify-content: center; align-items:center">
                                                                             <div class="padding-bottom-5">
                                                                                 <button type="button"
-                                                                                    class=" btn btn-danger"
+                                                                                    class=" btn btn-danger decrease"
                                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i
                                                                                         class="fa fa-arrow-left"></i></button>
-                                                                                <input type="number" name="quantity"
-                                                                                    min="1" readonly
+                                                                                <input type="number" name="quantity" class="item-quantity"
+                                                                                    min="1"
                                                                                     value="{{ $item->quantity }}"
                                                                                     class=" text-center bg-gray-300"
                                                                                     style="width:50" />
                                                                                 <button type="button"
-                                                                                    class="btn btn-danger"
+                                                                                    class="btn btn-danger increase"
                                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i
                                                                                         class="fa fa-arrow-right"></i></button>
                                                                             </div>
-                                                                            <button type="submit"
+                                                                            <!-- <button type="submit"
                                                                                 class=" text-white bg-gradient-secondary border-radius-10"
-                                                                                style="width:75%">Cập nhật</button>
+                                                                                style="width:75%">Cập nhật</button> -->
                                                                         </div>
-                                                                    </form>
+                                                                    <!-- </form> -->
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="hidden text-center md:table-cell padding-10"
                                                             style="padding-top: 0px">
+                                                            <input type="hidden" value="{{ $item->price }}">
                                                             @php
                                                                 $countReducePrice += $item->attributes->reduceFlat * $item->quantity + ($item->price * $item->attributes->reducePercent / 100) * $item->quantity;
                                                             @endphp
                                                             <span class="">
-                                                                {{ number_format($item->price * $item->quantity - $item->attributes->reduceFlat * $item->quantity - ($item->price * $item->attributes->reducePercent) / 100 * $item->quantity) }}
-                                                                VND
+                                                                <span>
+                                                                    {{ number_format($item->price * $item->quantity - $item->attributes->reduceFlat * $item->quantity - ($item->price * $item->attributes->reducePercent) / 100 * $item->quantity) }} VND
+                                                                </span>
+                                                                <input type="hidden">
                                                                 <br>
                                                                 (Giảm
                                                                 {{ number_format($item->attributes->reduceFlat * $item->quantity + ($item->price * $item->attributes->reducePercent) / 100  * $item->quantity)}} VNĐ từ voucher và giảm giá)
@@ -136,7 +140,15 @@
                                     @if (sizeof($cartItems) == 0)
                                     @else
                                         <div class="d-flex padding-10" style="justify-content: end">
-                                            Tổng : {{ number_format(Cart::getTotal() - $countReducePrice) }} VND (Tổng voucher giảm {{number_format($countReducePrice)}} VNĐ)
+                                            Tổng : &nbsp;
+                                            <span id="final-price">
+                                                {{ number_format(Cart::getTotal() - $countReducePrice) }}
+                                            </span>
+                                            VND (Tổng voucher giảm &nbsp;
+                                            <span>
+                                                {{number_format($countReducePrice)}} 
+                                            </span>
+                                            VNĐ)
                                         </div>
                                     @endif
                                     <div class="d-flex" style="justify-content: end;">
@@ -186,7 +198,93 @@
     </div>
     <!-- End of Page Wrapper -->
     @include('Customer.Layout.Common.bottom_script')
-    <script></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(function(){
+            function getFinalPrice(){
+                let abc = $('.item-quantity')
+                console.log('abc', abc)
+                let sum = 0;
+                for(let i = 0; i <abc.length; i++){
+                    let quantityTemp = abc.eq(i).val();
+                    let priceTemp = abc.eq(i).closest('td').next().children().eq(0).val();
+                    let totalPriceTemp = quantityTemp*priceTemp
+                    sum += totalPriceTemp
+                }
+                $('#final-price').html(sum.toLocaleString());
+            }
+
+            $('.item-quantity').change(function(){
+                if($(this).val() < 1){
+                    $(this).val(1)
+                }
+                let cartId = $(this).parent().parent().prev().val();
+                let quantity = $(this).val();
+                let price = $(this).closest('td').next().children().eq(0).val();
+                let totalPrice = (quantity*price).toLocaleString()+ ' VND';
+                $(this).closest('td').next().children().eq(1).children().eq(0).html(totalPrice);
+                $.ajax({
+                    url: "{{ url('update-cart') }}",
+                    type: "post",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": cartId,
+                        "quantity": quantity,
+                    },
+                    success: function(res){
+                        console.log('cartID', res[0], 'quantity', res[1])
+                    }
+                })
+                getFinalPrice();
+            });
+
+            $('.decrease').click(function(){
+                let quantity = $(this).next().val();
+                let cartId = $(this).parent().parent().prev().val();
+                let price = $(this).closest('td').next().children().eq(0).val();
+                let totalPrice = (quantity*price).toLocaleString()+ ' VND';
+                $(this).closest('td').next().children().eq(1).children().eq(0).html(totalPrice);
+                $.ajax({
+                    url: "{{ url('update-cart') }}",
+                    type: "post",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": cartId,
+                        "quantity": quantity,
+                    },
+                    success: function(res){
+                        console.log('cartID', res[0], 'quantity', res[1])
+                    }
+                })
+                getFinalPrice();
+            });
+            
+            $('.increase').click(function(){
+                let quantity = $(this).prev().val();
+                let cartId = $(this).parent().parent().prev().val();
+                let price = $(this).closest('td').next().children().eq(0).val();
+                let totalPrice = (quantity*price).toLocaleString()+ ' VND';
+                $(this).closest('td').next().children().eq(1).children().eq(0).html(totalPrice);
+                $.ajax({
+                    url: "{{ url('update-cart') }}",
+                    type: "post",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": cartId,
+                        "quantity": quantity,
+                    },
+                    success: function(res){
+                        console.log('cartID', res[0], 'quantity', res[1])
+                    }
+                })
+                getFinalPrice();
+            });
+        });
+    </script>
 </body>
 
 </html>
