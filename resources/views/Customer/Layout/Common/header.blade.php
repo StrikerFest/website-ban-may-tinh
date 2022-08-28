@@ -175,6 +175,11 @@
                     @endphp
                     @foreach ($cartItems as $item)
                         @if ($counterCart < 2)
+                        @php
+                            $quantity =  $item->quantity;
+                            if($quantity > 9)
+                                $quantity = 9;
+                        @endphp
                             {{--  --}}
                             <a class="dropdown-item d-flex align-items-center"
                                 href="{{ route('product.show', $item->id) }}">
@@ -186,12 +191,12 @@
                                 <div class="font-weight-bold">
                                     <div class="text-truncate">{{ $item->name }}</div>
                                     <div class="small text-gray-500">{{ number_format($item->price) }} VND</div>
-                                    <div>Số lượng: {{ $item->quantity }}</div>
+                                    <div>Số lượng: {{ $quantity }}</div>
                                     <div>Tổng:
-                                        {{ number_format($item->price * $item->quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity) }}
+                                        {{ number_format($item->price * $quantity - ($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $quantity) }}
                                         VND</div>
                                     <div>Tiết kiệm:
-                                        {{ number_format(($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $item->quantity) }}
+                                        {{ number_format(($item->attributes->reduceFlat + ($item->price * $item->attributes->reducePercent) / 100) * $quantity) }}
                                         VNĐ </div>
                                 </div>
                             </a>

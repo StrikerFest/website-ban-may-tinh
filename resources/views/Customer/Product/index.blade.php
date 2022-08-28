@@ -311,7 +311,7 @@
                                                                 <i class="fa fa-minus"></i>
                                                             </button>
                                                             <input type="number" class="width-10 text-center"
-                                                                name="quantity" min="1" value="1">
+                                                                name="quantity" min="1"  max="9" value="1">
                                                             <button type="button"
                                                                 onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                                                 class="btn btn-danger border-top-right-radius-25 border-bottom-right-radius-25 ">
@@ -384,7 +384,7 @@
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                                 <input type="number" class="width-10 text-center"
-                                                    name="quantity" min="1" value="1">
+                                                    name="quantity" min="1" max="9" value="1">
                                                 <button type="button"
                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                                     class="btn btn-primary border-top-right-radius-25 border-bottom-right-radius-25 ">

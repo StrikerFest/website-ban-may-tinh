@@ -86,15 +86,30 @@
                                                                                     class=" btn btn-danger decrease"
                                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i
                                                                                         class="fa fa-arrow-left"></i></button>
-                                                                                <input type="number" name="quantity" class="item-quantity"
-                                                                                    min="1"
-                                                                                    value="{{ $item->quantity }}"
-                                                                                    class=" text-center bg-gray-300"
-                                                                                    style="width:50" />
+                                                                                        @if($item->quantity > 9)
+                                                                                        <input type="number" name="quantity" class="item-quantity"
+                                                                                        min="1"
+                                                                                        max="9"
+                                                                                        value="9"
+                                                                                        class=" text-center bg-gray-300"
+                                                                                        style="width:50" />
+                                                                                        @else
+                                                                                        <input type="number" name="quantity" class="item-quantity"
+                                                                                        min="1"
+                                                                                        max="9"
+                                                                                        value="{{ $item->quantity }}"
+                                                                                        class=" text-center bg-gray-300"
+                                                                                        style="width:50" />
+                                                                                        @endif
+
                                                                                 <button type="button"
                                                                                     class="btn btn-danger increase"
                                                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i
                                                                                         class="fa fa-arrow-right"></i></button>
+                                                                                        <br>
+                                                                                        <span>
+                                                                                            Tối đa 9 sản phẩm - Liên hệ để mua nhiều hơn
+                                                                                        </span>
                                                                             </div>
                                                                             <!-- <button type="submit"
                                                                                 class=" text-white bg-gradient-secondary border-radius-10"
@@ -146,7 +161,7 @@
                                             </span>
                                             VND (Tổng voucher giảm &nbsp;
                                             <span>
-                                                {{number_format($countReducePrice)}} 
+                                                {{number_format($countReducePrice)}}
                                             </span>
                                             VNĐ)
                                         </div>
@@ -262,7 +277,7 @@
                 })
                 getFinalPrice();
             });
-            
+
             $('.increase').click(function(){
                 let quantity = $(this).prev().val();
                 let cartId = $(this).parent().parent().prev().val();
