@@ -46,10 +46,11 @@
                                 <h4>Lọc sản phẩm</h4>
                                 <form action="{{ route('categoryCustomer.show', 'null') }}">
                                     <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
-                                    <input type="hidden" name="theLoaiCon" value="{{ null }}">
+                                    {{-- <input type="hidden" name="theLoaiCon" value="{{ null }}">
                                     <input type="hidden" name="priceMin" value="{{ 0 }}">
                                     <input type="hidden" name="priceMax" value="{{ 10000000000 }}">
-                                    <input type="hidden" name="nhaSanXuat" value="{{ null }}">
+                                    <input type="hidden" name="nhaSanXuat" value="{{ null }}"> --}}
+                                    <input type="hidden" name="resetSoft" value="1">
                                     <button class="btn btn-danger">
                                         Hiển thị lại tất cả
                                     </button>
@@ -340,7 +341,7 @@
                                                     <input type="hidden" name="nhaSanXuat"
                                                         value="{{ $nhaSanXuatCate }}">
                                                 @endisset
-                                                <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
+                                                {{-- <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}"> --}}
                                                 {{-- Chuyển giá min --}}
                                                 @isset($priceMinCate)
                                                     <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">

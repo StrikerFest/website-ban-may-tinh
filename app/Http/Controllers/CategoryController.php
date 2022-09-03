@@ -197,16 +197,34 @@ class CategoryController extends Controller
             ->where('thong_so.tenTS', '!=', 'Dung lượng tối đa')
             ->get();
         // Lấy giá trị thông số
-        $listSanPhamThongSo = DB::table('san_pham_thong_so')
-            ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
-            ->join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
-            ->join('the_loai', 'the_loai_thong_so.maTL', '=', 'the_loai.maTL')
-            ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
-            ->where('the_loai_thong_so.maTL', $theLoaiCha)
-            ->where('the_loai_con.maTLC', $theLoaiConCate)
-            ->groupBy('giaTri')
-            ->get();
-
+        if ($theLoaiConCate == null && $theLoaiCha !== null)
+            $listSanPhamThongSo = DB::table('san_pham_thong_so')
+                ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                ->join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
+                ->join('the_loai', 'the_loai_thong_so.maTL', '=', 'the_loai.maTL')
+                ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
+                ->where('the_loai_thong_so.maTL', $theLoaiCha)
+                ->groupBy('giaTri')
+                ->get();
+        elseif ($theLoaiConCate !== null && $theLoaiCha == null)
+            $listSanPhamThongSo = DB::table('san_pham_thong_so')
+                ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                ->join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
+                ->join('the_loai', 'the_loai_thong_so.maTL', '=', 'the_loai.maTL')
+                ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
+                ->where('the_loai_con.maTLC', $theLoaiConCate)
+                ->groupBy('giaTri')
+                ->get();
+        else
+            $listSanPhamThongSo = DB::table('san_pham_thong_so')
+                ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
+                ->join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
+                ->join('the_loai', 'the_loai_thong_so.maTL', '=', 'the_loai.maTL')
+                ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
+                ->where('the_loai_thong_so.maTL', $theLoaiCha)
+                ->where('the_loai_con.maTLC', $theLoaiConCate)
+                ->groupBy('giaTri')
+                ->get();
         $countTS = 0;
         // Lấy thông số đầu
         $thongSoDauCate = $request->get('thongSoDau');
@@ -252,6 +270,12 @@ class CategoryController extends Controller
         // Xóa nhà sản xuất nếu bấm lại vào nhà sản xuất đã được chọn
         if ($request->get('removeTLC') == 1) {
             $theLoaiConCate = null;
+        }
+        // Reset trừ thể loại cha
+        if ($request->get('resetSoft') == 1) {
+            $nhaSanXuatCate = null;
+            $theLoaiConCate = null;
+            $thongSoCate = [];
         }
 
         //
