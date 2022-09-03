@@ -219,32 +219,32 @@ class CategoryController extends Controller
 
         $thongSoCate = [];
         $giaTriThongSoCate = null;
-
-        
         foreach ($listSanPhamThongSo as $SPTS) {
-            if($thongSoDauCate == $request->get('thongSo'. $SPTS->maTS)){
-                $thongSoDauCate = $request->get('thongSo'. $SPTS->maTS);
-                $giaTriThongSoDauCate = $request->get('giaTriThongSo'. $SPTS->maTS);
+            if ($thongSoDauCate == $request->get('thongSo' . $SPTS->maTS)) {
+                $thongSoDauCate = $request->get('thongSo' . $SPTS->maTS);
+                $giaTriThongSoDauCate = $request->get('giaTriThongSo' . $SPTS->maTS);
             }
-            if ($countTS == 0) {
-                $countTS++;
-                if ($giaTriThongSoDauCate !== null)
-                    $thongSoCate += [$thongSoDauCate => $giaTriThongSoDauCate];
+        }
+        if ($countTS == 0) {
+            $countTS++;
+            if ($giaTriThongSoDauCate !== null)
+                $thongSoCate += [$thongSoDauCate => $giaTriThongSoDauCate];
+        }
+        foreach ($listSanPhamThongSo as $SPTS) {
+
+            if ($request->get('thongSo' . $SPTS->maTS) == $SPTS->maTS) {
+                //// $data += [$category => $question];
+                //// $thongSoCate = $request->get('thongSo');
+                //// echo ('<br> $request->get("thongSo" . $SPTS->maTS)----------');
+                //// echo $request->get('thongSo' . $SPTS->maTS);
+                //// $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
+                if ($request->get('giaTriThongSo' . $SPTS->maTS) !== null)
+                    $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
+                //// echo ('<br> $thongSoCate[$request->get("thongSo" . $SPTS->maTS)]----------');
+                $giaTriThongSoCate = $request->get('giaTriThongSo' . $SPTS->maTS);
+                //// echo $thongSoCate[$request->get('thongSo' . $SPTS->maTS)];
             } else {
-                if ($request->get('thongSo' . $SPTS->maTS) == $SPTS->maTS) {
-                    //// $data += [$category => $question];
-                    //// $thongSoCate = $request->get('thongSo');
-                    //// echo ('<br> $request->get("thongSo" . $SPTS->maTS)----------');
-                    //// echo $request->get('thongSo' . $SPTS->maTS);
-                    //// $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
-                    if ($request->get('giaTriThongSo' . $SPTS->maTS) !== null)
-                        $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
-                    //// echo ('<br> $thongSoCate[$request->get("thongSo" . $SPTS->maTS)]----------');
-                    $giaTriThongSoCate = $request->get('giaTriThongSo' . $SPTS->maTS);
-                    //// echo $thongSoCate[$request->get('thongSo' . $SPTS->maTS)];
-                } else {
-                    $giaTriThongSoCate = null;
-                }
+                $giaTriThongSoCate = null;
             }
         }
         //// dd(!$thongSoCate);
@@ -487,7 +487,7 @@ class CategoryController extends Controller
         // $theLoaiConCate = $request->get('theLoaiCon');
         $nhaSanXuatCate = $request->get('nhaSanXuat');
         $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
-            ->select('san_pham_voucher.*','voucher.tenVoucher','voucher.giaTri','voucher.soLuong')
+            ->select('san_pham_voucher.*', 'voucher.tenVoucher', 'voucher.giaTri', 'voucher.soLuong')
             ->get();
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
