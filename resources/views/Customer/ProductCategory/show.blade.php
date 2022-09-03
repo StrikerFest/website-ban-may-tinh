@@ -373,7 +373,8 @@
                                                     {{-- Hiển thị thông số đã chọn nếu tồn tại --}}
                                                     @if ($thongSoCate[$SPTS->maTS] ?? null)
                                                         @if ($SPTS->giaTri == $thongSoCate[$SPTS->maTS])
-                                                            <input type="hidden" name="removeTS" value="{{$SPTS->maTS}}">
+                                                            <input type="hidden" name="removeTS"
+                                                                value="{{ $SPTS->maTS }}">
                                                             <button class=" text- btn "
                                                                 style="text-decoration: none;list-style: none;padding:0">
                                                                 <div
@@ -382,16 +383,17 @@
                                                                 </div>
                                                             </button>
                                                         @endif
-                                                    @endif
                                                     {{-- TODO: Thêm else vào đây nếu muốn bỏ các thông số khác thông số đã chọn --}}
+                                                    @else
                                                     <button class=" text- btn"
                                                         style="text-decoration: none;list-style: none;padding:0">
                                                         <div class="text-dark">
                                                             <li>{{ $SPTS->giaTri }}</li>
                                                         </div>
                                                     </button>
+                                                    @endif
+                                                </form>
                                             @endif
-                                            </form>
                                         @endforeach
                                         <hr class="border-red">
                                     </div>
