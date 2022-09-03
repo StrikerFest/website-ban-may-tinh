@@ -85,7 +85,7 @@ class CategoryController extends Controller
         $cartItems = \Cart::getContent();
 
         // Lấy dữ liệu mới từ filter
-        $productBrand = $request->get('nhaSanXuat');
+        $nhaSanXuatCate = $request->get('nhaSanXuat');
         $theLoaiConCate = $request->get('theLoaiCon');
 
         // PRICE MIN là giá được điền trong trường điền
@@ -146,7 +146,7 @@ class CategoryController extends Controller
         // Lấy mã thể loại con
         switch ($loai) {
             case 'NSX':
-                $productBrand = $id;
+                $nhaSanXuatCate = $id;
                 break;
             case 'TLC':
                 $theLoaiConCate = $id;
@@ -242,8 +242,12 @@ class CategoryController extends Controller
         }
 
         // Xóa thông số nếu bấm lại vào thông số đã được chọn
-        if($request->get('removeTS')){
+        if ($request->get('removeTS')) {
             unset($thongSoCate[$request->get('removeTS')]);
+        }
+        // Xóa nhà sản xuất nếu bấm lại vào nhà sản xuất đã được chọn
+        if ($request->get('removeNSX') == 1) {
+            $nhaSanXuatCate = null;
         }
 
         //
@@ -272,9 +276,9 @@ class CategoryController extends Controller
             ->selectRaw('count(san_pham.maSP) as SPC, san_pham.*,the_loai_con.*,san_pham_thong_so.*')
 
             // Nhà sản xuất
-            ->where(function ($query) use ($productBrand) {
-                if ($productBrand != null)
-                    $query->where('maNSX', $productBrand);
+            ->where(function ($query) use ($nhaSanXuatCate) {
+                if ($nhaSanXuatCate != null)
+                    $query->where('maNSX', $nhaSanXuatCate);
             })
             // Thể loại con
             ->where(function ($query) use ($theLoaiConCate) {
@@ -326,7 +330,7 @@ class CategoryController extends Controller
         // Kiểm tra nếu không có session thể loại con ( bấm từ ngoài vào hoặc chưa chọn bên trong trang vật phẩm)
         $theLoaiChaCate = $request->get('theLoaiCha');
         // $theLoaiConCate = $request->get('theLoaiCon');
-        $nhaSanXuatCate = $request->get('nhaSanXuat');
+
         // Lấy giá trị voucher để hiển thị giá giảm
         $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
             ->select('san_pham_voucher.*', 'voucher.tenVoucher', 'voucher.giaTri', 'voucher.soLuong')
