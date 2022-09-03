@@ -203,19 +203,13 @@ class CategoryController extends Controller
             ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
             ->where('the_loai_thong_so.maTL', $theLoaiCha)
             ->where('the_loai_con.maTLC', $theLoaiConCate)
-            //// ->select('*', DB::raw('COUNT(CASE giaTri WHEN the_loai_con.maTLC = ' . $theLoaiConCate .' THEN 1 ELSE NULL END) AS soSPCungGiaTri'))
-            //// ->select('*', DB::raw('count( giaTri) as soSPCungGiaTri'))
-
-            //// ->where('thongSo.ten',)
             ->groupBy('giaTri')
-            //// ->groupBy('san_pham_thong_so.maTS')
             ->get();
 
         $countTS = 0;
         // Lấy thông số
         $thongSoDauCate = $request->get('thongSoDau');
         $giaTriThongSoDauCate = $request->get('giaTriThongSoDau');
-        // dd($giaTriThongSoDauCate);
 
         $thongSoCate = [];
         $giaTriThongSoCate = null;
@@ -233,16 +227,9 @@ class CategoryController extends Controller
         foreach ($listSanPhamThongSo as $SPTS) {
 
             if ($request->get('thongSo' . $SPTS->maTS) == $SPTS->maTS) {
-                //// $data += [$category => $question];
-                //// $thongSoCate = $request->get('thongSo');
-                //// echo ('<br> $request->get("thongSo" . $SPTS->maTS)----------');
-                //// echo $request->get('thongSo' . $SPTS->maTS);
-                //// $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
                 if ($request->get('giaTriThongSo' . $SPTS->maTS) !== null)
                     $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
-                //// echo ('<br> $thongSoCate[$request->get("thongSo" . $SPTS->maTS)]----------');
                 $giaTriThongSoCate = $request->get('giaTriThongSo' . $SPTS->maTS);
-                //// echo $thongSoCate[$request->get('thongSo' . $SPTS->maTS)];
             } else {
                 $giaTriThongSoCate = null;
             }
@@ -251,7 +238,6 @@ class CategoryController extends Controller
         if($request->get('removeTS')){
             unset($thongSoCate[$request->get('removeTS')]);
         }
-        //// dd(!$thongSoCate);
         $priceMinCate = $priceMin;
         $priceMaxCate = $priceMax;
 
@@ -260,14 +246,9 @@ class CategoryController extends Controller
             ->join('san_pham_thong_so', 'san_pham_thong_so.maSP', '=', 'san_pham.maSP')
             ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
             ->where('san_pham.maTLC', $theLoaiConCate)
-            //// ->join('the_loai', 'the_loai_thong_so.maTL', '=', 'the_loai.maTL')
-            //// ->join('the_loai_con', 'the_loai_con.maTL', '=', 'the_loai.maTL')
             ->get();
         if (count($thongSoCate) !== 0)
             $listThongSoLoaiBo = DB::table('san_pham_thong_so')
-                // ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-                // ->join('san_pham_thong_so', 'san_pham_thong_so.maSP', '=', 'san_pham.maSP')
-                // ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
                 ->where(function ($query) use ($thongSoCate) {
                     if ($thongSoCate !== null)
                         foreach ($thongSoCate as $key => $value) {
@@ -311,17 +292,6 @@ class CategoryController extends Controller
                 if ($theLoaiCha1 != null)
                     $query->where('maTL', $theLoaiCha1);
             })
-            // Thông số đầu
-            // ->where(function ($query) use ($thongSoDauCate, $giaTriThongSoDauCate, $thongSoCate) {
-            //     if ($thongSoDauCate != null || $giaTriThongSoDauCate != null)
-            //         $query
-            //             ->where('giaTri', $giaTriThongSoDauCate)
-            //             ->orWhere(function ($query) use ($thongSoCate) {
-            //                 foreach ($thongSoCate as $key => $value) {
-            //                     $query->where('giaTri', $value);
-            //                 }
-            //             });
-            // })
             ->where(function ($query) use ($listThongSoLoaiBo) {
                 if ($listThongSoLoaiBo != null) {
                     foreach ($listThongSoLoaiBo as $TSLB) {
@@ -330,26 +300,6 @@ class CategoryController extends Controller
                     }
                 }
             })
-            // ->where(function ($query) use ($giaTriThongSoDauCate) {
-            //     if ($giaTriThongSoDauCate != null)
-            //         $query->where('giaTri', $giaTriThongSoDauCate);
-            // })
-            // ->where(function ($query) use ($thongSoCate) {
-            //     foreach ($thongSoCate as $key => $value) {
-            //         echo "<br>$value";
-            //         $query->orWhere('giaTri', $value)->where('maTS', $key);
-            //     }
-            // })
-
-            // // Thông số
-            // ->where(function ($query) use ($thongSoCate) {
-            //     if ($thongSoCate != null)
-            //         $query->where('maTS', $thongSoCate);
-            // })
-            // ->where(function ($query) use ($giaTriThongSoCate) {
-            //     if ($giaTriThongSoCate != null)
-            //         $query->where('giaTri', $giaTriThongSoCate);
-            // })
             // Tìm kiếm
             ->where(function ($query) use ($search) {
                 if ($search !== "")
@@ -357,74 +307,7 @@ class CategoryController extends Controller
                 else
                     $query->where('tenSP', 'like', '%%');
             });
-        // dd('Here');
-        $listSanPhamTemp = $listSanPham->get();
 
-
-        //// foreach ($listSanPham as $SP) {
-        ////     echo "<br>HERE1";
-        $countLoop = 0;
-        $countMax = count($thongSoCate);
-
-        // foreach ($listSanPhamTemp as $SP) {
-        //     foreach ($listSanPhamThongSoMotSP as $SPTSM) {
-        //         // 1
-        //         // 2 = 2
-        //         if ($SPTSM->maSP == $SP->maSP) {
-        //             if ($countMax !== 0) {
-        //                 if ($countLoop % $countMax == 0) {
-        //                     $countLoop = 0;
-        //                 }
-        //             } else {
-        //             }
-        //             foreach ($thongSoCate as $key => $value) {
-        //                 // i3 == i3
-        //                 // 64GB == 64GB
-        //                 // echo "<br>$key-OUT-KEY";
-        //                 // echo "<br>$value-OUT-VALUE<br>";
-
-        //                 if ($value == $SPTSM->giaTri) {
-        //                     // 1
-        //                     // 2
-        //                     $countLoop++;
-        //                     echo "<br>HERE-$value-VALUE-$SPTSM->giaTri<br>";
-        //                     echo "<br>$countLoop-YO-LOOP";
-        //                     echo "<br>$countMax-YO-MAX<br>";
-        //                 }
-        //                 // echo "<br>HERE-";
-        //                 // echo $SPTSM->giaTri;
-        //             }
-        //             if ($countLoop == $countMax) {
-        //                 // echo "<br>HERE-SUCCESS-ID-$SP->maSP<br>";
-
-        //                 // $listSanPham = $listSanPham->where('san_pham.maSP', $SP->maSP);
-        //                 $listSanPham = $listSanPham->where(function ($query) use ($SP) {
-        //                     if ($SP->maSP != null)
-        //                         $query->where('san_pham.maSP', $SP->maSP);
-        //                 });
-        //                 //     // If fit - process here
-        //                 // foreach ($thongSoCate as $key => $value) {
-        //                 //     $listSanPham = $listSanPham->where('maTS', $key);
-        //                 //     echo "<br>$key sad";
-        //                 //     $listSanPham = $listSanPham->where('giaTri', $value);
-        //                 //     echo "<br>$value das";
-        //                 // }
-        //             } else {
-        //                 $countLoop = 0;
-        //             }
-        //         }
-        //     }
-        // }
-
-        ///////
-
-        // foreach ($thongSoCate as $key => $value) {
-        //     $listSanPham = $listSanPham->where('maTS', $key);
-        //     echo "<br>$key sad";
-        //     $listSanPham = $listSanPham->where('giaTri', $value);
-        //     echo "<br>$value das";
-        // }
-        // $listSanPham = $listSanPham->where('san_pham.maSP', $SP->maSP);
         if (count($thongSoCate) !== 0)
             $listSanPham = $listSanPham
                 ->groupBy('san_pham.maSP')
@@ -434,57 +317,6 @@ class CategoryController extends Controller
             $listSanPham = $listSanPham
                 ->groupBy('san_pham.maSP')
                 ->get();
-        // dd(count($thongSoCate));
-        // dd($listSanPham);
-
-
-
-        // }
-        // dd($listSanPhamThongSoMotSP);
-        // die();
-
-        // session()->forget('search');
-        // // Nếu không có dữ liệu nhà sản xuất được chọn
-        // if ($request->get('nhaSanXuat') == null) {
-        //     // Nếu không có thể loại con
-        //     if ($theLoaiConCate == null) {
-        //         $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-        //             ->whereBetween('giaSP', [$priceMin, $priceMax])
-        //             ->where('maTL', $request->get('theLoaiCha'))
-        //             ->get();
-        //     }
-        //     // Nếu có thể loại con
-        //     else {
-        //         $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-        //             ->whereBetween('giaSP', [$priceMin, $priceMax])
-        //             ->where('maTL', $request->get('theLoaiCha'))
-        //             ->where('san_pham.maTLC', $theLoaiConCate)
-        //             ->get();
-        //     }
-        // }
-        // // Nếu có dữ liệu nhà sản xuất được chọn
-        // else {
-        //     // Nếu không có thể loại con
-        //     if ($theLoaiConCate == null) {
-        //         $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-        //             ->whereBetween('giaSP', [$priceMin, $priceMax])
-        //             ->where('maTL', $request->get('theLoaiCha'))
-        //             ->where('maNSX',  $request->get('nhaSanXuat'))
-        //             ->get();
-        //     }
-        //     // Nếu có thể loại con
-        //     else {
-        //         $listSanPham = DB::table('san_pham')->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-        //             ->whereBetween('giaSP', [$priceMin, $priceMax])
-        //             ->where('maTL', $request->get('theLoaiCha'))
-        //             ->where('san_pham.maTLC', $theLoaiConCate)
-        //             ->where('maNSX',  $request->get('nhaSanXuat'))
-        //             ->get();
-        //     }
-        // }
-
-        // // Lấy thể loại con đầu tiên - ĐỂ LÀM J ?
-        // $maTLCMin = DB::table('the_loai_con')->selectRaw('min(maTLC) as maTLC')->first();
 
         // Kiểm tra nếu không có session thể loại con ( bấm từ ngoài vào hoặc chưa chọn bên trong trang vật phẩm)
         $theLoaiChaCate = $request->get('theLoaiCha');
