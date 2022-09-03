@@ -247,6 +247,10 @@ class CategoryController extends Controller
                 $giaTriThongSoCate = null;
             }
         }
+
+        if($request->get('removeTS')){
+            unset($thongSoCate[$request->get('removeTS')]);
+        }
         //// dd(!$thongSoCate);
         $priceMinCate = $priceMin;
         $priceMaxCate = $priceMax;

@@ -373,6 +373,7 @@
                                                     {{-- Hiển thị thông số đã chọn nếu tồn tại --}}
                                                     @if ($thongSoCate[$SPTS->maTS] ?? null)
                                                         @if ($SPTS->giaTri == $thongSoCate[$SPTS->maTS])
+                                                            <input type="hidden" name="removeTS" value="{{$SPTS->maTS}}">
                                                             <button class=" text- btn "
                                                                 style="text-decoration: none;list-style: none;padding:0">
                                                                 <div
