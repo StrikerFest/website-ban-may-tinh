@@ -213,13 +213,13 @@
 
                             {{-- --------- --}}
                             {{-- @isset($nhaSanXuatCate) --}}
-                                <div class="col-md-12 text-center text-danger">
-                                    <hr class="border-red">
-                                    <h5>Nhu cầu sử dụng</h5>
-                                    <hr class="border-red">
-                                </div>
+                            <div class="col-md-12 text-center text-danger">
+                                <hr class="border-red">
+                                <h5>Nhu cầu sử dụng</h5>
+                                <hr class="border-red">
+                            </div>
                             {{-- @endisset --}}
-                            {{-- Nhu cầu --}}
+                            {{-- * Nhu cầu --}}
                             <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <ul>
                                     @foreach ($listTheLoai as $TL)
@@ -244,22 +244,22 @@
                                             <input type="hidden" name="priceMax"
                                                 value="{{ session()->get('currentPriceMax') }}">
                                             {{-- @isset($nhaSanXuatCate) --}}
-                                                @if ($TL->maTLC == $theLoaiConCate)
-                                                    <button class=" text- btn "
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div
-                                                            class="text-light bg-danger rounded padding-left-5 padding-right-5">
-                                                            <li>{{ $TL->tenTLC }}</li>
-                                                        </div>
-                                                    </button>
-                                                @else
-                                                    <button class=" text- btn"
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div class="text-dark">
-                                                            <li>{{ $TL->tenTLC }}</li>
-                                                        </div>
-                                                    </button>
-                                                @endif
+                                            @if ($TL->maTLC == $theLoaiConCate)
+                                                <button class=" text- btn "
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div
+                                                        class="text-light bg-danger rounded padding-left-5 padding-right-5">
+                                                        <li>{{ $TL->tenTLC }}</li>
+                                                    </div>
+                                                </button>
+                                            @else
+                                                <button class=" text- btn"
+                                                    style="text-decoration: none;list-style: none;padding:0">
+                                                    <div class="text-dark">
+                                                        <li>{{ $TL->tenTLC }}</li>
+                                                    </div>
+                                                </button>
+                                            @endif
                                             {{-- @endisset --}}
                                         </form>
                                     @endforeach
@@ -268,38 +268,41 @@
                             @php
                                 $countTS = 0;
                             @endphp
-                            {{-- Thông số --}}
+                            {{-- * Thông số --}}
                             @if (count($listSanPhamThongSo) !== 0)
+                                {{-- Lặp thông số --}}
                                 @foreach ($listThongSo as $TS)
                                     <div class="col-md-12 text-center text-danger">
                                         <hr class="border-red">
                                         <h5>{{ $TS->tenTS }}</h5>
+                                        {{-- Lặp các giá trị thông số có trong sản phẩm --}}
                                         @foreach ($listSanPhamThongSo as $SPTS)
+                                            {{-- Nếu giá trị thông số có mã thông số giống thông số --}}
                                             @if ($SPTS->maTS == $TS->maTS)
                                                 @php
                                                     $countTS = 0;
                                                 @endphp
-                                                {{-- <input type="checkbox">{{$SPTS->giaTri}}<br> --}}
+                                                {{-- Gửi lại vào controller --}}
                                                 <form action="{{ route('categoryCustomer.show', 'null') }}">
-                                                    @if ($theLoaiChaCate)
+                                                    @isset($theLoaiChaCate)
                                                         <input type="hidden" name="theLoaiCha"
                                                             value="{{ $theLoaiChaCate }}">
                                                     @endisset
-                                                    @isset($theLoaiChaCate)
+                                                    @isset($theLoaiConCate)
                                                         <input type="hidden" name="theLoaiCon"
                                                             value="{{ $theLoaiConCate }}">
                                                     @endisset
-                                                    {{-- Không rỗng --}}
                                                     @php
+                                                        // Lấy độ dài mảng thông số đã chọn
                                                         $sizeTS = sizeof($thongSoCate);
                                                     @endphp
+                                                    {{-- Điều kiện hiển thị các giá trị thông số đã và chưa được chọn --}}
                                                     @if ($sizeTS > 1)
+                                                        {{-- Lặp giá trị thông số đã được chọn - Chuyển nó --}}
                                                         @foreach ($thongSoCate as $key => $value)
                                                             {{-- Thông số thứ 2 trở đi --}}
                                                             @if ($countTS !== 0)
-                                                                <input type="hidden" name="ass2nd">
-                                                                <input type="hidden"
-                                                                    name="{{ 'thongSo' . $key }}"
+                                                                <input type="hidden" name="{{ 'thongSo' . $key }}"
                                                                     value="{{ $key }}">
                                                                 <input type="hidden"
                                                                     name="{{ 'giaTriThongSo' . $key }}"
@@ -309,58 +312,65 @@
                                                                 @php
                                                                     $countTS++;
                                                                 @endphp
-                                                                <input type="hidden" name="ass1st">
                                                                 <input type="hidden" name="thongSoDau"
                                                                     value="{{ $key }}">
                                                                 <input type="hidden" name="giaTriThongSoDau"
                                                                     value="{{ $value }}">
                                                             @endif
                                                         @endforeach
-                                                        <input type="hidden"
-                                                            name="{{ 'thongSo' . $SPTS->maTS }}"
+                                                        {{-- Chuyển thông số chưa được chọn --}}
+                                                        <input type="hidden" name="{{ 'thongSo' . $SPTS->maTS }}"
                                                             value="{{ $SPTS->maTS }}">
                                                         <input type="hidden"
                                                             name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
                                                             value="{{ $SPTS->giaTri }}">
                                                     @elseif($sizeTS == 0)
-                                                        {{-- <input type="hidden" name="{{ 'thongSo' . $SPTS->maTS }}"
-                                                        value="{{ $SPTS->maTS }}">
-                                                    <input type="hidden" name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
-                                                        value="{{ $SPTS->giaTri }}"> --}}
-                                                        <input type="hidden" name="ass">
+                                                        {{-- Chuyển thống số chưa được chọn --}}
                                                         <input type="hidden" name="thongSoDau"
                                                             value="{{ $SPTS->maTS }}">
                                                         <input type="hidden" name="giaTriThongSoDau"
                                                             value="{{ $SPTS->giaTri }}">
                                                     @elseif($sizeTS == 1)
+                                                        @php
+                                                            $repeatCheck = '';
+                                                        @endphp
+                                                        {{-- Chuyển thông số được chọn duy nhất --}}
                                                         @foreach ($thongSoCate as $key => $value)
-                                                            <input type="hidden" name="ass1st">
+                                                            @php
+                                                                $repeatCheck = $value;
+                                                            @endphp
                                                             <input type="hidden" name="thongSoDau"
                                                                 value="{{ $key }}">
                                                             <input type="hidden" name="giaTriThongSoDau"
                                                                 value="{{ $value }}">
                                                         @endforeach
-                                                        <input type="hidden"
-                                                            name="{{ 'thongSo' . $SPTS->maTS }}"
-                                                            value="{{ $SPTS->maTS }}">
-                                                        <input type="hidden"
-                                                            name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
-                                                            value="{{ $SPTS->giaTri }}">
+                                                        {{-- Chuyển thông số chưa được chọn --}}
+                                                        @if ($repeatCheck != $SPTS->giaTri)
+                                                            <input type="hidden"
+                                                                name="{{ 'thongSo' . $SPTS->maTS }}"
+                                                                value="{{ $SPTS->maTS }}">
+                                                            <input type="hidden"
+                                                                name="{{ 'giaTriThongSo' . $SPTS->maTS }}"
+                                                                value="{{ $SPTS->giaTri }}">
+                                                        @endif
                                                     @endif
 
-
+                                                    {{-- Chuyển mã nhà sản xuất --}}
                                                     @isset($nhaSanXuatCate)
                                                         <input type="hidden" name="nhaSanXuat"
                                                             value="{{ $nhaSanXuatCate }}">
                                                     @endisset
+                                                    {{-- Chuyển giá min --}}
                                                     @isset($priceMinCate)
                                                         <input type="hidden" name="priceMin"
                                                             value="{{ $priceMinCate }}">
                                                     @endisset
+                                                    {{-- Chuyển giá max --}}
                                                     @isset($priceMaxCate)
                                                         <input type="hidden" name="priceMax"
                                                             value="{{ $priceMaxCate }}">
                                                     @endisset
+                                                    {{-- Hiển thị thông số đã chọn nếu tồn tại --}}
                                                     @if ($thongSoCate[$SPTS->maTS] ?? null)
                                                         @if ($SPTS->giaTri == $thongSoCate[$SPTS->maTS])
                                                             <button class=" text- btn "
@@ -372,193 +382,192 @@
                                                             </button>
                                                         @endif
                                                     @endif
+                                                    {{-- TODO: Thêm else vào đây nếu muốn bỏ các thông số khác thông số đã chọn --}}
                                                     <button class=" text- btn"
                                                         style="text-decoration: none;list-style: none;padding:0">
                                                         <div class="text-dark">
                                                             <li>{{ $SPTS->giaTri }}</li>
                                                         </div>
                                                     </button>
-
-
-                                            </form>
-                                        @endif
-                                    @endforeach
-                                    <hr class="border-red">
-                                </div>
-                            @endforeach
-
-                        @endisset
-
-
-                        {{-- --------- --}}
-                        <div class="col-md-12 ">
-                            <hr class="border-red">
-                        </div>
-                </div>
-
-                {{-- Sản phẩm --}}
-                <div class="col-md-8">
-                    <div class="row">
-                        @foreach ($listSanPham as $CN)
-                            <div class="carousel-promo-item col-md-3 " onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
-                                style=" padding: 10px">
-                                <div class="">
-                                    <div class="card product-item" style="height: 430px;width:220px">
-                                        <!-- Thẻ sale trên đầu -->
-                                        <div class="badge bg-dark text-white position-absolute"
-                                            style="top: 0.5rem; right: 0.5rem">
-                                            Sale!
-                                        </div>
-                                        @php
-                                            $tempImg = 'STOCK.jpg';
-                                            $count = 0;
-                                        @endphp
-                                        <!-- Ảnh sản phẩm-->
-                                        @foreach ($productImage as $PI)
-                                            @if ($PI->maSP == $CN->maSP)
-                                                @if ($count == 0)
-                                                    @php
-                                                        $tempImg = $PI->anh;
-                                                    @endphp
-                                                    <a href="{{ route('product.show', $CN->maSP) }}">
-                                                        <img class="card-img-top hide-from-work -10"
-                                                            style="height:220px ; width:220px ; border: 1px solid gray"
-                                                            src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                            id="{{ $CN->maSP }}" alt="..." />
-                                                    </a>
-                                                    @php
-                                                        $count = 1;
-                                                    @endphp
-                                                @endif
                                             @endif
+                                            </form>
                                         @endforeach
-                                        @if ($tempImg == 'STOCK.jpg')
-                                            <img class="card-img-top "
-                                                style="height:220px ; width:220px ; border: 1px solid lightgray"
-                                                src="{{ asset('assets/img/' . $tempImg) }}" alt="..." />
-                                        @endif
-                                        <!-- Thông tin sản phẩm-->
-                                        <div class="card-body p-4 bg- text-light"
-                                            style="background-color: black">
-                                            <div class="text-center">
-                                                <!-- Tên sản phẩm-->
-                                                <h5 class="fw-bolder" style="font-size:0.8em">
-                                                    @php
-                                                        $find = '(';
-                                                        $positionOfOpenP = strpos($CN->tenSP, $find);
-                                                        $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
-                                                    @endphp
-                                                    <a class="link-white"
-                                                        href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
+                                        <hr class="border-red">
+                                    </div>
+                                @endforeach
 
-                                                </h5>
+                            @endif
 
+
+                            {{-- --------- --}}
+                            <div class="col-md-12 ">
+                                <hr class="border-red">
+                            </div>
+                        </div>
+
+                        {{-- Sản phẩm --}}
+                        <div class="col-md-8">
+                            <div class="row">
+                                @foreach ($listSanPham as $CN)
+                                    <div class="carousel-promo-item col-md-3 " onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
+                                        style=" padding: 10px">
+                                        <div class="">
+                                            <div class="card product-item" style="height: 430px;width:220px">
+                                                <!-- Thẻ sale trên đầu -->
+                                                <div class="badge bg-dark text-white position-absolute"
+                                                    style="top: 0.5rem; right: 0.5rem">
+                                                    Sale!
+                                                </div>
                                                 @php
-                                                    $reducedMoneyPercent = $CN->giamGia;
-                                                    $reducedMoneyFlat = 0;
+                                                    $tempImg = 'STOCK.jpg';
+                                                    $count = 0;
                                                 @endphp
-                                                @foreach ($productPromotion as $PP)
-                                                    @if ($PP->maSP == $CN->maSP)
-                                                        @php
-                                                            if ($PP->kichHoat == 1) {
-                                                                $ten = $PP->tenVoucher;
-                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
-                                                                    $reducedMoneyPercent += $PP->giaTri;
-                                                                } elseif ($PP->giaTri > 100) {
-                                                                    $reducedMoneyFlat += $PP->giaTri;
-                                                                }
-                                                            }
-                                                        @endphp
+                                                <!-- Ảnh sản phẩm-->
+                                                @foreach ($productImage as $PI)
+                                                    @if ($PI->maSP == $CN->maSP)
+                                                        @if ($count == 0)
+                                                            @php
+                                                                $tempImg = $PI->anh;
+                                                            @endphp
+                                                            <a href="{{ route('product.show', $CN->maSP) }}">
+                                                                <img class="card-img-top hide-from-work -10"
+                                                                    style="height:220px ; width:220px ; border: 1px solid gray"
+                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                    id="{{ $CN->maSP }}" alt="..." />
+                                                            </a>
+                                                            @php
+                                                                $count = 1;
+                                                            @endphp
+                                                        @endif
                                                     @endif
                                                 @endforeach
+                                                @if ($tempImg == 'STOCK.jpg')
+                                                    <img class="card-img-top "
+                                                        style="height:220px ; width:220px ; border: 1px solid lightgray"
+                                                        src="{{ asset('assets/img/' . $tempImg) }}" alt="..." />
+                                                @endif
+                                                <!-- Thông tin sản phẩm-->
+                                                <div class="card-body p-4 bg- text-light"
+                                                    style="background-color: black">
+                                                    <div class="text-center">
+                                                        <!-- Tên sản phẩm-->
+                                                        <h5 class="fw-bolder" style="font-size:0.8em">
+                                                            @php
+                                                                $find = '(';
+                                                                $positionOfOpenP = strpos($CN->tenSP, $find);
+                                                                $tenSP = strlen($CN->tenSP) > 40 ? substr($CN->tenSP, 0, $positionOfOpenP) . '' : $CN->tenSP;
+                                                            @endphp
+                                                            <a class="link-white"
+                                                                href="{{ route('product.show', $CN->maSP) }}">{{ $tenSP }}</a>
 
-                                                <!-- Giá sản phẩm -->
-                                                <span style="font-size: 0.8em"
-                                                    class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
-                                                    VND</span>
-                                                    <br>
-                                                <span
-                                                    style="font-size: 0.9em">{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
-                                                    VND</span>
-                                            </div>
-                                        </div>
-                                        <!-- Hành động của sản phẩm-->
-                                        <div class="card-footer border-top-0 bg-dar d-flex"
-                                            style="width: 100%;background-color: black;">
-                                            @if ($CN->soLuong <= 0)
-                                                <button class="btn btn-outline-danger text-left"
-                                                    href="{{ route('product.show', $CN->maSP) }}"
-                                                    style="background-color: navy;padding-bottom: 10px;height: 75%">
-                                                    Hết hàng
-                                                @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
-                                                    <button class="btn btn-outline-success text-left"
-                                                        href="{{ route('product.show', $CN->maSP) }}"
-                                                        style="background-color: navy;padding-bottom: 10px;height: 75%">
-                                                        Liên hệ ngay
-                                                    @else
-                                                        <button class="btn btn-outline-success text-left"
+                                                        </h5>
+
+                                                        @php
+                                                            $reducedMoneyPercent = $CN->giamGia;
+                                                            $reducedMoneyFlat = 0;
+                                                        @endphp
+                                                        @foreach ($productPromotion as $PP)
+                                                            @if ($PP->maSP == $CN->maSP)
+                                                                @php
+                                                                    if ($PP->kichHoat == 1) {
+                                                                        $ten = $PP->tenVoucher;
+                                                                        if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                            $reducedMoneyPercent += $PP->giaTri;
+                                                                        } elseif ($PP->giaTri > 100) {
+                                                                            $reducedMoneyFlat += $PP->giaTri;
+                                                                        }
+                                                                    }
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+
+                                                        <!-- Giá sản phẩm -->
+                                                        <span style="font-size: 0.8em"
+                                                            class="text-decoration-line-through text-danger">{{ number_format($CN->giaSP) }}
+                                                            VND</span>
+                                                        <br>
+                                                        <span
+                                                            style="font-size: 0.9em">{{ number_format($CN->giaSP - $reducedMoneyFlat - ($CN->giaSP * $reducedMoneyPercent) / 100) }}
+                                                            VND</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Hành động của sản phẩm-->
+                                                <div class="card-footer border-top-0 bg-dar d-flex"
+                                                    style="width: 100%;background-color: black;">
+                                                    @if ($CN->soLuong <= 0)
+                                                        <button class="btn btn-outline-danger text-left"
                                                             href="{{ route('product.show', $CN->maSP) }}"
-                                                            style="background-color: ;padding-top: 3px;height:65%;font-size: 0.9em">
-                                                            Còn hàng
-                                            @endif
-                                            </button>
+                                                            style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                            Hết hàng
+                                                        @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                            <button class="btn btn-outline-success text-left"
+                                                                href="{{ route('product.show', $CN->maSP) }}"
+                                                                style="background-color: navy;padding-bottom: 10px;height: 75%">
+                                                                Liên hệ ngay
+                                                            @else
+                                                                <button class="btn btn-outline-success text-left"
+                                                                    href="{{ route('product.show', $CN->maSP) }}"
+                                                                    style="background-color: ;padding-top: 3px;height:65%;font-size: 0.9em">
+                                                                    Còn hàng
+                                                    @endif
+                                                    </button>
 
-                                            @if ($CN->soLuong <= 0)
-                                            @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
-                                            @else
-                                                <form action="{{ route('cart.store') }}" method="POST"
-                                                    enctype="multipart/form-data">
-                                                    @csrf
-                                                    <input type="hidden" value="{{ $CN->maSP }}"
-                                                        name="id">
-                                                    <input type="hidden" value="{{ $tenSP }}"
-                                                        name="name">
-                                                    <input type="hidden" value="{{ $CN->giaSP }}"
-                                                        name="price">
-                                                    <input type="hidden" value="{{ $tempImg }}"
-                                                        name="image">
-                                                    <input type="hidden" value="{{ $reducedMoneyFlat }}"
-                                                        name="reduceFlat">
-                                                    <input type="hidden" value="{{ $reducedMoneyPercent }}"
-                                                        name="reducePercent">
-                                                    <input type="hidden" value="1" name="quantity">
-                                                    <button class="btn btn-outline-light  text-right"
-                                                        style="background-color: crimson"><i
-                                                            class="fa fa-shopping-cart"></i></button>
-                                                </form>
-                                            @endif
+                                                    @if ($CN->soLuong <= 0)
+                                                    @elseif($CN->soLuong > 0 && $CN->soLuong <= 5)
+                                                    @else
+                                                        <form action="{{ route('cart.store') }}" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $CN->maSP }}"
+                                                                name="id">
+                                                            <input type="hidden" value="{{ $tenSP }}"
+                                                                name="name">
+                                                            <input type="hidden" value="{{ $CN->giaSP }}"
+                                                                name="price">
+                                                            <input type="hidden" value="{{ $tempImg }}"
+                                                                name="image">
+                                                            <input type="hidden" value="{{ $reducedMoneyFlat }}"
+                                                                name="reduceFlat">
+                                                            <input type="hidden" value="{{ $reducedMoneyPercent }}"
+                                                                name="reducePercent">
+                                                            <input type="hidden" value="1" name="quantity">
+                                                            <button class="btn btn-outline-light  text-right"
+                                                                style="background-color: crimson"><i
+                                                                    class="fa fa-shopping-cart"></i></button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+
+
+                                            </div>
+
                                         </div>
-
 
                                     </div>
-
-                                </div>
-
+                                @endforeach
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /.container-fluid -->
         </div>
-    </div>
-    <!-- /.container-fluid -->
-</div>
 
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // alert("Ready!");
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-        // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-        let value = params.theLoaiCha; // "some_value"
-        console.log(params);
-        console.log('::8-' + value);
-    }, false);
-</script>
-<!-- End of Page Wrapper -->
-@include('Customer.Layout.Common.bottom_script')
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // alert("Ready!");
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+            // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+            let value = params.theLoaiCha; // "some_value"
+            console.log(params);
+            console.log('::8-' + value);
+        }, false);
+    </script>
+    <!-- End of Page Wrapper -->
+    @include('Customer.Layout.Common.bottom_script')
 
 </body>
 

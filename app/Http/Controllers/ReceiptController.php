@@ -221,13 +221,14 @@ class ReceiptController extends Controller
                     foreach ($cartItems as $cart) {
                         $hoaDonChiTiet = new DetailReceiptModel();
 
-                        $SP = DB::table('san_pham')->where('maSP', $cart->id)->first();
+                        $SP = DB::table('san_pham')->where('maSP', $cart->attributes->itemId)->first();
                         $giaSP = $cart->price;
                         $hoaDonChiTiet->maHD = $maHoaDonMoiNhat;
                         $hoaDonChiTiet->maSP = $cart->attributes->itemId;
                         $hoaDonChiTiet->soLuong = $cart->quantity;
                         $hoaDonChiTiet->giaSP = $giaSP;
-                        $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
+                        // $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
+                        $hoaDonChiTiet->giamGia = $SP->giamGia;
                         $reducePrice += $hoaDonChiTiet->giamGia;
                         $hoaDonChiTiet->save();
 
@@ -661,7 +662,7 @@ class ReceiptController extends Controller
         ");
         // dd($hoaDonCT->toArray(), $tienGiamVoucher);
         $listHoaDonCT = [];
-        for($i = 0; $i < sizeof($hoaDonCT); $i++){
+        for ($i = 0; $i < sizeof($hoaDonCT); $i++) {
             // $listVHDCT = DB::table('voucher_hoa_don_chi_tiet')
             //     ->join('voucher', 'voucher_hoa_don_chi_tiet.maVoucher', '=', 'voucher.maVoucher')
             //     ->where('maHDCT', $hoaDonCT[$i]->maHDCT)
@@ -736,7 +737,8 @@ class ReceiptController extends Controller
         //
     }
 
-    public function voucher($maHDCT){
+    public function voucher($maHDCT)
+    {
         $listVHDCT = DB::table('voucher_hoa_don_chi_tiet')
             ->selectRaw('voucher.tenVoucher, voucher.giaTri, hoa_don_chi_tiet.soLuong, voucher.maTLV, giaSP*giaTri/100 AS giaTriPhanTram')
             ->join('voucher', 'voucher_hoa_don_chi_tiet.maVoucher', '=', 'voucher.maVoucher')

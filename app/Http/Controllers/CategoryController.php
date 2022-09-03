@@ -219,7 +219,13 @@ class CategoryController extends Controller
 
         $thongSoCate = [];
         $giaTriThongSoCate = null;
+
+        
         foreach ($listSanPhamThongSo as $SPTS) {
+            if($thongSoDauCate == $request->get('thongSo'. $SPTS->maTS)){
+                $thongSoDauCate = $request->get('thongSo'. $SPTS->maTS);
+                $giaTriThongSoDauCate = $request->get('giaTriThongSo'. $SPTS->maTS);
+            }
             if ($countTS == 0) {
                 $countTS++;
                 if ($giaTriThongSoDauCate !== null)
@@ -348,7 +354,6 @@ class CategoryController extends Controller
                     $query->where('tenSP', 'like', '%%');
             });
         // dd('Here');
-
         $listSanPhamTemp = $listSanPham->get();
 
 
