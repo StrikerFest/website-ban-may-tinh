@@ -57,9 +57,7 @@
                             </div>
                             {{-- --------- --}}
                             <div class="col-md-12 text-center  text-dark">
-                                {{-- <hr class="border-red"> --}}
                                 <span style="font-size: 1.2em;font-weight: bold">Nhà sản xuất CH</span>
-                                {{-- <hr class="border-red"> --}}
                             </div>
                             {{-- * Hãng --}}
                             <div class="col-md-12 pl-5" style="font-size: 0.9em;color: black">
@@ -197,9 +195,7 @@
                             </div>
 
                             <div class="col-md-12 text-center  text-dark">
-                                {{-- <hr class="border-red"> --}}
                                 <span style="font-size: 1.2em;font-weight: bold">Giá tiêu dùng</span>
-                                {{-- <hr class="border-red"> --}}
                             </div>
 
                             {{-- * Khoảng giá --}}
@@ -322,9 +318,7 @@
 
                             {{-- --------- --}}
                             <div class="col-md-12 text-center  text-dark">
-                                {{-- <hr class="border-red"> --}}
                                 <span style="font-size: 1.2em;font-weight: bold">Nhu cầu sử dụng</span>
-                                {{-- <hr class="border-red"> --}}
                             </div>
                             {{-- * Nhu cầu --}}
                             <div class="col-md-12 text-left" style="font-size: 0.9em;color: black">
@@ -333,28 +327,51 @@
                                         $countCheck = 0;
                                     @endphp
                                     @foreach ($listTheLoai as $TL)
-                                        {{-- <a class=" text-bold " style="text-decoration: none"
-                                            href="{{ route('categoryCustomer.show', $TL->maTLC) }}">
-                                            <div class="text-dark">
-                                                <li>{{ $TL->tenTLC }}</li>
-                                            </div>
-
-                                        </a> --}}
-                                        <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}">
-                                            @isset($theLoaiChaCate)
-                                                <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
-                                            @endisset
-                                            @isset($nhaSanXuatCate)
-                                                <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
-                                            @endisset
-                                            <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
-                                            <input type="hidden" name="priceMin"
-                                                value="{{ session()->get('currentPriceMin') }}">
-
-                                            <input type="hidden" name="priceMax"
-                                                value="{{ session()->get('currentPriceMax') }}">
-                                            {{-- @isset($nhaSanXuatCate) --}}
-                                            @if ($TL->maTLC == $theLoaiConCate)
+                                        @if ($TL->maTLC == $theLoaiConCate)
+                                            @php
+                                                $countCheck = 1;
+                                            @endphp
+                                            <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}">
+                                                @isset($theLoaiChaCate)
+                                                    <input type="hidden" name="theLoaiCha"
+                                                        value="{{ $theLoaiChaCate }}">
+                                                @endisset
+                                                @isset($nhaSanXuatCate)
+                                                    <input type="hidden" name="nhaSanXuat"
+                                                        value="{{ $nhaSanXuatCate }}">
+                                                @endisset
+                                                <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
+                                                {{-- Chuyển giá min --}}
+                                                @isset($priceMinCate)
+                                                    <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">
+                                                @endisset
+                                                {{-- Chuyển giá max --}}
+                                                @isset($priceMaxCate)
+                                                    <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
+                                                @endisset
+                                                @php
+                                                    $countTS = 0;
+                                                @endphp
+                                                {{-- Lặp giá trị thông số đã được chọn - Chuyển nó --}}
+                                                @foreach ($thongSoCate as $key => $value)
+                                                    {{-- Thông số thứ 2 trở đi --}}
+                                                    @if ($countTS !== 0)
+                                                        <input type="hidden" name="{{ 'thongSo' . $key }}"
+                                                            value="{{ $key }}">
+                                                        <input type="hidden" name="{{ 'giaTriThongSo' . $key }}"
+                                                            value="{{ $value }}">
+                                                        {{-- Thông số đầu tiên --}}
+                                                    @else
+                                                        @php
+                                                            $countTS++;
+                                                        @endphp
+                                                        <input type="hidden" name="thongSoDau"
+                                                            value="{{ $key }}">
+                                                        <input type="hidden" name="giaTriThongSoDau"
+                                                            value="{{ $value }}">
+                                                    @endif
+                                                @endforeach
+                                                <input type="hidden" name="removeTLC" value="1">
                                                 <button class=" text- btn "
                                                     style="text-decoration: none;list-style: none;padding:0">
                                                     <div
@@ -362,7 +379,51 @@
                                                         <li><i class="fa fa-check"></i> {{ $TL->tenTLC }}</li>
                                                     </div>
                                                 </button>
-                                            @else
+                                            </form>
+                                        @endif
+                                    @endforeach
+                                    @if ($countCheck == 0)
+                                        @foreach ($listTheLoai as $TL)
+                                            <form action="{{ route('categoryCustomer.show', $TL->maTLC) }}">
+                                                @isset($theLoaiChaCate)
+                                                    <input type="hidden" name="theLoaiCha"
+                                                        value="{{ $theLoaiChaCate }}">
+                                                @endisset
+                                                @isset($nhaSanXuatCate)
+                                                    <input type="hidden" name="nhaSanXuat"
+                                                        value="{{ $nhaSanXuatCate }}">
+                                                @endisset
+                                                <input type="hidden" name="theLoaiCon" value="{{ $TL->maTLC }}">
+                                                {{-- Chuyển giá min --}}
+                                                @isset($priceMinCate)
+                                                    <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">
+                                                @endisset
+                                                {{-- Chuyển giá max --}}
+                                                @isset($priceMaxCate)
+                                                    <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
+                                                @endisset
+                                                @php
+                                                    $countTS = 0;
+                                                @endphp
+                                                {{-- Lặp giá trị thông số đã được chọn - Chuyển nó --}}
+                                                @foreach ($thongSoCate as $key => $value)
+                                                    {{-- Thông số thứ 2 trở đi --}}
+                                                    @if ($countTS !== 0)
+                                                        <input type="hidden" name="{{ 'thongSo' . $key }}"
+                                                            value="{{ $key }}">
+                                                        <input type="hidden" name="{{ 'giaTriThongSo' . $key }}"
+                                                            value="{{ $value }}">
+                                                        {{-- Thông số đầu tiên --}}
+                                                    @else
+                                                        @php
+                                                            $countTS++;
+                                                        @endphp
+                                                        <input type="hidden" name="thongSoDau"
+                                                            value="{{ $key }}">
+                                                        <input type="hidden" name="giaTriThongSoDau"
+                                                            value="{{ $value }}">
+                                                    @endif
+                                                @endforeach
                                                 <button class=" text- btn"
                                                     style="text-decoration: none;list-style: none;padding:0">
                                                     <div class="text-dark">
@@ -370,10 +431,9 @@
                                                         </li>
                                                     </div>
                                                 </button>
-                                            @endif
-                                            {{-- @endisset --}}
-                                        </form>
-                                    @endforeach
+                                            </form>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                             @php
@@ -393,7 +453,8 @@
                                                     $countTS = 0;
                                                 @endphp
                                                 {{-- Gửi lại vào controller --}}
-                                                <form class="text-left pl-5" action="{{ route('categoryCustomer.show', 'null') }}">
+                                                <form class="text-left pl-5"
+                                                    action="{{ route('categoryCustomer.show', 'null') }}">
                                                     @isset($theLoaiChaCate)
                                                         <input type="hidden" name="theLoaiCha"
                                                             value="{{ $theLoaiChaCate }}">
@@ -507,7 +568,6 @@
                                                 </form>
                                             @endif
                                         @endforeach
-                                        {{-- <hr class="border-red"> --}}
                                     </div>
                                 @endforeach
 
@@ -559,7 +619,8 @@
                                                 @if ($tempImg == 'STOCK.jpg')
                                                     <img class="card-img-top "
                                                         style="height:220px ; width:220px ; border: 1px solid lightgray"
-                                                        src="{{ asset('assets/img/' . $tempImg) }}" alt="..." />
+                                                        src="{{ asset('assets/img/' . $tempImg) }}"
+                                                        alt="..." />
                                                 @endif
                                                 <!-- Thông tin sản phẩm-->
                                                 <div class="card-body p-4 bg- text-light"

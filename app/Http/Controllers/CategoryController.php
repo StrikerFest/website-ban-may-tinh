@@ -249,6 +249,10 @@ class CategoryController extends Controller
         if ($request->get('removeNSX') == 1) {
             $nhaSanXuatCate = null;
         }
+        // Xóa nhà sản xuất nếu bấm lại vào nhà sản xuất đã được chọn
+        if ($request->get('removeTLC') == 1) {
+            $theLoaiConCate = null;
+        }
 
         //
         $priceMinCate = $priceMin;
