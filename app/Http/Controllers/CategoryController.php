@@ -196,6 +196,7 @@ class CategoryController extends Controller
             ->where('thong_so.tenTS', '!=', 'Khe cắm')
             ->where('thong_so.tenTS', '!=', 'Dung lượng tối đa')
             ->get();
+        // Lấy giá trị thông số
         $listSanPhamThongSo = DB::table('san_pham_thong_so')
             ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
             ->join('the_loai_thong_so', 'the_loai_thong_so.maTS', '=', 'thong_so.maTS')
@@ -207,25 +208,30 @@ class CategoryController extends Controller
             ->get();
 
         $countTS = 0;
-        // Lấy thông số
+        // Lấy thông số đầu
         $thongSoDauCate = $request->get('thongSoDau');
         $giaTriThongSoDauCate = $request->get('giaTriThongSoDau');
 
         $thongSoCate = [];
         $giaTriThongSoCate = null;
+
+        // Nếu thông số đầu có thông số trùng với thông số được chọn sau - Lấy giá trị thông số được chọn sau làm thông số đầu
         foreach ($listSanPhamThongSo as $SPTS) {
             if ($thongSoDauCate == $request->get('thongSo' . $SPTS->maTS)) {
                 $thongSoDauCate = $request->get('thongSo' . $SPTS->maTS);
                 $giaTriThongSoDauCate = $request->get('giaTriThongSo' . $SPTS->maTS);
             }
         }
+
+        // Thêm thông số đầu vào mảng thông số được chọn
         if ($countTS == 0) {
             $countTS++;
             if ($giaTriThongSoDauCate !== null)
                 $thongSoCate += [$thongSoDauCate => $giaTriThongSoDauCate];
         }
-        foreach ($listSanPhamThongSo as $SPTS) {
 
+        // Thêm các thông số được chọn vào mảng thông số được chọn
+        foreach ($listSanPhamThongSo as $SPTS) {
             if ($request->get('thongSo' . $SPTS->maTS) == $SPTS->maTS) {
                 if ($request->get('giaTriThongSo' . $SPTS->maTS) !== null)
                     $thongSoCate += [$request->get('thongSo' . $SPTS->maTS) => $request->get('giaTriThongSo' . $SPTS->maTS)];
@@ -235,18 +241,16 @@ class CategoryController extends Controller
             }
         }
 
+        // Xóa thông số nếu bấm lại vào thông số đã được chọn
         if($request->get('removeTS')){
             unset($thongSoCate[$request->get('removeTS')]);
         }
+
+        //
         $priceMinCate = $priceMin;
         $priceMaxCate = $priceMax;
 
-        $listSanPhamThongSoMotSP = DB::table('san_pham')
-            ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
-            ->join('san_pham_thong_so', 'san_pham_thong_so.maSP', '=', 'san_pham.maSP')
-            ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
-            ->where('san_pham.maTLC', $theLoaiConCate)
-            ->get();
+        // Nếu có thông số được chọn - Khởi tạo danh sách các thông số không được chọn
         if (count($thongSoCate) !== 0)
             $listThongSoLoaiBo = DB::table('san_pham_thong_so')
                 ->where(function ($query) use ($thongSoCate) {
@@ -260,6 +264,7 @@ class CategoryController extends Controller
                 ->get();
         else
             $listThongSoLoaiBo = null;
+
         // Sản phẩm được lọc
         $listSanPham = DB::table('san_pham')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
@@ -322,9 +327,11 @@ class CategoryController extends Controller
         $theLoaiChaCate = $request->get('theLoaiCha');
         // $theLoaiConCate = $request->get('theLoaiCon');
         $nhaSanXuatCate = $request->get('nhaSanXuat');
+        // Lấy giá trị voucher để hiển thị giá giảm
         $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
             ->select('san_pham_voucher.*', 'voucher.tenVoucher', 'voucher.giaTri', 'voucher.soLuong')
             ->get();
+        // Lấy danh sách thể loại cha và sidenav để hiển thị cho danh mục
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
         return view('Customer.ProductCategory.show', [
