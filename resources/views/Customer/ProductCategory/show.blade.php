@@ -61,30 +61,33 @@
                                 <h5>Nhà sản xuất CH</h5>
                                 <hr class="border-red">
                             </div>
-                            {{-- Chọn hãng --}}
+                            {{-- * Hãng --}}
                             <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <ul>
                                     <div class="row">
                                         @foreach ($listNhaSanXuat as $NSX)
-                                            {{-- <a class=" text-bold " style="text-decoration: none"
-                                            href="{{ route('categoryCustomer.show', $NSX->maNSX) }}">
-                                            <div class="text-dark">
-                                                <li>{{ $NSX->tenNSX }}</li>
-
-                                            </div>
-                                        </a> --}}
                                             <div class="col-6">
                                                 <form action="{{ route('categoryCustomer.show', 'null') }}">
-                                                    <input type="hidden" name="theLoaiCha"
-                                                        value="{{ $theLoaiChaCate }}">
-                                                    <input type="hidden" name="theLoaiCon"
-                                                        value="{{ $theLoaiConCate }}">
-                                                    <input type="hidden" name="priceMin"
-                                                        value="{{ session()->get('currentPriceMin') }}">
-                                                    <input type="hidden" name="priceMax"
-                                                        value="{{ session()->get('currentPriceMax') }}">
-                                                    <input type="hidden" name="nhaSanXuat"
-                                                        value="{{ $NSX->maNSX }}">
+                                                    {{-- Chuyển mã nhà sản xuất --}}
+                                                    <input type="hidden" name="nhaSanXuat" value="{{ $NSX->maNSX }}">
+                                                    {{-- Chuyển giá min --}}
+                                                    @isset($priceMinCate)
+                                                        <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">
+                                                    @endisset
+                                                    {{-- Chuyển giá max --}}
+                                                    @isset($priceMaxCate)
+                                                        <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
+                                                    @endisset
+                                                    {{-- Chuyển thể loại cha --}}
+                                                    @isset($theLoaiChaCate)
+                                                        <input type="hidden" name="theLoaiCha"
+                                                            value="{{ $theLoaiChaCate }}">
+                                                    @endisset
+                                                    {{-- Chuyển thể loại con --}}
+                                                    @isset($theLoaiConCate)
+                                                        <input type="hidden" name="theLoaiCon"
+                                                            value="{{ $theLoaiConCate }}">
+                                                    @endisset
                                                     @if ($NSX->maNSX == $nhaSanXuatCate)
                                                         <button class=" text-center btn "
                                                             style="text-decoration: none; padding:0;list-style: none">
@@ -94,13 +97,36 @@
                                                             </div>
                                                         </button>
                                                     @else
-                                                        <button class=" text- btn"
+                                                        <button class=" text-center btn "
                                                             style="text-decoration: none; padding:0;list-style: none">
                                                             <div class="text-dark">
                                                                 <li>{{ $NSX->tenNSX }}</li>
                                                             </div>
                                                         </button>
                                                     @endif
+
+                                                    @php
+                                                        $countTS = 0;
+                                                    @endphp
+                                                    {{-- Lặp giá trị thông số đã được chọn - Chuyển nó --}}
+                                                    @foreach ($thongSoCate as $key => $value)
+                                                        {{-- Thông số thứ 2 trở đi --}}
+                                                        @if ($countTS !== 0)
+                                                            <input type="hidden" name="{{ 'thongSo' . $key }}"
+                                                                value="{{ $key }}">
+                                                            <input type="hidden" name="{{ 'giaTriThongSo' . $key }}"
+                                                                value="{{ $value }}">
+                                                            {{-- Thông số đầu tiên --}}
+                                                        @else
+                                                            @php
+                                                                $countTS++;
+                                                            @endphp
+                                                            <input type="hidden" name="thongSoDau"
+                                                                value="{{ $key }}">
+                                                            <input type="hidden" name="giaTriThongSoDau"
+                                                                value="{{ $value }}">
+                                                        @endif
+                                                    @endforeach
                                                 </form>
                                             </div>
                                         @endforeach
@@ -114,7 +140,7 @@
                                 <hr class="border-red">
                             </div>
 
-                            {{-- Khoảng giá --}}
+                            {{-- * Khoảng giá --}}
 
                             <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <form action="{{ route('categoryCustomer.show', 'null') }}">
@@ -212,13 +238,11 @@
                             </div>
 
                             {{-- --------- --}}
-                            {{-- @isset($nhaSanXuatCate) --}}
                             <div class="col-md-12 text-center text-danger">
                                 <hr class="border-red">
                                 <h5>Nhu cầu sử dụng</h5>
                                 <hr class="border-red">
                             </div>
-                            {{-- @endisset --}}
                             {{-- * Nhu cầu --}}
                             <div class="col-md-12" style="font-size: 0.9em;color: black">
                                 <ul>
@@ -383,14 +407,14 @@
                                                                 </div>
                                                             </button>
                                                         @endif
-                                                    {{-- TODO: Thêm else vào đây nếu muốn bỏ các thông số khác thông số đã chọn --}}
+                                                        {{-- TODO: Thêm else vào đây nếu muốn bỏ các thông số khác thông số đã chọn --}}
                                                     @else
-                                                    <button class=" text- btn"
-                                                        style="text-decoration: none;list-style: none;padding:0">
-                                                        <div class="text-dark">
-                                                            <li>{{ $SPTS->giaTri }}</li>
-                                                        </div>
-                                                    </button>
+                                                        <button class=" text- btn"
+                                                            style="text-decoration: none;list-style: none;padding:0">
+                                                            <div class="text-dark">
+                                                                <li>{{ $SPTS->giaTri }}</li>
+                                                            </div>
+                                                        </button>
                                                     @endif
                                                 </form>
                                             @endif
