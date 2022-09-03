@@ -297,6 +297,22 @@ class CategoryController extends Controller
         else
             $listThongSoLoaiBo = null;
 
+        $filterSpecial = $request->get("special");
+        $filterSale = $request->get("sale");
+        $filterBigSale = $request->get("bigSale");
+        $filterPriceUp = $request->get("priceUp");
+        $filterPriceDown = $request->get("priceDown");
+        $filterOnGoing = $request->get("onGoing");
+
+        if ($request->get("resetFilter") == 1) {
+            $filterSpecial = null;
+            $filterSale = null;
+            $filterBigSale = null;
+            $filterPriceUp = null;
+            $filterPriceDown = null;
+            $filterOnGoing = null;
+        }
+
         // Sản phẩm được lọc
         $listSanPham = DB::table('san_pham')
             ->join('the_loai_con', 'the_loai_con.maTLC', '=', 'san_pham.maTLC')
@@ -329,6 +345,7 @@ class CategoryController extends Controller
                 if ($theLoaiCha1 != null)
                     $query->where('maTL', $theLoaiCha1);
             })
+            // Thông số
             ->where(function ($query) use ($listThongSoLoaiBo) {
                 if ($listThongSoLoaiBo != null) {
                     foreach ($listThongSoLoaiBo as $TSLB) {
@@ -343,18 +360,39 @@ class CategoryController extends Controller
                     $query->where('tenSP', 'like', '%' . $search . '%');
                 else
                     $query->where('tenSP', 'like', '%%');
-            });
+            })
+            ;
+
 
         if (count($thongSoCate) !== 0)
             $listSanPham = $listSanPham
                 ->groupBy('san_pham.maSP')
-                ->havingRaw('count(san_pham.maSP) = ' . count($thongSoCate))
-                ->get();
+                ->havingRaw('count(san_pham.maSP) = ' . count($thongSoCate));
         else
             $listSanPham = $listSanPham
                 ->groupBy('san_pham.maSP')
-                ->get();
+                ;
 
+            $listSanPham = $listSanPham
+            // Khuyến mãi đặc biệt
+            ->where(function ($query) use ($filterSpecial, $filterSale, $filterBigSale, $filterPriceUp, $filterPriceDown, $filterOnGoing) {
+                if ($filterSpecial != null)
+                    $query->where('dacBiet', 1);
+                if ($filterSale != null)
+                    $query->where('giamGia', '>', 0);
+                if ($filterBigSale != null)
+                    $query->where('giamGia', '>=', 20);
+                if ($filterPriceUp != null)
+                    $query->orderBy('giaSP');
+                if ($filterPriceDown != null)
+                    $query->orderBy('giaSP', 'desc');
+                if ($filterOnGoing != null)
+                    $query->where('soLuong', '>=', 10);
+            })
+            ->get()
+            // ->unique('san_pham.maSP')
+            ;
+// dd($listSanPham);
         // Kiểm tra nếu không có session thể loại con ( bấm từ ngoài vào hoặc chưa chọn bên trong trang vật phẩm)
         $theLoaiChaCate = $request->get('theLoaiCha');
         // $theLoaiConCate = $request->get('theLoaiCon');

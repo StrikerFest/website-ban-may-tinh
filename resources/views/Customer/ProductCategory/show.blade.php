@@ -574,15 +574,62 @@
 
                             @endif
 
-
-                            {{-- --------- --}}
-                            {{-- <div class="col-md-12 ">
-                                <hr class="border-red">
-                            </div> --}}
                         </div>
 
                         {{-- Sản phẩm --}}
                         <div class="col-md-8">
+                            <div>
+                                <form action="{{ route('categoryCustomer.show', 'null') }}">
+                                    {{-- Chuyển mã nhà sản xuất --}}
+                                    @isset($nhaSanXuatCate)
+                                        <input type="hidden" name="nhaSanXuat" value="{{ $nhaSanXuatCate }}">
+                                    @endisset
+                                    {{-- Chuyển giá min --}}
+                                    @isset($priceMinCate)
+                                        <input type="hidden" name="priceMin" value="{{ $priceMinCate }}">
+                                    @endisset
+                                    {{-- Chuyển giá max --}}
+                                    @isset($priceMaxCate)
+                                        <input type="hidden" name="priceMax" value="{{ $priceMaxCate }}">
+                                    @endisset
+                                    {{-- Chuyển thể loại cha --}}
+                                    @isset($theLoaiChaCate)
+                                        <input type="hidden" name="theLoaiCha" value="{{ $theLoaiChaCate }}">
+                                    @endisset
+                                    {{-- Chuyển thể loại con --}}
+                                    @isset($theLoaiConCate)
+                                        <input type="hidden" name="theLoaiCon" value="{{ $theLoaiConCate }}">
+                                    @endisset
+                                    @php
+                                        $countTS = 0;
+                                    @endphp
+                                    {{-- Lặp giá trị thông số đã được chọn - Chuyển nó --}}
+                                    @foreach ($thongSoCate as $key => $value)
+                                        {{-- Thông số thứ 2 trở đi --}}
+                                        @if ($countTS !== 0)
+                                            <input type="hidden" name="{{ 'thongSo' . $key }}"
+                                                value="{{ $key }}">
+                                            <input type="hidden" name="{{ 'giaTriThongSo' . $key }}"
+                                                value="{{ $value }}">
+                                            {{-- Thông số đầu tiên --}}
+                                        @else
+                                            @php
+                                                $countTS++;
+                                            @endphp
+                                            <input type="hidden" name="thongSoDau" value="{{ $key }}">
+                                            <input type="hidden" name="giaTriThongSoDau"
+                                                value="{{ $value }}">
+                                        @endif
+                                    @endforeach
+                                    <button type="submit" value="1" name="special" class="btn btn-danger">Khuyến mãi đặc biệt</button>
+                                    <button type="submit" value="1" name="sale" class="btn btn-danger">Đang giảm giá</button>
+                                    <button type="submit" value="1" name="bigSale" class="btn btn-danger">Giảm giá mạnh</button>
+                                    {{-- <button type="submit" value="1" name="priceUp" class="btn btn-danger">Giá tăng dần</button> --}}
+                                    {{-- <button type="submit" value="1" name="priceDown" class="btn btn-danger">Giá giảm dần</button> --}}
+                                    <button type="submit" value="1" name="onGoing" class="btn btn-danger">Còn hàng</button>
+                                    <button type="submit" value="1" name="resetFilter" class="btn btn-danger">Hiển thị lại</button>
+                                </form>
+                            </div>
                             <div class="row">
                                 @foreach ($listSanPham as $CN)
                                     <div class="carousel-promo-item col-md-3 " onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
