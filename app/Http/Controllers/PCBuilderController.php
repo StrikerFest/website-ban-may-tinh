@@ -25,12 +25,8 @@ class PCBuilderController extends Controller
      */
     public function create(Request $request)
     {
-        //
         $receiver = $request->get('PCBModal');
 
-        // // session()->flush();
-        // // dd($receiver);
-        // // dd(session()->get('modal'));
         $cartItems = \Cart::getContent();
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
@@ -42,15 +38,7 @@ class PCBuilderController extends Controller
         $PCBTheLoai = session()->has('PCBTheLoai') ? session()->get('PCBTheLoai') : '';
         $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
 
-        // // if ($receiver == "VGA") {
-        //     // $PCBTheLoai = "Card thiết kế đồ họa";
-        //     // session()->put('modal', 1);
-        //     // session()->put('modalClose', 0);
-        // // } else if ($receiver == "LaptopGaming") {
-        //     // $PCBTheLoai = "Laptop gaming";
-        //     // session()->put('modal', 1);
-        //     // session()->put('modalClose', 0);
-        // // }
+
         // Btn press send data
         if ($receiver !== "") {
             // When close btn pressed
@@ -67,18 +55,7 @@ class PCBuilderController extends Controller
             }
         }
         $receiver = "";
-        // // die();
-        // // dd(session()->get("modal"));
-        // if ($PCBTheLoai == "VGA")
-        //     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'Card game')->where('tenTLC', 'Card thiết kế đồ họa')->where('tenTLC', 'Card đào coin')->get();
-        // else
-        //     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', $PCBTheLoai)->get();
 
-        // if ($PCBTheLoai == "VGA")
-        //     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', 'like', 'Card%')->get();
-        // else
-        //     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', $PCBTheLoai)->get();
-        // dd($PCBTheLoai);
         $listCheckCPU = null;
         $listCheckCase = null;
         switch ($PCBTheLoai) {
@@ -134,26 +111,7 @@ class PCBuilderController extends Controller
                         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
                         ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
                         ->get();
-                    // dd($listCheckCPU);
 
-                    // $listSanPhamModal = DB::table('san_pham')
-                    //     ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
-                    //     ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
-                    //     ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
-                    //     ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
-                    //     ->where(function ($query) {
-                    //         $query->where('tenTS', 'Socket')
-                    //             ->where('giaTri', 'like', session()->get('PCBSocketCPU'));
-                    //     })->orWhere(function ($query) {
-                    //         $query->where('tenTS', 'Kích thước bộ')
-                    //             ->where('giaTri', 'like',  'mini%');
-                    //     })
-                    //     // ->where('tenTS', 'Socket')
-                    //     // ->where('tenTS', 'Kích thước bộ')
-                    //     // ->where('giaTri', 'like', session()->get('PCBSocketCPU'))
-                    //     // ->where('giaTri', 'like',  'mini%')
-                    //     ->get();
-                    // dd($listSanPhamModal);
                 } elseif (session()->has('PCBSocketCPU'))
                     $listSanPhamModal = DB::table('san_pham')
                         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
@@ -219,23 +177,9 @@ class PCBuilderController extends Controller
                         ->where('tenTS', 'Kích thước')
                         ->where('giaTri', 'like', 'Mini')
                         ->get();
-                //     // default:
-                //     //     // dd(session()->get('PCBSizeBMC'));
-                //     //     $listSanPhamModal = DB::table('san_pham')
-                //     //         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
-                //     //         ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
-                //     //         ->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')
-                //     //         ->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')
-                //     //         ->get();
-                //     //     break;
-                // } else
-                // dd(session()->get('PCBSizeBMC'));
-                // dd(substr(session()->get('PCBSizeBMC'), 0, 4) == 'mini');
+
                 else
-                    // $listSanPhamModal = DB::table('san_pham')
-                    //     ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
-                    //     ->skip(0)->take(7)->where('tenTLC', 'like', 'Vỏ case%')
-                    //     ->get();
+
                     $listSanPhamModal = DB::table('san_pham')
                         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
                         ->join('san_pham_thong_so', 'san_pham.maSP', '=', 'san_pham_thong_so.maSP')
@@ -312,13 +256,7 @@ class PCBuilderController extends Controller
             session()->put('PCBEmpty', 1);
         }
 
-        // // echo "<br>Modal head" . session()->get('modal');
-        // // echo "<br>Modal close head" . session()->get('modalClose');
         $receiver = $request->get('PCBModal');
-        // // echo "<br>Received start" . $receiver;
-        // // session()->flush();
-        // // dd($receiver);
-        // // dd(session()->get('modal'));
         $cartItems = \Cart::getContent();
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
@@ -622,11 +560,6 @@ class PCBuilderController extends Controller
                     session()->put('PCBBaoHanhFan', "1 năm");
                     session()->put('PCBTinhTrangFan', "Còn hàng");
                 }
-                // Validate data
-                // if (session()->has('PCBMaFan')) {
-                //     $size = DB::table('san_pham_thong_so')->join('thong_so', 'san_pham_thong_so.maTS', '=', 'thong_so.maTS')->where('maSP', session()->get('PCBMaCase'))->where('tenTS', 'Kích thước')->first();
-                //     session()->put('PCBSizeFan', $size->giaTri);
-                // }
                 break;
             case 'TNK':
                 if (session()->get('PCBEmpty') !== 1) {
@@ -660,23 +593,6 @@ class PCBuilderController extends Controller
                 }
                 break;
         }
-        //// if (session()->get('PCBTheLoai') == 'VGA') {
-        ////     if (session()->get('PCBEmpty') !== 1) {
-        ////         session()->put('PCBTenVGA', $item->tenSP);
-        ////         session()->put('PCBMaVGA', $item->maSP);
-        ////         session()->put('PCBGiaVGA', $item->giaSP);
-        ////         session()->put('PCBBaoHanhVGA', "1 năm");
-        ////         session()->put('PCBTinhTrangVGA', "Còn hàng");
-        ////     }
-        //// } else if (session()->get('PCBTheLoai') == 'Laptop gaming') {
-        ////     if (session()->get('PCBEmpty') !== 1) {
-        ////         session()->put('PCBTenL', $item->tenSP);
-        ////         session()->put('PCBMaL', $item->maSP);
-        ////         session()->put('PCBGiaL', $item->giaSP);
-        ////         session()->put('PCBBaoHanhL', "1 năm");
-        ////         session()->put('PCBTinhTrangL', "Còn hàng");
-        ////     }
-        //// }
 
         // Xóa - Quên đi session của sản phẩm xóa
         // CPU
@@ -943,16 +859,6 @@ class PCBuilderController extends Controller
         }
 
         $receiver = "";
-        //// dd($PCBTheLoai);
-        //// if ($PCBTheLoai == "VGA") {
-        ////     $VGA = DB::table('the_loai_con')->where('tenTLC', 'like', 'Card%')->get();
-        ////     echo "<br>" . $VGA;
-        ////     // dd($VGA);
-        ////     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->whereJsonContains('tenTLC', $VGA)->get();
-        //// } else
-        ////     $listSanPhamModal = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')->skip(0)->take(7)->where('tenTLC', $PCBTheLoai)->get();
-
-        //// return view('Customer.PCBuilder.pcbuilder', [
         return redirect()->route('PCBuilderCustomer.create', [
             'listTheLoaiCha' =>  $listTheLoaiCha,
             'cartItems' =>  $cartItems,
@@ -963,8 +869,6 @@ class PCBuilderController extends Controller
             'listTheLoaiManHinh' =>  $listTheLoaiManHinh,
             'listNhaSanXuat' =>  $listNhaSanXuat,
             'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
-            // 'listSanPhamModal' =>  $listSanPhamModal,
-            // 'PCBTheLoai' =>  $PCBTheLoai,
 
         ]);
     }
