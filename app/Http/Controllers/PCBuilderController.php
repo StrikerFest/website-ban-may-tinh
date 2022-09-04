@@ -269,7 +269,9 @@ class PCBuilderController extends Controller
                 break;
         }
         $productImage = DB::table('anh_san_pham')->get();
-
+        $scrollPos = session()->get('scrollPos');
+        if ($scrollPos == null)
+            $scrollPos = 0;
         return view('Customer.PCBuilder.pcbuilder', [
             'listTheLoaiCha' =>  $listTheLoaiCha,
             'cartItems' =>  $cartItems,
@@ -285,6 +287,7 @@ class PCBuilderController extends Controller
             'listCheckCPU' =>  $listCheckCPU,
             'listCheckCase' =>  $listCheckCase,
             'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
+            'scrollPos' =>  $scrollPos,
 
         ]);
     }
@@ -297,6 +300,9 @@ class PCBuilderController extends Controller
      */
     public function store(Request $request)
     {
+        $scrollPos = $request->get("scrollPos");
+        session()->put('scrollPos', $scrollPos);
+        // dd();
         $receiverItemId = $request->get("PCBMa");
         if ($request->has("PCBMa")) {
             $item = DB::table('san_pham')->where('maSP', '=', $receiverItemId)->first();
@@ -809,6 +815,106 @@ class PCBuilderController extends Controller
         }
         // L
         elseif ($request->PCBDeleteL == 1) {
+            session()->forget('PCBTenL');
+            session()->forget('PCBMaL');
+            session()->forget('PCBGiaL');
+            session()->forget('PCBBaoHanhL');
+            session()->forget('PCBTinhTrangL');
+            session()->forget('PCBSoLuongL');
+        }
+        elseif ($request->PCBDeleteAll == 1) {
+            session()->forget('PCBTenCPU');
+            session()->forget('PCBMaCPU');
+            session()->forget('PCBGiaCPU');
+            session()->forget('PCBBaoHanhCPU');
+            session()->forget('PCBTinhTrangCPU');
+            session()->forget('PCBSoLuongCPU');
+            session()->forget('PCBSocketCPU');
+            session()->forget('PCBTenBMC');
+            session()->forget('PCBMaBMC');
+            session()->forget('PCBGiaBMC');
+            session()->forget('PCBBaoHanhBMC');
+            session()->forget('PCBTinhTrangBMC');
+            session()->forget('PCBSoLuongBMC');
+            session()->forget('PCBSocketBMC');
+            session()->forget('PCBBusBMC');
+            session()->forget('PCBSizeBMC');
+            session()->forget('PCBTenRAM');
+            session()->forget('PCBMaRAM');
+            session()->forget('PCBGiaRAM');
+            session()->forget('PCBBaoHanhRAM');
+            session()->forget('PCBTinhTrangRAM');
+            session()->forget('PCBSoLuongRAM');
+            session()->forget('PCBBusRAM');
+            session()->forget('PCBTenHDD');
+            session()->forget('PCBMaHDD');
+            session()->forget('PCBGiaHDD');
+            session()->forget('PCBBaoHanhHDD');
+            session()->forget('PCBTinhTrangHDD');
+            session()->forget('PCBSoLuongHDD');
+            session()->forget('PCBTenSSD');
+            session()->forget('PCBMaSSD');
+            session()->forget('PCBGiaSSD');
+            session()->forget('PCBBaoHanhSSD');
+            session()->forget('PCBTinhTrangSSD');
+            session()->forget('PCBSoLuongSSD');
+            session()->forget('PCBTenVGA');
+            session()->forget('PCBMaVGA');
+            session()->forget('PCBGiaVGA');
+            session()->forget('PCBBaoHanhVGA');
+            session()->forget('PCBTinhTrangVGA');
+            session()->forget('PCBSoLuongVGA');
+            session()->forget('PCBTenPSU');
+            session()->forget('PCBMaPSU');
+            session()->forget('PCBGiaPSU');
+            session()->forget('PCBBaoHanhPSU');
+            session()->forget('PCBTinhTrangPSU');
+            session()->forget('PCBSoLuongPSU');
+            session()->forget('PCBTenCase');
+            session()->forget('PCBMaCase');
+            session()->forget('PCBGiaCase');
+            session()->forget('PCBBaoHanhCase');
+            session()->forget('PCBTinhTrangCase');
+            session()->forget('PCBSoLuongCase');
+            session()->forget('PCBSizeCase');
+            session()->forget('PCBTenMH');
+            session()->forget('PCBMaMH');
+            session()->forget('PCBGiaMH');
+            session()->forget('PCBBaoHanhMH');
+            session()->forget('PCBTinhTrangMH');
+            session()->forget('PCBSoLuongMH');
+            session()->forget('PCBTenMouse');
+            session()->forget('PCBMaMouse');
+            session()->forget('PCBGiaMouse');
+            session()->forget('PCBBaoHanhMouse');
+            session()->forget('PCBTinhTrangMouse');
+            session()->forget('PCBSoLuongMouse');
+            session()->forget('PCBTenBP');
+            session()->forget('PCBMaBP');
+            session()->forget('PCBGiaBP');
+            session()->forget('PCBBaoHanhBP');
+            session()->forget('PCBTinhTrangBP');
+            session()->forget('PCBSoLuongBP');
+            session()->forget('PCBTenFan');
+            session()->forget('PCBMaFan');
+            session()->forget('PCBGiaFan');
+            session()->forget('PCBBaoHanhFan');
+            session()->forget('PCBTinhTrangFan');
+            session()->forget('PCBSoLuongFan');
+            // session()->forget('PCBSizeFan');
+            session()->forget('PCBTenTNK');
+            session()->forget('PCBMaTNK');
+            session()->forget('PCBGiaTNK');
+            session()->forget('PCBBaoHanhTNK');
+            session()->forget('PCBTinhTrangTNK');
+            session()->forget('PCBSoLuongTNK');
+            session()->forget('PCBTenTNN');
+            session()->forget('PCBMaTNN');
+            session()->forget('PCBGiaTNN');
+            session()->forget('PCBBaoHanhTNN');
+            session()->forget('PCBTinhTrangTNN');
+            session()->forget('PCBSoLuongTNN');
+            session()->forget('PCBSocketTNN');
             session()->forget('PCBTenL');
             session()->forget('PCBMaL');
             session()->forget('PCBGiaL');

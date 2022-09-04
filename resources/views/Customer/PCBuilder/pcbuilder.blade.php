@@ -92,139 +92,143 @@
                                         @foreach ($listCheckCPU as $CPU)
                                             @foreach ($listCheckCase as $Case)
                                                 @if ($SPM->maSP == $CPU->maSP && $SPM->maSP == $Case->maSP)
-                                                <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" value="{{ $SPM->maSP }}" name="PCBMa">
-                                                    <div
-                                                        class="bg-gray-300 card padding-left-10 padding-right-10 text-center">
-                                                        <div class="row">
-                                                            <!-- Ảnh sản phẩm-->
-                                                            <div class="col-2 bg-primary">
-                                                                @php
-                                                                    $tempImg;
-                                                                    $count = 0;
-                                                                @endphp
-                                                                @foreach ($productImage as $PI)
-                                                                    @if ($PI->maSP == $SPM->maSP)
-                                                                        @if ($count == 0)
-                                                                            @php
-                                                                                $tempImg = $PI->anh;
-                                                                            @endphp
-                                                                            <a
-                                                                                href="{{ route('product.show', $SPM->maSP) }}">
-                                                                                <img class="card-img-top hide-from-work"
-                                                                                    style="height:110px ; width:110px ; border: 1px solid lightgray"
-                                                                                    src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                                    id="{{ $SPM->maSP }}"
-                                                                                    alt="..." />
-                                                                            </a>
-                                                                            @php
-                                                                                $count = 1;
-                                                                            @endphp
+                                                    <form action="{{ route('PCBuilderCustomer.store') }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $SPM->maSP }}"
+                                                            name="PCBMa">
+                                                        <div
+                                                            class="bg-gray-300 card padding-left-10 padding-right-10 text-center">
+                                                            <div class="row">
+                                                                <!-- Ảnh sản phẩm-->
+                                                                <div class="col-2 bg-primary">
+                                                                    @php
+                                                                        $tempImg;
+                                                                        $count = 0;
+                                                                    @endphp
+                                                                    @foreach ($productImage as $PI)
+                                                                        @if ($PI->maSP == $SPM->maSP)
+                                                                            @if ($count == 0)
+                                                                                @php
+                                                                                    $tempImg = $PI->anh;
+                                                                                @endphp
+                                                                                <a
+                                                                                    href="{{ route('product.show', $SPM->maSP) }}">
+                                                                                    <img class="card-img-top hide-from-work"
+                                                                                        style="height:110px ; width:110px ; border: 1px solid lightgray"
+                                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                                        id="{{ $SPM->maSP }}"
+                                                                                        alt="..." />
+                                                                                </a>
+                                                                                @php
+                                                                                    $count = 1;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
-                                                                    @endif
-                                                                @endforeach
-                                                            </div>
-                                                            {{-- Hết - Ảnh sản phẩm --}}
+                                                                    @endforeach
+                                                                </div>
+                                                                {{-- Hết - Ảnh sản phẩm --}}
 
-                                                            {{-- Thông tin sản phẩm --}}
-                                                            <div class="col-8">
-                                                                {{-- Tên sản phẩm --}}
-                                                                <div class="text-bold text-dark">
-                                                                    {{ $SPM->tenSP }}
+                                                                {{-- Thông tin sản phẩm --}}
+                                                                <div class="col-8">
+                                                                    {{-- Tên sản phẩm --}}
+                                                                    <div class="text-bold text-dark">
+                                                                        {{ $SPM->tenSP }}
+                                                                    </div>
+                                                                    <div class=" text-dark">
+                                                                        Mã sản phẩm: {{ $SPM->maSP }}
+                                                                        <br>
+                                                                        Bảo hành: 1 năm
+                                                                        <br>
+                                                                        Tình trạng sản phẩm: Còn hàng
+                                                                        <br>
+                                                                        <span
+                                                                            class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
+                                                                            VND</span>
+                                                                    </div>
                                                                 </div>
-                                                                <div class=" text-dark">
-                                                                    Mã sản phẩm: {{ $SPM->maSP }}
-                                                                    <br>
-                                                                    Bảo hành: 1 năm
-                                                                    <br>
-                                                                    Tình trạng sản phẩm: Còn hàng
-                                                                    <br>
-                                                                    <span
-                                                                        class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
-                                                                        VND</span>
+                                                                <div class="col-2">
+                                                                    <button type="submit" name="PCBSubmit"
+                                                                        class="btn btn-danger">+</button>
                                                                 </div>
+                                                                {{-- Hết - Thông tin sản phẩm --}}
                                                             </div>
-                                                            <div class="col-2">
-                                                                <button type="submit" name="PCBSubmit"
-                                                                    class="btn btn-danger">+</button>
-                                                            </div>
-                                                            {{-- Hết - Thông tin sản phẩm --}}
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
                                                 @endif
                                             @endforeach
                                         @endforeach
-                                        @else
-                                    <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" value="{{ $SPM->maSP }}" name="PCBMa">
-                                        <div class="bg-gray-300 card padding-left-10 padding-right-10 text-center">
-                                            <div class="row">
-                                                <!-- Ảnh sản phẩm-->
-                                                <div class="col-2 bg-primary">
-                                                    @php
-                                                        $tempImg;
-                                                        $count = 0;
-                                                    @endphp
-                                                    @foreach ($productImage as $PI)
-                                                        @if ($PI->maSP == $SPM->maSP)
-                                                            @if ($count == 0)
-                                                                @php
-                                                                    $tempImg = $PI->anh;
-                                                                @endphp
-                                                                <a href="{{ route('product.show', $SPM->maSP) }}">
-                                                                    <img class="card-img-top hide-from-work"
-                                                                        style="height:110px ; width:110px ; border: 1px solid lightgray"
-                                                                        src="{{ asset('assets/img/' . $PI->anh) }}"
-                                                                        id="{{ $SPM->maSP }}" alt="..." />
-                                                                </a>
-                                                                @php
-                                                                    $count = 1;
-                                                                @endphp
+                                    @else
+                                        <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="scrollPos" id="scrollPos2"
+                                                value="{{ $scrollPos }}">
+                                            <input type="hidden" value="{{ $SPM->maSP }}" name="PCBMa">
+                                            <div class="bg-gray-300 card padding-left-10 padding-right-10 text-center">
+                                                <div class="row">
+                                                    <!-- Ảnh sản phẩm-->
+                                                    <div class="col-2 bg-primary">
+                                                        @php
+                                                            $tempImg;
+                                                            $count = 0;
+                                                        @endphp
+                                                        @foreach ($productImage as $PI)
+                                                            @if ($PI->maSP == $SPM->maSP)
+                                                                @if ($count == 0)
+                                                                    @php
+                                                                        $tempImg = $PI->anh;
+                                                                    @endphp
+                                                                    <a href="{{ route('product.show', $SPM->maSP) }}">
+                                                                        <img class="card-img-top hide-from-work"
+                                                                            style="height:110px ; width:110px ; border: 1px solid lightgray"
+                                                                            src="{{ asset('assets/img/' . $PI->anh) }}"
+                                                                            id="{{ $SPM->maSP }}" alt="..." />
+                                                                    </a>
+                                                                    @php
+                                                                        $count = 1;
+                                                                    @endphp
+                                                                @endif
                                                             @endif
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                                {{-- Hết - Ảnh sản phẩm --}}
+                                                        @endforeach
+                                                    </div>
+                                                    {{-- Hết - Ảnh sản phẩm --}}
 
-                                                {{-- Thông tin sản phẩm --}}
-                                                <div class="col-8">
-                                                    {{-- Tên sản phẩm --}}
-                                                    <div class="text-bold text-dark">
-                                                        {{ $SPM->tenSP }}
+                                                    {{-- Thông tin sản phẩm --}}
+                                                    <div class="col-8">
+                                                        {{-- Tên sản phẩm --}}
+                                                        <div class="text-bold text-dark">
+                                                            {{ $SPM->tenSP }}
+                                                        </div>
+                                                        <div class=" text-dark">
+                                                            Mã sản phẩm: {{ $SPM->maSP }}
+                                                            <br>
+                                                            Bảo hành: 1 năm
+                                                            <br>
+                                                            Tình trạng sản phẩm: Còn hàng
+                                                            <br>
+                                                            <span
+                                                                class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
+                                                                VND</span>
+                                                        </div>
                                                     </div>
-                                                    <div class=" text-dark">
-                                                        Mã sản phẩm: {{ $SPM->maSP }}
-                                                        <br>
-                                                        Bảo hành: 1 năm
-                                                        <br>
-                                                        Tình trạng sản phẩm: Còn hàng
-                                                        <br>
-                                                        <span
-                                                            class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
-                                                            VND</span>
+                                                    <div class="col-2">
+                                                        <button type="submit" name="PCBSubmit"
+                                                            class="btn btn-danger">+</button>
                                                     </div>
+                                                    {{-- Hết - Thông tin sản phẩm --}}
                                                 </div>
-                                                <div class="col-2">
-                                                    <button type="submit" name="PCBSubmit"
-                                                        class="btn btn-danger">+</button>
-                                                </div>
-                                                {{-- Hết - Thông tin sản phẩm --}}
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
                                     @endif
-                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     @php
-                    // dd($countCheck2);
-                    // dd($countaaa);
-                    // dd($countaaa);
-                @endphp
+                        // dd($countCheck2);
+                        // dd($countaaa);
+                        // dd($countaaa);
+                    @endphp
                 </div>
             </div>
             {{--  --}}
@@ -238,13 +242,15 @@
                     <div class="padding-10 center-custom border-red rounded">
                         <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="scrollPos" id="scrollPos">
                             <table class="bg- w-100 ">
                                 {{-- Bộ vi xử lý --}}
                                 <tr class="">
                                     <td class="padding-10" style="width: 170px">Bộ vi xử lý</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="CPU" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn bộ vi xử lý</button>
+                                            class="btn btn-danger" onmouseover="getPosition()" style="width: 130px">Chọn
+                                            bộ vi xử lý</button>
                                     </td>
                                     @php
                                         $displayCPU = session()->has('PCBMaCPU');
@@ -331,7 +337,8 @@
                                     <td class="padding-10" style="width: 170px">Bo mạch chủ</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="BMC" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Bo mạch chủ</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Bo mạch chủ</button>
                                     </td>
                                     @php
                                         $displayBMC = session()->has('PCBMaBMC');
@@ -418,7 +425,8 @@
                                     <td class="padding-10" style="width: 170px">RAM</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="RAM" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn RAM</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn RAM</button>
                                     </td>
                                     @php
                                         $displayRAM = session()->has('PCBMaRAM');
@@ -505,7 +513,8 @@
                                     <td class="padding-10" style="width: 170px">HDD</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="HDD" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn HDD</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn HDD</button>
                                     </td>
                                     @php
                                         $displayHDD = session()->has('PCBMaHDD');
@@ -592,7 +601,8 @@
                                     <td class="padding-10" style="width: 170px">SSD</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="SSD" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn SSD</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn SSD</button>
                                     </td>
                                     @php
                                         $displaySSD = session()->has('PCBMaSSD');
@@ -679,7 +689,8 @@
                                     <td class="padding-10" style="width: 170px">Card đồ họa</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="VGA" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn card đồ họa</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn card đồ họa</button>
                                     </td>
                                     @php
                                         $displayVGA = session()->has('PCBMaVGA');
@@ -766,7 +777,8 @@
                                     <td class="padding-10" style="width: 170px">Nguồn</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="PSU" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Nguồn</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Nguồn</button>
                                     </td>
                                     @php
                                         $displayPSU = session()->has('PCBMaPSU');
@@ -853,7 +865,8 @@
                                     <td class="padding-10" style="width: 170px">Vỏ case</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="Case" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Vỏ case</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Vỏ case</button>
                                     </td>
                                     @php
                                         $displayCase = session()->has('PCBMaCase');
@@ -941,7 +954,8 @@
                                     <td class="padding-10" style="width: 170px">Màn hình</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="MH" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Màn hình</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Màn hình</button>
                                     </td>
                                     @php
                                         $displayMH = session()->has('PCBMaMH');
@@ -1028,7 +1042,8 @@
                                     <td class="padding-10" style="width: 170px">Bàn phím</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="BP" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Bàn phím</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Bàn phím</button>
                                     </td>
                                     @php
                                         $displayBP = session()->has('PCBMaBP');
@@ -1115,7 +1130,8 @@
                                     <td class="padding-10" style="width: 170px">Chuột</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="Mouse" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Chuột</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Chuột</button>
                                     </td>
                                     @php
                                         $displayMouse = session()->has('PCBMaMouse');
@@ -1203,7 +1219,8 @@
                                     <td class="padding-10" style="width: 170px">Quạt làm mát</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="Fan" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Quạt làm mát</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Quạt làm mát</button>
                                     </td>
                                     @php
                                         $displayFan = session()->has('PCBMaFan');
@@ -1290,7 +1307,8 @@
                                     <td class="padding-10" style="width: 170px">Tản nhiệt khí</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="TNK" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Tản nhiệt khí</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Tản nhiệt khí</button>
                                     </td>
                                     @php
                                         $displayTNK = session()->has('PCBMaTNK');
@@ -1377,7 +1395,8 @@
                                     <td class="padding-10" style="width: 170px">Tản nhiệt nước</td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton1" type="submit" value="TNN" name="PCBModal"
-                                            class="btn btn-danger" style="width: 130px">Chọn Tản nhiệt nước</button>
+                                            class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn Tản nhiệt nước</button>
                                     </td>
                                     @php
                                         $displayTNN = session()->has('PCBMaTNN');
@@ -1460,12 +1479,13 @@
                                     @endif
                                 </tr>
                                 {{-- Bộ phận khác --}}
-                                <tr class="">
+                                <tr hidden class="">
                                     <td class="padding-10" style="width: 170px">Laptop
                                     </td>
                                     <td class="padding-10" style="width: 170px">
                                         <button id="PCBuilderButton2" type="submit" value="LaptopGaming"
-                                            name="PCBModal" class="btn btn-danger" style="width: 130px">Chọn
+                                            name="PCBModal" class="btn btn-danger" onmouseover="getPosition()"
+                                            style="width: 130px">Chọn
                                             khác</button>
                                     </td>
                                     @php
@@ -1741,7 +1761,11 @@
                                 <button class="btn btn-danger w-100" type="submit">Thêm vào giỏ
                                     hàng</button>
                             </form>
-
+                            <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
+                                @csrf
+                                <button type="submit" name="PCBDeleteAll" id="PCBDeleteAll" value="1"
+                                    class="btn btn-danger w-100">Reset xây dựng PC</button>
+                            </form>
                         </div>
                     </div>
                     {{-- Hết - Thêm vào giỏ hàng --}}
@@ -1814,6 +1838,27 @@
                 {{ session()->put('modalClose', 1) }}
             }
         }
+        var mousePos;
+        onmousemove = function(e) {
+            // console.log("mouse location:", e.clientX, e.clientY)
+            mousePos = e.clientY;
+        }
+
+        function setPosition() {
+            console.log("HIRES::", {{ $scrollPos }});
+            document.documentElement.scrollTop = document.body.scrollTop = {{ $scrollPos }}
+            // console.log(document.documentElement.scrollTop || document.body.scrollTop);
+
+        }
+
+        function getPosition() {
+            // document.documentElement.scrollTop = document.body.scrollTop =
+            mousePos = document.documentElement.scrollTop || document.body.scrollTop;
+            console.log("RES:", mousePos);
+            document.getElementById('scrollPos').value = mousePos;
+            // document.getElementById('scrollPos2').value = mousePos;
+        }
+        window.onload = setPosition();
     </script>
     @include('Customer.Layout.Common.bottom_script')
     <script></script>

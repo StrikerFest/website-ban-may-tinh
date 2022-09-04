@@ -382,6 +382,30 @@
                 }
             });
         });
+
+        // All
+        jQuery('#PCBDeleteAll').click(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            if (confirm('Bạn có thực sự muốn xóa hết các sản phẩm đã chọn?') == true) {
+                jQuery.ajax({
+                    url: "{{ route('PCBuilderCustomer.store') }}",
+                    method: 'post',
+                    data: {
+                        PCBDeleteAll: jQuery('#PCBDeleteAll').val(),
+                    },
+                    success: function(result) {
+                        console.log("Result::" + result);
+                        // $('#PCBAll').load(location.href + " #PCBAll");
+                        reloadPCBDelete();
+                    }
+                });
+            }
+        });
     });
 
     // AJAX gọi data modal

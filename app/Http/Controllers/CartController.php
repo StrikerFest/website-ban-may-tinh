@@ -381,7 +381,8 @@ class CartController extends Controller
 
         // session()->flash('success', 'Sản phẩm thêm vào giỏ hàng thành công !');
         if ($emptyCartCheck == 0)
-            return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Thêm vào giỏ hàng thành công");
+            return redirect()->route('cart.list');
+
         else
             return redirect(url()->previous() . '#collapsePoint')->with("cartAddSuccess", "Không có vật phẩm thêm vào giỏ hàng");
     }

@@ -150,7 +150,7 @@
                                         $conNum = sizeof($saleProduct) / 3;
                                         $conNum = ceil($conNum);
                                     @endphp
-                                    <ol class="carousel-indicators" style="margin-bottom: -20px; overflow:visible">
+                                    <ol class="carousel-indicators" style="margin-bottom: -20px; overflow:hidden">
                                         @for ($i = 0; $i < $conNum; $i++)
                                             @if ($i == 0)
                                                 <li data-target="#saleCarousel" data-slide-to="{{ $i }}"
@@ -264,6 +264,7 @@
                                                                                                             <div
                                                                                                                 class="btn btn-danger ">
                                                                                                                 Xem ngay
+                                                                                                                <br> Ưu đãi lớn
                                                                                                             </div>
                                                                                                         </a>
                                                                                                     </div>
@@ -374,7 +375,7 @@
                                                                                                             href="{{ route('product.show', $CN->maSP) }}">
                                                                                                             <div
                                                                                                                 class="btn btn-danger ">
-                                                                                                                Xem ngay
+                                                                                                                Xem ngay <br> Ưu đãi lớn
                                                                                                             </div>
                                                                                                         </a>
                                                                                                     </div>
