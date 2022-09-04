@@ -3,7 +3,20 @@
 <head>
     @include('Customer.Layout.Common.meta')
     <meta name="_token" content="{{ csrf_token() }}" />
-
+    <script>
+        const pageAccessedByReload = (
+            (window.performance.navigation && window.performance.navigation.type === 1) ||
+            window.performance
+            .getEntriesByType('navigation')
+            .map((nav) => nav.type)
+            .includes('reload')
+        );
+        if(pageAccessedByReload == true){
+            @php
+                // $modalStatus = 0;
+            @endphp
+        }
+    </script>
     <style>
         /* The Modal (background) */
         .modal-PCB {
@@ -72,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- The Modal -->
-                        @if (session()->get('modal') == 1)
+                        @if ($modalStatus == 1)
                             <div id="PCBuildModal" style="display: block" class="modal-PCB">
                             @else
                                 <div id="PCBuildModal" class="modal-PCB">
@@ -163,6 +176,7 @@
                                             @csrf
                                             <input type="hidden" name="scrollPos" id="scrollPos2"
                                                 value="{{ $scrollPos }}">
+                                            <input type="hidden" name="modalStatus" id="modalStatus2">
                                             <input type="hidden" value="{{ $SPM->maSP }}" name="PCBMa">
                                             <div class="bg-gray-300 card padding-left-10 padding-right-10 text-center">
                                                 <div class="row">
@@ -212,8 +226,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-2">
-                                                        <button type="submit" name="PCBSubmit"
-                                                            class="btn btn-danger">+</button>
+                                                        <button type="submit" name="PCBSubmit" class="btn btn-danger"
+                                                            onmouseover="closeModalOnClick()">+</button>
                                                     </div>
                                                     {{-- Hết - Thông tin sản phẩm --}}
                                                 </div>
@@ -243,6 +257,8 @@
                         <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="scrollPos" id="scrollPos">
+                            <input type="hidden" name="modalStatus" id="modalStatus">
+
                             <table class="bg- w-100 ">
                                 {{-- Bộ vi xử lý --}}
                                 <tr class="">
@@ -1806,12 +1822,14 @@
         btn1.onclick = function() {
             // modal.style.display = "block";
             console.log("BTN");
-            {{ session()->put('modal', 1) }}
+            document.getElementById('modalStatus').value = 1;
+            // {{ session()->put('modal', 1) }}
         }
         btn2.onclick = function() {
             // modal.style.display = "block";
             console.log("BTN");
-            {{ session()->put('modal', 1) }}
+            // {{ session()->put('modal', 1) }}
+            document.getElementById('modalStatus').value = 1;
         }
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
@@ -1819,9 +1837,14 @@
             // modal2.style.display = "none";
             console.log("X CLICK");
             console.log("Modal is " + {{ session()->get('modal') }});
+            document.getElementById('modalStatus').value = 0;
             {{ session()->put('modalClose', 1) }}
             console.log("Modal close is " + {{ session()->get('modalClose') }});
 
+        }
+
+        function closeModalOnClick() {
+            document.getElementById('modalStatus2').value = 0;
         }
 
         // closex.onclick = function() {
@@ -1835,6 +1858,7 @@
             if (event.target == modal) {
                 modal.style.display = "none";
                 console.log("OUTSIDE CLICK");
+                document.getElementById('modalStatus').value = 0;
                 {{ session()->put('modalClose', 1) }}
             }
         }
@@ -1856,8 +1880,11 @@
             mousePos = document.documentElement.scrollTop || document.body.scrollTop;
             console.log("RES:", mousePos);
             document.getElementById('scrollPos').value = mousePos;
+            document.getElementById('modalStatus').value = 1;
             // document.getElementById('scrollPos2').value = mousePos;
         }
+
+
         window.onload = setPosition();
     </script>
     @include('Customer.Layout.Common.bottom_script')

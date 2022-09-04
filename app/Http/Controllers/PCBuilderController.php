@@ -26,7 +26,7 @@ class PCBuilderController extends Controller
     public function create(Request $request)
     {
         $receiver = $request->get('PCBModal');
-
+        // dd($receiver);
         $cartItems = \Cart::getContent();
         $listTheLoaiCha = DB::table('the_loai')->get();
         $listNhaSanXuat = DB::table('nha_san_xuat')->skip(0)->take(7)->get();
@@ -38,23 +38,25 @@ class PCBuilderController extends Controller
         $PCBTheLoai = session()->has('PCBTheLoai') ? session()->get('PCBTheLoai') : '';
         $listTheLoaiSidenav = DB::table('the_loai_con')->join('the_loai', 'the_loai_con.maTL', '=', 'the_loai.maTL')->get();
 
-
-        // Btn press send data
-        if ($receiver !== "") {
-            // When close btn pressed
-            if (session()->get('modalClose') == 1) {
-                // Reset data
-                $receiver = "";
-                // Close use of close btn
-                session()->put('modalClose', 0);
-                // Close use of modal
-                session()->put('modal', 0);
-                // dd("here");
-            } else {
-                session()->put('modal', 1);
-            }
-        }
-        $receiver = "";
+        $modalStatus = session()->get('modalStatus');
+        if ($modalStatus == null)
+            $modalStatus = 0;
+        // // Btn press send data
+        // if ($receiver !== null) {
+        //     // When close btn pressed
+        //     if (session()->get('modalClose') == 1) {
+        //         // Reset data
+        //         $receiver = null;
+        //         // Close use of close btn
+        //         session()->put('modalClose', 0);
+        //         // Close use of modal
+        //         session()->put('modal', 0);
+        //         // dd("here");
+        //     } else {
+        //         session()->put('modal', 1);
+        //     }
+        // }
+        $receiver = null;
 
         $listCheckCPU = null;
         $listCheckCase = null;
@@ -111,7 +113,6 @@ class PCBuilderController extends Controller
                         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
                         ->skip(0)->take(7)->where('tenTLC', 'like', 'Bo mạch %')
                         ->get();
-
                 } elseif (session()->has('PCBSocketCPU'))
                     $listSanPhamModal = DB::table('san_pham')
                         ->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
@@ -232,6 +233,7 @@ class PCBuilderController extends Controller
             'listCheckCase' =>  $listCheckCase,
             'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
             'scrollPos' =>  $scrollPos,
+            'modalStatus' =>  $modalStatus,
 
         ]);
     }
@@ -737,8 +739,7 @@ class PCBuilderController extends Controller
             session()->forget('PCBBaoHanhL');
             session()->forget('PCBTinhTrangL');
             session()->forget('PCBSoLuongL');
-        }
-        elseif ($request->PCBDeleteAll == 1) {
+        } elseif ($request->PCBDeleteAll == 1) {
             session()->forget('PCBTenCPU');
             session()->forget('PCBMaCPU');
             session()->forget('PCBGiaCPU');
@@ -840,23 +841,25 @@ class PCBuilderController extends Controller
         }
 
 
+        $modalStatus = $request->get('modalStatus');
 
+        // // Btn press send data
+        // if ($modalStatus !== null) {
+        //     // When close btn pressed
+        //     if ($modalStatus == 1) {
+        //         // Reset data
+        //         // $receiver = null;
+        //         // Close use of close btn
+        //         session()->put('modalClose', 0);
+        //         // Close use of modal
+        //         session()->put('modal', 0);
+        //         echo "<br>Reached";
+        //     } else {
+        //         session()->put('modal', 1);
+        //     }
+        // }
 
-        // Btn press send data
-        if ($receiver !== "") {
-            // When close btn pressed
-            if (session()->get('modalClose') == 1) {
-                // Reset data
-                $receiver = "";
-                // Close use of close btn
-                session()->put('modalClose', 0);
-                // Close use of modal
-                session()->put('modal', 0);
-                echo "<br>Reached";
-            } else {
-                session()->put('modal', 1);
-            }
-        }
+        session()->put('modalStatus', $modalStatus);
 
         $receiver = "";
         return redirect()->route('PCBuilderCustomer.create', [
