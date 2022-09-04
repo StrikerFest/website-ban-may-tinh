@@ -41,7 +41,7 @@
             <span style="color: gray !important">Máy tính bàn</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                             @foreach ($listTheLoaiCha as $TLCha)
@@ -166,8 +166,8 @@
             <i class="fas fa-laptop sidenav-header"></i>
             <span style="color: gray !important">Laptop</span>
         </a>
-        <div id="collapseLaptop" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+        <div id="collapseLaptop" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+            <div class="bg-white collapse-inner rounded custom-1" style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -295,13 +295,13 @@
     <!-- Nav Item - Màn hình-->
     <li class="nav-item">
         {{-- Title --}}
-        <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
-            data-target="#collapseMH" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed sidenav-text pt-0 pb-0"  data-toggle="collapse"
+            data-target="#collapseMH" aria-expanded="true" aria-controls="collapseMH">
             <i class="fas fa-desktop sidenav-header"></i>
             <span style="color: gray !important">Màn hình</span>
         </a>
         <div id="collapseMH" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -419,12 +419,12 @@
     <li class="nav-item">
         {{-- Title --}}
         <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
-            data-target="#collapseMouse" aria-expanded="true" aria-controls="collapseTwo">
+            data-target="#collapseMouse" aria-expanded="true" aria-controls="collapseMouse">
             <i class="fas fa-solid fa-mouse sidenav-header"></i>
             <span style="color: gray !important">Chuột</span>
         </a>
         <div id="collapseMouse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -542,12 +542,12 @@
     <li class="nav-item">
         {{-- Title --}}
         <a class="nav-link collapsed sidenav-text pt-0 pb-0" href="#" data-toggle="collapse"
-            data-target="#collapseBP" aria-expanded="true" aria-controls="collapseTwo">
+            data-target="#collapseBP" aria-expanded="true" aria-controls="collapseBP">
             <i class="fas fa-keyboard sidenav-header"></i>
             <span style="color: gray !important">Bàn phím</span>
         </a>
         <div id="collapseBP" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -677,7 +677,7 @@
             <span style="color: gray !important">CPU</span>
         </a>
         <div id="collapseCPU" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -800,7 +800,7 @@
             <span style="color: gray !important">Bo mạch chủ</span>
         </a>
         <div id="collapseBMC" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -925,7 +925,7 @@
             <span style="color: gray !important">RAM</span>
         </a>
         <div id="collapseRAM" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -1050,7 +1050,7 @@
             <span style="color: gray !important">VGA</span>
         </a>
         <div id="collapseVGA" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
@@ -1175,7 +1175,7 @@
             <span style="color: gray !important">Nguồn</span>
         </a>
         <div id="collapseNguon" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white collapse-inner rounded " style="width: 400%">
+            <div class="bg-white collapse-inner rounded " style="width:50%;position:fixed;top:130px;left:225px">
                 <div class="grid">
                     <div class="row">
                         @foreach ($listTheLoaiCha as $TLCha)
