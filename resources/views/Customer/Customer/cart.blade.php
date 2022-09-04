@@ -57,20 +57,20 @@
                                                 @endphp
                                                 @foreach ($cartItems as $item)
                                                     <tr>
-                                                        <td class="hidden pb-4 md:table-cell" style="width: 25%">
+                                                        <td class="hidden  md:table-cell" style="width: 20%">
                                                             <a href="{{ route('product.show', $item->id) }}">
                                                                 <img {{-- src="{{ $item->image }}" --}}
-                                                                    style="height: 100%;width: 100%;"
+                                                                    style="height: 113px;width: 113px;"
                                                                     src="{{ asset('assets/img/' . $item->attributes->image) }}"
                                                                     class="w-20 rounded" alt="Thumbnail">
                                                             </a>
                                                         </td>
-                                                        <td>
-                                                            <a href="{{ route('product.show', $item->id) }}">
+                                                        <td class="pr-3">
+                                                            <a href="{{ route('product.show', $item->id) }}" style="color:black;font-size:0.9em">
                                                                 <p class="mb-2 md:ml-4">{{ $item->name }}</p>
                                                             </a>
                                                         </td>
-                                                        <td class="justify-center mt-6 md:justify-end md:flex">
+                                                        <td class="justify-center mt-6 md:justify-end md:flex" style="font-size:0.9em">
                                                             <div class="h-10 w-28">
                                                                 <div class="relative flex flex-row w-full h-8">
 
@@ -120,7 +120,7 @@
                                                             </div>
                                                         </td>
                                                         <td class="hidden text-center md:table-cell padding-10"
-                                                            style="padding-top: 0px">
+                                                        style="color:black;font-size:0.9em">
                                                             <input type="hidden" value="{{ $item->price }}">
                                                             <input type="hidden" value="{{ $item->attributes->reduceFlat }}">
                                                             <input type="hidden" value="{{ $item->attributes->reducePercent }}">
@@ -285,7 +285,7 @@
                 let reduceFlat = $(this).closest('td').next().children().eq(1).val();
                 let reducePercent = $(this).closest('td').next().children().eq(2).val();
                 let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity).toLocaleString();
-                
+
                 $(this).closest('td').next().children().eq(3).children().eq(0).html(totalPrice);
                 $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce);
                 $.ajax({
