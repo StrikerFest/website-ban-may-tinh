@@ -3217,14 +3217,14 @@ INSERT INTO `serial` (`maSerial`, `maSP`, `serial`, `maNK`, `maHDCT`) VALUES (NU
                                                                             (NULL, '111', 'QT3010', '1', NULL);
 
 -- -- Hoá đơn
--- INSERT INTO `hoa_don` (`maHD`, `maKH`, `maNV`, `ngayTao`, `soDienThoai`, `diaChi`, `maPTTT`, `maTTHD`) VALUES (NULL, '6', NULL, '2022-08-17 11:29:41.000000', '0123456789', 'Hà Nội', '1', '1'),
---                                                                                                                             (NULL, '6', NULL, '2022-08-17 11:29:42.000000', '0123456789', 'Hà Nội', '2', '1');
+INSERT INTO `hoa_don` (`maHD`, `maKH`, `maNV`, `ngayTao`, `tenKH`, `soDienThoai`, `diaChi`, `maPTTT`, `maTTHD`) VALUES (NULL, '6', NULL, '2022-08-17 11:29:41.000000', 'Nguyễn Văn A', '0123456789', 'Hà Nội', '1', '1'),
+                                                                                                                            (NULL, '6', NULL, '2022-08-17 11:29:42.000000', 'Nguyễn Văn A', '0123456789', 'Hà Nội', '2', '1');
 
 -- -- Hoá đơn chi tiết
--- INSERT INTO `hoa_don_chi_tiet` (`maHDCT`, `maHD`, `maSP`, `soLuong`, `giaSP`, `giamGia`) VALUES (NULL, '1', '7', '1', '23000000', '10'),
---                                                                                                             (NULL, '1', '86', '2', '3100000', '10'),
---                                                                                                             (NULL, '2', '91', '2', '2200000', '10'),
---                                                                                                             (NULL, '2', '107', '3', '4200000', '10');
+INSERT INTO `hoa_don_chi_tiet` (`maHDCT`, `maHD`, `maSP`, `soLuong`, `giaSP`, `giamGia`) VALUES (NULL, '1', '7', '1', '23000000', '10'),
+                                                                                                            (NULL, '1', '86', '2', '3100000', '10'),
+                                                                                                            (NULL, '2', '91', '2', '2200000', '10'),
+                                                                                                            (NULL, '2', '107', '3', '4200000', '10');
 
 -- -- Voucher hoá đơn chi tiết
--- INSERT INTO `voucher_hoa_don_chi_tiet` (`maVHDCT`, `maVoucher`, `maHDCT`) VALUES (NULL, '2', '1'), (NULL, '8', '1'), (NULL, '5', '3'), (NULL, '3', '4');
+INSERT INTO `voucher_hoa_don_chi_tiet` (`maVHDCT`, `maVoucher`, `maHDCT`) VALUES (NULL, '2', '1'), (NULL, '8', '1'), (NULL, '5', '3'), (NULL, '3', '4');
