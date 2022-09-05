@@ -234,12 +234,14 @@
                 for(let i = 0; i <abc.length; i++){
                     let quantityTemp = abc.eq(i).val();
                     let priceTemp = abc.eq(i).closest('td').next().children().eq(0).val();
-                    let totalPriceTemp = quantityTemp*priceTemp
-                    sum += totalPriceTemp
-
+                    
                     let reduceFlatTemp = abc.eq(i).closest('td').next().children().eq(1).val();
                     let reducePercentTemp = abc.eq(i).closest('td').next().children().eq(2).val();
                     let totalReduceTemp = reduceFlatTemp*quantityTemp + (priceTemp*reducePercentTemp/100)*quantityTemp
+                    
+                    let totalPriceTemp = quantityTemp*priceTemp-totalReduceTemp
+                    sum += totalPriceTemp
+
                     sumReduce += totalReduceTemp
                 }
                 $('#final-price').html(sum.toLocaleString());
@@ -255,14 +257,15 @@
                 let cartId = $(this).parent().parent().prev().val();
                 let quantity = $(this).val();
                 let price = $(this).closest('td').next().children().eq(0).val();
-                let totalPrice = (quantity*price).toLocaleString()+ ' VND';
-
+                
                 let reduceFlat = $(this).closest('td').next().children().eq(1).val();
                 let reducePercent = $(this).closest('td').next().children().eq(2).val();
-                let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity).toLocaleString();
+                let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity);
+                
+                let totalPrice = (quantity*price-totalReduce).toLocaleString()+ ' VND';
 
                 $(this).closest('td').next().children().eq(3).children().eq(0).html(totalPrice);
-                $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce);
+                $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce.toLocaleString());
                 $.ajax({
                     url: "{{ url('update-cart') }}",
                     type: "post",
@@ -282,14 +285,15 @@
                 let quantity = $(this).next().val();
                 let cartId = $(this).parent().parent().prev().val();
                 let price = $(this).closest('td').next().children().eq(0).val();
-                let totalPrice = (quantity*price).toLocaleString()+ ' VND';
-
+                
                 let reduceFlat = $(this).closest('td').next().children().eq(1).val();
                 let reducePercent = $(this).closest('td').next().children().eq(2).val();
-                let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity).toLocaleString();
+                let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity);
+                
+                let totalPrice = (quantity*price-totalReduce).toLocaleString()+ ' VND';
 
                 $(this).closest('td').next().children().eq(3).children().eq(0).html(totalPrice);
-                $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce);
+                $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce.toLocaleString());
                 $.ajax({
                     url: "{{ url('update-cart') }}",
                     type: "post",
@@ -309,14 +313,15 @@
                 let quantity = $(this).prev().val();
                 let cartId = $(this).parent().parent().prev().val();
                 let price = $(this).closest('td').next().children().eq(0).val();
-                let totalPrice = (quantity*price).toLocaleString()+ ' VNĐ';
-
+                
                 let reduceFlat = $(this).closest('td').next().children().eq(1).val();
                 let reducePercent = $(this).closest('td').next().children().eq(2).val();
-                let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity).toLocaleString();
+                let totalReduce = (reduceFlat*quantity + (price*reducePercent/100)*quantity);
+                
+                let totalPrice = (quantity*price-totalReduce).toLocaleString()+ ' VNĐ';
 
                 $(this).closest('td').next().children().eq(3).children().eq(0).html(totalPrice);
-                $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce);
+                $(this).closest('td').next().children().eq(3).children().eq(2).html(totalReduce.toLocaleString());
                 $.ajax({
                     url: "{{ url('update-cart') }}",
                     type: "post",
