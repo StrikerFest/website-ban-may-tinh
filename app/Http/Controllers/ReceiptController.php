@@ -206,6 +206,7 @@ class ReceiptController extends Controller
                     $hoaDon->maKH = $id;
                     date_default_timezone_set('Asia/Ho_Chi_Minh');
                     $hoaDon->ngayTao =  date("Y/m/d H:i:s");
+                    $hoaDon->tenKH = session()->get('tenKhachHangDat');
                     $hoaDon->diaChi =  session()->get('diaChiDat');
                     $hoaDon->soDienThoai = session()->get('soDienThoaiDat');
                     $hoaDon->maPTTT = 2;
@@ -248,7 +249,11 @@ class ReceiptController extends Controller
 
                                 //
                                 $voucher = VoucherModel::find($PP->maVoucher);
-                                $voucher->soLuong -= 1;
+                                $voucher->soLuong -= $cart->quantity;
+                                //Check số lượng voucher khi đang tạo đơn hàng
+                                if($voucher->soLuong <= 0){
+                                    $voucher->soLuong = 0;
+                                }
                                 $voucher->save();
                                 //
                             }
@@ -264,6 +269,22 @@ class ReceiptController extends Controller
                     $objDemo->receiver = session()->get('tenKhachHang');
                     Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
                     session()->put('maillingSession', 0);
+
+                    //Check số lượng voucher sau khi hoàn tất đơn hàng
+                    foreach($cartItems as $ci){
+                        $SPV = ProductVoucherModel::where('maSP', $ci->attributes->itemId)->get();
+                        foreach($SPV as $spv){
+                            $V = VoucherModel::find($spv->maVoucher);
+                            if($V->soLuong <= 10){
+                                $PV = ProductVoucherModel::where('maVoucher', $V->maVoucher)->get();
+                                foreach($PV as $pv){
+                                    $pv->kichHoat = 0;
+                                    $pv->save();
+                                }
+                            }
+                        }
+                    }
+
                     \Cart::clear();
                     // if (session()->get('maillingSession') == 1) {
 
@@ -389,6 +410,7 @@ class ReceiptController extends Controller
                 date_default_timezone_set('Asia/Ho_Chi_Minh');
                 $hoaDon->ngayTao =  date("Y/m/d H:i:s");
                 $hoaDon->diaChi =  $request->receiptAddress;
+                $hoaDon->tenKH = $request->get('receiptName');
                 $hoaDon->soDienThoai = $request->get('receiptPhone');
                 // if ($request->paymentMethod == "COD") {
                 $hoaDon->maPTTT = 1;
@@ -448,7 +470,11 @@ class ReceiptController extends Controller
 
                             //
                             $voucher = VoucherModel::find($PP->maVoucher);
-                            $voucher->soLuong -= 1;
+                            $voucher->soLuong -= $cart->quantity;
+                            //Check số lượng voucher trong khi đang tạo đơn hàng
+                            if($voucher->soLuong <= 0){
+                                $voucher->soLuong = 0;
+                            }
                             $voucher->save();
                             //
                         }
@@ -471,6 +497,21 @@ class ReceiptController extends Controller
                 // if (session()->get('maillingSession') == 1) {
                 Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
                 session()->put('maillingSession', 0);
+                
+                //Check số lượng voucher sau khi hoàn tất đơn hàng
+                foreach($cartItems as $ci){
+                    $SPV = ProductVoucherModel::where('maSP', $ci->attributes->itemId)->get();
+                    foreach($SPV as $spv){
+                        $V = VoucherModel::find($spv->maVoucher);
+                        if($V->soLuong <= 10){
+                            $PV = ProductVoucherModel::where('maVoucher', $V->maVoucher)->get();
+                            foreach($PV as $pv){
+                                $pv->kichHoat = 0;
+                                $pv->save();
+                            }
+                        }
+                    }
+                }
                 \Cart::clear();
                 // }
             }

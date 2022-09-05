@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('maNV')->nullable();
             $table->foreign('maNV')->references('maND')->on('nguoi_dung');
             $table->dateTime('ngayTao');
+            $table->string('tenKH', 50);
             $table->string('soDienThoai', 15);
             $table->string('diaChi', 400);
             $table->unsignedInteger('maPTTT');
