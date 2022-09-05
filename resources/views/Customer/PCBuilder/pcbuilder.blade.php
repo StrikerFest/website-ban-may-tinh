@@ -11,7 +11,7 @@
             .map((nav) => nav.type)
             .includes('reload')
         );
-        if(pageAccessedByReload == true){
+        if (pageAccessedByReload == true) {
             @php
                 // $modalStatus = 0;
             @endphp
@@ -155,8 +155,26 @@
                                                                         <br>
                                                                         Tình trạng sản phẩm: Còn hàng
                                                                         <br>
+                                                                        @php
+                                                                            $reducedMoneyPercent = $SPM->giamGia;
+                                                                            $reducedMoneyFlat = 0;
+                                                                        @endphp
+                                                                        @foreach ($productPromotion as $PP)
+                                                                            @if ($PP->maSP == $SPM->maSP)
+                                                                                @php
+                                                                                    if ($PP->kichHoat == 1) {
+                                                                                        $ten = $PP->tenVoucher;
+                                                                                        if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                            $reducedMoneyPercent += $PP->giaTri;
+                                                                                        } elseif ($PP->giaTri > 100) {
+                                                                                            $reducedMoneyFlat += $PP->giaTri;
+                                                                                        }
+                                                                                    }
+                                                                                @endphp
+                                                                            @endif
+                                                                        @endforeach
                                                                         <span
-                                                                            class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
+                                                                            class="text-danger text-bold">{{ number_format($SPM->giaSP - $reducedMoneyFlat - ($SPM->giaSP * $reducedMoneyPercent) / 100) }}
                                                                             VND</span>
                                                                     </div>
                                                                 </div>
@@ -220,8 +238,26 @@
                                                             <br>
                                                             Tình trạng sản phẩm: Còn hàng
                                                             <br>
+                                                            @php
+                                                                $reducedMoneyPercent = $SPM->giamGia;
+                                                                $reducedMoneyFlat = 0;
+                                                            @endphp
+                                                            @foreach ($productPromotion as $PP)
+                                                                @if ($PP->maSP == $SPM->maSP)
+                                                                    @php
+                                                                        if ($PP->kichHoat == 1) {
+                                                                            $ten = $PP->tenVoucher;
+                                                                            if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                $reducedMoneyPercent += $PP->giaTri;
+                                                                            } elseif ($PP->giaTri > 100) {
+                                                                                $reducedMoneyFlat += $PP->giaTri;
+                                                                            }
+                                                                        }
+                                                                    @endphp
+                                                                @endif
+                                                            @endforeach
                                                             <span
-                                                                class="text-danger text-bold">{{ number_format($SPM->giaSP) }}
+                                                                class="text-danger text-bold">{{ number_format($SPM->giaSP - $reducedMoneyFlat - ($SPM->giaSP * $reducedMoneyPercent) / 100) }}
                                                                 VND</span>
                                                         </div>
                                                     </div>
@@ -324,14 +360,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaCPU')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentCPU = session()->get('PCBGiamGiaCPU');
+                                                                    $reducedMoneyFlatCPU = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaCPU'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentCPU += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatCPU += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaCPU') - (session()->get('PCBGiaCPU') * $reducedMoneyPercentCPU) / 100 - $reducedMoneyFlatCPU) }}
                                                                 VND x <input type="number" id="PCBSoLuongCPU"
                                                                     value="{{ session()->get('PCBSoLuongCPU') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongCPU">
                                                                 =
                                                                 <span id="PCBTongTienCPU">
-                                                                    {{ number_format(session()->get('PCBSoLuongCPU') * session()->get('PCBGiaCPU')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongCPU') * (session()->get('PCBGiaCPU') - (session()->get('PCBGiaCPU') * $reducedMoneyPercentCPU) / 100 - $reducedMoneyFlatCPU)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -412,14 +466,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaBMC')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentBMC = session()->get('PCBGiamGiaBMC');
+                                                                    $reducedMoneyFlatBMC = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaBMC'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentBMC += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatBMC += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaBMC') - (session()->get('PCBGiaBMC') * $reducedMoneyPercentBMC) / 100 - $reducedMoneyFlatBMC) }}
                                                                 VND x <input type="number" id="PCBSoLuongBMC"
                                                                     value="{{ session()->get('PCBSoLuongBMC') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongBMC">
                                                                 =
                                                                 <span id="PCBTongTienBMC">
-                                                                    {{ number_format(session()->get('PCBSoLuongBMC') * session()->get('PCBGiaBMC')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongBMC') * (session()->get('PCBGiaBMC') - (session()->get('PCBGiaBMC') * $reducedMoneyPercentBMC) / 100 - $reducedMoneyFlatBMC)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -500,14 +572,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaRAM')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentRAM = session()->get('PCBGiamGiaRAM');
+                                                                    $reducedMoneyFlatRAM = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaRAM'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentRAM += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatRAM += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaRAM') - (session()->get('PCBGiaRAM') * $reducedMoneyPercentRAM) / 100 - $reducedMoneyFlatRAM) }}
                                                                 VND x <input type="number" id="PCBSoLuongRAM"
                                                                     value="{{ session()->get('PCBSoLuongRAM') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongRAM">
                                                                 =
                                                                 <span id="PCBTongTienRAM">
-                                                                    {{ number_format(session()->get('PCBSoLuongRAM') * session()->get('PCBGiaRAM')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongRAM') * (session()->get('PCBGiaRAM') - (session()->get('PCBGiaRAM') * $reducedMoneyPercentRAM) / 100 - $reducedMoneyFlatRAM)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -588,14 +678,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaHDD')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentHDD = session()->get('PCBGiamGiaHDD');
+                                                                    $reducedMoneyFlatHDD = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaHDD'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentHDD += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatHDD += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaHDD') - (session()->get('PCBGiaHDD') * $reducedMoneyPercentHDD) / 100 - $reducedMoneyFlatHDD) }}
                                                                 VND x <input type="number" id="PCBSoLuongHDD"
                                                                     value="{{ session()->get('PCBSoLuongHDD') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongHDD">
                                                                 =
                                                                 <span id="PCBTongTienHDD">
-                                                                    {{ number_format(session()->get('PCBSoLuongHDD') * session()->get('PCBGiaHDD')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongHDD') * (session()->get('PCBGiaHDD') - (session()->get('PCBGiaHDD') * $reducedMoneyPercentHDD) / 100 - $reducedMoneyFlatHDD)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -676,14 +784,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaSSD')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentSSD = session()->get('PCBGiamGiaSSD');
+                                                                    $reducedMoneyFlatSSD = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaSSD'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentSSD += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatSSD += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaSSD') - (session()->get('PCBGiaSSD') * $reducedMoneyPercentSSD) / 100 - $reducedMoneyFlatSSD) }}
                                                                 VND x <input type="number" id="PCBSoLuongSSD"
                                                                     value="{{ session()->get('PCBSoLuongSSD') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongSSD">
                                                                 =
                                                                 <span id="PCBTongTienSSD">
-                                                                    {{ number_format(session()->get('PCBSoLuongSSD') * session()->get('PCBGiaSSD')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongSSD') * (session()->get('PCBGiaSSD') - (session()->get('PCBGiaSSD') * $reducedMoneyPercentSSD) / 100 - $reducedMoneyFlatSSD)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -764,14 +890,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaVGA')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentVGA = session()->get('PCBGiamGiaVGA');
+                                                                    $reducedMoneyFlatVGA = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaVGA'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentVGA += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatVGA += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaVGA') - (session()->get('PCBGiaVGA') * $reducedMoneyPercentVGA) / 100 - $reducedMoneyFlatVGA) }}
                                                                 VND x <input type="number" id="PCBSoLuongVGA"
                                                                     value="{{ session()->get('PCBSoLuongVGA') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongVGA">
                                                                 =
                                                                 <span id="PCBTongTienVGA">
-                                                                    {{ number_format(session()->get('PCBSoLuongVGA') * session()->get('PCBGiaVGA')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongVGA') * (session()->get('PCBGiaVGA') - (session()->get('PCBGiaVGA') * $reducedMoneyPercentVGA) / 100 - $reducedMoneyFlatVGA)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -852,14 +996,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaPSU')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentPSU = session()->get('PCBGiamGiaPSU');
+                                                                    $reducedMoneyFlatPSU = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaPSU'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentPSU += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatPSU += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaPSU') - (session()->get('PCBGiaPSU') * $reducedMoneyPercentPSU) / 100 - $reducedMoneyFlatPSU) }}
                                                                 VND x <input type="number" id="PCBSoLuongPSU"
                                                                     value="{{ session()->get('PCBSoLuongPSU') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongPSU">
                                                                 =
                                                                 <span id="PCBTongTienPSU">
-                                                                    {{ number_format(session()->get('PCBSoLuongPSU') * session()->get('PCBGiaPSU')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongPSU') * (session()->get('PCBGiaPSU') - (session()->get('PCBGiaPSU') * $reducedMoneyPercentPSU) / 100 - $reducedMoneyFlatPSU)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -940,14 +1102,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaCase')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentCase = session()->get('PCBGiamGiaCase');
+                                                                    $reducedMoneyFlatCase = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaCase'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentCase += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatCase += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaCase') - (session()->get('PCBGiaCase') * $reducedMoneyPercentCase) / 100 - $reducedMoneyFlatCase) }}
                                                                 VND x <input type="number" id="PCBSoLuongCase"
                                                                     value="{{ session()->get('PCBSoLuongCase') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongCase">
                                                                 =
                                                                 <span id="PCBTongTienCase">
-                                                                    {{ number_format(session()->get('PCBSoLuongCase') * session()->get('PCBGiaCase')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongCase') * (session()->get('PCBGiaCase') - (session()->get('PCBGiaCase') * $reducedMoneyPercentCase) / 100 - $reducedMoneyFlatCase)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1029,14 +1209,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaMH')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentMH = session()->get('PCBGiamGiaMH');
+                                                                    $reducedMoneyFlatMH = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaMH'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentMH += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatMH += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaMH') - (session()->get('PCBGiaMH') * $reducedMoneyPercentMH) / 100 - $reducedMoneyFlatMH) }}
                                                                 VND x <input type="number" id="PCBSoLuongMH"
                                                                     value="{{ session()->get('PCBSoLuongMH') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongMH">
                                                                 =
                                                                 <span id="PCBTongTienMH">
-                                                                    {{ number_format(session()->get('PCBSoLuongMH') * session()->get('PCBGiaMH')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongMH') * (session()->get('PCBGiaMH') - (session()->get('PCBGiaMH') * $reducedMoneyPercentMH) / 100 - $reducedMoneyFlatMH)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1117,14 +1315,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaBP')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentBP = session()->get('PCBGiamGiaBP');
+                                                                    $reducedMoneyFlatBP = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaBP'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentBP += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatBP += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaBP') - (session()->get('PCBGiaBP') * $reducedMoneyPercentBP) / 100 - $reducedMoneyFlatBP) }}
                                                                 VND x <input type="number" id="PCBSoLuongBP"
                                                                     value="{{ session()->get('PCBSoLuongBP') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongBP">
                                                                 =
                                                                 <span id="PCBTongTienBP">
-                                                                    {{ number_format(session()->get('PCBSoLuongBP') * session()->get('PCBGiaBP')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongBP') * (session()->get('PCBGiaBP') - (session()->get('PCBGiaBP') * $reducedMoneyPercentBP) / 100 - $reducedMoneyFlatBP)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1205,14 +1421,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaMouse')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentMouse = session()->get('PCBGiamGiaMouse');
+                                                                    $reducedMoneyFlatMouse = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaMouse'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentMouse += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatMouse += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaMouse') - (session()->get('PCBGiaMouse') * $reducedMoneyPercentMouse) / 100 - $reducedMoneyFlatMouse) }}
                                                                 VND x <input type="number" id="PCBSoLuongMouse"
                                                                     value="{{ session()->get('PCBSoLuongMouse') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongMouse">
                                                                 =
                                                                 <span id="PCBTongTienMouse">
-                                                                    {{ number_format(session()->get('PCBSoLuongMouse') * session()->get('PCBGiaMouse')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongMouse') * (session()->get('PCBGiaMouse') - (session()->get('PCBGiaMouse') * $reducedMoneyPercentMouse) / 100 - $reducedMoneyFlatMouse)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1294,14 +1528,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaFan')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentFan = session()->get('PCBGiamGiaFan');
+                                                                    $reducedMoneyFlatFan = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaFan'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentFan += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatFan += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaFan') - (session()->get('PCBGiaFan') * $reducedMoneyPercentFan) / 100 - $reducedMoneyFlatFan) }}
                                                                 VND x <input type="number" id="PCBSoLuongFan"
                                                                     value="{{ session()->get('PCBSoLuongFan') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongFan">
                                                                 =
                                                                 <span id="PCBTongTienFan">
-                                                                    {{ number_format(session()->get('PCBSoLuongFan') * session()->get('PCBGiaFan')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongFan') * (session()->get('PCBGiaFan') - (session()->get('PCBGiaFan') * $reducedMoneyPercentFan) / 100 - $reducedMoneyFlatFan)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1382,14 +1634,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaTNK')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentTNK = session()->get('PCBGiamGiaTNK');
+                                                                    $reducedMoneyFlatTNK = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaTNK'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentTNK += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatTNK += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaTNK') - (session()->get('PCBGiaTNK') * $reducedMoneyPercentTNK) / 100 - $reducedMoneyFlatTNK) }}
                                                                 VND x <input type="number" id="PCBSoLuongTNK"
                                                                     value="{{ session()->get('PCBSoLuongTNK') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongTNK">
                                                                 =
                                                                 <span id="PCBTongTienTNK">
-                                                                    {{ number_format(session()->get('PCBSoLuongTNK') * session()->get('PCBGiaTNK')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongTNK') * (session()->get('PCBGiaTNK') - (session()->get('PCBGiaTNK') * $reducedMoneyPercentTNK) / 100 - $reducedMoneyFlatTNK)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1470,14 +1740,32 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaTNN')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentTNN = session()->get('PCBGiamGiaTNN');
+                                                                    $reducedMoneyFlatTNN = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaTNN'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentTNN += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatTNN += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaTNN') - (session()->get('PCBGiaTNN') * $reducedMoneyPercentTNN) / 100 - $reducedMoneyFlatTNN) }}
                                                                 VND x <input type="number" id="PCBSoLuongTNN"
                                                                     value="{{ session()->get('PCBSoLuongTNN') }}"
                                                                     min="1" max="9"
                                                                     name="PCBSoLuongTNN">
                                                                 =
                                                                 <span id="PCBTongTienTNN">
-                                                                    {{ number_format(session()->get('PCBSoLuongTNN') * session()->get('PCBGiaTNN')) }}
+                                                                    {{ number_format(session()->get('PCBSoLuongTNN') * (session()->get('PCBGiaTNN') - (session()->get('PCBGiaTNN') * $reducedMoneyPercentTNN) / 100 - $reducedMoneyFlatTNN)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1559,14 +1847,31 @@
                                                                 }
                                                             @endphp
                                                             <span class="text-danger text-bold">
-                                                                {{ number_format(session()->get('PCBGiaL')) }}
+                                                                @php
+                                                                    $reducedMoneyPercentL = session()->get('PCBGiamGiaL');
+                                                                    $reducedMoneyFlatL = 0;
+                                                                @endphp
+                                                                @foreach ($productPromotion as $PP)
+                                                                    @if ($PP->maSP == session()->get('PCBMaL'))
+                                                                        @php
+                                                                            if ($PP->kichHoat == 1) {
+                                                                                $ten = $PP->tenVoucher;
+                                                                                if ($PP->giaTri >= 0 && $PP->giaTri <= 100) {
+                                                                                    $reducedMoneyPercentL += $PP->giaTri;
+                                                                                } elseif ($PP->giaTri > 100) {
+                                                                                    $reducedMoneyFlatL += $PP->giaTri;
+                                                                                }
+                                                                            }
+                                                                        @endphp
+                                                                    @endif
+                                                                @endforeach
+                                                                {{ number_format(session()->get('PCBGiaL') - (session()->get('PCBGiaL') * $reducedMoneyPercentL) / 100 - $reducedMoneyFlatL) }}
                                                                 VND x <input type="number" id="PCBSoLuongL"
                                                                     value="{{ session()->get('PCBSoLuongL') }}"
-                                                                    min="1" max="9" name="PCBSoLuongL"
-                                                                    onkeydown="return (event.keyCode!=13);">
+                                                                    min="1" max="9" name="PCBSoLuongL">
                                                                 =
-                                                                <span class="hihi" id="PCBTongTienL">
-                                                                    {{ number_format(session()->get('PCBSoLuongL') * session()->get('PCBGiaL')) }}
+                                                                <span id="PCBTongTienL">
+                                                                    {{ number_format(session()->get('PCBSoLuongL') * (session()->get('PCBGiaL') - (session()->get('PCBGiaL') * $reducedMoneyPercentL) / 100 - $reducedMoneyFlatL)) }}
                                                                     VND
                                                                 </span>
                                                             </span>
@@ -1601,6 +1906,8 @@
                                         value="{{ session()->has('PCBSoLuongCPU') ? session()->get('PCBSoLuongCPU') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhCPU" value="{{ $tempImgCPU }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatCPU }}" name="reduceFlatCPU">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentCPU }}" name="reducePercentCPU">
                                     {{-- Bộ vi xử lý --}}
                                 @endif
                                 {{-- Bo mạch chủ --}}
@@ -1613,6 +1920,8 @@
                                         value="{{ session()->has('PCBSoLuongBMC') ? session()->get('PCBSoLuongBMC') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhBMC" value="{{ $tempImgBMC }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatBMC }}" name="reduceFlatBMC">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentBMC }}" name="reducePercentBMC">
                                     {{-- Bo mạch chủ --}}
                                 @endif
                                 {{-- RAM --}}
@@ -1625,6 +1934,8 @@
                                         value="{{ session()->has('PCBSoLuongRAM') ? session()->get('PCBSoLuongRAM') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhRAM" value="{{ $tempImgRAM }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatRAM }}" name="reduceFlatRAM">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentRAM }}" name="reducePercentRAM">
                                     {{-- RAM --}}
                                 @endif
                                 {{-- HDD --}}
@@ -1637,6 +1948,8 @@
                                         value="{{ session()->has('PCBSoLuongHDD') ? session()->get('PCBSoLuongHDD') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhHDD" value="{{ $tempImgHDD }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatHDD }}" name="reduceFlatHDD">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentHDD }}" name="reducePercentHDD">
                                     {{-- HDD --}}
                                 @endif
                                 {{-- SSD --}}
@@ -1649,6 +1962,8 @@
                                         value="{{ session()->has('PCBSoLuongSSD') ? session()->get('PCBSoLuongSSD') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhSSD" value="{{ $tempImgSSD }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatSSD }}" name="reduceFlatSSD">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentSSD }}" name="reducePercentSSD">
                                     {{-- SSD --}}
                                 @endif
                                 {{-- VGA --}}
@@ -1661,6 +1976,8 @@
                                         value="{{ session()->has('PCBSoLuongVGA') ? session()->get('PCBSoLuongVGA') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhVGA" value="{{ $tempImgVGA }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatVGA }}" name="reduceFlatVGA">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentVGA }}" name="reducePercentVGA">
                                     {{-- VGA --}}
                                 @endif
 
@@ -1674,6 +1991,8 @@
                                         value="{{ session()->has('PCBSoLuongPSU') ? session()->get('PCBSoLuongPSU') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhPSU" value="{{ $tempImgPSU }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatPSU }}" name="reduceFlatPSU">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentPSU }}" name="reducePercentPSU">
                                     {{-- Nguồn --}}
                                 @endif
                                 {{-- Vỏ case --}}
@@ -1686,6 +2005,8 @@
                                         value="{{ session()->has('PCBSoLuongCase') ? session()->get('PCBSoLuongCase') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhCase" value="{{ $tempImgCase }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatCase }}" name="reduceFlatCase">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentCase }}" name="reducePercentCase">
                                     {{-- Vỏ case --}}
                                 @endif
                                 {{-- Màn hình --}}
@@ -1698,6 +2019,8 @@
                                         value="{{ session()->has('PCBSoLuongMH') ? session()->get('PCBSoLuongMH') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhMH" value="{{ $tempImgMH }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatMH }}" name="reduceFlatMH">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentMH }}" name="reducePercentMH">
                                     {{-- Màn hình --}}
                                 @endif
                                 {{-- Bàn phím --}}
@@ -1710,6 +2033,8 @@
                                         value="{{ session()->has('PCBSoLuongBP') ? session()->get('PCBSoLuongBP') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhBP" value="{{ $tempImgBP }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatBP }}" name="reduceFlatBP">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentBP }}" name="reducePercentBP">
                                     {{-- Bàn phím --}}
                                 @endif
                                 {{-- Chuột --}}
@@ -1722,6 +2047,8 @@
                                         value="{{ session()->has('PCBSoLuongMouse') ? session()->get('PCBSoLuongMouse') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhMouse" value="{{ $tempImgMouse }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatMouse }}" name="reduceFlatMouse">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentMouse }}" name="reducePercentMouse">
                                     {{-- Chuột --}}
                                 @endif
                                 {{-- Quạt làm mát --}}
@@ -1734,6 +2061,8 @@
                                         value="{{ session()->has('PCBSoLuongFan') ? session()->get('PCBSoLuongFan') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhFan" value="{{ $tempImgFan }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatFan }}" name="reduceFlatFan">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentFan }}" name="reducePercentFan">
                                     {{-- Quạt làm mát --}}
                                 @endif
                                 {{-- Tản nhiệt khí --}}
@@ -1746,6 +2075,8 @@
                                         value="{{ session()->has('PCBSoLuongTNK') ? session()->get('PCBSoLuongTNK') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhTNK" value="{{ $tempImgTNK }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatTNK }}" name="reduceFlatTNK">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentTNK }}" name="reducePercentTNK">
                                     {{-- Tản nhiệt khí --}}
                                 @endif
                                 {{-- Tản nhiệt nước --}}
@@ -1758,6 +2089,8 @@
                                         value="{{ session()->has('PCBSoLuongTNN') ? session()->get('PCBSoLuongTNN') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhTNN" value="{{ $tempImgTNN }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatTNN }}" name="reduceFlatTNN">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentTNN }}" name="reducePercentTNN">
                                     {{-- Tản nhiệt nước --}}
                                 @endif
                                 {{-- Khác --}}
@@ -1771,6 +2104,8 @@
                                         value="{{ session()->has('PCBSoLuongL') ? session()->get('PCBSoLuongL') : 0 }}">
                                     {{-- * Ảnh --}}
                                     <input type="hidden" name="PCBCartAnhL" value="{{ $tempImgL }}">
+                                    <input type="hidden" value="{{ $reducedMoneyFlatL }}" name="reduceFlatL">
+                                    <input type="hidden" value="{{ $reducedMoneyPercentL }}" name="reducePercentL">
                                     {{-- L --}}
                                 @endif
 

@@ -106,6 +106,10 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhCPU,
+                    'reduceFlat' => $request->reduceFlatCPU,
+                    'reducePercent' => $request->reducePercentCPU,
+                    'itemId' => $sanPham->maSP,
+
                 )
             ]);
         }
@@ -125,6 +129,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhBMC,
+                    'reduceFlat' => $request->reduceFlatBMC,
+                    'reducePercent' => $request->reducePercentBMC,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -144,6 +151,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhRAM,
+                    'reduceFlat' => $request->reduceFlatRAM,
+                    'reducePercent' => $request->reducePercentRAM,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -163,6 +173,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhHDD,
+                    'reduceFlat' => $request->reduceFlatHDD,
+                    'reducePercent' => $request->reducePercentHDD,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -182,6 +195,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhSSD,
+                    'reduceFlat' => $request->reduceFlatSSD,
+                    'reducePercent' => $request->reducePercentSSD,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -201,6 +217,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhVGA,
+                    'reduceFlat' => $request->reduceFlatVGA,
+                    'reducePercent' => $request->reducePercentVGA,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -220,6 +239,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhPSU,
+                    'reduceFlat' => $request->reduceFlatPSU,
+                    'reducePercent' => $request->reducePercentPSU,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -239,6 +261,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhCase,
+                    'reduceFlat' => $request->reduceFlatCase,
+                    'reducePercent' => $request->reducePercentCase,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -258,6 +283,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhMH,
+                    'reduceFlat' => $request->reduceFlatMH,
+                    'reducePercent' => $request->reducePercentMH,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -277,6 +305,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhMouse,
+                    'reduceFlat' => $request->reduceFlatMouse,
+                    'reducePercent' => $request->reducePercentMouse,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -296,6 +327,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhBP,
+                    'reduceFlat' => $request->reduceFlatBP,
+                    'reducePercent' => $request->reducePercentBP,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -315,6 +349,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhFan,
+                    'reduceFlat' => $request->reduceFlatFan,
+                    'reducePercent' => $request->reducePercentFan,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -334,6 +371,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhTNK,
+                    'reduceFlat' => $request->reduceFlatTNK,
+                    'reducePercent' => $request->reducePercentTNK,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -353,6 +393,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhTNN,
+                    'reduceFlat' => $request->reduceFlatTNN,
+                    'reducePercent' => $request->reducePercentTNN,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }
@@ -374,6 +417,9 @@ class CartController extends Controller
                 'quantity' => $quantity,
                 'attributes' => array(
                     'image' => $request->PCBCartAnhL,
+                    'reduceFlat' => $request->reduceFlatL,
+                    'reducePercent' => $request->reducePercentL,
+                    'itemId' => $sanPham->maSP,
                 )
             ]);
         }

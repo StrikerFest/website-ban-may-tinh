@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductVoucherModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -217,6 +218,11 @@ class PCBuilderController extends Controller
         $scrollPos = session()->get('scrollPos');
         if ($scrollPos == null)
             $scrollPos = 0;
+
+        $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
+            ->select('san_pham_voucher.*', 'voucher.tenVoucher', 'voucher.giaTri', 'voucher.soLuong')
+            ->get();
+
         return view('Customer.PCBuilder.pcbuilder', [
             'listTheLoaiCha' =>  $listTheLoaiCha,
             'cartItems' =>  $cartItems,
@@ -234,6 +240,7 @@ class PCBuilderController extends Controller
             'listTheLoaiSidenav' =>  $listTheLoaiSidenav,
             'scrollPos' =>  $scrollPos,
             'modalStatus' =>  $modalStatus,
+            'productPromotion' =>  $productPromotion,
 
         ]);
     }
@@ -435,6 +442,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenCPU', $item->tenSP);
                     session()->put('PCBMaCPU', $item->maSP);
                     session()->put('PCBGiaCPU', $item->giaSP);
+                    session()->put('PCBGiamGiaCPU',$item->giamGia);
                     session()->put('PCBBaoHanhCPU', "1 năm");
                     session()->put('PCBTinhTrangCPU', "Còn hàng");
                 }
@@ -449,6 +457,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenBMC', $item->tenSP);
                     session()->put('PCBMaBMC', $item->maSP);
                     session()->put('PCBGiaBMC', $item->giaSP);
+                    session()->put('PCBGiamGiaBMC',$item->giamGia);
                     session()->put('PCBBaoHanhBMC', "1 năm");
                     session()->put('PCBTinhTrangBMC', "Còn hàng");
                 }
@@ -467,6 +476,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenRAM', $item->tenSP);
                     session()->put('PCBMaRAM', $item->maSP);
                     session()->put('PCBGiaRAM', $item->giaSP);
+                    session()->put('PCBGiamGiaRAM',$item->giamGia);
                     session()->put('PCBBaoHanhRAM', "1 năm");
                     session()->put('PCBTinhTrangRAM', "Còn hàng");
                     // Validate data
@@ -481,6 +491,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenHDD', $item->tenSP);
                     session()->put('PCBMaHDD', $item->maSP);
                     session()->put('PCBGiaHDD', $item->giaSP);
+                    session()->put('PCBGiamGiaHDD',$item->giamGia);
                     session()->put('PCBBaoHanhHDD', "1 năm");
                     session()->put('PCBTinhTrangHDD', "Còn hàng");
                 }
@@ -490,6 +501,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenSSD', $item->tenSP);
                     session()->put('PCBMaSSD', $item->maSP);
                     session()->put('PCBGiaSSD', $item->giaSP);
+                    session()->put('PCBGiamGiaSSD',$item->giamGia);
                     session()->put('PCBBaoHanhSSD', "1 năm");
                     session()->put('PCBTinhTrangSSD', "Còn hàng");
                 }
@@ -499,6 +511,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenVGA', $item->tenSP);
                     session()->put('PCBMaVGA', $item->maSP);
                     session()->put('PCBGiaVGA', $item->giaSP);
+                    session()->put('PCBGiamGiaVGA',$item->giamGia);
                     session()->put('PCBBaoHanhVGA', "1 năm");
                     session()->put('PCBTinhTrangVGA', "Còn hàng");
                 }
@@ -508,6 +521,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenPSU', $item->tenSP);
                     session()->put('PCBMaPSU', $item->maSP);
                     session()->put('PCBGiaPSU', $item->giaSP);
+                    session()->put('PCBGiamGiaPSU',$item->giamGia);
                     session()->put('PCBBaoHanhPSU', "1 năm");
                     session()->put('PCBTinhTrangPSU', "Còn hàng");
                 }
@@ -517,6 +531,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenCase', $item->tenSP);
                     session()->put('PCBMaCase', $item->maSP);
                     session()->put('PCBGiaCase', $item->giaSP);
+                    session()->put('PCBGiamGiaCase',$item->giamGia);
                     session()->put('PCBBaoHanhCase', "1 năm");
                     session()->put('PCBTinhTrangCase', "Còn hàng");
                 }
@@ -532,6 +547,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenMH', $item->tenSP);
                     session()->put('PCBMaMH', $item->maSP);
                     session()->put('PCBGiaMH', $item->giaSP);
+                    session()->put('PCBGiamGiaMH',$item->giamGia);
                     session()->put('PCBBaoHanhMH', "1 năm");
                     session()->put('PCBTinhTrangMH', "Còn hàng");
                 }
@@ -541,6 +557,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenMouse', $item->tenSP);
                     session()->put('PCBMaMouse', $item->maSP);
                     session()->put('PCBGiaMouse', $item->giaSP);
+                    session()->put('PCBGiamGiaMouse',$item->giamGia);
                     session()->put('PCBBaoHanhMouse', "1 năm");
                     session()->put('PCBTinhTrangMouse', "Còn hàng");
                 }
@@ -550,6 +567,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenBP', $item->tenSP);
                     session()->put('PCBMaBP', $item->maSP);
                     session()->put('PCBGiaBP', $item->giaSP);
+                    session()->put('PCBGiamGiaBP',$item->giamGia);
                     session()->put('PCBBaoHanhBP', "1 năm");
                     session()->put('PCBTinhTrangBP', "Còn hàng");
                 }
@@ -559,6 +577,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenFan', $item->tenSP);
                     session()->put('PCBMaFan', $item->maSP);
                     session()->put('PCBGiaFan', $item->giaSP);
+                    session()->put('PCBGiamGiaFan',$item->giamGia);
                     session()->put('PCBBaoHanhFan', "1 năm");
                     session()->put('PCBTinhTrangFan', "Còn hàng");
                 }
@@ -568,6 +587,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenTNK', $item->tenSP);
                     session()->put('PCBMaTNK', $item->maSP);
                     session()->put('PCBGiaTNK', $item->giaSP);
+                    session()->put('PCBGiamGiaTNK',$item->giamGia);
                     session()->put('PCBBaoHanhTNK', "1 năm");
                     session()->put('PCBTinhTrangTNK', "Còn hàng");
                 }
@@ -577,6 +597,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenTNN', $item->tenSP);
                     session()->put('PCBMaTNN', $item->maSP);
                     session()->put('PCBGiaTNN', $item->giaSP);
+                    session()->put('PCBGiamGiaTNN',$item->giamGia);
                     session()->put('PCBBaoHanhTNN', "1 năm");
                     session()->put('PCBTinhTrangTNN', "Còn hàng");
                 }
@@ -590,6 +611,7 @@ class PCBuilderController extends Controller
                     session()->put('PCBTenL', $item->tenSP);
                     session()->put('PCBMaL', $item->maSP);
                     session()->put('PCBGiaL', $item->giaSP);
+                    session()->put('PCBGiamGiaL',$item->giamGia);
                     session()->put('PCBBaoHanhL', "1 năm");
                     session()->put('PCBTinhTrangL', "Còn hàng");
                 }

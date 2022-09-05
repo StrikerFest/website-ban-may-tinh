@@ -230,7 +230,7 @@ class ReceiptController extends Controller
                         $hoaDonChiTiet->giaSP = $giaSP;
                         // $hoaDonChiTiet->giamGia = $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
                         $hoaDonChiTiet->giamGia = $SP->giamGia;
-                        $reducePrice += $hoaDonChiTiet->giamGia;
+                        $reducePrice += $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
                         $hoaDonChiTiet->save();
 
                         $productPromotion = ProductVoucherModel::join('voucher', 'san_pham_voucher.maVoucher', '=', 'voucher.maVoucher')
@@ -438,7 +438,7 @@ class ReceiptController extends Controller
                     $hoaDonChiTiet->soLuong = $cart->quantity;
                     $hoaDonChiTiet->giaSP = $giaSP;
                     $hoaDonChiTiet->giamGia = $SP->giamGia;
-                    $reducePrice += $hoaDonChiTiet->giamGia;
+                    $reducePrice += $cart->attributes->reduceFlat + $cart->price * $cart->attributes->reducePercent / 100;
                     // echo $hoaDon;
                     // echo "<br>-------<br>";
                     // echo "<br>MA HD: ";
@@ -497,7 +497,7 @@ class ReceiptController extends Controller
                 // if (session()->get('maillingSession') == 1) {
                 Mail::to(session()->get('emailDat'))->send(new DemoEmail($objDemo));
                 session()->put('maillingSession', 0);
-                
+
                 //Check số lượng voucher sau khi hoàn tất đơn hàng
                 foreach($cartItems as $ci){
                     $SPV = ProductVoucherModel::where('maSP', $ci->attributes->itemId)->get();
