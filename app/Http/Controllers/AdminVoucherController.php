@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\VoucherModel;
+use App\Models\ProductVoucherModel;
 use App\Models\DetailReceiptModel;
 use App\Models\VoucherDetailReceiptModel;
 use DB;
@@ -163,6 +164,13 @@ class AdminVoucherController extends Controller
         $V->soLuong = $request->get('soLuong');
         $V->maSP = $request->get('maTLV') == 3 ? $request->Get('maSP') : null;
         $V->save();
+        if($V->soLuong > 9){
+            $SPV = ProductVoucherModel::where('maVoucher', $V->maVoucher)->get();
+            foreach($SPV as $spv){
+                $spv->kichHoat = 1;
+                $spv->save();
+            }
+        }
 
         return redirect(route('voucher.index'));
     }

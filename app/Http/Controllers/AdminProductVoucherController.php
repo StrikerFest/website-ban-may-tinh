@@ -16,11 +16,19 @@ class AdminProductVoucherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($maVoucher)
+    public function index(Request $request, $maVoucher)
     {
+        $searchName = $request->get('searchName');
+
         $V = VoucherModel::join('the_loai_voucher', 'the_loai_voucher.maTLV', '=', 'voucher.maTLV')->find($maVoucher);
 
-        $SPV = ProductVoucherModel::join('san_pham', 'san_pham.maSP', '=', 'san_pham_voucher.maSP')->where('maVoucher', $maVoucher)->get();
+        $SPV = ProductVoucherModel::join('san_pham', 'san_pham.maSP', '=', 'san_pham_voucher.maSP')
+            ->where('maVoucher', $maVoucher)
+            ->where('tenSP', 'like' , "%$searchName%")
+            ->paginate(10)
+            ->appends([
+                'searchName' => $searchName,
+            ]);
         
         $TangPham = DB::table('san_pham')->join('the_loai_con', 'san_pham.maTLC', '=', 'the_loai_con.maTLC')
             ->where('the_loai_con.tenTLC', 'like', 'Tặng phẩm')
@@ -47,6 +55,7 @@ class AdminProductVoucherController extends Controller
             'SPV' => $SPV,
             'giaTriVoucher' => $giaTriVoucher,
             'SanPham' => $SanPham,
+            'searchName' => $searchName,
         ]);
     }
 
@@ -74,12 +83,17 @@ class AdminProductVoucherController extends Controller
         ]);
         $listMaSP = $request->get('maSP');
         $maVoucher = $request->get('maVoucher');
+        $voucher = VoucherModel::find($maVoucher);
         $arr = [];
         foreach($listMaSP as $maSP){
             $SPV = new ProductVoucherModel();
             $SPV->maSP = $maSP;
             $SPV->maVoucher = $maVoucher;
-            $SPV->kichHoat = 1;
+            if($voucher->soLuong < 10){
+                $SPV->kichHoat = 0;
+            }else{
+                $SPV->kichHoat = 1;
+            }
             $SPV->save();
         }
         return redirect()->route('productVoucher.index', $maVoucher);
@@ -149,5 +163,18 @@ class AdminProductVoucherController extends Controller
         }catch(Exception $e){
             return redirect()->back()->with('delete', 'Xung đột khoá ngoại');
         }
+    }
+
+    public function updateAll(Request $request, $maVoucher){
+        $validated = $request->validate([
+            'kichHoat' => 'required',
+        ]);
+
+        $SPV = ProductVoucherModel::where('maVoucher', $maVoucher)->get();
+        foreach($SPV as $spv){
+            $spv->kichHoat = $request->get('kichHoat');
+            $spv->save();
+        }
+        return back();
     }
 }

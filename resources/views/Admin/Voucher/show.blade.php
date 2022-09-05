@@ -28,14 +28,33 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Bảng sản phẩm thuộc voucher</h6>
                         <!-- Filter -->
+                        <div style="margin-top: 10px">
+                            <table>
+                                <h6>Bộ lọc</h6>
+                                <form method="get">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <input class="form-control" type="text" name="searchName" value="{{$searchName}}" placeholder="Nhập tên sản phẩm">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button class="btn btn-primary">Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </table>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <div style="font-size: 20px; margin: 5px 0; font-weight: bold;">
+                                Tổng số bản ghi: {{$SPV->total()}}
+                            </div>
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <tr>
                                     <th>Voucher</th>
                                     <th>Thể loại</th>
                                     <th>Giá trị</th>
+                                    <th colspan="2" width="20%">Thao tác</th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -46,6 +65,22 @@
                                     </td>
                                     <td>
                                         {{$giaTriVoucher}}
+                                    </td>
+                                    <td>
+                                        <form action="{{route('productVoucher.updateAll', $V->maVoucher)}}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="kichHoat" value="1">
+                                            <button class="btn btn-success btn-user btn-block">Kích hoạt</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{route('productVoucher.updateAll', $V->maVoucher)}}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="kichHoat" value="0">
+                                            <button class="btn btn-danger btn-user btn-block">Tắt</button>
+                                        </form>
                                     </td>
                                 </tr>
                             </table>
@@ -103,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-
+                {{$SPV->links()}}
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Gắn voucher vào sản phẩm</h6>

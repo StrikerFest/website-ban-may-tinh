@@ -129,7 +129,8 @@
                                                             @endphp
                                                             <span class="">
                                                                 <span>
-                                                                    {{ number_format($item->price * $item->quantity - $item->attributes->reduceFlat * $item->quantity - ($item->price * $item->attributes->reducePercent) / 100 * $item->quantity) }} VND
+                                                                    <!-- {{ number_format($item->price * $item->quantity - $item->attributes->reduceFlat * $item->quantity - ($item->price * $item->attributes->reducePercent) / 100 * $item->quantity) }} VND -->
+                                                                    {{ number_format($item->price * $item->quantity).' VND' }}
                                                                 </span>
                                                                 <br>
                                                                 (Giảm
@@ -161,7 +162,8 @@
                                         <div class="d-flex padding-10" style="justify-content: end">
                                             Tổng : &nbsp;
                                             <span id="final-price">
-                                                {{ number_format(Cart::getTotal() - $countReducePrice) }}
+                                                <!-- {{ number_format(Cart::getTotal() - $countReducePrice) }} -->
+                                                {{ number_format(Cart::getTotal()) }}
                                             </span>
                                             VND (Tổng voucher giảm &nbsp;
                                             <span id="final-reduce">

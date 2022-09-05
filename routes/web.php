@@ -140,6 +140,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogin'], function () {
     Route::get('voucherSample', [AdminVoucherController::class, "sample"])->name('voucher.sample');
     Route::resource('voucher', AdminVoucherController::class);
     Route::resource('voucherType', AdminVoucherTypeController::class);
+    Route::put('productVoucherUpdateAll/{maVoucher}', [AdminProductVoucherController::class, "updateAll"])->name('productVoucher.updateAll');
     Route::get('productVoucher/{maVoucher}', [AdminProductVoucherController::class, "index"])->name('productVoucher.index');
     Route::resource('productVoucher', AdminProductVoucherController::class)->except(['index']);
     Route::resource('warranty', AdminWarrantyController::class);
