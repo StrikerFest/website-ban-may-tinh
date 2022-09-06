@@ -444,10 +444,15 @@
                         <div class="card shadow mb-4 background-none" id="collapsePoint">
                             {{-- Label danh mục - Thay class bằng class khác --}}
                             <div class="card-header py-3 black-glass ">
-                                <h4 class="m-0 font-weight-bold text-light text-left carousel-promo-item-label "
+                                    <form action="{{route('categoryCustomer.show',$TLC->maTLC)}}">
+                                        <h4 class="m-0 font-weight-bold text-light text-left carousel-promo-item-label "
                                     style="padding-left: 4%">
-                                    {{ $TLC->tenTLC }}</h4>
-                            </div>
+                                    {{ $TLC->tenTLC }}
+                                                <input type="hidden" name="theLoaiCha" value="{{ $TLC->maTL }}">
+                                                <input type="hidden" name="loai" value="TLC">
+                                                <button class="btn btn-danger">Xem thêm</button></h4>
+                                    </form>
+                                </div>
                             {{-- Content danh mục - Thay class bằng class khác --}}
                             <div class="card-body center-custom">
                                 <div class="table-responsive d-flex">
