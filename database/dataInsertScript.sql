@@ -126,21 +126,42 @@ INSERT INTO the_loai(`tenTL`) VALUE ('Bàn phím');
 
 -- =============================== ===========================================================================
 -- Bảng Thể loại con
-INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),(1,'Máy PC trạm'),(1,'Máy PC gaming'),
-                                                (2,'Laptop văn phòng'),(2,'Laptop trạm'),(2,'Laptop gaming'),
-                                                (3,'Màn hình LED'),(3,'Màn hình OLED'),(3,'Màn hình IPS'),
-                                                (7,'Ổ cứng HDD'),(7,'Ổ cứng SSD'),(7,'Ổ cứng NVME'),
-                                                (16,'Card game'),(16,'Card thiết kế đồ họa'),(16,'Card đào coin'),
-                                                (8,'CPU i3'),(8,'CPU i5'),(8,'CPU i9'),
-                                                (9,'Bo mạch budget'),(9,'Bo mạch highend'),
-                                                (10,'RAM PC'),(10,'RAM Laptop'),
-                                                (11,'Nguồn 80plus bronze'),(11,'Nguồn 80plus Titanium'),
-                                                (12,'Vỏ case phổ thông'),(12,'Vỏ case custom'),
+INSERT INTO the_loai_con(`maTL`,`tenTLC`) VALUE (1,'Máy PC văn phòng'),
+                                                (1,'Máy PC trạm'),
+                                                (1,'Máy PC gaming'),
+                                                (2,'Laptop văn phòng'),
+                                                (2,'Laptop trạm'),
+                                                (2,'Laptop gaming'),
+                                                (3,'Màn hình LED'),
+                                                (3,'Màn hình OLED'),
+                                                (3,'Màn hình IPS'),
+                                                (6, 'Tặng phẩm'),
+                                                (7,'Ổ cứng HDD'),
+                                                (7,'Ổ cứng SSD'),
+                                                (7,'Ổ cứng NVME'),
+                                                (8,'CPU i3'),
+                                                (8,'CPU i5'),
+                                                (8,'CPU i9'),
+                                                (9,'Bo mạch budget'),
+                                                (9,'Bo mạch highend'),
+                                                (10,'RAM PC'),
+                                                (10,'RAM Laptop'),
+                                                (11,'Nguồn 80plus bronze'),
+                                                (11,'Nguồn 80plus Titanium'),
+                                                (12,'Vỏ case phổ thông'),
+                                                (12,'Vỏ case custom'),
                                                 (13,'Quạt làm mát phổ thông'),
                                                 (14,'Tản nhiệt khí phổ thông'),
-                                                (15,'Tản nhiệt nước factory'),(15,'Tản nhiệt nước custom'),
-                                                (17,'Chuột có dây'),(17,'Chuột không dây'),
-                                                (18,'Bàn phím mềm'),(18,'Bàn phím giả cơ'),(18,'Bàn phím cơ'),(6, 'Tặng phẩm');
+                                                (15,'Tản nhiệt nước factory'),
+                                                (15,'Tản nhiệt nước custom'),
+                                                (16,'Card game'),
+                                                (16,'Card thiết kế đồ họa'),
+                                                (16,'Card đào coin'),
+                                                (17,'Chuột có dây'),
+                                                (17,'Chuột không dây'),
+                                                (18,'Bàn phím mềm'),
+                                                (18,'Bàn phím giả cơ'),
+                                                (18,'Bàn phím cơ');
 -- ==========================================================================================================
 -- Bảng Trạng thái sản phẩm
 INSERT INTO tinh_trang_san_pham(`tenTTSP`) VALUE ('Không còn giao bán');
@@ -335,23 +356,23 @@ VALUE('Laptop Asus DakBook M3401QA (i9-11700/8GB RAM/512GB SSD/RTX 2060/14 Oled 
 
 -- Card đồ họa
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T600 (4GB GDDR6, 128-bit, 4x mini DisplayPort)',4900000,10,10,3,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T600 (4GB GDDR6, 128-bit, 4x mini DisplayPort)',4900000,10,10,3,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2660 T800 (8GB GDDR6, 128-bit, 4x mini DisplayPort)',5900000,10,10,3,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2660 T800 (8GB GDDR6, 128-bit, 4x mini DisplayPort)',5900000,10,10,3,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',6900000,10,10,3,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',6900000,10,10,3,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T11200 (16GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,10,10,3,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T11200 (16GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,10,10,3,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2660 T320 (32GB GDDR6, 128-bit, 4x mini DisplayPort)',14900000,10,10,3,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2660 T320 (32GB GDDR6, 128-bit, 4x mini DisplayPort)',14900000,10,10,3,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T6600 (64GB GDDR6, 128-bit, 4x mini DisplayPort)',24900000,10,10,5,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T6600 (64GB GDDR6, 128-bit, 4x mini DisplayPort)',24900000,10,10,5,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T11600 (128GB GDDR6, 128-bit, 4x mini DisplayPort)',22900000,10,15,3,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T11600 (128GB GDDR6, 128-bit, 4x mini DisplayPort)',22900000,10,15,3,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2660 T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,10,15,3,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2660 T8500 (64GB GDDR6, 256-bit, 4x mini DisplayPort)',17900000,10,15,3,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,10,15,3,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T163600 (128GB GDDR6, 256-bit, 8x mini DisplayPort)',114900000,10,15,3,31,4,3);
 
 -- Dac biet
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
@@ -361,121 +382,121 @@ VALUE('Laptop HP Omen 17 (R7 5800H/8GB RAM/512GB SSD/14 Oled 2.8K/Win11/Xanh)',8
 
 -- Bộ vi xử lý
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',5500000,10,10,8,16,4,3);
+VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',5500000,10,10,8,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',6500000,10,10,8,16,4,3);
+VALUE('CPU Intel Core i3-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',6500000,10,10,8,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',7500000,10,10,8,17,4,3);
+VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',7500000,10,10,8,15,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i5-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',8500000,10,10,8,17,4,3);
+VALUE('CPU Intel Core i5-12500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',8500000,10,10,8,15,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',9500000,10,10,8,18,4,3);
+VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',9500000,10,10,8,16,4,3);
 
 -- Bo mạch chủ
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B660-I GAMING mini-iTX LG 1200',5500000,10,10,3,19,4,3);
+VALUE('Mainboard Asus ROG STRIX B660-I GAMING mini-iTX LG 1200',5500000,10,10,3,17,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B760-I GAMING mini-iTX LG 1300',6500000,10,10,3,19,4,3);
+VALUE('Mainboard Asus ROG STRIX B760-I GAMING mini-iTX LG 1300',6500000,10,10,3,17,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B860-I GAMING iTX LG 1700',7500000,10,10,3,19,4,3);
+VALUE('Mainboard Asus ROG STRIX B860-I GAMING iTX LG 1700',7500000,10,10,3,17,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B960-I GAMING ATX LG 1700',8500000,10,10,3,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B960-I GAMING ATX LG 1700',8500000,10,10,3,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B1660-I GAMING ATX LG 1700',15500000,10,10,3,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B1660-I GAMING ATX LG 1700',15500000,10,10,3,18,4,3);
 
 -- RAM
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',799000,10,10,5,21,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',799000,10,10,5,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR5 2666MHz',899000,10,10,5,21,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR5 2666MHz',899000,10,10,5,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR5 2666MHz',999000,10,10,5,21,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR5 2666MHz',999000,10,10,5,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',899000,10,10,5,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 8GB (1x8GB) DDR4 2666MHz',899000,10,10,5,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR4 2666MHz',990000,10,10,5,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK8GX4M1A2666C16 ) 16GB (1x8GB) DDR4 2666MHz',990000,10,10,5,20,4,3);
 
 -- Nguồn
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 550W Bronze ( Màu Đen/80 Plus Bronze )',9990000,10,10,3,23,4,3);
+VALUE('Nguồn ASUS TUF GAMING 550W Bronze ( Màu Đen/80 Plus Bronze )',9990000,10,10,3,21,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 650W Silver ( Màu Đen/80 Plus Silver )',10990000,10,10,3,23,4,3);
+VALUE('Nguồn ASUS TUF GAMING 650W Silver ( Màu Đen/80 Plus Silver )',10990000,10,10,3,21,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 750W Gold ( Màu Đen/80 Plus Gold )',11990000,10,10,3,23,4,3);
+VALUE('Nguồn ASUS TUF GAMING 750W Gold ( Màu Đen/80 Plus Gold )',11990000,10,10,3,21,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 850W Gold ( Màu Đen/80 Plus Gold )',12990000,10,10,3,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 850W Gold ( Màu Đen/80 Plus Gold )',12990000,10,10,3,22,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 1200W Platinum  ( Màu Đen/80 Plus Platinum )',13990000,10,10,3,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 1200W Platinum  ( Màu Đen/80 Plus Platinum )',13990000,10,10,3,22,4,3);
 
 -- Vỏ case
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R12 BLACK (Mini Tower/Màu Đen)',709000,10,10,4,25,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R12 BLACK (Mini Tower/Màu Đen)',709000,10,10,4,23,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R22 BLACK (Mini Tower/Màu Đen)',809000,10,10,4,25,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R22 BLACK (Mini Tower/Màu Đen)',809000,10,10,4,23,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R32 BLACK (Mid Tower/Màu Đen)',889000,10,10,4,25,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R32 BLACK (Mid Tower/Màu Đen)',889000,10,10,4,23,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R42 BLACK (Full Tower/Màu Đen)',909000,10,10,4,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R42 BLACK (Full Tower/Màu Đen)',909000,10,10,4,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R82 BLACK (Full Tower/Màu Đen)',1009000,10,10,4,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R82 BLACK (Full Tower/Màu Đen)',1009000,10,10,4,24,4,3);
 
 -- Quạt làm mát
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST120 Triple White ARGB 3 in1',990000,10,10,4,27,4,3);
+VALUE('Fan Case LIAN-LI  ST120 Triple White ARGB 3 in1',990000,10,10,4,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST220 Triple White ARGB 3 in1',1090000,10,10,4,27,4,3);
+VALUE('Fan Case LIAN-LI  ST220 Triple White ARGB 3 in1',1090000,10,10,4,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST320 Triple White ARGB 3 in1',1100000,10,10,4,27,4,3);
+VALUE('Fan Case LIAN-LI  ST320 Triple White ARGB 3 in1',1100000,10,10,4,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST420 Triple White ARGB 3 in1',1200000,10,10,4,27,4,3);
+VALUE('Fan Case LIAN-LI  ST420 Triple White ARGB 3 in1',1200000,10,10,4,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Fan Case LIAN-LI  ST520 Triple White ARGB 3 in1',1300000,10,10,4,27,4,3);
+VALUE('Fan Case LIAN-LI  ST520 Triple White ARGB 3 in1',1300000,10,10,4,25,4,3);
 -- Tản nhiệt khí
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt khí MSI Frost Commander 140 Black',1800000,10,10,5,28,4,3);
+VALUE('Tản nhiệt khí MSI Frost Commander 140 Black',1800000,10,10,5,26,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt khí MSI Frost Commander 200 Black',1900000,10,10,5,28,4,3);
+VALUE('Tản nhiệt khí MSI Frost Commander 200 Black',1900000,10,10,5,26,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt khí MSI Frost Commander 240 Black',2100000,10,10,5,28,4,3);
+VALUE('Tản nhiệt khí MSI Frost Commander 240 Black',2100000,10,10,5,26,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt khí MSI Frost Commander 300 Black',2200000,10,10,5,28,4,3);
+VALUE('Tản nhiệt khí MSI Frost Commander 300 Black',2200000,10,10,5,26,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt khí MSI Frost Commander 340 Black',2690000,10,10,5,28,4,3);
+VALUE('Tản nhiệt khí MSI Frost Commander 340 Black',2690000,10,10,5,26,4,3);
 
 -- Tản nhiệt nước
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW6 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2000000,10,10,4,29,4,3);
+VALUE('Tản nhiệt nước AIO Jonsbo TW6 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2000000,10,10,4,27,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW7 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2400000,10,10,4,29,4,3);
+VALUE('Tản nhiệt nước AIO Jonsbo TW7 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',2400000,10,10,4,27,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW8 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3100000,10,10,4,29,4,3);
+VALUE('Tản nhiệt nước AIO Jonsbo TW8 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3100000,10,10,4,27,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW9 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3300000,10,10,4,30,4,3);
+VALUE('Tản nhiệt nước AIO Jonsbo TW9 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',3300000,10,10,4,28,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Tản nhiệt nước AIO Jonsbo TW12 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',4000000,10,10,4,30,4,3);
+VALUE('Tản nhiệt nước AIO Jonsbo TW12 360 ARGB ( Kèm sẵn Backplate 1700 Jonsbo )',4000000,10,10,4,28,4,3);
 
 -- Chuột
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Chuột game dây Asus TUF M4 (USB)',1100000,10,10,3,31,4,3);
+VALUE('Chuột game dây Asus TUF M4 (USB)',1100000,10,10,3,32,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Chuột game dây Asus TUF M5 (USB)',2100000,10,10,3,31,4,3);
+VALUE('Chuột game dây Asus TUF M5 (USB)',2100000,10,10,3,32,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Chuột game dây Asus TUF M6 (USB)',3100000,10,10,3,31,4,3);
+VALUE('Chuột game dây Asus TUF M6 (USB)',3100000,10,10,3,32,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Chuột game không dây Asus TUF M6 Wireless (USB)',4100000,10,10,3,32,4,3);
+VALUE('Chuột game không dây Asus TUF M6 Wireless (USB)',4100000,10,10,3,33,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Chuột game không dây Asus TUF M8 Wireless (USB)',5100000,10,10,3,32,4,3);
+VALUE('Chuột game không dây Asus TUF M8 Wireless (USB)',5100000,10,10,3,33,4,3);
 -- Bàn phím
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Bàn phím giả cơ Logitech G613 Lightsync RGB (USB)',1990000,10,10,9,33,4,3);
+VALUE('Bàn phím giả cơ Logitech G613 Lightsync RGB (USB)',1990000,10,10,9,34,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Bàn phím giả cơ Logitech G813 Lightsync RGB (USB)',2100000,10,10,9,34,4,3);
+VALUE('Bàn phím giả cơ Logitech G813 Lightsync RGB (USB)',2100000,10,10,9,35,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Bàn phím giả cơ Logitech G913 Lightsync RGB (USB)',2200000,10,10,9,34,4,3);
+VALUE('Bàn phím giả cơ Logitech G913 Lightsync RGB (USB)',2200000,10,10,9,35,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Bàn phím cơ Logitech G813 Lightsync RGB GL Clicky (USB)',2900000,10,10,9,35,4,3);
+VALUE('Bàn phím cơ Logitech G813 Lightsync RGB GL Clicky (USB)',2900000,10,10,9,36,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Bàn phím cơ Logitech G913 Lightsync RGB GL Clicky (USB)',3100000,10,10,9,35,4,3);
+VALUE('Bàn phím cơ Logitech G913 Lightsync RGB GL Clicky (USB)',3100000,10,10,9,36,4,3);
 -- Màn hình
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
 VALUE('Màn hình Acer VA903-H',1200000,10,10,6,7,4,3);
@@ -489,30 +510,30 @@ INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,
 VALUE('Màn hình Acer VA2903-H',8200000,10,10,6,9,4,3);
 -- HDD
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WD 2.5 inch',870000,10,10,10,10,4,3);
+VALUE('Ổ cứng HDD 500GB WD 2.5 inch',870000,10,10,10,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WD 3.5 inch',900000,10,10,10,10,4,3);
+VALUE('Ổ cứng HDD 1TB WD 3.5 inch',900000,10,10,10,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WD 3.5 inch',1020000,10,10,10,10,4,3);
+VALUE('Ổ cứng HDD 2TB WD 3.5 inch',1020000,10,10,10,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 3TB WD 3.5 inch',1400000,10,10,10,10,4,3);
+VALUE('Ổ cứng HDD 3TB WD 3.5 inch',1400000,10,10,10,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 6TB WD 3.5 inch',1600000,10,10,10,10,4,3);
+VALUE('Ổ cứng HDD 6TB WD 3.5 inch',1600000,10,10,10,11,4,3);
 -- SSD
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 500GB WD',1200000,10,10,10,11,4,3);
+VALUE('Ổ cứng SSD 500GB WD',1200000,10,10,10,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 1TB WD',2200000,10,10,10,11,4,3);
+VALUE('Ổ cứng SSD 1TB WD',2200000,10,10,10,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 2TB WD',3200000,10,10,10,11,4,3);
+VALUE('Ổ cứng SSD 2TB WD',3200000,10,10,10,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 3TB WD',4200000,10,10,10,11,4,3);
+VALUE('Ổ cứng SSD 3TB WD',4200000,10,10,10,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 6TB WD',8200000,10,10,10,11,4,3);
+VALUE('Ổ cứng SSD 6TB WD',8200000,10,10,10,12,4,3);
 -- Tặng phẩm
-INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `soLuong`, `giamGia`, `maNSX`, `maTLC`, `maBH`, `maTTSP`) VALUES (NULL, 'Chuột không dây Logitech B175', '150000', '10', '0', '3', '36', '1', '1'),
-                                                                                                                    (NULL, 'Bàn phím cơ không dây Dareu EK807G TKL', '500000', '10', '0', '5', '36', '1', '1'),
-                                                                                                                    (NULL, 'Chuột chơi game có dây Logitech G203 Lightsync', '300000', '10', '0', '1', '36', '1', '1');
+INSERT INTO `san_pham` (`maSP`, `tenSP`, `giaSP`, `soLuong`, `giamGia`, `maNSX`, `maTLC`, `maBH`, `maTTSP`) VALUES (NULL, 'Chuột không dây Logitech B175', '150000', '10', '0', '3', '10', '1', '1'),
+                                                                                                                    (NULL, 'Bàn phím cơ không dây Dareu EK807G TKL', '500000', '10', '0', '5', '10', '1', '1'),
+                                                                                                                    (NULL, 'Chuột chơi game có dây Logitech G203 Lightsync', '300000', '10', '0', '1', '10', '1', '1');
 
 
 
@@ -3218,20 +3239,6 @@ INSERT INTO `serial` (`maSerial`, `maSP`, `serial`, `maNK`, `maHDCT`) VALUES (NU
                                                                             (NULL, '111', 'QT308', '1', NULL),
                                                                             (NULL, '111', 'QT309', '1', NULL),
                                                                             (NULL, '111', 'QT3010', '1', NULL);
-
--- -- Hoá đơn
-INSERT INTO `hoa_don` (`maHD`, `maKH`, `maNV`, `ngayTao`, `tenKH`, `soDienThoai`, `diaChi`, `maPTTT`, `maTTHD`) VALUES (NULL, '6', NULL, '2022-08-17 11:29:41.000000', 'Nguyễn Văn A', '0123456789', 'Hà Nội', '1', '1'),
-                                                                                                                            (NULL, '6', NULL, '2022-08-17 11:29:42.000000', 'Nguyễn Văn A', '0123456789', 'Hà Nội', '2', '1');
-
--- -- Hoá đơn chi tiết
-INSERT INTO `hoa_don_chi_tiet` (`maHDCT`, `maHD`, `maSP`, `soLuong`, `giaSP`, `giamGia`) VALUES (NULL, '1', '7', '1', '23000000', '10'),
-                                                                                                            (NULL, '1', '86', '2', '3100000', '10'),
-                                                                                                            (NULL, '2', '91', '2', '2200000', '10'),
-                                                                                                            (NULL, '2', '107', '3', '4200000', '10');
-
--- -- Voucher hoá đơn chi tiết
-INSERT INTO `voucher_hoa_don_chi_tiet` (`maVHDCT`, `maVoucher`, `maHDCT`) VALUES (NULL, '2', '1'), (NULL, '8', '1'), (NULL, '5', '3'), (NULL, '3', '4');
-
 -- Thêm mới sản phẩm
 
 -- Laptop Gaming
@@ -3268,416 +3275,416 @@ INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maBV`,`maNSX`,`maTLC`,
 VALUE('Laptop Asus DakBook M6401QA (i7-11700/8GB RAM/512GB SSD/RTX 3080/14 Oled 2.8K/Win11/Xanh)',89200000,10,5,2,1,4,4,3);
 -- Card game
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TX1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7000000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TX1200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7000000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TX21200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7100000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TX21200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7100000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TX31200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7200000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TX31200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7200000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TX41200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7300000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TX41200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7300000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TX51200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7400000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TX51200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7400000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TX61200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7500000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TX61200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7500000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TX71200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7600000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TX71200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7600000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TX81200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7700000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TX81200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7700000,10,10,1,29,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TX91200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7800000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TX91200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7800000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TX101200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TX101200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',7900000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TX111200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8000000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TX111200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8000000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TX121200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8100000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TX121200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8100000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TX131200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8200000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TX291200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8200000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TX141200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8300000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TX141200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8300000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TX151200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8400000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TX151200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8400000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TX161200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8500000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TX161200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8500000,10,10,1,29,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TX171200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8600000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TX171200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8600000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TX181200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8700000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TX181200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8700000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TX191200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8800000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TX191200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8800000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TX201200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8900000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TX201200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',8900000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TX211200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9000000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TX211200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9000000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TX221200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9100000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TX221200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9100000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TX231200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9200000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TX231200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9200000,10,10,1,29,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TX241200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9300000,10,10,1,13,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TX241200 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9300000,10,10,1,29,4,3);
 
 -- Card thiet ke
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TG26600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9400000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TG26600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9400000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TG36600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9500000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 TG36600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9500000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TG46600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9600000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TG46600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9600000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TG56600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9700000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TG56600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9700000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TG66600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9800000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 TG66600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9800000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TG76600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9900000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TG76600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',9900000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TG86600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10000000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TG86600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10000000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TG96600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10100000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 TG96600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10100000,10,10,1,30,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TG106600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10200000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TG106600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10200000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TG116600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10300000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TG116600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10300000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TG126600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10400000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 TG126600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10400000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TG146600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10500000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TG146600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10500000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TG146600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10600000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2060 TG146600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10600000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TG156600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10700000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TG156600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10700000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TG166600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10800000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TG166600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10800000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TG176600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10900000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 TG176600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',10900000,10,10,1,30,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TG186600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11000000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TG186600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11000000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TG196600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11100000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TG196600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11100000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TG206600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11200000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 TG206600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11200000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TG216600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11300000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TG216600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11300000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TG226600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11400000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TG226600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11400000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TG236600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11500000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 TG236600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11500000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TG246600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11600000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TG246600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11600000,10,10,1,30,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TG256600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11700000,10,10,1,14,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 TG256600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11700000,10,10,1,30,4,3);
 -- Card coin
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T263600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11800000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T263600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11800000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T363600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11900000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb GTX 1660 T363600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',11900000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 T463600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12000000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 T463600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12000000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 T563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12100000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 T563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12100000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 2060 T663600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12200000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 2060 T663600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12200000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 T763600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12300000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 T763600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12300000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 T863600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12400000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 T863600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12400000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 4Gb RTX 3080 T963600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12500000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 4Gb RTX 3080 T963600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12500000,10,10,1,31,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 T1063600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12600000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 T1063600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12600000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 T1163600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12700000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 T1163600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12700000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb GTX 1660 T1263600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12800000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb GTX 1660 T1263600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12800000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2060 T1563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12900000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2060 T1563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',12900000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 2060 T1463600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13000000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 2060 T1463600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13000000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 T1563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13100000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 T1563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13100000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 T1663600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13200000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 T1663600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13200000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 6Gb RTX 3080 T1763600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13300000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 6Gb RTX 3080 T1763600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13300000,10,10,1,31,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 T1863600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13400000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 T1863600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13400000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 T1963600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13500000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 T1963600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13500000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb GTX 1660 T2063600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13600000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb GTX 1660 T2063600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13600000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 T2163600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13700000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 T2163600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13700000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 T2263600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13800000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 T2263600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13800000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 2060 T2363600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13900000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 2060 T2363600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',13900000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T2463600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',14000000,10,10,1,15,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T2463600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',14000000,10,10,1,31,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T2563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',14100000,10,10,1,15,4,3);
-
--- Bộ vi xử lý
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9600000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9700000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i7-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9800000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9900000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10000000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i5-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10100000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i7-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10200000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i9-119500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10300000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10400000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i5-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10500000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i7-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10600000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i9-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10700000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i3-X7500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10800000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i5-X8500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10900000,10,10,1,18,4,3);
-INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('CPU Intel Core i7-X9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',11000000,10,10,1,18,4,3);
+VALUE('Card màn hình NVIDIA 8Gb RTX 3080 T2563600 (12GB GDDR6, 128-bit, 4x mini DisplayPort)',14100000,10,10,1,31,4,3);
 
 -- Bộ vi xử lý
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B2660-I GAMING ATX LG 1200',15600000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i3-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9600000,10,10,1,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B3660-I GAMING ATX LG 1200',15700000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i5-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9700000,10,10,1,15,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B4660-I GAMING ATX LG 1200',15800000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i7-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9800000,10,10,1,16,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B5660-I GAMING ATX LG 1200',15900000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i9-9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',9900000,10,10,1,16,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B6660-I GAMING ATX LG 1200',16000000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i3-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10000000,10,10,1,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B7660-I GAMING ATX LG 1200',16100000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i5-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10100000,10,10,1,15,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B8660-I GAMING ATX LG 1200',16200000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i7-11500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10200000,10,10,1,16,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B9660-I GAMING ATX LG 1200',16300000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i9-119500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1200',10300000,10,10,1,16,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B10660-I GAMING ATX LG 1200',16400000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i3-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10400000,10,10,1,14,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B11660-I GAMING ATX LG 1200',16500000,10,10,1,20,4,3);
+VALUE('CPU Intel Core i5-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10500000,10,10,1,15,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i7-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10600000,10,10,1,16,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i9-13500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10700000,10,10,1,16,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i3-X7500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10800000,10,10,1,14,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i5-X8500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',10900000,10,10,1,15,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('CPU Intel Core i7-X9500 (Upto 4.46Ghz, 6 nhân 12 luồng, 18MB Cache, 65W) - Socket Intel LGA 1700',11000000,10,10,1,16,4,3);
+
+-- Bộ vi xử lý
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B2660-I GAMING ATX LG 1200',15600000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B3660-I GAMING ATX LG 1200',15700000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B4660-I GAMING ATX LG 1200',15800000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B5660-I GAMING ATX LG 1200',15900000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B6660-I GAMING ATX LG 1200',16000000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B7660-I GAMING ATX LG 1200',16100000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B8660-I GAMING ATX LG 1200',16200000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B9660-I GAMING ATX LG 1200',16300000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B10660-I GAMING ATX LG 1200',16400000,10,10,1,18,4,3);
+INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
+VALUE('Mainboard Asus ROG STRIX B11660-I GAMING ATX LG 1200',16500000,10,10,1,18,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B12660-I GAMING ATX LG 1700',16600000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B12660-I GAMING ATX LG 1700',16600000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B13660-I GAMING ATX LG 1700',16700000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B13660-I GAMING ATX LG 1700',16700000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B14660-I GAMING ATX LG 1700',16800000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B14660-I GAMING ATX LG 1700',16800000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B15660-I GAMING ATX LG 1700',16900000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B15660-I GAMING ATX LG 1700',16900000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B16660-I GAMING ATX LG 1700',17000000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B16660-I GAMING ATX LG 1700',17000000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B17660-I GAMING ATX LG 1700',17100000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B17660-I GAMING ATX LG 1700',17100000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B18660-I GAMING ATX LG 1700',17200000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B18660-I GAMING ATX LG 1700',17200000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B19660-I GAMING ATX LG 1700',17300000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B19660-I GAMING ATX LG 1700',17300000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B20660-I GAMING ATX LG 1700',17400000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B20660-I GAMING ATX LG 1700',17400000,10,10,1,18,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Mainboard Asus ROG STRIX B21660-I GAMING ATX LG 1700',17500000,10,10,1,20,4,3);
+VALUE('Mainboard Asus ROG STRIX B21660-I GAMING ATX LG 1700',17500000,10,10,1,18,4,3);
 
 -- RAM
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK9GX4M1A2666C16 ) 4GB (1x4GB) DDR4 ',1000000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK9GX4M1A2666C16 ) 4GB (1x4GB) DDR4 ',1000000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK10GX4M1A2666C16 ) 4GB (1x4GB) DDR4 ',1010000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK10GX4M1A2666C16 ) 4GB (1x4GB) DDR4 ',1010000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK11GX4M1A2666C16 ) 4GB (2x4GB) DDR4 ',1020000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK11GX4M1A2666C16 ) 4GB (2x4GB) DDR4 ',1020000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK12GX4M1A2666C16 ) 8GB (2x8GB) DDR4 ',1030000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK12GX4M1A2666C16 ) 8GB (2x8GB) DDR4 ',1030000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK13GX4M1A2666C16 ) 8GB (1x8GB) DDR4 ',1040000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK13GX4M1A2666C16 ) 8GB (1x8GB) DDR4 ',1040000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK14GX4M1A2666C16 ) 8GB (1x8GB) DDR4 ',1050000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK14GX4M1A2666C16 ) 8GB (1x8GB) DDR4 ',1050000,10,10,1,19,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK15GX4M1A2666C16 ) 4GB (2x4GB) DDR4 ',1060000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK15GX4M1A2666C16 ) 4GB (2x4GB) DDR4 ',1060000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK16GX4M1A2666C16 ) 4GB (1x4GB) DDR4 ',1070000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK16GX4M1A2666C16 ) 4GB (1x4GB) DDR4 ',1070000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK17GX4M1A2666C16 ) 4GB (2x4GB) DDR4 ',1080000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK17GX4M1A2666C16 ) 4GB (2x4GB) DDR4 ',1080000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK18GX4M1A2666C16 ) 8GB (1x8GB) DDR4 ',1090000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK18GX4M1A2666C16 ) 8GB (1x8GB) DDR4 ',1090000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK19GX4M1A2666C16 ) 8GB (2x8GB) DDR4 ',1100000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK19GX4M1A2666C16 ) 8GB (2x8GB) DDR4 ',1100000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK20GX4M1A2666C16 ) 8GB (2x8GB) DDR4 ',1110000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK20GX4M1A2666C16 ) 8GB (2x8GB) DDR4 ',1110000,10,10,1,19,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK21GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1120000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK21GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1120000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK22GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1130000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK22GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1130000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK23GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1140000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK23GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1140000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK24GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1150000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK24GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1150000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK25GX4M1A2666C16 ) 8GB (1x8GB) DDR5 ',1160000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK25GX4M1A2666C16 ) 8GB (1x8GB) DDR5 ',1160000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK26GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1170000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK26GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1170000,10,10,1,19,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Desktop MSI Vengeance LPX (CMK27GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1180000,10,10,1,22,4,3);
+VALUE('RAM Desktop MSI Vengeance LPX (CMK27GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1180000,10,10,1,19,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK28GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1190000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK28GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1190000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK29GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1200000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK29GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1200000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK30GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1210000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK30GX4M1A2666C16 ) 4GB (1x4GB) DDR5 ',1210000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK31GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1220000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK31GX4M1A2666C16 ) 4GB (2x4GB) DDR5 ',1220000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK32GX4M1A2666C16 ) 8GB (1x8GB) DDR5 ',1230000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK32GX4M1A2666C16 ) 8GB (1x8GB) DDR5 ',1230000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK33GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1240000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK33GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1240000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK34GX4M1A2666C16 ) 8GB (1x8GB) DDR5 ',1250000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK34GX4M1A2666C16 ) 8GB (1x8GB) DDR5 ',1250000,10,10,1,20,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('RAM Laptop MSI Vengeance LPX (CMK35GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1260000,10,10,1,22,4,3);
+VALUE('RAM Laptop MSI Vengeance LPX (CMK35GX4M1A2666C16 ) 8GB (2x8GB) DDR5 ',1260000,10,10,1,20,4,3);
 
 -- Nguồn
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 550W Silver  ( Màu Đen/80 Plus Silver )',14090000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 550W Silver  ( Màu Đen/80 Plus Silver )',14090000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 550W Gold  ( Màu Đen/80 Plus Gold )',14190000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 550W Gold  ( Màu Đen/80 Plus Gold )',14190000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 550W Platinum  ( Màu Đen/80 Plus Platinum )',14290000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 550W Platinum  ( Màu Đen/80 Plus Platinum )',14290000,10,10,1,25,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 650 Bronze  ( Màu Đen/80 Plus Bronze )',14390000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 650 Bronze  ( Màu Đen/80 Plus Bronze )',14390000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 650 Gold  ( Màu Đen/80 Plus Gold )',14490000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 650 Gold  ( Màu Đen/80 Plus Gold )',14490000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 650 Platinum  ( Màu Đen/80 Plus Platinum )',14590000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 650 Platinum  ( Màu Đen/80 Plus Platinum )',14590000,10,10,1,25,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 750W Bronze  ( Màu Đen/80 Plus Bronze )',14690000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 750W Bronze  ( Màu Đen/80 Plus Bronze )',14690000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 750W Silver  ( Màu Đen/80 Plus Silver )',14790000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 750W Silver  ( Màu Đen/80 Plus Silver )',14790000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 750W Platinum  ( Màu Đen/80 Plus Platinum )',14890000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 750W Platinum  ( Màu Đen/80 Plus Platinum )',14890000,10,10,1,25,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 850W Bronze  ( Màu Đen/80 Plus Bronze )',14990000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 850W Bronze  ( Màu Đen/80 Plus Bronze )',14990000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 850W Silver  ( Màu Đen/80 Plus Silver )',15090000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 850W Silver  ( Màu Đen/80 Plus Silver )',15090000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 850W Platinum  ( Màu Đen/80 Plus Platinum )',15190000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 850W Platinum  ( Màu Đen/80 Plus Platinum )',15190000,10,10,1,25,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 1200W Bronze  ( Màu Đen/80 Plus Bronze )',15290000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 1200W Bronze  ( Màu Đen/80 Plus Bronze )',15290000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 1200W Silver  ( Màu Đen/80 Plus Silver )',15390000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 1200W Silver  ( Màu Đen/80 Plus Silver )',15390000,10,10,1,25,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Nguồn ASUS TUF GAMING 1200W Gold  ( Màu Đen/80 Plus Gold )',15490000,10,10,1,24,4,3);
+VALUE('Nguồn ASUS TUF GAMING 1200W Gold  ( Màu Đen/80 Plus Gold )',15490000,10,10,1,25,4,3);
 
 -- Vỏ case
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R92 BLACK (Mid Tower/Màu Đen)',1019000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R92 BLACK (Mid Tower/Màu Đen)',1019000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R102 BLACK (Full Tower/Màu Đen)',1029000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R102 BLACK (Full Tower/Màu Đen)',1029000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R112 BLACK (Mini Tower/Màu Đen)',1039000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R112 BLACK (Mini Tower/Màu Đen)',1039000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R122 BLACK (Mini Tower/Màu Đen)',1049000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R122 BLACK (Mini Tower/Màu Đen)',1049000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R132 BLACK (Mid Tower/Màu Đen)',1059000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R132 BLACK (Mid Tower/Màu Đen)',1059000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R142 BLACK (Full Tower/Màu Đen)',1069000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R142 BLACK (Full Tower/Màu Đen)',1069000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R152 BLACK (Mini Tower/Màu Đen)',1079000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R152 BLACK (Mini Tower/Màu Đen)',1079000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R162 BLACK (Mid Tower/Màu Đen)',1089000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R162 BLACK (Mid Tower/Màu Đen)',1089000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R172 BLACK (Full Tower/Màu Đen)',1099000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R172 BLACK (Full Tower/Màu Đen)',1099000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R182 BLACK (Mini Tower/Màu Đen)',1109000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R182 BLACK (Mini Tower/Màu Đen)',1109000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R192 BLACK (Mid Tower/Màu Đen)',1119000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R192 BLACK (Mid Tower/Màu Đen)',1119000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R202 BLACK (Full Tower/Màu Đen)',1129000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R202 BLACK (Full Tower/Màu Đen)',1129000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R212 BLACK (Mini Tower/Màu Đen)',1139000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R212 BLACK (Mini Tower/Màu Đen)',1139000,10,10,1,24,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Vỏ Case Vitra POSEIDON R222 BLACK (Mid Tower/Màu Đen)',1149000,10,10,1,26,4,3);
+VALUE('Vỏ Case Vitra POSEIDON R222 BLACK (Mid Tower/Màu Đen)',1149000,10,10,1,24,4,3);
 -- HDD
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx1 2.5 inch',1700000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx1 2.5 inch',1700000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx2 2.5 inch',1800000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx2 2.5 inch',1800000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx3 2.5 inch',1900000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx3 2.5 inch',1900000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WDx4 2.5 inch',2000000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WDx4 2.5 inch',2000000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WDx5 2.5 inch',2100000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WDx5 2.5 inch',2100000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WDx6 2.5 inch',2200000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WDx6 2.5 inch',2200000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WDx7 2.5 inch',2300000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WDx7 2.5 inch',2300000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WDx8 2.5 inch',2400000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WDx8 2.5 inch',2400000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WDx9 2.5 inch',2500000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WDx9 2.5 inch',2500000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WDx10 2.5 inch',2600000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WDx10 2.5 inch',2600000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WDx11 2.5 inch',2700000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WDx11 2.5 inch',2700000,10,10,1,11,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx12 3.5 inch',2800000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx12 3.5 inch',2800000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx13 3.5 inch',2900000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx13 3.5 inch',2900000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx14 3.5 inch',3000000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx14 3.5 inch',3000000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 500GB WDx15 3.5 inch',3100000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 500GB WDx15 3.5 inch',3100000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WDx32 3.5 inch',3300000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WDx32 3.5 inch',3300000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 1TB WDx17 3.5 inch',3400000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 1TB WDx17 3.5 inch',3400000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WDx18 3.5 inch',3500000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WDx18 3.5 inch',3500000,10,10,1,11,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng HDD 2TB WDx19 3.5 inch',3600000,10,10,1,10,4,3);
+VALUE('Ổ cứng HDD 2TB WDx19 3.5 inch',3600000,10,10,1,11,4,3);
 
 -- SSD
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 500GB WD SDX1 2.5inch',8300000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 500GB WD SDX1 2.5inch',8300000,10,10,1,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 1TB WD SDX2 2.5inch',8400000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 1TB WD SDX2 2.5inch',8400000,10,10,1,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 2TB WD SDX3 2.5inch',8500000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 2TB WD SDX3 2.5inch',8500000,10,10,1,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 2TB WD SDX4 2.5inch',8600000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 2TB WD SDX4 2.5inch',8600000,10,10,1,12,4,3);
 
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 500GB WD SDX5 3.5inch',8700000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 500GB WD SDX5 3.5inch',8700000,10,10,1,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 500GB WD SDX6 3.5inch',8800000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 500GB WD SDX6 3.5inch',8800000,10,10,1,12,4,3);
 INSERT INTO san_pham(`tenSP`,`giaSP`,`soLuong`,`giamGia`,`maNSX`,`maTLC`,`maBH`,`maTTSP`)
-VALUE('Ổ cứng SSD 1TB WD SDX7 3.5inch',8900000,10,10,1,11,4,3);
+VALUE('Ổ cứng SSD 1TB WD SDX7 3.5inch',8900000,10,10,1,12,4,3);
 
 -- Anh san pham moi
 -- Laptop gaming
@@ -7562,3 +7569,57 @@ VALUES
 (NULL, '314', 'FOR2022US2031', '6', NULL);
 
 
+
+-- -- Hoá đơn
+INSERT INTO `hoa_don` (`maHD`, `maKH`, `maNV`, `ngayTao`, `tenKH`, `soDienThoai`, `diaChi`, `maPTTT`, `maTTHD`) VALUES (NULL, '6', NULL, '2022-08-17 11:29:41.000000', 'Nguyễn Văn A', '0123456789', 'Hà Nội', '1', '1'),
+                                                                                                                        (NULL, '6', NULL, '2022-08-17 11:29:42.000000', 'Nguyễn Văn A', '0123456789', 'Hà Nội', '2', '1'),
+                                                                                                                        (NULL, '7', NULL, '2022-09-06 10:12:42.000000', 'Trần Văn B', '0123456789', 'hanoi', '1', '1'),
+                                                                                                                        (NULL, '7', NULL, '2022-09-06 10:12:42.000000', 'Trần Văn B', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '8', NULL, '2022-09-06 10:22:09.000000', 'Lê Văn C', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '8', NULL, '2022-09-06 10:22:09.000000', 'Lê Văn C', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '9', NULL, '2022-09-06 10:22:09.000000', 'Hoàng Văn D', '0123456789', 'hanoi', '1', '1'),
+                                                                                                                        (NULL, '9', NULL, '2022-09-06 10:22:09.000000', 'Hoàng Văn D', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '10', NULL, '2022-09-06 10:22:09.000000', 'Dương Văn E', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '10', NULL, '2022-09-06 10:22:09.000000', 'Dương Văn E', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '11', NULL, '2022-09-06 10:22:09.000000', 'Trịnh Văn F', '0123456789', 'hanoi', '2', '1'),
+                                                                                                                        (NULL, '11', NULL, '2022-09-06 10:22:09.000000', 'Trịnh Văn F', '0123456789', 'hanoi', '1', '1');
+
+-- -- Hoá đơn chi tiết
+INSERT INTO `hoa_don_chi_tiet` (`maHDCT`, `maHD`, `maSP`, `soLuong`, `giaSP`, `giamGia`) VALUES (NULL, '1', '7', '1', '23000000', '10'),
+                                                                                                (NULL, '1', '86', '2', '3100000', '10'),
+                                                                                                (NULL, '2', '91', '2', '2200000', '10'),
+                                                                                                (NULL, '2', '107', '3', '4200000', '10'),
+                                                                                                (NULL, '3', '102', '3', '1400000', '10'),
+                                                                                                (NULL, '4', '314', '1', '8900000', '10'),
+                                                                                                (NULL, '5', '129', '1', '7300000', '10'),
+                                                                                                (NULL, '5', '6', '1', '50000000', '10'),
+                                                                                                (NULL, '6', '227', '2', '17000000', '10'),
+                                                                                                (NULL, '7', '43', '1', '88900000', '5'),
+                                                                                                (NULL, '8', '83', '2', '4000000', '10'),
+                                                                                                (NULL, '9', '203', '1', '10100000', '10'),
+                                                                                                (NULL, '9', '92', '1', '2900000', '10'),
+                                                                                                (NULL, '10', '152', '1', '9600000', '10'),
+                                                                                                (NULL, '11', '227', '1', '17000000', '10'),
+                                                                                                (NULL, '11', '69', '1', '990000', '10'),
+                                                                                                (NULL, '12', '33', '1', '4900000', '10'),
+                                                                                                (NULL, '12', '89', '1', '1990000', '10');
+
+-- -- Voucher hoá đơn chi tiết
+INSERT INTO `voucher_hoa_don_chi_tiet` (`maVHDCT`, `maVoucher`, `maHDCT`) VALUES (NULL, '2', '1'),
+                                                                                (NULL, '8', '1'),
+                                                                                (NULL, '5', '3'),
+                                                                                (NULL, '3', '4'),
+                                                                                (NULL, '1', '5'),
+                                                                                (NULL, '1', '6'),
+                                                                                (NULL, '1', '7'),
+                                                                                (NULL, '1', '8'),
+                                                                                (NULL, '1', '9'),
+                                                                                (NULL, '1', '10'),
+                                                                                (NULL, '1', '11'),
+                                                                                (NULL, '1', '12'),
+                                                                                (NULL, '1', '13'),
+                                                                                (NULL, '1', '14'),
+                                                                                (NULL, '1', '15'),
+                                                                                (NULL, '1', '16'),
+                                                                                (NULL, '1', '17'),
+                                                                                (NULL, '1', '18');

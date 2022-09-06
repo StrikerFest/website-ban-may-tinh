@@ -377,6 +377,7 @@ class DashboardController extends Controller
         for($i = 0; $i < $soLuongDMC; $i++){
             $danhMucCon[] = (object) ['maDM' => $maDMC[$i], 'name' => $tenDMC[$i], 'y'=> $tiLeDMC[$i]];
         }
+        // dd($maDMC, $tenDMC);
 
         $listDanhMucCon = DB::table('the_loai_con')->where('tenTLC', 'not like', '%Tặng phẩm%')->get();
         $listNamTheoHoaDon = DB::select("

@@ -745,6 +745,7 @@
         //Biểu đồ danh mục sản phẩm đã bán
         var danhMuc = {!! json_encode($danhMuc, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
         var danhMucCon = {!! json_encode($danhMucCon, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) !!};
+        console.log('abc', danhMuc, danhMucCon)
         var colors = Highcharts.getOptions().colors;
         for(var i = 0; i < danhMuc.length; i++) {
             danhMuc[i].color = colors[i];
