@@ -123,28 +123,28 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <form action="{{route('admin.product.updateSpecial', $SP->maSP)}}" method="post">
-                                                            @csrf
-                                                            <?php if($SP->dacBiet == 0){ ?>
-                                                                <input type="hidden" name="dacBiet" value="1">
-                                                                <button class="btn btn-danger btn-user btn-block">Sale</button>
-                                                            <?php }else{ ?>
-                                                                <input type="hidden" name="dacBiet" value="0">
-                                                                <button class="btn btn-success btn-user btn-block">Sale</button>
-                                                            <?php } ?>
-                                                        </form>
+                                                <?php if($SP->tenTLC != "Tặng phẩm"){ ?>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <form action="{{route('admin.product.updateSpecial', $SP->maSP)}}" method="post">
+                                                                @csrf
+                                                                <?php if($SP->dacBiet == 0){ ?>
+                                                                    <input type="hidden" name="dacBiet" value="1">
+                                                                    <button class="btn btn-danger btn-user btn-block">Sale</button>
+                                                                <?php }else{ ?>
+                                                                    <input type="hidden" name="dacBiet" value="0">
+                                                                    <button class="btn btn-success btn-user btn-block">Sale</button>
+                                                                <?php } ?>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <form action="{{route('admin.product.createVoucher', $SP->maSP)}}" method="get">
+                                                                @csrf
+                                                                <button class="btn btn-primary btn-user btn-block">Voucher</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                    <?php if($SP->tenTLC != "Tặng phẩm"){ ?>
-                                                        <form action="{{route('admin.product.createVoucher', $SP->maSP)}}" method="get">
-                                                            @csrf
-                                                            <button class="btn btn-primary btn-user btn-block">Voucher</button>
-                                                        </form>
-                                                    <?php } ?>
-                                                    </div>
-                                                </div>
+                                                <?php } ?>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <form action="{{route('productImage.index', $SP->maSP)}}" method="get">
