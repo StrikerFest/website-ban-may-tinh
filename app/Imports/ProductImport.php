@@ -30,7 +30,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
             $sanPham = new ProductModel();
             $sanPham->tenSP = $row['ten_san_pham'];
             $sanPham->giaSP = $row['gia'];
-            $sanPham->moTa = $row['mo_ta'];
             $sanPham->giamGia = $row['giam_gia'];
             $sanPham->maNSX = $maNSX;
             $sanPham->maTLC = $maTLC;
@@ -63,7 +62,6 @@ class ProductImport implements ToCollection, withHeadingRow, withValidation
         return [
             'ten_san_pham' => ['required', 'min:3', 'unique:App\Models\ProductModel,tenSP'],
             'gia' => ['required', 'numeric', 'min:0'],
-            'mo_ta' => ['required'],
             'giam_gia' => ['required', 'numeric', 'min:0', 'max:100'],
             'nha_san_xuat' => ['in:'.$validateNSX],
             'danh_muc' => ['in:'.$validateTLC],
