@@ -27,6 +27,7 @@ class AdminReceiptController extends Controller
      */
     public function index(Request $request)
     {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $validated = $request->validate([
             'NKT' => 'before_or_equal:' . Date('Y-m-d'),
             'NBD' => 'before_or_equal:' . Date('Y-m-d'),
