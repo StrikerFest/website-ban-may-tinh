@@ -631,6 +631,7 @@
                                 </form>
                             </div>
                             <div class="row">
+                                @if(count($listSanPham) !== 0)
                                 @foreach ($listSanPham as $CN)
                                     <div class="carousel-promo-item col-md-3 " onmouseover="" {{-- onmouseover="getData('{{ $CN->tenSP }}', 'product-test');" --}}
                                         style=" padding: 10px">
@@ -769,6 +770,11 @@
 
                                     </div>
                                 @endforeach
+                                @else
+                                <div class="col-12 text-center card p-3" style="font-size: 2em" >
+                                    Sản phẩm với bộ lọc trên hiện đang không có
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
