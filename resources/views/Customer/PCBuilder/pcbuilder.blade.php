@@ -99,7 +99,15 @@
                                     $countCheck1 = 0;
                                     $countCheck2 = 0;
                                 @endphp
-
+                                {{-- Search trong modal --}}
+                                <form action="{{ route('PCBuilderCustomer.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="scrollPos" id="scrollPos3"
+                                        value="{{ $scrollPos }}">
+                                    <input type="hidden" name="modalStatus" id="modalStatus3" value="1">
+                                    Tìm kiếm <input class="" type="text" name="searchModal">
+                                </form>
+                                {{-- Vòng lặp hiển thị sản phẩm trong modal--}}
                                 @foreach ($listSanPhamModal as $SPM)
                                     @if ($listCheckCase !== null && $listCheckCPU !== null)
                                         @foreach ($listCheckCPU as $CPU)
