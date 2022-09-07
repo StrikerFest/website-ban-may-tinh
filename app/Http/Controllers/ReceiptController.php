@@ -6,6 +6,8 @@ use App\Mail\DemoEmail;
 use App\Models\DetailReceiptModel;
 use App\Models\ProductImageModel;
 use App\Models\ProductVoucherModel;
+use App\Models\ProductModel;
+use App\Models\SerialModel;
 use App\Models\ReceiptModel;
 use App\Models\UserModel;
 use App\Models\VoucherDetailReceiptModel;
@@ -788,5 +790,81 @@ class ReceiptController extends Controller
             ->get();
 
         return response()->json($listVHDCT);
+    }
+
+    public function confirmOrder(Request $request, $id)
+    {
+        $hoaDon = ReceiptModel::find($id);
+        if($hoaDon->maTTHD == 2){
+            return back()->with('canceled', "Đơn hàng đã bị huỷ");
+        }
+        
+        $hoaDon->maTTHD = $request->get('maTTHD');
+
+        $hoaDon->save();
+
+        return redirect()->back();
+    }
+
+    public function cancelOrder(Request $request, $id)
+    {
+        $hoaDon = ReceiptModel::join('nguoi_dung', 'nguoi_dung.maND', '=', 'hoa_don.maKH')->find($id);
+        // dd($hoaDon);
+        if($hoaDon->maTTHD == 5){
+            return back()->with('canceled', "Đơn hàng đã được giao");
+        }
+        // // Gửi mail thông báo huỷ đơn
+        // $objDemo = new \stdClass();
+        // // Mã hóa đơn
+        // $objDemo->idReceipt = $hoaDon->maHD;
+        // // Tên người gửi
+        // $objDemo->sender = 'BKCOM';
+        // // Tên người nhận
+        // $objDemo->receiver = $hoaDon->tenND;
+        // // Lý do
+        // $objDemo->reason = $request->cancelReason;
+        // Mail::to($hoaDon->emailND)->send(new CancelOrderMail($objDemo));
+
+
+        // dd($hoaDon->maTTHD);
+        $hdct = DB::table('hoa_don_chi_tiet')->where('maHD', '=', $id)->get();
+        // dd($hdct);
+        if($hoaDon->maTTHD == 4){
+            //Tăng số lượng sp sau khi huỷ đơn
+            for($i = 0; $i < sizeof($hdct); $i++){
+                $sp = ProductModel::find($hdct[$i]->maSP);
+                $sp->soLuong += $hdct[$i]->soLuong;
+                $sp->save();
+
+                //Bỏ liên kết của serial với hoá đơn chi tiết
+                $serials = SerialModel::where('maHDCT', $hdct[$i]->maHDCT)->get();
+                // dd($serial);
+                for($j = 0; $j < sizeof($serials); $j++){
+                    $serial = SerialModel::find($serials[$j]->maSerial);
+                    $serial->maHDCT = null;
+                    $serial->save();
+                }
+            }
+
+        }
+        //Tăng số lượng voucher sau khi huỷ đơn
+        for($i = 0; $i < sizeof($hdct); $i++){
+            $vhdct = VoucherDetailReceiptModel::select(['voucher_hoa_don_chi_tiet.*', 'voucher.soLuong AS soLuongV', 'hoa_don_chi_tiet.soLuong AS soLuongSP'])
+                ->join('hoa_don_chi_tiet', 'hoa_don_chi_tiet.maHDCT', '=', 'voucher_hoa_don_chi_tiet.maHDCT')
+                ->join('voucher', 'voucher.maVoucher', '=', 'voucher_hoa_don_chi_tiet.maVoucher')
+                ->where('voucher_hoa_don_chi_tiet.maHDCT', $hdct[$i]->maHDCT)
+                ->get();
+            // dd($vhdct);
+            foreach($vhdct as $item){
+                $voucher = VoucherModel::find($item->maVoucher);
+                $voucher->soLuong += $item->soLuongSP;
+                $voucher->save();
+            }
+        }
+        // dd($hdct);
+        $hoaDon->maTTHD = 2;//Huỷ đơn
+        $hoaDon->save();
+
+        return back();
     }
 }

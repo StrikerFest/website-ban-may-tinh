@@ -167,6 +167,8 @@ Route::post('/logoutProcess', [CustomerLoginController::class, "logoutProcess"])
 Route::resource('product', ProductController::class);
 
 Route::get('receiptVoucher/{maHDCT}', [Receiptcontroller::class, "voucher"])->name('receiptCustomer.voucher');
+Route::put('receiptConfirm/{maHD}', [ReceiptController::class, "confirmOrder"])->name('receiptCustomer.confirmOrder');
+Route::put('receiptCancel/{maHD}', [ReceiptController::class, "cancelOrder"])->name('receiptCustomer.cancelOrder');
 Route::resource('receiptCustomer', ReceiptController::class);
 
 Route::resource('manufacturerCustomer', ManufacturerController::class);

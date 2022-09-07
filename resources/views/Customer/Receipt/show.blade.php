@@ -182,7 +182,7 @@
                                                     <td colspan="7">
                                                         <div style="display: flex; justify-content: flex-end;">
                                                             <?php if($hoaDon->maTTHD == 4){ ?>
-                                                                <form style="margin-right: 10px;" action="{{route('receipt.update', $hoaDon->maHD)}}" method="post">
+                                                                <form style="margin-right: 10px;" action="{{route('receiptCustomer.confirmOrder', $hoaDon->maHD)}}" method="post">
                                                                     @method('PUT')
                                                                     @csrf
                                                                     <input type="hidden" name="maTTHD" value="5">
@@ -192,7 +192,7 @@
                                                                 </form>
                                                             <?php } ?>
                                                             <?php if($hoaDon->maTTHD != 5 && $hoaDon->maTTHD != 2){ ?>
-                                                                <form action="{{route('receipt.cancelOrder', $hoaDon->maHD)}}" method="post">
+                                                                <form action="{{route('receiptCustomer.cancelOrder', $hoaDon->maHD)}}" method="post">
                                                                     @method('PUT')
                                                                     @csrf
                                                                     <button class="btn btn-danger" onclick="return confirm('Xác nhận huỷ đơn?')">
